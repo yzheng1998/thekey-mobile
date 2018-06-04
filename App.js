@@ -4,43 +4,57 @@
  * @flow
  */
 
-import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import React, { Component } from 'react'
+import ApolloClient from 'apollo-boost'
+import { Platform, StyleSheet, Text, View } from 'react-native'
+import { ApolloProvider } from 'react-apollo'
+import config from './config'
 
 const instructions = Platform.select({
-  ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
+  ios: 'Press Cmd+R to reload,\n',
   android:
-    "Double tap R on your keyboard to reload,\n" +
-    "Shake or press menu button for dev menu"
-});
+    'Double tap R on your keyboard to reload,\n' +
+    'Shake or press menu button for dev menu',
+})
 
-export default class App extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>I am Diego!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
-  }
-}
+const client = new ApolloClient({
+  uri: config.graphqlUrl,
+  request: async operation => {
+    operation.setContext({
+      headers: {},
+    })
+  },
+})
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#F5FCFF"
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
   welcome: {
     fontSize: 20,
-    textAlign: "center",
-    margin: 10
+    textAlign: 'center',
+    margin: 10,
   },
   instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+})
+
+export default class App extends Component {
+  render() {
+    return (
+      <ApolloProvider client={client}>
+        <View style={styles.container}>
+          <Text style={styles.welcome}>I am Diego!</Text>
+          <Text style={styles.instructions}>To get started, edit App.js</Text>
+          <Text style={styles.instructions}>{instructions}</Text>
+        </View>
+      </ApolloProvider>
+    )
   }
-});
+}
