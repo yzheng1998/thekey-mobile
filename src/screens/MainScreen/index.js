@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Background, NavigateButton, ButtonText } from './styledComponents'
+import { Background, NavigateButton, ButtonText } from './styles'
 
 class MainScreen extends Component {
   static navigationOptions = {

@@ -8,12 +8,12 @@ export const Background = styled.View`
 
 export const NavigateButton = styled.TouchableOpacity`
   width: 40%;
-  aspect-ratio: 3;
+  height: 30;
   background-color: blue;
   align-items: center;
   justify-content: center;
 `
 export const ButtonText = styled.Text`
-  font-size: 14
+  font-size: 14;
   color: white;
 `
