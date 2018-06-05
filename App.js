@@ -20,5 +20,4 @@ export default class App extends Component {
         <RootNavigator />
       </ApolloProvider>
     )
-  }
 }
