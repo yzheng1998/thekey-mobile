@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-import { Text, View } from 'react-native'
+import { FlatList } from 'react-native'
+import { ListItem } from 'react-native-elements'
 
 const GET_USERS = gql`
   query users {
@@ -13,16 +14,34 @@ const GET_USERS = gql`
     }
   }
 `
-const message = <Text>please</Text>
+
+const UserView = ({ keyExtractor, renderItem }) => (
+  <Query query={GET_USERS}>
+    {({ loading, error, data }) => {
+      if (loading) return 'Loading...'
+      if (error) return `Error! ${error.message}`
+      return (
+        <FlatList
+          keyExtractor={keyExtractor}
+          data={data.users}
+          renderItem={renderItem}
+        />
+      )
+    }}
+  </Query>
+)
+
 class GetUsers extends Component {
+  keyExtractor = (item, index) => index.toString()
+  renderItem = ({ item }) => (
+    <ListItem
+      title={`${item.firstName} ${item.lastName}`}
+      subtitle={item.email}
+    />
+  )
   render() {
     return (
-      <Query query={GET_USERS}>
-        {({ loading, data }) => {
-          const text = JSON.stringify(data.users)
-          return <Text>{text}</Text>
-        }}
-      </Query>
+      <UserView keyExtractor={this.keyExtractor} renderItem={this.renderItem} />
     )
   }
 }
