@@ -4,13 +4,14 @@ export const Background = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: red;
 `
 
 export const NavigateButton = styled.TouchableOpacity`
-  width: 60%;
-  aspect-ratio: 2;
+  width: 40%;
+  aspect-ratio: 3;
   background-color: blue;
+  align-items: center;
+  justify-content: center;
 `
 export const ButtonText = styled.Text`
   font-size: 14
