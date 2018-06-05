@@ -1,3 +1,16 @@
 import { createStackNavigator } from 'react-navigation'
 
-const RootNavigator = createStackNavigator({})
+import MainScreen from '../screens/MainScreen/index'
+
+const RootNavigator = createStackNavigator(
+  {
+    Main: {
+      screen: MainScreen,
+    },
+  },
+  {
+    initialRouteName: 'Main',
+  },
+)
+
+export default RootNavigator
