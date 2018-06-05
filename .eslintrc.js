@@ -8,6 +8,7 @@ module.exports = {
   rules: {
     semi: ['error', 'never'],
     'import/first': 0,
+    'import/prefer-default-export': 0,
     'react/prop-types': 0,
     'react/jsx-filename-extension': 0,
     'react/prefer-stateless-function': 0,
