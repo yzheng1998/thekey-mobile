@@ -21,10 +21,15 @@
     "prettier": "^1.12.1",
     "react": "16.3.1",
     "react-apollo": "^2.1.4",
+<<<<<<< HEAD
     "react-native": "^0.55.4",
     "react-native-elements": "^0.19.1",
     "react-native-form": "^2.1.2",
     "react-native-form-builder": "^1.0.14",
+=======
+    "react-native": "~0.55.2",
+    "react-native-elements": "^0.19.1",
+>>>>>>> 8972588... added packages
     "react-navigation": "^2.0.1",
     "styled-components": "^3.2.6",
     "stylelint-config-styled-components": "^0.1.1",
