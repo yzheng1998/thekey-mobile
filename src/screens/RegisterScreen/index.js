@@ -13,7 +13,7 @@ const CREATE_USER = gql`
   }
 `
 
-class Register extends Component {
+class RegisterScreen extends Component {
   state = {
     firstName: '',
     lastName: '',
@@ -76,10 +76,10 @@ class Register extends Component {
               }}
             />
           </View>
-        )})
+        )}
       </Mutation>
     )
   }
 }
 
-export default Register
+export default RegisterScreen
