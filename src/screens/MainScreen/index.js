@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Background, NavigateButton, ButtonText } from './styles'
-import { Button } from 'react-native'
+import { Background } from './styles'
+import { Button } from 'react-native-elements'
 
 class MainScreen extends Component {
   static navigationOptions = {
@@ -10,17 +10,24 @@ class MainScreen extends Component {
   render() {
     return (
       <Background>
-        <NavigateButton>
-          <ButtonText>Go SomeWhere</ButtonText>
-        </NavigateButton>
         <Button
           title="View All Users"
-          onPress={() => this.props.navigation.navigate('UserListView')}
+          onPress={() => this.props.navigation.navigate('Users')}
         />
         <Button
           title="View All Events"
           onPress={() => this.props.navigation.navigate('Events')}
         />
+        <Button
+          title="View All Jobs"
+          onPress={() => this.props.navigation.navigate('Jobs')}
+        />
+        <Button
+          title="Register"
+          onPress={() => this.props.navigation.navigate('Register')}
+        >
+          Register
+        </Button>
       </Background>
     )
   }

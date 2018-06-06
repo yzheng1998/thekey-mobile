@@ -4,35 +4,37 @@ import { Query } from 'react-apollo'
 import { FlatList } from 'react-native'
 import { ListItem } from 'react-native-elements'
 
-const GET_USERS = gql`
-  query users {
-    users {
+const GET_JOBS = gql`
+  query jobs {
+    jobs {
       id
-      firstName
-      lastName
-      email
+      title
+      description
+      picture
+      experience
+      location
     }
   }
 `
 
-class UsersScreen extends Component {
+class JobsScreen extends Component {
   render() {
     return (
-      <Query query={GET_USERS}>
+      <Query query={GET_JOBS}>
         {({ loading, error, data }) => {
           if (loading) return 'Loading...'
           if (error) return `Error! ${error.message}`
           return (
             <FlatList
-              keyExtractor={user => user.id}
-              data={data.users}
-              renderItem={({ item: user }) => (
+              keyExtractor={job => job.id}
+              data={data.jobs}
+              renderItem={({ item }) => (
                 <ListItem
-                  title={`${user.firstName} ${user.lastName}`}
-                  subtitle={user.email}
+                  title={`${item.title}`}
+                  subtitle={item.experience}
                   onPress={() =>
-                    this.props.navigation.navigate('User', {
-                      id: user.id,
+                    this.props.navigation.navigate('Job', {
+                      id: item.id,
                     })
                   }
                 />
@@ -45,4 +47,4 @@ class UsersScreen extends Component {
   }
 }
 
-export default UsersScreen
+export default JobsScreen
