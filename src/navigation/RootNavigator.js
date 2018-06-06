@@ -1,6 +1,8 @@
 import { createStackNavigator } from 'react-navigation'
 
 import MainScreen from '../screens/MainScreen/index'
+import EventsScreen from '../screens/EventsScreen/'
+import EventScreen from '../screens/EventScreen/'
 import RegisterScreen from '../screens/RegisterScreen/'
 import UserScreen from '../screens/UserScreen/'
 import UsersScreen from '../screens/UsersScreen/'
@@ -11,6 +13,12 @@ const RootNavigator = createStackNavigator(
   {
     Main: {
       screen: MainScreen,
+    },
+    Events: {
+      screen: EventsScreen,
+    },
+    Event: {
+      screen: EventScreen,
     },
     Register: {
       screen: RegisterScreen,
