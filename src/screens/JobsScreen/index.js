@@ -33,7 +33,7 @@ class JobsScreen extends Component {
                   title={`${item.title}`}
                   subtitle={item.experience}
                   onPress={() =>
-                    this.props.navigation.navigate('Event', {
+                    this.props.navigation.navigate('Job', {
                       id: item.id,
                     })
                   }
