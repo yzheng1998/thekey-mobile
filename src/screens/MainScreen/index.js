@@ -12,7 +12,7 @@ class MainScreen extends Component {
       <Background>
         <Button
           title="View All Users"
-          onPress={() => this.props.navigation.navigate('UserListView')}
+          onPress={() => this.props.navigation.navigate('Users')}
         />
         <Button
           title="Register"

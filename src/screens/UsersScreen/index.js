@@ -26,10 +26,15 @@ class UsersScreen extends Component {
             <FlatList
               keyExtractor={user => user.id}
               data={data.users}
-              renderItem={({ item }) => (
+              renderItem={({ item: user }) => (
                 <ListItem
-                  title={`${item.firstName} ${item.lastName}`}
-                  subtitle={item.email}
+                  title={`${user.firstName} ${user.lastName}`}
+                  subtitle={user.email}
+                  onPress={() =>
+                    this.props.navigation.navigate('User', {
+                      id: user.id,
+                    })
+                  }
                 />
               )}
             />
