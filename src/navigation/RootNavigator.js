@@ -4,6 +4,7 @@ import MainScreen from '../screens/MainScreen/index'
 import RegisterScreen from '../screens/RegisterScreen/'
 import UserScreen from '../screens/UserScreen/'
 import UsersScreen from '../screens/UsersScreen/'
+import JobsScreen from '../screens/JobsScreen'
 
 const RootNavigator = createStackNavigator(
   {
@@ -18,6 +19,9 @@ const RootNavigator = createStackNavigator(
     },
     User: {
       screen: UserScreen,
+    },
+    Jobs: {
+      screen: JobsScreen,
     },
   },
   {
