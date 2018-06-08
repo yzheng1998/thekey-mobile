@@ -8,6 +8,7 @@ import UserScreen from '../screens/UserScreen/'
 import UsersScreen from '../screens/UsersScreen/'
 import JobScreen from '../screens/JobScreen'
 import JobsScreen from '../screens/JobsScreen'
+import FriendRequestScreen from '../screens/FriendRequestScreen'
 
 const RootNavigator = createStackNavigator(
   {
@@ -34,6 +35,9 @@ const RootNavigator = createStackNavigator(
     },
     Job: {
       screen: JobScreen,
+    },
+    FriendRequestScreen: {
+      screen: FriendRequestScreen,
     },
   },
   {

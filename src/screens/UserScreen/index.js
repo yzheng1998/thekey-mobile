@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { View, Text, FlatList } from 'react-native'
-import { ListItem } from 'react-native-elements'
+import { ListItem, Button } from 'react-native-elements'
 
 const GET_USER = gql`
   query user($id: ID!) {
@@ -38,6 +38,12 @@ class UserScreen extends Component {
               <Text>{firstName}</Text>
               <Text>{lastName}</Text>
               <Text>{email}</Text>
+              <Button
+                title="View Friend Requests"
+                onPress={() =>
+                  this.props.navigation.navigate('FriendRequestScreen')
+                }
+              />
               <FlatList
                 horizontal
                 keyExtractor={user => user.id}
