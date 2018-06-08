@@ -8,9 +8,17 @@ import UserScreen from '../screens/UserScreen/'
 import UsersScreen from '../screens/UsersScreen/'
 import JobScreen from '../screens/JobScreen'
 import JobsScreen from '../screens/JobsScreen'
+import LoginScreen from '../screens/LoginScreen'
+import LandingScreen from '../screens/LandingScreen'
 
 const RootNavigator = createStackNavigator(
   {
+    Landing: {
+      screen: LandingScreen,
+    },
+    Login: {
+      screen: LoginScreen,
+    },
     Main: {
       screen: MainScreen,
     },
@@ -37,7 +45,7 @@ const RootNavigator = createStackNavigator(
     },
   },
   {
-    initialRouteName: 'Main',
+    initialRouteName: 'Landing',
   },
 )
 
