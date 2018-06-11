@@ -40,9 +40,7 @@ class UserScreen extends Component {
               <Text>{email}</Text>
               <Button
                 title="View Friend Requests"
-                onPress={() =>
-                  this.props.navigation.navigate('FriendRequestScreen')
-                }
+                onPress={() => this.props.navigation.navigate('FriendRequests')}
               />
               <FlatList
                 horizontal
