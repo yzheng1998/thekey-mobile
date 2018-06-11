@@ -22,12 +22,6 @@ class MainScreen extends Component {
           title="View All Jobs"
           onPress={() => this.props.navigation.navigate('Jobs')}
         />
-        <Button
-          title="Register"
-          onPress={() => this.props.navigation.navigate('Register')}
-        >
-          Register
-        </Button>
       </Background>
     )
   }

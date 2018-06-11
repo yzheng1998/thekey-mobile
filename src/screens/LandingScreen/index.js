@@ -18,7 +18,7 @@ class LandingScreen extends Component {
         <Button
           // For testing the rest of the app bc don't have login functionality yet
           title="Main Page (for testing)"
-          onPress={() => this.props.navigation.navigate('Main')}
+          onPress={() => this.props.navigation.navigate('MainTab')}
         />
       </View>
     )
