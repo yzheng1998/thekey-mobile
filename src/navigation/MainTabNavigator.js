@@ -1,21 +1,23 @@
 import React from 'react'
-import { Image } from 'react-native'
-import { TabNavigator } from 'react-navigation' // 1.0.0-beta.14
-import MainScreen from '../screens/MainScreen/index'
-import UsersScreen from '../screens/UsersScreen/'
+import { createBottomTabNavigator } from 'react-navigation' // 1.0.0-beta.14
+import { View, Image } from 'react-native'
+import { Button } from 'react-native-elements'
 import placeholder from '../../assets/devlogo.png'
+import UsersScreen from '../screens/UsersScreen'
+import EventsScreen from '../screens/EventsScreen'
+import DiscoverStack from '../navigation/DiscoverStack'
 
-const MainTabNavigator = TabNavigator(
+const MainTabNavigator = createBottomTabNavigator(
   {
     Discover: {
-      screen: MainScreen,
+      screen: DiscoverStack,
       navigationOptions: () => ({
         title: 'Discover',
         tabBarIcon: () => <Image source={placeholder} size={30} />,
       }),
     },
     Chats: {
-      // Random screen/pictures for now
+      // Temporary Screen here
       screen: UsersScreen,
       navigationOptions: () => ({
         title: 'Chats',
@@ -23,8 +25,8 @@ const MainTabNavigator = TabNavigator(
       }),
     },
     Profile: {
-      // Random screen/pictures for now
-      screen: UsersScreen,
+      // Temporary Screen here
+      screen: EventsScreen,
       navigationOptions: () => ({
         title: 'Profile',
         tabBarIcon: () => <Image source={placeholder} size={30} />,
@@ -32,9 +34,14 @@ const MainTabNavigator = TabNavigator(
     },
   },
   {
-    initialRouteName: 'Main',
-
+    initialRouteName: 'Discover',
+    tabBarOptions: {
+      style: {
+        backgroundColor: 'white',
+      },
+    },
     navigationOptions: () => ({
+      headerRight: <Button />,
       headerStyle: { backgroundColor: '#545680' },
       headerTintColor: 'white',
       headerTitleStyle: {
@@ -50,4 +57,16 @@ const MainTabNavigator = TabNavigator(
   },
 )
 
-export default MainTabNavigator
+class MainTabWrapper extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        <MainTabNavigator navigation={this.props.navigation} />
+      </View>
+    )
+  }
+}
+
+MainTabWrapper.router = MainTabNavigator.router
+
+export default MainTabWrapper
