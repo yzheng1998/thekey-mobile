@@ -3,7 +3,8 @@
 ## Setting up the application
 
 ```bash
-$ git clone # then cd into directory
+$ git clone https://github.com/hsadev/thekey-mobile.git && cd thekey-mobile
+# then cd into directory
 $ npm install
 $ react-native link
 ```
@@ -17,7 +18,7 @@ $ cd thekey-api
 $ npm run db
 $ \i config/script.sql # Type in the postgres config script
 $ # open a new terminal tab
-$ npm run start
+$ npm start
 ```
 
 After the backend is running, in a new terminal window, cd into thekey-mobile and execute
