@@ -9,7 +9,7 @@
 #import <AppCenterReactNativeCrashes/AppCenterReactNativeCrashes.h>
 #import <AppCenterReactNativeAnalytics/AppCenterReactNativeAnalytics.h>
 #import <AppCenterReactNative/AppCenterReactNative.h>
-
+#import <RCTLinkedinLogin/RCTLinkedinLogin.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
@@ -38,6 +38,14 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  return YES;
+}
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+  if ([RCTLinkedinLogin shouldHandleUrl:url])
+  {
+    return [RCTLinkedinLogin application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+  }
   return YES;
 }
 
