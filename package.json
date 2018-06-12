@@ -12,6 +12,7 @@
     "lint": "npm-run-all js-lint css-lint"
   },
   "dependencies": {
+    "@storybook/react": "^3.4.7",
     "apollo-boost": "^0.1.6",
     "apollo-client": "^2.3.2",
     "expo": "^27.0.2",
