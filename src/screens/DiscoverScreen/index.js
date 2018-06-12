@@ -1,30 +1,44 @@
 import React, { Component } from 'react'
 import { Background } from './styles'
-import { Button } from 'react-native-elements'
+import DiscoverCard from './components/DiscoverCard'
+import placeholder from '../../../assets/city.png'
 
-class MainScreen extends Component {
+class DiscoverScreen extends Component {
   static navigationOptions = {
-    headerTitle: 'Main Screen',
+    headerTitle: 'Discover',
   }
 
   render() {
     return (
       <Background>
-        <Button
-          title="View All Users"
+        <DiscoverCard
+          title="The Society"
+          description="View other users on the site"
+          image={placeholder}
           onPress={() => this.props.navigation.navigate('Users')}
         />
-        <Button
-          title="View All Events"
+        <DiscoverCard
+          title="Jobs/Internships"
+          description="View jobs posted on the site"
+          image={placeholder}
+          onPress={() => this.props.navigation.navigate('Jobs')}
+        />
+        <DiscoverCard
+          title="Events"
+          description="View events posted on the site"
+          image={placeholder}
           onPress={() => this.props.navigation.navigate('Events')}
         />
-        <Button
-          title="View All Jobs"
-          onPress={() => this.props.navigation.navigate('Jobs')}
+        <DiscoverCard
+          title="Reviews"
+          description="Review companies on the site"
+          image={placeholder}
+          // Navigate to a random page (no reviews page yet)
+          onPress={() => this.props.navigation.navigate('Events')}
         />
       </Background>
     )
   }
 }
 
-export default MainScreen
+export default DiscoverScreen
