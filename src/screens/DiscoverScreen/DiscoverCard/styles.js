@@ -21,13 +21,15 @@ export const Tint = styled.View.attrs({
   width: 100%;
 `
 export const Title = styled.Text`
-  font-size: 23;
+  font-size: 24;
   font-weight: 900;
+  font-family: 'SF Pro Display';
   color: white;
   padding: 5px;
 `
 export const Description = styled.Text`
-  font-size: 15;
+  font-size: 16;
+  font-family: 'SF Pro Display';
   color: white;
 `
 export const BackgroundImage = styled.Image`
