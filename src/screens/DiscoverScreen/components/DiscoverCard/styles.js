@@ -9,14 +9,13 @@ export const Card = styled.TouchableOpacity`
   justify-content: center;
   overflow: hidden;
 `
-export const Wrapper = styled.View`
+export const TextContainer = styled.View`
   position: absolute;
   align-items: center;
 `
-export const Tint = styled.View.attrs({
-  backgroundColor: props => props.tintColor || 'rgba(52, 52, 52, 0.8)',
-})`
-  background-color: ${props => props.backgroundColor}
+export const Tint = styled.View`
+  background-color: ${props =>
+    props.tintColor ? props.tintColor : 'rgba(52, 52, 52, 0.8)'}
   flex: 1;
   width: 100%;
 `

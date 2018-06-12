@@ -6,7 +6,7 @@ import {
   Title,
   Description,
   BackgroundImage,
-  Wrapper,
+  TextContainer,
   Tint,
 } from './styles'
 
@@ -30,10 +30,10 @@ export default class DiscoverCard extends Component {
       <Card onPress={onPress}>
         <Tint tintColor={tintColor} />
         <BackgroundImage source={image} />
-        <Wrapper>
+        <TextContainer>
           <Title>{title}</Title>
           <Description>{description}</Description>
-        </Wrapper>
+        </TextContainer>
       </Card>
     )
   }
