@@ -13,6 +13,7 @@
     "storybook": "storybook start -p 7007"
   },
   "dependencies": {
+    "@storybook/react": "^3.4.7",
     "apollo-boost": "^0.1.6",
     "appcenter": "^1.5.1",
     "appcenter-analytics": "^1.5.1",
@@ -75,5 +76,10 @@
   },
   "jest": {
     "preset": "react-native"
+  },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
   }
 }
