@@ -33,30 +33,50 @@ to run the frontend.
 
 Features that have currently been implemented:
 
-### Register
+### Registration
 
-Users are able to make an account for the app using a registration form with text fields. However, the full application process hasn't been implemented yet.
+After navigating away from the landing screen, users may choose to register as new users. This process involves providing basic user information like name, email, and password as well as filling out an application, answering a few short essay questions, and uploading a resumé. After this, the applicant must wait to be reviewed by The Key's membership board. Upon approval by the board, the applicant will be notified via email, at which time they will be able to log in to the app.
 
 ### Login
 
-A temporary login page has been built, but full functionality is still being implemented.
+Members of the site are able to log in via facebook, LinkedIn, or email. After logging in, the user is navigated to the main app.
 
 ### Navigation
 
-Users are able to choose whether to register an account or login using a basic landing page that appears when they first open the app. After logging in, users are presented a page with three tabs (implemented using a TabNavigator) for three different pages: Discover, Chats, and Profile. They can choose which of the pages they want to visit using the TabNavigator. Once users are on the TabNavigator page, they are unable to return to the landing page. After being logged in, users can use the Discover tab to view other Users, Events, or Jobs, the Chats tab to send messages to other users (still needs to be fully implemented), and view/edit their own Profile (still needs to be implemented).
+Members of The Key are able to explore the app via the main tab navigtor (located at the bottom of the Screen) and the 'Discover' list. The tab navigator offers you the choice to view the 'Discover' screen, the 'Your Network' screen, and the profile screen. The 'Discover' screen has cards that that navigate Members to list views of other Members, Events, Jobs/Internships, and Reviews. On all list views, tapping on the cards takes the Member to a details view of whatever the card was was displaying. At most points in the app, if one would expect a card or photo to be tappable, it probably is and it will most likely follow this details view navigation pattern. At any point, Members can press the 'back arrow' found in the upper left-hand corner of the screen to go back to the previous screen.
 
-### Viewing Users
+### List Views
 
-After selecing to view other users, the user is redirected to a page that shows a list of user components, each component shows some information about each user. After the component is clicked, the user is redirected to a User Detail View page that shows more information about that user.
+List views exist so that Members can discover: fellow Members/Groups (via 'The Society'), Jobs/Internships, Events, and Reivews.
 
-#### Friend Requests
+#### 'The Society' (Members/Groups)
+
+The Society is Screen that contains a single card. This card may contain either a Member or a Group. If the Card showcases a Member, it displays the Members: name, location, picture, industry tags, short bio, and mutual connection you have with the Member. If the Card is a Group it displays the exact same information with the added 'Group' tag infront of the location line in order to designate it as a group.
+
+The results in The Society are filtered based on the current information you have provided your account. We match Members/Groups based on education, location, industry interests, and several other factors.
+
+The main functionality of The Society is swipping based. Therefore, we you swipe right on a person, this is equivalent to sending a friendRequest and swiping left will take no action. After swiping right on a Member/Group, you are able chat with them after that Member/Group has accepted your friendRequest.
+
+#### Jobs/Internships
+
+#### Events
+
+#### Reviews
+
+### Friend Requests
 
 From the User Detail View page, the user can also click a button that redirects them to a page that allows them to view the friend requests they have received (and also the friend requests of any other user - we will need to fix this). They can then choose to accept or reject those friend requests.
 
-#### Other Friends:
+### Chat
 
-From the User Detail View page, one can view the user's other friends in a horizontal scroll view (still needs to be made swipeable). The user can click on the other friends and will be redirected to their detail views.
+#### Chat Inbox
 
-### Events/Jobs
+#### Add Friend / Friend Search
 
-From the Discover screen, users can also choose to view a list of all jobs (they can click on a job to view more details about that job) or a list of all events posted (they can click on an event to view more details about that event).
+#### Convesation Screen
+
+### Profile
+
+## Designs
+
+The working designs can be found at the following Link: https://github.com/hsadev/thekey-general/tree/master/Designs
