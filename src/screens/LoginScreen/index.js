@@ -8,6 +8,10 @@ import { Message } from './styles'
 const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
     loginUser(email: $email, password: $password) {
+      user {
+        id
+        firstName
+      }
       token
       error {
         message
@@ -27,11 +31,11 @@ class LoginScreen extends Component {
         mutation={LOGIN_USER}
         onCompleted={async data => {
           const {
-            loginUser: { token },
+            loginUser: { token, user },
           } = data
-
           if (!data.loginUser.error) {
-            await (token && AsyncStorage.setItem('token', token))
+            await AsyncStorage.setItem('token', token)
+            await AsyncStorage.setItem('userId', user.id)
             this.props.navigation.navigate('MainTab')
           }
         }}
