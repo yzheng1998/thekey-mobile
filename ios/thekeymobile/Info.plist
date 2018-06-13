@@ -44,6 +44,15 @@
 	<dict>
 		<key>NSExceptionDomains</key>
 		<dict>
+			<key>linkedin.com</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
 			<key>localhost</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
@@ -65,44 +74,24 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 	</array>
-  <key>NSAppTransportSecurity</key>
-  <dict>
-    <key>NSExceptionDomains</key>
-    <dict>
-      <key>linkedin.com</key>
-      <dict>
-        <key>NSExceptionAllowsInsecureHTTPLoads</key>
-        <true/>
-        <key>NSExceptionRequiresForwardSecrecy</key>
-        <false/>
-        <key>NSIncludesSubdomains</key>
-        <true/>
-      </dict>
-      <key>localhost</key>
-      <dict>
-        <key>NSExceptionAllowsInsecureHTTPLoads</key>
-        <true/>
-      </dict>
-    </dict>
-  </dict>
-  <key>CFBundleURLTypes</key>
-  <array>
-    <dict>
-      <key>CFBundleTypeRole</key>
-      <string>Editor</string>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>li{YOUR_APP_ID_GOES_HERE}</string>
-      </array>
-    </dict>
-  </array>
-  <key>LIAppId</key>
-  <string>{YOUR_APP_ID_GOES_HERE}</string>
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>linkedin</string>
-    <string>linkedin-sdk2</string>
-    <string>linkedin-sdk</string>
-  </array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>li{YOUR_APP_ID_GOES_HERE}</string>
+			</array>
+		</dict>
+	</array>
+	<key>LIAppId</key>
+	<string>{YOUR_APP_ID_GOES_HERE}</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>linkedin</string>
+		<string>linkedin-sdk2</string>
+		<string>linkedin-sdk</string>
+	</array>
 </dict>
 </plist>
