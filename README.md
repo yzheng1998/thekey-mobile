@@ -59,21 +59,45 @@ The main functionality of The Society is swipping based. Therefore, we you swipe
 
 #### Jobs/Internships
 
+Jobs and Internships will be displayed in lists. Members will be able to star Jobs/Internships so that they can easily be viewed via the tab filters at the top of the screen. These tab filters also offer easy access to jobs that the Member as applied for. Upon tapping on one of the Job listings, Members will be taken to a details view about the Job/Internship.
+
+The detail view offers Members the opportunity to see more indepth descriptions about jobs as well as offers them the opportunity to apply for jobs. Applying for a job involves typing up a CV and sending a resumé.
+
 #### Events
+
+Events will be displayed in list views. The main list of Events will be displayed in large cards showcasing the Event's title, location, time and date, interested Members that you may know, and a picture for the event. These events will be selected for you based on your interests, demographics, and other information. There will also be a second list of Events that will displayed on much smaller cards containing the Event's title, date and time, interested Members that you may know, and photo. These Events will be selected for you based on your location.
+
+Regardless of the type of card, clicking the '+' button allows Members to show interest in an Event, adding them to the Event's list of Members.
+
+Upon tapping an Event Card, you are taken to a details view that will give more indepth details about the Event, as well as give you the option to become part of the Chat assciated with the Event.
 
 #### Reviews
 
+TBD
+
 ### Friend Requests
 
-From the User Detail View page, the user can also click a button that redirects them to a page that allows them to view the friend requests they have received (and also the friend requests of any other user - we will need to fix this). They can then choose to accept or reject those friend requests.
+Friend requests can be sent in multiple ways. First, a friend request can be sent from the society page by swiping right. Second, a friend request can be sent by navigating to a particular Member's page and tapping the 'connect' button. Third, a friend request may be sent by scanning a Member's QR code. Fourth, a friend request may be sent from 'Your Network' by simply pressing the 'Add Friend' button and using the resulting screen.
 
 ### Chat
 
-#### Chat Inbox
+Members are able to communicate to eachother via both One-to-One and group Chats. Group chats can also be associated with Member defined Groups that will show up in the Society and Events.
+
+#### 'Your Network' (Chat Inbox)
+
+On this screen, Members can view all of their current Chats. Each chat is represented by a card that contains the avatar for the chat (this will be the other Members's photo for a One-to-One chat, the group photo for a Group chat, or the event photo for an Event Chat), the name of the Member/Group/the last sent message in the chat,
+
+This screen also contains a few filter tabs that allow the Member to easily see chats that belong to the following categories: Connection (other Members), Group, Event. This filtering can be made even more specific by using the search bar that will allow you to search through all of you available connections (Members, Groups, and Events).
+
+Members can add new connections via the 'Add Friend' button in the top right corner or add new chats via the 'Add Chat' button in the bottom right corner.
 
 #### Add Friend / Friend Search
 
+TBD
+
 #### Convesation Screen
+
+The Conversation Screen shows the messages of a particular chat. The Header of the chat displays the name of the current recipient (either a Member, Group, or Event) as well as that recipient's photo. Messages sent by you are displayed on the right side of the screen and messages sent by others are on the left. At the bottom of the screen is a message input with a Camera button and a send button.
 
 ### Profile
 

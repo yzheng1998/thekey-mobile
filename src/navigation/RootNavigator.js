@@ -12,7 +12,6 @@ import LoginScreen from '../screens/LoginScreen'
 import LandingScreen from '../screens/LandingScreen'
 import FriendRequestScreen from '../screens/FriendRequestScreen'
 
-
 const RootNavigator = createStackNavigator(
   {
     Landing: {
