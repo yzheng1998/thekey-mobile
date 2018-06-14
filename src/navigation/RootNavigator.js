@@ -1,55 +1,26 @@
-import { createStackNavigator } from 'react-navigation'
+import { createSwitchNavigator, HeaderBackButton } from 'react-navigation'
+import React from 'react'
+import LoginStack from '../navigation/LoginStack'
+import MainTabNavigator from '../navigation/MainTabNavigator'
 
-import MainScreen from '../screens/MainScreen/index'
-import EventsScreen from '../screens/EventsScreen/'
-import EventScreen from '../screens/EventScreen/'
-import RegisterScreen from '../screens/RegisterScreen/'
-import UserScreen from '../screens/UserScreen/'
-import UsersScreen from '../screens/UsersScreen/'
-import JobScreen from '../screens/JobScreen'
-import JobsScreen from '../screens/JobsScreen'
-import LoginScreen from '../screens/LoginScreen'
-import LandingScreen from '../screens/LandingScreen'
-import FriendRequestScreen from '../screens/FriendRequestScreen'
-
-const RootNavigator = createStackNavigator(
+const RootNavigator = createSwitchNavigator(
   {
-    Landing: {
-      screen: LandingScreen,
+    LoginStack: {
+      screen: LoginStack,
+      navigationOptions: ({ navigation }) => ({
+        headerLeft: <HeaderBackButton onPress={() => navigation.goBack()} />,
+      }),
     },
-    Login: {
-      screen: LoginScreen,
-    },
-    Main: {
-      screen: MainScreen,
-    },
-    Events: {
-      screen: EventsScreen,
-    },
-    Event: {
-      screen: EventScreen,
-    },
-    Register: {
-      screen: RegisterScreen,
-    },
-    Users: {
-      screen: UsersScreen,
-    },
-    User: {
-      screen: UserScreen,
-    },
-    Jobs: {
-      screen: JobsScreen,
-    },
-    Job: {
-      screen: JobScreen,
-    },
-    FriendRequestScreen: {
-      screen: FriendRequestScreen,
+    MainTab: {
+      screen: MainTabNavigator,
+      navigationOptions: ({ navigation }) => ({
+        headerLeft: <HeaderBackButton onPress={() => navigation.goBack()} />,
+      }),
     },
   },
   {
-    initialRouteName: 'Landing',
+    initialRouteName: 'LoginStack',
+    headerMode: 'screen',
   },
 )
 
