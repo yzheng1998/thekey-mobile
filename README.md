@@ -1,201 +1,106 @@
-This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
+# thekey-mobile
 
-Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
+## Setting up the application
 
-## Table of Contents
-
-* [Updating to New Releases](#updating-to-new-releases)
-* [Available Scripts](#available-scripts)
-  * [npm start](#npm-start)
-  * [npm test](#npm-test)
-  * [npm run ios](#npm-run-ios)
-  * [npm run android](#npm-run-android)
-  * [npm run eject](#npm-run-eject)
-* [Writing and Running Tests](#writing-and-running-tests)
-* [Environment Variables](#environment-variables)
-  * [Configuring Packager IP Address](#configuring-packager-ip-address)
-* [Customizing App Display Name and Icon](#customizing-app-display-name-and-icon)
-* [Sharing and Deployment](#sharing-and-deployment)
-  * [Publishing to Expo's React Native Community](#publishing-to-expos-react-native-community)
-  * [Building an Expo "standalone" app](#building-an-expo-standalone-app)
-  * [Ejecting from Create React Native App](#ejecting-from-create-react-native-app)
-    * [Build Dependencies (Xcode & Android Studio)](#build-dependencies-xcode-android-studio)
-    * [Should I Use ExpoKit?](#should-i-use-expokit)
-* [Troubleshooting](#troubleshooting)
-  * [Networking](#networking)
-  * [iOS Simulator won't open](#ios-simulator-wont-open)
-  * [QR Code does not scan](#qr-code-does-not-scan)
-
-## Updating to New Releases
-
-You should only need to update the global installation of `create-react-native-app` very rarely, ideally never.
-
-Updating the `react-native-scripts` dependency of your app should be as simple as bumping the version number in `package.json` and reinstalling your project's dependencies.
-
-Upgrading to a new version of React Native requires updating the `react-native`, `react`, and `expo` package versions, and setting the correct `sdkVersion` in `app.json`. See the [versioning guide](https://github.com/react-community/create-react-native-app/blob/master/VERSIONS.md) for up-to-date information about package version compatibility.
-
-## Available Scripts
-
-If Yarn was installed when the project was initialized, then dependencies will have been installed via Yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for Yarn and NPM at the time of this writing.
-
-### `npm start`
-
-Runs your app in development mode.
-
-Open it in the [Expo app](https://expo.io) on your phone to view it. It will reload if you save edits to your files, and you will see build errors and logs in the terminal.
-
-Sometimes you may need to reset or clear the React Native packager's cache. To do so, you can pass the `--reset-cache` flag to the start script:
-
-```
-npm start --reset-cache
-# or
-yarn start --reset-cache
+```bash
+$ git clone https://github.com/hsadev/thekey-mobile.git && cd thekey-mobile
+# then cd into directory
+$ npm install
+$ react-native link
 ```
 
-#### `npm test`
+## Running the application
 
-Runs the [jest](https://github.com/facebook/jest) test runner on your tests.
+Make sure you have the backend running first in a separate terminal:
 
-#### `npm run ios`
-
-Like `npm start`, but also attempts to open your app in the iOS Simulator if you're on a Mac and have it installed.
-
-#### `npm run android`
-
-Like `npm start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup). We also recommend installing Genymotion as your Android emulator. Once you've finished setting up the native build environment, there are two options for making the right copy of `adb` available to Create React Native App:
-
-##### Using Android Studio's `adb`
-
-1. Make sure that you can run adb from your terminal.
-2. Open Genymotion and navigate to `Settings -> ADB`. Select “Use custom Android SDK tools” and update with your [Android SDK directory](https://stackoverflow.com/questions/25176594/android-sdk-location).
-
-##### Using Genymotion's `adb`
-
-1. Find Genymotion’s copy of adb. On macOS for example, this is normally `/Applications/Genymotion.app/Contents/MacOS/tools/`.
-2. Add the Genymotion tools directory to your path (instructions for [Mac](http://osxdaily.com/2014/08/14/add-new-path-to-path-command-line/), [Linux](http://www.computerhope.com/issues/ch001647.htm), and [Windows](https://www.howtogeek.com/118594/how-to-edit-your-system-path-for-easy-command-line-access/)).
-3. Make sure that you can run adb from your terminal.
-
-#### `npm run eject`
-
-This will start the process of "ejecting" from Create React Native App's build scripts. You'll be asked a couple of questions about how you'd like to build your project.
-
-**Warning:** Running eject is a permanent action (aside from whatever version control system you use). An ejected app will require you to have an [Xcode and/or Android Studio environment](https://facebook.github.io/react-native/docs/getting-started.html) set up.
-
-## Customizing App Display Name and Icon
-
-You can edit `app.json` to include [configuration keys](https://docs.expo.io/versions/latest/guides/configuration.html) under the `expo` key.
-
-To change your app's display name, set the `expo.name` key in `app.json` to an appropriate string.
-
-To set an app icon, set the `expo.icon` key in `app.json` to be either a local path or a URL. It's recommended that you use a 512x512 png file with transparency.
-
-## Writing and Running Tests
-
-This project is set up to use [jest](https://facebook.github.io/jest/) for tests. You can configure whatever testing strategy you like, but jest works out of the box. Create test files in directories called `__tests__` or with the `.test` extension to have the files loaded by jest. See the [the template project](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/App.test.js) for an example test. The [jest documentation](https://facebook.github.io/jest/docs/en/getting-started.html) is also a wonderful resource, as is the [React Native testing tutorial](https://facebook.github.io/jest/docs/en/tutorial-react-native.html).
-
-## Environment Variables
-
-You can configure some of Create React Native App's behavior using environment variables.
-
-### Configuring Packager IP Address
-
-When starting your project, you'll see something like this for your project URL:
-
-```
-exp://192.168.0.2:19000
+```bash
+$ cd thekey-api
+$ npm run db
+$ \i config/script.sql # Type in the postgres config script
+$ # open a new terminal tab
+$ npm start
 ```
 
-The "manifest" at that URL tells the Expo app how to retrieve and load your app's JavaScript bundle, so even if you load it in the app via a URL like `exp://localhost:19000`, the Expo client app will still try to retrieve your app at the IP address that the start script provides.
+After the backend is running, in a new terminal window, cd into thekey-mobile and execute
 
-In some cases, this is less than ideal. This might be the case if you need to run your project inside of a virtual machine and you have to access the packager via a different IP address than the one which prints by default. In order to override the IP address or hostname that is detected by Create React Native App, you can specify your own hostname via the `REACT_NATIVE_PACKAGER_HOSTNAME` environment variable:
-
-Mac and Linux:
-
-```
-REACT_NATIVE_PACKAGER_HOSTNAME='my-custom-ip-address-or-hostname' npm start
+```bash
+npm run ios
 ```
 
-Windows:
-```
-set REACT_NATIVE_PACKAGER_HOSTNAME='my-custom-ip-address-or-hostname'
-npm start
-```
+to run the frontend.
 
-The above example would cause the development server to listen on `exp://my-custom-ip-address-or-hostname:19000`.
+## Documentation
 
-## Sharing and Deployment
+Features that have currently been implemented:
 
-Create React Native App does a lot of work to make app setup and development simple and straightforward, but it's very difficult to do the same for deploying to Apple's App Store or Google's Play Store without relying on a hosted service.
+### Registration
 
-### Publishing to Expo's React Native Community
+After navigating away from the landing screen, users may choose to register as new users. This process involves providing basic user information like name, email, and password as well as filling out an application, answering a few short essay questions, and uploading a resumé. After this, the applicant must wait to be reviewed by The Key's membership board. Upon approval by the board, the applicant will be notified via email, at which time they will be able to log in to the app.
 
-Expo provides free hosting for the JS-only apps created by CRNA, allowing you to share your app through the Expo client app. This requires registration for an Expo account.
+### Login
 
-Install the `exp` command-line tool, and run the publish command:
+Members of the site are able to log in via facebook, LinkedIn, or email. After logging in, the user is navigated to the main app.
 
-```
-$ npm i -g exp
-$ exp publish
-```
+### Navigation
 
-### Building an Expo "standalone" app
+Members of The Key are able to explore the app via the main tab navigtor (located at the bottom of the Screen) and the 'Discover' list. The tab navigator offers you the choice to view the 'Discover' screen, the 'Your Network' screen, and the profile screen. The 'Discover' screen has cards that that navigate Members to list views of other Members, Events, Jobs/Internships, and Reviews. On all list views, tapping on the cards takes the Member to a details view of whatever the card was was displaying. At most points in the app, if one would expect a card or photo to be tappable, it probably is and it will most likely follow this details view navigation pattern. At any point, Members can press the 'back arrow' found in the upper left-hand corner of the screen to go back to the previous screen.
 
-You can also use a service like [Expo's standalone builds](https://docs.expo.io/versions/latest/guides/building-standalone-apps.html) if you want to get an IPA/APK for distribution without having to build the native code yourself.
+### List Views
 
-### Ejecting from Create React Native App
+List views exist so that Members can discover: fellow Members/Groups (via 'The Society'), Jobs/Internships, Events, and Reivews.
 
-If you want to build and deploy your app yourself, you'll need to eject from CRNA and use Xcode and Android Studio.
+#### 'The Society' (Members/Groups)
 
-This is usually as simple as running `npm run eject` in your project, which will walk you through the process. Make sure to install `react-native-cli` and follow the [native code getting started guide for React Native](https://facebook.github.io/react-native/docs/getting-started.html).
+The Society is Screen that contains a single card. This card may contain either a Member or a Group. If the Card showcases a Member, it displays the Members: name, location, picture, industry tags, short bio, and mutual connection you have with the Member. If the Card is a Group it displays the exact same information with the added 'Group' tag infront of the location line in order to designate it as a group.
 
-#### Should I Use ExpoKit?
+The results in The Society are filtered based on the current information you have provided your account. We match Members/Groups based on education, location, industry interests, and several other factors.
 
-If you have made use of Expo APIs while working on your project, then those API calls will stop working if you eject to a regular React Native project. If you want to continue using those APIs, you can eject to "React Native + ExpoKit" which will still allow you to build your own native code and continue using the Expo APIs. See the [ejecting guide](https://github.com/react-community/create-react-native-app/blob/master/EJECTING.md) for more details about this option.
+The main functionality of The Society is swipping based. Therefore, we you swipe right on a person, this is equivalent to sending a friendRequest and swiping left will take no action. After swiping right on a Member/Group, you are able chat with them after that Member/Group has accepted your friendRequest.
 
-## Troubleshooting
+#### Jobs/Internships
 
-### Networking
+Jobs and Internships will be displayed in lists. Members will be able to star Jobs/Internships so that they can easily be viewed via the tab filters at the top of the screen. These tab filters also offer easy access to jobs that the Member as applied for. Upon tapping on one of the Job listings, Members will be taken to a details view about the Job/Internship.
 
-If you're unable to load your app on your phone due to a network timeout or a refused connection, a good first step is to verify that your phone and computer are on the same network and that they can reach each other. Create React Native App needs access to ports 19000 and 19001 so ensure that your network and firewall settings allow access from your device to your computer on both of these ports.
+The detail view offers Members the opportunity to see more indepth descriptions about jobs as well as offers them the opportunity to apply for jobs. Applying for a job involves typing up a CV and sending a resumé.
 
-Try opening a web browser on your phone and opening the URL that the packager script prints, replacing `exp://` with `http://`. So, for example, if underneath the QR code in your terminal you see:
+#### Events
 
-```
-exp://192.168.0.1:19000
-```
+Events will be displayed in list views. The main list of Events will be displayed in large cards showcasing the Event's title, location, time and date, interested Members that you may know, and a picture for the event. These events will be selected for you based on your interests, demographics, and other information. There will also be a second list of Events that will displayed on much smaller cards containing the Event's title, date and time, interested Members that you may know, and photo. These Events will be selected for you based on your location.
 
-Try opening Safari or Chrome on your phone and loading
+Regardless of the type of card, clicking the '+' button allows Members to show interest in an Event, adding them to the Event's list of Members.
 
-```
-http://192.168.0.1:19000
-```
+Upon tapping an Event Card, you are taken to a details view that will give more indepth details about the Event, as well as give you the option to become part of the Chat assciated with the Event.
 
-and
+#### Reviews
 
-```
-http://192.168.0.1:19001
-```
+TBD
 
-If this works, but you're still unable to load your app by scanning the QR code, please open an issue on the [Create React Native App repository](https://github.com/react-community/create-react-native-app) with details about these steps and any other error messages you may have received.
+### Friend Requests
 
-If you're not able to load the `http` URL in your phone's web browser, try using the tethering/mobile hotspot feature on your phone (beware of data usage, though), connecting your computer to that WiFi network, and restarting the packager. If you are using a VPN you may need to disable it.
+Friend requests can be sent in multiple ways. First, a friend request can be sent from the society page by swiping right. Second, a friend request can be sent by navigating to a particular Member's page and tapping the 'connect' button. Third, a friend request may be sent by scanning a Member's QR code. Fourth, a friend request may be sent from 'Your Network' by simply pressing the 'Add Friend' button and using the resulting screen.
 
-### iOS Simulator won't open
+### Chat
 
-If you're on a Mac, there are a few errors that users sometimes see when attempting to `npm run ios`:
+Members are able to communicate to eachother via both One-to-One and group Chats. Group chats can also be associated with Member defined Groups that will show up in the Society and Events.
 
-* "non-zero exit code: 107"
-* "You may need to install Xcode" but it is already installed
-* and others
+#### 'Your Network' (Chat Inbox)
 
-There are a few steps you may want to take to troubleshoot these kinds of errors:
+On this screen, Members can view all of their current Chats. Each chat is represented by a card that contains the avatar for the chat (this will be the other Members's photo for a One-to-One chat, the group photo for a Group chat, or the event photo for an Event Chat), the name of the Member/Group/the last sent message in the chat,
 
-1. Make sure Xcode is installed and open it to accept the license agreement if it prompts you. You can install it from the Mac App Store.
-2. Open Xcode's Preferences, the Locations tab, and make sure that the `Command Line Tools` menu option is set to something. Sometimes when the CLI tools are first installed by Homebrew this option is left blank, which can prevent Apple utilities from finding the simulator. Make sure to re-run `npm/yarn run ios` after doing so.
-3. If that doesn't work, open the Simulator, and under the app menu select `Reset Contents and Settings...`. After that has finished, quit the Simulator, and re-run `npm/yarn run ios`.
+This screen also contains a few filter tabs that allow the Member to easily see chats that belong to the following categories: Connection (other Members), Group, Event. This filtering can be made even more specific by using the search bar that will allow you to search through all of you available connections (Members, Groups, and Events).
 
-### QR Code does not scan
+Members can add new connections via the 'Add Friend' button in the top right corner or add new chats via the 'Add Chat' button in the bottom right corner.
 
-If you're not able to scan the QR code, make sure your phone's camera is focusing correctly, and also make sure that the contrast on the two colors in your terminal is high enough. For example, WebStorm's default themes may [not have enough contrast](https://github.com/react-community/create-react-native-app/issues/49) for terminal QR codes to be scannable with the system barcode scanners that the Expo app uses.
+#### Add Friend / Friend Search
 
-If this causes problems for you, you may want to try changing your terminal's color theme to have more contrast, or running Create React Native App from a different terminal. You can also manually enter the URL printed by the packager script in the Expo app's search bar to load it manually.
+TBD
+
+#### Convesation Screen
+
+The Conversation Screen shows the messages of a particular chat. The Header of the chat displays the name of the current recipient (either a Member, Group, or Event) as well as that recipient's photo. Messages sent by you are displayed on the right side of the screen and messages sent by others are on the left. At the bottom of the screen is a message input with a Camera button and a send button.
+
+### Profile
+
+## Designs
+
+The working designs can be found at the following Link: https://github.com/hsadev/thekey-general/tree/master/Designs
