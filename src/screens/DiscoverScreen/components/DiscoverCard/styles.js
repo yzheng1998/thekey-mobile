@@ -22,19 +22,13 @@ export const Tint = styled.View`
 export const Title = styled.Text`
   font-size: 24;
   font-weight: 900;
-<<<<<<< HEAD
   font-family: 'SF Pro Display';
-=======
->>>>>>> Feature/DiscoverCardNavigation
   color: white;
   padding: 5px;
 `
 export const Description = styled.Text`
   font-size: 16;
-<<<<<<< HEAD
   font-family: 'SF Pro Display';
-=======
->>>>>>> Feature/DiscoverCardNavigation
   color: white;
 `
 export const BackgroundImage = styled.Image`
