@@ -6,6 +6,7 @@
 	objectVersion = 46;
 	objects = {
 /* Begin PBXBuildFile section */
+		006BB4013DBD484A94E17B89 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CADA69BA8ED240E48C664A9F /* SF-Pro-Display-Bold.otf */; };
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
 		00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
@@ -13,7 +14,7 @@
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* thekeymobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* thekeymobileTests.m */; };
 		118E1FF6574BF7DD6A6FCF78 /* libPods-thekeymobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 697D7679D4522A6331B61DFC /* libPods-thekeymobileTests.a */; };
-		1270BB449CEA670473179057 /* libPods-thekeymobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E288833CDD5831644CCD9C4D /* libPods-thekeymobile-tvOS.a */; };
+		1270BB449CEA670473179057 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -23,7 +24,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		14BCAA07D0BC48D98BC461B6 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = E8A928EAC4C8415C94C19208 /* AppCenter-Config.plist */; };
+		14BCAA07D0BC48D98BC461B6 /* BuildFile in Resources */ = {isa = PBXBuildFile; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -38,6 +39,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* thekeymobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* thekeymobileTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		488B16712D974F0D873BEEFA /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5281DEC24D914142BEB52458 /* Entypo.ttf */; };
+		4B4E9CC9C36D451395F20D36 /* SF-Pro-Display-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = BC109BE7242D491A8D8F4ADA /* SF-Pro-Display-Medium.otf */; };
 		4F20FB066A506911F008DDC8 /* libPods-thekeymobile-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 70FCE34A1E72FAC773680123 /* libPods-thekeymobile-tvOSTests.a */; };
 		50120DCC1F894836A5E4CB3A /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A32BF31FE52B4D2986C8ADE4 /* Zocial.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
@@ -47,8 +49,9 @@
 		9ED885B592DE4C91ACF7B773 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E5539AFFF742A69B39A006 /* libRNVectorIcons.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B6EF217337AA4A8EAA22912A /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BC7358005F364402B50F0E74 /* EvilIcons.ttf */; };
-		CB684F2C61FE48528244A665 /* libAppCenterReactNativeCrashes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C64B94D554D443A4B7CCBE24 /* libAppCenterReactNativeCrashes.a */; };
+		CB684F2C61FE48528244A665 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		CF156757378E4217B6AFE1A3 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBEF8EC4E6B84CA58D6AADE5 /* Ionicons.ttf */; };
+		D3174CFDAB1A48CECB560008 /* libPods-thekeymobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58E1E7F8A5CC9CF5F5CED460 /* libPods-thekeymobile-tvOS.a */; };
 		D40677B25EE34111A4F58A89 /* libAppCenterReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AD24F765C0441A6BFAE7E24 /* libAppCenterReactNative.a */; };
 		D806152269ED4ACD8AA26B7D /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B49B1ECB95EC40D996ED8FA5 /* SimpleLineIcons.ttf */; };
 		D8FCBBB2B302492F9A94D7CF /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 855CA83A4217418C8CEC8674 /* Foundation.ttf */; };
@@ -123,6 +126,34 @@
 			proxyType = 2;
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
+		};
+		22C6844E20D17BF200DB50D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5733C72DC6AC43E2B1BF7DEA /* AppCenterReactNative.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C35AEC211EF91F9300931F0C;
+			remoteInfo = AppCenterReactNative;
+		};
+		22C6845120D17BF200DB50D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 471450B524BF4D12AA2F153B /* AppCenterReactNativeAnalytics.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 548694001D8384E600E6685A;
+			remoteInfo = AppCenterReactNativeAnalytics;
+		};
+		22C6845420D17BF200DB50D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5599D894EC9C4218A1B6EB59 /* AppCenterReactNativeCrashes.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5419C2701D824AA700DDF3A1;
+			remoteInfo = AppCenterReactNativeCrashes;
+		};
+		22C6845720D17BF200DB50D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4BF1A27DC11447458EF0F49D /* RNVectorIcons.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
+			remoteInfo = RNVectorIcons;
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -389,6 +420,7 @@
 		2D02E47B1E0B4A5D006451C7 /* thekeymobile-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "thekeymobile-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* thekeymobile-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "thekeymobile-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		36D5746878A8001C50797F37 /* Pods-thekeymobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thekeymobileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-thekeymobileTests/Pods-thekeymobileTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3A5358A83F5EDC12CE38B3A8 /* Pods-thekeymobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thekeymobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-thekeymobile/Pods-thekeymobile.release.xcconfig"; sourceTree = "<group>"; };
 		471450B524BF4D12AA2F153B /* AppCenterReactNativeAnalytics.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AppCenterReactNativeAnalytics.xcodeproj; path = "../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics.xcodeproj"; sourceTree = "<group>"; };
 		4BF1A27DC11447458EF0F49D /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -399,6 +431,7 @@
 		572F2637C26E50E39E659CCF /* libPods-thekeymobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-thekeymobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5733C72DC6AC43E2B1BF7DEA /* AppCenterReactNative.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AppCenterReactNative.xcodeproj; path = ../node_modules/appcenter/ios/AppCenterReactNative.xcodeproj; sourceTree = "<group>"; };
 		57C18897B14D45A4BC7C0F8E /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		58E1E7F8A5CC9CF5F5CED460 /* libPods-thekeymobile-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-thekeymobile-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		6089F441EDA0847491EF5D20 /* Pods-thekeymobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thekeymobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-thekeymobile/Pods-thekeymobile.debug.xcconfig"; sourceTree = "<group>"; };
 		697D7679D4522A6331B61DFC /* libPods-thekeymobileTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-thekeymobileTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -408,6 +441,7 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		855CA83A4217418C8CEC8674 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		A32BF31FE52B4D2986C8ADE4 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		A4870AC7331A2DD674DBFFC4 /* Pods-thekeymobile-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thekeymobile-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-thekeymobile-tvOSTests/Pods-thekeymobile-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		AD76A1DA3F3E4580B86C8A89 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		AE5242340EE9412CA7F93516 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
@@ -425,6 +459,14 @@
 		FBEF8EC4E6B84CA58D6AADE5 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		68D986EEE764439AA48D9B4C /* RCTLinkedinLogin.xcodeproj */ = {isa = PBXFileReference; name = "RCTLinkedinLogin.xcodeproj"; path = "../node_modules/react-native-linkedin-login/ios/RCTLinkedinLogin.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		770979C32CE742419B4E5066 /* libRCTLinkedinLogin.a */ = {isa = PBXFileReference; name = "libRCTLinkedinLogin.a"; path = "libRCTLinkedinLogin.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		BC109BE7242D491A8D8F4ADA /* SF-Pro-Display-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Medium.otf"; path = "../assets/fonts/SF-Pro-Display-Medium.otf"; sourceTree = "<group>"; };
+		BC7358005F364402B50F0E74 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		C1E5539AFFF742A69B39A006 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
+		C7CE58D74CE749BDADA024F7 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		CADA69BA8ED240E48C664A9F /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-Bold.otf"; path = "../assets/fonts/SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
+		D04A162B6C43F43AD8402A98 /* Pods-thekeymobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thekeymobileTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-thekeymobileTests/Pods-thekeymobileTests.release.xcconfig"; sourceTree = "<group>"; };
+		D56E58871E0B42336FD84D38 /* Pods-thekeymobile-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thekeymobile-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-thekeymobile-tvOSTests/Pods-thekeymobile-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FBEF8EC4E6B84CA58D6AADE5 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -457,7 +499,7 @@
 				9ED885B592DE4C91ACF7B773 /* libRNVectorIcons.a in Frameworks */,
 				D40677B25EE34111A4F58A89 /* libAppCenterReactNative.a in Frameworks */,
 				EBBA8FBC292C489E86F2A7EE /* libAppCenterReactNativeAnalytics.a in Frameworks */,
-				CB684F2C61FE48528244A665 /* libAppCenterReactNativeCrashes.a in Frameworks */,
+				CB684F2C61FE48528244A665 /* BuildFile in Frameworks */,
 				FABA81C9D0556D6707D72315 /* libPods-thekeymobile.a in Frameworks */,
 				86EA3D286A2A490DB1188250 /* libRCTLinkedinLogin.a in Frameworks */,
 			);
@@ -475,7 +517,8 @@
 				2D02E4C61E0B4AEC006451C7 /* libRCTSettings-tvOS.a in Frameworks */,
 				2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */,
 				2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */,
-				1270BB449CEA670473179057 /* libPods-thekeymobile-tvOS.a in Frameworks */,
+				1270BB449CEA670473179057 /* BuildFile in Frameworks */,
+				D3174CFDAB1A48CECB560008 /* libPods-thekeymobile-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,7 +593,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		046D07A902E24D6194CA2198 /* Resources */ = {
+		046D07A902E24D6194CA2198 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
 				5281DEC24D914142BEB52458 /* Entypo.ttf */,
@@ -564,8 +607,10 @@
 				29954D5A8DA44CEE86698978 /* Octicons.ttf */,
 				B49B1ECB95EC40D996ED8FA5 /* SimpleLineIcons.ttf */,
 				A32BF31FE52B4D2986C8ADE4 /* Zocial.ttf */,
+				CADA69BA8ED240E48C664A9F /* SF-Pro-Display-Bold.otf */,
+				BC109BE7242D491A8D8F4ADA /* SF-Pro-Display-Medium.otf */,
 			);
-			name = Resources;
+			name = Libraries;
 			sourceTree = "<group>";
 		};
 		139105B71AF99BAD00B5F7CC /* Products */ = {
@@ -625,14 +670,56 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		22C6841F20D17BF100DB50D9 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				C1E5539AFFF742A69B39A006 /* libRNVectorIcons.a */,
+				6AD24F765C0441A6BFAE7E24 /* libAppCenterReactNative.a */,
+				51D140E18AAF471E9A7C05D1 /* libAppCenterReactNativeAnalytics.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		22C6844520D17BF200DB50D9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22C6845520D17BF200DB50D9 /* libAppCenterReactNativeCrashes.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22C6844720D17BF200DB50D9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22C6845820D17BF200DB50D9 /* libRNVectorIcons.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22C6844920D17BF200DB50D9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22C6844F20D17BF200DB50D9 /* libAppCenterReactNative.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22C6844B20D17BF200DB50D9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22C6845220D17BF200DB50D9 /* libAppCenterReactNativeAnalytics.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				572F2637C26E50E39E659CCF /* libPods-thekeymobile.a */,
-				E288833CDD5831644CCD9C4D /* libPods-thekeymobile-tvOS.a */,
 				70FCE34A1E72FAC773680123 /* libPods-thekeymobile-tvOSTests.a */,
 				697D7679D4522A6331B61DFC /* libPods-thekeymobileTests.a */,
+				58E1E7F8A5CC9CF5F5CED460 /* libPods-thekeymobile-tvOS.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -739,10 +826,11 @@
 				00E356EF1AD99517003FC87E /* thekeymobileTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-				046D07A902E24D6194CA2198 /* Resources */,
-				E8A928EAC4C8415C94C19208 /* AppCenter-Config.plist */,
+				046D07A902E24D6194CA2198 /* Libraries */,
 				938B9618B051C41913E5C227 /* Pods */,
 				3BD328F320D0404B003331F0 /* Recovered References */,
+				DA07FB1A0C834CCBB6F9A4C6 /* Resources */,
+
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -767,10 +855,10 @@
 				3A5358A83F5EDC12CE38B3A8 /* Pods-thekeymobile.release.xcconfig */,
 				50DE7E8B34CAB78449C8ADD2 /* Pods-thekeymobile-tvOS.debug.xcconfig */,
 				14C28565BDC4D4FBF4904BC4 /* Pods-thekeymobile-tvOS.release.xcconfig */,
-				F2EEEFED64BB5C7A1F7BBFDA /* Pods-thekeymobile-tvOSTests.debug.xcconfig */,
-				F573B12258E4D8404730BE17 /* Pods-thekeymobile-tvOSTests.release.xcconfig */,
-				E2BF461CA2CD1374FDB4962B /* Pods-thekeymobileTests.debug.xcconfig */,
-				F5BD54925DDC4C2A5B5C8DEF /* Pods-thekeymobileTests.release.xcconfig */,
+				D56E58871E0B42336FD84D38 /* Pods-thekeymobile-tvOSTests.debug.xcconfig */,
+				A4870AC7331A2DD674DBFFC4 /* Pods-thekeymobile-tvOSTests.release.xcconfig */,
+				36D5746878A8001C50797F37 /* Pods-thekeymobileTests.debug.xcconfig */,
+				D04A162B6C43F43AD8402A98 /* Pods-thekeymobileTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -783,6 +871,14 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		DA07FB1A0C834CCBB6F9A4C6 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -1029,6 +1125,34 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		22C6844F20D17BF200DB50D9 /* libAppCenterReactNative.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAppCenterReactNative.a;
+			remoteRef = 22C6844E20D17BF200DB50D9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		22C6845220D17BF200DB50D9 /* libAppCenterReactNativeAnalytics.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAppCenterReactNativeAnalytics.a;
+			remoteRef = 22C6845120D17BF200DB50D9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		22C6845520D17BF200DB50D9 /* libAppCenterReactNativeCrashes.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libAppCenterReactNativeCrashes.a;
+			remoteRef = 22C6845420D17BF200DB50D9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		22C6845820D17BF200DB50D9 /* libRNVectorIcons.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNVectorIcons.a;
+			remoteRef = 22C6845720D17BF200DB50D9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */ = {
@@ -1289,7 +1413,9 @@
 				65663D91475F4FB686315EC7 /* Octicons.ttf in Resources */,
 				D806152269ED4ACD8AA26B7D /* SimpleLineIcons.ttf in Resources */,
 				50120DCC1F894836A5E4CB3A /* Zocial.ttf in Resources */,
-				14BCAA07D0BC48D98BC461B6 /* AppCenter-Config.plist in Resources */,
+				006BB4013DBD484A94E17B89 /* SF-Pro-Display-Bold.otf in Resources */,
+				4B4E9CC9C36D451395F20D36 /* SF-Pro-Display-Medium.otf in Resources */,
+				14BCAA07D0BC48D98BC461B6 /* BuildFile in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1478,7 +1604,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E2BF461CA2CD1374FDB4962B /* Pods-thekeymobileTests.debug.xcconfig */;
+			baseConfigurationReference = 36D5746878A8001C50797F37 /* Pods-thekeymobileTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1515,7 +1641,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5BD54925DDC4C2A5B5C8DEF /* Pods-thekeymobileTests.release.xcconfig */;
+			baseConfigurationReference = D04A162B6C43F43AD8402A98 /* Pods-thekeymobileTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -1688,7 +1814,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2EEEFED64BB5C7A1F7BBFDA /* Pods-thekeymobile-tvOSTests.debug.xcconfig */;
+			baseConfigurationReference = D56E58871E0B42336FD84D38 /* Pods-thekeymobile-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1730,7 +1856,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F573B12258E4D8404730BE17 /* Pods-thekeymobile-tvOSTests.release.xcconfig */;
+			baseConfigurationReference = A4870AC7331A2DD674DBFFC4 /* Pods-thekeymobile-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
