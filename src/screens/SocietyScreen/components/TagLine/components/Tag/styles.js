@@ -18,7 +18,7 @@ export const TagOverlay = styled.View`
   height: 100%;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
 `
 
 export const TagText = styled.Text`
@@ -26,5 +26,6 @@ export const TagText = styled.Text`
   font-size: 14;
   line-height: 16;
   color: white;
-  margin-horizontal: 9;
+  margin-left: 9;
+  margin-right: 9;
 `
