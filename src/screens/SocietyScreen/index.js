@@ -15,7 +15,7 @@ const GET_USERS = gql`
   }
 `
 
-class UsersScreen extends Component {
+class SocietyScreen extends Component {
   render() {
     return (
       <Query query={GET_USERS}>
@@ -45,4 +45,4 @@ class UsersScreen extends Component {
   }
 }
 
-export default UsersScreen
+export default SocietyScreen
