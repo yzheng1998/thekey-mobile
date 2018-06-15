@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components/native'
 import theme from '../theme'
 
 import '../src/stories/ProfilePicBlock'
+import '../src/stories/TagLine'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
