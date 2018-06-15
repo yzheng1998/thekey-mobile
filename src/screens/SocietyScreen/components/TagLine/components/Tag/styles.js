@@ -11,9 +11,14 @@ export const TagContainer = styled.View`
 export const TagImage = styled.ImageBackground`
   width: 100%;
   height: 100%;
-  opacity: 1;
+`
+
+export const TagOverlay = styled.View`
+  width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
 `
 
 export const TagText = styled.Text`
