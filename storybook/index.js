@@ -1,7 +1,7 @@
 import { AppRegistry } from 'react-native'
 import { getStorybookUI } from '@storybook/react-native'
 
-import '../src/stories/example'
+import '../src/stories/ProfilePicBlock'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
