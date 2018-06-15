@@ -1,3 +1,5 @@
+import { Platform } from 'react-native'
+
 const theme = {
   colors: {
     background: 'white',
@@ -15,11 +17,22 @@ const theme = {
   width: {
     primary: '87.2%',
   },
-  iosFonts: {
-    bold: 'SFProDisplay-Bold',
-    medium: 'SFProDisplay-Medium',
-    light: 'SFProDisplay-Light',
-  },
+  ...Platform.select({
+    ios: {
+      fonts: {
+        bold: 'SFProDisplay-Bold',
+        medium: 'SFProDisplay-Medium',
+        light: 'SFProDisplay-Light',
+      },
+    },
+    android: {
+      fonts: {
+        bold: 'Roboto-Bold',
+        medium: 'Roboto-Medium',
+        light: 'Roboto-Light',
+      },
+    },
+  }),
 }
 
 export default theme
