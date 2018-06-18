@@ -1,9 +1,13 @@
 import styled from 'styled-components'
+import { themeGet } from 'styled-system'
+import { Dimensions } from 'react-native'
+
+const { height } = Dimensions.get('window')
 
 export const BlockContainer = styled.View`
   overflow: hidden;
-  width: 87.2%;
-  aspect-ratio: 0.954;
+  width: 100%;
+  height: ${height * 0.5};
 `
 
 export const BackgroundProfilePic = styled.ImageBackground`
@@ -14,16 +18,16 @@ export const BackgroundProfilePic = styled.ImageBackground`
 `
 
 export const ProfilePic = styled.Image`
-  width: 170;
-  border-radius: 85;
+  width: 171;
+  border-radius: ${171 / 2};
   aspect-ratio: 1;
 `
 
 export const EventTitleText = styled.Text`
   font-size: 24;
   line-height: 29;
-  font-family: SFProDisplay-Bold;
-  color: white;
+  font-family: ${themeGet('fonts.bold')};
+  color: ${themeGet('colors.fontTag')};
   margin-top: 24px;
   margin-bottom: 3px;
 `
@@ -31,6 +35,6 @@ export const EventTitleText = styled.Text`
 export const LocationText = styled.Text`
   font-size: 18;
   line-height: 21;
-  font-family: SFProDisplay-Medium;
-  color: white;
+  font-family: ${themeGet('fonts.medium')};
+  color: ${themeGet('colors.fontCard')};
 `
