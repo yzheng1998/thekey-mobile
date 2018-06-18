@@ -1,8 +1,8 @@
 import styled from 'styled-components'
+import { themeGet } from 'styled-system'
 
 export const TagContainer = styled.View`
   height: 32;
-  background-color: rgba(0, 0, 0, 0.6);
   border-radius: 8;
   overflow: hidden;
   margin: 5px;
@@ -22,10 +22,10 @@ export const TagOverlay = styled.View`
 `
 
 export const TagText = styled.Text`
-  font-family: SFProDisplay-Bold;
+  font-family: ${themeGet('fonts.bold')};
   font-size: 14;
   line-height: 16;
-  color: white;
+  color: ${themeGet('colors.fontTag')};
   margin-left: 9;
   margin-right: 9;
 `
