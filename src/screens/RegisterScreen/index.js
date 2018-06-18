@@ -27,7 +27,7 @@ class RegisterScreen extends Component {
         mutation={CREATE_USER}
         onCompleted={async data => {
           const { token } = data.createUser
-          await AsyncStorage.setItem('user', { token })
+          await AsyncStorage.setItem('token', token)
         }}
       >
         {(createUser, { loading, data }) => (
