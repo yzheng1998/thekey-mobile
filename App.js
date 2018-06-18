@@ -3,14 +3,16 @@ import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo'
 import config from './config'
 import RootNavigator from './src/navigation/RootNavigator'
-import { ThemeProvider } from 'styled-components/native'
-import theme from './theme'
+import { AsyncStorage } from 'react-native'
 
 const client = new ApolloClient({
   uri: config.graphqlUrl,
   request: async operation => {
+    const token = await AsyncStorage.getItem('token')
     operation.setContext({
-      headers: {},
+      headers: {
+        authorization: token,
+      },
     })
   },
 })
@@ -19,9 +21,7 @@ export default class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <ThemeProvider theme={theme}>
-          <RootNavigator />
-        </ThemeProvider>
+        <RootNavigator />
       </ApolloProvider>
     )
   }
