@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-import { FlatList, Text } from 'react-native'
+import { FlatList } from 'react-native'
 import { ListItem } from 'react-native-elements'
 
 const GET_USERS = gql`
@@ -15,13 +15,13 @@ const GET_USERS = gql`
   }
 `
 
-class UsersScreen extends Component {
+class SocietyScreen extends Component {
   render() {
     return (
       <Query query={GET_USERS}>
         {({ loading, error, data }) => {
-          if (loading) return <Text>Loading...</Text>
-          if (error) return <Text>Error! {error.message}</Text>
+          if (loading) return 'Loading...'
+          if (error) return `Error! ${error.message}`
           return (
             <FlatList
               keyExtractor={user => user.id}
@@ -45,4 +45,4 @@ class UsersScreen extends Component {
   }
 }
 
-export default UsersScreen
+export default SocietyScreen
