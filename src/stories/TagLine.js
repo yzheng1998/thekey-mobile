@@ -55,6 +55,48 @@ const tagData = [
         'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
     },
   },
+  {
+    text: 'Medicisdfdsne',
+    image: {
+      uri:
+        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+    },
+  },
+  {
+    text: 'Heasdfsdlth',
+    image: {
+      uri:
+        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+    },
+  },
+  {
+    text: 'Busisdfsness',
+    image: {
+      uri:
+        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+    },
+  },
+  {
+    text: 'Ventusdfsdre Capital',
+    image: {
+      uri:
+        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+    },
+  },
+  {
+    text: 'Start-uasdfsdsdafsdfasdfsdfsdfsdp',
+    image: {
+      uri:
+        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+    },
+  },
+  {
+    text: 'Tecsdfsh',
+    image: {
+      uri:
+        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+    },
+  },
 ]
 
 storiesOf('CenteredView').add('TagLine1', () => (
