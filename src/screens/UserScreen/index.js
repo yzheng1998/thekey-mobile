@@ -28,8 +28,8 @@ class UserScreen extends Component {
         variables={{ id: this.props.navigation.getParam('id') }}
       >
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...'
-          if (error) return `Error! ${error.message}`
+          if (loading) return <Text>Loading...</Text>
+          if (error) return <Text>Error! ${error.message}</Text>
 
           const { firstName, lastName, email } = data.user
 

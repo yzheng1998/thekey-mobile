@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-import { FlatList } from 'react-native'
+import { FlatList, Text } from 'react-native'
 import { ListItem } from 'react-native-elements'
 
 const GET_JOBS = gql`
@@ -22,8 +22,8 @@ class JobsScreen extends Component {
     return (
       <Query query={GET_JOBS}>
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...'
-          if (error) return `Error! ${error.message}`
+          if (loading) return <Text>Loading...</Text>
+          if (error) return <Text>Error! {error.message}</Text>
           return (
             <FlatList
               keyExtractor={job => job.id}
