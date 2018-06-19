@@ -5,7 +5,7 @@ export const Categories = styled.Text`
   font-size: ${props => (props.isSelected ? '24px' : '17px')};
   font-weight: 900;
   font-family: '${themeGet('fonts.light')}';
-  color: black;
+  color: white;
   margin-left: 20px;
   opacity: ${props => (props.isSelected ? '1' : '0.9')};
 `

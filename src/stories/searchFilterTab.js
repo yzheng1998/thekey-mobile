@@ -7,7 +7,7 @@ const style = {
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: '#F5FCFF',
+  backgroundColor: 'black',
 }
 const CenteredView = ({ children }) => <View style={style}>{children}</View>
 
