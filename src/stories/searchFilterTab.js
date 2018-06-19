@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
 import React from 'react'
-import ChatTab from '../components/ChatTab'
+import SearchFilterTab from '../components/SearchFilterTab'
 
 const style = {
   flex: 1,
@@ -11,8 +11,8 @@ const style = {
 }
 const CenteredView = ({ children }) => <View style={style}>{children}</View>
 
-storiesOf('CenteredView').add('default view', () => (
+storiesOf('CenteredView').add('SearchFilterTab', () => (
   <CenteredView>
-    <ChatTab options={['All', 'Connection', 'Groups', 'Events']} />
+    <SearchFilterTab options={['All', 'Connection', 'Groups', 'Events']} />
   </CenteredView>
 ))

@@ -6,7 +6,7 @@ import theme from '../theme'
 
 import '../src/stories/ProfilePicBlock'
 import '../src/stories/TagLine'
-import '../src/stories/chatTab'
+import '../src/stories/searchFilterTab'
 
 const StorybookUI = getStorybookUI({
   port: 7007,

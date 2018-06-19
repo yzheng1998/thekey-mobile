@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Tab, Categories } from './styles'
 
-export default class ChatTab extends Component {
+export default class SearchFilterTab extends Component {
   constructor(props) {
     super(props)
     this.state = { selectedIndex: 0 }
