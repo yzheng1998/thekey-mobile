@@ -4,6 +4,8 @@ import { ApolloProvider } from 'react-apollo'
 import config from './config'
 import RootNavigator from './src/navigation/RootNavigator'
 import { AsyncStorage } from 'react-native'
+import { ThemeProvider } from 'styled-components/native'
+import theme from './theme'
 
 const client = new ApolloClient({
   uri: config.graphqlUrl,
@@ -21,7 +23,9 @@ export default class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <RootNavigator />
+        <ThemeProvider theme={theme}>
+          <RootNavigator />
+        </ThemeProvider>
       </ApolloProvider>
     )
   }

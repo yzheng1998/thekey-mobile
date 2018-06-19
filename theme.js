@@ -1,4 +1,8 @@
+
 import { Platform } from 'react-native'
+import { Platform, Dimensions } from 'react-native'
+
+const { width } = Dimensions.get('window')
 
 const theme = {
   colors: {
@@ -9,13 +13,14 @@ const theme = {
     fontSubtitle: 'rgb(148 157, 170)',
     fontDescription: 'rgb(176, 18, 200)',
     fontTag: 'white',
+    fontCard: 'white',
     fontButtonPrimary: 'white',
     fontButtonSecondary: 'rgb(100, 108, 132)',
     fontButtonTertiary: 'rgb(250, 53, 121)',
     fontProfileFields: 'rgb(78, 158, 255)',
   },
   width: {
-    primary: '87.2%',
+    primary: 0.872 * width,
   },
   ...Platform.select({
     ios: {
