@@ -3,9 +3,9 @@ import { createBottomTabNavigator } from 'react-navigation' // 1.0.0-beta.14
 import { View, Image } from 'react-native'
 import { Button } from 'react-native-elements'
 import placeholder from '../../assets/devlogo.png'
-import SocietyScreen from '../screens/SocietyScreen'
 import EventsScreen from '../screens/EventsScreen'
 import DiscoverStack from '../navigation/DiscoverStack'
+import ChatStack from '../navigation/ChatStack'
 
 const MainTabNavigator = createBottomTabNavigator(
   {
@@ -17,8 +17,7 @@ const MainTabNavigator = createBottomTabNavigator(
       }),
     },
     Chats: {
-      // Temporary Screen here
-      screen: SocietyScreen,
+      screen: ChatStack,
       navigationOptions: () => ({
         title: 'Chats',
         tabBarIcon: () => <Image source={placeholder} size={30} />,
