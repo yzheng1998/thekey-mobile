@@ -13,6 +13,6 @@ const CenteredView = ({ children }) => <View style={style}>{children}</View>
 
 storiesOf('CenteredView').add('default view', () => (
   <CenteredView>
-    <ChatTab />
+    <ChatTab options={['All', 'Connection', 'Groups', 'Events']} />
   </CenteredView>
 ))

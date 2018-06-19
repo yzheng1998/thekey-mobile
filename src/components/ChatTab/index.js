@@ -15,30 +15,14 @@ export default class ChatTab extends Component {
     const { selectedIndex } = this.state
     return (
       <Tab>
-        <Categories
-          isSelected={selectedIndex === 0}
-          onPress={() => this.changeIndex(0)}
-        >
-          All
-        </Categories>
-        <Categories
-          isSelected={selectedIndex === 1}
-          onPress={() => this.changeIndex(1)}
-        >
-          Connections
-        </Categories>
-        <Categories
-          isSelected={selectedIndex === 2}
-          onPress={() => this.changeIndex(2)}
-        >
-          Groups
-        </Categories>
-        <Categories
-          isSelected={selectedIndex === 3}
-          onPress={() => this.changeIndex(3)}
-        >
-          Events
-        </Categories>
+        {this.props.options.map((option, idx) => (
+          <Categories
+            isSelected={selectedIndex === idx}
+            onPress={() => this.changeIndex(idx)}
+          >
+            {option}
+          </Categories>
+        ))}
       </Tab>
     )
   }
