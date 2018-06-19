@@ -9,7 +9,7 @@ export default class TagLine extends Component {
         {this.props.tagData.map(
           (tag, i) =>
             i < 10 && (
-              <Tag tagImage={tag.image} tagText={tag.text} key={tag.text} />
+              <Tag tagImage={tag.image} tagText={tag.name} key={tag.name} />
             ),
         )}
       </TagList>
