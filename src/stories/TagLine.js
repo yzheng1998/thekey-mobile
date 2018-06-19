@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
 import React from 'react'
 
-import TagLine from '../screens/SocietyScreen/components/TagLine'
+import TagLine from '../components/TagLine'
 
 const style = {
   flex: 1,
