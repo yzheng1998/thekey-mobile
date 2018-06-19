@@ -23,7 +23,7 @@ export default class ConnectionsRow extends Component {
           )}
         </AvatarContainer>
         <MutualConnections>
-          {this.props.connectionsNum} mutual connections
+          {this.props.friends.length} mutual connections
         </MutualConnections>
       </ConnectionsRowContainer>
     )
