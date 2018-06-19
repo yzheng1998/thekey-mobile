@@ -11,7 +11,7 @@ export default class ConnectionsRow extends Component {
     return (
       <ConnectionsRowContainer>
         <AvatarContainer>
-          {this.props.friends.map(
+          {this.props.mutualFriends.map(
             (friend, i) =>
               i < this.props.avatarNum && (
                 <Avatar
@@ -23,7 +23,7 @@ export default class ConnectionsRow extends Component {
           )}
         </AvatarContainer>
         <MutualConnections>
-          {this.props.friends.length} mutual connections
+          {this.props.mutualFriends.length} mutual connections
         </MutualConnections>
       </ConnectionsRowContainer>
     )
