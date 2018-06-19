@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
 import React from 'react'
 
-import TagLine from '../screens/SocietyScreen/components/TagLine'
+import TagLine from '../components/TagLine'
 
 const style = {
   flex: 1,
@@ -99,8 +99,14 @@ const tagData = [
   },
 ]
 
-storiesOf('CenteredView').add('TagLine1', () => (
-  <CenteredView>
-    <TagLine tagData={tagData} />
-  </CenteredView>
-))
+storiesOf('CenteredView')
+  .add('TagLine1', () => (
+    <CenteredView>
+      <TagLine tagData={tagData} lines={2} />
+    </CenteredView>
+  ))
+  .add('TagLine2', () => (
+    <CenteredView>
+      <TagLine tagData={tagData} lines={1} />
+    </CenteredView>
+  ))
