@@ -6,6 +6,7 @@ import theme from '../theme'
 
 import '../src/stories/ProfilePicBlock'
 import '../src/stories/TagLine'
+import '../src/stories/ConnectionsRow'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
