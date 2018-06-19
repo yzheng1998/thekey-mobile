@@ -6,12 +6,11 @@ import ConnectionsRow from '../ConnectionsRow'
 
 export default class SocietyCard extends Component {
   render() {
-    console.log(this.props.user)
     return (
       <CardContainer>
         <ProfilePicBlock
           profilePic={this.props.user.profilePic}
-          name={this.props.user.firstName + ' ' + this.props.user.lastName}
+          name={`${this.props.user.firstName} ${this.props.user.lastName}`}
           city={this.props.user.hometown}
           state={this.props.user.state}
         />
