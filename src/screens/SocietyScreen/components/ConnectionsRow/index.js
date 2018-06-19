@@ -11,19 +11,19 @@ export default class ConnectionsRow extends Component {
     return (
       <ConnectionsRowContainer>
         <AvatarContainer>
-          {this.props.avatarArray.map(
-            (avatar, i) =>
+          {this.props.friends.map(
+            (friend, i) =>
               i < this.props.avatarNum && (
                 <Avatar
                   avatarSize={this.props.avatarSize}
-                  source={avatar.avatar}
-                  key={avatar.id}
+                  source={friend.profilePicture}
+                  key={friend.id}
                 />
               ),
           )}
         </AvatarContainer>
         <MutualConnections>
-          {this.props.connections} mutual connections
+          {this.props.connectionsNum} mutual connections
         </MutualConnections>
       </ConnectionsRowContainer>
     )
