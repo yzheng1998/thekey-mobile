@@ -6,4 +6,5 @@ export const TagList = styled.View`
   overflow: hidden;
   flex-wrap: wrap;
   flex-direction: row;
+  height: ${props => (props.height ? props.height : 85)};
 `
