@@ -1,13 +1,10 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
-import { Dimensions } from 'react-native'
-
-const { height } = Dimensions.get('window')
 
 export const BlockContainer = styled.View`
   overflow: hidden;
   width: 100%;
-  height: ${height * 0.5};
+  aspect-ratio: 1.048;
 `
 
 export const BackgroundProfilePic = styled.ImageBackground`
