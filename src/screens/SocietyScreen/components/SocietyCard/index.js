@@ -6,20 +6,32 @@ import ConnectionsRow from '../ConnectionsRow'
 
 export default class SocietyCard extends Component {
   render() {
+    const {
+      profilePicture,
+      firstName,
+      lastName,
+      hometown,
+      state,
+      tags,
+      bio,
+      mutualFriends,
+    } = this.props.user
+    const selectMutualFriends = [...mutualFriends].slice(0, 5)
+    const selectTags = [...tags].slice(0, 10)
     return (
       <CardContainer>
         <ProfilePicBlock
-          profilePic={this.props.user.profilePic}
-          name={`${this.props.user.firstName} ${this.props.user.lastName}`}
-          city={this.props.user.hometown}
-          state={this.props.user.state}
+          profilePic={profilePicture}
+          name={`${firstName} ${lastName}`}
+          city={hometown}
+          state={state}
         />
-        <TagLine tagData={this.props.user.tags.splice(0, 10)} lines={2} />
-        <BioText numberOfLines={3}>{this.props.user.bio}</BioText>
+        <TagLine tagData={selectTags} lines={2} />
+        <BioText numberOfLines={3}>{bio}</BioText>
         <ConnectionsRow
           avatarSize={28}
-          connectionsNum={this.props.user.mutualFriends.length}
-          mutualFriends={this.props.user.mutualFriends.splice(0, 5)}
+          connectionsNum={mutualFriends.length}
+          mutualFriends={selectMutualFriends}
         />
       </CardContainer>
     )
