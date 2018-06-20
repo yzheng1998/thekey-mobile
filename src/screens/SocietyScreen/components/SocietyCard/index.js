@@ -14,12 +14,12 @@ export default class SocietyCard extends Component {
           city={this.props.user.hometown}
           state={this.props.user.state}
         />
-        <TagLine tagData={this.props.user.tags} lines={2} />
+        <TagLine tagData={this.props.user.tags.splice(0, 10)} lines={2} />
         <BioText numberOfLines={3}>{this.props.user.bio}</BioText>
         <ConnectionsRow
-          avatarNum={5}
           avatarSize={28}
-          mutualFriends={this.props.user.mutualFriends}
+          connectionsNum={this.props.user.mutualFriends.length}
+          mutualFriends={this.props.user.mutualFriends.splice(0, 5)}
         />
       </CardContainer>
     )
