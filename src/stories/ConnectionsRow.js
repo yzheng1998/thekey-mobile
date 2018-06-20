@@ -1,13 +1,14 @@
 import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
 import React from 'react'
-import ConnectionsRow from '../screens/SocietyScreen/components/ConnectionsRow'
+import MutualConnectionsRow from '../screens/SocietyScreen/components/MutualConnectionsRow'
+import InterestedFriendsRow from '../screens/EventsScreen/components/InterestedFriendsRow'
 
 const style = {
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: '#F5FCFF',
+  backgroundColor: 'black',
 }
 const CenteredView = ({ children }) => <View style={style}>{children}</View>
 
@@ -52,6 +53,29 @@ const friends = [
 
 storiesOf('CenteredView').add('ConnectionsRow1', () => (
   <CenteredView>
-    <ConnectionsRow avatarNum={5} avatarSize={28} friends={friends} />
+    <MutualConnectionsRow
+      avatarNum={5}
+      avatarSize={28}
+      mutualFriends={friends}
+      connectionsNum={friends.length}
+    />
+    <InterestedFriendsRow
+      avatarNum={5}
+      avatarSize={28}
+      mutualFriends={friends}
+      connectionsNum={friends.length}
+    />
+    <MutualConnectionsRow
+      avatarNum={5}
+      avatarSize={28}
+      mutualFriends={friends.slice(0, 0)}
+      connectionsNum={0}
+    />
+    <InterestedFriendsRow
+      avatarNum={5}
+      avatarSize={28}
+      mutualFriends={friends.slice(0, 0)}
+      connectionsNum={0}
+    />
   </CenteredView>
 ))
