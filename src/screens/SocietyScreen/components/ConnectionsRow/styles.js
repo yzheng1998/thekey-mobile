@@ -3,7 +3,7 @@ import { themeGet } from 'styled-system'
 
 export const ConnectionsRowContainer = styled.View`
   flex-direction: row;
-  align-self: center;
+  margin-left: 16;
   margin-bottom: 19;
 `
 
