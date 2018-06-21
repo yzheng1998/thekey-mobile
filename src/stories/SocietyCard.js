@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
 import React from 'react'
 
-import TagLine from '../components/TagLine'
+import SocietyCard from '../screens/SocietyScreen/components/SocietyCard'
 
 const style = {
   flex: 1,
@@ -99,14 +99,98 @@ const tagData = [
   },
 ]
 
-storiesOf('CenteredView')
-  .add('TagLine1', () => (
-    <CenteredView>
-      <TagLine tagData={tagData} lines={2} />
-    </CenteredView>
-  ))
-  .add('TagLine2', () => (
-    <CenteredView>
-      <TagLine tagData={tagData} lines={1} />
-    </CenteredView>
-  ))
+const friends = [
+  {
+    firstName: 'Yuke',
+    id: 1,
+    profilePicture: {
+      uri:
+        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+    },
+  },
+  {
+    firstName: 'Noah',
+    id: 2,
+    profilePicture: {
+      uri: 'https://www.dev.hsa.net/img/team/Noah.jpg',
+    },
+  },
+  {
+    firstName: 'Humprey',
+    id: 3,
+    profilePicture: {
+      uri: 'https://www.dev.hsa.net/img/team/humphrey.JPG',
+    },
+  },
+  {
+    firstName: 'Ivraj',
+    id: 4,
+    profilePicture: {
+      uri: 'https://www.dev.hsa.net/img/team/Ivraj.jpg',
+    },
+  },
+  {
+    firstName: 'Jovi',
+    id: 5,
+    profilePicture: {
+      uri: 'https://www.dev.hsa.net/img/team/Jovin.jpg',
+    },
+  },
+  {
+    firstName: 'Yuke',
+    id: 6,
+    profilePicture: {
+      uri:
+        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+    },
+  },
+  {
+    firstName: 'Noah',
+    id: 7,
+    profilePicture: {
+      uri: 'https://www.dev.hsa.net/img/team/Noah.jpg',
+    },
+  },
+  {
+    firstName: 'Humprey',
+    id: 8,
+    profilePicture: {
+      uri: 'https://www.dev.hsa.net/img/team/humphrey.JPG',
+    },
+  },
+  {
+    firstName: 'Ivraj',
+    id: 9,
+    profilePicture: {
+      uri: 'https://www.dev.hsa.net/img/team/Ivraj.jpg',
+    },
+  },
+  {
+    firstName: 'Jovi',
+    id: 10,
+    profilePicture: {
+      uri: 'https://www.dev.hsa.net/img/team/Jovin.jpg',
+    },
+  },
+]
+
+const user = {
+  profilePic: {
+    uri:
+      'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+  },
+  firstName: 'Yuke',
+  lastName: 'Zheng',
+  hometown: 'Cleveland',
+  state: 'Ohio',
+  bio:
+    'Student at Harvard, lover of life. Looking to get hired at a large finanical firm and make lots of impact on the world!',
+  tags: tagData,
+  mutualFriends: friends,
+}
+
+storiesOf('CenteredView').add('SocietyCard1', () => (
+  <CenteredView>
+    <SocietyCard user={user} />
+  </CenteredView>
+))

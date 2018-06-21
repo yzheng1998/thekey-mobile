@@ -3,6 +3,8 @@ import { themeGet } from 'styled-system'
 
 export const ConnectionsRowContainer = styled.View`
   flex-direction: row;
+  margin-left: 16;
+  margin-bottom: 19;
 `
 
 export const MutualConnections = styled.Text`
@@ -10,9 +12,9 @@ export const MutualConnections = styled.Text`
   line-height: 19;
   font-family: ${themeGet('fonts.medium')};
   color: rgb(148, 157, 170);
+  margin-left: 8;
 `
 export const AvatarContainer = styled.View`
-  margin-right: 8;
   flex-direction: row;
 `
 
