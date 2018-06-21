@@ -17,6 +17,13 @@ import Star from 'react-native-vector-icons/FontAwesome'
 import TagLine from '../TagLine'
 import moment from 'moment'
 
+const daysLeft = time => {
+  const today = moment()
+  const date = moment(time)
+  const diff = date.diff(today, 'hours')
+  const result = diff < 24 ? `${diff} h` : `${date.diff(today, 'days')} d`
+  return result
+}
 export default class JobCard extends Component {
   static propTypes = {
     picture: PropTypes.string.isRequired,
@@ -27,14 +34,8 @@ export default class JobCard extends Component {
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     deadline: PropTypes.string.isRequired,
   }
+
   render() {
-    const daysLeft = time => {
-      const today = moment()
-      const date = moment(time)
-      const diff = date.diff(today, 'hours')
-      const result = diff < 24 ? `${diff} h` : `${date.diff(today, 'days')} d`
-      return result
-    }
     const {
       picture,
       title,

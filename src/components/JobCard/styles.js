@@ -16,7 +16,7 @@ export const LeftContainer = styled.View`
 `
 export const Deadline = styled.Text`
   font-size: 12px;
-  font-family: '${themeGet('fonts.bold')}';
+  font-family: ${themeGet('fonts.bold')};
   padding-left: 14px;
 `
 export const ContentContainer = styled.View`
@@ -27,19 +27,19 @@ export const ContentContainer = styled.View`
 `
 export const Title = styled.Text`
   font-size: 18px;
-  font-family: '${themeGet('fonts.bold')}';
+  font-family: ${themeGet('fonts.bold')};
   padding-bottom: 2px;
 `
 export const Host = styled.Text`
   font-size: 15px;
-  font-family: '${themeGet('fonts.medium')}';
-  color: rgb(148,157,170);
+  font-family: ${themeGet('fonts.medium')};
+  color: ${themeGet('colors.fontSubtitle')};
   padding-bottom: 4px;
 `
 export const Description = styled.Text`
   font-size: 12px;
-  font-family: '${themeGet('fonts.medium')}';
-  color: rgb(176,186,200);
+  font-family: ${themeGet('fonts.medium')};
+  color: ${themeGet('colors.fontDescription')};
 `
 export const TagsContainer = styled.View`
   margin-left: -16px;
