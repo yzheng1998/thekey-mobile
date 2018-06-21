@@ -16,6 +16,9 @@ const theme = {
     fontButtonSecondary: 'rgb(100, 108, 132)',
     fontButtonTertiary: 'rgb(250, 53, 121)',
     fontProfileFields: 'rgb(78, 158, 255)',
+    messageBubbleCurrentUser: 'rgb(250, 53, 121)',
+    messageBubbleOtherUser: 'rgb(75, 67, 91)',
+    messageBubbleText: 'white',
   },
   width: {
     primary: 0.872 * width,
