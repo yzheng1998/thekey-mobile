@@ -1,8 +1,8 @@
 import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
 import React from 'react'
-
-import TagLine from '../components/TagLine'
+import JobCard from '../components/JobCard'
+import Beats from './beats3.jpg'
 
 const style = {
   flex: 1,
@@ -11,102 +11,104 @@ const style = {
   backgroundColor: '#F5FCFF',
 }
 const CenteredView = ({ children }) => <View style={style}>{children}</View>
-
 const tagData = [
   {
-    name: 'Medicine',
+    text: 'Headphones',
     image: {
       uri:
         'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
     },
   },
   {
-    name: 'Health',
+    text: 'Tech',
     image: {
       uri:
         'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
     },
   },
   {
-    name: 'Business',
+    text: 'Leadership',
     image: {
       uri:
         'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
     },
   },
   {
-    name: 'Venture Capital',
+    text: 'Venture Capital',
     image: {
       uri:
         'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
     },
   },
   {
-    name: 'Start-up',
+    text: 'Start-up',
     image: {
       uri:
         'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
     },
   },
   {
-    name: 'Tech',
+    text: 'Tech',
     image: {
       uri:
         'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
     },
   },
   {
-    name: 'Medicisdfdsne',
+    text: 'Medicisdfdsne',
     image: {
       uri:
         'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
     },
   },
   {
-    name: 'Heasdfsdlth',
+    text: 'Heasdfsdlth',
     image: {
       uri:
         'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
     },
   },
   {
-    name: 'Busisdfsness',
+    text: 'Busisdfsness',
     image: {
       uri:
         'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
     },
   },
   {
-    name: 'Ventusdfsdre Capital',
+    text: 'Ventusdfsdre Capital',
     image: {
       uri:
         'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
     },
   },
   {
-    name: 'Start-uasdfsdsdafsdfasdfsdfsdfsdp',
+    text: 'Start-uasdfsdsdafsdfasdfsdfsdfsdp',
     image: {
       uri:
         'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
     },
   },
   {
-    name: 'Tecsdfsh',
+    text: 'Tecsdfsh',
     image: {
       uri:
         'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
     },
   },
 ]
+const job = {
+  picture: Beats,
+  title: 'General Manager',
+  company: '@ Beats By Dre',
+  commitment: 'Full time',
+  location: 'SF Bay Area',
+  tags: tagData,
+  deadline: '06/22/2018',
+}
 
-storiesOf('CenteredView')
-  .add('TagLine1', () => (
-    <CenteredView>
-      <TagLine tagData={tagData} lines={2} />
-    </CenteredView>
-  ))
-  .add('TagLine2', () => (
-    <CenteredView>
-      <TagLine tagData={tagData} lines={1} />
-    </CenteredView>
-  ))
+storiesOf('CenteredView').add('JobCard', () => (
+  <CenteredView>
+    <JobCard job={job} />
+  </CenteredView>
+))

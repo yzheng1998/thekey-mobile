@@ -52,11 +52,6 @@ const friends = [
 
 storiesOf('CenteredView').add('ConnectionsRow1', () => (
   <CenteredView>
-    <ConnectionsRow
-      connectionsNum={12}
-      avatarNum={5}
-      avatarSize={28}
-      friends={friends}
-    />
+    <ConnectionsRow avatarNum={5} avatarSize={28} friends={friends} />
   </CenteredView>
 ))

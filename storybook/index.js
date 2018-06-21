@@ -11,6 +11,8 @@ import '../src/stories/searchFilterTab'
 import '../src/stories/chatcard'
 import '../src/stories/ConnectionsRow'
 import '../src/stories/MessageBubble'
+import '../src/stories/JobCard'
+import '../src/stories/SocietyCard'
 
 const StorybookUI = getStorybookUI({
   port: 7007,

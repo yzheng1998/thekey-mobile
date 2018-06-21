@@ -9,13 +9,14 @@ import {
 
 export default class ProfilePicBlock extends Component {
   render() {
+    const { profilePic, name, city, state } = this.props
     return (
       <BlockContainer>
-        <BackgroundProfilePic source={this.props.profilePic} blurRadius={20}>
-          <ProfilePic source={this.props.profilePic} />
-          <EventTitleText>{this.props.name}</EventTitleText>
+        <BackgroundProfilePic source={profilePic} blurRadius={20}>
+          <ProfilePic source={profilePic} />
+          <EventTitleText>{name}</EventTitleText>
           <LocationText>
-            {this.props.city}, {this.props.state}
+            {city}, {state}
           </LocationText>
         </BackgroundProfilePic>
       </BlockContainer>
