@@ -10,6 +10,7 @@ import '../src/stories/messageinput'
 import '../src/stories/searchFilterTab'
 import '../src/stories/chatcard'
 import '../src/stories/ConnectionsRow'
+import '../src/stories/JobCard'
 import '../src/stories/SocietyCard'
 
 const StorybookUI = getStorybookUI({
