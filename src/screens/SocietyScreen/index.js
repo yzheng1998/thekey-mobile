@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-import { View, FlatList } from 'react-native'
 import { tagData, profilePicture } from '../../stories/SocietyCard'
 
 import SocietyCard from './components/SocietyCard'
+
+import { SwiperContainer } from './styles'
+
+import Swiper from 'react-native-deck-swiper'
 
 const GET_USERS = gql`
   query users {
@@ -29,18 +32,10 @@ class SocietyScreen extends Component {
           if (loading) return 'Loading...'
           if (error) return `Error! ${error.message}`
           return (
-            <View
-              style={{
-                flex: 1,
-                alignItems: 'center',
-                backgroundColor: 'rgb(250, 250, 251)',
-              }}
-            >
-              <FlatList
-                keyExtractor={user => user.id}
-                showsVerticalScrollIndicator={false}
-                data={data.users}
-                renderItem={({ item }) => {
+            <SwiperContainer>
+              <Swiper
+                cards={data.users}
+                renderCard={item => {
                   const renderUser = {
                     firstName: item.firstName,
                     lastName: item.lastName,
@@ -55,8 +50,12 @@ class SocietyScreen extends Component {
                   }
                   return <SocietyCard user={renderUser} />
                 }}
+                backgroundColor="white"
+                verticalSwipe={false}
+                stackSize={3}
+                cardVerticalMargin={10}
               />
-            </View>
+            </SwiperContainer>
           )
         }}
       </Query>
