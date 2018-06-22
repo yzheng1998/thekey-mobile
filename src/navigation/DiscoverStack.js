@@ -16,7 +16,7 @@ const DiscoverStack = createStackNavigator(
         title: 'View Options',
       }),
     },
-    Users: {
+    Society: {
       screen: SocietyScreen,
       navigationOptions: () => ({
         title: 'View Users',

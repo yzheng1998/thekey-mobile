@@ -18,7 +18,7 @@ class DiscoverScreen extends Component {
             title="The Society"
             description="View other users on the site"
             image={placeholder}
-            onPress={() => this.props.navigation.navigate('Users')}
+            onPress={() => this.props.navigation.navigate('Society')}
           />
           <DiscoverCard
             title="Jobs/Internships"
