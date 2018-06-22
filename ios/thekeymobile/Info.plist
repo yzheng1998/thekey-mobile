@@ -64,7 +64,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -106,6 +106,8 @@
 		<string>SF-Pro-Text-RegularItalic.otf</string>
 		<string>SF-Pro-Text-Semibold.otf</string>
 		<string>SF-Pro-Text-SemiboldItalic.otf</string>
+		<string>SF-Pro-Text-Light.otf</string>
+		<string>SF-Pro-Text-Medium.otf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
