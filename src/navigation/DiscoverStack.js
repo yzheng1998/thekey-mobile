@@ -7,6 +7,7 @@ import JobsScreen from '../screens/JobsScreen'
 import JobScreen from '../screens/JobScreen'
 import DiscoverScreen from '../screens/DiscoverScreen'
 import FriendRequestScreen from '../screens/FriendRequestScreen'
+import ApplyNowScreen from '../screens/ApplyNowScreen'
 
 const DiscoverStack = createStackNavigator(
   {
@@ -58,6 +59,10 @@ const DiscoverStack = createStackNavigator(
         title: 'View Friend Requests',
       }),
     },
+    Apply: {
+      screen: ApplyNowScreen,
+      navigationOptions: { header: null },
+    },
   },
   {
     initialRouteName: 'Discover',
@@ -65,5 +70,16 @@ const DiscoverStack = createStackNavigator(
     headerMode: 'screen',
   },
 )
+
+DiscoverStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true
+  if (navigation.state.index > 0) {
+    tabBarVisible = false
+  }
+
+  return {
+    tabBarVisible,
+  }
+}
 
 export default DiscoverStack
