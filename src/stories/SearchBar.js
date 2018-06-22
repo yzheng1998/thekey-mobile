@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
-import React from 'react'
+import React, { Component } from 'react'
 
 import SearchBar from '../components/SearchBar'
 
@@ -12,8 +12,28 @@ const style = {
 }
 const CenteredView = ({ children }) => <View style={style}>{children}</View>
 
+class WrapperWithState extends Component {
+  state = {
+    text: null,
+  }
+
+  updateText = text => {
+    this.setState({ text })
+  }
+
+  render() {
+    return (
+      <SearchBar
+        updateText={this.updateText}
+        state={this.state}
+        placeholderText="Search events"
+      />
+    )
+  }
+}
+
 storiesOf('CenteredView').add('SearchBar1', () => (
   <CenteredView>
-    <SearchBar placeholderText="Search events" />
+    <WrapperWithState />
   </CenteredView>
 ))
