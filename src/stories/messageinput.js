@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
 import React from 'react'
-import MessageInput from '../components/MessageInput'
+import MessageInput from '../screens/ConversationScreen/components/MessageInput'
 
 const style = {
   flex: 1,
