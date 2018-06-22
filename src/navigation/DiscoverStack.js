@@ -66,4 +66,12 @@ const DiscoverStack = createStackNavigator(
   },
 )
 
+DiscoverStack.navigationOptions = ({ navigation }) => {
+  const tabBarVisible = navigation.state.index > 0
+
+  return {
+    tabBarVisible,
+  }
+}
+
 export default DiscoverStack
