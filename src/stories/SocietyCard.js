@@ -12,7 +12,7 @@ const style = {
 }
 const CenteredView = ({ children }) => <View style={style}>{children}</View>
 
-const tagData = [
+export const tagData = [
   {
     name: 'Medicine',
     image: {
@@ -99,7 +99,7 @@ const tagData = [
   },
 ]
 
-const friends = [
+export const friends = [
   {
     firstName: 'Yuke',
     id: 1,
@@ -174,11 +174,14 @@ const friends = [
   },
 ]
 
-const user = {
-  profilePic: {
-    uri:
-      'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-  },
+export const profilePicture = {
+  uri:
+    'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+}
+
+export const user = {
+  id: 1,
+  profilePicture,
   firstName: 'Yuke',
   lastName: 'Zheng',
   hometown: 'Cleveland',
