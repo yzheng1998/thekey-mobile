@@ -29,6 +29,7 @@ const theme = {
         bold: 'SFProDisplay-Bold',
         medium: 'SFProDisplay-Medium',
         light: 'SFProDisplay-Light',
+        regular: 'SFProDisplay-Regular',
       },
     },
     android: {

@@ -13,6 +13,7 @@ import '../src/stories/ConnectionsRow'
 import '../src/stories/MessageBubble'
 import '../src/stories/JobCard'
 import '../src/stories/SocietyCard'
+import '../src/stories/SearchBar'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
