@@ -39,13 +39,6 @@ class DiscoverScreen extends Component {
             // Navigate to a random page (no reviews page yet)
             onPress={() => this.props.navigation.navigate('Events')}
           />
-          <DiscoverCard
-            title="Apply Now"
-            description="Review companies on the site"
-            image={placeholder}
-            // Navigate to a random page (no reviews page yet)
-            onPress={() => this.props.navigation.navigate('Apply')}
-          />
         </List>
       </Background>
     )

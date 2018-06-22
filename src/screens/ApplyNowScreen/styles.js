@@ -9,7 +9,7 @@ export const Title = styled.Text`
   font-size: 34px;
   padding-bottom: 8px;
 `
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   padding: 24px;
   padding-bottom: -24px;
   background-color: white;

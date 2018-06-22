@@ -1,7 +1,7 @@
 import { ButtonGroup } from 'react-native-elements'
 import React, { Component } from 'react'
 
-export default class ButtonGroup2 extends Component {
+export default class TemplateSelector extends Component {
   render() {
     return (
       <ButtonGroup
