@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Image } from 'react-native'
-import PropTypes from 'prop-types'
 import {
   Host,
   Card,
@@ -25,16 +24,6 @@ const daysLeft = time => {
   return result
 }
 export default class JobCard extends Component {
-  static propTypes = {
-    picture: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    company: PropTypes.string.isRequired,
-    commitment: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    deadline: PropTypes.string.isRequired,
-  }
-
   render() {
     const {
       picture,
