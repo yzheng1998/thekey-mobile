@@ -9,6 +9,9 @@ import {
 } from './styles'
 
 export default class SearchBar extends Component {
+  state = {
+    showCancel: false,
+  }
   render() {
     return (
       <SearchBarContainer>
@@ -17,15 +20,23 @@ export default class SearchBar extends Component {
           <SearchText
             placeholder={this.props.placeholderText}
             placeholderTextColor="rgb(142, 142, 147)"
+            onFocus={() => this.setState({ showCancel: true })}
             onChangeText={text => {
               this.props.updateText(text)
+              this.setState({ showCancel: true })
             }}
             value={this.props.state.text}
           />
         </SearchContainer>
 
-        {this.props.state.text && (
-          <CancelButton onPress={() => this.props.updateText(null)}>
+        {this.state.showCancel && (
+          <CancelButton
+            onPress={() => {
+              dismissKeyboard()
+              this.props.updateText(null)
+              this.setState({ showCancel: false })
+            }}
+          >
             <CancelText>Cancel</CancelText>
           </CancelButton>
         )}

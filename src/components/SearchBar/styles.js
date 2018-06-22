@@ -24,11 +24,10 @@ export const SearchContainer = styled.View`
 `
 
 export const SearchText = styled.TextInput`
-  width: 100%;
+  width: 98%;
   height: 100%;
   background-color: transparent;
   padding-left: 7;
-  padding-right: 7;
 `
 
 export const SearchIcon = styled(Icon)`
