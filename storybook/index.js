@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components/native'
 import theme from '../theme'
 
 import '../src/stories/ProfilePicBlock'
+import '../src/stories/PictureHeader'
 import '../src/stories/TagLine'
 import '../src/stories/messageinput'
 import '../src/stories/searchFilterTab'
