@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const BlockContainer = styled.View`
   overflow: hidden;
   width: 100%;
-  aspect-ratio: ${props => (props.aspectRatio ? props.aspectRatio : 1.048)};
 `
 
 export const BackgroundPicture = styled.ImageBackground`
