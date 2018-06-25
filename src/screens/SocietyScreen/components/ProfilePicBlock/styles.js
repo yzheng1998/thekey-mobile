@@ -1,6 +1,11 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
+export const Container = styled.View`
+  aspect-ratio: 1.048;
+  width: 100%;
+`
+
 export const EventTitleText = styled.Text`
   font-size: 24;
   line-height: 29;
