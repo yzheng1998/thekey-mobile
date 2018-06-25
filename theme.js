@@ -16,6 +16,8 @@ const theme = {
     fontButtonSecondary: 'rgb(100, 108, 132)',
     fontButtonTertiary: 'rgb(250, 53, 121)',
     fontProfileFields: 'rgb(78, 158, 255)',
+    like: 'rgba(119, 210, 103, 0.8)',
+    dislike: 'rgba(221, 91, 91, 0.8)',
     textArea: 'rgb(249,249,249)',
     textAreaText: 'rgb(69,77,88)',
     textAreaBorder: 'rgb(211, 216, 223)',
