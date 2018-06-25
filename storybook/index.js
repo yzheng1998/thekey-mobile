@@ -16,6 +16,7 @@ import '../src/stories/MessageBubble'
 import '../src/stories/JobCard'
 import '../src/stories/SocietyCard'
 import '../src/stories/SearchBar'
+import '../src/stories/MyProfilePicBlock'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
