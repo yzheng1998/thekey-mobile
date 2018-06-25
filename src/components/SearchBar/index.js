@@ -4,6 +4,8 @@ import {
   SearchContainer,
   SearchText,
   SearchIcon,
+  ClearIconButton,
+  ClearIcon,
   CancelButton,
   CancelText,
 } from './styles'
@@ -27,6 +29,11 @@ export default class SearchBar extends Component {
             }}
             value={this.props.state.text}
           />
+          {this.props.state.text && (
+            <ClearIconButton onPress={() => this.props.updateText(null)}>
+              <ClearIcon name="ios-close-circle" size={18} />
+            </ClearIconButton>
+          )}
         </SearchContainer>
 
         {this.state.showCancel && (

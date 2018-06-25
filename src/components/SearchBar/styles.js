@@ -24,13 +24,20 @@ export const SearchContainer = styled.View`
 `
 
 export const SearchText = styled.TextInput`
-  width: 98%;
+  flex: 1;
   height: 100%;
   background-color: transparent;
   padding-left: 7;
 `
 
 export const SearchIcon = styled(Icon)`
+  background-color: transparent;
+  color: ${themeGet('colors.fontSubtitle')};
+`
+
+export const ClearIconButton = styled.TouchableOpacity``
+
+export const ClearIcon = styled(Icon)`
   background-color: transparent;
   color: ${themeGet('colors.fontSubtitle')};
 `
