@@ -19,6 +19,7 @@ import '../src/stories/reviewcard'
 import '../src/stories/SearchBar'
 import '../src/stories/MyProfilePicBlock'
 import '../src/stories/MyProfileBioBlock'
+import '../src/stories/EducationRow'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
