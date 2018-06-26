@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
+import { FlatList, ScrollView, Text } from 'react-native'
+import { SearchBar } from 'react-native-elements'
+import JobCard from '../../components/JobCard'
+import SearchFilterTab from '../../components/SearchFilterTab'
+import { HeaderBackground, Title } from './styles'
 import { Query } from 'react-apollo'
-import { FlatList, Text } from 'react-native'
-import { ListItem } from 'react-native-elements'
 
 const GET_JOBS = gql`
   query jobs {
@@ -11,8 +14,12 @@ const GET_JOBS = gql`
       title
       description
       picture
-      experience
       location
+      commitment
+      deadline
+      tags {
+        name
+      }
     }
   }
 `
@@ -20,29 +27,28 @@ const GET_JOBS = gql`
 class JobsScreen extends Component {
   render() {
     return (
-      <Query query={GET_JOBS}>
-        {({ loading, error, data }) => {
-          if (loading) return <Text>Loading...</Text>
-          if (error) return <Text>Error! {error.message}</Text>
-          return (
-            <FlatList
-              keyExtractor={job => job.id}
-              data={data.jobs}
-              renderItem={({ item }) => (
-                <ListItem
-                  title={`${item.title}`}
-                  subtitle={item.experience}
-                  onPress={() =>
-                    this.props.navigation.navigate('Job', {
-                      id: item.id,
-                    })
-                  }
-                />
-              )}
-            />
-          )
-        }}
-      </Query>
+      <ScrollView>
+        <HeaderBackground>
+          <Title>Jobs/Internships</Title>
+          <SearchFilterTab options={['All', 'Saved', 'Applied For']} />
+        </HeaderBackground>
+        <SearchBar lightTheme placeholder="Search Jobs & Internships" />
+        <Query query={GET_JOBS}>
+          {({ loading, error, data }) => {
+            if (loading) return <Text>Loading...</Text>
+            if (error) {
+              return <Text>Error! {error.message}</Text>
+            }
+            return (
+              <FlatList
+                keyExtractor={job => job.id}
+                data={data.jobs}
+                renderItem={({ item: job }) => <JobCard job={job} />}
+              />
+            )
+          }}
+        </Query>
+      </ScrollView>
     )
   }
 }
