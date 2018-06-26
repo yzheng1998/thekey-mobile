@@ -14,7 +14,7 @@ export const TextContainer = styled.View`
   padding-left: 16;
 `
 
-export const University = styled.Text`
+export const Title = styled.Text`
   font-size: 14;
   font-family: ${themeGet('fonts.medium')};
   line-height: 19;
@@ -22,7 +22,7 @@ export const University = styled.Text`
   margin-bottom: 1;
 `
 
-export const Degree = styled.Text`
+export const Subtitle = styled.Text`
   font-size: 18;
   font-family: ${themeGet('fonts.light')};
   line-height: 23;
@@ -37,7 +37,7 @@ export const Years = styled.Text`
   color: ${themeGet('colors.fontSubtitle')};
 `
 
-export const SchoolBadge = styled.Image`
+export const Badge = styled.Image`
   width: 46;
   height: 46;
   margin-right: 16;
