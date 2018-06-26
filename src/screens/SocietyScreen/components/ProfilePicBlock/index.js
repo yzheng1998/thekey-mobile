@@ -1,25 +1,19 @@
 import React, { Component } from 'react'
-import {
-  BlockContainer,
-  BackgroundProfilePic,
-  ProfilePic,
-  EventTitleText,
-  LocationText,
-} from './styles'
+import { Container, EventTitleText, LocationText } from './styles'
+import PictureHeader from '../../../../components/PictureHeader'
 
 export default class ProfilePicBlock extends Component {
   render() {
     const { profilePic, name, city, state } = this.props
     return (
-      <BlockContainer>
-        <BackgroundProfilePic source={profilePic} blurRadius={20}>
-          <ProfilePic source={profilePic} />
+      <Container>
+        <PictureHeader picture={profilePic} size={171}>
           <EventTitleText>{name}</EventTitleText>
           <LocationText>
             {city}, {state}
           </LocationText>
-        </BackgroundProfilePic>
-      </BlockContainer>
+        </PictureHeader>
+      </Container>
     )
   }
 }
