@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
 import React from 'react'
-import ExperienceRow from '../screens/ProfileScreen/components/ExperienceListView/ExperienceRow'
+import ButtonRowView from '../screens/ProfileScreen/components/ButtonRowView'
 
 const style = {
   flex: 1,
@@ -11,13 +11,8 @@ const style = {
 }
 const CenteredView = ({ children }) => <View style={style}>{children}</View>
 
-storiesOf('CenteredView').add('ExperienceRow1', () => (
+storiesOf('CenteredView').add('ButtonRowView', () => (
   <CenteredView>
-    <ExperienceRow
-      companyName="Unfiltered Network"
-      position="CEO"
-      startYear="2016"
-      endYear="Present / 1yr 9 mos"
-    />
+    <ButtonRowView />
   </CenteredView>
 ))

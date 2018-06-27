@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
 import React from 'react'
-import EducationRow from '../screens/ProfileScreen/components/EducationRow'
+import EducationRow from '../screens/ProfileScreen/components/EducationListView/EducationRow'
 
 const style = {
   flex: 1,
@@ -15,28 +15,20 @@ storiesOf('CenteredView')
   .add('EducationRow1', () => (
     <CenteredView>
       <EducationRow
-        university="Harvard University"
-        degree="Bachelors Degree"
-        major="East Asian Studies"
-        yearStart="2013"
-        yearEnd="2017"
-        badge={{
-          uri:
-            'https://logoeps.com/wp-content/uploads/2012/07/harvard-university-logo-vector-01.png',
-        }}
+        schoolName="Harvard University"
+        degreeType="Bachelors Degree"
+        major="Chemical and Physical Biology"
+        startYear="2013"
+        graduationYear="2017"
       />
     </CenteredView>
   ))
   .add('EducationRow2', () => (
     <CenteredView>
       <EducationRow
-        university="Harvard University"
-        yearStart="2013"
-        yearEnd="2017"
-        badge={{
-          uri:
-            'https://logoeps.com/wp-content/uploads/2012/07/harvard-university-logo-vector-01.png',
-        }}
+        schoolName="Harvard University"
+        startYear="2013"
+        graduationYear="2017"
       />
     </CenteredView>
   ))
