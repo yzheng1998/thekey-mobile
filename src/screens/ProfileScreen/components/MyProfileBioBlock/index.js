@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BlockContainer, BioText, TextButton } from './styles'
 import TagLine from '../../../../components/TagLine'
 
-export default class MyProfileBioBlock extends Component {
+export default class MyProfile extends Component {
   state = {
     truncated: true,
   }

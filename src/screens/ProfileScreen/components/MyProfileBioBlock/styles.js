@@ -9,7 +9,7 @@ export const BioText = styled.Text`
   font-size: 18;
   line-height: 23;
   font-family: ${themeGet('fonts.light')};
-  color: ${themeGet('colors.textAreaText')};
+  color: ${themeGet('colors.fontDescription.tertiary')};
   margin-left: 16;
   margin-right: 16;
 `
