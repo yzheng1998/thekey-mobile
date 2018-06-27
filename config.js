@@ -1,5 +1,3 @@
 module.exports = {
-  graphqlUrl:
-    process.env.REACT_APP_API_URL ||
-    'https://thekey-api-staging.herokuapp.com/graphql',
+  graphqlUrl: process.env.REACT_APP_API_URL || 'http://localhost:5000/graphql',
 }
