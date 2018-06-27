@@ -32,4 +32,5 @@ export const Years = styled.Text`
   font-size: 12;
   font-family: ${themeGet('fonts.medium')};
   line-height: 19;
+  color: ${themeGet('colors.fontSubtitle.primary')};
 `
