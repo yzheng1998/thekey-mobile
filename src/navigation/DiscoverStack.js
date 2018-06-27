@@ -16,7 +16,7 @@ const DiscoverStack = createStackNavigator(
         title: 'View Options',
       }),
     },
-    Users: {
+    Society: {
       screen: SocietyScreen,
       navigationOptions: () => ({
         title: 'View Users',
@@ -65,5 +65,13 @@ const DiscoverStack = createStackNavigator(
     headerMode: 'screen',
   },
 )
+
+DiscoverStack.navigationOptions = ({ navigation }) => {
+  const tabBarVisible = navigation.state.index > 0
+
+  return {
+    tabBarVisible,
+  }
+}
 
 export default DiscoverStack
