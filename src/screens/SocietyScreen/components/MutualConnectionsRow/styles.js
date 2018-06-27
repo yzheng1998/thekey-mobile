@@ -6,18 +6,16 @@ export const ConnectionsRowContainer = styled.View`
   margin-left: 16;
   margin-bottom: 19;
 `
-
 export const MutualConnections = styled.Text`
   font-size: 16;
   line-height: 19;
   font-family: ${themeGet('fonts.medium')};
-  color: rgb(148, 157, 170);
+  color: ${themeGet('colors.fontSubtitle.primary')}
   margin-left: 8;
 `
 export const AvatarContainer = styled.View`
   flex-direction: row;
 `
-
 export const Avatar = styled.Image`
   height: ${props => (props.avatarSize ? props.avatarSize : 24)};
   width: ${props => (props.avatarSize ? props.avatarSize : 24)};

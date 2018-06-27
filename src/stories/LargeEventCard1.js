@@ -1,17 +1,11 @@
 import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
+import LargeEventCard from '../screens/EventsScreen/components/LargeEventCard'
 import React from 'react'
-import MutualConnectionsRow from '../screens/SocietyScreen/components/MutualConnectionsRow'
-import InterestedFriendsRow from '../screens/EventsScreen/components/InterestedFriendsRow'
 
-const style = {
-  flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: 'black',
-}
-const CenteredView = ({ children }) => <View style={style}>{children}</View>
+const placeholder = require('../../assets/city.png')
 
+const CenteredView = ({ children }) => <View>{children}</View>
 const friends = [
   {
     firstName: 'Yuke',
@@ -50,32 +44,15 @@ const friends = [
     },
   },
 ]
-
-storiesOf('CenteredView').add('ConnectionsRow1', () => (
+storiesOf('CenteredView').add('Large Event Card 1', () => (
   <CenteredView>
-    <MutualConnectionsRow
-      avatarNum={5}
-      avatarSize={28}
+    <LargeEventCard
+      image={placeholder}
+      price={40.0}
+      title="A super fun eventA super fun event"
+      location="DEV"
+      timeStamp="2018-06-18 12:52:03.744-04"
       mutualFriends={friends}
-      connectionsNum={friends.length}
-    />
-    <InterestedFriendsRow
-      avatarNum={5}
-      avatarSize={28}
-      mutualFriends={friends}
-      connectionsNum={friends.length}
-    />
-    <MutualConnectionsRow
-      avatarNum={5}
-      avatarSize={28}
-      mutualFriends={friends.slice(0, 0)}
-      connectionsNum={0}
-    />
-    <InterestedFriendsRow
-      avatarNum={5}
-      avatarSize={28}
-      mutualFriends={friends.slice(0, 0)}
-      connectionsNum={0}
     />
   </CenteredView>
 ))

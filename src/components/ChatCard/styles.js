@@ -1,10 +1,11 @@
 import styled from 'styled-components'
+import { themeGet } from 'styled-system'
 
 export const Card = styled.TouchableOpacity`
   width: 100%;
   height: 90px;
   overflow: hidden;
-  background-color: white;
+  background-color: ${themeGet('colors.background')};
   flex-direction: row;
   padding: 10px;
 `
@@ -26,13 +27,13 @@ export const TitleWrapper2 = styled.View`
 export const Name = styled.Text`
   font-size: 18px;
   margin-right: 80px;
-  color: rgb(51, 51, 51);
+  color: ${themeGet('colors.fontTitle')};
 `
 export const Message = styled.Text`
   font-size: 13px;
   margin-right: 20px;
   font-style: italic;
-  color: rgb(128, 128, 128);
+  color: ${themeGet('colors.fontDescription.secondary')};
 `
 export const ProfileImage = styled.Image`
   border-radius: 30px;
@@ -43,5 +44,5 @@ export const ProfileImage = styled.Image`
 export const TimeStamp = styled.Text`
   font-size: 12;
   align-self: flex-end;
-  color: rgb(51, 51, 51);
+  color: ${themeGet('colors.fontTitle')};
 `
