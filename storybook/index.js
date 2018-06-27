@@ -23,6 +23,7 @@ import '../src/stories/MyProfileBioBlock'
 import '../src/stories/EducationRow'
 import '../src/stories/ProfileInfoRow'
 import '../src/stories/ExperienceRow'
+import '../src/stories/ButtonRowView'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
