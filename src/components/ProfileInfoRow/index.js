@@ -18,14 +18,13 @@ export default class EducationRow extends Component {
       yearEnd,
       badge,
     } = this.props
+    const subtitleArray = [subtitle1, subtitle2].filter(Boolean)
     return (
       <EducationRowContainer>
         <TextContainer>
           <Title>{title}</Title>
-          {subtitle1 && (
-            <Subtitle>
-              {subtitle1}, {subtitle2}
-            </Subtitle>
+          {subtitleArray.length > 0 && (
+            <Subtitle>{subtitleArray.join(', ')}</Subtitle>
           )}
           <Years>
             {yearStart} - {yearEnd}
