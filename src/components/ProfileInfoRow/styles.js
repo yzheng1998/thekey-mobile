@@ -18,7 +18,7 @@ export const Title = styled.Text`
   font-size: 14;
   font-family: ${themeGet('fonts.medium')};
   line-height: 19;
-  color: ${themeGet('colors.textAreaText')};
+  color: ${themeGet('colors.fontDescription.tertiary')};
   margin-bottom: 1;
 `
 
@@ -26,7 +26,7 @@ export const Subtitle = styled.Text`
   font-size: 18;
   font-family: ${themeGet('fonts.light')};
   line-height: 23;
-  color: ${themeGet('colors.textAreaText')};
+  color: ${themeGet('colors.fontDescription.tertiary')};
   margin-bottom: 1;
 `
 
@@ -34,7 +34,7 @@ export const Years = styled.Text`
   font-size: 12;
   font-family: ${themeGet('fonts.medium')};
   line-height: 19;
-  color: ${themeGet('colors.fontSubtitle')};
+  color: ${themeGet('colors.fontSubtitle.primary')};
 `
 
 export const Badge = styled.Image`

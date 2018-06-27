@@ -28,5 +28,5 @@ export const MessageContainer = styled.View`
 export const MessageText = styled.Text`
   font-size: 17px;
   font-family: ${themeGet('fonts.medium')};
-  color: ${themeGet('colors.messageBubbleText')};
+  color: ${themeGet('colors.fontPrimary')};
 `

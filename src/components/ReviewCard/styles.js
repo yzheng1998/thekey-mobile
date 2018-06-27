@@ -28,7 +28,7 @@ export const Title = styled.Text`
   padding-bottom: 5px;
 `
 export const Description = styled.Text`
-  font-size: 12px;
+  font-size: 13px;
   font-family: ${themeGet('fonts.medium')};
-  color: ${themeGet('colors.fontDescription')};
+  color: ${themeGet('colors.fontDescription.primary')};
 `

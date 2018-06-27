@@ -33,7 +33,7 @@ export const SearchText = styled.TextInput`
 
 export const SearchIcon = styled(Icon)`
   background-color: transparent;
-  color: ${themeGet('colors.fontSubtitle')};
+  color: ${themeGet('colors.fontSubtitle.primary')};
 `
 
 export const CancelButton = styled.TouchableOpacity`
@@ -43,6 +43,6 @@ export const CancelButton = styled.TouchableOpacity`
 export const CancelText = styled.Text`
   font-size: 17;
   line-height: 20;
-  font-family: ${themeGet('fonts.regular')};
+  font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.buttonPrimary')};
 `
