@@ -5,19 +5,11 @@ import {
   Title,
   Subtitle,
   Years,
-  Badge,
 } from './styles'
 
 export default class EducationRow extends Component {
   render() {
-    const {
-      title,
-      subtitle1,
-      subtitle2,
-      yearStart,
-      yearEnd,
-      badge,
-    } = this.props
+    const { title, subtitle1, subtitle2, startYear, endYear } = this.props
     const subtitleArray = [subtitle1, subtitle2].filter(Boolean)
     return (
       <EducationRowContainer>
@@ -27,10 +19,9 @@ export default class EducationRow extends Component {
             <Subtitle>{subtitleArray.join(', ')}</Subtitle>
           )}
           <Years>
-            {yearStart} - {yearEnd}
+            {startYear} - {endYear}
           </Years>
         </TextContainer>
-        <Badge source={badge} />
       </EducationRowContainer>
     )
   }
