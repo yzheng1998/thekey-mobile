@@ -13,7 +13,7 @@ export const HeaderBackground = styled.View`
   padding-bottom: 10px;
 `
 export const Title = styled.Text`
-  color: ${themeGet('colors.fontHeader.secondary')};
+  color: ${themeGet('colors.fontPrimary')};
   font-family: ${themeGet('fonts.bold')};
   font-size: 30px;
   margin-left: 20px;
