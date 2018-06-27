@@ -36,6 +36,6 @@ export const EditButton = styled.TouchableOpacity`
 export const EditLabel = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   color: ${themeGet('colors.fontCard')};
-  font-size: 12;
+  font-size: 13;
   margin-left: 3;
 `

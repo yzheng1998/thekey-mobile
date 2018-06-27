@@ -3,6 +3,7 @@ import { themeGet } from 'styled-system'
 
 export const BlockContainer = styled.View`
   width: 100%;
+  margin-top: 16px;
 `
 
 export const BioText = styled.Text`
