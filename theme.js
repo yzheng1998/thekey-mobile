@@ -24,6 +24,7 @@ const theme = {
       tertiary: 'rgb(128, 128, 128)',
       quaternary: 'rgb(51, 51, 51)',
     },
+    border: 'rgb(230, 230, 230)',
     fontTag: 'white',
     fontCard: 'white',
     fontButtonPrimary: 'white',
