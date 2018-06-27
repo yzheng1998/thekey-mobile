@@ -25,6 +25,7 @@ import '../src/stories/ProfileInfoRow'
 import '../src/stories/ExperienceRow'
 import '../src/stories/ButtonRowView'
 import '../src/stories/Description'
+import '../src/stories/ContactContainerView'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
