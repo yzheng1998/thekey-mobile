@@ -12,13 +12,13 @@ export const Title = styled.Text`
 export const Container = styled.ScrollView`
   padding: 24px;
   padding-bottom: -24px;
-  background-color: white;
+  background-color: ${themeGet('colors.background')};
   flex: 1;
 `
 export const Prompt = styled.Text`
   font-family: ${themeGet('fonts.medium')};
   font-size: 16px;
-  color: ${themeGet('colors.fontSubtitle')};
+  color: ${themeGet('colors.fontSubtitle.primary')};
   padding-bottom: 12px;
 `
 export const ButtonsContainer = styled.View`
@@ -45,7 +45,7 @@ export const BackButtonContainer = styled.TouchableOpacity`
 export const ApplyButton = styled.TouchableOpacity`
   height: 45px;
   width: 100%;
-  background-color: ${themeGet('colors.fontButtonTertiary')};
+  background-color: ${themeGet('colors.buttonPrimary')};
   align-items: center;
   padding: 10px;
 `

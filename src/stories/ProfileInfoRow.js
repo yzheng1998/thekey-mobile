@@ -17,12 +17,8 @@ storiesOf('CenteredView').add('ProfileInfoRow1', () => (
       title="Harvard University"
       subtitle1="Bachelors Degree"
       subtitle2="East Asian Studies"
-      yearStart="2013"
-      yearEnd="2017"
-      badge={{
-        uri:
-          'https://logoeps.com/wp-content/uploads/2012/07/harvard-university-logo-vector-01.png',
-      }}
+      startYear="2013"
+      endYear="2017"
     />
   </CenteredView>
 ))

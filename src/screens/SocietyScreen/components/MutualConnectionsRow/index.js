@@ -6,21 +6,24 @@ import {
   AvatarContainer,
 } from './styles'
 
-export default class ConnectionsRow extends Component {
+export default class MutualConnectionsRow extends Component {
   render() {
+    const { connectionsNum, mutualFriends, avatarSize } = this.props
     return (
       <ConnectionsRowContainer>
         <AvatarContainer>
-          {this.props.mutualFriends.map(friend => (
+          {mutualFriends.map(friend => (
             <Avatar
-              avatarSize={this.props.avatarSize}
+              avatarSize={avatarSize}
               source={friend.profilePicture}
               key={friend.id}
             />
           ))}
         </AvatarContainer>
         <MutualConnections>
-          {`${this.props.connectionsNum} mutual connections`}
+          {connectionsNum
+            ? `${connectionsNum} mutual connections`
+            : `0 mutual connections`}
         </MutualConnections>
       </ConnectionsRowContainer>
     )
