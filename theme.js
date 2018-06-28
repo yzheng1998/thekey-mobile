@@ -23,6 +23,8 @@ const theme = {
     fontCard: 'white',
     fontButtonPrimary: 'white',
     fontButtonSecondary: 'rgb(100, 108, 132)',
+    fontButtonTertiary: 'rgb(250, 53, 121)',
+    fontButtonQuaternary: 'rgb(39, 43, 49)',
     fontProfileFields: 'rgb(78, 158, 255)',
     chatCardBorder: 'rgba(142, 142, 147, 0.12)',
     textAreaBorder: 'rgb(211, 216, 223)',
@@ -31,6 +33,7 @@ const theme = {
     messageBubbleOtherUser: 'rgb(75, 67, 91)',
     like: 'rgba(119, 210, 103, 0.8)',
     dislike: 'rgba(221, 91, 91, 0.8)',
+    shadow: 'rgb(15, 16, 26)',
   },
   width: {
     primary: 0.872 * width,
