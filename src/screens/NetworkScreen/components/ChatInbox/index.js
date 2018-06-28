@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { ListItem } from 'react-native-elements'
 import { FlatList } from 'react-native'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import ChatCard from '../../../../components/ChatCard'
+import placeholderAvatar from '../../../../../assets/Jon.jpg'
 
 const GET_CHATS = gql`
   query viewer {
@@ -53,12 +54,18 @@ class ChatInbox extends Component {
               keyExtractor={chat => chat.id}
               data={data.viewer.chats}
               renderItem={({ item: chat }) => (
-                <ListItem
-                  title={chat.participants
+                <ChatCard
+                  name={chat.participants
                     .filter(x => x.id !== data.viewer.id)
                     .map(x => x.firstName)
                     .join(', ')}
-                  subtitle={chat.messages[chat.messages.length - 1].content}
+                  message={
+                    chat.messages.length
+                      ? chat.messages[chat.messages.length - 1].content
+                      : ''
+                  }
+                  profileImage={placeholderAvatar}
+                  timeStamp="2018-06-18 10:52:03.744-04"
                   onPress={() =>
                     this.props.navigation.navigate('Conversation', {
                       chat,
