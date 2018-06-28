@@ -43,7 +43,7 @@ export default class SmallEventCard extends Component {
     const { image, title, timeStamp, interestedFriends } = this.props
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
-      <Card activeOpacity={0.9}>
+      <Card width={this.props.width} activeOpacity={0.9}>
         <BackgroundImage source={{ uri: image }} />
         <FullContainer>
           <ContentContainer>

@@ -4,7 +4,7 @@ import Icon2 from 'react-native-vector-icons/Feather'
 import Icon1 from 'react-native-vector-icons/Foundation'
 
 export const Card = styled.TouchableOpacity`
-  width: 90%;
+  width: ${props => (props.width ? props.width : '90%')};
   height: 140px;
   padding: 20px;
   border-radius: 20px;

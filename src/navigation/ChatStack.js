@@ -24,4 +24,7 @@ const ChatStack = createStackNavigator(
   },
 )
 
+ChatStack.navigationOptions = ({ navigation }) => ({
+  tabBarVisible: navigation.state.index === 0,
+})
 export default ChatStack

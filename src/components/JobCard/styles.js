@@ -2,12 +2,13 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const Card = styled.TouchableOpacity`
-  width: 100%;
-  height: 140px;
+  width: ${props => (props.width ? props.width : '100%')};
+  height: ${props => (props.height ? props.height : '140px')};
   overflow: hidden;
   background-color: white;
   flex-direction: row;
   padding: 10px;
+  border-radius: ${props => (props.borderRadius ? props.borderRadius : '0px')};
 `
 export const LeftContainer = styled.View`
   padding: 10px;
@@ -17,8 +18,7 @@ export const LeftContainer = styled.View`
 export const Deadline = styled.Text`
   font-size: 12px;
   font-family: ${themeGet('fonts.bold')};
-  align-self: center;
-  padding-top: 3px;
+  padding-left: 14px;
 `
 export const ContentContainer = styled.View`
   padding-top: 10px;
