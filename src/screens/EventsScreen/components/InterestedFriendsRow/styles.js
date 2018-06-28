@@ -6,7 +6,7 @@ export const ConnectionsRowContainer = styled.View`
   margin-left: 16;
   margin-bottom: 19;
 `
-export const InterestedFriends = styled.Text`
+export const InterestedFriendsContainer = styled.Text`
   font-size: 16;
   line-height: 19;
   font-family: ${themeGet('fonts.medium')};
