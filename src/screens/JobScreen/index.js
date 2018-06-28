@@ -1,45 +1,78 @@
 import React, { Component } from 'react'
-import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
-import { View, Text } from 'react-native'
+import {
+  Container,
+  TagsContainer,
+  BackButtonContainer,
+  StarContainer,
+} from './styles'
+import JobPictureBlock from '../../components/JobPictureBlock'
+import AboutBlock from '../../components/AboutBlock'
+import TagLine from '../../components/TagLine'
+import SimilarJobsBlock from '../../components/SimilarJobsBlock'
+import BackButton from 'react-native-vector-icons/Ionicons'
+import Star from 'react-native-vector-icons/Feather'
 
-const GET_JOB = gql`
-  query job($id: ID!) {
-    job(id: $id) {
-      id
-      title
-      description
-      picture
-      experience
-      location
-    }
-  }
-`
+const tagData = [
+  {
+    name: 'Headphones',
+    image: {
+      uri:
+        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+    },
+  },
+  {
+    name: 'Tech',
+    image: {
+      uri:
+        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+    },
+  },
+  {
+    name: 'Leadership',
+    image: {
+      uri:
+        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+    },
+  },
+]
 
 class JobScreen extends Component {
   render() {
+    const {
+      about,
+      picture,
+      title,
+      company,
+      commitment,
+      location,
+      time,
+      views,
+      jobs,
+    } = this.props
     return (
-      <Query
-        query={GET_JOB}
-        variables={{ id: this.props.navigation.getParam('id') }}
-      >
-        {({ loading, error, data }) => {
-          if (loading) return <Text>Loading...</Text>
-          if (error) return <Text>Error! ${error.message}</Text>
-
-          const { title, description, picture, experience, location } = data.job
-
-          return (
-            <View>
-              <Text>{title}</Text>
-              <Text>{description}</Text>
-              <Text>{picture}</Text>
-              <Text>{experience}</Text>
-              <Text>{location}</Text>
-            </View>
-          )
-        }}
-      </Query>
+      <Container>
+        <JobPictureBlock
+          navigation={this.props.navigation}
+          picture={picture}
+          title={title}
+          company={company}
+          commitment={commitment}
+          location={location}
+          views={views}
+          time={time}
+        />
+        <AboutBlock about={about} />
+        <TagsContainer>
+          <TagLine tagData={tagData} lines={1} />
+        </TagsContainer>
+        <SimilarJobsBlock jobs={jobs} />
+        <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
+          <BackButton name="ios-arrow-back" size={27} color="white" />
+        </BackButtonContainer>
+        <StarContainer>
+          <Star name="star" size={27} color="white" />
+        </StarContainer>
+      </Container>
     )
   }
 }

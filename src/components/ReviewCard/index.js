@@ -5,7 +5,7 @@ import Rating from './components/RatingStar'
 
 export default class ReviewCard extends Component {
   render() {
-    const { picture, title, reviews, rating } = this.props
+    const { picture, title, reviews, rating } = this.props.review
     return (
       <Card>
         <Image source={picture} style={{ width: 46, height: 46 }} />
