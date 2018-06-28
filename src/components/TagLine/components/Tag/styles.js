@@ -25,7 +25,7 @@ export const TagText = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   font-size: 14;
   line-height: 16;
-  color: ${themeGet('colors.fontTag')};
+  color: ${themeGet('colors.fontPrimary')};
   margin-left: 9;
   margin-right: 9;
 `

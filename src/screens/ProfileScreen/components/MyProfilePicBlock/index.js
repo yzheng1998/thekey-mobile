@@ -21,7 +21,7 @@ export default class MyProfilePicBlock extends Component {
           </LocationText>
           <EditButton
             activeOpacity={0.5}
-            onPress={() => this.props.navigate.navigation('EditProfile')}
+            onPress={() => this.props.navigation.navigate('EditProfile')}
           >
             <EditPencil name="edit" color="white" />
             <EditLabel>EDIT PROFILE</EditLabel>

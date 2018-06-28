@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { CardContainer, BioText } from './styles'
 import ProfilePicBlock from '../ProfilePicBlock'
 import TagLine from '../../../../components/TagLine'
-import ConnectionsRow from '../ConnectionsRow'
+import MutualConnectionsRow from '../MutualConnectionsRow'
 
 export default class SocietyCard extends Component {
   render() {
@@ -28,7 +28,7 @@ export default class SocietyCard extends Component {
         />
         <TagLine tagData={selectTags} lines={2} />
         <BioText numberOfLines={3}>{bio}</BioText>
-        <ConnectionsRow
+        <MutualConnectionsRow
           avatarSize={28}
           connectionsNum={mutualFriends.length}
           mutualFriends={selectMutualFriends}
