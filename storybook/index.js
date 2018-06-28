@@ -22,6 +22,7 @@ import '../src/stories/MyProfilePicBlock'
 import '../src/stories/MyProfileBioBlock'
 import '../src/stories/EducationRow'
 import '../src/stories/ProfileInfoRow'
+import '../src/stories/SmallEventCard'
 import '../src/stories/similarjobs'
 import '../src/stories/aboutblock'
 import '../src/stories/summary'
@@ -34,6 +35,7 @@ import '../src/stories/Description'
 import '../src/stories/EducationListView'
 import '../src/stories/ExperienceListView'
 import '../src/stories/reviewsScreen'
+import '../src/stories/jobScreen'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
