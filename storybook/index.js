@@ -34,6 +34,7 @@ import '../src/stories/ContactContainerView'
 import '../src/stories/Description'
 import '../src/stories/EducationListView'
 import '../src/stories/ExperienceListView'
+import '../src/stories/eventPictureBlock'
 import '../src/stories/reviewsScreen'
 import '../src/stories/jobScreen'
 
