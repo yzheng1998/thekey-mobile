@@ -40,6 +40,7 @@ const theme = {
   ...Platform.select({
     ios: {
       fonts: {
+        heavy: 'SFProDisplay-Heavy',
         bold: 'SFProDisplay-Bold',
         medium: 'SFProDisplay-Medium',
         light: 'SFProDisplay-Light',
