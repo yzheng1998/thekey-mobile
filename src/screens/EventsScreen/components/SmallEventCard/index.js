@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Image } from 'react-native'
 import {
   BackgroundImage,
   Card,
@@ -12,7 +11,6 @@ import {
   TimeIcon,
   StarIcon,
 } from './styles'
-import PropTypes from 'prop-types'
 import moment from 'moment'
 import InterestedFriendsRow from '../InterestedFriendsRow'
 
@@ -29,22 +27,11 @@ function formatTimeStamp(timeStamp) {
 }
 
 export default class SmallEventCard extends Component {
-  static defaultProps = {
-    mutualFriends: null,
-  }
-
-  static propTypes = {
-    image: Image.propTypes.source.isRequired,
-    title: PropTypes.string.isRequired,
-    timeStamp: PropTypes.string.isRequired,
-    mutualFriends: PropTypes.arrayOf(Object),
-  }
-
   render() {
-    const { image, title, timeStamp, mutualFriends } = this.props
+    const { image, title, timeStamp, mutualFriends } = this.props.event
     const selectMutualFriends = [...mutualFriends].slice(0, 5)
     return (
-      <Card activeOpacity={0.9}>
+      <Card width={this.props.width} activeOpacity={0.9}>
         <BackgroundImage source={image} />
         <FullContainer>
           <ContentContainer>
