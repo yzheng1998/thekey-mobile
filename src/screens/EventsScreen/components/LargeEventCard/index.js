@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Image } from 'react-native'
 import {
   BackgroundImage,
   Card,
@@ -42,16 +41,16 @@ function formatTimeStamp(timeStamp) {
 export default class LargeEventsCard extends Component {
   static defaultProps = {
     price: 0.0,
-    mutualFriends: null,
+    interestedFriends: [],
   }
 
   static propTypes = {
-    image: Image.propTypes.source.isRequired,
+    image: PropTypes.string.isRequired,
     price: PropTypes.number,
     title: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
     timeStamp: PropTypes.string.isRequired,
-    mutualFriends: PropTypes.arrayOf(Object),
+    interestedFriends: PropTypes.arrayOf(Object),
   }
 
   render() {
@@ -61,38 +60,39 @@ export default class LargeEventsCard extends Component {
       title,
       location,
       timeStamp,
-      mutualFriends,
+      interestedFriends,
     } = this.props
-    const selectMutualFriends = [...mutualFriends].slice(0, 5)
+    const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
       <Card activeOpacity={0.9}>
-        <BackgroundImage source={image} />
-        <TopContainer>
-          <PriceContainer>
-            <Price>{formatPrice(price)}</Price>
-          </PriceContainer>
-          <StarButton>
-            <StarIcon name="star" size={28} />
-          </StarButton>
-        </TopContainer>
-        <ContentContainer>
-          <DetailsContainer>
-            <ClockIcon name="clock" size={19} />
-            <DateTime>{formatTimeStamp(timeStamp)}</DateTime>
-          </DetailsContainer>
-          <Title numberOfLines={3}>{title} </Title>
-          <DetailsContainer>
-            <LocationIcon name="location" size={25} />
-            <Location>{location}</Location>
-          </DetailsContainer>
-        </ContentContainer>
-        mutualFriends && {mutualFriends.length > 0} &&
-        <InterestedFriendsRow
-          avatarNum={5}
-          avatarSize={30}
-          connectionsNum={mutualFriends.length}
-          mutualFriends={selectMutualFriends}
-        />
+        <BackgroundImage source={{ uri: image }}>
+          <TopContainer>
+            <PriceContainer>
+              <Price>{formatPrice(price)}</Price>
+            </PriceContainer>
+            <StarButton>
+              <StarIcon name="star" size={28} />
+            </StarButton>
+          </TopContainer>
+          <ContentContainer>
+            <DetailsContainer>
+              <ClockIcon name="clock" size={19} />
+              <DateTime>{formatTimeStamp(timeStamp)}</DateTime>
+            </DetailsContainer>
+            <Title numberOfLines={3}>{title}</Title>
+            <DetailsContainer>
+              <LocationIcon name="location" size={25} />
+              <Location>{location}</Location>
+            </DetailsContainer>
+          </ContentContainer>
+          interestedFriends && {interestedFriends.length > 0} &&
+          <InterestedFriendsRow
+            avatarNum={5}
+            avatarSize={30}
+            connectionsNum={interestedFriends.length}
+            interestedFriends={selectMutualFriends}
+          />
+        </BackgroundImage>
       </Card>
     )
   }
