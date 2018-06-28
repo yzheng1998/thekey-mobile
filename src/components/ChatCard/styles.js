@@ -3,11 +3,13 @@ import { themeGet } from 'styled-system'
 
 export const Card = styled.TouchableOpacity`
   width: 100%;
-  height: 90px;
+  height: 80px;
   overflow: hidden;
   background-color: ${themeGet('colors.background')};
   flex-direction: row;
   padding: 10px;
+  border-bottom-color: ${themeGet('colors.border')};
+  border-bottom-width: 1px;
 `
 export const Wrapper = styled.View`
   padding: 10px;

@@ -6,6 +6,7 @@ const theme = {
   colors: {
     background: 'white',
     buttonPrimary: 'rgb(250, 53, 121)',
+    buttonSecondary: 'rgb(243, 244, 245)',
     fontPrimary: 'white',
     fontHeader: 'rgb(7, 12, 27)',
     fontTitle: 'rgb(51, 51, 51)',
@@ -23,14 +24,21 @@ const theme = {
     fontCard: 'white',
     fontButtonPrimary: 'white',
     fontButtonSecondary: 'rgb(100, 108, 132)',
+    fontButtonTertiary: 'rgb(250, 53, 121)',
+    fontButtonQuaternary: 'rgb(39, 43, 49)',
+    fontProfileFields: 'rgb(78, 158, 255)',
+    shadow: 'rgb(15, 16, 26)',
     fontProfileFields: 'rgb(78, 158, 255)',
     chatCardBorder: 'rgba(142, 142, 147, 0.12)',
-    textAreaBorder: 'rgb(211, 216, 223)',
     textArea: 'rgb(249, 249, 249)',
+    textAreaBorder: 'rgb(211, 216, 223)',
+    textAreaText: 'rgb(69,77,88)',
     messageBubbleCurrentUser: 'rgb(250, 53, 121)',
     messageBubbleOtherUser: 'rgb(75, 67, 91)',
     like: 'rgba(119, 210, 103, 0.8)',
     dislike: 'rgba(221, 91, 91, 0.8)',
+    divider: 'rgb(243, 244, 245)',
+    profileTitle: 'rgb(39, 43, 49)',
   },
   width: {
     primary: 0.872 * width,
@@ -38,9 +46,11 @@ const theme = {
   ...Platform.select({
     ios: {
       fonts: {
+        heavy: 'SFProDisplay-Heavy',
         bold: 'SFProDisplay-Bold',
         medium: 'SFProDisplay-Medium',
         light: 'SFProDisplay-Light',
+        regular: 'SFProDisplay-Regular',
       },
     },
     android: {
@@ -48,7 +58,6 @@ const theme = {
         bold: 'Roboto-Bold',
         medium: 'Roboto-Medium',
         light: 'Roboto-Light',
-        heavy: 'Roboto-Heavy',
       },
     },
   }),

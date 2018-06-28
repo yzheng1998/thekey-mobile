@@ -15,7 +15,6 @@ import {
 import Star from 'react-native-vector-icons/FontAwesome'
 import TagLine from '../TagLine'
 import moment from 'moment'
-import question from '../../stories/question-mark.jpg'
 
 const daysLeft = time => {
   const today = moment()
@@ -24,31 +23,33 @@ const daysLeft = time => {
   const result = diff < 24 ? `${diff} h` : `${date.diff(today, 'days')} d`
   return result
 }
-
 export default class JobCard extends Component {
   render() {
     const {
       picture,
       title,
-      tags,
+      company,
       commitment,
       location,
+      tags,
       deadline,
     } = this.props.job
     return (
-      <Card>
+      <Card
+        width={this.props.width}
+        height={this.props.height}
+        activeOpacity={this.props.activeOpacity}
+        borderRadius={this.props.borderRadius}
+      >
         <LeftContainer>
-          <Image
-            source={picture || question}
-            style={{ width: 46, height: 46 }}
-          />
+          <Image source={picture} style={{ width: 46, height: 46 }} />
           <Deadline>{daysLeft(deadline)}</Deadline>
         </LeftContainer>
         <ContentContainer>
           <InfoContainer>
             <ContentContainer>
               <Title>{title}</Title>
-              <Host>@ Beats By Dre</Host>
+              <Host>{company}</Host>
             </ContentContainer>
             <StarContainer>
               <Star name="star" size={21} color="rgb(250,53,121)" />

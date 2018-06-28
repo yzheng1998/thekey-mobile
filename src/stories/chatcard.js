@@ -2,8 +2,8 @@ import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
 import React from 'react'
 import ChatCard from '../components/ChatCard'
-import Jon from './Jon.jpg'
-import TheRock from './therock.jpg'
+import Jon from '../../assets/Jon.jpg'
+import TheRock from '../../assets/therock.jpg'
 
 const style = {
   flex: 1,
