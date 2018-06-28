@@ -33,6 +33,7 @@ import '../src/stories/ContactContainerView'
 import '../src/stories/Description'
 import '../src/stories/EducationListView'
 import '../src/stories/ExperienceListView'
+import '../src/stories/reviewsScreen'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
