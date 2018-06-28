@@ -28,7 +28,6 @@ const theme = {
     fontButtonQuaternary: 'rgb(39, 43, 49)',
     fontProfileFields: 'rgb(78, 158, 255)',
     shadow: 'rgb(15, 16, 26)',
-    fontProfileFields: 'rgb(78, 158, 255)',
     chatCardBorder: 'rgba(142, 142, 147, 0.12)',
     textArea: 'rgb(249, 249, 249)',
     textAreaBorder: 'rgb(211, 216, 223)',
