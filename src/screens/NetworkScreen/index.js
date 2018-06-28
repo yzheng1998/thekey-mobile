@@ -1,17 +1,35 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
 import ChatInbox from './components/ChatInbox'
+import SearchFilterTab from '../../components/SearchFilterTab'
+import { SearchBar } from 'react-native-elements'
+import { Background, HeaderBackground, Title, NewChatButton } from './styles'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 class NetworkScreen extends Component {
   static navigationOptions = {
-    headerTitle: 'Your Network',
+    header: null,
   }
 
   render() {
     return (
-      <View>
+      <Background>
+        <HeaderBackground>
+          <Title>Your Network</Title>
+          <SearchFilterTab
+            options={['All', 'Connections', 'Groups', 'Events']}
+          />
+        </HeaderBackground>
+        <SearchBar
+          lightTheme
+          platform="ios"
+          cancelButtonTitle="Cancel"
+          placeholder="Search Your Network"
+        />
         <ChatInbox navigation={this.props.navigation} />
-      </View>
+        <NewChatButton>
+          <Icon name="chat-bubble" size={25} color="white" />
+        </NewChatButton>
+      </Background>
     )
   }
 }
