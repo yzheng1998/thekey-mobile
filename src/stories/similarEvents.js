@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
-import SmallEventCard from '../screens/EventsScreen/components/SmallEventCard'
 import React from 'react'
+import SimilarEvents from '../components/SimilarEventsBlock'
 
 const placeholder = require('../../assets/city.png')
 
@@ -9,7 +9,6 @@ const style = {
   flex: 1,
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: 'black',
 }
 const CenteredView = ({ children }) => <View style={style}>{children}</View>
 const friends = [
@@ -50,47 +49,15 @@ const friends = [
     },
   },
 ]
-const friends2 = [
-  {
-    firstName: 'Yuke',
-    id: 1,
-    profilePicture: {
-      uri:
-        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-    },
-  },
-  {
-    firstName: 'Noah',
-    id: 2,
-    profilePicture: {
-      uri: 'https://www.dev.hsa.net/img/team/Noah.jpg',
-    },
-  },
-  {
-    firstName: 'Humprey',
-    id: 3,
-    profilePicture: {
-      uri: 'https://www.dev.hsa.net/img/team/humphrey.JPG',
-    },
-  },
-]
+
 const event = {
   image: placeholder,
   title: 'A super fun eventA super fun event',
   timeStamp: '2018-06-18 12:52:03.744-04',
   mutualFriends: friends,
 }
-
-const event2 = {
-  image: placeholder,
-  title: 'A super fun eventA super fun event',
-  timeStamp: '2018-06-18 12:52:03.744-04',
-  mutualFriends: friends2,
-}
-
-storiesOf('CenteredView').add('Small Event Card 1', () => (
+storiesOf('CenteredView').add('Similar Events', () => (
   <CenteredView>
-    <SmallEventCard event={event} />
-    <SmallEventCard event={event2} />
+    <SimilarEvents events={[event, event, event]} />
   </CenteredView>
 ))
