@@ -17,6 +17,7 @@ export default class SearchFilterTab extends Component {
       <Tab>
         {this.props.options.map((option, idx) => (
           <Categories
+            key={option}
             isSelected={selectedIndex === idx}
             onPress={() => this.changeIndex(idx)}
           >
