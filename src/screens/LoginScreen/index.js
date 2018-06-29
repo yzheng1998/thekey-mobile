@@ -38,6 +38,7 @@ class LoginScreen extends Component {
             if (!data.loginUser.error) {
               await AsyncStorage.setItem('token', token)
               await AsyncStorage.setItem('userId', user.id)
+              await AsyncStorage.setItem('firstName', user.firstName)
               this.props.navigation.navigate('MainTab')
             }
           }}
