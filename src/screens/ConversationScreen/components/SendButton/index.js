@@ -1,13 +1,18 @@
-import React, { Component } from 'react'
-import gql from 'graphql-tag'
-import { Mutation } from 'react-apollo'
 import { ButtonContainer, SendIcon } from './styles'
+import React, { Component } from 'react'
+
+import { GET_CHAT_AND_VIEWER } from '../../queries'
+import { Mutation } from 'react-apollo'
+import gql from 'graphql-tag'
 
 const SEND_MESSAGE = gql`
   mutation sendMessage($sendMessageInput: SendMessageInput!) {
     sendMessage(sendMessageInput: $sendMessageInput) {
       message {
         content
+        sender {
+          id
+        }
         id
       }
       error {
@@ -19,8 +24,37 @@ const SEND_MESSAGE = gql`
 
 export default class SendButton extends Component {
   render() {
+    // need to add better error handeling in update for if error is set
     return (
-      <Mutation mutation={SEND_MESSAGE} onCompleted={this.props.clearMessage}>
+      <Mutation
+        mutation={SEND_MESSAGE}
+        onCompleted={this.props.clearMessage}
+        update={(
+          cache,
+          {
+            data: {
+              sendMessage: { message },
+            },
+          },
+        ) => {
+          const oldQuery = cache.readQuery({
+            query: GET_CHAT_AND_VIEWER,
+            variables: { chatId: this.props.chatId },
+          })
+          const newQuery = {
+            ...oldQuery,
+            chat: {
+              ...oldQuery.chat,
+              messages: [...oldQuery.chat.messages, message],
+            },
+          }
+          cache.writeQuery({
+            query: GET_CHAT_AND_VIEWER,
+            data: newQuery,
+            variables: { chatId: this.props.chatId },
+          })
+        }}
+      >
         {sendMessage => (
           <ButtonContainer
             onPress={() => {
