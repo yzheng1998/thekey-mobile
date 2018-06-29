@@ -11,6 +11,7 @@ import TagLine from '../../components/TagLine'
 import SimilarJobsBlock from '../../components/SimilarJobsBlock'
 import BackButton from 'react-native-vector-icons/Ionicons'
 import Star from 'react-native-vector-icons/Feather'
+import StarClicked from 'react-native-vector-icons/FontAwesome'
 
 const tagData = [
   {
@@ -66,6 +67,11 @@ const aboutJob = {
 }
 
 class JobScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { isInterested: false }
+  }
+  
   static defaultProps = {
     job: aboutJob,
   }
@@ -101,8 +107,16 @@ class JobScreen extends Component {
         <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
           <BackButton name="ios-arrow-back" size={27} color="white" />
         </BackButtonContainer>
-        <StarContainer>
-          <Star name="star" size={27} color="white" />
+        <StarContainer
+          onPress={() =>
+            this.setState({ isInterested: !this.state.isInterested })
+          }
+        >
+          {this.state.star ? (
+            <StarClicked name="star" size={27} color="white" />
+          ) : (
+            <Star name="star" size={27} color="white" />
+          )}
         </StarContainer>
       </Container>
     )

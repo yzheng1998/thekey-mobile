@@ -51,7 +51,7 @@ export const InfoContainer = styled.View`
   margin-left: -13px;
   margin-top: -9px;
 `
-export const StarContainer = styled.View`
+export const StarContainer = styled.TouchableOpacity`
   padding-top: 20px;
   padding-right: 20px;
 `
