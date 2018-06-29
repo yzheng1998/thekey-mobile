@@ -24,6 +24,10 @@ const daysLeft = time => {
   return result
 }
 export default class JobCard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { isInterested: false }
+  }
   render() {
     const {
       picture,
@@ -51,8 +55,20 @@ export default class JobCard extends Component {
               <Title>{title}</Title>
               <Host>{company}</Host>
             </ContentContainer>
-            <StarContainer>
-              <Star name="star" size={21} color="rgb(250,53,121)" />
+            <StarContainer
+              onPress={() =>
+                this.setState({ isInterested: !this.state.isInterested })
+              }
+            >
+              <Star
+                name={this.state.isInterested ? 'star' : 'star-o'}
+                size={21}
+                color={
+                  this.state.isInterested
+                    ? 'rgb(250,53,121)'
+                    : '(rgb(148,157,170)'
+                }
+              />
             </StarContainer>
           </InfoContainer>
           <Description>
