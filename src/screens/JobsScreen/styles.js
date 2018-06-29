@@ -14,8 +14,11 @@ export const HeaderBackground = styled.View`
 `
 export const Title = styled.Text`
   color: ${themeGet('colors.fontPrimary')};
-  font-family: ${themeGet('fonts.bold')};
+  font-family: ${themeGet('fonts.heavy')};
   font-size: 30px;
   margin-left: 20px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+`
+export const BackButton = styled.TouchableOpacity`
+  margin-left: 20px;
 `
