@@ -43,7 +43,9 @@ class JobsScreen extends Component {
               <FlatList
                 keyExtractor={job => job.id}
                 data={data.jobs}
-                renderItem={({ item: job }) => <JobCard job={job} />}
+                renderItem={({ item: job }) => (
+                  <JobCard navigation={this.props.navigation} job={job} />
+                )}
               />
             )
           }}

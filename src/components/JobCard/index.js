@@ -15,6 +15,7 @@ import {
 import Star from 'react-native-vector-icons/FontAwesome'
 import TagLine from '../TagLine'
 import moment from 'moment'
+import questionMark from '../../stories/question-mark.jpg'
 
 const daysLeft = time => {
   const today = moment()
@@ -26,7 +27,7 @@ const daysLeft = time => {
 export default class JobCard extends Component {
   render() {
     const {
-      picture,
+      id,
       title,
       company,
       commitment,
@@ -36,13 +37,18 @@ export default class JobCard extends Component {
     } = this.props.job
     return (
       <Card
+        onPress={() =>
+          this.props.navigation.navigate('Job', {
+            id,
+          })
+        }
         width={this.props.width}
         height={this.props.height}
         activeOpacity={this.props.activeOpacity}
         borderRadius={this.props.borderRadius}
       >
         <LeftContainer>
-          <Image source={picture} style={{ width: 46, height: 46 }} />
+          <Image source={questionMark} style={{ width: 46, height: 46 }} />
           <Deadline>{daysLeft(deadline)}</Deadline>
         </LeftContainer>
         <ContentContainer>

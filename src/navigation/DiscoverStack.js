@@ -7,6 +7,7 @@ import JobsScreen from '../screens/JobsScreen'
 import JobScreen from '../screens/JobScreen'
 import DiscoverScreen from '../screens/DiscoverScreen'
 import FriendRequestScreen from '../screens/FriendRequestScreen'
+import Summary from '../screens/JobSummaryScreen'
 import ReviewsScreen from '../screens/ReviewsScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import ApplyNowScreen from '../screens/ApplyNowScreen'
@@ -52,6 +53,13 @@ const DiscoverStack = createStackNavigator(
     Job: {
       screen: JobScreen,
       navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    Summary: {
+      screen: Summary,
+      navigationOptions: () => ({
+        title: 'Job Summary',
         header: null,
       }),
     },
