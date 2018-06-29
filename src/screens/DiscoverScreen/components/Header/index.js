@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Image } from 'react-native'
-import { Background, Icon, Name, Title, TextBox } from './styles'
+import { Background, Icon, IconButton, Name, Title, TextBox } from './styles'
 
 export default class Header extends Component {
   static defaultProps = {}
@@ -16,10 +16,12 @@ export default class Header extends Component {
     return (
       <Background>
         <TextBox>
-          <Name>HI {name}</Name>
+          <Name>HI {name.toUpperCase()}</Name>
           <Title>Discover</Title>
         </TextBox>
-        <Icon source={avatar} />
+        <IconButton onPress={() => this.props.navigation.navigate('Profile')}>
+          <Icon source={avatar} />
+        </IconButton>
       </Background>
     )
   }
