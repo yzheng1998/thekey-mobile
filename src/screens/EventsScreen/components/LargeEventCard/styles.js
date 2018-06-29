@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 import Icon1 from 'react-native-vector-icons/Foundation'
 import Icon2 from 'react-native-vector-icons/EvilIcons'
-import Icon3 from 'react-native-vector-icons/Feather'
 
 export const Card = styled.TouchableOpacity`
   width: 340px;
@@ -65,14 +64,12 @@ export const Price = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   color: ${themeGet('colors.fontPrimary')};
 `
-export const StarButton = styled.TouchableOpacity``
-
+export const StarButton = styled.TouchableOpacity`
+  padding-top: 9px;
+`
 export const ClockIcon = styled(Icon1)`
   color: ${themeGet('colors.fontSubtitle.secondary')};
 `
 export const LocationIcon = styled(Icon2)`
-  color: ${themeGet('colors.fontPrimary')};
-`
-export const StarIcon = styled(Icon3)`
   color: ${themeGet('colors.fontPrimary')};
 `
