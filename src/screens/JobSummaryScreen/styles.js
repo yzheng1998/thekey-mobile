@@ -3,6 +3,7 @@ import { themeGet } from 'styled-system'
 
 export const BigContainer = styled.View`
   flex: 1;
+  background-color: white;
 `
 export const BackButtonContainer = styled.TouchableOpacity`
   margin-top: 25px;
