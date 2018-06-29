@@ -9,11 +9,11 @@ import {
   DateTime,
   Title,
   TimeIcon,
-  StarIcon,
 } from './styles'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import InterestedFriendsRow from '../InterestedFriendsRow'
+import Star from 'react-native-vector-icons/FontAwesome'
 
 const TIME_ZONE_LEN = 3
 
@@ -39,6 +39,11 @@ export default class SmallEventCard extends Component {
     interestedFriends: PropTypes.arrayOf(Object),
   }
 
+  constructor(props) {
+    super(props)
+    this.state = { isInterested: false }
+  }
+
   render() {
     const { image, title, timeStamp, interestedFriends } = this.props
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
@@ -53,8 +58,16 @@ export default class SmallEventCard extends Component {
             </DetailsContainer>
             <Title numberOfLines={1}>{title} </Title>
           </ContentContainer>
-          <StarButton>
-            <StarIcon name="star" size={25} />
+          <StarButton
+            onPress={() =>
+              this.setState({ isInterested: !this.state.isInterested })
+            }
+          >
+            <Star
+              name={this.state.isInterested ? 'star' : 'star-o'}
+              size={27}
+              color="white"
+            />
           </StarButton>
         </FullContainer>
         interestedFriends && {interestedFriends.length > 0} &&

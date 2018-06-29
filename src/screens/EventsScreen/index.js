@@ -1,24 +1,18 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import { Query } from 'react-apollo'
 import { FlatList, Text, View } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import HorizontalEventsScroll from './components/HorizontalEventsScroll'
 import SmallEventCard from './components/SmallEventCard'
-import SearchFilterTab from '../../components/SearchFilterTab'
+import EventsHeader from './components/EventsHeader'
 import {
   Background,
-  HeaderBackground,
-  Title,
   Subtitle,
   Description,
   SmallCardContainer,
   Spacer,
-  NewEventButton,
-  ButtonContainer,
 } from './styles'
-import { TopContainer } from './components/LargeEventCard/styles'
 // need to write another query for similar events later
 const GET_EVENTS = gql`
   query events($startsAt: String, $location: String) {
@@ -82,19 +76,7 @@ class EventsScreen extends Component {
     ]
     return (
       <View>
-        <HeaderBackground>
-          <TopContainer>
-            <ButtonContainer>
-              <NewEventButton>
-                <Icon name="calendar-plus-o" size={20} color="white" />
-              </NewEventButton>
-            </ButtonContainer>
-          </TopContainer>
-          <Title>Events</Title>
-          <SearchFilterTab
-            options={['All', 'Today', 'Tomorrow', 'This Week']}
-          />
-        </HeaderBackground>
+        <EventsHeader navigation={this.props.navigation} />
         <SearchBar
           lightTheme
           platform="ios"
