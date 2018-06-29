@@ -3,17 +3,32 @@ import { Background, List } from './styles'
 import DiscoverCard from './components/DiscoverCard'
 import Header from './components/Header'
 import placeholder from '../../../assets/city.png'
+import { AsyncStorage } from 'react-native'
 
 class DiscoverScreen extends Component {
   static navigationOptions = {
-    headerTitle: 'Discover',
+    header: null,
+  }
+  state = {
+    name: '',
+  }
+
+  componentDidMount = async () => {
+    const firstName = await AsyncStorage.getItem('firstName')
+    if (firstName) {
+      this.setState({ name: firstName })
+    }
   }
 
   render() {
     return (
       <Background>
-        <Header name="SAM" avatar={placeholder} />
         <List>
+          <Header
+            name={this.state.name}
+            avatar={placeholder}
+            navigation={this.props.navigation}
+          />
           <DiscoverCard
             title="The Society"
             description="View other users on the site"
@@ -36,8 +51,7 @@ class DiscoverScreen extends Component {
             title="Reviews"
             description="Review companies on the site"
             image={placeholder}
-            // Navigate to a random page (no reviews page yet)
-            onPress={() => this.props.navigation.navigate('Events')}
+            onPress={() => this.props.navigation.navigate('Reviews')}
           />
         </List>
       </Background>

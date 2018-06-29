@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { themeGet } from 'styled-system'
 
 export const Background = styled.View`
   width: 100%;
@@ -7,6 +8,7 @@ export const Background = styled.View`
   flex-direction: row;
   margin-top: 20px;
 `
+export const IconButton = styled.TouchableOpacity``
 export const Icon = styled.Image`
   width: 40px;
   height: 40px;
@@ -20,12 +22,12 @@ export const TextBox = styled.View`
 `
 export const Title = styled.Text`
   color: black;
-  font-family: 'SF Pro Display';
+  font-family: ${themeGet('fonts.bold')};
   font-size: 34px;
   font-weight: bold;
 `
 export const Name = styled.Text`
-  color: grey;
-  font-family: 'SF Pro Display';
-  font-size: 12px;
+  color: ${themeGet('colors.fontSubtitle.primary')};
+  font-family: ${themeGet('fonts.bold')};
+  font-size: 14px;
 `
