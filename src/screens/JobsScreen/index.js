@@ -4,8 +4,9 @@ import { FlatList, ScrollView, Text } from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import JobCard from '../../components/JobCard'
 import SearchFilterTab from '../../components/SearchFilterTab'
-import { HeaderBackground, Title } from './styles'
+import { HeaderBackground, Title, BackButton } from './styles'
 import { Query } from 'react-apollo'
+import BackArrow from 'react-native-vector-icons/Ionicons'
 
 const GET_JOBS = gql`
   query jobs {
@@ -29,6 +30,9 @@ class JobsScreen extends Component {
     return (
       <ScrollView>
         <HeaderBackground>
+          <BackButton onPress={() => this.props.navigation.goBack()}>
+            <BackArrow name="ios-arrow-back" color="white" size={30} />
+          </BackButton>
           <Title>Jobs/Internships</Title>
           <SearchFilterTab options={['All', 'Saved', 'Applied For']} />
         </HeaderBackground>
