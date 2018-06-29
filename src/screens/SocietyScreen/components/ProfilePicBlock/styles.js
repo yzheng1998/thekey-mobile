@@ -6,7 +6,7 @@ export const Container = styled.View`
   width: 100%;
 `
 
-export const EventTitleText = styled.Text`
+export const NameText = styled.Text`
   font-size: 24;
   line-height: 29;
   font-family: ${themeGet('fonts.bold')};
