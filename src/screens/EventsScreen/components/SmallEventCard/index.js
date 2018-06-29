@@ -11,6 +11,7 @@ import {
   TimeIcon,
   StarIcon,
 } from './styles'
+import PropTypes from 'prop-types'
 import moment from 'moment'
 import InterestedFriendsRow from '../InterestedFriendsRow'
 
@@ -27,12 +28,23 @@ function formatTimeStamp(timeStamp) {
 }
 
 export default class SmallEventCard extends Component {
+  static defaultProps = {
+    interestedFriends: null,
+  }
+
+  static propTypes = {
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    timeStamp: PropTypes.string.isRequired,
+    interestedFriends: PropTypes.arrayOf(Object),
+  }
+
   render() {
-    const { image, title, timeStamp, mutualFriends } = this.props.event
-    const selectMutualFriends = [...mutualFriends].slice(0, 5)
+    const { image, title, timeStamp, interestedFriends } = this.props
+    const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
       <Card width={this.props.width} activeOpacity={0.9}>
-        <BackgroundImage source={image} />
+        <BackgroundImage source={{ uri: image }} />
         <FullContainer>
           <ContentContainer>
             <DetailsContainer>
@@ -45,12 +57,12 @@ export default class SmallEventCard extends Component {
             <StarIcon name="star" size={25} />
           </StarButton>
         </FullContainer>
-        mutualFriends && {mutualFriends.length > 0} &&
+        interestedFriends && {interestedFriends.length > 0} &&
         <InterestedFriendsRow
           avatarNum={5}
           avatarSize={22}
-          connectionsNum={mutualFriends.length}
-          mutualFriends={selectMutualFriends}
+          connectionsNum={interestedFriends.length}
+          interestedFriends={selectMutualFriends}
         />
       </Card>
     )

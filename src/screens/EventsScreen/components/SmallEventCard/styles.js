@@ -11,6 +11,7 @@ export const Card = styled.TouchableOpacity`
   align-items: flex-start;
   overflow: hidden;
   margin-bottom: 20px;
+  margin-left: 15px;
 `
 export const BackgroundImage = styled.Image`
   position: absolute;
