@@ -39,6 +39,8 @@ import '../src/stories/reviewsScreen'
 import '../src/stories/jobScreen'
 import '../src/stories/similarEvents'
 import '../src/stories/HorizontalEditField'
+import '../src/stories/EditContactBlock'
+import '../src/stories/BlockButton'
 
 const StorybookUI = getStorybookUI({
   port: 7007,

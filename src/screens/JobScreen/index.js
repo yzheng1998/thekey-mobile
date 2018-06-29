@@ -6,7 +6,7 @@ import {
   StarContainer,
 } from './styles'
 import JobPictureBlock from '../../components/JobPictureBlock'
-import AboutBlock from '../../components/AboutBlock'
+import AboutBlock from './components/AboutBlock'
 import TagLine from '../../components/TagLine'
 import SimilarJobsBlock from '../../components/SimilarJobsBlock'
 import BackButton from 'react-native-vector-icons/Ionicons'
@@ -37,10 +37,43 @@ const tagData = [
   },
 ]
 
+const job = {
+  picture: {
+    uri:
+      'https://cdn.zeplin.io/5b18b9740bc6b2af45546408/assets/6FE3D570-0BE7-40CA-923D-A045ECA2830D.png',
+  },
+  title: 'General Manager',
+  company: '@ Beats By Dre',
+  commitment: 'Full time',
+  location: 'SF Bay Area',
+  deadline: '06/31/2018',
+  tags: [],
+}
+
+const aboutJob = {
+  about:
+    'The Inbound General Manager manages and leads a team to ensure that customer services meet client needs as well as the standards of a national service delivery model.',
+  picture: {
+    uri:
+      'https://cdn.zeplin.io/5b18b9740bc6b2af45546408/assets/6FE3D570-0BE7-40CA-923D-A045ECA2830D.png',
+  },
+  title: 'General Manager',
+  company: '@Beats by Dre',
+  commitment: 'Full time',
+  location: 'SF Bay Area',
+  views: '60',
+  time: '06/20/2018',
+  jobs: [job, job, job],
+}
+
 class JobScreen extends Component {
   constructor(props) {
     super(props)
     this.state = { isInterested: false }
+  }
+  
+  static defaultProps = {
+    job: aboutJob,
   }
   render() {
     const {
@@ -53,7 +86,7 @@ class JobScreen extends Component {
       time,
       views,
       jobs,
-    } = this.props
+    } = this.props.job
     return (
       <Container>
         <JobPictureBlock
@@ -66,7 +99,7 @@ class JobScreen extends Component {
           views={views}
           time={time}
         />
-        <AboutBlock about={about} />
+        <AboutBlock navigation={this.props.navigation} about={about} />
         <TagsContainer>
           <TagLine tagData={tagData} lines={1} />
         </TagsContainer>
