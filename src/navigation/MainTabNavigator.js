@@ -12,14 +12,18 @@ const MainTabNavigator = createBottomTabNavigator(
       screen: DiscoverStack,
       navigationOptions: () => ({
         title: 'Discover',
-        tabBarIcon: () => <Image source={placeholder} size={30} />,
+        tabBarIcon: () => (
+          <Image source={placeholder} style={{ height: 25, width: 25 }} />
+        ),
       }),
     },
     Chats: {
       screen: ChatStack,
       navigationOptions: () => ({
         title: 'Chats',
-        tabBarIcon: () => <Image source={placeholder} size={30} />,
+        tabBarIcon: () => (
+          <Image source={placeholder} style={{ height: 25, width: 25 }} />
+        ),
       }),
     },
   },
@@ -28,19 +32,19 @@ const MainTabNavigator = createBottomTabNavigator(
     tabBarOptions: {
       style: {
         backgroundColor: 'white',
+        height: 40,
       },
     },
     navigationOptions: () => ({
       headerRight: <Button />,
-      headerStyle: { backgroundColor: '#545680' },
       headerTintColor: 'white',
       headerTitleStyle: {
         textAlign: 'center',
         alignSelf: 'center',
-        marginBottom: 5,
+        marginBottom: 0,
         fontFamily: 'Circular Std',
         fontSize: 19,
-        lineHeight: 26,
+        lineHeight: 20,
       },
     }),
     headerMode: 'screen',
