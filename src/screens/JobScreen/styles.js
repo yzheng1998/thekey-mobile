@@ -84,6 +84,7 @@ export const HeaderContainer = styled.View`
 export const TagsContainer = styled.View`
   border-bottom-width: 4px;
   border-bottom-color: ${themeGet('colors.buttonSecondary')};
+  background-color: white;
 `
 export const Block = styled.View``
 export const Option = styled.Text`
