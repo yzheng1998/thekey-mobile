@@ -62,6 +62,7 @@ const DiscoverStack = createStackNavigator(
         title: 'Job Summary',
         header: null,
       }),
+    },
     Reviews: {
       screen: ReviewsScreen,
       navigationOptions: () => ({ header: null }),
