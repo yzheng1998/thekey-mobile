@@ -41,6 +41,7 @@ import '../src/stories/similarEvents'
 import '../src/stories/HorizontalEditField'
 import '../src/stories/EditContactBlock'
 import '../src/stories/BlockButton'
+import '../src/stories/eventScreen'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
