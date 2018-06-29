@@ -18,7 +18,7 @@ export const LeftContainer = styled.View`
 export const Deadline = styled.Text`
   font-size: 12px;
   font-family: ${themeGet('fonts.bold')};
-  padding-left: 14px;
+  align-self: center;
 `
 export const ContentContainer = styled.View`
   padding-top: 10px;
