@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Animated } from 'react-native'
 import { themeGet } from 'styled-system'
 import Icon from 'react-native-vector-icons/Ionicons'
 
@@ -11,7 +12,7 @@ export const SearchBarContainer = styled.View`
   align-items: center;
 `
 
-export const SearchContainer = styled.View`
+export const SearchContainer = styled(Animated.View)`
   height: 36;
   flex-direction: row;
   flex: 1;
@@ -41,6 +42,8 @@ export const ClearIcon = styled(Icon)`
   background-color: transparent;
   color: ${themeGet('colors.fontSubtitle')};
 `
+
+export const CancelAnimated = styled(Animated.View)``
 
 export const CancelButton = styled.TouchableOpacity`
   margin-left: 16;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Keyboard, Animated } from 'react-native'
 import {
   SearchBarContainer,
   SearchContainer,
@@ -8,21 +9,40 @@ import {
   ClearIcon,
   CancelButton,
   CancelText,
+  CancelAnimated,
 } from './styles'
 
 export default class SearchBar extends Component {
   state = {
     showCancel: false,
+    animated: new Animated.Value(0),
   }
+
+  slide() {
+    const newState = !this.state.showCancel
+    this.setState({ showCancel: newState })
+    Animated.timing(this.state.animated, {
+      toValue: newState ? 1 : 0,
+      duration: 300,
+    }).start()
+  }
+
   render() {
     return (
       <SearchBarContainer>
-        <SearchContainer>
+        <SearchContainer
+          style={{
+            marginRight: this.state.animated.interpolate({
+              inputRange: [0, 1],
+              outputRange: [-65, 0],
+            }),
+          }}
+        >
           <SearchIcon name="ios-search" size={18} />
           <SearchText
             placeholder={this.props.placeholderText}
             placeholderTextColor="rgb(142, 142, 147)"
-            onFocus={() => this.setState({ showCancel: true })}
+            onFocus={() => this.slide()}
             onChangeText={text => {
               this.props.updateText(text)
               this.setState({ showCancel: true })
@@ -36,17 +56,28 @@ export default class SearchBar extends Component {
           )}
         </SearchContainer>
 
-        {this.state.showCancel && (
+        <CancelAnimated
+          style={{
+            transform: [
+              {
+                translateX: this.state.animated.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: [65, 0],
+                }),
+              },
+            ],
+          }}
+        >
           <CancelButton
             onPress={() => {
-              dismissKeyboard()
+              Keyboard.dismiss()
               this.props.updateText(null)
-              this.setState({ showCancel: false })
+              this.slide()
             }}
           >
             <CancelText>Cancel</CancelText>
           </CancelButton>
-        )}
+        </CancelAnimated>
       </SearchBarContainer>
     )
   }
