@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Animated } from 'react-native'
 import { themeGet } from 'styled-system'
 import Icon from 'react-native-vector-icons/Ionicons'
 
@@ -11,7 +12,7 @@ export const SearchBarContainer = styled.View`
   align-items: center;
 `
 
-export const SearchContainer = styled.View`
+export const SearchContainer = styled(Animated.View)`
   height: 36;
   flex-direction: row;
   flex: 1;
@@ -24,17 +25,25 @@ export const SearchContainer = styled.View`
 `
 
 export const SearchText = styled.TextInput`
-  width: 100%;
+  flex: 1;
   height: 100%;
   background-color: transparent;
   padding-left: 7;
-  padding-right: 7;
 `
 
 export const SearchIcon = styled(Icon)`
   background-color: transparent;
   color: ${themeGet('colors.fontSubtitle.primary')};
 `
+
+export const ClearIconButton = styled.TouchableOpacity``
+
+export const ClearIcon = styled(Icon)`
+  background-color: transparent;
+  color: ${themeGet('colors.fontSubtitle')};
+`
+
+export const CancelAnimated = styled(Animated.View)``
 
 export const CancelButton = styled.TouchableOpacity`
   margin-left: 16;
