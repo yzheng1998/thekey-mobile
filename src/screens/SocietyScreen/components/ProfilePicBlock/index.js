@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, EventTitleText, LocationText } from './styles'
+import { Container, NameText, LocationText } from './styles'
 import PictureHeader from '../../../../components/PictureHeader'
 
 export default class ProfilePicBlock extends Component {
@@ -8,7 +8,7 @@ export default class ProfilePicBlock extends Component {
     return (
       <Container>
         <PictureHeader picture={profilePic} size={171}>
-          <EventTitleText>{name}</EventTitleText>
+          <NameText>{name}</NameText>
           <LocationText>
             {city}, {state}
           </LocationText>
