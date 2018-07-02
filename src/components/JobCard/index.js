@@ -38,6 +38,7 @@ export default class JobCard extends Component {
       location,
       tags,
       deadline,
+      picture,
     } = this.props.job
     return (
       <Card
@@ -52,7 +53,10 @@ export default class JobCard extends Component {
         borderRadius={this.props.borderRadius}
       >
         <LeftContainer>
-          <Image source={questionMark} style={{ width: 46, height: 46 }} />
+          <Image
+            source={picture || questionMark}
+            style={{ width: 46, height: 46 }}
+          />
           <Deadline>{daysLeft(deadline)}</Deadline>
         </LeftContainer>
         <ContentContainer>
