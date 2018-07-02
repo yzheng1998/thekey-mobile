@@ -1,15 +1,8 @@
 import { storiesOf } from '@storybook/react-native'
-import { View } from 'react-native'
 import React from 'react'
-import SimilarEvents from '../components/SimilarEventsBlock'
+import SimilarEventsScreen from '../screens/SimilarEventsScreen'
 
-const style = {
-  flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
-}
-const CenteredView = ({ children }) => <View style={style}>{children}</View>
-const friends = [
+const friends2 = [
   {
     firstName: 'Yuke',
     id: 1,
@@ -32,31 +25,15 @@ const friends = [
       uri: 'https://www.dev.hsa.net/img/team/humphrey.JPG',
     },
   },
-  {
-    firstName: 'Ivraj',
-    id: 4,
-    profilePicture: {
-      uri: 'https://www.dev.hsa.net/img/team/Ivraj.jpg',
-    },
-  },
-  {
-    firstName: 'Jovi',
-    id: 5,
-    profilePicture: {
-      uri: 'https://www.dev.hsa.net/img/team/Jovin.jpg',
-    },
-  },
 ]
 
 const event = {
   image: 'https://c1.staticflickr.com/1/126/387606063_408c203f6c_b.jpg',
   title: 'A super fun eventA super fun event',
   timeStamp: '2018-06-18 12:52:03.744-04',
-  interestedFriends: friends,
+  interestedFriends: friends2,
 }
 
-storiesOf('CenteredView').add('Similar Events', () => (
-  <CenteredView>
-    <SimilarEvents events={[event, event, event]} />
-  </CenteredView>
+storiesOf('CenteredView').add('Similar Events Screen', () => (
+  <SimilarEventsScreen events={[event, event, event]} />
 ))
