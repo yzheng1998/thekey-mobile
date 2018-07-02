@@ -45,7 +45,7 @@ export default class SmallEventCard extends Component {
   }
 
   render() {
-    const { image, title, timeStamp, interestedFriends } = this.props
+    const { image, title, timeStamp, interestedFriends } = this.props.event
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
       <Card width={this.props.width} activeOpacity={0.9}>
