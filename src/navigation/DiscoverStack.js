@@ -11,6 +11,8 @@ import Summary from '../screens/JobSummaryScreen'
 import ReviewsScreen from '../screens/ReviewsScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import ApplyNowScreen from '../screens/ApplyNowScreen'
+import SimilarJobsScreen from '../screens/SimilarJobsScreen'
+import SimilarEventsScreen from '../screens/SimilarEventsScreen'
 
 const DiscoverStack = createStackNavigator(
   {
@@ -81,6 +83,18 @@ const DiscoverStack = createStackNavigator(
     },
     ApplyNow: {
       screen: ApplyNowScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    SimilarJobsScreen: {
+      screen: SimilarJobsScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    SimilarEventsScreen: {
+      screen: SimilarEventsScreen,
       navigationOptions: () => ({
         header: null,
       }),
