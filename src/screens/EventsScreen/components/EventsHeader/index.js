@@ -23,7 +23,11 @@ export default class EventsHeader extends Component {
           </NewEventButton>
         </ButtonRow>
         <Title>Events</Title>
-        <SearchFilterTab options={['All', 'Today', 'Tomorrow', 'This Week']} />
+        <SearchFilterTab
+          options={['All', 'Today', 'Tomorrow', 'This Week']}
+          updateState={this.props.updateState}
+          // pass in callback function
+        />
       </HeaderBackground>
     )
   }
