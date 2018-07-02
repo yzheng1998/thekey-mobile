@@ -18,7 +18,13 @@ class SimilarEventsBlock extends Component {
           data={events}
           renderItem={({ item }) => (
             <EventContainer>
-              <EventCard width="327px" event={item} />
+              <EventCard
+                width="327px"
+                image={item.image}
+                title={item.title}
+                timeStamp={item.timeStamp}
+                interestedFriends={item.interestedFriends}
+              />
             </EventContainer>
           )}
         />
