@@ -27,6 +27,7 @@ const theme = {
     fontButtonTertiary: 'rgb(250, 53, 121)',
     fontButtonQuaternary: 'rgb(39, 43, 49)',
     fontProfileFields: 'rgb(250, 53, 121)',
+    fontReviewFields: 'rgb(250, 53, 121)',
     shadow: 'rgb(15, 16, 26)',
     chatCardBorder: 'rgba(142, 142, 147, 0.12)',
     textArea: 'rgb(249, 249, 249)',
