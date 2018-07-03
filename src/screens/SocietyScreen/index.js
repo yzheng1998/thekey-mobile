@@ -34,7 +34,11 @@ class SocietyScreen extends Component {
             if (error) return `Error! ${error.message}`
             return (
               <SwiperContainer>
-                <CardSwiper width={width} data={data} />
+                <CardSwiper
+                  navigation={this.props.navigation}
+                  width={width}
+                  data={data}
+                />
               </SwiperContainer>
             )
           }}

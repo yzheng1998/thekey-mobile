@@ -11,6 +11,7 @@ import Summary from '../screens/JobSummaryScreen'
 import ReviewsScreen from '../screens/ReviewsScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import ApplyNowScreen from '../screens/ApplyNowScreen'
+import PeopleList from '../screens/PeopleList'
 
 const DiscoverStack = createStackNavigator(
   {
@@ -81,6 +82,12 @@ const DiscoverStack = createStackNavigator(
     },
     ApplyNow: {
       screen: ApplyNowScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    PeopleList: {
+      screen: PeopleList,
       navigationOptions: () => ({
         header: null,
       }),
