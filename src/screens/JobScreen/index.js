@@ -67,13 +67,12 @@ const aboutJob = {
 }
 
 class JobScreen extends Component {
+  static defaultProps = {
+    job: aboutJob,
+  }
   constructor(props) {
     super(props)
     this.state = { isInterested: false }
-  }
-  
-  static defaultProps = {
-    job: aboutJob,
   }
   render() {
     const {

@@ -19,8 +19,7 @@ const GET_EVENTS = gql`
     events(eventsFilterInput: { startsAt: $startsAt, location: $location }) {
       id
       location
-      startsAt
-      endsAt
+      dateRange
       title
       picture
       details
@@ -50,16 +49,16 @@ class EventsScreen extends Component {
       THIS_WEEK: 3,
     }
 
-    const customVariable = () => {
-      switch (this.state.tab) {
+    const customVariable = tab => {
+      switch (tab) {
         case tabs.ALL:
           return ''
         case tabs.TODAY:
-          return ''
+          return 'today'
         case tabs.TOMORROW:
-          return ''
+          return 'tomorrow'
         case tabs.THIS_WEEK:
-          return ''
+          return 'thisWeek'
         default:
           return ''
       }
@@ -103,6 +102,7 @@ class EventsScreen extends Component {
         },
       },
     ]
+
     return (
       <View>
         <EventsHeader
@@ -117,12 +117,13 @@ class EventsScreen extends Component {
           placeholder="Search Events"
         />
         <Background>
-          <Query query={GET_EVENTS} variable={{}}>
+          <Query
+            query={GET_EVENTS}
+            variables={{ startsAt: customVariable(this.state.tab) }}
+          >
             {({ loading, error, data }) => {
               if (loading) return <Text>Loading...</Text>
               if (error) return <Text>Error! ${error.message}</Text>
-              console.log('state', this.state.tab)
-              console.log('customVariable', customVariable)
               return <HorizontalEventsScroll eventsList={data.events} />
             }}
           </Query>
@@ -141,7 +142,7 @@ class EventsScreen extends Component {
                       <SmallEventCard
                         image="https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg"
                         title={item.title}
-                        timeStamp={item.startsAt}
+                        timeStamp={new Date(item.dateRange[0]).toISOString()}
                         interestedFriends={friends}
                       />
                     </SmallCardContainer>
