@@ -26,7 +26,7 @@ const theme = {
     fontButtonSecondary: 'rgb(100, 108, 132)',
     fontButtonTertiary: 'rgb(250, 53, 121)',
     fontButtonQuaternary: 'rgb(39, 43, 49)',
-    fontProfileFields: 'rgb(250, 53, 121)',
+    fontProfileFields: 'rgb(78, 158, 255)',
     shadow: 'rgb(15, 16, 26)',
     chatCardBorder: 'rgba(142, 142, 147, 0.12)',
     textArea: 'rgb(249, 249, 249)',
@@ -54,9 +54,11 @@ const theme = {
     },
     android: {
       fonts: {
+        heavy: 'Roboto-Bold',
         bold: 'Roboto-Bold',
         medium: 'Roboto-Medium',
         light: 'Roboto-Light',
+        regular: 'Roboto-Regular',
       },
     },
   }),

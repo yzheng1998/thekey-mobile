@@ -24,6 +24,7 @@ export default class MessageInput extends Component {
           }}
         />
         <SendButton
+          onPress={this.props.onPress}
           chatId={this.props.chatId}
           content={this.state.content}
           clearMessage={this.clearMessage}

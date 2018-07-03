@@ -9,12 +9,22 @@ class ConversationScreen extends Component {
   render() {
     const conversation = this.props.navigation.getParam('chat')
     const viewer = this.props.navigation.getParam('viewer')
+    const messages = conversation.messages.slice()
+
+    const handlePress = () => {
+      this.flatList.scrollToOffset({ x: 0, y: 0, animated: true })
+    }
+
     return (
       <Background>
         <MessageContainer>
           <FlatList
+            inverted
+            ref={el => {
+              this.flatList = el
+            }}
             keyExtractor={message => message.id}
-            data={conversation.messages}
+            data={messages.reverse()}
             renderItem={({ item }) => (
               <MessageBubble
                 key={item.id}
@@ -24,7 +34,7 @@ class ConversationScreen extends Component {
             )}
           />
         </MessageContainer>
-        <MessageInput chatId={conversation.id} />
+        <MessageInput onPress={handlePress} chatId={conversation.id} />
         <KeyboardSpacer />
       </Background>
     )
