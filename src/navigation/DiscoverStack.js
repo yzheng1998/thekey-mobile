@@ -12,6 +12,8 @@ import ReviewsScreen from '../screens/ReviewsScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import ApplyNowScreen from '../screens/ApplyNowScreen'
 import PeopleList from '../screens/PeopleList'
+import EditProfileScreen from '../screens/EditProfileScreen'
+import AddEducationForm from '../screens/EditProfileScreen/components/AddEducationForm'
 
 const DiscoverStack = createStackNavigator(
   {
@@ -78,6 +80,18 @@ const DiscoverStack = createStackNavigator(
       screen: ProfileScreen,
       navigationOptions: () => ({
         header: null,
+      }),
+    },
+    EditProfile: {
+      screen: EditProfileScreen,
+      navigationOptions: () => ({
+        title: 'Edit Profile',
+      }),
+    },
+    AddEducation: {
+      screen: AddEducationForm,
+      navigationOptions: () => ({
+        title: 'Add Education',
       }),
     },
     ApplyNow: {
