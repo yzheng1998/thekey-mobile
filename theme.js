@@ -54,9 +54,11 @@ const theme = {
     },
     android: {
       fonts: {
+        heavy: 'Roboto-Bold',
         bold: 'Roboto-Bold',
         medium: 'Roboto-Medium',
         light: 'Roboto-Light',
+        regular: 'Roboto-Regular',
       },
     },
   }),
