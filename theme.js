@@ -7,6 +7,7 @@ const theme = {
     background: 'white',
     buttonPrimary: 'rgb(250, 53, 121)',
     buttonSecondary: 'rgb(243, 244, 245)',
+    buttonClicked: 'rgb(253, 205, 221)',
     fontPrimary: 'white',
     fontHeader: 'rgb(7, 12, 27)',
     fontTitle: 'rgb(51, 51, 51)',
