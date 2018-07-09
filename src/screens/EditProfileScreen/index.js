@@ -103,7 +103,7 @@ export default class EditProfileScreen extends Component {
     if (Number.isInteger(educationItem.id)) {
       educationData[educationItem.id] = educationItem
     } else educationData.push({ ...educationItem, id: educationData.length })
-    this.setState({ educationData: educationData })
+    this.setState({ educationData })
   }
 
   render() {

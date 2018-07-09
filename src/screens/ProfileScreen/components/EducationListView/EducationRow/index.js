@@ -9,7 +9,6 @@ export default class EducationRow extends Component {
       major,
       startYear,
       graduationYear,
-      id,
     } = this.props
     return (
       <ProfileInfoRow

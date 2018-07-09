@@ -15,23 +15,26 @@ import PickerComponent from '../PickerComponent'
 const schoolTypes = ['Secondary', 'Undergraduate', 'Graduate']
 
 export default class AddEducationForm extends Component {
-  formElements = this.props.navigation.getParam('formElements')
-  editMode = this.props.navigation.getParam('editMode')
-
-  state = {
-    schoolName: this.formElements ? this.formElements.schoolName : null,
-    schoolType: this.formElements ? this.formElements.schoolType : null,
-    degreeType: this.formElements ? this.formElements.degreeType : null,
-    major: this.formElements ? this.formElements.major : null,
-    startYear: this.formElements ? this.formElements.startYear : null,
-    graduationYear: this.formElements ? this.formElements.graduationYear : null,
-    id: this.formElements ? this.formElements.id : null,
-    schoolTypePickerEnabled: false,
+  constructor(props) {
+    super(props)
+    const formElements = this.props.navigation.getParam('formElements')
+    this.state = {
+      schoolName: formElements ? formElements.schoolName : null,
+      schoolType: formElements ? formElements.schoolType : null,
+      degreeType: formElements ? formElements.degreeType : null,
+      major: formElements ? formElements.major : null,
+      startYear: formElements ? formElements.startYear : null,
+      graduationYear: formElements ? formElements.graduationYear : null,
+      id: formElements ? formElements.id : null,
+      schoolTypePickerEnabled: false,
+    }
   }
 
   updateText = obj => {
     this.setState(obj)
   }
+
+  editMode = this.props.navigation.getParam('editMode')
 
   render() {
     const {
@@ -69,7 +72,7 @@ export default class AddEducationForm extends Component {
             <Input
               value={schoolName}
               placeholder="Harvard University"
-              onChangeText={schoolName => this.setState({ schoolName })}
+              onChangeText={text => this.setState({ schoolName: text })}
             />
           </RowContainer>
           <RowContainer>
@@ -90,7 +93,7 @@ export default class AddEducationForm extends Component {
             <Input
               value={degreeType}
               placeholder="Bachlor's Degree"
-              onChangeText={degreeType => this.setState({ degreeType })}
+              onChangeText={text => this.setState({ degreeType: text })}
             />
           </RowContainer>
           <RowContainer>
@@ -98,7 +101,7 @@ export default class AddEducationForm extends Component {
             <Input
               value={major}
               placeholder="Chemistry"
-              onChangeText={major => this.setState({ major })}
+              onChangeText={text => this.setState({ major: text })}
             />
           </RowContainer>
           <RowContainer>
@@ -106,13 +109,13 @@ export default class AddEducationForm extends Component {
             <Input
               value={startYear}
               placeholder="2018"
-              onChangeText={startYear => this.setState({ startYear })}
+              onChangeText={text => this.setState({ startYear: text })}
             />
             <Title>End Year</Title>
             <Input
               value={graduationYear}
               placeholder="2022"
-              onChangeText={graduationYear => this.setState({ graduationYear })}
+              onChangeText={text => this.setState({ graduationYear: text })}
             />
           </RowContainer>
         </Block>
