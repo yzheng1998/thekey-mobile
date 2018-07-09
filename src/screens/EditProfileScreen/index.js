@@ -109,6 +109,13 @@ export default class EditProfileScreen extends Component {
     this.setState({ educationData })
   }
 
+  addExperience = experienceItem => {
+    if (Number.isInteger(experienceItem.id)) {
+      experienceData[experienceItem.id] = experienceItem
+    } else experienceData.push({ ...experienceItem, id: experienceData.length })
+    this.setState({ workExperience: experienceData })
+  }
+
   render() {
     return (
       <Screen>
@@ -140,6 +147,7 @@ export default class EditProfileScreen extends Component {
           <EditExperienceBlock
             navigation={this.props.navigation}
             experienceData={this.state.workExperience}
+            addExperience={this.addExperience}
           />
           <EditContactBlock
             linkedIn={this.state.linkedIn}
