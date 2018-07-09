@@ -52,6 +52,7 @@ const educationData = [
     id: 1,
   },
 ]
+
 const experienceData = [
   {
     companyName: 'Unfiltered Network',
@@ -98,6 +99,13 @@ export default class EditProfileScreen extends Component {
     this.setState(obj)
   }
 
+  addEducation = educationItem => {
+    if (Number.isInteger(educationItem.id)) {
+      educationData[educationItem.id] = educationItem
+    } else educationData.push({ ...educationItem, id: educationData.length })
+    this.setState({ educationData: educationData })
+  }
+
   render() {
     return (
       <Screen>
@@ -121,8 +129,15 @@ export default class EditProfileScreen extends Component {
             </ColumnContainer>
           </Block>
           <Divider />
-          <EditEducationBlock educationData={this.state.educationData} />
-          <EditExperienceBlock experienceData={this.state.workExperience} />
+          <EditEducationBlock
+            navigation={this.props.navigation}
+            educationData={this.state.educationData}
+            addEducation={this.addEducation}
+          />
+          <EditExperienceBlock
+            navigation={this.props.navigation}
+            experienceData={this.state.workExperience}
+          />
           <EditContactBlock
             linkedIn={this.state.linkedIn}
             email={this.state.email}
