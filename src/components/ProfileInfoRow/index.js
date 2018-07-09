@@ -1,28 +1,41 @@
 import React, { Component } from 'react'
 import {
-  EducationRowContainer,
+  ProfileInfoRowContainer,
   TextContainer,
   Title,
   Subtitle,
   Years,
+  EditButton,
 } from './styles'
+import EditPencil from 'react-native-vector-icons/MaterialIcons'
 
-export default class EducationRow extends Component {
+export default class ProfileInfoRow extends Component {
   render() {
-    const { title, subtitle1, subtitle2, startYear, endYear } = this.props
+    const {
+      title,
+      subtitle1,
+      subtitle2,
+      startYear,
+      endYear,
+      onPress,
+    } = this.props
     const subtitleArray = [subtitle1, subtitle2].filter(Boolean)
+    const yearArray = [startYear, endYear].filter(Boolean)
     return (
-      <EducationRowContainer>
+      <ProfileInfoRowContainer>
         <TextContainer>
           <Title>{title}</Title>
           {subtitleArray.length > 0 && (
             <Subtitle>{subtitleArray.join(', ')}</Subtitle>
           )}
-          <Years>
-            {startYear} - {endYear}
-          </Years>
+          {yearArray.length > 0 && <Years>{yearArray.join(' - ')}</Years>}
         </TextContainer>
-      </EducationRowContainer>
+        {this.props.showEditButton && (
+          <EditButton onPress={onPress}>
+            <EditPencil name="edit" color="black" size={15} />
+          </EditButton>
+        )}
+      </ProfileInfoRowContainer>
     )
   }
 }
