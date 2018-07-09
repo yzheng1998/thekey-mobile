@@ -194,6 +194,7 @@ export default class ProfileScreen extends Component {
           city={hometown}
           state={state}
           profilePic={profilePicture}
+          navigation={this.props.navigation}
         />
         <ButtonRowView goBack={() => this.props.navigation.goBack()} />
         <MyProfileBioBlock tagData={tags} bioText={bio} />

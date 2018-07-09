@@ -12,6 +12,8 @@ export default class EditExperienceBlock extends Component {
           <Suitcase name="suitcase" size={36} style={{ marginBottom: 4 }} />
           {this.props.experienceData.map(experience => (
             <ExperienceRow
+              navigation={this.props.navigation}
+              showEditButton
               companyName={experience.companyName}
               position={experience.position}
               startYear={experience.startYear}
