@@ -14,6 +14,7 @@ import ApplyNowScreen from '../screens/ApplyNowScreen'
 import PeopleList from '../screens/PeopleList'
 import EditProfileScreen from '../screens/EditProfileScreen'
 import AddEducationForm from '../screens/EditProfileScreen/components/AddEducationForm'
+import AddExperienceForm from '../screens/EditProfileScreen/components/AddExperienceForm'
 
 const DiscoverStack = createStackNavigator(
   {
@@ -92,6 +93,12 @@ const DiscoverStack = createStackNavigator(
       screen: AddEducationForm,
       navigationOptions: () => ({
         title: 'Add Education',
+      }),
+    },
+    AddExperience: {
+      screen: AddExperienceForm,
+      navigationOptions: () => ({
+        title: 'Add Experience',
       }),
     },
     ApplyNow: {
