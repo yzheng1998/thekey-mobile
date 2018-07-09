@@ -9,7 +9,9 @@ export default class ExperienceRow extends Component {
         navigation={this.props.navigation}
         onPress={() =>
           this.props.navigation.navigate('AddExperience', {
+            addExperience: this.props.addExperience,
             formElements: this.props,
+            editMode: true,
           })
         }
         showEditButton={this.props.showEditButton}
