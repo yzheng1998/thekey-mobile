@@ -8,9 +8,27 @@ export const Container = styled.View`
   margin-top: 50px;
 `
 export const Menu = styled.View`
-  height: 200px;
   width: 100%;
   overflow: hidden;
-  background-color: blue;
+  background-color: ${themeGet('colors.backgroundSecondary')};
   border-radius: 20px;
+`
+export const MenuItemList = styled.ScrollView`
+  width: 100%;
+`
+export const CancelMembershipButton = styled.TouchableOpacity`
+  width: 91%;
+  height: 45px;
+  background-color: ${themeGet('colors.buttonPrimary')};
+  border-radius: 8px;
+  margin-top: 8px;
+  margin-bottom: 80px;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+`
+export const ButtonText = styled.Text`
+font-size: 14px;
+font-family: ${themeGet('fonts.bold')}
+color: ${themeGet('colors.fontButtonPrimary')}
 `
