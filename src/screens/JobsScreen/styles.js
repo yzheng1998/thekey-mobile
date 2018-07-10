@@ -22,3 +22,9 @@ export const Title = styled.Text`
 export const BackButton = styled.TouchableOpacity`
   margin-left: 20px;
 `
+
+export const Divider = styled.View`
+  width: 100%;
+  height: 8px;
+  background-color: ${themeGet('colors.divider')};
+`

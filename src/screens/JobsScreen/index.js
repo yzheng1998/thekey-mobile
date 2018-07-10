@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { FlatList, ScrollView, Text } from 'react-native'
-import { SearchBar } from 'react-native-elements'
+import SearchBar from '../../components/SearchBar'
 import JobCard from '../../components/JobCard'
 import SearchFilterTab from '../../components/SearchFilterTab'
-import { HeaderBackground, Title, BackButton } from './styles'
+import { HeaderBackground, Title, BackButton, Divider } from './styles'
 import { Query } from 'react-apollo'
 import BackArrow from 'react-native-vector-icons/Ionicons'
 
 const GET_JOBS = gql`
-  query jobs {
-    jobs {
+  query jobs($jobsFilterInput: JobsFilterInput!) {
+    jobs(jobsFilterInput: $jobsFilterInput) {
       id
       title
       description
@@ -26,9 +26,23 @@ const GET_JOBS = gql`
 `
 
 class JobsScreen extends Component {
+  state = {
+    searchText: '',
+  }
+
+  updateText = searchText => {
+    this.setState({ searchText })
+  }
+
   render() {
+    const { searchText } = this.state
+    const variables = {
+      jobsFilterInput: {
+        tag: searchText,
+      },
+    }
     return (
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="always">
         <HeaderBackground>
           <BackButton onPress={() => this.props.navigation.goBack()}>
             <BackArrow name="ios-arrow-back" color="white" size={30} />
@@ -36,8 +50,13 @@ class JobsScreen extends Component {
           <Title>Jobs/Internships</Title>
           <SearchFilterTab options={['All', 'Saved', 'Applied For']} />
         </HeaderBackground>
-        <SearchBar lightTheme placeholder="Search Jobs & Internships" />
-        <Query query={GET_JOBS}>
+        <SearchBar
+          updateText={this.updateText}
+          searchText={searchText}
+          placeholderText="Search Jobs & Internships"
+        />
+        <Divider />
+        <Query query={GET_JOBS} variables={variables}>
           {({ loading, error, data }) => {
             if (loading) return <Text>Loading...</Text>
             if (error) {
