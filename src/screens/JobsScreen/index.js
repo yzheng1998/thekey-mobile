@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { FlatList, ScrollView, Text } from 'react-native'
-import { SearchBar } from 'react-native-elements'
+import SearchBar from '../../components/SearchBar'
 import JobCard from '../../components/JobCard'
 import SearchFilterTab from '../../components/SearchFilterTab'
 import { HeaderBackground, Title, BackButton } from './styles'
@@ -26,9 +26,17 @@ const GET_JOBS = gql`
 `
 
 class JobsScreen extends Component {
+  state = {
+    searchText: '',
+  }
+
+  updateText = searchText => {
+    this.setState({ searchText })
+  }
+
   render() {
     return (
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="always">
         <HeaderBackground>
           <BackButton onPress={() => this.props.navigation.goBack()}>
             <BackArrow name="ios-arrow-back" color="white" size={30} />
@@ -36,7 +44,11 @@ class JobsScreen extends Component {
           <Title>Jobs/Internships</Title>
           <SearchFilterTab options={['All', 'Saved', 'Applied For']} />
         </HeaderBackground>
-        <SearchBar lightTheme placeholder="Search Jobs & Internships" />
+        <SearchBar
+          updateText={this.updateText}
+          searchText={this.state.searchText}
+          placeholderText="Search Jobs & Internships"
+        />
         <Query query={GET_JOBS}>
           {({ loading, error, data }) => {
             if (loading) return <Text>Loading...</Text>
