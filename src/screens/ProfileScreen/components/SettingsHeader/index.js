@@ -12,7 +12,7 @@ export default class SettingsMenu extends Component {
           <Title>Settings</Title>
         </TitleContainer>
         <DismissButton>
-          <DownArrow name="chevron-down" color="black" size={40} />
+          <DownArrow name="chevron-down" color="rgb(176,186,200)" size={40} />
         </DismissButton>
       </Container>
     )
