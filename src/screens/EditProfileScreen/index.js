@@ -42,7 +42,7 @@ const educationData = [
     major: 'East Asian Studies',
     startYear: '2013',
     graduationYear: '2017',
-    id: 0,
+    id: 4,
   },
   {
     schoolType: 'GRADUATE',
@@ -101,7 +101,10 @@ export default class EditProfileScreen extends Component {
 
   addEducation = educationItem => {
     if (Number.isInteger(educationItem.id)) {
-      educationData[educationItem.id] = educationItem
+      const index = educationData.findIndex(
+        item => item.id === educationItem.id,
+      )
+      educationData[index] = educationItem
     } else educationData.push({ ...educationItem, id: educationData.length })
     this.setState({ educationData })
   }
