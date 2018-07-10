@@ -23,34 +23,37 @@ export default class SearchBar extends Component {
     this.setState({ showCancel: newState })
     Animated.timing(this.state.animated, {
       toValue: newState ? 1 : 0,
-      duration: 300,
+      duration: 200,
     }).start()
   }
 
   render() {
+    const { updateText, searchText, placeholderText } = this.props
     return (
       <SearchBarContainer>
         <SearchContainer
           style={{
             marginRight: this.state.animated.interpolate({
               inputRange: [0, 1],
-              outputRange: [-65, 0],
+              outputRange: [-68, 0],
             }),
           }}
         >
           <SearchIcon name="ios-search" size={18} />
           <SearchText
-            placeholder={this.props.placeholderText}
+            placeholder={placeholderText}
             placeholderTextColor="rgb(142, 142, 147)"
-            onFocus={() => this.slide()}
+            onFocus={() => {
+              if (!this.state.showCancel) this.slide()
+            }}
             onChangeText={text => {
-              this.props.updateText(text)
+              updateText(text)
               this.setState({ showCancel: true })
             }}
-            value={this.props.state.text}
+            value={searchText}
           />
-          {this.props.state.text && (
-            <ClearIconButton onPress={() => this.props.updateText(null)}>
+          {searchText && (
+            <ClearIconButton onPress={() => updateText('')}>
               <ClearIcon name="ios-close-circle" size={18} />
             </ClearIconButton>
           )}
@@ -62,7 +65,7 @@ export default class SearchBar extends Component {
               {
                 translateX: this.state.animated.interpolate({
                   inputRange: [0, 1],
-                  outputRange: [65, 0],
+                  outputRange: [68, 0],
                 }),
               },
             ],
@@ -70,9 +73,9 @@ export default class SearchBar extends Component {
         >
           <CancelButton
             onPress={() => {
-              Keyboard.dismiss()
-              this.props.updateText(null)
+              updateText('')
               this.slide()
+              Keyboard.dismiss()
             }}
           >
             <CancelText>Cancel</CancelText>
