@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
-import {
-  Text,
-  View,
-  AsyncStorage,
-  TouchableHighlight,
-  Image,
-} from 'react-native'
-import LinkedInButton from './SignInWithLinkedIn.png'
+import { Text, View, AsyncStorage, TouchableHighlight } from 'react-native'
 import LinkedInModal from 'react-native-linkedin'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
+import LinkedInIcon from 'react-native-vector-icons/Ionicons'
 
 const LINKEDIN_LOGIN = gql`
   mutation linkedinLogin($authorizationCode: String!) {
@@ -59,7 +53,11 @@ class LinkedInLoginButton extends Component {
               renderButton={() => null}
             />
             <TouchableHighlight onPress={() => this.modal.open()}>
-              <Image source={LinkedInButton} />
+              <LinkedInIcon
+                name="logo-linkedin"
+                size={30}
+                color="rgb(0, 120, 183)"
+              />
             </TouchableHighlight>
             {loading && <Text>Logging you in...</Text>}
             {data &&
