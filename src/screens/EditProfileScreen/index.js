@@ -42,7 +42,7 @@ const educationData = [
     major: 'East Asian Studies',
     startYear: '2013',
     graduationYear: '2017',
-    id: 0,
+    id: 4,
   },
   {
     schoolType: 'GRADUATE',
@@ -52,6 +52,7 @@ const educationData = [
     id: 1,
   },
 ]
+
 const experienceData = [
   {
     companyName: 'Unfiltered Network',
@@ -98,6 +99,26 @@ export default class EditProfileScreen extends Component {
     this.setState(obj)
   }
 
+  addEducation = educationItem => {
+    if (Number.isInteger(educationItem.id)) {
+      const index = educationData.findIndex(
+        item => item.id === educationItem.id,
+      )
+      educationData[index] = educationItem
+    } else educationData.push({ ...educationItem, id: educationData.length })
+    this.setState({ educationData })
+  }
+
+  addExperience = experienceItem => {
+    if (Number.isInteger(experienceItem.id)) {
+      const index = experienceData.findIndex(
+        item => item.id === experienceItem.id,
+      )
+      experienceData[index] = experienceItem
+    } else experienceData.push({ ...experienceItem, id: experienceData.length })
+    this.setState({ workExperience: experienceData })
+  }
+
   render() {
     return (
       <Screen>
@@ -121,8 +142,16 @@ export default class EditProfileScreen extends Component {
             </ColumnContainer>
           </Block>
           <Divider />
-          <EditEducationBlock educationData={this.state.educationData} />
-          <EditExperienceBlock experienceData={this.state.workExperience} />
+          <EditEducationBlock
+            navigation={this.props.navigation}
+            educationData={this.state.educationData}
+            addEducation={this.addEducation}
+          />
+          <EditExperienceBlock
+            navigation={this.props.navigation}
+            experienceData={this.state.workExperience}
+            addExperience={this.addExperience}
+          />
           <EditContactBlock
             linkedIn={this.state.linkedIn}
             email={this.state.email}

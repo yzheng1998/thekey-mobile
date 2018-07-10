@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const EducationRowContainer = styled.View`
+export const ProfileInfoRowContainer = styled.View`
   width: 100%;
   flex-direction: row;
   align-items: center;
@@ -33,4 +33,10 @@ export const Years = styled.Text`
   font-family: ${themeGet('fonts.medium')};
   line-height: 19;
   color: ${themeGet('colors.fontSubtitle.primary')};
+`
+
+export const EditButton = styled.TouchableOpacity`
+  position: absolute;
+  top: 8px;
+  right: 16px;
 `
