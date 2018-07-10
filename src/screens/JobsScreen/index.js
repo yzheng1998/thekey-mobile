@@ -4,13 +4,13 @@ import { FlatList, ScrollView, Text } from 'react-native'
 import SearchBar from '../../components/SearchBar'
 import JobCard from '../../components/JobCard'
 import SearchFilterTab from '../../components/SearchFilterTab'
-import { HeaderBackground, Title, BackButton } from './styles'
+import { HeaderBackground, Title, BackButton, Divider } from './styles'
 import { Query } from 'react-apollo'
 import BackArrow from 'react-native-vector-icons/Ionicons'
 
 const GET_JOBS = gql`
-  query jobs {
-    jobs {
+  query jobs($jobsFilterInput: JobsFilterInput!) {
+    jobs(jobsFilterInput: $jobsFilterInput) {
       id
       title
       description
@@ -35,6 +35,12 @@ class JobsScreen extends Component {
   }
 
   render() {
+    const { searchText } = this.state
+    const variables = {
+      jobsFilterInput: {
+        tag: searchText,
+      },
+    }
     return (
       <ScrollView keyboardShouldPersistTaps="always">
         <HeaderBackground>
@@ -46,10 +52,11 @@ class JobsScreen extends Component {
         </HeaderBackground>
         <SearchBar
           updateText={this.updateText}
-          searchText={this.state.searchText}
+          searchText={searchText}
           placeholderText="Search Jobs & Internships"
         />
-        <Query query={GET_JOBS}>
+        <Divider />
+        <Query query={GET_JOBS} variables={variables}>
           {({ loading, error, data }) => {
             if (loading) return <Text>Loading...</Text>
             if (error) {
