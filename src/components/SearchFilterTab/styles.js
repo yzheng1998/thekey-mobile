@@ -2,10 +2,10 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const Categories = styled.Text`
-  font-size: ${props => (props.isSelected ? '24px' : '17px')};
-  font-weight: 900;
+  font-size: ${props => (props.isSelected ? '23px' : '16px')};
+  font-weight: 700;
   font-family: '${themeGet('fonts.light')}';
-  color: white;
+  color: ${props => (props.isSelected ? props.selectedColor : props.color)};
   margin-left: 20px;
   opacity: ${props => (props.isSelected ? '1' : '0.9')};
 `

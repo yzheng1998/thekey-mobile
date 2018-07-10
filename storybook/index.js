@@ -48,6 +48,7 @@ import '../src/stories/EditProfileScreen'
 import '../src/stories/BasicInfoBlock'
 import '../src/stories/DescriptionBlock'
 import '../src/stories/loginscreen'
+import '../src/stories/filterBlock'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
