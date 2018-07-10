@@ -30,6 +30,17 @@ export default class AddEducationForm extends Component {
     }
   }
 
+  // state = {
+  //   schoolName: this.formElements ? this.formElements.schoolName : null,
+  //   schoolType: this.formElements ? this.formElements.schoolType : null,
+  //   degreeType: this.formElements ? this.formElements.degreeType : null,
+  //   major: this.formElements ? this.formElements.major : null,
+  //   startYear: this.formElements ? this.formElements.startYear : null,
+  //   graduationYear: this.formElements ? this.formElements.graduationYear : null,
+  //   id: this.formElements ? this.formElements.id : null,
+  //   schoolTypePickerEnabled: false,
+  // }
+
   updateText = obj => {
     this.setState(obj)
   }

@@ -11,14 +11,12 @@ import EditPencil from 'react-native-vector-icons/MaterialIcons'
 
 export default class MyProfilePicBlock extends Component {
   render() {
-    const { profilePic, name, city, state } = this.props
+    const { profilePic, name, hometown } = this.props
     return (
       <BlockContainer>
         <PictureHeader picture={profilePic} avatarSize={123}>
           <EventTitleText>{name}</EventTitleText>
-          <LocationText>
-            {city}, {state}
-          </LocationText>
+          <LocationText>{hometown}</LocationText>
           <EditButton
             activeOpacity={0.5}
             onPress={() => this.props.navigation.navigate('EditProfile')}
