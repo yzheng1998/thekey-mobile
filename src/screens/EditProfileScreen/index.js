@@ -111,7 +111,10 @@ export default class EditProfileScreen extends Component {
 
   addExperience = experienceItem => {
     if (Number.isInteger(experienceItem.id)) {
-      experienceData[experienceItem.id] = experienceItem
+      const index = experienceData.findIndex(
+        item => item.id === experienceItem.id,
+      )
+      experienceData[index] = experienceItem
     } else experienceData.push({ ...experienceItem, id: experienceData.length })
     this.setState({ workExperience: experienceData })
   }
