@@ -6,7 +6,8 @@ import BackButton from 'react-native-vector-icons/Ionicons'
 
 class SimilarJobsScreen extends Component {
   render() {
-    const { jobs } = this.props
+    const data = this.props.navigation.getParam('data')
+    const jobs = data.similarJobs
     return (
       <ScrollView>
         <HeaderBackground>

@@ -27,3 +27,4 @@ export const SeeAll = styled.Text`
   padding-top: 16px;
   padding-right: 16px;
 `
+export const ButtonContainer = styled.TouchableOpacity``

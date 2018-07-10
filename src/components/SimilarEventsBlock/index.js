@@ -1,5 +1,12 @@
 import React, { Component } from 'react'
-import { Container, Title, EventContainer, Header, SeeAll } from './styles'
+import {
+  Container,
+  Title,
+  EventContainer,
+  Header,
+  SeeAll,
+  ButtonContainer,
+} from './styles'
 import EventCard from '../../screens/EventsScreen/components/SmallEventCard'
 import { FlatList } from 'react-native'
 
@@ -10,7 +17,13 @@ class SimilarEventsBlock extends Component {
       <Container>
         <Header>
           <Title>Similar Events</Title>
-          <SeeAll>See All</SeeAll>
+          <ButtonContainer
+            onPress={() =>
+              this.props.navigation.navigate('SimilarEventsScreen')
+            }
+          >
+            <SeeAll>See All</SeeAll>
+          </ButtonContainer>
         </Header>
         <FlatList
           horizontal
