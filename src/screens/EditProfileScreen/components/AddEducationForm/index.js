@@ -11,6 +11,7 @@ import {
   PickerText,
 } from '../../styles'
 import PickerComponent from '../PickerComponent'
+import _ from 'lodash'
 
 const schoolTypes = ['Secondary', 'Undergraduate', 'Graduate']
 
@@ -19,27 +20,18 @@ export default class AddEducationForm extends Component {
     super(props)
     const formElements = this.props.navigation.getParam('formElements')
     this.state = {
-      schoolName: formElements ? formElements.schoolName : null,
-      schoolType: formElements ? formElements.schoolType : null,
-      degreeType: formElements ? formElements.degreeType : null,
-      major: formElements ? formElements.major : null,
-      startYear: formElements ? formElements.startYear : null,
-      graduationYear: formElements ? formElements.graduationYear : null,
-      id: formElements ? formElements.id : null,
+      ..._.pick(formElements, [
+        'schoolName',
+        'schoolType',
+        'degreeType',
+        'major',
+        'startYear',
+        'graudationYear',
+        'id',
+      ]),
       schoolTypePickerEnabled: false,
     }
   }
-
-  // state = {
-  //   schoolName: this.formElements ? this.formElements.schoolName : null,
-  //   schoolType: this.formElements ? this.formElements.schoolType : null,
-  //   degreeType: this.formElements ? this.formElements.degreeType : null,
-  //   major: this.formElements ? this.formElements.major : null,
-  //   startYear: this.formElements ? this.formElements.startYear : null,
-  //   graduationYear: this.formElements ? this.formElements.graduationYear : null,
-  //   id: this.formElements ? this.formElements.id : null,
-  //   schoolTypePickerEnabled: false,
-  // }
 
   updateText = obj => {
     this.setState(obj)
@@ -63,7 +55,7 @@ export default class AddEducationForm extends Component {
           onPress={() => {
             const educationItem = {
               schoolName,
-              schoolType,
+              schoolType: schoolType.toUpperCase(),
               degreeType,
               major,
               startYear,
@@ -91,12 +83,11 @@ export default class AddEducationForm extends Component {
             <PickerButton
               onPress={() =>
                 this.setState({
-                  schoolType: schoolTypes[0],
                   schoolTypePickerEnabled: true,
                 })
               }
             >
-              <PickerText>{this.state.schoolType}</PickerText>
+              <PickerText>{schoolType}</PickerText>
             </PickerButton>
           </RowContainer>
           <RowContainer>
@@ -139,7 +130,7 @@ export default class AddEducationForm extends Component {
               })
             }}
             onValueChange={this.updateText}
-            value={this.state.schoolType}
+            value={schoolType}
             keyName="schoolType"
           />
         )}

@@ -8,18 +8,19 @@ import {
   DoneButton,
   DoneButtonText,
 } from '../../styles'
+import _ from 'lodash'
 
 export default class AddExperienceForm extends Component {
   constructor(props) {
     super(props)
     const formElements = this.props.navigation.getParam('formElements')
-    this.state = {
-      companyName: formElements ? formElements.companyName : null,
-      position: formElements ? formElements.position : null,
-      startYear: formElements ? formElements.startYear : null,
-      endYear: formElements ? formElements.endYear : null,
-      id: formElements ? formElements.id : null,
-    }
+    this.state = _.pick(formElements, [
+      'companyName',
+      'position',
+      'startYear',
+      'endYear',
+      'id',
+    ])
   }
 
   updateText = obj => {
