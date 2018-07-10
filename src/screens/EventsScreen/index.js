@@ -114,7 +114,6 @@ class EventsScreen extends Component {
                         title={item.title}
                         timeStamp="2018-06-18 10:52:03.744-04"
                         interestedFriends={friends}
-                        navigation={this.props.navigation}
                       />
                     </SmallCardContainer>
                   )}
