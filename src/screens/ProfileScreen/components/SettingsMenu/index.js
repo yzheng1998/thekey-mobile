@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Container, Menu } from './styles'
+import { Container, Menu, Title } from './styles'
 import SettingsHeader from '../SettingsHeader'
+import SettingsMenuItem from '../SettingsMenuItem'
 
 export default class SettingsMenu extends Component {
   render() {
@@ -8,6 +9,7 @@ export default class SettingsMenu extends Component {
       <Container>
         <Menu>
           <SettingsHeader />
+          <SettingsMenuItem title="Password" />
         </Menu>
       </Container>
     )
