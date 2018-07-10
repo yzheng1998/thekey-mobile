@@ -47,6 +47,7 @@ import '../src/stories/similarJobsScreen'
 import '../src/stories/EditProfileScreen'
 import '../src/stories/BasicInfoBlock'
 import '../src/stories/loginscreen'
+import '../src/stories/reviewPictureBlock'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
