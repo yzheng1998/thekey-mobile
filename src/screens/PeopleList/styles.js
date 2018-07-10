@@ -22,3 +22,8 @@ export const Title = styled.Text`
 export const BackButton = styled.TouchableOpacity`
   margin-left: 20px;
 `
+export const Container = styled.View`
+  flex: 1;
+  width: 100%;
+  background-color: ${themeGet('colors.background')};
+`
