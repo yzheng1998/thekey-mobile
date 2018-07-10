@@ -61,6 +61,7 @@ export default class HorizontalEventsScroll extends Component {
           renderItem={({ item }) => (
             <CardContainer>
               <LargeEventCard
+                navigation={this.props.navigation}
                 image="https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg"
                 price={item.price}
                 title={item.title}

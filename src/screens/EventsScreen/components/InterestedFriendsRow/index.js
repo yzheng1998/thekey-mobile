@@ -10,7 +10,14 @@ export default class InterestedFriendsRow extends Component {
   render() {
     const { connectionsNum, interestedFriends, avatarSize } = this.props
     return (
-      <ConnectionsRowContainer>
+      <ConnectionsRowContainer
+        onPress={() =>
+          this.props.navigation.navigate('PeopleList', {
+            people: interestedFriends,
+            title: 'Interested Friends',
+          })
+        }
+      >
         <AvatarContainer>
           {interestedFriends.map(friend => (
             <Avatar

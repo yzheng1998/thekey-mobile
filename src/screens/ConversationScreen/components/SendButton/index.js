@@ -30,8 +30,10 @@ export default class SendButton extends Component {
                   content: this.props.content,
                 },
               }
-              if (variables.sendMessageInput.content.length > 0)
+              if (variables.sendMessageInput.content.length > 0) {
                 sendMessage({ variables })
+                this.props.onPress()
+              }
             }}
           >
             <SendIcon name="paper-plane" size={22} />

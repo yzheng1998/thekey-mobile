@@ -23,7 +23,9 @@ export default class CardSwiper extends Component {
             profilePicture,
             tags: tagData,
           }
-          return <SocietyCard user={renderUser} />
+          return (
+            <SocietyCard user={renderUser} navigation={this.props.navigation} />
+          )
         }}
         backgroundColor="white"
         verticalSwipe={false}

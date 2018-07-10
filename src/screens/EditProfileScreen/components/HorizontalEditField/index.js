@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { RowContainer, Title, Content } from '../../styles'
+import { RowContainer, Title, Input } from '../../styles'
 
 export default class HorizontalEditField extends Component {
   render() {
@@ -7,7 +7,7 @@ export default class HorizontalEditField extends Component {
     return (
       <RowContainer>
         <Title>{title}</Title>
-        <Content defaultValue={value} onChangeText={onChangeText} />
+        <Input defaultValue={value} onChangeText={onChangeText} />
       </RowContainer>
     )
   }

@@ -13,6 +13,7 @@ import ProfileScreen from '../screens/ProfileScreen'
 import ApplyNowScreen from '../screens/ApplyNowScreen'
 import SimilarJobsScreen from '../screens/SimilarJobsScreen'
 import SimilarEventsScreen from '../screens/SimilarEventsScreen'
+import PeopleList from '../screens/PeopleList'
 
 const DiscoverStack = createStackNavigator(
   {
@@ -95,6 +96,12 @@ const DiscoverStack = createStackNavigator(
     },
     SimilarEventsScreen: {
       screen: SimilarEventsScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    PeopleList: {
+      screen: PeopleList,
       navigationOptions: () => ({
         header: null,
       }),
