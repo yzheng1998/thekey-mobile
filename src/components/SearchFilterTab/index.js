@@ -17,7 +17,6 @@ export default class SearchFilterTab extends Component {
   render() {
     const { selectedIndex } = this.state
     const { color, selectedColor, updateState } = this.props
-    
     return (
       <Tab>
         {this.props.options.map((option, idx) => (

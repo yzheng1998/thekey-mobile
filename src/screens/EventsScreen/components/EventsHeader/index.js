@@ -26,6 +26,8 @@ export default class EventsHeader extends Component {
         <SearchFilterTab
           options={['All', 'Today', 'Tomorrow', 'This Week']}
           updateState={this.props.updateState}
+          color="white"
+          selectedColor="white"
           // pass in callback function
         />
       </HeaderBackground>
