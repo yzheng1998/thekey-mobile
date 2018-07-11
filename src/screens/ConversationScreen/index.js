@@ -21,9 +21,9 @@ const CHAT_SUBSCRIPTION = gql`
   }
 `
 
-const MessageInputDisplay = ({ chatId }) => (
+const MessageInputDisplay = ({ chatId, onPress }) => (
   <View>
-    <MessageInput chatId={chatId} />
+    <MessageInput onPress={onPress} chatId={chatId} />
     <KeyboardSpacer />
   </View>
 )
@@ -33,6 +33,14 @@ class ConversationScreen extends Component {
     const { id: chatId } = this.props.navigation.getParam('chat')
 
     const variables = { chatId }
+
+    const handlePress = () => {
+      this.messageDisplay.flatList.scrollToOffset({
+        x: 0,
+        y: 0,
+        animated: true,
+      })
+    }
 
     return (
       <Background>
@@ -47,6 +55,9 @@ class ConversationScreen extends Component {
             } = data
             return (
               <MessagesDisplay
+                ref={el => {
+                  this.messageDisplay = el
+                }}
                 chat={chat}
                 userId={userId}
                 subscribe={async () => {
@@ -55,8 +66,6 @@ class ConversationScreen extends Component {
                     document: CHAT_SUBSCRIPTION,
                     variables: { chatId, token },
                     updateQuery: (oldQuery, { subscriptionData }) => {
-                      console.log('calledupdate')
-                      console.log(subscriptionData)
                       if (!subscriptionData.data) return oldQuery
                       const message = subscriptionData.data.messageAdded
                       const newQuery = {
@@ -74,7 +83,7 @@ class ConversationScreen extends Component {
             )
           }}
         </Query>
-        <MessageInputDisplay chatId={chatId} />
+        <MessageInputDisplay onPress={handlePress} chatId={chatId} />
       </Background>
     )
   }
