@@ -19,8 +19,7 @@ const GET_EVENTS = gql`
     events(eventsFilterInput: { startsAt: $startsAt, location: $location }) {
       id
       location
-      startsAt
-      endsAt
+      dateRange
       title
       picture
       details
@@ -34,7 +33,36 @@ class EventsScreen extends Component {
     header: null,
   }
 
+  state = {
+    tab: 0,
+  }
+
+  updateState = value => {
+    this.setState({ tab: value })
+  }
+
   render() {
+    const tabs = {
+      ALL: 0,
+      TODAY: 1,
+      TOMORROW: 2,
+      THIS_WEEK: 3,
+    }
+
+    const customVariable = tab => {
+      switch (tab) {
+        case tabs.ALL:
+          return ''
+        case tabs.TODAY:
+          return 'today'
+        case tabs.TOMORROW:
+          return 'tomorrow'
+        case tabs.THIS_WEEK:
+          return 'thisWeek'
+        default:
+          return ''
+      }
+    }
     // hardcoding array of friends for now
     const friends = [
       {
@@ -74,9 +102,14 @@ class EventsScreen extends Component {
         },
       },
     ]
+
     return (
       <View>
-        <EventsHeader navigation={this.props.navigation} />
+        <EventsHeader
+          navigation={this.props.navigation}
+          state={this.state.tab}
+          updateState={this.updateState}
+        />
         <SearchBar
           lightTheme
           platform="ios"
@@ -84,7 +117,10 @@ class EventsScreen extends Component {
           placeholder="Search Events"
         />
         <Background>
-          <Query query={GET_EVENTS} variable={{}}>
+          <Query
+            query={GET_EVENTS}
+            variables={{ startsAt: customVariable(this.state.tab) }}
+          >
             {({ loading, error, data }) => {
               if (loading) return <Text>Loading...</Text>
               if (error) return <Text>Error! ${error.message}</Text>
@@ -112,7 +148,7 @@ class EventsScreen extends Component {
                         navigation={this.props.navigation}
                         image="https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg"
                         title={item.title}
-                        timeStamp="2018-06-18 10:52:03.744-04"
+                        timeStamp={new Date(item.dateRange[0]).toISOString()}
                         interestedFriends={friends}
                       />
                     </SmallCardContainer>

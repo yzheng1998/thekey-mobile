@@ -11,7 +11,12 @@ import Summary from '../screens/JobSummaryScreen'
 import ReviewsScreen from '../screens/ReviewsScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import ApplyNowScreen from '../screens/ApplyNowScreen'
+import SimilarJobsScreen from '../screens/SimilarJobsScreen'
+import SimilarEventsScreen from '../screens/SimilarEventsScreen'
 import PeopleList from '../screens/PeopleList'
+import EditProfileScreen from '../screens/EditProfileScreen'
+import AddEducationForm from '../screens/EditProfileScreen/components/AddEducationForm'
+import AddExperienceForm from '../screens/EditProfileScreen/components/AddExperienceForm'
 
 const DiscoverStack = createStackNavigator(
   {
@@ -80,8 +85,38 @@ const DiscoverStack = createStackNavigator(
         header: null,
       }),
     },
+    EditProfile: {
+      screen: EditProfileScreen,
+      navigationOptions: () => ({
+        title: 'Edit Profile',
+      }),
+    },
+    AddEducation: {
+      screen: AddEducationForm,
+      navigationOptions: () => ({
+        title: 'Add Education',
+      }),
+    },
+    AddExperience: {
+      screen: AddExperienceForm,
+      navigationOptions: () => ({
+        title: 'Add Experience',
+      }),
+    },
     ApplyNow: {
       screen: ApplyNowScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    SimilarJobsScreen: {
+      screen: SimilarJobsScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    SimilarEventsScreen: {
+      screen: SimilarEventsScreen,
       navigationOptions: () => ({
         header: null,
       }),

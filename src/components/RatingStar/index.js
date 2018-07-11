@@ -6,18 +6,19 @@ import _ from 'lodash'
 export default class RatingStar extends Component {
   static defaultProps = {
     scoreOff: false,
+    color="rgb(250,53,121)",
   }
   render() {
-    const { rating, scoreOff } = this.props
+    const { rating, color, scoreOff } = this.props
     const stars = _.range(Math.round(rating)).map(() => (
       <StarContainer>
-        <Star name="star" size={16} color="rgb(250,53,121)" />
+        <Star name="star" size={16} color={color} />
       </StarContainer>
     ))
     return (
       <RatingContainer>
         {stars}
-        {!scoreOff && <RateText>{this.props.rating}</RateText>}
+        {!scoreOff && <RateText color={color}>{this.props.rating}</RateText>}
       </RatingContainer>
     )
   }
