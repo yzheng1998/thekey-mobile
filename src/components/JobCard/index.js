@@ -15,6 +15,7 @@ import {
 import Star from 'react-native-vector-icons/FontAwesome'
 import TagLine from '../TagLine'
 import moment from 'moment'
+import questionMark from '../../stories/question-mark.jpg'
 
 const daysLeft = time => {
   const today = moment()
@@ -24,42 +25,68 @@ const daysLeft = time => {
   return result
 }
 export default class JobCard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { isInterested: false }
+  }
   render() {
     const {
-      picture,
+      id,
       title,
       company,
       commitment,
       location,
       tags,
       deadline,
+      picture,
     } = this.props.job
+    const { tagsOff } = this.props
     return (
       <Card
+        onPress={() =>
+          this.props.navigation.navigate('Job', {
+            id,
+          })
+        }
         width={this.props.width}
         height={this.props.height}
         activeOpacity={this.props.activeOpacity}
         borderRadius={this.props.borderRadius}
       >
         <LeftContainer>
-          <Image source={picture} style={{ width: 46, height: 46 }} />
+          <Image
+            source={picture ? { uri: picture } : questionMark}
+            style={{ width: 46, height: 46 }}
+          />
           <Deadline>{daysLeft(deadline)}</Deadline>
         </LeftContainer>
         <ContentContainer>
           <InfoContainer>
             <ContentContainer>
               <Title>{title}</Title>
-              <Host>{company}</Host>
+              <Host>{company || 'No Associated Company'}</Host>
             </ContentContainer>
-            <StarContainer>
-              <Star name="star" size={21} color="rgb(250,53,121)" />
+            <StarContainer
+              onPress={() =>
+                this.setState({ isInterested: !this.state.isInterested })
+              }
+            >
+              <Star
+                name={this.state.isInterested ? 'star' : 'star-o'}
+                size={21}
+                color={
+                  this.state.isInterested
+                    ? 'rgb(250,53,121)'
+                    : '(rgb(148,157,170)'
+                }
+              />
             </StarContainer>
           </InfoContainer>
           <Description>
             {commitment} - {location}
           </Description>
           <TagsContainer>
-            <TagLine tagData={tags} lines={1} />
+            <TagLine tagData={tagsOff ? [] : tags} lines={1} />
           </TagsContainer>
         </ContentContainer>
       </Card>

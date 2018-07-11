@@ -18,7 +18,7 @@ export const LeftContainer = styled.View`
 export const Deadline = styled.Text`
   font-size: 12px;
   font-family: ${themeGet('fonts.bold')};
-  padding-left: 14px;
+  align-self: center;
 `
 export const ContentContainer = styled.View`
   padding-top: 10px;
@@ -51,7 +51,7 @@ export const InfoContainer = styled.View`
   margin-left: -13px;
   margin-top: -9px;
 `
-export const StarContainer = styled.View`
+export const StarContainer = styled.TouchableOpacity`
   padding-top: 20px;
   padding-right: 20px;
 `

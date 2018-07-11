@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const ConnectionsRowContainer = styled.View`
+export const ConnectionsRowContainer = styled.TouchableOpacity`
   flex-direction: row;
   margin-left: 16;
   margin-bottom: 19;
 `
-export const InterestedFriends = styled.Text`
+export const InterestedFriendsContainer = styled.Text`
   font-size: 16;
   line-height: 19;
   font-family: ${themeGet('fonts.medium')};

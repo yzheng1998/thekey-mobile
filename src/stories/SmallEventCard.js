@@ -3,8 +3,6 @@ import { View } from 'react-native'
 import SmallEventCard from '../screens/EventsScreen/components/SmallEventCard'
 import React from 'react'
 
-const placeholder = require('../../assets/city.png')
-
 const style = {
   flex: 1,
   justifyContent: 'center',
@@ -75,17 +73,19 @@ const friends2 = [
   },
 ]
 const event = {
-  image: placeholder,
+  image:
+    'https://lh3.googleusercontent.com/-xM-G_KMGNuQ/WFDmG9MGN6I/AAAAAAAAAM0/YKJMrUuD0PQ/s1600/background_by_tapash_editz-daknk9r.jpg',
   title: 'A super fun eventA super fun event',
   timeStamp: '2018-06-18 12:52:03.744-04',
-  mutualFriends: friends,
+  interestedFriends: friends,
 }
 
 const event2 = {
-  image: placeholder,
+  image:
+    'https://lh3.googleusercontent.com/-xM-G_KMGNuQ/WFDmG9MGN6I/AAAAAAAAAM0/YKJMrUuD0PQ/s1600/background_by_tapash_editz-daknk9r.jpg',
   title: 'A super fun eventA super fun event',
   timeStamp: '2018-06-18 12:52:03.744-04',
-  mutualFriends: friends2,
+  interestedFriends: friends2,
 }
 
 storiesOf('CenteredView').add('Small Event Card 1', () => (

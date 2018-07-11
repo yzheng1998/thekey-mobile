@@ -2,22 +2,17 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 import Icon1 from 'react-native-vector-icons/Foundation'
 import Icon2 from 'react-native-vector-icons/EvilIcons'
-import Icon3 from 'react-native-vector-icons/Feather'
 
 export const Card = styled.TouchableOpacity`
-  width: 90%;
-  height: 400px;
-  padding: 20px;
+  width: 340px;
+  height: 350px;
   border-radius: 20px;
-  align-items: flex-start;
   overflow: hidden;
 `
-export const BackgroundImage = styled.Image`
-  position: absolute;
-  width: 115%;
+export const BackgroundImage = styled.ImageBackground`
+  padding: 20px;
   opacity: 0.9;
-  height: 400px;
-  overflow: hidden;
+  flex: 1;
 `
 export const TopContainer = styled.View`
   width: 100%;
@@ -30,7 +25,7 @@ export const ContentContainer = styled.View`
   justify-content: flex-start;
   padding-top: 60px;
   padding-left: 5px;
-  margin-bottom: 30px;
+  margin-bottom: 60px;
 `
 export const Title = styled.Text`
   font-size: 34px;
@@ -70,17 +65,11 @@ export const Price = styled.Text`
   color: ${themeGet('colors.fontPrimary')};
 `
 export const StarButton = styled.TouchableOpacity`
-  width: 40%;
-  height: 30px;
-  margin: 10px;
-  align-items: flex-end;
+  padding-top: 9px;
 `
 export const ClockIcon = styled(Icon1)`
   color: ${themeGet('colors.fontSubtitle.secondary')};
 `
 export const LocationIcon = styled(Icon2)`
-  color: ${themeGet('colors.fontPrimary')};
-`
-export const StarIcon = styled(Icon3)`
   color: ${themeGet('colors.fontPrimary')};
 `

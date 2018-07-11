@@ -29,6 +29,7 @@ export default class SocietyCard extends Component {
         <TagLine tagData={selectTags} lines={2} />
         <BioText numberOfLines={3}>{bio}</BioText>
         <MutualConnectionsRow
+          navigation={this.props.navigation}
           avatarSize={28}
           connectionsNum={mutualFriends.length}
           mutualFriends={selectMutualFriends}

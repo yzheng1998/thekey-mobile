@@ -7,6 +7,16 @@ import JobsScreen from '../screens/JobsScreen'
 import JobScreen from '../screens/JobScreen'
 import DiscoverScreen from '../screens/DiscoverScreen'
 import FriendRequestScreen from '../screens/FriendRequestScreen'
+import Summary from '../screens/JobSummaryScreen'
+import ReviewsScreen from '../screens/ReviewsScreen'
+import ProfileScreen from '../screens/ProfileScreen'
+import ApplyNowScreen from '../screens/ApplyNowScreen'
+import SimilarJobsScreen from '../screens/SimilarJobsScreen'
+import SimilarEventsScreen from '../screens/SimilarEventsScreen'
+import PeopleList from '../screens/PeopleList'
+import EditProfileScreen from '../screens/EditProfileScreen'
+import AddEducationForm from '../screens/EditProfileScreen/components/AddEducationForm'
+import AddExperienceForm from '../screens/EditProfileScreen/components/AddExperienceForm'
 
 const DiscoverStack = createStackNavigator(
   {
@@ -19,7 +29,7 @@ const DiscoverStack = createStackNavigator(
     Society: {
       screen: SocietyScreen,
       navigationOptions: () => ({
-        title: 'View Users',
+        header: null,
       }),
     },
     User: {
@@ -43,19 +53,78 @@ const DiscoverStack = createStackNavigator(
     Jobs: {
       screen: JobsScreen,
       navigationOptions: () => ({
-        title: 'View Jobs',
+        header: null,
       }),
     },
     Job: {
       screen: JobScreen,
       navigationOptions: () => ({
-        title: 'View Jobs',
+        header: null,
       }),
+    },
+    Summary: {
+      screen: Summary,
+      navigationOptions: () => ({
+        title: 'Job Summary',
+        header: null,
+      }),
+    },
+    Reviews: {
+      screen: ReviewsScreen,
+      navigationOptions: () => ({ header: null }),
     },
     FriendRequests: {
       screen: FriendRequestScreen,
       navigationOptions: () => ({
         title: 'View Friend Requests',
+      }),
+    },
+    Profile: {
+      screen: ProfileScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    EditProfile: {
+      screen: EditProfileScreen,
+      navigationOptions: () => ({
+        title: 'Edit Profile',
+      }),
+    },
+    AddEducation: {
+      screen: AddEducationForm,
+      navigationOptions: () => ({
+        title: 'Add Education',
+      }),
+    },
+    AddExperience: {
+      screen: AddExperienceForm,
+      navigationOptions: () => ({
+        title: 'Add Experience',
+      }),
+    },
+    ApplyNow: {
+      screen: ApplyNowScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    SimilarJobsScreen: {
+      screen: SimilarJobsScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    SimilarEventsScreen: {
+      screen: SimilarEventsScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    PeopleList: {
+      screen: PeopleList,
+      navigationOptions: () => ({
+        header: null,
       }),
     },
   },

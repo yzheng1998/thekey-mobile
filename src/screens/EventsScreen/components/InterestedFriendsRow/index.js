@@ -1,18 +1,25 @@
 import React, { Component } from 'react'
 import {
   ConnectionsRowContainer,
-  InterestedFriends,
+  InterestedFriendsContainer,
   Avatar,
   AvatarContainer,
 } from './styles'
 
 export default class InterestedFriendsRow extends Component {
   render() {
-    const { connectionsNum, mutualFriends, avatarSize } = this.props
+    const { connectionsNum, interestedFriends, avatarSize } = this.props
     return (
-      <ConnectionsRowContainer>
+      <ConnectionsRowContainer
+        onPress={() =>
+          this.props.navigation.navigate('PeopleList', {
+            people: interestedFriends,
+            title: 'Interested Friends',
+          })
+        }
+      >
         <AvatarContainer>
-          {mutualFriends.map(friend => (
+          {interestedFriends.map(friend => (
             <Avatar
               avatarSize={avatarSize}
               source={friend.profilePicture}
@@ -20,11 +27,12 @@ export default class InterestedFriendsRow extends Component {
             />
           ))}
         </AvatarContainer>
-        <InterestedFriends>
+        <InterestedFriendsContainer>
           {connectionsNum
-            ? `${mutualFriends[0].firstName} and ${connectionsNum - 1} friends`
+            ? `${interestedFriends[0].firstName} and ${connectionsNum -
+                1} friends`
             : `0 interested friends`}
-        </InterestedFriends>
+        </InterestedFriendsContainer>
       </ConnectionsRowContainer>
     )
   }

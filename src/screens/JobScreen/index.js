@@ -6,11 +6,12 @@ import {
   StarContainer,
 } from './styles'
 import JobPictureBlock from '../../components/JobPictureBlock'
-import AboutBlock from '../../components/AboutBlock'
+import AboutBlock from './components/AboutBlock'
 import TagLine from '../../components/TagLine'
 import SimilarJobsBlock from '../../components/SimilarJobsBlock'
 import BackButton from 'react-native-vector-icons/Ionicons'
 import Star from 'react-native-vector-icons/Feather'
+import StarClicked from 'react-native-vector-icons/FontAwesome'
 
 const tagData = [
   {
@@ -36,7 +37,44 @@ const tagData = [
   },
 ]
 
+const job = {
+  picture: {
+    uri:
+      'https://cdn.zeplin.io/5b18b9740bc6b2af45546408/assets/6FE3D570-0BE7-40CA-923D-A045ECA2830D.png',
+  },
+  title: 'General Manager',
+  company: '@ Beats By Dre',
+  commitment: 'Full time',
+  location: 'SF Bay Area',
+  deadline: '06/31/2018',
+  tags: [],
+}
+
+const aboutJob = {
+  about:
+    'The Inbound General Manager manages and leads a team to ensure that customer services meet client needs as well as the standards of a national service delivery model.',
+  picture: {
+    uri:
+      'https://cdn.zeplin.io/5b18b9740bc6b2af45546408/assets/6FE3D570-0BE7-40CA-923D-A045ECA2830D.png',
+  },
+  title: 'General Manager',
+  company: '@Beats by Dre',
+  commitment: 'Full time',
+  location: 'SF Bay Area',
+  views: '60',
+  time: '06/20/2018',
+  jobs: [job, job, job],
+}
+
 class JobScreen extends Component {
+  static defaultProps = {
+    job: aboutJob,
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = { isInterested: false }
+  }
   render() {
     const {
       about,
@@ -48,7 +86,7 @@ class JobScreen extends Component {
       time,
       views,
       jobs,
-    } = this.props
+    } = this.props.job
     return (
       <Container>
         <JobPictureBlock
@@ -61,16 +99,24 @@ class JobScreen extends Component {
           views={views}
           time={time}
         />
-        <AboutBlock about={about} />
+        <AboutBlock navigation={this.props.navigation} about={about} />
         <TagsContainer>
           <TagLine tagData={tagData} lines={1} />
         </TagsContainer>
-        <SimilarJobsBlock jobs={jobs} />
+        <SimilarJobsBlock navigation={this.props.navigation} jobs={jobs} />
         <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
           <BackButton name="ios-arrow-back" size={27} color="white" />
         </BackButtonContainer>
-        <StarContainer>
-          <Star name="star" size={27} color="white" />
+        <StarContainer
+          onPress={() =>
+            this.setState({ isInterested: !this.state.isInterested })
+          }
+        >
+          {this.state.star ? (
+            <StarClicked name="star" size={27} color="white" />
+          ) : (
+            <Star name="star" size={27} color="white" />
+          )}
         </StarContainer>
       </Container>
     )

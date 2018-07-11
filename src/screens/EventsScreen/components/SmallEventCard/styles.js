@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
-import Icon2 from 'react-native-vector-icons/Feather'
 import Icon1 from 'react-native-vector-icons/Foundation'
 
 export const Card = styled.TouchableOpacity`
@@ -11,6 +10,7 @@ export const Card = styled.TouchableOpacity`
   align-items: flex-start;
   overflow: hidden;
   margin-bottom: 20px;
+  margin-left: 15px;
 `
 export const BackgroundImage = styled.Image`
   position: absolute;
@@ -60,7 +60,4 @@ export const StarButton = styled.TouchableOpacity`
 `
 export const TimeIcon = styled(Icon1)`
   color: ${themeGet('colors.fontSubtitle.secondary')};
-`
-export const StarIcon = styled(Icon2)`
-  color: ${themeGet('colors.fontPrimary')};
 `

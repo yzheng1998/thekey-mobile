@@ -27,6 +27,8 @@ export default class ExperienceListView extends Component {
             .slice(0, experiencesShown)
             .map(experience => (
               <ExperienceRow
+                navigation={this.props.navigation}
+                showEditButton={this.props.showEditButton}
                 companyName={experience.companyName}
                 position={experience.position}
                 startYear={experience.startYear}
