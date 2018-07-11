@@ -9,7 +9,7 @@ export const RatingContainer = styled.View`
   flex-direction: row;
 `
 export const RateText = styled.Text`
-  color: ${props => props.color || ${themeGet('colors.buttonPrimary')}};
+  color: ${props => props.color || themeGet('colors.buttonPrimary')};
   font-size: 16px;
   font-family: ${themeGet('fonts.medium')};
   margin-top: -1px;
