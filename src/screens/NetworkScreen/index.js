@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ChatInbox from './components/ChatInbox'
 import SearchFilterTab from '../../components/SearchFilterTab'
-import { SearchBar } from 'react-native-elements'
+import SearchBar from '../../components/SearchBar'
 import { Background, HeaderBackground, Title, NewChatButton } from './styles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
@@ -10,7 +10,16 @@ class NetworkScreen extends Component {
     header: null,
   }
 
+  state = {
+    searchText: '',
+  }
+
+  updateText = searchText => {
+    this.setState({ searchText })
+  }
+
   render() {
+    const { searchText } = this.state
     return (
       <Background>
         <HeaderBackground>
@@ -20,10 +29,9 @@ class NetworkScreen extends Component {
           />
         </HeaderBackground>
         <SearchBar
-          lightTheme
-          platform="ios"
-          cancelButtonTitle="Cancel"
-          placeholder="Search Your Network"
+          updateText={this.updateText}
+          searchText={searchText}
+          placeholderText="Search Your Network"
         />
         <ChatInbox navigation={this.props.navigation} />
         <NewChatButton>
