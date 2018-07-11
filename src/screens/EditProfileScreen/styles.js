@@ -170,6 +170,9 @@ export const ModalContainer = styled.View`
   height: 35%;
   background-color: ${themeGet('colors.background')};
   align-items: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 `
 
 export const EmojiContainer = styled.View`

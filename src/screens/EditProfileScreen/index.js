@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Modal } from 'react-native'
 import EditContactBlock from './components/EditContactBlock'
 import BasicInfoBlock from './components/BasicInfoBlock'
 import EditEducationBlock from './components/EditEducationBlock'
@@ -183,7 +184,11 @@ export default class EditProfileScreen extends Component {
             keyName="lookingFor"
           />
         )}
-        {this.state.meetByPickerEnabled && (
+        <Modal
+          animationType="slide"
+          transparent
+          visible={this.state.meetByPickerEnabled}
+        >
           <EmojiModal
             doneOnPress={() => {
               this.updateText({
@@ -194,7 +199,7 @@ export default class EditProfileScreen extends Component {
             options={waysToMeet}
             selected={this.state.preferredWaysToMeet}
           />
-        )}
+        </Modal>
       </Screen>
     )
   }
