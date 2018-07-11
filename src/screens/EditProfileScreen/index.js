@@ -3,7 +3,7 @@ import EditContactBlock from './components/EditContactBlock'
 import BasicInfoBlock from './components/BasicInfoBlock'
 import EditEducationBlock from './components/EditEducationBlock'
 import EditExperienceBlock from './components/EditExperienceBlock'
-import PickerComponent from './components/PickerComponent'
+import PickerComponent from '../../components/PickerComponent'
 import {
   Screen,
   Block,
