@@ -38,7 +38,9 @@ export default class JobCard extends Component {
       location,
       tags,
       deadline,
+      picture,
     } = this.props.job
+    const { tagsOff } = this.props
     return (
       <Card
         onPress={() =>
@@ -52,14 +54,17 @@ export default class JobCard extends Component {
         borderRadius={this.props.borderRadius}
       >
         <LeftContainer>
-          <Image source={questionMark} style={{ width: 46, height: 46 }} />
+          <Image
+            source={picture ? { uri: picture } : questionMark}
+            style={{ width: 46, height: 46 }}
+          />
           <Deadline>{daysLeft(deadline)}</Deadline>
         </LeftContainer>
         <ContentContainer>
           <InfoContainer>
             <ContentContainer>
               <Title>{title}</Title>
-              <Host>{company}</Host>
+              <Host>{company || 'No Associated Company'}</Host>
             </ContentContainer>
             <StarContainer
               onPress={() =>
@@ -81,7 +86,7 @@ export default class JobCard extends Component {
             {commitment} - {location}
           </Description>
           <TagsContainer>
-            <TagLine tagData={tags} lines={1} />
+            <TagLine tagData={tagsOff ? [] : tags} lines={1} />
           </TagsContainer>
         </ContentContainer>
       </Card>

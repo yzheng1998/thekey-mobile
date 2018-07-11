@@ -124,7 +124,12 @@ class EventsScreen extends Component {
             {({ loading, error, data }) => {
               if (loading) return <Text>Loading...</Text>
               if (error) return <Text>Error! ${error.message}</Text>
-              return <HorizontalEventsScroll eventsList={data.events} />
+              return (
+                <HorizontalEventsScroll
+                  eventsList={data.events}
+                  navigation={this.props.navigation}
+                />
+              )
             }}
           </Query>
           <Subtitle>More Events</Subtitle>
@@ -140,6 +145,7 @@ class EventsScreen extends Component {
                   renderItem={({ item }) => (
                     <SmallCardContainer>
                       <SmallEventCard
+                        navigation={this.props.navigation}
                         image="https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg"
                         title={item.title}
                         timeStamp={new Date(item.dateRange[0]).toISOString()}

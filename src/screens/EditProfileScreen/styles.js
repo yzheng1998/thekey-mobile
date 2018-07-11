@@ -1,30 +1,93 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const RowContainer = styled.View`
+export const Screen = styled.View`
+  flex: 1;
+  width: 100%;
+  background-color: ${themeGet('colors.background')};
+`
+
+export const ScreenScroll = styled.ScrollView`
+  width: 100%;
+`
+
+export const Block = styled.View`
   width: 100%;
   padding-left: 16px;
   padding-right: 16px;
+`
+
+export const Divider = styled.View`
+  width: 100%;
+  height: 4px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background-color: ${themeGet('colors.divider')};
+`
+
+export const Picture = styled.ImageBackground`
+  align-self: center;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  height: 123px;
+  width: 123px;
+  border-radius: ${123 / 2}px;
+  overflow: hidden;
+`
+
+export const PictureButton = styled.TouchableOpacity`
+  height: 29px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.33);
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
 `
 
+export const EditLabel = styled.Text`
+  font-family: ${themeGet('fonts.bold')};
+  color: ${themeGet('colors.fontCard')};
+  font-size: 13;
+  margin-left: 3;
+`
+
+export const RowContainer = styled.View`
+  width: 100%;
+  flex-direction: row;
+  margin-top: 8px;
+  margin-bottom: 8px;
+`
+
+export const ColumnContainer = styled.View`
+  margin-top: 8px;
+  margin-bottom: 8px;
+`
+
 export const Title = styled.Text`
-  flex: 2;
+  flex: 1;
   font-size: 16px;
   font-family: ${themeGet('fonts.bold')};
+`
+
+export const Input = styled.TextInput`
+  flex: 2;
+  font-size: 16px;
+  font-family: ${themeGet('fonts.medium')};
+  color: ${themeGet('colors.fontProfileFields')};
+`
+
+export const LargeInput = styled.TextInput`
+  font-size: 16px;
+  font-family: ${themeGet('fonts.medium')};
+  color: ${themeGet('colors.fontProfileFields')};
 `
 
 export const BlockTitle = styled.Text`
   margin-bottom: 8px;
   font-size: 16px;
   font-family: ${themeGet('fonts.bold')};
-`
-
-export const Content = styled.TextInput`
-  flex: 3;
-  font-size: 16px;
-  font-family: ${themeGet('fonts.medium')};
-  color: ${themeGet('colors.fontProfileFields')};
 `
 
 export const ContactContent = styled.TextInput`
@@ -55,4 +118,50 @@ export const Container = styled.View`
   margin-bottom: 5;
   padding-left: 16;
   padding-right: 16;
+`
+
+export const PickerContainer = styled.View`
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+`
+
+export const PickerText = styled.Text`
+  font-size: 16px;
+  font-family: ${themeGet('fonts.medium')};
+  color: ${themeGet('colors.fontProfileFields')};
+`
+
+export const PickerButton = styled.TouchableOpacity`
+  flex: 2;
+  justify-content: space-between;
+  flex-direction: row;
+`
+
+export const PickerView = styled.Picker`
+  width: 100%;
+  background-color: ${themeGet('colors.background')};
+`
+
+export const DoneButton = styled.TouchableOpacity`
+  height: 45px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: ${themeGet('colors.divider')};
+`
+
+export const DoneButtonText = styled.Text`
+  font-size: 16px;
+  color: black;
+  font-family: ${themeGet('fonts.medium')};
+`
+
+export const WideContainer = styled.View``
+
+export const ExperienceList = styled.View`
+  margin-top: 5;
+  margin-bottom: 5;
+  width: 100%;
+  padding-left: 16;
 `

@@ -21,7 +21,7 @@ class EventPictureBlock extends Component {
       title,
       location,
       date,
-      mutualFriends,
+      friends,
       connectionsNum,
     } = this.props
     return (
@@ -43,7 +43,7 @@ class EventPictureBlock extends Component {
             </Container>
             <InterestedFriendsRow
               connectionsNum={connectionsNum}
-              mutualFriends={mutualFriends}
+              interestedFriends={friends}
               avatarSize={26}
             />
           </DescriptionContainer>

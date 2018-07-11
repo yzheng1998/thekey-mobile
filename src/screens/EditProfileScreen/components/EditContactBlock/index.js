@@ -13,25 +13,25 @@ export default class EditContactBlock extends Component {
             iconName="linkedin-box"
             value={linkedIn}
             placeholder="Linkedin.com/name"
-            onChangeText={text => onChangeText('linkedIn', text)}
+            onChangeText={text => onChangeText({ linkedIn: text })}
           />
           <GeneralContactInput
             iconName="twitter-box"
             value={twitter}
             placeholder="@username"
-            onChangeText={text => onChangeText('twitter', text)}
+            onChangeText={text => onChangeText({ twitter: text })}
           />
           <GeneralContactInput
             iconName="facebook-box"
             value={facebook}
             placeholder="facebook.com/name"
-            onChangeText={text => onChangeText('facebook', text)}
+            onChangeText={text => onChangeText({ facebook: text })}
           />
           <GeneralContactInput
             iconName="email"
             value={email}
             placeholder="person@email.com"
-            onChangeText={text => onChangeText('email', text)}
+            onChangeText={text => onChangeText({ email: text })}
           />
         </ContactContainer>
       </Container>

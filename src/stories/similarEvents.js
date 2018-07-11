@@ -3,8 +3,6 @@ import { View } from 'react-native'
 import React from 'react'
 import SimilarEvents from '../components/SimilarEventsBlock'
 
-const placeholder = require('../../assets/city.png')
-
 const style = {
   flex: 1,
   justifyContent: 'center',
@@ -51,11 +49,12 @@ const friends = [
 ]
 
 const event = {
-  image: placeholder,
+  image: 'https://c1.staticflickr.com/1/126/387606063_408c203f6c_b.jpg',
   title: 'A super fun eventA super fun event',
   timeStamp: '2018-06-18 12:52:03.744-04',
-  mutualFriends: friends,
+  interestedFriends: friends,
 }
+
 storiesOf('CenteredView').add('Similar Events', () => (
   <CenteredView>
     <SimilarEvents events={[event, event, event]} />

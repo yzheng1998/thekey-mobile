@@ -10,7 +10,14 @@ export default class MutualConnectionsRow extends Component {
   render() {
     const { connectionsNum, mutualFriends, avatarSize } = this.props
     return (
-      <ConnectionsRowContainer>
+      <ConnectionsRowContainer
+        onPress={() =>
+          this.props.navigation.navigate('PeopleList', {
+            people: mutualFriends,
+            title: 'Mutual Friends',
+          })
+        }
+      >
         <AvatarContainer>
           {mutualFriends.map(friend => (
             <Avatar

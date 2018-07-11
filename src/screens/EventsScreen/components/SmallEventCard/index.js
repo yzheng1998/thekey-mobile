@@ -72,6 +72,7 @@ export default class SmallEventCard extends Component {
         </FullContainer>
         interestedFriends && {interestedFriends.length > 0} &&
         <InterestedFriendsRow
+          navigation={this.props.navigation}
           avatarNum={5}
           avatarSize={22}
           connectionsNum={interestedFriends.length}
