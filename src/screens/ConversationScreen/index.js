@@ -1,41 +1,89 @@
+import { AsyncStorage, View } from 'react-native'
 import React, { Component } from 'react'
-import { FlatList } from 'react-native'
-import MessageBubble from './components/MessageBubble'
-import MessageInput from './components/MessageInput'
+
+import { Background } from './styles'
+import { GET_CHAT_AND_VIEWER } from './queries'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
-import { Background, MessageContainer } from './styles'
+import MessageInput from './components/MessageInput'
+import MessagesDisplay from './components/MessagesDisplay'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
+
+const CHAT_SUBSCRIPTION = gql`
+  subscription messageAdded($chatId: ID!, $token: String!) {
+    messageAdded(chatId: $chatId, token: $token) {
+      id
+      sender {
+        id
+      }
+      content
+    }
+  }
+`
+
+const MessageInputDisplay = ({ chatId, onPress }) => (
+  <View>
+    <MessageInput onPress={onPress} chatId={chatId} />
+    <KeyboardSpacer />
+  </View>
+)
 
 class ConversationScreen extends Component {
   render() {
-    const conversation = this.props.navigation.getParam('chat')
-    const viewer = this.props.navigation.getParam('viewer')
-    const messages = conversation.messages.slice()
+    const { id: chatId } = this.props.navigation.getParam('chat')
+
+    const variables = { chatId }
 
     const handlePress = () => {
-      this.flatList.scrollToOffset({ x: 0, y: 0, animated: true })
+      this.messageDisplay.flatList.scrollToOffset({
+        x: 0,
+        y: 0,
+        animated: true,
+      })
     }
 
     return (
       <Background>
-        <MessageContainer>
-          <FlatList
-            inverted
-            ref={el => {
-              this.flatList = el
-            }}
-            keyExtractor={message => message.id}
-            data={messages.reverse()}
-            renderItem={({ item }) => (
-              <MessageBubble
-                key={item.id}
-                isUser={item.sender.id === viewer.id}
-                message={item.content}
+        <Query query={GET_CHAT_AND_VIEWER} variables={variables}>
+          {({ data, loading, error, subscribeToMore }) => {
+            if (loading) return 'loading'
+            if (error) return 'error'
+
+            const {
+              chat,
+              viewer: { id: userId },
+            } = data
+            return (
+              <MessagesDisplay
+                ref={el => {
+                  this.messageDisplay = el
+                }}
+                chat={chat}
+                userId={userId}
+                subscribe={async () => {
+                  const token = await AsyncStorage.getItem('token')
+                  subscribeToMore({
+                    document: CHAT_SUBSCRIPTION,
+                    variables: { chatId, token },
+                    updateQuery: (oldQuery, { subscriptionData }) => {
+                      if (!subscriptionData.data) return oldQuery
+                      const message = subscriptionData.data.messageAdded
+                      const newQuery = {
+                        ...oldQuery,
+                        chat: {
+                          ...oldQuery.chat,
+                          messages: [...oldQuery.chat.messages, message],
+                        },
+                      }
+                      return newQuery
+                    },
+                  })
+                }}
               />
-            )}
-          />
-        </MessageContainer>
-        <MessageInput onPress={handlePress} chatId={conversation.id} />
-        <KeyboardSpacer />
+            )
+          }}
+        </Query>
+        <MessageInputDisplay onPress={handlePress} chatId={chatId} />
       </Background>
     )
   }
