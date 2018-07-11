@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import { FlatList, ScrollView } from 'react-native'
-import { HeaderBackground, Title, BackButton, Container } from './styles'
+import {
+  HeaderBackground,
+  Title,
+  BackButton,
+  Container,
+  Divider,
+} from './styles'
 import SearchBar from '../../components/SearchBar'
 import BackArrow from 'react-native-vector-icons/Ionicons'
 import ListItem from './components/ListItem'
@@ -31,6 +37,7 @@ class PeopleList extends Component {
           searchText={searchText}
           placeholderText="Search Jobs & Internships"
         />
+        <Divider />
         <Container>
           <FlatList
             styles={{ backgroundColor: 'red', flex: 1 }}
