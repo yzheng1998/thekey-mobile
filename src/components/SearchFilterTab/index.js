@@ -10,22 +10,23 @@ export default class SearchFilterTab extends Component {
     super(props)
     this.state = { selectedIndex: 0 }
   }
-
   changeIndex(idx) {
     this.setState({ selectedIndex: idx })
   }
 
   render() {
     const { selectedIndex } = this.state
-    const { color, selectedColor } = this.props
-
+    const { color, selectedColor, updateState } = this.props
     return (
       <Tab>
         {this.props.options.map((option, idx) => (
           <Categories
             key={option}
             isSelected={selectedIndex === idx}
-            onPress={() => this.changeIndex(idx)}
+            onPress={() => {
+              this.changeIndex(idx)
+              updateState(idx)
+            }}
             color={color}
             selectedColor={selectedColor}
           >
