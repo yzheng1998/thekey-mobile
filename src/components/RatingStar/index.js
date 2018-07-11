@@ -4,17 +4,21 @@ import { StarContainer, RatingContainer, RateText } from './styles'
 import _ from 'lodash'
 
 export default class RatingStar extends Component {
+  static defaultProps = {
+    scoreOff: false,
+    color: 'rgb(250,53,121)',
+  }
   render() {
-    const { rating, color } = this.props
+    const { rating, color, scoreOff } = this.props
     const stars = _.range(Math.round(rating)).map(() => (
-      <StarContainer>
+      <StarContainer key={`${Math.random()}`}>
         <Star name="star" size={16} color={color} />
       </StarContainer>
     ))
     return (
       <RatingContainer>
         {stars}
-        <RateText color={color}>{this.props.rating}</RateText>
+        {!scoreOff && <RateText color={color}>{this.props.rating}</RateText>}
       </RatingContainer>
     )
   }
