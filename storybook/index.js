@@ -51,6 +51,7 @@ import '../src/stories/loginscreen'
 import '../src/stories/reviewBlock'
 import '../src/stories/filterBlock'
 import '../src/stories/reviewPictureBlock'
+import '../src/stories/connectionCard'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
