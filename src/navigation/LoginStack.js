@@ -20,7 +20,7 @@ const LoginStack = createStackNavigator(
     Login: {
       screen: LoginScreen,
       navigationOptions: () => ({
-        title: 'Login',
+        header: null,
       }),
     },
   },
