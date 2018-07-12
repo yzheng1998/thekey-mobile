@@ -1,7 +1,9 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const Container = styled.View``
+export const Container = styled.View`
+  background-color: white;
+`
 export const Title = styled.Text`
   font-size: 16px;
   font-family: ${themeGet('fonts.bold')};
@@ -27,3 +29,4 @@ export const SeeAll = styled.Text`
   padding-top: 16px;
   padding-right: 16px;
 `
+export const ButtonContainer = styled.TouchableOpacity``

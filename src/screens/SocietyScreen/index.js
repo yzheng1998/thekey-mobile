@@ -18,6 +18,8 @@ const GET_USERS = gql`
       friends {
         id
         profilePicture
+        firstName
+        lastName
       }
     }
   }

@@ -7,8 +7,20 @@ export default class EditEducationBlock extends Component {
   render() {
     return (
       <WideContainer>
-        <EducationListView educationData={this.props.educationData} />
-        <BlockButton text="ADD EDUCATION" />
+        <EducationListView
+          showEditButton
+          addEducation={this.props.addEducation}
+          navigation={this.props.navigation}
+          educationData={this.props.educationData}
+        />
+        <BlockButton
+          text="ADD EDUCATION"
+          onPress={() =>
+            this.props.navigation.navigate('AddEducation', {
+              addEducation: this.props.addEducation,
+            })
+          }
+        />
       </WideContainer>
     )
   }

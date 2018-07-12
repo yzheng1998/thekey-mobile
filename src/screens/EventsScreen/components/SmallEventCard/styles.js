@@ -51,10 +51,10 @@ export const DateTime = styled.Text`
   margin-top: 1px;
 `
 export const StarButton = styled.TouchableOpacity`
-  width: 40%;
   height: 30px;
   margin: 10px;
   margin-top: 33px;
+  margin-left: 90px;
   flex-direction: column;
   align-items: flex-end;
 `
