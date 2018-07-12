@@ -41,16 +41,12 @@ function formatTimeStamp(timeStamp) {
 export default class LargeEventsCard extends Component {
   static defaultProps = {
     price: 0.0,
-    interestedFriends: [],
   }
 
   static propTypes = {
-    image: PropTypes.string.isRequired,
     price: PropTypes.number,
     title: PropTypes.string.isRequired,
     location: PropTypes.string.isRequired,
-    timeStamp: PropTypes.string.isRequired,
-    interestedFriends: PropTypes.arrayOf(Object),
   }
 
   constructor(props) {
@@ -58,14 +54,50 @@ export default class LargeEventsCard extends Component {
     this.state = { isInterested: false }
   }
   render() {
-    const {
-      image,
-      price,
-      title,
-      location,
-      timeStamp,
-      interestedFriends,
-    } = this.props
+    const image =
+      'https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg'
+    const interestedFriends = [
+      {
+        firstName: 'Yuke',
+        id: 1,
+        profilePicture: {
+          uri:
+            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+        },
+      },
+      {
+        firstName: 'Noah',
+        id: 2,
+        profilePicture: {
+          uri: 'https://www.dev.hsa.net/img/team/Noah.jpg',
+        },
+      },
+      {
+        firstName: 'Humprey',
+        id: 3,
+        profilePicture: {
+          uri: 'https://www.dev.hsa.net/img/team/humphrey.JPG',
+        },
+      },
+      {
+        firstName: 'Ivraj',
+        id: 4,
+        profilePicture: {
+          uri: 'https://www.dev.hsa.net/img/team/Ivraj.jpg',
+        },
+      },
+      {
+        firstName: 'Jovi',
+        id: 5,
+        profilePicture: {
+          uri: 'https://www.dev.hsa.net/img/team/Jovin.jpg',
+        },
+      },
+    ]
+    const usableTimeStamp = new Date(
+      this.props.event.dateRange[0],
+    ).toISOString()
+    const { price, title, location } = this.props.event
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
       <Card activeOpacity={0.9}>
@@ -89,7 +121,7 @@ export default class LargeEventsCard extends Component {
           <ContentContainer>
             <DetailsContainer>
               <ClockIcon name="clock" size={19} />
-              <DateTime>{formatTimeStamp(timeStamp)}</DateTime>
+              <DateTime>{formatTimeStamp(usableTimeStamp)}</DateTime>
             </DetailsContainer>
             <Title numberOfLines={3}>{title}</Title>
             <DetailsContainer>

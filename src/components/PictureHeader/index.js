@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { BlockContainer, BackgroundPicture, Picture } from './styles'
 
-export default class ProfilePicBlock extends Component {
+export default class PictureHeader extends Component {
   render() {
     return (
       <BlockContainer>

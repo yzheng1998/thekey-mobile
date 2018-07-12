@@ -55,7 +55,7 @@ export default class ProfileScreen extends Component {
               <Description row title="Looking For" content={lookingFor} />
               <Description
                 row
-                title="Preferred Way To Meet"
+                title="Preferred Ways To Meet"
                 content={preferredWaysToMeet}
               />
               <Divider />
