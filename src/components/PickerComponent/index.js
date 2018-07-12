@@ -4,7 +4,7 @@ import {
   PickerView,
   DoneButton,
   DoneButtonText,
-} from '../../styles'
+} from './styles'
 
 export default class PickerComponent extends Component {
   render() {

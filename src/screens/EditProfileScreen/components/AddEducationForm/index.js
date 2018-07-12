@@ -10,7 +10,7 @@ import {
   PickerButton,
   PickerText,
 } from '../../styles'
-import PickerComponent from '../PickerComponent'
+import PickerComponent from '../../../../components/PickerComponent'
 import _ from 'lodash'
 
 const schoolTypes = ['Secondary', 'Undergraduate', 'Graduate']
