@@ -10,7 +10,6 @@ import {
   Title,
   TimeIcon,
 } from './styles'
-import PropTypes from 'prop-types'
 import moment from 'moment'
 import InterestedFriendsRow from '../InterestedFriendsRow'
 import Star from 'react-native-vector-icons/FontAwesome'
@@ -28,24 +27,56 @@ function formatTimeStamp(timeStamp) {
 }
 
 export default class SmallEventCard extends Component {
-  static defaultProps = {
-    interestedFriends: null,
-  }
-
-  static propTypes = {
-    image: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    timeStamp: PropTypes.string.isRequired,
-    interestedFriends: PropTypes.arrayOf(Object),
-  }
-
   constructor(props) {
     super(props)
     this.state = { isInterested: false }
   }
 
   render() {
-    const { image, title, timeStamp, interestedFriends } = this.props
+    const interestedFriends = [
+      {
+        firstName: 'Yuke',
+        id: 1,
+        profilePicture: {
+          uri:
+            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+        },
+      },
+      {
+        firstName: 'Noah',
+        id: 2,
+        profilePicture: {
+          uri: 'https://www.dev.hsa.net/img/team/Noah.jpg',
+        },
+      },
+      {
+        firstName: 'Humprey',
+        id: 3,
+        profilePicture: {
+          uri: 'https://www.dev.hsa.net/img/team/humphrey.JPG',
+        },
+      },
+      {
+        firstName: 'Ivraj',
+        id: 4,
+        profilePicture: {
+          uri: 'https://www.dev.hsa.net/img/team/Ivraj.jpg',
+        },
+      },
+      {
+        firstName: 'Jovi',
+        id: 5,
+        profilePicture: {
+          uri: 'https://www.dev.hsa.net/img/team/Jovin.jpg',
+        },
+      },
+    ]
+    const image =
+      'https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg'
+    const { title } = this.props.event
+    const usableTimeStamp = new Date(
+      this.props.event.dateRange[0],
+    ).toISOString()
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
       <Card width={this.props.width} activeOpacity={0.9}>
@@ -54,7 +85,7 @@ export default class SmallEventCard extends Component {
           <ContentContainer>
             <DetailsContainer>
               <TimeIcon name="clock" size={19} />
-              <DateTime>{formatTimeStamp(timeStamp)}</DateTime>
+              <DateTime>{formatTimeStamp(usableTimeStamp)}</DateTime>
             </DetailsContainer>
             <Title numberOfLines={1}>{title} </Title>
           </ContentContainer>

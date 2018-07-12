@@ -4,18 +4,19 @@ import ReviewCard from '../../components/ReviewCard'
 import SearchFilterTab from '../../components/SearchFilterTab'
 import { HeaderBackground, Title, BackButtonContainer } from './styles'
 import BackButton from 'react-native-vector-icons/Ionicons'
-import { SearchBar } from 'react-native-elements'
+import SearchBar from '../../components/SearchBar'
 
 class ReviewsScreen extends Component {
   state = {
-    searchBarValue: '',
+    searchText: '',
   }
 
-  search = text => {
-    this.setState({ searchBarValue: text })
+  updateText = searchText => {
+    this.setState({ searchText })
   }
 
   render() {
+    const { searchText } = this.state
     const { reviews } = this.props
     return (
       <ScrollView>
@@ -26,7 +27,11 @@ class ReviewsScreen extends Component {
           <Title>Reviews</Title>
           <SearchFilterTab options={['All', 'Saved', 'Highest Rate']} />
         </HeaderBackground>
-        <SearchBar lightTheme placeholder="Search All Reviews" />
+        <SearchBar
+          updateText={this.updateText}
+          searchText={searchText}
+          placeholderText="Search All Reviews"
+        />
         <FlatList
           keyExtractor={review => review.id}
           data={reviews}

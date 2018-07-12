@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { FlatList, Text, View } from 'react-native'
-import { SearchBar } from 'react-native-elements'
+import SearchBar from '../../components/SearchBar'
 import HorizontalEventsScroll from './components/HorizontalEventsScroll'
 import SmallEventCard from './components/SmallEventCard'
 import EventsHeader from './components/EventsHeader'
@@ -19,8 +19,7 @@ const GET_EVENTS = gql`
     events(eventsFilterInput: { startsAt: $startsAt, location: $location }) {
       id
       location
-      startsAt
-      endsAt
+      dateRange
       title
       picture
       details
@@ -34,57 +33,61 @@ class EventsScreen extends Component {
     header: null,
   }
 
+  state = {
+    tab: 0,
+    searchText: '',
+  }
+
+  updateState = value => {
+    this.setState({ tab: value })
+  }
+
+  updateText = searchText => {
+    this.setState({ searchText })
+  }
+
   render() {
-    // hardcoding array of friends for now
-    const friends = [
-      {
-        firstName: 'Yuke',
-        id: 1,
-        profilePicture: {
-          uri:
-            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-        },
-      },
-      {
-        firstName: 'Noah',
-        id: 2,
-        profilePicture: {
-          uri: 'https://www.dev.hsa.net/img/team/Noah.jpg',
-        },
-      },
-      {
-        firstName: 'Humprey',
-        id: 3,
-        profilePicture: {
-          uri: 'https://www.dev.hsa.net/img/team/humphrey.JPG',
-        },
-      },
-      {
-        firstName: 'Ivraj',
-        id: 4,
-        profilePicture: {
-          uri: 'https://www.dev.hsa.net/img/team/Ivraj.jpg',
-        },
-      },
-      {
-        firstName: 'Jovi',
-        id: 5,
-        profilePicture: {
-          uri: 'https://www.dev.hsa.net/img/team/Jovin.jpg',
-        },
-      },
-    ]
+    const tabs = {
+      ALL: 0,
+      TODAY: 1,
+      TOMORROW: 2,
+      THIS_WEEK: 3,
+    }
+
+    const customVariable = tab => {
+      switch (tab) {
+        case tabs.ALL:
+          return ''
+        case tabs.TODAY:
+          return 'today'
+        case tabs.TOMORROW:
+          return 'tomorrow'
+        case tabs.THIS_WEEK:
+          return 'thisWeek'
+        default:
+          return ''
+      }
+    }
+
+    const { searchText } = this.state
+
     return (
       <View>
-        <EventsHeader navigation={this.props.navigation} />
+        <EventsHeader
+          navigation={this.props.navigation}
+          state={this.state.tab}
+          updateState={this.updateState}
+        />
         <SearchBar
-          lightTheme
-          platform="ios"
-          cancelButtonTitle="Cancel"
-          placeholder="Search Events"
+          updateText={this.updateText}
+          searchText={searchText}
+          placeholderText="Search Events"
         />
         <Background>
-          <Query query={GET_EVENTS} variable={{}}>
+          <Query
+            query={GET_EVENTS}
+            variables={{ startsAt: customVariable(this.state.tab) }}
+          >
             {({ loading, error, data }) => {
               if (loading) return <Text>Loading...</Text>
               if (error) return <Text>Error! ${error.message}</Text>
@@ -110,10 +113,7 @@ class EventsScreen extends Component {
                     <SmallCardContainer>
                       <SmallEventCard
                         navigation={this.props.navigation}
-                        image="https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg"
-                        title={item.title}
-                        timeStamp="2018-06-18 10:52:03.744-04"
-                        interestedFriends={friends}
+                        event={item}
                       />
                     </SmallCardContainer>
                   )}

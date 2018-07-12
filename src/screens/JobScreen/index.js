@@ -70,7 +70,6 @@ class JobScreen extends Component {
   static defaultProps = {
     job: aboutJob,
   }
-
   constructor(props) {
     super(props)
     this.state = { isInterested: false }
@@ -103,7 +102,7 @@ class JobScreen extends Component {
         <TagsContainer>
           <TagLine tagData={tagData} lines={1} />
         </TagsContainer>
-        <SimilarJobsBlock jobs={jobs} />
+        <SimilarJobsBlock navigation={this.props.navigation} jobs={jobs} />
         <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
           <BackButton name="ios-arrow-back" size={27} color="white" />
         </BackButtonContainer>

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { Modal } from 'react-native'
 import EditContactBlock from './components/EditContactBlock'
 import BasicInfoBlock from './components/BasicInfoBlock'
 import EditEducationBlock from './components/EditEducationBlock'
 import EditExperienceBlock from './components/EditExperienceBlock'
+import EmojiModal from './components/EmojiModal'
 import PickerComponent from './components/PickerComponent'
 import {
   Screen,
@@ -42,7 +44,7 @@ const educationData = [
     major: 'East Asian Studies',
     startYear: '2013',
     graduationYear: '2017',
-    id: 0,
+    id: 4,
   },
   {
     schoolType: 'GRADUATE',
@@ -52,6 +54,7 @@ const educationData = [
     id: 1,
   },
 ]
+
 const experienceData = [
   {
     companyName: 'Unfiltered Network',
@@ -77,8 +80,7 @@ export default class EditProfileScreen extends Component {
       'Former Harvard Basketball player now transitioning to the business world and looking to learn and connect with others!',
     lookingFor: 'Business Mentor',
     lookingForText: 'Business Mentor',
-    preferredWayToMeet: nodeEmoji.get('coffee'),
-    preferredWayToMeetText: nodeEmoji.get('coffee'),
+    preferredWaysToMeet: [nodeEmoji.get('coffee')],
     profilePicture: {
       uri:
         'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
@@ -96,6 +98,35 @@ export default class EditProfileScreen extends Component {
 
   updateText = obj => {
     this.setState(obj)
+  }
+
+  addEducation = educationItem => {
+    if (Number.isInteger(educationItem.id)) {
+      const index = educationData.findIndex(
+        item => item.id === educationItem.id,
+      )
+      educationData[index] = educationItem
+    } else educationData.push({ ...educationItem, id: educationData.length })
+    this.setState({ educationData })
+  }
+
+  addExperience = experienceItem => {
+    if (Number.isInteger(experienceItem.id)) {
+      const index = experienceData.findIndex(
+        item => item.id === experienceItem.id,
+      )
+      experienceData[index] = experienceItem
+    } else experienceData.push({ ...experienceItem, id: experienceData.length })
+    this.setState({ workExperience: experienceData })
+  }
+
+  addWayToMeet = emoji => {
+    const { preferredWaysToMeet } = this.state
+    const index = preferredWaysToMeet.indexOf(emoji)
+    if (index > -1) {
+      preferredWaysToMeet.splice(index, 1)
+    } else preferredWaysToMeet.push(emoji)
+    this.setState({ preferredWaysToMeet })
   }
 
   render() {
@@ -121,8 +152,16 @@ export default class EditProfileScreen extends Component {
             </ColumnContainer>
           </Block>
           <Divider />
-          <EditEducationBlock educationData={this.state.educationData} />
-          <EditExperienceBlock experienceData={this.state.workExperience} />
+          <EditEducationBlock
+            navigation={this.props.navigation}
+            educationData={this.state.educationData}
+            addEducation={this.addEducation}
+          />
+          <EditExperienceBlock
+            navigation={this.props.navigation}
+            experienceData={this.state.workExperience}
+            addExperience={this.addExperience}
+          />
           <EditContactBlock
             linkedIn={this.state.linkedIn}
             email={this.state.email}
@@ -145,20 +184,22 @@ export default class EditProfileScreen extends Component {
             keyName="lookingFor"
           />
         )}
-        {this.state.meetByPickerEnabled && (
-          <PickerComponent
-            options={waysToMeet}
+        <Modal
+          animationType="slide"
+          transparent
+          visible={this.state.meetByPickerEnabled}
+        >
+          <EmojiModal
             doneOnPress={() => {
               this.updateText({
-                preferredWayToMeetText: this.state.preferredWayToMeet,
                 meetByPickerEnabled: false,
               })
             }}
-            onValueChange={this.updateText}
-            value={this.state.preferredWayToMeet}
-            keyName="preferredWayToMeet"
+            onSelection={this.addWayToMeet}
+            options={waysToMeet}
+            selected={this.state.preferredWaysToMeet}
           />
-        )}
+        </Modal>
       </Screen>
     )
   }
