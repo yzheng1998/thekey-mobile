@@ -20,7 +20,7 @@ export default class BasicInfoBlock extends Component {
       location,
       bio,
       lookingForText,
-      preferredWayToMeetText,
+      preferredWaysToMeet,
     } = this.props.state
     const { onChangeText } = this.props
     return (
@@ -73,7 +73,7 @@ export default class BasicInfoBlock extends Component {
                 })
               }
             >
-              <PickerText>{preferredWayToMeetText}</PickerText>
+              <PickerText>{preferredWaysToMeet}</PickerText>
             </PickerButton>
           </RowContainer>
         </Block>

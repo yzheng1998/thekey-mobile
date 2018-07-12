@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { FlatList, Text, View } from 'react-native'
-import { SearchBar } from 'react-native-elements'
+import SearchBar from '../../components/SearchBar'
 import HorizontalEventsScroll from './components/HorizontalEventsScroll'
 import SmallEventCard from './components/SmallEventCard'
 import EventsHeader from './components/EventsHeader'
@@ -35,10 +35,15 @@ class EventsScreen extends Component {
 
   state = {
     tab: 0,
+    searchText: '',
   }
 
   updateState = value => {
     this.setState({ tab: value })
+  }
+
+  updateText = searchText => {
+    this.setState({ searchText })
   }
 
   render() {
@@ -63,45 +68,8 @@ class EventsScreen extends Component {
           return ''
       }
     }
-    // hardcoding array of friends for now
-    const friends = [
-      {
-        firstName: 'Yuke',
-        id: 1,
-        profilePicture: {
-          uri:
-            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-        },
-      },
-      {
-        firstName: 'Noah',
-        id: 2,
-        profilePicture: {
-          uri: 'https://www.dev.hsa.net/img/team/Noah.jpg',
-        },
-      },
-      {
-        firstName: 'Humprey',
-        id: 3,
-        profilePicture: {
-          uri: 'https://www.dev.hsa.net/img/team/humphrey.JPG',
-        },
-      },
-      {
-        firstName: 'Ivraj',
-        id: 4,
-        profilePicture: {
-          uri: 'https://www.dev.hsa.net/img/team/Ivraj.jpg',
-        },
-      },
-      {
-        firstName: 'Jovi',
-        id: 5,
-        profilePicture: {
-          uri: 'https://www.dev.hsa.net/img/team/Jovin.jpg',
-        },
-      },
-    ]
+
+    const { searchText } = this.state
 
     return (
       <View>
@@ -111,10 +79,9 @@ class EventsScreen extends Component {
           updateState={this.updateState}
         />
         <SearchBar
-          lightTheme
-          platform="ios"
-          cancelButtonTitle="Cancel"
-          placeholder="Search Events"
+          updateText={this.updateText}
+          searchText={searchText}
+          placeholderText="Search Events"
         />
         <Background>
           <Query
@@ -146,10 +113,7 @@ class EventsScreen extends Component {
                     <SmallCardContainer>
                       <SmallEventCard
                         navigation={this.props.navigation}
-                        image="https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg"
-                        title={item.title}
-                        timeStamp={new Date(item.dateRange[0]).toISOString()}
-                        interestedFriends={friends}
+                        event={item}
                       />
                     </SmallCardContainer>
                   )}
