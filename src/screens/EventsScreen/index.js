@@ -68,6 +68,7 @@ class EventsScreen extends Component {
           return ''
       }
     }
+
     // hardcoding array of friends for now
     const friends = [
       {
@@ -107,7 +108,9 @@ class EventsScreen extends Component {
         },
       },
     ]
+    
     const { searchText } = this.state
+    
     return (
       <View>
         <EventsHeader
@@ -150,10 +153,7 @@ class EventsScreen extends Component {
                     <SmallCardContainer>
                       <SmallEventCard
                         navigation={this.props.navigation}
-                        image="https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg"
-                        title={item.title}
-                        timeStamp={new Date(item.dateRange[0]).toISOString()}
-                        interestedFriends={friends}
+                        event={item}
                       />
                     </SmallCardContainer>
                   )}
