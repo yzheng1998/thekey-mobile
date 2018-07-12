@@ -18,6 +18,7 @@ export const TopContainer = styled.View`
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 `
 export const ContentContainer = styled.View`
   width: 100%;
@@ -63,9 +64,6 @@ export const Price = styled.Text`
   font-size: 15px;
   font-family: ${themeGet('fonts.bold')};
   color: ${themeGet('colors.fontPrimary')};
-`
-export const StarButton = styled.TouchableOpacity`
-  padding-top: 9px;
 `
 export const ClockIcon = styled(Icon1)`
   color: ${themeGet('colors.fontSubtitle.secondary')};

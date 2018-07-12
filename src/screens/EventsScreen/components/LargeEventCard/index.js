@@ -5,7 +5,6 @@ import {
   TopContainer,
   PriceContainer,
   Price,
-  StarButton,
   ContentContainer,
   DetailsContainer,
   DateTime,
@@ -14,10 +13,10 @@ import {
   ClockIcon,
   LocationIcon,
 } from './styles'
+import StarButton from '../../../../components/StarButton'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import InterestedFriendsRow from '../InterestedFriendsRow'
-import Star from 'react-native-vector-icons/FontAwesome'
 
 const TIME_ZONE_LEN = 3
 
@@ -53,6 +52,11 @@ export default class LargeEventsCard extends Component {
     super(props)
     this.state = { isInterested: false }
   }
+
+  select = () => {
+    this.setState({ isInterested: !this.state.isInterested })
+  }
+
   render() {
     const image =
       'https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg'
@@ -97,7 +101,7 @@ export default class LargeEventsCard extends Component {
     const usableTimeStamp = new Date(
       this.props.event.dateRange[0],
     ).toISOString()
-    const { price, title, location } = this.props.event
+    const { price, title, location, id } = this.props.event
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
       <Card activeOpacity={0.9}>
@@ -107,16 +111,10 @@ export default class LargeEventsCard extends Component {
               <Price>{formatPrice(price)}</Price>
             </PriceContainer>
             <StarButton
-              onPress={() =>
-                this.setState({ isInterested: !this.state.isInterested })
-              }
-            >
-              <Star
-                name={this.state.isInterested ? 'star' : 'star-o'}
-                size={27}
-                color="white"
-              />
-            </StarButton>
+              onPress={this.select}
+              isInterested={this.state.isInterested}
+              id={id}
+            />
           </TopContainer>
           <ContentContainer>
             <DetailsContainer>
