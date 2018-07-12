@@ -165,3 +165,41 @@ export const ExperienceList = styled.View`
   width: 100%;
   padding-left: 16;
 `
+
+export const ModalContainer = styled.View`
+  height: 35%;
+  background-color: ${themeGet('colors.background')};
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+`
+
+export const EmojiContainer = styled.View`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`
+
+export const EmojiWrapper = styled.View`
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100px;
+`
+
+export const EmojiButton = styled.TouchableOpacity`
+  width: 40px;
+  height: 40px;
+  margin: 3px;
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  background-color: ${props =>
+    props.selected ? themeGet('colors.fontProfileFields') : 'transparent'};
+`
+
+export const Emoji = styled.Text`
+  font-size: 30;
+`
