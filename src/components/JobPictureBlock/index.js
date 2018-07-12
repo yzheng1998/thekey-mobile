@@ -33,6 +33,7 @@ class JobPictureBlock extends Component {
       location,
       time,
       views,
+      id,
     } = this.props
     return (
       <HeaderContainer>
@@ -47,7 +48,9 @@ class JobPictureBlock extends Component {
               {timePosted(time)} - {views} views
             </Deadline>
           </DescriptionContainer>
-          <Apply onPress={() => this.props.navigation.navigate('ApplyNow')}>
+          <Apply
+            onPress={() => this.props.navigation.navigate('ApplyNow', { id })}
+          >
             <ApplyButton>APPLY NOW</ApplyButton>
           </Apply>
         </PictureHeader>
