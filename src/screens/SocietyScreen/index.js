@@ -68,7 +68,7 @@ class SocietyScreen extends Component {
                 <CardSwiper
                   navigation={this.props.navigation}
                   width={width}
-                  data={data}
+                  userData={data}
                 />
               </SwiperContainer>
             )
