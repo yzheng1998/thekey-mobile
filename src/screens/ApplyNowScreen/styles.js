@@ -42,7 +42,7 @@ export const BackButtonContainer = styled.TouchableOpacity`
   margin-top: 25px;
   width: 4%;
 `
-export const ApplyButton = styled.TouchableOpacity`
+export const Button = styled.TouchableOpacity`
   height: 45px;
   width: 100%;
   background-color: ${themeGet('colors.buttonPrimary')};
