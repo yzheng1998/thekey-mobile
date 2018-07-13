@@ -56,6 +56,7 @@ import '../src/stories/reviewPictureBlock'
 import '../src/stories/ReviewScreen'
 import '../src/stories/EmploymentHistoryBlock'
 import '../src/stories/connectionCard'
+import '../src/stories/OptionalInformation'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
