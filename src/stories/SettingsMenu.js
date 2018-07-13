@@ -12,6 +12,6 @@ const CenteredView = ({ children }) => <View style={style}>{children}</View>
 
 storiesOf('CenteredView').add('SettingsMenu', () => (
   <CenteredView>
-    <SettingsMenu title="Hello" content="PLEASE" />
+    <SettingsMenu email="diego.o.co@gmail.com" />
   </CenteredView>
 ))

@@ -16,6 +16,12 @@ export const Menu = styled.View`
 export const MenuItemList = styled.ScrollView`
   width: 100%;
 `
+export const EmailAddress = styled.Text`
+  font-family: ${themeGet('fonts.medium')};
+  font-size: 14px;
+  letter-spacing: -0.1;
+  color: ${themeGet('colors.fontProfileFields')};
+`
 export const CancelMembershipButton = styled.TouchableOpacity`
   width: 91%;
   height: 45px;
