@@ -55,44 +55,39 @@ export default class NewChatModal extends Component {
   }
   state = {
     text: '',
-    users: [],
+    tags: [],
   }
 
-  onChangeTags = () => {
-    if (this.state.text !== '')
-      this.setState({ users: [...this.state.users, this.state.text] })
+  onChangeTags = tags => {
+    this.setState({ tags })
   }
 
   onChangeText = text => {
-    this.setState({ text }, () => {
-      console.log('AFTER SETTING TEXT', this.state)
-    })
+    this.setState({ text })
+
     const lastTyped = text.charAt(text.length - 1)
     const parseWhen = [',', ' ', ';', '\n']
+
     if (parseWhen.indexOf(lastTyped) > -1) {
-      this.setState(
-        {
-          users: [...this.state.users, this.state.text],
-          text: '',
-        },
-        () => {
-          console.log('AFTER SETTING TAGS IN PARSED', this.state)
-        },
-      )
+      this.setState({
+        tags: [...this.state.tags, this.state.text],
+        text: '',
+      })
     }
-    console.log('TAG LIST', this.state.users)
   }
 
   setModalVisible(visible) {
     this.setState({ modalVisible: visible })
   }
+
+  labelExtractor = tag => tag
+
   updateUsers = () => {
     // this.setState({ users: [...this.state.users, user] })
     // this.setState({ users }, () => {
     //   console.log('AFTER UPDATEUSERS', this.state)
     // })
   }
-  labelExtractor = user => user
 
   renderUserCards = peopleData => (
     <PeopleListContainer>
@@ -113,7 +108,7 @@ export default class NewChatModal extends Component {
   render() {
     const inputProps = {
       keyboardType: 'default',
-      placeholder: 'email',
+      placeholder: 'search',
       autoFocus: true,
       style: {
         fontSize: 14,
@@ -136,8 +131,8 @@ export default class NewChatModal extends Component {
           <SearchNameContainer>
             <Text>To: </Text>
             <TagInput
-              value={this.state.users}
-              onChange={() => null}
+              value={this.state.tags}
+              onChange={this.onChangeTags}
               labelExtractor={this.labelExtractor}
               text={this.state.text}
               onChangeText={this.onChangeText}
