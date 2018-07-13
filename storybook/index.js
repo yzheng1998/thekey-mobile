@@ -48,11 +48,14 @@ import '../src/stories/EditProfileScreen'
 import '../src/stories/BasicInfoBlock'
 import '../src/stories/DescriptionBlock'
 import '../src/stories/loginscreen'
+import '../src/stories/addCompanyScreen'
 import '../src/stories/memberScreen'
 import '../src/stories/reviewBlock'
 import '../src/stories/filterBlock'
 import '../src/stories/reviewPictureBlock'
 import '../src/stories/ReviewScreen'
+import '../src/stories/EmploymentHistoryBlock'
+import '../src/stories/connectionCard'
 
 const StorybookUI = getStorybookUI({
   port: 7007,

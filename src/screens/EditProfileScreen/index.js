@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import { Modal } from 'react-native'
 import EditContactBlock from './components/EditContactBlock'
 import BasicInfoBlock from './components/BasicInfoBlock'
 import EditEducationBlock from './components/EditEducationBlock'
 import EditExperienceBlock from './components/EditExperienceBlock'
-import PickerComponent from './components/PickerComponent'
+import PickerComponent from '../../components/PickerComponent'
+import EmojiModal from './components/EmojiModal'
 import {
   Screen,
   Block,
@@ -78,8 +80,7 @@ export default class EditProfileScreen extends Component {
       'Former Harvard Basketball player now transitioning to the business world and looking to learn and connect with others!',
     lookingFor: 'Business Mentor',
     lookingForText: 'Business Mentor',
-    preferredWayToMeet: nodeEmoji.get('coffee'),
-    preferredWayToMeetText: nodeEmoji.get('coffee'),
+    preferredWaysToMeet: [nodeEmoji.get('coffee')],
     profilePicture: {
       uri:
         'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
@@ -117,6 +118,15 @@ export default class EditProfileScreen extends Component {
       experienceData[index] = experienceItem
     } else experienceData.push({ ...experienceItem, id: experienceData.length })
     this.setState({ workExperience: experienceData })
+  }
+
+  addWayToMeet = emoji => {
+    const { preferredWaysToMeet } = this.state
+    const index = preferredWaysToMeet.indexOf(emoji)
+    if (index > -1) {
+      preferredWaysToMeet.splice(index, 1)
+    } else preferredWaysToMeet.push(emoji)
+    this.setState({ preferredWaysToMeet })
   }
 
   render() {
@@ -174,20 +184,22 @@ export default class EditProfileScreen extends Component {
             keyName="lookingFor"
           />
         )}
-        {this.state.meetByPickerEnabled && (
-          <PickerComponent
-            options={waysToMeet}
+        <Modal
+          animationType="slide"
+          transparent
+          visible={this.state.meetByPickerEnabled}
+        >
+          <EmojiModal
             doneOnPress={() => {
               this.updateText({
-                preferredWayToMeetText: this.state.preferredWayToMeet,
                 meetByPickerEnabled: false,
               })
             }}
-            onValueChange={this.updateText}
-            value={this.state.preferredWayToMeet}
-            keyName="preferredWayToMeet"
+            onSelection={this.addWayToMeet}
+            options={waysToMeet}
+            selected={this.state.preferredWaysToMeet}
           />
-        )}
+        </Modal>
       </Screen>
     )
   }

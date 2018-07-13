@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { FlatList, Text, View } from 'react-native'
-import { SearchBar } from 'react-native-elements'
+import SearchBar from '../../components/SearchBar'
 import HorizontalEventsScroll from './components/HorizontalEventsScroll'
 import SmallEventCard from './components/SmallEventCard'
 import EventsHeader from './components/EventsHeader'
@@ -35,10 +35,15 @@ class EventsScreen extends Component {
 
   state = {
     tab: 0,
+    searchText: '',
   }
 
   updateState = value => {
     this.setState({ tab: value })
+  }
+
+  updateText = searchText => {
+    this.setState({ searchText })
   }
 
   render() {
@@ -64,6 +69,8 @@ class EventsScreen extends Component {
       }
     }
 
+    const { searchText } = this.state
+
     return (
       <View>
         <EventsHeader
@@ -72,10 +79,9 @@ class EventsScreen extends Component {
           updateState={this.updateState}
         />
         <SearchBar
-          lightTheme
-          platform="ios"
-          cancelButtonTitle="Cancel"
-          placeholder="Search Events"
+          updateText={this.updateText}
+          searchText={searchText}
+          placeholderText="Search Events"
         />
         <Background>
           <Query

@@ -77,7 +77,7 @@ const user = {
   graduateSchool: 'Stanford University',
   interestingFact: 'I can ride the unicycle!',
   ethnicity: 'ASIAN',
-  preferredWayToMeet: 'Drinks!',
+  preferredWaysToMeet: 'Drinks!',
   workExperience: experience,
   lookingFor: 'Business Mentor',
   goodQualities: 'Lorem Ipsum',

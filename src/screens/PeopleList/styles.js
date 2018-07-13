@@ -27,3 +27,9 @@ export const Container = styled.View`
   width: 100%;
   background-color: ${themeGet('colors.background')};
 `
+
+export const Divider = styled.View`
+  width: 100%;
+  height: 8px;
+  background-color: ${themeGet('colors.divider')};
+`
