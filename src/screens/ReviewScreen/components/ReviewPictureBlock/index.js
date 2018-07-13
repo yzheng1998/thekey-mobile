@@ -7,8 +7,8 @@ import {
   Apply,
   ApplyButton,
 } from './styles'
-import PictureHeader from '../PictureHeader'
-import RatingStar from '../RatingStar'
+import PictureHeader from '../../../../components/PictureHeader'
+import RatingStar from '../../../../components/RatingStar'
 
 class ReviewPictureBlock extends Component {
   static defaultProps = {

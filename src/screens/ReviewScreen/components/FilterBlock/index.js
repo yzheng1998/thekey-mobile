@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Container, Title, TabContainer } from './styles'
-import SearchFilterTab from '../SearchFilterTab'
+import SearchFilterTab from '../../../../components/SearchFilterTab'
 
-class FilterBlock extends Component {
+export default class FilterBlock extends Component {
   static defaultProps = {}
   render() {
     return (
@@ -19,5 +19,3 @@ class FilterBlock extends Component {
     )
   }
 }
-
-export default FilterBlock

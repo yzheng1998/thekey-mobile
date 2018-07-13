@@ -9,13 +9,13 @@ import {
   Comment,
   Container,
 } from './styles'
-import RatingStar from '../RatingStar'
+import RatingStar from '../../../../components/RatingStar'
 import PersonIcon from 'react-native-vector-icons/Feather'
 import LocationIcon from 'react-native-vector-icons/SimpleLineIcons'
 
 const moment = require('moment')
 
-export default class ReviewCard extends Component {
+export default class ReviewBlock extends Component {
   static defaultProps = {
     subject: '"Great company, great people"',
     date: '2018-07-09 13:27:03.246-04',
@@ -23,7 +23,9 @@ export default class ReviewCard extends Component {
     role: 'Current Employee',
     position: 'General Manager',
     location: 'San Francisco',
-    comment:
+    pros:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    cons:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   }
   render() {
@@ -34,11 +36,12 @@ export default class ReviewCard extends Component {
       role,
       position,
       location,
-      comment,
+      pros,
+      cons,
     } = this.props
     return (
       <Card>
-        <SubTitle>{moment(date).format('DD/MM/YYYY')}</SubTitle>
+        <SubTitle>{moment(date).format('MM/DD/YYYY')}</SubTitle>
         <Title>{subject}</Title>
         <RatingContainer>
           <RatingStar rating={rating} scoreOff />
@@ -61,15 +64,11 @@ export default class ReviewCard extends Component {
         </SubTitle>
         <SecondaryTitle>Pros</SecondaryTitle>
         <Container>
-          <Comment numberOfLines={3} ellipsizeMode="tail">
-            {comment}
-          </Comment>
+          <Comment ellipsizeMode="tail">{pros}</Comment>
         </Container>
         <SecondaryTitle>Cons</SecondaryTitle>
         <Container>
-          <Comment numberOfLines={3} ellipsizeMode="tail">
-            {comment}
-          </Comment>
+          <Comment ellipsizeMode="tail">{cons}</Comment>
         </Container>
       </Card>
     )
