@@ -51,6 +51,7 @@ export default class SearchBar extends Component {
               this.setState({ showCancel: true })
             }}
             value={searchText}
+            autoCapitalize="none"
           />
           {searchText && (
             <ClearIconButton onPress={() => updateText('')}>
