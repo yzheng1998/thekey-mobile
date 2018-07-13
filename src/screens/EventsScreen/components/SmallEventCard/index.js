@@ -2,17 +2,17 @@ import React, { Component } from 'react'
 import {
   BackgroundImage,
   Card,
-  StarButton,
   FullContainer,
   ContentContainer,
+  RowContainer,
   DetailsContainer,
   DateTime,
   Title,
   TimeIcon,
 } from './styles'
+import StarButton from '../../../../components/StarButton'
 import moment from 'moment'
 import InterestedFriendsRow from '../InterestedFriendsRow'
-import Star from 'react-native-vector-icons/FontAwesome'
 
 const TIME_ZONE_LEN = 3
 
@@ -30,6 +30,10 @@ export default class SmallEventCard extends Component {
   constructor(props) {
     super(props)
     this.state = { isInterested: false }
+  }
+
+  select = () => {
+    this.setState({ isInterested: !this.state.isInterested })
   }
 
   render() {
@@ -73,7 +77,7 @@ export default class SmallEventCard extends Component {
     ]
     const image =
       'https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg'
-    const { title } = this.props.event
+    const { title, id } = this.props.event
     const usableTimeStamp = new Date(
       this.props.event.dateRange[0],
     ).toISOString()
@@ -87,19 +91,15 @@ export default class SmallEventCard extends Component {
               <TimeIcon name="clock" size={19} />
               <DateTime>{formatTimeStamp(usableTimeStamp)}</DateTime>
             </DetailsContainer>
-            <Title numberOfLines={1}>{title} </Title>
+            <RowContainer>
+              <Title numberOfLines={1}>{title}</Title>
+              <StarButton
+                onPress={this.select}
+                isInterested={this.state.isInterested}
+                id={id}
+              />
+            </RowContainer>
           </ContentContainer>
-          <StarButton
-            onPress={() =>
-              this.setState({ isInterested: !this.state.isInterested })
-            }
-          >
-            <Star
-              name={this.state.isInterested ? 'star' : 'star-o'}
-              size={27}
-              color="white"
-            />
-          </StarButton>
         </FullContainer>
         interestedFriends && {interestedFriends.length > 0} &&
         <InterestedFriendsRow

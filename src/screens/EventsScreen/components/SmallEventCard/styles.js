@@ -20,7 +20,7 @@ export const BackgroundImage = styled.Image`
   overflow: hidden;
 `
 export const ContentContainer = styled.View`
-  width: 60%;
+  width: 100%;
   flex-direction: column;
   justify-content: flex-start;
   padding-left: 5px;
@@ -43,6 +43,11 @@ export const DetailsContainer = styled.View`
   flex-direction: row;
   margin-top: 10px;
 `
+export const RowContainer = styled.View`
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+`
 export const DateTime = styled.Text`
   font-size: 13px;
   font-family: ${themeGet('fonts.medium')};
@@ -50,14 +55,7 @@ export const DateTime = styled.Text`
   margin-left: 3px;
   margin-top: 1px;
 `
-export const StarButton = styled.TouchableOpacity`
-  height: 30px;
-  margin: 10px;
-  margin-top: 33px;
-  margin-left: 90px;
-  flex-direction: column;
-  align-items: flex-end;
-`
+
 export const TimeIcon = styled(Icon1)`
   color: ${themeGet('colors.fontSubtitle.secondary')};
 `
