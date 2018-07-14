@@ -75,7 +75,7 @@ class LoginBody extends Component {
                   onChangeText={newText => this.setState({ email: newText })}
                   type="text"
                   name="email"
-                  autoCapitalize={false}
+                  autoCapitalize="none"
                 />
               </TextInputContainer>
               <TextInputContainer>
@@ -88,7 +88,7 @@ class LoginBody extends Component {
                   onChangeText={newText => this.setState({ password: newText })}
                   secureTextEntry
                   name="password"
-                  autoCapitalize={false}
+                  autoCapitalize="none"
                 />
               </TextInputContainer>
               <ForgotPass>
