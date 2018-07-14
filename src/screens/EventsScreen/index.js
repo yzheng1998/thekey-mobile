@@ -15,8 +15,8 @@ import {
 } from './styles'
 // need to write another query for similar events later
 const GET_EVENTS = gql`
-  query events($startsAt: String, $location: String) {
-    events(eventsFilterInput: { startsAt: $startsAt, location: $location }) {
+  query events($eventsFilterInput: EventsFilterInput!) {
+    events(eventsFilterInput: $eventsFilterInput) {
       id
       location
       dateRange
@@ -71,6 +71,15 @@ class EventsScreen extends Component {
 
     const { searchText } = this.state
 
+    const variables = {
+      eventsFilterInput: {
+        startsAt: customVariable(this.state.tab),
+        location: this.state.searchText,
+        tag: this.state.searchText,
+        title: this.state.searchText,
+      },
+    }
+
     return (
       <View>
         <EventsHeader
@@ -84,10 +93,7 @@ class EventsScreen extends Component {
           placeholderText="Search Events"
         />
         <Background>
-          <Query
-            query={GET_EVENTS}
-            variables={{ startsAt: customVariable(this.state.tab) }}
-          >
+          <Query query={GET_EVENTS} variables={variables}>
             {({ loading, error, data }) => {
               if (loading) return <Text>Loading...</Text>
               if (error) return <Text>Error! ${error.message}</Text>
@@ -101,7 +107,7 @@ class EventsScreen extends Component {
           </Query>
           <Subtitle>More Events</Subtitle>
           <Description>Other events nearby</Description>
-          <Query query={GET_EVENTS} variable={{}}>
+          <Query query={GET_EVENTS} variables={{ eventsFilterInput: {} }}>
             {({ loading, error, data }) => {
               if (loading) return <Text>Loading...</Text>
               if (error) return <Text>Error! ${error.message}</Text>
