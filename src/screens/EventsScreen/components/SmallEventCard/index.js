@@ -77,19 +77,27 @@ export default class SmallEventCard extends Component {
     ]
     const image =
       'https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg'
-    const { title, id } = this.props.event
-    const usableTimeStamp = new Date(
-      this.props.event.dateRange[0],
-    ).toISOString()
+    const { title, id, dateRange } = this.props.event
+
+    const usableTimeStamp = new Date(dateRange[0]).toISOString()
+
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
-      <Card width={this.props.width} activeOpacity={0.9}>
+      <Card
+        width={this.props.width}
+        activeOpacity={0.9}
+        onPress={() =>
+          this.props.navigation.navigate('Event', {
+            id,
+          })
+        }
+      >
         <BackgroundImage source={{ uri: image }} />
         <FullContainer>
           <ContentContainer>
             <DetailsContainer>
               <TimeIcon name="clock" size={19} />
-              <DateTime>{formatTimeStamp(usableTimeStamp)}</DateTime>
+              {<DateTime>{formatTimeStamp(usableTimeStamp)}</DateTime>}
             </DetailsContainer>
             <RowContainer>
               <Title numberOfLines={1}>{title}</Title>
