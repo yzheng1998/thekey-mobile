@@ -116,14 +116,16 @@ export default class LargeEventsCard extends Component {
               <Location>{location}</Location>
             </DetailsContainer>
           </ContentContainer>
-          interestedFriends && {interestedFriends.length > 0} &&
-          <InterestedFriendsRow
-            navigation={this.props.navigation}
-            avatarNum={5}
-            avatarSize={30}
-            connectionsNum={interestedFriends.length}
-            interestedFriends={selectMutualFriends}
-          />
+          {interestedFriends &&
+            interestedFriends.length > 0 && (
+              <InterestedFriendsRow
+                navigation={this.props.navigation}
+                avatarNum={5}
+                avatarSize={30}
+                connectionsNum={interestedFriends.length}
+                interestedFriends={selectMutualFriends}
+              />
+            )}
         </BackgroundImage>
       </Card>
     )
