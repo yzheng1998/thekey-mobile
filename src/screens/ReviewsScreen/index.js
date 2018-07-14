@@ -37,7 +37,6 @@ class ReviewsScreen extends Component {
           data={reviews}
           renderItem={({ item: review }) => <ReviewCard review={review} />}
         />
-        )
       </ScrollView>
     )
   }
