@@ -14,7 +14,6 @@ import {
   LocationIcon,
 } from './styles'
 import StarButton from '../../../../components/StarButton'
-import PropTypes from 'prop-types'
 import moment from 'moment'
 import InterestedFriendsRow from '../InterestedFriendsRow'
 
@@ -38,16 +37,6 @@ function formatTimeStamp(timeStamp) {
 }
 
 export default class LargeEventsCard extends Component {
-  static defaultProps = {
-    price: 0.0,
-  }
-
-  static propTypes = {
-    price: PropTypes.number,
-    title: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
-  }
-
   constructor(props) {
     super(props)
     this.state = { isInterested: false }
