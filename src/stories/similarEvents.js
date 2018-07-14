@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
 import React from 'react'
-import SimilarEvents from '../components/SimilarEventsBlock'
+import SimilarEvents from '../screens/EventScreen/components/SimilarEventsBlock'
 
 const style = {
   flex: 1,
