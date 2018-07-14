@@ -19,7 +19,6 @@ const GET_COMPANIES = gql`
     }
   }
 `
-
 class ReviewsScreen extends Component {
   state = {
     searchText: '',
@@ -37,7 +36,6 @@ class ReviewsScreen extends Component {
         highestRated: false,
       },
     }
-
     return (
       <ScrollView>
         <HeaderBackground>
@@ -45,7 +43,11 @@ class ReviewsScreen extends Component {
             <BackButton name="ios-arrow-back" size={27} color="white" />
           </BackButtonContainer>
           <Title>Reviews</Title>
-          <SearchFilterTab options={['All', 'Saved', 'Highest Rate']} />
+          <SearchFilterTab
+            options={['All', 'Saved', 'Highest Rate']}
+            selectedColor="white"
+            color="white"
+          />
         </HeaderBackground>
         <SearchBar
           updateText={this.updateText}
