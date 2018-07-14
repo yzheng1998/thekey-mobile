@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScreenContainer, Divider } from './styles'
-
+import { Text } from 'react-native'
 import MyProfilePicBlock from './components/MyProfilePicBlock'
 import MyProfileBioBlock from './components/MyProfileBioBlock'
 import ButtonRowView from './components/ButtonRowView'
@@ -19,8 +19,8 @@ export default class ProfileScreen extends Component {
     return (
       <Query query={GET_USER}>
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...'
-          if (error) return `Error! ${error.message}`
+          if (loading) return <Text>`Loading...`</Text>
+          if (error) return <Text>`Error! ${error.message}`</Text>
           const {
             email,
             firstName,
