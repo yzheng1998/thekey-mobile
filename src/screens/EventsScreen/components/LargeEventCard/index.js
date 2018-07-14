@@ -93,7 +93,14 @@ export default class LargeEventsCard extends Component {
     const { price, title, location, id } = this.props.event
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
-      <Card activeOpacity={0.9}>
+      <Card
+        activeOpacity={0.9}
+        onPress={() =>
+          this.props.navigation.navigate('Event', {
+            id,
+          })
+        }
+      >
         <BackgroundImage source={{ uri: image }}>
           <TopContainer>
             <PriceContainer>
