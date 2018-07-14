@@ -59,17 +59,15 @@ class JobScreen extends Component {
             deadline,
             tags,
           } = data.job
-          const source = picture
-            ? { uri: picture }
-            : {
-                uri:
-                  'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=74be18f074e19e06a51221f0f09969df&auto=format&fit=crop&w=1504&q=80',
-              }
           return (
             <Container>
               <JobPictureBlock
                 navigation={this.props.navigation}
-                picture={source}
+                picture={{
+                  uri:
+                    picture ||
+                    'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=74be18f074e19e06a51221f0f09969df&auto=format&fit=crop&w=1504&q=80',
+                }}
                 title={title}
                 company={company.name}
                 commitment={commitment}

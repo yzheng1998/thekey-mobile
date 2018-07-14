@@ -12,6 +12,8 @@ import ContactContainerView from './components/ContactContainerView'
 import { Query } from 'react-apollo'
 import { GET_USER } from './query'
 
+import nodeEmoji from 'node-emoji'
+
 export default class ProfileScreen extends Component {
   render() {
     return (
@@ -37,6 +39,9 @@ export default class ProfileScreen extends Component {
             lookingFor,
             skills,
           } = data.viewer
+          const emojiList = preferredWaysToMeet.map(emoji =>
+            nodeEmoji.get(emoji.toLowerCase()),
+          )
           return (
             <ScreenContainer>
               <MyProfilePicBlock
@@ -56,7 +61,7 @@ export default class ProfileScreen extends Component {
               <Description
                 row
                 title="Preferred Ways To Meet"
-                content={preferredWaysToMeet}
+                content={emojiList}
               />
               <Divider />
               <EducationListView educationData={education} />
