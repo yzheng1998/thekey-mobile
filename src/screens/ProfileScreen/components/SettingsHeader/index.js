@@ -11,7 +11,7 @@ export default class SettingsMenu extends Component {
           <SettingsGear name="settings" color="black" size={25} />
           <Title>Settings</Title>
         </TitleContainer>
-        <DismissButton>
+        <DismissButton onPress={this.props.hideSettings}>
           <DownArrow name="chevron-down" color="rgb(176,186,200)" size={40} />
         </DismissButton>
       </Container>

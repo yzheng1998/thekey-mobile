@@ -25,13 +25,14 @@ const MenuItemWithNavigation = ({ title, onPress }) => (
 
 export default class SettingsMenu extends Component {
   render() {
+    const { hideSettings, email } = this.props
     return (
       <Container>
         <Menu>
-          <SettingsHeader />
+          <SettingsHeader hideSettings={hideSettings} />
           <MenuItemList>
             <SettingsMenuItem title="Email Address" disabled>
-              <EmailAddress>{this.props.email}</EmailAddress>
+              <EmailAddress>{email}</EmailAddress>
             </SettingsMenuItem>
             <SettingsMenuItem title="Enable Email Notifications" disabled>
               <Switch backgroundActive="rgb(250,53,121)" />

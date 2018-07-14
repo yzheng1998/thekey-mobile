@@ -11,7 +11,7 @@ export default class ButtonRowView extends Component {
         <BackButton onPress={this.props.goBack}>
           <BackArrow name="ios-arrow-back" color="white" size={33} />
         </BackButton>
-        <Settings onPress={() => this.props.navigation.navigate('Settings')}>
+        <Settings onPress={this.props.showSettings}>
           <SettingsGear name="settings" color="white" size={25} />
         </Settings>
       </ButtonRow>

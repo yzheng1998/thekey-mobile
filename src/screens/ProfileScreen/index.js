@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScreenContainer, Divider } from './styles'
-import { Text } from 'react-native'
+import { Text, Modal } from 'react-native'
 import MyProfilePicBlock from './components/MyProfilePicBlock'
 import MyProfileBioBlock from './components/MyProfileBioBlock'
 import ButtonRowView from './components/ButtonRowView'
@@ -8,6 +8,7 @@ import Description from './components/Description'
 import EducationListView from './components/EducationListView'
 import ExperienceListView from './components/ExperienceListView'
 import ContactContainerView from './components/ContactContainerView'
+import SettingsMenu from './components/SettingsMenu'
 
 import { Query } from 'react-apollo'
 import { GET_USER } from './query'
@@ -15,6 +16,9 @@ import { GET_USER } from './query'
 import nodeEmoji from 'node-emoji'
 
 export default class ProfileScreen extends Component {
+  state = {
+    showSettings: false,
+  }
   render() {
     return (
       <Query query={GET_USER}>
@@ -44,6 +48,20 @@ export default class ProfileScreen extends Component {
           )
           return (
             <ScreenContainer>
+              <Modal
+                visible={this.state.showSettings}
+                transparent
+                animationType="slide"
+              >
+                <SettingsMenu
+                  hideSettings={() =>
+                    this.setState({
+                      showSettings: !this.state.showSettings,
+                    })
+                  }
+                  email={email}
+                />
+              </Modal>
               <MyProfilePicBlock
                 name={`${firstName} ${lastName}`}
                 hometown={demographics.hometown}
@@ -54,7 +72,14 @@ export default class ProfileScreen extends Component {
                 }}
                 navigation={this.props.navigation}
               />
-              <ButtonRowView goBack={() => this.props.navigation.goBack()} />
+              <ButtonRowView
+                goBack={() => this.props.navigation.goBack()}
+                showSettings={() =>
+                  this.setState({
+                    showSettings: !this.state.showSettings,
+                  })
+                }
+              />
               <MyProfileBioBlock tagData={tags} bioText={bio} />
               <Divider />
               <Description row title="Looking For" content={lookingFor} />

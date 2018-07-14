@@ -3,7 +3,6 @@ import { themeGet } from 'styled-system'
 
 export const Container = styled.View`
   flex: 1;
-  background-color: red;
   width: 100%;
   margin-top: 50px;
 `
@@ -18,7 +17,7 @@ export const MenuItemList = styled.ScrollView`
 `
 export const EmailAddress = styled.Text`
   font-family: ${themeGet('fonts.medium')};
-  font-size: 14px;
+  font-size: 16px;
   letter-spacing: -0.1;
   color: ${themeGet('colors.fontProfileFields')};
 `
