@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   width: 100%;
   height: 50px;
   flex-direction: row;

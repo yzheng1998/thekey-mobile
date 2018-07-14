@@ -10,6 +10,18 @@ import {
 import NavigationArrow from 'react-native-vector-icons/EvilIcons'
 import SettingsHeader from '../SettingsHeader'
 import SettingsMenuItem from '../SettingsMenuItem'
+import Switch from 'react-native-switch-pro'
+
+const MenuItemWithNavigation = ({ title, onPress }) => (
+  <SettingsMenuItem title={title} onPress={onPress}>
+    <NavigationArrow
+      name="chevron-right"
+      color="rgb(176,186,200)"
+      size={32}
+      style={{ marginRight: -11 }}
+    />
+  </SettingsMenuItem>
+)
 
 export default class SettingsMenu extends Component {
   render() {
@@ -18,75 +30,23 @@ export default class SettingsMenu extends Component {
         <Menu>
           <SettingsHeader />
           <MenuItemList>
-            <SettingsMenuItem title="Email Address">
+            <SettingsMenuItem title="Email Address" disabled>
               <EmailAddress>{this.props.email}</EmailAddress>
             </SettingsMenuItem>
-            <SettingsMenuItem title="Enable Email Notifications" />
-            <SettingsMenuItem title="Recieve Monthly Newsletter" />
-            <SettingsMenuItem title="Password">
-              <NavigationArrow
-                name="chevron-right"
-                color="rgb(176,186,200)"
-                size={32}
-                style={{ marginRight: -11 }}
-              />
+            <SettingsMenuItem title="Enable Email Notifications" disabled>
+              <Switch backgroundActive="rgb(250,53,121)" />
             </SettingsMenuItem>
-            <SettingsMenuItem title="About">
-              <NavigationArrow
-                name="chevron-right"
-                color="rgb(176,186,200)"
-                size={35}
-                style={{ marginRight: -11 }}
-              />
+            <SettingsMenuItem title="Recieve Monthly Newsletter" disabled>
+              <Switch backgroundActive="rgb(250,53,121)" />
             </SettingsMenuItem>
-            <SettingsMenuItem title="Terms Of Service">
-              <NavigationArrow
-                name="chevron-right"
-                color="rgb(176,186,200)"
-                size={35}
-                style={{ marginRight: -11 }}
-              />
-            </SettingsMenuItem>
-            <SettingsMenuItem title="Privacy Policy">
-              <NavigationArrow
-                name="chevron-right"
-                color="rgb(176,186,200)"
-                size={35}
-                style={{ marginRight: -11 }}
-              />
-            </SettingsMenuItem>
-            <SettingsMenuItem title="FAQ's">
-              <NavigationArrow
-                name="chevron-right"
-                color="rgb(176,186,200)"
-                size={35}
-                style={{ marginRight: -11 }}
-              />
-            </SettingsMenuItem>
-            <SettingsMenuItem title="Contact Us">
-              <NavigationArrow
-                name="chevron-right"
-                color="rgb(176,186,200)"
-                size={35}
-                style={{ marginRight: -11 }}
-              />
-            </SettingsMenuItem>
-            <SettingsMenuItem title="Restore Purchase">
-              <NavigationArrow
-                name="chevron-right"
-                color="rgb(176,186,200)"
-                size={35}
-                style={{ marginRight: -11 }}
-              />
-            </SettingsMenuItem>
-            <SettingsMenuItem title="Logout">
-              <NavigationArrow
-                name="chevron-right"
-                color="rgb(176,186,200)"
-                size={35}
-                style={{ marginRight: -11 }}
-              />
-            </SettingsMenuItem>
+            <MenuItemWithNavigation title="Password" />
+            <MenuItemWithNavigation title="About" />
+            <MenuItemWithNavigation title="Terms Of Service" />
+            <MenuItemWithNavigation title="Privacy Policy" />
+            <MenuItemWithNavigation title="FAQ's" />
+            <MenuItemWithNavigation title="Contact Us" />
+            <MenuItemWithNavigation title="Restore Purchase" />
+            <MenuItemWithNavigation title="Logout" />
             <CancelMembershipButton>
               <ButtonText>CANCEL MEMBERSHIP</ButtonText>
             </CancelMembershipButton>
