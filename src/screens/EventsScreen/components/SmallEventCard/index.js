@@ -101,14 +101,16 @@ export default class SmallEventCard extends Component {
             </RowContainer>
           </ContentContainer>
         </FullContainer>
-        interestedFriends && {interestedFriends.length > 0} &&
-        <InterestedFriendsRow
-          navigation={this.props.navigation}
-          avatarNum={5}
-          avatarSize={22}
-          connectionsNum={interestedFriends.length}
-          interestedFriends={selectMutualFriends}
-        />
+        {interestedFriends &&
+          interestedFriends.length > 0 && (
+            <InterestedFriendsRow
+              navigation={this.props.navigation}
+              avatarNum={5}
+              avatarSize={22}
+              connectionsNum={interestedFriends.length}
+              interestedFriends={selectMutualFriends}
+            />
+          )}
       </Card>
     )
   }
