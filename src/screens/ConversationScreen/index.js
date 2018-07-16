@@ -1,4 +1,4 @@
-import { AsyncStorage, View } from 'react-native'
+import { AsyncStorage, View, Text } from 'react-native'
 import React, { Component } from 'react'
 
 import { Background } from './styles'
@@ -46,8 +46,8 @@ class ConversationScreen extends Component {
       <Background>
         <Query query={GET_CHAT_AND_VIEWER} variables={variables}>
           {({ data, loading, error, subscribeToMore }) => {
-            if (loading) return 'loading'
-            if (error) return 'error'
+            if (loading) return <Text>loading</Text>
+            if (error) return <Text>error</Text>
 
             const {
               chat,
