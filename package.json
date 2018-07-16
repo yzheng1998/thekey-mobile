@@ -51,6 +51,7 @@
     "react-native-linkedin-login": "^1.44.1",
     "react-native-qrcode": "^0.2.6",
     "react-native-stars": "^1.1.4",
+    "react-native-switch-pro": "^1.0.0-beta",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^2.0.1",
     "react-number-format": "^3.4.2",

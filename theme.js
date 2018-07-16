@@ -5,6 +5,7 @@ const { width } = Dimensions.get('window')
 const theme = {
   colors: {
     background: 'white',
+    backgroundSecondary: 'rgb(242, 244, 245)',
     buttonPrimary: 'rgb(250, 53, 121)',
     buttonSecondary: 'rgb(243, 244, 245)',
     buttonClicked: 'rgb(253, 205, 221)',
@@ -49,6 +50,7 @@ const theme = {
       fonts: {
         heavy: 'SFProDisplay-Heavy',
         bold: 'SFProDisplay-Bold',
+        semiBold: 'SFProDisplay-Semibold',
         medium: 'SFProDisplay-Medium',
         light: 'SFProDisplay-Light',
         regular: 'SFProDisplay-Regular',
