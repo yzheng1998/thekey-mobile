@@ -22,10 +22,14 @@ const GET_COMPANIES = gql`
 class ReviewsScreen extends Component {
   state = {
     searchText: '',
+    tab: 0,
   }
 
   updateText = searchText => {
     this.setState({ searchText })
+  }
+  changeTab = value => {
+    this.setState({ tab: value })
   }
 
   render() {
@@ -44,9 +48,10 @@ class ReviewsScreen extends Component {
           </BackButtonContainer>
           <Title>Reviews</Title>
           <SearchFilterTab
-            options={['All', 'Saved', 'Highest Rate']}
+            options={['All', 'Saved', 'Highest Rated']}
             selectedColor="white"
             color="white"
+            updateState={this.changeTab}
           />
         </HeaderBackground>
         <SearchBar
@@ -66,9 +71,8 @@ class ReviewsScreen extends Component {
                   <CompanyCard
                     title={item.name}
                     rating={item.rating}
-                    onPress={
-                      (this.props.navigation.navigate('Review'), { item })
-                    }
+                    companyId={item.id}
+                    navigation={this.props.navigation}
                   />
                 )}
               />
