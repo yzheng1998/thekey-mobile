@@ -46,22 +46,20 @@ export default class ReviewBlock extends Component {
         <RatingContainer>
           <RatingStar rating={rating} scoreOff />
         </RatingContainer>
-        <SubTitle>
-          <IconContainer>
-            <PersonIcon name="user" size={15} color="rgb(176,186,200)" />
-          </IconContainer>
-          {role} - {position}
-        </SubTitle>
-        <SubTitle>
-          <IconContainer>
-            <LocationIcon
-              name="location-pin"
-              size={15}
-              color="rgb(176,186,200)"
-            />
-          </IconContainer>
-          {location}
-        </SubTitle>
+        <IconContainer>
+          <PersonIcon name="user" size={15} color="rgb(176,186,200)" />
+          <SubTitle>
+            {role} - {position}
+          </SubTitle>
+        </IconContainer>
+        <IconContainer>
+          <LocationIcon
+            name="location-pin"
+            size={15}
+            color="rgb(176,186,200)"
+          />
+          <SubTitle>{location}</SubTitle>
+        </IconContainer>
         <SecondaryTitle>Pros</SecondaryTitle>
         <Container>
           <Comment ellipsizeMode="tail">{pros}</Comment>
