@@ -64,6 +64,8 @@ import '../src/stories/YourEducationScreen'
 import '../src/stories/EssayScreen'
 import '../src/stories/LineInput'
 import '../src/stories/AddCompanyReviewScreen'
+import '../src/stories/registrationTag'
+import '../src/stories/interestsScreen'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
