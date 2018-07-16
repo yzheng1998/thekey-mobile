@@ -12,6 +12,7 @@ export default class EducationRow extends Component {
     } = this.props
     return (
       <ProfileInfoRow
+        education
         showEditButton={this.props.showEditButton}
         onPress={() =>
           this.props.navigation.navigate('AddEducation', {
