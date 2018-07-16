@@ -58,6 +58,7 @@ import '../src/stories/EmploymentHistoryBlock'
 import '../src/stories/connectionCard'
 import '../src/stories/OptionalInformation'
 import '../src/stories/SettingsMenu'
+import '../src/stories/YourEducationScreen'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
