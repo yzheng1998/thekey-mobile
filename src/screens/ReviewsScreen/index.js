@@ -1,11 +1,24 @@
 import React, { Component } from 'react'
-import { FlatList, ScrollView } from 'react-native'
-import ReviewCard from '../../components/ReviewCard'
+import { FlatList, ScrollView, Text } from 'react-native'
+import CompanyCard from '../../components/CompanyCard'
 import SearchFilterTab from '../../components/SearchFilterTab'
 import { HeaderBackground, Title, BackButtonContainer } from './styles'
 import BackButton from 'react-native-vector-icons/Ionicons'
 import SearchBar from '../../components/SearchBar'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
 
+const GET_COMPANIES = gql`
+  query companies($companyFilterInput: CompanyFilterInput!) {
+    companies(companyFilterInput: $companyFilterInput) {
+      id
+      name
+      email
+      about
+      rating
+    }
+  }
+`
 class ReviewsScreen extends Component {
   state = {
     searchText: '',
@@ -17,7 +30,12 @@ class ReviewsScreen extends Component {
 
   render() {
     const { searchText } = this.state
-    const { reviews } = this.props
+    const variables = {
+      companyFilterInput: {
+        name: this.state.searchText,
+        highestRated: false,
+      },
+    }
     return (
       <ScrollView>
         <HeaderBackground>
@@ -25,18 +43,32 @@ class ReviewsScreen extends Component {
             <BackButton name="ios-arrow-back" size={27} color="white" />
           </BackButtonContainer>
           <Title>Reviews</Title>
-          <SearchFilterTab options={['All', 'Saved', 'Highest Rate']} />
+          <SearchFilterTab
+            options={['All', 'Saved', 'Highest Rate']}
+            selectedColor="white"
+            color="white"
+          />
         </HeaderBackground>
         <SearchBar
           updateText={this.updateText}
           searchText={searchText}
           placeholderText="Search All Reviews"
         />
-        <FlatList
-          keyExtractor={review => review.id}
-          data={reviews}
-          renderItem={({ item: review }) => <ReviewCard review={review} />}
-        />
+        <Query query={GET_COMPANIES} variables={variables}>
+          {({ loading, error, data }) => {
+            if (loading) return <Text>Loading...</Text>
+            if (error) return <Text>Error! ${error.message}</Text>
+            return (
+              <FlatList
+                keyExtractor={review => review.id}
+                data={data.companies}
+                renderItem={({ item }) => (
+                  <CompanyCard title={item.name} rating={item.rating} />
+                )}
+              />
+            )
+          }}
+        </Query>
       </ScrollView>
     )
   }
