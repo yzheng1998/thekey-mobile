@@ -8,8 +8,8 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
 const GET_COMPANY_REVIEWS = gql`
-  query companyReviews($CompanyReviewFilterInput: CompanyReviewFilterInput!) {
-    companyReviews(CompanyReviewFilterInput: $CompanyReviewFilterInput) {
+  query companyReviews($companyReviewFilterInput: CompanyReviewFilterInput!) {
+    companyReviews(companyReviewFilterInput: $companyReviewFilterInput) {
       id
       rating
       title
@@ -19,7 +19,9 @@ const GET_COMPANY_REVIEWS = gql`
       current
       jobTitle
       location
-      company
+      company {
+        id
+      }
       lastWorked
     }
   }
@@ -28,37 +30,41 @@ export default class ReviewScreen extends Component {
   state = {
     tab: 0,
   }
+  changeTab = value => {
+    this.setState({ tab: value })
+  }
   render() {
-    const { companyReviewInfo } = this.props
+    const { title, rating, companyId } = this.props.navigation.state.params
     const tabs = {
       ALL: 0,
-      FULL_TIME: 1,
-      PART_TIME: 2,
+      FULLTIME: 1,
+      PARTTIME: 2,
       INTERNSHIP: 3,
     }
-    const customVariable = tab => {
+    const setEmploymentType = tab => {
       switch (tab) {
         case tabs.ALL:
-          return ''
-        case tabs.FULL_TIME:
-          return 'fullTime'
-        case tabs.PART_TIME:
-          return 'partTime'
+          return null
+        case tabs.FULLTIME:
+          return 'FULLTIME'
+        case tabs.PARTTIME:
+          return 'PARTTIME'
         case tabs.INTERNSHIP:
-          return 'internship'
+          return 'INTERNSHIP'
         default:
-          return ''
+          return null
       }
     }
 
     const variables = {
-      companyFilterInput: {
-        employmentType: customVariable(this.state.tab),
+      companyReviewFilterInput: {
+        companyId,
+        employmentType: setEmploymentType(this.state.tab),
       },
     }
     return (
       <Query query={GET_COMPANY_REVIEWS} variables={variables}>
-        {({ loading, error, reviews }) => {
+        {({ loading, error, data }) => {
           if (loading) return <Text>Loading...</Text>
           if (error) return <Text>Error! ${error.message}</Text>
           return (
@@ -66,23 +72,25 @@ export default class ReviewScreen extends Component {
               <ReviewPictureBlock
                 // get pictures from props but hardcode for now
                 picture={{
-                  source:
+                  uri:
                     'https://images.unsplash.com/photo-1521058001910-55b77aba2203?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=16e03fd1b22a1e9b694c0d2c3457b57a&auto=format&fit=crop&w=1947&q=80',
                 }}
-                title={companyReviewInfo.name}
-                rating={companyReviewInfo.rating}
-                reviews={reviews.length}
+                title={title}
+                rating={rating}
+                reviews={data.companyReviews.length}
               />
-              <FilterBlock />
+              <FilterBlock updateState={this.changeTab} />
               <FlatList
                 keyExtractor={review => review.id}
-                data={reviews}
+                data={data.companyReviews}
                 renderItem={({ item: review }) => (
                   <ReviewBlock
                     subject={review.title}
-                    date={review.date} // no date?
+                    date="placeholder date"
                     rating={review.rating}
-                    role={review.current}
+                    role={
+                      review.current ? 'Current Employee' : 'Former Employee'
+                    }
                     position={review.jobTitle}
                     location={review.location}
                     pros={review.pros}
