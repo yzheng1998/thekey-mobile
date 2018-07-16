@@ -41,6 +41,7 @@ const theme = {
     dislike: 'rgba(221, 91, 91, 0.8)',
     divider: 'rgb(243, 244, 245)',
     profileTitle: 'rgb(39, 43, 49)',
+    textInputBorder: 'rgb(229, 223, 242)',
   },
   width: {
     primary: 0.872 * width,
