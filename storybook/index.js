@@ -16,7 +16,7 @@ import '../src/stories/MessageBubble'
 import '../src/stories/JobCard'
 import '../src/stories/SocietyCard'
 import '../src/stories/LargeEventCard1'
-import '../src/stories/reviewcard'
+import '../src/stories/CompanyCard'
 import '../src/stories/SearchBar'
 import '../src/stories/MyProfilePicBlock'
 import '../src/stories/MyProfileBioBlock'
@@ -57,6 +57,7 @@ import '../src/stories/ReviewScreen'
 import '../src/stories/EmploymentHistoryBlock'
 import '../src/stories/connectionCard'
 import '../src/stories/OptionalInformation'
+import '../src/stories/SettingsMenu'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
