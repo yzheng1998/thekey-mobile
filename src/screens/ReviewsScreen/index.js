@@ -63,7 +63,13 @@ class ReviewsScreen extends Component {
                 keyExtractor={review => review.id}
                 data={data.companies}
                 renderItem={({ item }) => (
-                  <CompanyCard title={item.name} rating={item.rating} />
+                  <CompanyCard
+                    title={item.name}
+                    rating={item.rating}
+                    onPress={
+                      (this.props.navigation.navigate('Review'), { item })
+                    }
+                  />
                 )}
               />
             )
