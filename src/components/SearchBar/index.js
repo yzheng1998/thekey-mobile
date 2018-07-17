@@ -52,7 +52,7 @@ export default class SearchBar extends Component {
             }}
             value={searchText}
           />
-          {searchText && (
+          {searchText !== '' && (
             <ClearIconButton onPress={() => updateText('')}>
               <ClearIcon name="ios-close-circle" size={18} />
             </ClearIconButton>
