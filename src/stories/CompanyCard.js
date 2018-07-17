@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
 import React from 'react'
-import ReviewCard from '../components/ReviewCard'
+import CompanyCard from '../components/CompanyCard'
 import Beats from './beats3.jpg'
 
 const style = {
@@ -13,9 +13,9 @@ const style = {
 const CenteredView = ({ children }) => <View style={style}>{children}</View>
 
 storiesOf('CenteredView')
-  .add('ReviewCard1', () => (
+  .add('CompanyCard1', () => (
     <CenteredView>
-      <ReviewCard
+      <CompanyCard
         picture={Beats}
         title="Beats By Dre"
         reviews="300"
@@ -23,9 +23,9 @@ storiesOf('CenteredView')
       />
     </CenteredView>
   ))
-  .add('ReviewCard2', () => (
+  .add('CompanyCard2', () => (
     <CenteredView>
-      <ReviewCard
+      <CompanyCard
         picture={Beats}
         title="Beats By Dre"
         reviews="300"

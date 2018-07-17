@@ -51,8 +51,9 @@ export default class SearchBar extends Component {
               this.setState({ showCancel: true })
             }}
             value={searchText}
+            autoCapitalize="none"
           />
-          {searchText && (
+          {searchText !== '' && (
             <ClearIconButton onPress={() => updateText('')}>
               <ClearIcon name="ios-close-circle" size={18} />
             </ClearIconButton>

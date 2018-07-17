@@ -13,8 +13,7 @@ import {
   ClockIcon,
   LocationIcon,
 } from './styles'
-import StarButton from '../../../../components/StarButton'
-import PropTypes from 'prop-types'
+import StarButton from '../../../../components/EventStarButton'
 import moment from 'moment'
 import InterestedFriendsRow from '../InterestedFriendsRow'
 
@@ -38,16 +37,6 @@ function formatTimeStamp(timeStamp) {
 }
 
 export default class LargeEventsCard extends Component {
-  static defaultProps = {
-    price: 0.0,
-  }
-
-  static propTypes = {
-    price: PropTypes.number,
-    title: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
-  }
-
   constructor(props) {
     super(props)
     this.state = { isInterested: false }
@@ -104,7 +93,14 @@ export default class LargeEventsCard extends Component {
     const { price, title, location, id } = this.props.event
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
-      <Card activeOpacity={0.9}>
+      <Card
+        activeOpacity={0.9}
+        onPress={() =>
+          this.props.navigation.navigate('Event', {
+            id,
+          })
+        }
+      >
         <BackgroundImage source={{ uri: image }}>
           <TopContainer>
             <PriceContainer>
@@ -127,14 +123,16 @@ export default class LargeEventsCard extends Component {
               <Location>{location}</Location>
             </DetailsContainer>
           </ContentContainer>
-          interestedFriends && {interestedFriends.length > 0} &&
-          <InterestedFriendsRow
-            navigation={this.props.navigation}
-            avatarNum={5}
-            avatarSize={30}
-            connectionsNum={interestedFriends.length}
-            interestedFriends={selectMutualFriends}
-          />
+          {interestedFriends &&
+            interestedFriends.length > 0 && (
+              <InterestedFriendsRow
+                navigation={this.props.navigation}
+                avatarNum={5}
+                avatarSize={30}
+                connectionsNum={interestedFriends.length}
+                interestedFriends={selectMutualFriends}
+              />
+            )}
         </BackgroundImage>
       </Card>
     )

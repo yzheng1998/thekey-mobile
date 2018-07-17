@@ -7,7 +7,7 @@ import {
   SeeAll,
   ButtonContainer,
 } from './styles'
-import EventCard from '../../screens/EventsScreen/components/SmallEventCard'
+import SmallEventCard from '../../../../screens/EventsScreen/components/SmallEventCard'
 import { FlatList } from 'react-native'
 
 class SimilarEventsBlock extends Component {
@@ -31,13 +31,7 @@ class SimilarEventsBlock extends Component {
           data={events}
           renderItem={({ item }) => (
             <EventContainer>
-              <EventCard
-                width="327px"
-                image={item.image}
-                title={item.title}
-                timeStamp={item.timeStamp}
-                interestedFriends={item.interestedFriends}
-              />
+              <SmallEventCard width="350px" event={item} />
             </EventContainer>
           )}
         />

@@ -9,8 +9,8 @@ import {
   LocationContainer,
   ClockContainer,
 } from './styles'
-import PictureHeader from '../PictureHeader'
-import InterestedFriendsRow from '../../screens/EventsScreen/components/InterestedFriendsRow'
+import PictureHeader from '../../../../components/PictureHeader'
+import InterestedFriendsRow from '../../../../screens/EventsScreen/components/InterestedFriendsRow'
 import LocationIcon from 'react-native-vector-icons/SimpleLineIcons'
 import ClockIcon from 'react-native-vector-icons/Feather'
 
@@ -26,7 +26,7 @@ class EventPictureBlock extends Component {
     } = this.props
     return (
       <HeaderContainer>
-        <PictureHeader picture={picture} avatarSize={123}>
+        <PictureHeader source={{ uri: picture }} avatarSize={123}>
           <DescriptionContainer>
             <Title>{title}</Title>
             <Container>
