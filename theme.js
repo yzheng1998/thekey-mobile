@@ -43,6 +43,7 @@ const theme = {
     profileTitle: 'rgb(39, 43, 49)',
     progressBarEmpty: 'rgb(235,240,247)',
     progressBarPrimary: 'rgb(119,210,103)',
+    textInputBorder: 'rgb(229, 223, 242)',
   },
   width: {
     primary: 0.872 * width,

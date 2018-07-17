@@ -59,6 +59,8 @@ import '../src/stories/connectionCard'
 import '../src/stories/OptionalInformation'
 import '../src/stories/SettingsMenu'
 import '../src/stories/YourEducationScreen'
+import '../src/stories/EssayScreen'
+import '../src/stories/LineInput'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
