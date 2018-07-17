@@ -26,6 +26,9 @@ const GET_COMPANY_REVIEWS = gql`
     }
   }
 `
+
+const TABS = [null, 'FULLTIME', 'PARTTIME', 'INTERNSHIP']
+
 export default class ReviewScreen extends Component {
   state = {
     tab: 0,
@@ -35,31 +38,10 @@ export default class ReviewScreen extends Component {
   }
   render() {
     const { title, rating, companyId } = this.props.navigation.state.params
-    const tabs = {
-      ALL: 0,
-      FULLTIME: 1,
-      PARTTIME: 2,
-      INTERNSHIP: 3,
-    }
-    const setEmploymentType = tab => {
-      switch (tab) {
-        case tabs.ALL:
-          return null
-        case tabs.FULLTIME:
-          return 'FULLTIME'
-        case tabs.PARTTIME:
-          return 'PARTTIME'
-        case tabs.INTERNSHIP:
-          return 'INTERNSHIP'
-        default:
-          return null
-      }
-    }
-
     const variables = {
       companyReviewFilterInput: {
         companyId,
-        employmentType: setEmploymentType(this.state.tab),
+        employmentType: TABS[this.state.tab],
       },
     }
     return (
