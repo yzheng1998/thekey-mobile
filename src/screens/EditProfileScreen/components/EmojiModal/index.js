@@ -22,7 +22,7 @@ export default class EmojiModal extends Component {
               <EmojiSelector
                 onSelection={onSelection}
                 emoji={emoji}
-                key={emoji}
+                key={emoji.label}
                 selected={selected}
               />
             ))}

@@ -9,6 +9,8 @@ import {
 } from './styles'
 import EditPencil from 'react-native-vector-icons/MaterialIcons'
 
+import moment from 'moment'
+
 export default class ProfileInfoRow extends Component {
   render() {
     const {
@@ -18,9 +20,21 @@ export default class ProfileInfoRow extends Component {
       startYear,
       endYear,
       onPress,
+      education,
     } = this.props
+
+    const formatTime = time => {
+      if (time) {
+        if (education) return moment(time).format('YYYY')
+        return moment(time).format('MMM YYYY')
+      }
+      return null
+    }
+
     const subtitleArray = [subtitle1, subtitle2].filter(Boolean)
-    const yearArray = [startYear, endYear].filter(Boolean)
+    const yearArray = [formatTime(startYear), formatTime(endYear)].filter(
+      Boolean,
+    )
     return (
       <ProfileInfoRowContainer>
         <TextContainer>
