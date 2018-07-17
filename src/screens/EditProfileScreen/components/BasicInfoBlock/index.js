@@ -16,25 +16,41 @@ import {
 export default class BasicInfoBlock extends Component {
   render() {
     const {
-      name,
-      location,
+      firstName,
+      lastName,
+      hometown,
       bio,
-      lookingForText,
+      lookingFor,
       preferredWaysToMeet,
     } = this.props.state
+    const { lookingForOptions, waysToMeet } = this.props
+
+    const lookingForLabel = lookingForOptions.find(
+      element => element.value === lookingFor,
+    ).label
+
+    const waysToMeetLabels = preferredWaysToMeet.map(
+      el => waysToMeet.find(emoji => emoji.value === el).label,
+    )
+
     const { onChangeText } = this.props
     return (
       <WideContainer>
         <Block>
           <HorizontalEditField
-            title="Name"
-            onChangeText={text => onChangeText({ name: text })}
-            value={name}
+            title="First Name"
+            onChangeText={text => onChangeText({ firstName: text })}
+            value={firstName}
+          />
+          <HorizontalEditField
+            title="Last Name"
+            onChangeText={text => onChangeText({ lastName: text })}
+            value={lastName}
           />
           <HorizontalEditField
             title="Location"
-            onChangeText={text => onChangeText({ location: text })}
-            value={location}
+            onChangeText={text => onChangeText({ hometown: text })}
+            value={hometown}
           />
         </Block>
         <Divider />
@@ -60,7 +76,7 @@ export default class BasicInfoBlock extends Component {
                 })
               }
             >
-              <PickerText>{lookingForText}</PickerText>
+              <PickerText>{lookingForLabel}</PickerText>
             </PickerButton>
           </RowContainer>
           <RowContainer>
@@ -73,7 +89,7 @@ export default class BasicInfoBlock extends Component {
                 })
               }
             >
-              <PickerText>{preferredWaysToMeet}</PickerText>
+              <PickerText>{waysToMeetLabels}</PickerText>
             </PickerButton>
           </RowContainer>
         </Block>

@@ -20,7 +20,11 @@ export default class PickerComponent extends Component {
           itemStyle={{ color: 'rgb(250, 53, 121)' }}
         >
           {options.map(option => (
-            <PickerView.Item label={option} value={option} key={option} />
+            <PickerView.Item
+              label={option.label}
+              value={option.value}
+              key={option}
+            />
           ))}
         </PickerView>
       </PickerContainer>
