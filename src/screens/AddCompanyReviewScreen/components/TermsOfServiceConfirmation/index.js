@@ -4,14 +4,15 @@ import { BlockBackground, RowContainer } from '../../styles'
 import { TouchableOpacity, Linking } from 'react-native'
 import CheckBoxIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+const CheckBox = ({ accepted }) => (
+  <CheckBoxIcon
+    name="checkbox-marked-circle"
+    color={accepted ? 'rgb(250, 53, 121)' : 'rgb(176, 186, 200)'}
+    size={30}
+  />
+)
+
 export default class TermsOfServiceConfirmation extends Component {
-  renderCheckBox = accepted => (
-    <CheckBoxIcon
-      name="checkbox-marked-circle"
-      color={accepted ? 'rgb(250, 53, 121)' : 'rgb(176, 186, 200)'}
-      size={30}
-    />
-  )
   render() {
     const { handleAcceptedTerms, acceptedTerms } = this.props
     return (
@@ -19,11 +20,10 @@ export default class TermsOfServiceConfirmation extends Component {
         <RowContainer>
           <TouchableOpacity
             onPress={() => {
-              handleAcceptedTerms(acceptedTerms)
-              this.renderCheckBox(acceptedTerms)
+              handleAcceptedTerms()
             }}
           >
-            {this.renderCheckBox(acceptedTerms)}
+            <CheckBox accepted={acceptedTerms} />
           </TouchableOpacity>
           <DescriptionContainer>
             <DescriptionText>

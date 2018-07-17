@@ -11,22 +11,13 @@ const style = {
 
 class CenteredView extends Component {
   state = {
-    rating: 0,
-    employmentType: 0,
-    isCurrentEmployee: false,
-    yearLastWorked: new Date().getFullYear(),
-    companyName: 'Doofenshmirtz Evil Incorporated',
-    jobTitle: 'General Manager',
-    location: 'Enter Location',
     acceptedTerms: false,
-    reviewTitle: '',
-    reviewPros: '',
-    reviewCons: '',
   }
   // toggles state variable once user agrees/disagrees to terms of use
-  handleAcceptedTerms = flag => {
-    this.setState({ acceptedTerms: !flag })
+  handleAcceptedTerms = () => {
+    this.setState({ acceptedTerms: !this.state.acceptedTerms })
   }
+
   render() {
     return (
       <View style={style}>
