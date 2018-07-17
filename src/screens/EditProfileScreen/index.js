@@ -33,10 +33,51 @@ const lookingForOptions = [
 ]
 
 const waysToMeet = [
+<<<<<<< HEAD
   { label: nodeEmoji.get('coffee'), value: 'COFFEE' },
   { label: nodeEmoji.get('hamburger'), value: 'HAMBURGER' },
   { label: nodeEmoji.get('phone'), value: 'PHONE' },
   { label: nodeEmoji.get('beers'), value: 'BEERS' },
+=======
+  nodeEmoji.get('coffee'),
+  nodeEmoji.get('hamburger'),
+  nodeEmoji.get('phone'),
+  nodeEmoji.get('beers'),
+]
+
+const educationData = [
+  {
+    schoolName: 'Harvard University',
+    degreeType: 'Bachelors Degree',
+    major: 'East Asian Studies',
+    startYear: '2013',
+    graduationYear: '2017',
+    id: 4,
+  },
+  {
+    schoolName: 'Beachwood High School',
+    startYear: '2009',
+    graduationYear: '2013',
+    id: 1,
+  },
+]
+
+const experienceData = [
+  {
+    companyName: 'Unfiltered Network',
+    position: 'CEO',
+    startDate: '2016',
+    endDate: 'Present / 1yr 9 mos',
+    id: 0,
+  },
+  {
+    companyName: 'Facemovie',
+    position: 'Graphic Designer',
+    startDate: '2010',
+    endDate: '2016',
+    id: 1,
+  },
+>>>>>>> 677c9b3... renamed startYear/endYear to startDate/endDate in AddExperienceForm
 ]
 
 export default class EditProfileScreen extends Component {
