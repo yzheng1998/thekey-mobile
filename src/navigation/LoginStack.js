@@ -2,6 +2,8 @@ import { createStackNavigator } from 'react-navigation'
 import LoginScreen from '../screens/LoginScreen/'
 import LandingScreen from '../screens/LandingScreen/'
 import SignUpScreen from '../screens/SignUpScreen'
+import PersonalDetailsScreen from '../screens/PersonalDetailsScreen'
+import PersonalDetailsScreenCont from '../screens/PersonalDetailsScreenCont'
 
 const LoginStack = createStackNavigator(
   {
@@ -19,6 +21,18 @@ const LoginStack = createStackNavigator(
     },
     SignUp: {
       screen: SignUpScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    PersonalDetails: {
+      screen: PersonalDetailsScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    PersonalDetailsCont: {
+      screen: PersonalDetailsScreenCont,
       navigationOptions: () => ({
         header: null,
       }),

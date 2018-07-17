@@ -78,7 +78,20 @@ export default class SignUpScreen extends Component {
               </Subtitle>”
             </Subtitle>
           </SubtitleView>
-          <RegisterButton buttonText="SIGN UP & ACCEPT" disabled={disabled} />
+          <RegisterButton
+            onPress={() =>
+              this.props.navigation.navigate('PersonalDetails', {
+                userInfo: {
+                  firstName,
+                  lastName,
+                  email,
+                  password,
+                },
+              })
+            }
+            buttonText="SIGN UP & ACCEPT"
+            disabled={disabled}
+          />
         </KeyboardAvoidingView>
       </ScreenContainer>
     )
