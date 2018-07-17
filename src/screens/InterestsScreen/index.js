@@ -40,8 +40,35 @@ const tags = [
   'FINANCE',
 ]
 
+const MAX_NUM_INTERESTS = 3
+
 class InterestsScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      interests: [],
+      selected: [],
+    }
+  }
+
+  addInterest = (interest, index) => {
+    this.setState({
+      interests: [...this.state.interests, interest],
+      selected: [...this.state.selected, index],
+    })
+  }
+
+  removeInterest = (oldInterest, index) => {
+    this.setState({
+      interests: this.state.interests.filter(
+        interest => interest !== oldInterest,
+      ),
+      selected: this.state.selected.filter(interest => interest !== index),
+    })
+  }
   render() {
+    const maxReached = this.state.selected.length === MAX_NUM_INTERESTS
+    const onSelect = maxReached ? () => null : this.addInterest
     return (
       <Container>
         <Header>
@@ -57,8 +84,15 @@ class InterestsScreen extends Component {
         </Subtitle>
         <TagsContainer>
           <TagsRow>
-            {tags.map(tag => (
-              <RegistrationTag name={tag} key={Math.random()} />
+            {tags.map((tag, idx) => (
+              <RegistrationTag
+                name={tag}
+                key={Math.random()}
+                index={idx}
+                selected={this.state.selected.includes(idx)}
+                onSelect={onSelect}
+                onDeselect={this.removeInterest}
+              />
             ))}
           </TagsRow>
         </TagsContainer>
