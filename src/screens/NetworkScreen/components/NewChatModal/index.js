@@ -82,13 +82,6 @@ export default class NewChatModal extends Component {
 
   labelExtractor = tag => tag
 
-  updateUsers = () => {
-    // this.setState({ users: [...this.state.users, user] })
-    // this.setState({ users }, () => {
-    //   console.log('AFTER UPDATEUSERS', this.state)
-    // })
-  }
-
   renderUserCards = peopleData => (
     <PeopleListContainer>
       <FlatList
