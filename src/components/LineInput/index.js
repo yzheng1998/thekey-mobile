@@ -12,9 +12,9 @@ export default class LineInput extends Component {
     selected: false,
   }
   render() {
-    const { updateText, children, placeholderText, text } = this.props
+    const { updateText, children, placeholderText, text, width } = this.props
     return (
-      <LineInputContainer selected={this.state.selected}>
+      <LineInputContainer selected={this.state.selected} width={width}>
         <InputContainer>
           {children}
           <Input
@@ -25,11 +25,12 @@ export default class LineInput extends Component {
             onFocus={() => this.setState({ selected: true })}
             onBlur={() => this.setState({ selected: false })}
           />
-          {text !== '' && (
-            <ClearIconButton onPress={() => updateText('')}>
-              <ClearIcon name="clear" size={20} color="rgb(181, 171, 202)" />
-            </ClearIconButton>
-          )}
+          {text !== undefined &&
+            text !== '' && (
+              <ClearIconButton onPress={() => updateText('')}>
+                <ClearIcon name="clear" size={20} color="rgb(181, 171, 202)" />
+              </ClearIconButton>
+            )}
         </InputContainer>
       </LineInputContainer>
     )
