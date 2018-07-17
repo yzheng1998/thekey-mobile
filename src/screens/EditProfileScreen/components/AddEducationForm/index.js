@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
+import { Screen, Block } from '../../styles'
 import {
-  Screen,
-  Block,
-  RowContainer,
-  Title,
-  Input,
-  DoneButton,
-  DoneButtonText,
-  PickerButton,
-  PickerText,
-} from '../../styles'
+  AddButton,
+  AddButtonText,
+  RemoveButton,
+  RemoveButtonText,
+  ButtonContainer,
+  DateInputRow,
+  OptionsInputContainer,
+  OptionsPlaceholder,
+  OptionsText,
+} from './styles'
 import PickerComponent from '../../../../components/PickerComponent'
+import LineInput from '../../../../components/LineInput'
 import _ from 'lodash'
 
 const schoolTypes = ['Secondary', 'Undergraduate', 'Graduate']
@@ -26,18 +28,29 @@ export default class AddEducationForm extends Component {
         'degreeType',
         'major',
         'startYear',
-        'graudationYear',
+        'graduationYear',
         'id',
       ]),
       schoolTypePickerEnabled: false,
+      optionsInputSelected: false,
+      optionsInputClicked: false,
     }
   }
 
-  updateText = obj => {
+  updateText = (key, text) => {
+    this.setState({ [key]: text })
+  }
+  updateState = obj => {
     this.setState(obj)
   }
-
   editMode = this.props.navigation.getParam('editMode')
+
+  renderSelectedOption = optionsInputSelected => {
+    // if a selection has been made, change text from placeholder
+    if (optionsInputSelected)
+      return <OptionsText>{this.state.schoolType}</OptionsText>
+    return <OptionsPlaceholder>School Type</OptionsPlaceholder>
+  }
 
   render() {
     const {
@@ -48,78 +61,84 @@ export default class AddEducationForm extends Component {
       startYear,
       graduationYear,
       id,
+      optionsInputSelected,
+      optionsInputClicked,
     } = this.state
     return (
       <Screen>
-        <DoneButton
-          onPress={() => {
-            const educationItem = {
-              schoolName,
-              schoolType: schoolType.toUpperCase(),
-              degreeType,
-              major,
-              startYear,
-              graduationYear,
-              id,
-            }
-            const addEducation = this.props.navigation.getParam('addEducation')
-            addEducation(educationItem)
-            this.props.navigation.navigate('EditProfile')
-          }}
-        >
-          <DoneButtonText>{this.editMode ? 'Save' : 'Add'}</DoneButtonText>
-        </DoneButton>
         <Block>
-          <RowContainer>
-            <Title>School Name</Title>
-            <Input
-              value={schoolName}
-              placeholder="Harvard University"
-              onChangeText={text => this.setState({ schoolName: text })}
+          <LineInput
+            text={schoolName}
+            placeholderText="School Name"
+            updateText={text => this.updateText('schoolName', text)}
+          />
+          <OptionsInputContainer
+            selected={optionsInputClicked}
+            onPress={() =>
+              this.setState({
+                schoolTypePickerEnabled: true,
+                optionsInputSelected: true,
+                optionsInputClicked: true,
+              })
+            }
+          >
+            {this.renderSelectedOption(optionsInputSelected)}
+          </OptionsInputContainer>
+          <LineInput
+            text={degreeType}
+            placeholderText="Degree Type"
+            updateText={text => this.updateText('degreeType', text)}
+          />
+          <LineInput
+            text={major}
+            placeholderText="Field of Study"
+            updateText={text => this.updateText('major', text)}
+          />
+          <DateInputRow>
+            <LineInput
+              text={startYear}
+              placeholderText="Start Date"
+              width="48%"
+              updateText={text => this.updateText('startYear', text)}
             />
-          </RowContainer>
-          <RowContainer>
-            <Title>School Type</Title>
-            <PickerButton
-              onPress={() =>
-                this.setState({
-                  schoolTypePickerEnabled: true,
-                })
-              }
+            <LineInput
+              text={graduationYear}
+              placeholderText="Graduation Date"
+              width="48%"
+              updateText={text => this.updateText('graduationYear', text)}
+            />
+          </DateInputRow>
+          <ButtonContainer>
+            <AddButton
+              onPress={() => {
+                const educationItem = {
+                  schoolName,
+                  schoolType: schoolType.toUpperCase(),
+                  degreeType,
+                  major,
+                  startYear,
+                  graduationYear,
+                  id,
+                }
+                const addEducation = this.props.navigation.getParam(
+                  'addEducation',
+                )
+                addEducation(educationItem)
+                this.props.navigation.navigate('EditProfile')
+              }}
             >
-              <PickerText>{schoolType}</PickerText>
-            </PickerButton>
-          </RowContainer>
-          <RowContainer>
-            <Title>Degree Type</Title>
-            <Input
-              value={degreeType}
-              placeholder="Bachlor's Degree"
-              onChangeText={text => this.setState({ degreeType: text })}
-            />
-          </RowContainer>
-          <RowContainer>
-            <Title>Field of Study</Title>
-            <Input
-              value={major}
-              placeholder="Chemistry"
-              onChangeText={text => this.setState({ major: text })}
-            />
-          </RowContainer>
-          <RowContainer>
-            <Title>Start Year</Title>
-            <Input
-              value={startYear}
-              placeholder="2018"
-              onChangeText={text => this.setState({ startYear: text })}
-            />
-            <Title>End Year</Title>
-            <Input
-              value={graduationYear}
-              placeholder="2022"
-              onChangeText={text => this.setState({ graduationYear: text })}
-            />
-          </RowContainer>
+              <AddButtonText>
+                {this.editMode ? 'UPDATE SCHOOL' : 'ADD SCHOOL'}
+              </AddButtonText>
+            </AddButton>
+            <RemoveButton
+              onPress={() => {
+                this.props.navigation.navigate('EditProfile')
+              }}
+            >
+              <RemoveButtonText>REMOVE SCHOOL</RemoveButtonText>
+            </RemoveButton>
+          </ButtonContainer>
         </Block>
         {this.state.schoolTypePickerEnabled && (
           <PickerComponent
@@ -127,9 +146,10 @@ export default class AddEducationForm extends Component {
             doneOnPress={() => {
               this.setState({
                 schoolTypePickerEnabled: false,
+                optionsInputClicked: false, // handles border color of optionsInput
               })
             }}
-            onValueChange={this.updateText}
+            onValueChange={this.updateState}
             value={schoolType}
             keyName="schoolType"
           />
