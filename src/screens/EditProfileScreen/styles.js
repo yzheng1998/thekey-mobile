@@ -13,8 +13,8 @@ export const ScreenScroll = styled.ScrollView`
 
 export const Block = styled.View`
   width: 100%;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: 12px;
+  padding-right: 12px;
 `
 
 export const Divider = styled.View`

@@ -10,7 +10,6 @@ export default class EducationListView extends Component {
         <GraduationCap
           name="graduation-cap"
           size={36}
-          u
           style={{ marginBottom: 4 }}
         />
         {this.props.educationData.map(school => (
