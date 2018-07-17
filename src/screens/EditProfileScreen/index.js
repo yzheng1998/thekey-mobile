@@ -38,7 +38,6 @@ const waysToMeet = [
 
 const educationData = [
   {
-    schoolType: 'UNDERGRADUATE',
     schoolName: 'Harvard University',
     degreeType: 'Bachelors Degree',
     major: 'East Asian Studies',
@@ -47,7 +46,6 @@ const educationData = [
     id: 4,
   },
   {
-    schoolType: 'GRADUATE',
     schoolName: 'Beachwood High School',
     startYear: '2009',
     graduationYear: '2013',
