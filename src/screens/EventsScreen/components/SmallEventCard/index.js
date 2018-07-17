@@ -10,7 +10,7 @@ import {
   Title,
   TimeIcon,
 } from './styles'
-import StarButton from '../../../../components/StarButton'
+import StarButton from '../../../../components/EventStarButton'
 import moment from 'moment'
 import InterestedFriendsRow from '../InterestedFriendsRow'
 
