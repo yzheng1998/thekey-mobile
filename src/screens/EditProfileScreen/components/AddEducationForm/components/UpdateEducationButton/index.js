@@ -32,7 +32,7 @@ export default class UpdateEducationButton extends Component {
       <Mutation
         mutation={UPDATE_EDUCATION}
         onCompleted={() =>
-          this.props.onPress() && this.props.navigation.goBack()
+          this.props.refreshEditProfile() && this.props.navigation.goBack()
         }
       >
         {updateEducation => (
