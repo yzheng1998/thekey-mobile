@@ -18,10 +18,15 @@ class NetworkScreen extends Component {
 
   state = {
     searchText: '',
+    tab: 0,
   }
 
   updateText = searchText => {
     this.setState({ searchText })
+  }
+
+  changeTab = tab => {
+    this.setState({ tab })
   }
 
   render() {
@@ -31,6 +36,10 @@ class NetworkScreen extends Component {
         <HeaderBackground>
           <Title>Your Network</Title>
           <SearchFilterTab
+            updateState={this.changeTab}
+            selectedIndex={this.state.tab}
+            color="white"
+            selectedColor="white"
             options={['All', 'Connections', 'Groups', 'Events']}
           />
         </HeaderBackground>
