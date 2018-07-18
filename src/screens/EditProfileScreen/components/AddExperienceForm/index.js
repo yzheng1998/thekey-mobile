@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
+import { Screen, Block } from '../../styles'
 import {
-  Screen,
-  Block,
   RowContainer,
-  Title,
-  Input,
-  DoneButton,
-  DoneButtonText,
-} from '../../styles'
+  AddButton,
+  AddButtonText,
+  RemoveButton,
+  RemoveButtonText,
+  ButtonContainer,
+  SwitchLabel,
+} from './styles'
+import LineInput from '../../../../components/LineInput'
+import { Switch } from 'react-native'
 import _ from 'lodash'
 
 export default class AddExperienceForm extends Component {
@@ -17,71 +20,105 @@ export default class AddExperienceForm extends Component {
     this.state = _.pick(formElements, [
       'companyName',
       'position',
-      'startYear',
-      'endYear',
+      'startDate',
+      'endDate',
+      'isCurrentEmployee',
       'id',
     ])
   }
 
-  updateText = obj => {
-    this.setState(obj)
+  // functions to update state
+  updateCompanyName = text => {
+    this.setState({ companyName: text })
+  }
+  updatePosition = text => {
+    this.setState({ position: text })
+  }
+  updateStartDate = text => {
+    this.setState({ startDate: text })
+  }
+  updateEndDate = text => {
+    this.setState({ endDate: text })
   }
 
   editMode = this.props.navigation.getParam('editMode')
 
   render() {
-    const { companyName, position, startYear, endYear, id } = this.state
+    const {
+      companyName,
+      position,
+      startDate,
+      endDate,
+      isCurrentEmployee,
+      id,
+    } = this.state
+    const disabled = !(companyName && position && startDate && endDate)
     return (
       <Screen>
-        <DoneButton
-          onPress={() => {
-            const experienceItem = {
-              companyName,
-              position,
-              startYear,
-              endYear,
-              id,
-            }
-            const addExperience = this.props.navigation.getParam(
-              'addExperience',
-            )
-            addExperience(experienceItem)
-            this.props.navigation.navigate('EditProfile')
-          }}
-        >
-          <DoneButtonText>{this.editMode ? 'Save' : 'Add'}</DoneButtonText>
-        </DoneButton>
         <Block>
+          <LineInput
+            text={companyName}
+            placeholderText="Company Name"
+            updateText={text => this.updateCompanyName(text)}
+          />
+          <LineInput
+            text={position}
+            placeholderText="Position"
+            updateText={text => this.updatePosition(text)}
+          />
           <RowContainer>
-            <Title>Company Name</Title>
-            <Input
-              value={companyName}
-              placeholder="The Key"
-              onChangeText={text => this.setState({ companyName: text })}
+            <SwitchLabel>I am currently working here</SwitchLabel>
+            <Switch
+              onValueChange={() =>
+                this.setState({
+                  isCurrentEmployee:
+                    isCurrentEmployee === undefined ? true : !isCurrentEmployee,
+                  endDate: 'Present',
+                })
+              }
+              value={isCurrentEmployee}
+              onTintColor="rgb(250, 53, 121)"
             />
           </RowContainer>
           <RowContainer>
-            <Title>Position</Title>
-            <Input
-              value={position}
-              placeholder="Software Engineer"
-              onChangeText={text => this.setState({ position: text })}
+            <LineInput
+              text={startDate}
+              width="48%"
+              placeholderText="Start Date"
+              updateText={text => this.updateStartDate(text)}
+            />
+            <LineInput
+              text={endDate}
+              width="48%"
+              placeholderText="End Date"
+              updateText={text => this.updateEndDate(text)}
             />
           </RowContainer>
-          <RowContainer>
-            <Title>Start Year</Title>
-            <Input
-              value={startYear}
-              placeholder="2018"
-              onChangeText={text => this.setState({ startYear: text })}
-            />
-            <Title>End Year</Title>
-            <Input
-              value={endYear}
-              placeholder="2022"
-              onChangeText={text => this.setState({ endYear: text })}
-            />
-          </RowContainer>
+          <ButtonContainer>
+            <AddButton
+              disabled={disabled}
+              onPress={() => {
+                const experienceItem = {
+                  companyName,
+                  position,
+                  startDate,
+                  endDate,
+                  isCurrentEmployee,
+                  id,
+                }
+                const addExperience = this.props.navigation.getParam(
+                  'addExperience',
+                )
+                addExperience(experienceItem)
+                this.props.navigation.navigate('EditProfile')
+              }}
+            >
+              <AddButtonText>UPDATE WORK EXPERIENCE</AddButtonText>
+            </AddButton>
+            <RemoveButton>
+              <RemoveButtonText>REMOVE WORK EXPERIENCE</RemoveButtonText>
+            </RemoveButton>
+          </ButtonContainer>
         </Block>
       </Screen>
     )

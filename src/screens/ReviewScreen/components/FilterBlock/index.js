@@ -13,6 +13,7 @@ export default class FilterBlock extends Component {
             options={['All', 'Full-time', 'Part-time', 'Internship']}
             selectedColor="rgb(250,53,121)"
             color="rgb(148,157,170)"
+            updateState={this.props.updateState}
           />
         </TabContainer>
       </Container>
