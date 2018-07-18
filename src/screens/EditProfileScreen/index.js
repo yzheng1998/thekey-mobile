@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal } from 'react-native'
+import { Modal, Text } from 'react-native'
 import EditContactBlock from './components/EditContactBlock'
 import BasicInfoBlock from './components/BasicInfoBlock'
 import EditEducationBlock from './components/EditEducationBlock'
@@ -53,8 +53,8 @@ export default class EditProfileScreen extends Component {
     return (
       <Query query={GET_USER}>
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...'
-          if (error) return `Error! ${error.message}`
+          if (loading) return <Text>Loading...</Text>
+          if (error) return <Text>Error! ${error.message}`</Text>
           const displayData = Object.assign(
             { hometown: data.viewer.demographics.hometown },
             data.viewer,
