@@ -16,10 +16,11 @@ export default class EducationListView extends Component {
         {this.props.educationData.map(school => (
           <EducationRow
             schoolName={school.schoolName}
+            schoolType={school.schoolType}
             degreeType={school.degreeType}
             major={school.major}
             startYear={school.startYear}
-            graduationYear={school.graduationYear}
+            endYear={school.endYear}
             key={school.id}
           />
         ))}
