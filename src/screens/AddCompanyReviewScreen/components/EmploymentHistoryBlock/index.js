@@ -19,7 +19,7 @@ export default class EmploymentHistoryBlock extends Component {
   static createYearData() {
     const yearArray = []
     for (let i = 1970; i <= new Date().getFullYear(); i += 1) {
-      yearArray.push(i.toString())
+      yearArray.push({ label: i.toString(), value: i.toString() })
     }
     return yearArray
   }
