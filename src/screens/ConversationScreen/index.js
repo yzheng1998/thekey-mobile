@@ -72,9 +72,10 @@ class ConversationScreen extends Component {
                         ...oldQuery,
                         chat: {
                           ...oldQuery.chat,
-                          messages: [...oldQuery.chat.messages, message],
+                          messages: [message, ...oldQuery.chat.messages],
                         },
                       }
+                      handlePress()
                       return newQuery
                     },
                   })
