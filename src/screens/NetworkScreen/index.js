@@ -9,6 +9,7 @@ import {
   Title,
   NewChatButton,
   Divider,
+  ThinDivider,
 } from './styles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
@@ -46,7 +47,10 @@ class NetworkScreen extends Component {
           <Title>Your Network</Title>
           <SearchFilterTab
             options={['All', 'Connections', 'Groups', 'Events']}
+            color="rgb(176, 186, 200)"
+            selectedColor="rgb(250, 53, 121)"
           />
+          <ThinDivider />
         </HeaderBackground>
         <SearchBar
           updateText={this.updateText}
