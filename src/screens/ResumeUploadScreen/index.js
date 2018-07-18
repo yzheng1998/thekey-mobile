@@ -3,14 +3,34 @@ import { ScreenContainer, SubtitleView, Subtitle } from './styles'
 import Header from '../../components/Header'
 import Icon from 'react-native-vector-icons/Feather'
 import RegisterButton from '../../components/RegisterButton'
+import ResumeList from './components/ResumeList'
 
 export default class ResumeUploadScreen extends Component {
   state = {
     buttonText: 'ADD FILE',
+    resumeListData: [
+      {
+        id: 0,
+        title: 'Zena_Resume(2018).pdf',
+        dataSize: '3mb',
+        progress: '32.5%',
+      },
+      {
+        id: 1,
+        title: 'Yuke_Resume(2018).pdf',
+        dataSize: '15mb',
+        progress: '67.5%',
+      },
+    ],
   }
 
   updateText = (key, text) => {
     this.setState({ [key]: text })
+  }
+
+  removeFileById = id => {
+    const filteredList = this.state.resumeListData.filter(el => el.id !== id)
+    this.setState({ resumeListData: filteredList })
   }
 
   render() {
@@ -28,6 +48,10 @@ export default class ResumeUploadScreen extends Component {
             Extracurriculars, Internships/Work Experience, etc.
           </Subtitle>
         </SubtitleView>
+        <ResumeList
+          cancel={this.removeFileById}
+          resumeListData={this.state.resumeListData}
+        />
         <RegisterButton
           secondary
           buttonText={this.state.buttonText}
