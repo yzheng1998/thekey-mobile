@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const LineInputContainer = styled.View`
+export const PickerContainer = styled.TouchableOpacity`
   flex-direction: row;
   height: 50px;
-  width: ${props => props.width || '100%'};
   border-radius: 8px;
+  margin-left: 12px;
+  margin-right: 12px;
   align-items: center;
   padding-left: 4px;
   padding-right: 4px;
@@ -17,16 +18,12 @@ export const LineInputContainer = styled.View`
   margin-top: 11px;
   margin-bottom: 11px;
 `
-export const InputContainer = styled.View`
+
+export const TextField = styled.Text`
   font-family: ${themeGet('fonts.regular')};
-  flex-direction: row;
-  align-items: center;
-`
-export const Input = styled.TextInput`
   font-size: 15px;
   flex: 1;
   margin-left: 12px;
-`
-export const ClearIconButton = styled.TouchableOpacity`
-  margin-right: 8px;
+  color: ${props =>
+    props.placeholder ? themeGet('colors.pickerPlaceholder') : 'black'};
 `
