@@ -16,6 +16,10 @@ class LandingScreen extends Component {
           onPress={() => this.props.navigation.navigate('Register')}
         />
         <Button
+          title="Splash"
+          onPress={() => this.props.navigation.navigate('Splash')}
+        />
+        <Button
           // For testing the rest of the app bc don't have login functionality yet
           title="Main Page (for testing)"
           onPress={() => this.props.navigation.navigate('MainTab')}
