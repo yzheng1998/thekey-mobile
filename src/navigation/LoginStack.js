@@ -4,6 +4,7 @@ import LandingScreen from '../screens/LandingScreen/'
 import SignUpScreen from '../screens/SignUpScreen'
 import PersonalDetailsScreen from '../screens/PersonalDetailsScreen'
 import PersonalDetailsScreenCont from '../screens/PersonalDetailsScreenCont'
+import ResumeUploadScreen from '../screens/ResumeUploadScreen'
 
 const LoginStack = createStackNavigator(
   {
@@ -33,6 +34,12 @@ const LoginStack = createStackNavigator(
     },
     PersonalDetailsCont: {
       screen: PersonalDetailsScreenCont,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    ResumeUpload: {
+      screen: ResumeUploadScreen,
       navigationOptions: () => ({
         header: null,
       }),

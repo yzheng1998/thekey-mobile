@@ -76,7 +76,11 @@ export default class PersonalDetailsScreenCont extends Component {
           text={gender ? this.findLabel(gender, genderOptions) : ''}
           placeholderText="What's your gender?"
         />
-        <RegisterButton buttonText="NEXT" disabled={disabled} />
+        <RegisterButton
+          buttonText="NEXT"
+          disabled={disabled}
+          onPress={() => this.props.navigation.navigate('ResumeUpload')}
+        />
         {showSexualOrientationPicker && (
           <PickerComponent
             options={sexualOrientationOptions}
