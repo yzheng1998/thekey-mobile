@@ -19,13 +19,11 @@ export default class EducationListView extends Component {
             navigation={this.props.navigation}
             showEditButton={this.props.showEditButton}
             schoolName={school.schoolName}
-            schoolType={school.schoolType
-              .toLowerCase()
-              .replace(/^\w/, c => c.toUpperCase())}
+            schoolType={school.schoolType}
             degreeType={school.degreeType}
             major={school.major}
             startYear={school.startYear}
-            graduationYear={school.graduationYear}
+            endYear={school.endYear}
             id={school.id}
             key={school.id}
           />
