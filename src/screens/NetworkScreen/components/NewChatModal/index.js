@@ -49,6 +49,22 @@ const people = [
   },
 ]
 
+const PeopleList = ({ peopleData }) => (
+  <PeopleListContainer>
+    <FlatList
+      styles={{ backgroundColor: 'red', flex: 1 }}
+      keyExtractor={person => person.id}
+      data={peopleData}
+      renderItem={({ item: person }) => (
+        <UserCard
+          name={`${person.firstName} ${person.lastName}`}
+          picture={person.profilePicture}
+        />
+      )}
+    />
+  </PeopleListContainer>
+)
+
 export default class NewChatModal extends Component {
   static navigationOptions = {
     header: 'New Conversation',
@@ -63,16 +79,18 @@ export default class NewChatModal extends Component {
   }
 
   onChangeText = text => {
-    this.setState({ text })
-
     const lastTyped = text.charAt(text.length - 1)
-    const parseWhen = [',', ' ', ';', '\n']
-
-    if (parseWhen.indexOf(lastTyped) > -1) {
+    const parseWhen = [',', ' ']
+    // make tag
+    const cleanText = text.replace(',', '').trim()
+    if (parseWhen.indexOf(lastTyped) > -1 && cleanText !== '') {
       this.setState({
-        tags: [...this.state.tags, this.state.text],
+        tags: [...this.state.tags, this.state.text.trim()],
         text: '',
       })
+    } else {
+      // don't make tag, let user keep typing
+      this.setState({ text: text.trim() })
     }
   }
 
@@ -81,22 +99,6 @@ export default class NewChatModal extends Component {
   }
 
   labelExtractor = tag => tag
-
-  renderUserCards = peopleData => (
-    <PeopleListContainer>
-      <FlatList
-        styles={{ backgroundColor: 'red', flex: 1 }}
-        keyExtractor={person => person.id}
-        data={peopleData}
-        renderItem={({ item: person }) => (
-          <UserCard
-            name={`${person.firstName} ${person.lastName}`}
-            picture={person.profilePicture}
-          />
-        )}
-      />
-    </PeopleListContainer>
-  )
 
   render() {
     const inputProps = {
@@ -136,7 +138,9 @@ export default class NewChatModal extends Component {
               tagContainerStyle={{ height: 31 }}
             />
           </SearchNameContainer>
-          <ScrollScreen>{this.renderUserCards(people)}</ScrollScreen>
+          <ScrollScreen>
+            <PeopleList peopleData={people} />
+          </ScrollScreen>
         </Background>
       </Modal>
     )
