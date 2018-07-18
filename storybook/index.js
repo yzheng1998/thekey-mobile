@@ -63,6 +63,7 @@ import '../src/stories/SchoolSearchModal'
 import '../src/stories/YourEducationScreen'
 import '../src/stories/EssayScreen'
 import '../src/stories/LineInput'
+import '../src/stories/AddCompanyReviewScreen'
 
 const StorybookUI = getStorybookUI({
   port: 7007,
