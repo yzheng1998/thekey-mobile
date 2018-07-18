@@ -84,7 +84,7 @@ class EventsScreen extends Component {
       <View>
         <EventsHeader
           navigation={this.props.navigation}
-          state={this.state.tab}
+          selectedIndex={this.state.tab}
           updateState={this.updateState}
         />
         <SearchBar

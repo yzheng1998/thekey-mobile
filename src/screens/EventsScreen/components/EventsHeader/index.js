@@ -12,6 +12,7 @@ import BackArrow from 'react-native-vector-icons/Ionicons'
 
 export default class EventsHeader extends Component {
   render() {
+    const { updateState, selectedIndex } = this.props
     return (
       <HeaderBackground>
         <ButtonRow>
@@ -25,10 +26,10 @@ export default class EventsHeader extends Component {
         <Title>Events</Title>
         <SearchFilterTab
           options={['All', 'Today', 'Tomorrow', 'This Week']}
-          updateState={this.props.updateState}
+          updateState={updateState}
           color="white"
           selectedColor="white"
-          // pass in callback function
+          selectedIndex={selectedIndex}
         />
       </HeaderBackground>
     )
