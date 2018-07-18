@@ -4,10 +4,6 @@ import ProfileInfoRow from '../../../../../components/ProfileInfoRow'
 export default class EducationRow extends Component {
   render() {
     const { schoolName, degreeType, major, startYear, endYear } = this.props
-<<<<<<< HEAD
-=======
-    console.log('props', this.props)
->>>>>>> 7a0983a... fix up prop naming issues in Profile Screen
     return (
       <ProfileInfoRow
         education
