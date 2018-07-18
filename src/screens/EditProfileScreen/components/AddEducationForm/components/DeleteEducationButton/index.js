@@ -18,14 +18,14 @@ export default class DeleteEducationButton extends Component {
       <Mutation
         mutation={DELETE_EDUCATION}
         onCompleted={() =>
-          this.props.onPress() && this.props.navigation.goBack()
+          this.props.refreshDeleteEducation() && this.props.navigation.goBack()
         }
       >
         {deleteEducation => (
           <RemoveButton
             onPress={() => {
               const variables = {
-                id,
+                educationId: id,
               }
               deleteEducation({ variables })
             }}
