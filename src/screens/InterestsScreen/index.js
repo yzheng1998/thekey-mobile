@@ -20,24 +20,24 @@ const tags = [
   'DEVELOPMENT',
   'MUSIC',
   'FINANCE',
-  'TECH',
-  'START-UPS',
-  'DESIGN',
-  'DEVELOPMENT',
-  'MUSIC',
-  'FINANCE',
-  'TECH',
-  'START-UPS',
-  'DESIGN',
-  'DEVELOPMENT',
-  'MUSIC',
-  'FINANCE',
-  'TECH',
-  'START-UPS',
-  'DESIGN',
-  'DEVELOPMENT',
-  'MUSIC',
-  'FINANCE',
+  'aTECH',
+  'aSTART-UPS',
+  'aDESIGN',
+  'aDEVELOPMENT',
+  'aMUSIC',
+  'aFINANCE',
+  'bTECH',
+  'bSTART-UPS',
+  'bDESIGN',
+  'bDEVELOPMENT',
+  'bMUSIC',
+  'bFINANCE',
+  'cTECH',
+  'cSTART-UPS',
+  'cDESIGN',
+  'cDEVELOPMENT',
+  'cMUSIC',
+  'cFINANCE',
 ]
 
 const MAX_NUM_INTERESTS = 3
@@ -47,27 +47,24 @@ class InterestsScreen extends Component {
     super(props)
     this.state = {
       interests: [],
-      selected: [],
     }
   }
 
-  addInterest = (interest, index) => {
+  addInterest = interest => {
     this.setState({
       interests: [...this.state.interests, interest],
-      selected: [...this.state.selected, index],
     })
   }
 
-  removeInterest = (oldInterest, index) => {
+  removeInterest = oldInterest => {
     this.setState({
       interests: this.state.interests.filter(
         interest => interest !== oldInterest,
       ),
-      selected: this.state.selected.filter(interest => interest !== index),
     })
   }
   render() {
-    const maxReached = this.state.selected.length === MAX_NUM_INTERESTS
+    const maxReached = this.state.interests.length === MAX_NUM_INTERESTS
     const onSelect = maxReached ? () => null : this.addInterest
     return (
       <Container>
@@ -84,14 +81,14 @@ class InterestsScreen extends Component {
         </Subtitle>
         <TagsContainer>
           <TagsRow>
-            {tags.map((tag, idx) => (
+            {tags.map(tag => (
               <RegistrationTag
                 name={tag}
                 key={Math.random()}
-                index={idx}
-                selected={this.state.selected.includes(idx)}
+                index={tag}
+                selected={this.state.interests.includes(tag)}
                 currentFunction={
-                  this.state.selected.includes(idx)
+                  this.state.interests.includes(tag)
                     ? this.removeInterest
                     : onSelect
                 }
