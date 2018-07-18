@@ -20,6 +20,7 @@ const theme = {
       primary: 'rgb(176, 186, 200)',
       secondary: 'rgb(128, 128, 128)',
       tertiary: 'rgb(69, 77, 88)',
+      quaternary: 'rgb(148,157,170)',
     },
     border: 'rgb(230, 230, 230)',
     fontTag: 'white',
