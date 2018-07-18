@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import { Screen, Block } from '../../styles'
 import {
-  AddButton,
-  AddButtonText,
-  RemoveButton,
-  RemoveButtonText,
   ButtonContainer,
   DateInputRow,
   OptionsInputContainer,
@@ -12,10 +8,17 @@ import {
   OptionsText,
 } from './styles'
 import PickerComponent from '../../../../components/PickerComponent'
+import AddEducationButton from './components/AddEducationButton'
+import UpdateEducationButton from './components/UpdateEducationButton'
+import DeleteEducationButton from './components/DeleteEducationButton'
 import LineInput from '../../../../components/LineInput'
 import _ from 'lodash'
 
-const schoolTypes = ['Secondary', 'Undergraduate', 'Graduate']
+const schoolTypes = [
+  { label: 'Secondary', value: 'SECONDARY' },
+  { label: 'Undergraduate', value: 'UNDERGRADUATE' },
+  { label: 'Graduate', value: 'GRADUATE' },
+]
 
 export default class AddEducationForm extends Component {
   constructor(props) {
@@ -28,7 +31,7 @@ export default class AddEducationForm extends Component {
         'degreeType',
         'major',
         'startYear',
-        'graduationYear',
+        'endYear',
         'id',
       ]),
       schoolTypePickerEnabled: false,
@@ -47,23 +50,24 @@ export default class AddEducationForm extends Component {
 
   renderSelectedOption = optionsInputSelected => {
     // if a selection has been made, change text from placeholder
-    if (optionsInputSelected)
+    if (optionsInputSelected || this.editMode)
       return <OptionsText>{this.state.schoolType}</OptionsText>
     return <OptionsPlaceholder>School Type</OptionsPlaceholder>
   }
 
   render() {
     const {
+      id,
       schoolName,
       schoolType,
       degreeType,
       major,
       startYear,
-      graduationYear,
-      id,
+      endYear,
       optionsInputSelected,
       optionsInputClicked,
     } = this.state
+
     return (
       <Screen>
         <Block>
@@ -102,42 +106,48 @@ export default class AddEducationForm extends Component {
               updateText={text => this.updateText('startYear', text)}
             />
             <LineInput
-              text={graduationYear}
+              text={endYear}
               placeholderText="Graduation Date"
               width="48%"
-              updateText={text => this.updateText('graduationYear', text)}
+              updateText={text => this.updateText('endYear', text)}
             />
           </DateInputRow>
           <ButtonContainer>
-            <AddButton
-              onPress={() => {
-                const educationItem = {
-                  schoolName,
-                  schoolType: schoolType.toUpperCase(),
-                  degreeType,
-                  major,
-                  startYear,
-                  graduationYear,
-                  id,
-                }
-                const addEducation = this.props.navigation.getParam(
-                  'addEducation',
-                )
-                addEducation(educationItem)
-                this.props.navigation.navigate('EditProfile')
-              }}
-            >
-              <AddButtonText>
-                {this.editMode ? 'UPDATE SCHOOL' : 'ADD SCHOOL'}
-              </AddButtonText>
-            </AddButton>
-            <RemoveButton
-              onPress={() => {
-                this.props.navigation.navigate('EditProfile')
-              }}
-            >
-              <RemoveButtonText>REMOVE SCHOOL</RemoveButtonText>
-            </RemoveButton>
+            {this.editMode ? (
+              <UpdateEducationButton
+                refreshEditProfile={this.props.navigation.getParam(
+                  'refreshData',
+                )}
+                id={id}
+                schoolName={schoolName}
+                schoolType={schoolType}
+                degreeType={degreeType}
+                major={major}
+                startYear={startYear}
+                endYear={endYear}
+                navigation={this.props.navigation}
+              />
+            ) : (
+              <AddEducationButton
+                refreshAddEducation={this.props.navigation.getParam(
+                  'refreshData',
+                )}
+                schoolName={schoolName}
+                schoolType={schoolType}
+                degreeType={degreeType}
+                major={major}
+                startYear={startYear}
+                endYear={endYear}
+                navigation={this.props.navigation}
+              />
+            )}
+            <DeleteEducationButton
+              refreshDeleteEducation={this.props.navigation.getParam(
+                'refreshData',
+              )}
+              navigation={this.props.navigation}
+              id={id}
+            />
           </ButtonContainer>
         </Block>
         {this.state.schoolTypePickerEnabled && (

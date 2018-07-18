@@ -35,6 +35,7 @@ export default class ProfileInfoRow extends Component {
     const yearArray = [formatTime(startYear), formatTime(endYear)].filter(
       Boolean,
     )
+
     return (
       <ProfileInfoRowContainer>
         <TextContainer>
@@ -42,7 +43,7 @@ export default class ProfileInfoRow extends Component {
           {subtitleArray.length > 0 && (
             <Subtitle>{subtitleArray.join(', ')}</Subtitle>
           )}
-          {yearArray.length > 0 && <Years>{yearArray.join(' - ')}</Years>}
+          {yearArray.length > 1 && <Years>{yearArray.join(' - ')}</Years>}
         </TextContainer>
         {this.props.showEditButton && (
           <EditButton onPress={onPress}>

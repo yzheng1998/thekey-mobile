@@ -52,9 +52,9 @@ export default class EditProfileScreen extends Component {
   render() {
     return (
       <Query query={GET_USER}>
-        {({ loading, error, data }) => {
+        {({ loading, error, data, refetch }) => {
           if (loading) return <Text>Loading...</Text>
-          if (error) return <Text>Error! ${error.message}`</Text>
+          if (error) return <Text>Error! ${error.message}</Text>
           const displayData = Object.assign(
             { hometown: data.viewer.demographics.hometown },
             data.viewer,
@@ -87,7 +87,6 @@ export default class EditProfileScreen extends Component {
                 preferredWaysToMeet: [...preferredWaysToMeet, emoji.value],
               })
           }
-
           return (
             <Screen>
               <ScreenScroll>
@@ -123,6 +122,7 @@ export default class EditProfileScreen extends Component {
                 <Divider />
                 <EditEducationBlock
                   navigation={this.props.navigation}
+                  refreshData={refetch}
                   educationData={education}
                 />
                 <EditExperienceBlock
