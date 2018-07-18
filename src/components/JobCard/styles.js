@@ -50,6 +50,8 @@ export const InfoContainer = styled.View`
   flex-direction: row;
   margin-left: -13px;
   margin-top: -9px;
+  align-items: center;
+  padding-right: 8px;
 `
 export const StarContainer = styled.TouchableOpacity`
   padding-top: 20px;

@@ -28,3 +28,8 @@ export const Divider = styled.View`
   height: 8px;
   background-color: ${themeGet('colors.divider')};
 `
+
+export const CardDivider = styled.View`
+  height: 2px;
+  background-color: ${themeGet('colors.divider')};
+`
