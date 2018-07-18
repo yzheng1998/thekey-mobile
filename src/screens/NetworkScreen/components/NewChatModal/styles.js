@@ -23,10 +23,16 @@ export const InputField = styled.TextInput`
 export const SearchNameContainer = styled.View`
   flex-direction: row;
   align-items: center;
-  background-color: ${themeGet('colors.textArea')};
+  background-color: white;
 `
 export const PeopleListContainer = styled.View`
   flex: 1;
   width: 100%;
   background-color: ${themeGet('colors.background')};
+`
+export const ThinDivider = styled.View`
+  width: 100%;
+  height: 4px;
+  margin: 5px;
+  background-color: ${themeGet('colors.divider')};
 `
