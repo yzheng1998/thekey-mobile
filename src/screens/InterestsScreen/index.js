@@ -90,8 +90,11 @@ class InterestsScreen extends Component {
                 key={Math.random()}
                 index={idx}
                 selected={this.state.selected.includes(idx)}
-                onSelect={onSelect}
-                onDeselect={this.removeInterest}
+                currentFunction={
+                  this.state.selected.includes(idx)
+                    ? this.removeInterest
+                    : onSelect
+                }
               />
             ))}
           </TagsRow>

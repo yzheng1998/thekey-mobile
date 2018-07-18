@@ -7,8 +7,7 @@ class RegistrationTag extends Component {
     this.state = { active: false }
   }
   render() {
-    const { name, index, selected, onSelect, onDeselect } = this.props
-    const currentFunction = selected ? onDeselect : onSelect
+    const { name, index, selected, currentFunction } = this.props
     return (
       <Tag onPress={() => currentFunction(name, index)} color={selected}>
         <TagText>{name}</TagText>
