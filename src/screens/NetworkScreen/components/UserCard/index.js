@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Name, Picture, Location, InfoContainer } from './styles'
-import { TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 
 class UserCard extends Component {
   render() {
