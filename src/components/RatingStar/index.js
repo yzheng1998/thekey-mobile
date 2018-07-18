@@ -18,7 +18,7 @@ export default class RatingStar extends Component {
     return (
       <RatingContainer>
         {stars}
-        {!scoreOff && <RateText color={color}>{this.props.rating}</RateText>}
+        {scoreOff && <RateText color={color}>{this.props.rating}</RateText>}
       </RatingContainer>
     )
   }

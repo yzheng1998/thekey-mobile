@@ -6,9 +6,17 @@ import DevLogo from '../../../assets/devlogo.png'
 
 export default class CompanyCard extends Component {
   render() {
-    const { picture, title, rating } = this.props
+    const { picture, title, rating, companyId, navigation } = this.props
     return (
-      <Card>
+      <Card
+        onPress={() =>
+          navigation.navigate('Review', {
+            title,
+            rating,
+            companyId,
+          })
+        }
+      >
         <Image
           source={picture ? { uri: picture } : DevLogo}
           style={{ width: 46, height: 46 }}

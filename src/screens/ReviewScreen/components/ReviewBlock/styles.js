@@ -21,12 +21,13 @@ export const SubTitle = styled.Text`
   padding-bottom: 8px;
   color: ${themeGet('colors.fontDescription.primary')};
 `
-export const RatingContainer = styled.Text`
+export const RatingContainer = styled.View`
   padding-bottom: 7px;
 `
 export const IconContainer = styled.View`
   padding-right: 5px;
   margin-bottom: -3px;
+  flex-direction: row;
 `
 export const SecondaryTitle = styled.Text`
   font-size: 15px;

@@ -9,6 +9,7 @@ import DiscoverScreen from '../screens/DiscoverScreen'
 import FriendRequestScreen from '../screens/FriendRequestScreen'
 import Summary from '../screens/JobSummaryScreen'
 import ReviewsScreen from '../screens/ReviewsScreen'
+import ReviewScreen from '../screens/ReviewScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import ApplyNowScreen from '../screens/ApplyNowScreen'
 import SimilarJobsScreen from '../screens/SimilarJobsScreen'
@@ -71,6 +72,10 @@ const DiscoverStack = createStackNavigator(
     },
     Reviews: {
       screen: ReviewsScreen,
+      navigationOptions: () => ({ header: null }),
+    },
+    Review: {
+      screen: ReviewScreen,
       navigationOptions: () => ({ header: null }),
     },
     FriendRequests: {
