@@ -27,8 +27,18 @@ export default class AddExperienceForm extends Component {
     ])
   }
 
-  updateText = (key, text) => {
-    this.setState({ [key]: text })
+  // functions to update state
+  updateCompanyName = text => {
+    this.setState({ companyName: text })
+  }
+  updatePosition = text => {
+    this.setState({ position: text })
+  }
+  updateStartDate = text => {
+    this.setState({ startDate: text })
+  }
+  updateEndDate = text => {
+    this.setState({ endDate: text })
   }
 
   editMode = this.props.navigation.getParam('editMode')
@@ -49,12 +59,12 @@ export default class AddExperienceForm extends Component {
           <LineInput
             text={companyName}
             placeholderText="Company Name"
-            updateText={text => this.updateText('companyName', text)}
+            updateText={text => this.updateCompanyName(text)}
           />
           <LineInput
             text={position}
             placeholderText="Position"
-            updateText={text => this.updateText('position', text)}
+            updateText={text => this.updatePosition(text)}
           />
           <RowContainer>
             <SwitchLabel>I am currently working here</SwitchLabel>
@@ -75,13 +85,13 @@ export default class AddExperienceForm extends Component {
               text={startDate}
               width="48%"
               placeholderText="Start Date"
-              updateText={text => this.updateText('startDate', text)}
+              updateText={text => this.updateStartDate(text)}
             />
             <LineInput
               text={endDate}
               width="48%"
               placeholderText="End Date"
-              updateText={text => this.updateText('endDate', text)}
+              updateText={text => this.updateEndDate(text)}
             />
           </RowContainer>
           <ButtonContainer>
