@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal } from 'react-native'
+import { Modal, Text } from 'react-native'
 import EditContactBlock from './components/EditContactBlock'
 import BasicInfoBlock from './components/BasicInfoBlock'
 import EditEducationBlock from './components/EditEducationBlock'
@@ -33,51 +33,10 @@ const lookingForOptions = [
 ]
 
 const waysToMeet = [
-<<<<<<< HEAD
   { label: nodeEmoji.get('coffee'), value: 'COFFEE' },
   { label: nodeEmoji.get('hamburger'), value: 'HAMBURGER' },
   { label: nodeEmoji.get('phone'), value: 'PHONE' },
   { label: nodeEmoji.get('beers'), value: 'BEERS' },
-=======
-  nodeEmoji.get('coffee'),
-  nodeEmoji.get('hamburger'),
-  nodeEmoji.get('phone'),
-  nodeEmoji.get('beers'),
-]
-
-const educationData = [
-  {
-    schoolName: 'Harvard University',
-    degreeType: 'Bachelors Degree',
-    major: 'East Asian Studies',
-    startYear: '2013',
-    graduationYear: '2017',
-    id: 4,
-  },
-  {
-    schoolName: 'Beachwood High School',
-    startYear: '2009',
-    graduationYear: '2013',
-    id: 1,
-  },
-]
-
-const experienceData = [
-  {
-    companyName: 'Unfiltered Network',
-    position: 'CEO',
-    startDate: '2016',
-    endDate: 'Present / 1yr 9 mos',
-    id: 0,
-  },
-  {
-    companyName: 'Facemovie',
-    position: 'Graphic Designer',
-    startDate: '2010',
-    endDate: '2016',
-    id: 1,
-  },
->>>>>>> 677c9b3... renamed startYear/endYear to startDate/endDate in AddExperienceForm
 ]
 
 export default class EditProfileScreen extends Component {
@@ -94,8 +53,8 @@ export default class EditProfileScreen extends Component {
     return (
       <Query query={GET_USER}>
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...'
-          if (error) return `Error! ${error.message}`
+          if (loading) return <Text>Loading...</Text>
+          if (error) return <Text>Error! ${error.message}`</Text>
           const displayData = Object.assign(
             { hometown: data.viewer.demographics.hometown },
             data.viewer,
