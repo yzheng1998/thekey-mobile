@@ -9,6 +9,7 @@ export const Button = styled.TouchableOpacity`
   margin-right: 12px;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
   background-color: ${props => {
     if (props.secondary) {
       return themeGet('colors.background')

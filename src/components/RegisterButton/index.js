@@ -4,8 +4,15 @@ import { Button, ButtonText } from './styles'
 export default class RegisterButton extends Component {
   render() {
     return (
-      <Button onPress={this.props.onPress} disabled={this.props.disabled}>
-        <ButtonText>{this.props.buttonText}</ButtonText>
+      <Button
+        secondary={this.props.secondary}
+        onPress={this.props.onPress}
+        disabled={this.props.disabled}
+      >
+        {this.props.children}
+        <ButtonText secondary={this.props.secondary}>
+          {this.props.buttonText}
+        </ButtonText>
       </Button>
     )
   }
