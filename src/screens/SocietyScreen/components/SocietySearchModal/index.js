@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
-import { Modal, FlatList, Platform } from 'react-native'
+import { Modal, FlatList } from 'react-native'
 import {
   Background,
   ScrollScreen,
-  SearchNameContainer,
   PeopleListContainer,
-  Text,
   ThinDivider,
 } from './styles'
-import TagInput from 'react-native-tag-input'
 import UserCard from '../../../../components/UserCard'
-import NewChatModalHeader from '../NewChatModalHeader'
+import SearchModalHeader from '../SearchModalHeader'
+import SearchBar from '../../../../components/SearchBar'
 
 const people = [
   {
@@ -71,81 +69,37 @@ const PeopleList = ({ peopleData }) => (
     />
   </PeopleListContainer>
 )
-
-export default class NewChatModal extends Component {
+export default class SocietySearchModal extends Component {
   static navigationOptions = {
-    header: 'New Conversation',
+    header: 'Search the Society',
   }
+
   state = {
-    text: '',
-    tags: [],
+    searchText: '',
   }
 
-  onChangeTags = tags => {
-    this.setState({ tags })
+  updateText = searchText => {
+    this.setState({ searchText })
   }
-
-  onChangeText = text => {
-    const lastTyped = text.charAt(text.length - 1)
-    const parseWhen = [',', ' ']
-    // make tag
-    const cleanText = text.replace(',', '').trim()
-    if (parseWhen.indexOf(lastTyped) > -1 && cleanText !== '') {
-      this.setState({
-        tags: [...this.state.tags, this.state.text.trim()],
-        text: '',
-      })
-    } else {
-      // don't make tag, let user keep typing
-      this.setState({ text: text.trim() })
-    }
-  }
-
-  setModalVisible(visible) {
-    this.setState({ modalVisible: visible })
-  }
-
-  labelExtractor = tag => tag
 
   render() {
-    const inputProps = {
-      keyboardType: 'default',
-      placeholder: 'search',
-      autoFocus: true,
-      style: {
-        fontSize: 14,
-        marginVertical: Platform.OS === 'ios' ? 10 : -2,
-      },
-    }
-
-    const { handleClose, ...rest } = this.props
-    const handleCloseModal = () => {
+    const { closeModal, ...rest } = this.props
+    const closeSearchModal = () => {
       this.setState({
-        text: '',
-        users: [],
+        searchText: '',
       })
-      handleClose()
+      closeModal()
     }
     return (
       <Modal animationType="slide" {...rest}>
         <Background>
-          <NewChatModalHeader handleClose={handleCloseModal} />
+          <SearchModalHeader closeModal={closeSearchModal} />
+          <SearchBar
+            updateText={this.updateText}
+            searchText={this.state.searchText}
+            placeholderText="Search for a user"
+          />
           <ThinDivider />
-          <SearchNameContainer>
-            <Text>To: </Text>
-            <TagInput
-              value={this.state.tags}
-              onChange={this.onChangeTags}
-              labelExtractor={this.labelExtractor}
-              text={this.state.text}
-              onChangeText={this.onChangeText}
-              tagColor="rgb(250, 53, 121)"
-              tagTextColor="white"
-              inputProps={inputProps}
-              maxHeight={80}
-              tagContainerStyle={{ height: 31 }}
-            />
-          </SearchNameContainer>
           <ScrollScreen>
             <PeopleList peopleData={people} />
           </ScrollScreen>

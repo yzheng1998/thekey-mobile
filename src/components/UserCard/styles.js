@@ -15,7 +15,7 @@ export const Name = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   margin-bottom: 2px;
 `
-export const Location = styled.Text`
+export const Subtitle = styled.Text`
   font-size: 12px;
   font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.fontSubtitle.primary')};

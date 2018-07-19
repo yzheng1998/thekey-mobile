@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import { Card, Name, Picture, Location, InfoContainer } from './styles'
+import { Card, Name, Picture, Subtitle, InfoContainer } from './styles'
 import { TouchableOpacity } from 'react-native'
 
 class UserCard extends Component {
   render() {
-    const { name, picture, location } = this.props
+    const { name, picture, subtitle } = this.props
     return (
       <TouchableOpacity>
         <Card>
           <Picture source={{ uri: picture }} />
           <InfoContainer>
             <Name>{name}</Name>
-            <Location>{location}</Location>
+            <Subtitle>{subtitle}</Subtitle>
           </InfoContainer>
         </Card>
       </TouchableOpacity>
