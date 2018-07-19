@@ -7,7 +7,14 @@ class AboutBlock extends Component {
     this.state = { extend: false }
   }
   render() {
-    const { about } = this.props
+    const {
+      about,
+      aboutRole,
+      aboutCompany,
+      bringToRole,
+      industry,
+      commitment,
+    } = this.props
     return (
       <Container>
         <InfoContainer>
@@ -15,7 +22,17 @@ class AboutBlock extends Component {
             {about}
           </InfoText>
         </InfoContainer>
-        <See onPress={() => this.props.navigation.navigate('Summary')}>
+        <See
+          onPress={() =>
+            this.props.navigation.navigate('Summary', {
+              aboutRole,
+              aboutCompany,
+              bringToRole,
+              industry,
+              commitment,
+            })
+          }
+        >
           <SeeButton>SEE ALL</SeeButton>
         </See>
       </Container>
