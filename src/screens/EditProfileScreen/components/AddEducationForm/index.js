@@ -67,7 +67,7 @@ export default class AddEducationForm extends Component {
       optionsInputSelected,
       optionsInputClicked,
     } = this.state
-
+    const disabled = !(schoolName && schoolType && startYear && endYear)
     return (
       <Screen>
         <Block>
@@ -118,6 +118,7 @@ export default class AddEducationForm extends Component {
                 refreshEditProfile={this.props.navigation.getParam(
                   'refreshData',
                 )}
+                disabled={disabled}
                 id={id}
                 schoolName={schoolName}
                 schoolType={schoolType}
@@ -132,6 +133,7 @@ export default class AddEducationForm extends Component {
                 refreshAddEducation={this.props.navigation.getParam(
                   'refreshData',
                 )}
+                disabled={disabled}
                 schoolName={schoolName}
                 schoolType={schoolType}
                 degreeType={degreeType}
