@@ -30,6 +30,10 @@ const GET_JOB = gql`
       tags {
         name
       }
+      aboutRole
+      aboutCompany
+      bringToRole
+      industry
     }
   }
 `
@@ -59,6 +63,10 @@ class JobScreen extends Component {
             commitment,
             deadline,
             tags,
+            aboutRole,
+            aboutCompany,
+            bringToRole,
+            industry,
           } = data.job
           return (
             <Container>
@@ -78,6 +86,11 @@ class JobScreen extends Component {
               <AboutBlock
                 navigation={this.props.navigation}
                 about={description}
+                aboutRole={aboutRole}
+                aboutCompany={aboutCompany}
+                bringToRole={bringToRole}
+                industry={industry}
+                commitment={commitment}
               />
               <TagsContainer>
                 <TagLine tagData={tags} lines={1} />
