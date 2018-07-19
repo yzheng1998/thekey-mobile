@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react-native'
 import React from 'react'
 import { View } from 'react-native'
-import FilterBlock from '../components/FilterBlock'
+import FilterBlock from '../screens/ReviewScreen/components/FilterBlock'
 
 const style = {
   flex: 1,

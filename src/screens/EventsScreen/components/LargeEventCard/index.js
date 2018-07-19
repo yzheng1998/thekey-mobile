@@ -5,7 +5,6 @@ import {
   TopContainer,
   PriceContainer,
   Price,
-  StarButton,
   ContentContainer,
   DetailsContainer,
   DateTime,
@@ -14,10 +13,9 @@ import {
   ClockIcon,
   LocationIcon,
 } from './styles'
-import PropTypes from 'prop-types'
+import StarButton from '../../../../components/EventStarButton'
 import moment from 'moment'
 import InterestedFriendsRow from '../InterestedFriendsRow'
-import Star from 'react-native-vector-icons/FontAwesome'
 
 const TIME_ZONE_LEN = 3
 
@@ -39,20 +37,15 @@ function formatTimeStamp(timeStamp) {
 }
 
 export default class LargeEventsCard extends Component {
-  static defaultProps = {
-    price: 0.0,
-  }
-
-  static propTypes = {
-    price: PropTypes.number,
-    title: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
-  }
-
   constructor(props) {
     super(props)
     this.state = { isInterested: false }
   }
+
+  select = () => {
+    this.setState({ isInterested: !this.state.isInterested })
+  }
+
   render() {
     const image =
       'https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg'
@@ -97,26 +90,27 @@ export default class LargeEventsCard extends Component {
     const usableTimeStamp = new Date(
       this.props.event.dateRange[0],
     ).toISOString()
-    const { price, title, location } = this.props.event
+    const { price, title, location, id } = this.props.event
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
-      <Card activeOpacity={0.9}>
+      <Card
+        activeOpacity={0.9}
+        onPress={() =>
+          this.props.navigation.navigate('Event', {
+            id,
+          })
+        }
+      >
         <BackgroundImage source={{ uri: image }}>
           <TopContainer>
             <PriceContainer>
               <Price>{formatPrice(price)}</Price>
             </PriceContainer>
             <StarButton
-              onPress={() =>
-                this.setState({ isInterested: !this.state.isInterested })
-              }
-            >
-              <Star
-                name={this.state.isInterested ? 'star' : 'star-o'}
-                size={27}
-                color="white"
-              />
-            </StarButton>
+              onPress={this.select}
+              isInterested={this.state.isInterested}
+              id={id}
+            />
           </TopContainer>
           <ContentContainer>
             <DetailsContainer>
@@ -129,14 +123,16 @@ export default class LargeEventsCard extends Component {
               <Location>{location}</Location>
             </DetailsContainer>
           </ContentContainer>
-          interestedFriends && {interestedFriends.length > 0} &&
-          <InterestedFriendsRow
-            navigation={this.props.navigation}
-            avatarNum={5}
-            avatarSize={30}
-            connectionsNum={interestedFriends.length}
-            interestedFriends={selectMutualFriends}
-          />
+          {interestedFriends &&
+            interestedFriends.length > 0 && (
+              <InterestedFriendsRow
+                navigation={this.props.navigation}
+                avatarNum={5}
+                avatarSize={30}
+                connectionsNum={interestedFriends.length}
+                interestedFriends={selectMutualFriends}
+              />
+            )}
         </BackgroundImage>
       </Card>
     )

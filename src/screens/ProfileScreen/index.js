@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScreenContainer, Divider } from './styles'
-
+import { Text, Modal } from 'react-native'
 import MyProfilePicBlock from './components/MyProfilePicBlock'
 import MyProfileBioBlock from './components/MyProfileBioBlock'
 import ButtonRowView from './components/ButtonRowView'
@@ -8,17 +8,23 @@ import Description from './components/Description'
 import EducationListView from './components/EducationListView'
 import ExperienceListView from './components/ExperienceListView'
 import ContactContainerView from './components/ContactContainerView'
+import SettingsMenu from './components/SettingsMenu'
 
 import { Query } from 'react-apollo'
 import { GET_USER } from './query'
 
+import nodeEmoji from 'node-emoji'
+
 export default class ProfileScreen extends Component {
+  state = {
+    showSettings: false,
+  }
   render() {
     return (
       <Query query={GET_USER}>
         {({ loading, error, data }) => {
-          if (loading) return 'Loading...'
-          if (error) return `Error! ${error.message}`
+          if (loading) return <Text>`Loading...`</Text>
+          if (error) return <Text>`Error! ${error.message}`</Text>
           const {
             email,
             firstName,
@@ -37,8 +43,25 @@ export default class ProfileScreen extends Component {
             lookingFor,
             skills,
           } = data.viewer
+          const emojiList = preferredWaysToMeet.map(emoji =>
+            nodeEmoji.get(emoji.toLowerCase()),
+          )
           return (
             <ScreenContainer>
+              <Modal
+                visible={this.state.showSettings}
+                transparent
+                animationType="slide"
+              >
+                <SettingsMenu
+                  hideSettings={() =>
+                    this.setState({
+                      showSettings: !this.state.showSettings,
+                    })
+                  }
+                  email={email}
+                />
+              </Modal>
               <MyProfilePicBlock
                 name={`${firstName} ${lastName}`}
                 hometown={demographics.hometown}
@@ -49,14 +72,21 @@ export default class ProfileScreen extends Component {
                 }}
                 navigation={this.props.navigation}
               />
-              <ButtonRowView goBack={() => this.props.navigation.goBack()} />
+              <ButtonRowView
+                goBack={() => this.props.navigation.goBack()}
+                showSettings={() =>
+                  this.setState({
+                    showSettings: !this.state.showSettings,
+                  })
+                }
+              />
               <MyProfileBioBlock tagData={tags} bioText={bio} />
               <Divider />
               <Description row title="Looking For" content={lookingFor} />
               <Description
                 row
                 title="Preferred Ways To Meet"
-                content={preferredWaysToMeet}
+                content={emojiList}
               />
               <Divider />
               <EducationListView educationData={education} />

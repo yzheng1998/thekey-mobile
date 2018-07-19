@@ -5,6 +5,7 @@ const { width } = Dimensions.get('window')
 const theme = {
   colors: {
     background: 'white',
+    backgroundSecondary: 'rgb(242, 244, 245)',
     buttonPrimary: 'rgb(250, 53, 121)',
     buttonSecondary: 'rgb(243, 244, 245)',
     buttonClicked: 'rgb(253, 205, 221)',
@@ -19,6 +20,7 @@ const theme = {
       primary: 'rgb(176, 186, 200)',
       secondary: 'rgb(128, 128, 128)',
       tertiary: 'rgb(69, 77, 88)',
+      quaternary: 'rgb(148,157,170)',
     },
     border: 'rgb(230, 230, 230)',
     fontTag: 'white',
@@ -40,6 +42,10 @@ const theme = {
     dislike: 'rgba(221, 91, 91, 0.8)',
     divider: 'rgb(243, 244, 245)',
     profileTitle: 'rgb(39, 43, 49)',
+    progressBarEmpty: 'rgb(235,240,247)',
+    progressBarPrimary: 'rgb(119,210,103)',
+    textInputBorder: 'rgb(229, 223, 242)',
+    pickerPlaceholder: 'rgb(139, 133, 150)',
   },
   width: {
     primary: 0.872 * width,
@@ -49,6 +55,7 @@ const theme = {
       fonts: {
         heavy: 'SFProDisplay-Heavy',
         bold: 'SFProDisplay-Bold',
+        semiBold: 'SFProDisplay-Semibold',
         medium: 'SFProDisplay-Medium',
         light: 'SFProDisplay-Light',
         regular: 'SFProDisplay-Regular',

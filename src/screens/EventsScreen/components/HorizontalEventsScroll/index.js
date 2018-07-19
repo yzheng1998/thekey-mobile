@@ -13,7 +13,6 @@ export default class HorizontalEventsScroll extends Component {
   }
   render() {
     const { eventsList } = this.props
-    // hardcoding array of friends for now
 
     return (
       <Container>

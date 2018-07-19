@@ -6,11 +6,10 @@ import {
   ButtonsContainer,
   LetterInput,
   BackButtonContainer,
-  ApplyButton,
-  Placeholder,
   BigContainer,
 } from './styles'
 import TemplateSelector from './components/ButtonGroup'
+import ApplyButton from './components/ApplyButton'
 import BackButton from 'react-native-vector-icons/Ionicons'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
 
@@ -66,9 +65,11 @@ export default class ApplyNowScreen extends Component {
             placeholderTextColor="rgb(69,77,88)"
           />
         </Container>
-        <ApplyButton>
-          <Placeholder>SEND APPLICATION</Placeholder>
-        </ApplyButton>
+        <ApplyButton
+          coverLetter={this.state.content}
+          navigation={this.props.navigation}
+          id={this.props.navigation.getParam('id')}
+        />
         <KeyboardSpacer />
       </BigContainer>
     )

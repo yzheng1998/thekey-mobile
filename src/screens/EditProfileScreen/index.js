@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal } from 'react-native'
+import { Modal, Text } from 'react-native'
 import EditContactBlock from './components/EditContactBlock'
 import BasicInfoBlock from './components/BasicInfoBlock'
 import EditEducationBlock from './components/EditEducationBlock'
@@ -21,186 +21,155 @@ import {
 
 import nodeEmoji from 'node-emoji'
 
+import { Query } from 'react-apollo'
+import { GET_USER } from './query'
+
 const lookingForOptions = [
-  'Business Mentor',
-  'Friends',
-  'Business Partner',
-  'Employment',
-  'School Advice',
+  { label: 'Business Mentor', value: 'BUSINESSMENTOR' },
+  { label: 'Friends', value: 'FRIENDS' },
+  { label: 'Business Partner', value: 'BUSINESSPARTNER' },
+  { label: 'Employment', value: 'EMPLOYMENT' },
+  { label: 'School Advice', value: 'SCHOOLADVICE' },
 ]
 
 const waysToMeet = [
-  nodeEmoji.get('coffee'),
-  nodeEmoji.get('hamburger'),
-  nodeEmoji.get('phone'),
-  nodeEmoji.get('beers'),
-]
-
-const educationData = [
-  {
-    schoolType: 'UNDERGRADUATE',
-    schoolName: 'Harvard University',
-    degreeType: 'Bachelors Degree',
-    major: 'East Asian Studies',
-    startYear: '2013',
-    graduationYear: '2017',
-    id: 4,
-  },
-  {
-    schoolType: 'GRADUATE',
-    schoolName: 'Beachwood High School',
-    startYear: '2009',
-    graduationYear: '2013',
-    id: 1,
-  },
-]
-
-const experienceData = [
-  {
-    companyName: 'Unfiltered Network',
-    position: 'CEO',
-    startYear: '2016',
-    endYear: 'Present / 1yr 9 mos',
-    id: 0,
-  },
-  {
-    companyName: 'Facemovie',
-    position: 'Graphic Designer',
-    startYear: '2010',
-    endYear: '2016',
-    id: 1,
-  },
+  { label: nodeEmoji.get('coffee'), value: 'COFFEE' },
+  { label: nodeEmoji.get('hamburger'), value: 'HAMBURGER' },
+  { label: nodeEmoji.get('phone'), value: 'PHONE' },
+  { label: nodeEmoji.get('beers'), value: 'BEERS' },
 ]
 
 export default class EditProfileScreen extends Component {
   state = {
-    name: 'Yuke Zheng',
-    location: 'Cleveland, Ohio',
-    bio:
-      'Former Harvard Basketball player now transitioning to the business world and looking to learn and connect with others!',
-    lookingFor: 'Business Mentor',
-    lookingForText: 'Business Mentor',
-    preferredWaysToMeet: [nodeEmoji.get('coffee')],
-    profilePicture: {
-      uri:
-        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-    },
-    linkedIn: 'Linkedin.com/name',
-    twitter: '@username',
-    facebook: 'facebook.com/name',
-    email: 'person@email.com',
-    interests: '#Medicine #Health #Business #Tech',
     lookingForPickerEnabled: false,
     meetByPickerEnabled: false,
-    educationData,
-    workExperience: experienceData,
   }
 
   updateText = obj => {
     this.setState(obj)
   }
 
-  addEducation = educationItem => {
-    if (Number.isInteger(educationItem.id)) {
-      const index = educationData.findIndex(
-        item => item.id === educationItem.id,
-      )
-      educationData[index] = educationItem
-    } else educationData.push({ ...educationItem, id: educationData.length })
-    this.setState({ educationData })
-  }
-
-  addExperience = experienceItem => {
-    if (Number.isInteger(experienceItem.id)) {
-      const index = experienceData.findIndex(
-        item => item.id === experienceItem.id,
-      )
-      experienceData[index] = experienceItem
-    } else experienceData.push({ ...experienceItem, id: experienceData.length })
-    this.setState({ workExperience: experienceData })
-  }
-
-  addWayToMeet = emoji => {
-    const { preferredWaysToMeet } = this.state
-    const index = preferredWaysToMeet.indexOf(emoji)
-    if (index > -1) {
-      preferredWaysToMeet.splice(index, 1)
-    } else preferredWaysToMeet.push(emoji)
-    this.setState({ preferredWaysToMeet })
-  }
-
   render() {
     return (
-      <Screen>
-        <ScreenScroll>
-          <Picture source={this.state.profilePicture}>
-            <PictureButton>
-              <EditLabel>EDIT</EditLabel>
-            </PictureButton>
-          </Picture>
-          <BasicInfoBlock state={this.state} onChangeText={this.updateText} />
-          <Divider />
-          <Block>
-            <ColumnContainer>
-              <BlockTitle>My Interests</BlockTitle>
-              <LargeInput
-                multiline
-                defaultValue={this.state.interests}
-                onChangeText={interests => this.setState({ interests })}
-                placeholder="#Medicine #Health #Business #Tech #Venture Capital #Start-up"
-              />
-            </ColumnContainer>
-          </Block>
-          <Divider />
-          <EditEducationBlock
-            navigation={this.props.navigation}
-            educationData={this.state.educationData}
-            addEducation={this.addEducation}
-          />
-          <EditExperienceBlock
-            navigation={this.props.navigation}
-            experienceData={this.state.workExperience}
-            addExperience={this.addExperience}
-          />
-          <EditContactBlock
-            linkedIn={this.state.linkedIn}
-            email={this.state.email}
-            facebook={this.state.facebook}
-            twitter={this.state.twitter}
-            onChangeText={this.updateText}
-          />
-        </ScreenScroll>
-        {this.state.lookingForPickerEnabled && (
-          <PickerComponent
-            options={lookingForOptions}
-            doneOnPress={() => {
-              this.updateText({
-                lookingForText: this.state.lookingFor,
-                lookingForPickerEnabled: false,
+      <Query query={GET_USER}>
+        {({ loading, error, data, refetch }) => {
+          if (loading) return <Text>Loading...</Text>
+          if (error) return <Text>Error! ${error.message}</Text>
+          const displayData = Object.assign(
+            { hometown: data.viewer.demographics.hometown },
+            data.viewer,
+            this.state,
+          )
+          const {
+            email,
+            linkedIn,
+            facebook,
+            twitter,
+            profilePicture,
+            education,
+            preferredWaysToMeet,
+            tags,
+            workExperiences,
+            lookingFor,
+            lookingForPickerEnabled,
+            meetByPickerEnabled,
+          } = displayData
+
+          const toggleWayToMeet = emoji => {
+            if (preferredWaysToMeet.includes(emoji.value)) {
+              this.setState({
+                preferredWaysToMeet: preferredWaysToMeet.filter(
+                  el => el !== emoji.value,
+                ),
               })
-            }}
-            onValueChange={this.updateText}
-            value={this.state.lookingFor}
-            keyName="lookingFor"
-          />
-        )}
-        <Modal
-          animationType="slide"
-          transparent
-          visible={this.state.meetByPickerEnabled}
-        >
-          <EmojiModal
-            doneOnPress={() => {
-              this.updateText({
-                meetByPickerEnabled: false,
+            } else
+              this.setState({
+                preferredWaysToMeet: [...preferredWaysToMeet, emoji.value],
               })
-            }}
-            onSelection={this.addWayToMeet}
-            options={waysToMeet}
-            selected={this.state.preferredWaysToMeet}
-          />
-        </Modal>
-      </Screen>
+          }
+          return (
+            <Screen>
+              <ScreenScroll>
+                <Picture
+                  source={{
+                    uri:
+                      profilePicture ||
+                      'https://images.unsplash.com/photo-1519145897500-869c40ccb024?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc363c8e033813d4f7b798846bb13a24&auto=format&fit=crop&w=582&q=80',
+                  }}
+                >
+                  <PictureButton>
+                    <EditLabel>EDIT</EditLabel>
+                  </PictureButton>
+                </Picture>
+                <BasicInfoBlock
+                  state={displayData}
+                  lookingForOptions={lookingForOptions}
+                  waysToMeet={waysToMeet}
+                  onChangeText={this.updateText}
+                />
+                <Divider />
+                <Block>
+                  <ColumnContainer>
+                    <BlockTitle>My Interests</BlockTitle>
+                    <LargeInput
+                      multiline
+                      defaultValue={tags.map(tag => tag.name).toString()}
+                      onChangeText={interests => this.setState({ interests })}
+                      placeholder="#Medicine #Health #Business #Tech #Venture Capital #Start-up"
+                    />
+                  </ColumnContainer>
+                </Block>
+                <Divider />
+                <EditEducationBlock
+                  navigation={this.props.navigation}
+                  refreshData={refetch}
+                  educationData={education}
+                />
+                <EditExperienceBlock
+                  navigation={this.props.navigation}
+                  experienceData={workExperiences}
+                />
+                <EditContactBlock
+                  linkedIn={linkedIn}
+                  email={email}
+                  facebook={facebook}
+                  twitter={twitter}
+                  onChangeText={this.updateText}
+                />
+              </ScreenScroll>
+              {lookingForPickerEnabled && (
+                <PickerComponent
+                  options={lookingForOptions}
+                  doneOnPress={() => {
+                    this.updateText({
+                      lookingForPickerEnabled: false,
+                    })
+                  }}
+                  onValueChange={this.updateText}
+                  value={lookingFor}
+                  keyName="lookingFor"
+                />
+              )}
+              <Modal
+                animationType="slide"
+                transparent
+                visible={meetByPickerEnabled}
+              >
+                <EmojiModal
+                  doneOnPress={() => {
+                    this.updateText({
+                      meetByPickerEnabled: false,
+                    })
+                  }}
+                  onSelection={toggleWayToMeet}
+                  options={waysToMeet}
+                  selected={preferredWaysToMeet}
+                />
+              </Modal>
+            </Screen>
+          )
+        }}
+      </Query>
     )
   }
 }
