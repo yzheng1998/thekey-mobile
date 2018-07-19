@@ -46,6 +46,7 @@ const theme = {
     progressBarPrimary: 'rgb(119,210,103)',
     textInputBorder: 'rgb(229, 223, 242)',
     pickerPlaceholder: 'rgb(139, 133, 150)',
+    activeTag: 'rgb(92, 78, 121)',
   },
   width: {
     primary: 0.872 * width,

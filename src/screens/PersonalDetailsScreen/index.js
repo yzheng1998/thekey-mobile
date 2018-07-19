@@ -5,19 +5,24 @@ import Header from '../../components/Header'
 import RegisterButton from '../../components/RegisterButton'
 import RegistrationPicker from '../../components/RegistrationPicker'
 import { ethnicityOptions } from './constants'
+import HometownSearchModal from '../../components/HometownSearchModal'
 
 import nodeEmoji from 'node-emoji'
 
 export default class PersonalDetailsScreen extends Component {
   state = {
     ethnicity: '',
-    hometown: 'asd',
+    hometown: '',
     showEthnictyPicker: false,
     showHometownPicker: false,
   }
 
   updateText = obj => {
     this.setState(obj)
+  }
+
+  closeHometownPicker = () => {
+    this.setState({ showHometownPicker: false })
   }
 
   findLabel = (value, arr) => arr.find(el => el.value === value).label
@@ -35,6 +40,11 @@ export default class PersonalDetailsScreen extends Component {
 
     return (
       <ScreenContainer>
+        <HometownSearchModal
+          setText={this.updateText}
+          onPress={this.closeHometownPicker}
+          visible={showHometownPicker}
+        />
         <Header
           title={`${nodeEmoji.get('wave')} Hi, ${userInfo.firstName}!`}
           showBack
