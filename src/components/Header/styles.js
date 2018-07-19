@@ -11,7 +11,6 @@ export const TitleRow = styled.View`
   width: 100%;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
   margin-bottom: 12px;
 `
 export const Title = styled.Text`
