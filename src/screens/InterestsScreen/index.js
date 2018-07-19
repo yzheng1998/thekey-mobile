@@ -1,18 +1,14 @@
 import React, { Component } from 'react'
 import RegistrationTag from '../../components/RegistrationTag'
 import {
-  Header,
+  ScreenContainer,
   Container,
-  Title,
-  GreenProgressBar,
-  ProgressBar,
   Subtitle,
-  BackButtonContainer,
   TagsRow,
   TagsContainer,
 } from './styles'
-import BackButton from 'react-native-vector-icons/Ionicons'
-import RegisterButton from '../../components/RegisterButton'
+import SubmitButton from '../../components/SubmitButton'
+import Header from '../../components/Header'
 
 const tags = [
   'TECH',
@@ -43,7 +39,7 @@ const tags = [
 
 const MAX_NUM_INTERESTS = 3
 
-class InterestsScreen extends Component {
+export default class InterestsScreen extends Component {
   state = {
     interests: [],
   }
@@ -62,40 +58,47 @@ class InterestsScreen extends Component {
 
   render() {
     const maxReached = this.state.interests.length >= MAX_NUM_INTERESTS
+    const userInfo = this.props.navigation.getParam('userInfo')
     return (
-      <Container>
-        <Header>
-          <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
-            <BackButton name="ios-arrow-back" size={27} color="black" />
-          </BackButtonContainer>
-          <Title>Your Interests</Title>
-        </Header>
-        <ProgressBar />
-        <GreenProgressBar />
-        <Subtitle>
-          Choose 3 options. These can be {'\n'}updated later on
-        </Subtitle>
-        <TagsContainer>
-          <TagsRow>
-            {tags.map(tag => (
-              <RegistrationTag
-                name={tag}
-                key={tag}
-                disable={maxReached && !this.state.interests.includes(tag)}
-                selected={this.state.interests.includes(tag)}
-                onPress={this.toggleInterest}
-              />
-            ))}
-          </TagsRow>
-          <RegisterButton
-            buttonText="NEXT"
-            disabled={!maxReached}
-            onPress={() => null}
+      <ScreenContainer>
+        <Container>
+          <Header
+            title="Your Interests"
+            showBack
+            onBackPress={() => this.props.navigation.goBack()}
+            progress="71.4%"
           />
-        </TagsContainer>
-      </Container>
+          <Subtitle>
+            Choose 3 options. These can be {'\n'}updated later on
+          </Subtitle>
+          <TagsContainer>
+            <TagsRow>
+              {tags.map(tag => (
+                <RegistrationTag
+                  name={tag}
+                  key={tag}
+                  disable={maxReached && !this.state.interests.includes(tag)}
+                  selected={this.state.interests.includes(tag)}
+                  onPress={this.toggleInterest}
+                />
+              ))}
+            </TagsRow>
+          </TagsContainer>
+        </Container>
+        {maxReached && (
+          <SubmitButton
+            onPress={() =>
+              this.props.navigation.navigate('Skills', {
+                userInfo: {
+                  ...userInfo,
+                  interests: this.state.interests,
+                },
+              })
+            }
+            buttonText="CONTINUE"
+          />
+        )}
+      </ScreenContainer>
     )
   }
 }
-
-export default InterestsScreen
