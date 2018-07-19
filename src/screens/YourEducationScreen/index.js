@@ -4,41 +4,50 @@ import Header from '../../components/Header'
 import RegisterButton from '../../components/RegisterButton'
 import EducationList from './components/EducationList'
 import SubmitButton from '../../components/SubmitButton'
+import SchoolSearchModal from '../../components/SchoolSearchModal'
+import AddEducationModal from './components/AddEducationModal'
 
 import nodeEmoji from 'node-emoji'
 
 class YourEducationScreen extends Component {
   state = {
-    educationListData: [
-      {
-        id: 0,
-        schoolName: 'Harvard University',
-        schoolType: 'UNDERGRADUATE',
-        location: 'Cambridge, Massachusetts',
-        degreeType: 'Bachelors Degree',
-        major: 'Chemical and Physical Biology',
-        startYear: '2017',
-        endYear: '2021',
-      },
-      {
-        id: 1,
-        schoolName: 'Beachwood High School',
-        schoolType: 'SECONDARY',
-        location: 'Beachwood, Ohio',
-        degreeType: 'SECONDARY',
-        startYear: '2013',
-        endYear: '2017',
-      },
-    ],
+    showSchoolSearchModal: false,
+    showAddEducationModal: false,
+    schoolName: '',
+    location: '',
+    major: '',
+    startYear: '',
+    graduationYear: '',
+    isCurrentEmployee: false,
+    educationListData: [],
   }
 
-  updateText = (key, text) => {
-    this.setState({ [key]: text })
+  toggleSchoolModal = () => {
+    this.setState({ showSchoolSearchModal: !this.state.showSchoolSearchModal })
+  }
+
+  toggleEducationModal = () => {
+    this.setState({ showAddEducationModal: !this.state.showAddEducationModal })
   }
 
   removeEducationById = id => {
     const filteredList = this.state.educationListData.filter(el => el.id !== id)
     this.setState({ educationListData: filteredList })
+  }
+
+  updateState = obj => {
+    this.setState(obj)
+  }
+
+  clearState = () => {
+    this.setState({
+      schoolName: '',
+      location: '',
+      major: '',
+      startYear: '',
+      graduationYear: '',
+      isCurrentEmployee: '',
+    })
   }
 
   render() {
@@ -47,6 +56,19 @@ class YourEducationScreen extends Component {
     const buttonText = this.state.educationListData.length
       ? '+ ADD ANOTHER SCHOOL'
       : '+ ADD SCHOOL'
+
+    const addEducation = schoolObj => {
+      this.setState({
+        educationListData: [...this.state.educationListData, schoolObj],
+      })
+    }
+    const {
+      schoolName,
+      location,
+      major,
+      startYear,
+      graduationYear,
+    } = this.state
     return (
       <Container>
         <Header
@@ -63,7 +85,34 @@ class YourEducationScreen extends Component {
           cancel={this.removeEducationById}
           educationListData={this.state.educationListData}
         />
-        <RegisterButton buttonText={buttonText} secondary />
+        <RegisterButton
+          buttonText={buttonText}
+          secondary
+          onPress={() => this.setState({ showSchoolSearchModal: true })}
+        />
+        <AddEducationModal
+          addEducation={() => {
+            addEducation({
+              schoolName,
+              location,
+              major,
+              startYear,
+              graduationYear,
+            })
+          }}
+          clearState={this.clearState}
+          state={this.state}
+          updateText={this.updateState}
+          toggleEducationModal={this.toggleEducationModal}
+          visible={this.state.showAddEducationModal}
+        />
+        <SchoolSearchModal
+          updateState={this.updateState}
+          toggleEducationModal={this.toggleEducationModal}
+          navigation={this.props.navigation}
+          toggleSchoolModal={this.toggleSchoolModal}
+          visible={this.state.showSchoolSearchModal}
+        />
         {!disabled && (
           <SubmitButton
             onPress={() =>
