@@ -60,6 +60,7 @@ export default class ReviewScreen extends Component {
                 title={title}
                 rating={rating}
                 reviews={data.companyReviews.length}
+                navigation={this.props.navigation}
               />
               <FilterBlock updateState={this.changeTab} />
               <FlatList
