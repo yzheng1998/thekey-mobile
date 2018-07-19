@@ -9,6 +9,7 @@ import {
   DateTime,
   Title,
   TimeIcon,
+  TitleContainer,
 } from './styles'
 import StarButton from '../../../../components/EventStarButton'
 import moment from 'moment'
@@ -80,7 +81,6 @@ export default class SmallEventCard extends Component {
     const { title, id, dateRange } = this.props.event
 
     const usableTimeStamp = new Date(dateRange[0]).toISOString()
-
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
       <Card
@@ -100,7 +100,9 @@ export default class SmallEventCard extends Component {
               {<DateTime>{formatTimeStamp(usableTimeStamp)}</DateTime>}
             </DetailsContainer>
             <RowContainer>
-              <Title numberOfLines={1}>{title}</Title>
+              <TitleContainer>
+                <Title numberOfLines={1}>{title}</Title>
+              </TitleContainer>
               <StarButton
                 onPress={this.select}
                 isInterested={this.state.isInterested}
