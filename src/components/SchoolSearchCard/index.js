@@ -1,21 +1,28 @@
 import React, { Component } from 'react'
+import { View } from 'react-native'
 import { Container, SchoolName, Location } from './styles'
+import Icon from 'react-native-vector-icons/Ionicons'
 
-export default class SchoolSearchModal extends Component {
-  state = {
-    searchText: '',
-  }
-
-  updateText = searchText => {
-    this.setState({ searchText })
-  }
-
+export default class SchoolSearchCard extends Component {
   render() {
-    const { school, location } = this.props
+    const { updateState, toggleSchoolModal, schoolName, location } = this.props
     return (
-      <Container>
-        <SchoolName>{school}</SchoolName>
-        <Location>{location}</Location>
+      <Container
+        onPress={() => {
+          toggleSchoolModal()
+          updateState({ schoolName, location })
+        }}
+      >
+        <Icon
+          name="ios-school"
+          size={40}
+          color="rgb(75, 42, 168)"
+          style={{ marginTop: 8 }}
+        />
+        <View>
+          <SchoolName>{schoolName}</SchoolName>
+          <Location>{location}</Location>
+        </View>
       </Container>
     )
   }

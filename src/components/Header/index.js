@@ -14,6 +14,7 @@ class Header extends Component {
             )}
           </BackButtonContainer>
           <Title>{this.props.title}</Title>
+          {this.props.children}
         </TitleRow>
         {this.props.progress && (
           <RegistrationProgressBar progress={this.props.progress} />
