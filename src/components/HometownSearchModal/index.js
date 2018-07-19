@@ -46,9 +46,10 @@ export default class HometownSearchModal extends Component {
             data={exampleHometowns}
             renderItem={({ item: hometown }) => (
               <HometownSearchCard
-                setText={setText}
-                onPress={onPress}
-                updateText={this.updateText}
+                onPress={obj => {
+                  onPress()
+                  setText(obj)
+                }}
                 city={hometown.city}
                 state={hometown.state}
               />
