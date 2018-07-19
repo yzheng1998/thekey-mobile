@@ -3,10 +3,11 @@ import { themeGet } from 'styled-system'
 
 export const ScreenScroll = styled.ScrollView`
   width: 100%;
+  padding-top: 5px;
 `
 export const Background = styled.View`
   flex: 1;
-  padding-top: 30px;
+  background-color: ${themeGet('colors.background')};
 `
 export const BlockBackground = styled.View`
   padding: 15px;
