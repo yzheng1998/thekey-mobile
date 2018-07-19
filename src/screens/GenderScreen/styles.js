@@ -27,3 +27,24 @@ export const Subtitle = styled.Text`
   line-height: 20px;
   text-align: center;
 `
+
+export const GenderButton = styled.TouchableOpacity`
+  margin-top: 8px;
+  margin-bottom: 8px;
+  height: 50px;
+  margin-left: 12px;
+  margin-right: 12px;
+  justify-content: center;
+  align-items: center;
+  background-color: ${props =>
+    props.clicked
+      ? themeGet('colors.activeTag')
+      : themeGet('colors.textAreaBorder')};
+  border-radius: 8px;
+`
+
+export const ButtonText = styled.Text`
+  font-family: ${themeGet('fonts.heavy')};
+  font-size: 16px;
+  color: white;
+`

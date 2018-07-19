@@ -3,7 +3,7 @@ import LoginScreen from '../screens/LoginScreen/'
 import LandingScreen from '../screens/LandingScreen/'
 import SignUpScreen from '../screens/SignUpScreen'
 import PersonalDetailsScreen from '../screens/PersonalDetailsScreen'
-import PersonalDetailsScreenCont from '../screens/PersonalDetailsScreenCont'
+import GenderScreen from '../screens/GenderScreen'
 import ResumeUploadScreen from '../screens/ResumeUploadScreen'
 
 const LoginStack = createStackNavigator(
@@ -32,8 +32,8 @@ const LoginStack = createStackNavigator(
         header: null,
       }),
     },
-    PersonalDetailsCont: {
-      screen: PersonalDetailsScreenCont,
+    Gender: {
+      screen: GenderScreen,
       navigationOptions: () => ({
         header: null,
       }),
