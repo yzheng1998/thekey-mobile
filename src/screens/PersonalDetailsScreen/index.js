@@ -6,6 +6,7 @@ import RegisterButton from '../../components/RegisterButton'
 import RegistrationPicker from '../../components/RegistrationPicker'
 import { ethnicityOptions } from './constants'
 import HometownSearchModal from '../../components/HometownSearchModal'
+import RegistrationProgressBar from '../../components/RegistrationProgressBar'
 
 import nodeEmoji from 'node-emoji'
 
@@ -50,12 +51,21 @@ export default class PersonalDetailsScreen extends Component {
           showBack
           onBackPress={() => this.props.navigation.goBack()}
         />
+        <RegistrationProgressBar progress="14.2%" />
         <SubtitleView>
           <Subtitle>
             Before you can get started, tell us a little bit about yourself.
             This information is private
           </Subtitle>
         </SubtitleView>
+        <RegistrationPicker
+          selected={showHometownPicker}
+          onPress={() => {
+            if (!showEthnictyPicker) this.setState({ showHometownPicker: true })
+          }}
+          text={hometown}
+          placeholderText="What's your hometown?"
+        />
         <RegistrationPicker
           selected={showEthnictyPicker}
           onPress={() => {
@@ -68,19 +78,11 @@ export default class PersonalDetailsScreen extends Component {
           text={ethnicity ? this.findLabel(ethnicity, ethnicityOptions) : ''}
           placeholderText="What's your ethnicity"
         />
-        <RegistrationPicker
-          selected={showHometownPicker}
-          onPress={() => {
-            if (!showEthnictyPicker) this.setState({ showHometownPicker: true })
-          }}
-          text={hometown}
-          placeholderText="What's your hometown?"
-        />
         <RegisterButton
           buttonText="NEXT"
           disabled={disabled}
           onPress={() =>
-            this.props.navigation.navigate('PersonalDetailsCont', {
+            this.props.navigation.navigate('Gender', {
               userInfo: { ...userInfo, ethnicity, hometown },
             })
           }

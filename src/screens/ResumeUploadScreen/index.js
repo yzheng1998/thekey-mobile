@@ -4,10 +4,10 @@ import Header from '../../components/Header'
 import Icon from 'react-native-vector-icons/Feather'
 import RegisterButton from '../../components/RegisterButton'
 import ResumeList from './components/ResumeList'
+import RegistrationProgressBar from '../../components/RegistrationProgressBar'
 
 export default class ResumeUploadScreen extends Component {
   state = {
-    buttonText: 'ADD FILE',
     resumeListData: [
       {
         id: 0,
@@ -35,6 +35,9 @@ export default class ResumeUploadScreen extends Component {
 
   render() {
     const disabled = false
+    const buttonText = this.state.resumeListData.length
+      ? 'ADD ANOTHER FILE'
+      : 'ADD FILE'
     return (
       <ScreenContainer>
         <Header
@@ -42,6 +45,7 @@ export default class ResumeUploadScreen extends Component {
           showBack
           onBackPress={() => this.props.navigation.goBack()}
         />
+        <RegistrationProgressBar progress="100%" />
         <SubtitleView>
           <Subtitle>
             Last step, add your resume. This should include GPA, School,
@@ -52,11 +56,7 @@ export default class ResumeUploadScreen extends Component {
           cancel={this.removeFileById}
           resumeListData={this.state.resumeListData}
         />
-        <RegisterButton
-          secondary
-          buttonText={this.state.buttonText}
-          disabled={disabled}
-        >
+        <RegisterButton secondary buttonText={buttonText} disabled={disabled}>
           <Icon
             name="upload"
             size={20}
