@@ -45,7 +45,7 @@ const friends = [
 const event = {
   image: 'https://c1.staticflickr.com/1/126/387606063_408c203f6c_b.jpg',
   title: 'A super fun eventA super fun event',
-  timeStamp: '2018-06-18 12:52:03.744-04',
+  dateRange: ['2018-06-18 12:52:03.744-04', '2018-06-18 12:52:03.744-04'],
   interestedFriends: friends,
 }
 
@@ -61,10 +61,7 @@ class EventsInCommon extends Component {
             <SmallEventCard
               width="327px"
               navigation={this.props.navigation}
-              image="https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg"
-              title={item.title}
-              timeStamp="2018-06-18 10:52:03.744-04"
-              interestedFriends={friends}
+              event={item}
             />
           </SmallCardContainer>
         )}
