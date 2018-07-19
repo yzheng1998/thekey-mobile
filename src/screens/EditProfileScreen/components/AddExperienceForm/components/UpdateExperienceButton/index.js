@@ -3,9 +3,9 @@ import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { AddButton, AddButtonText } from '../../styles'
 
-const ADD_EXPERIENCE = gql`
-  mutation addExperience($addExperienceInput: AddExperienceInput!) {
-    addExperience(addExperienceInput: $addExperienceInput) {
+const UPDATE_EXPERIENCE = gql`
+  mutation updateExperience($updateExperienceInput: UpdateExperienceInput!) {
+    updateExperience(updateExperienceInput: $updateExperienceInput) {
       experience {
         employer
         position
@@ -15,32 +15,33 @@ const ADD_EXPERIENCE = gql`
     }
   }
 `
-export default class AddExperienceButton extends Component {
+export default class UpdateExperienceButton extends Component {
   render() {
-    const { employer, position, startDate, endDate, disabled } = this.props
+    const { id, employer, position, startDate, endDate, disabled } = this.props
     return (
       <Mutation
-        mutation={ADD_EXPERIENCE}
+        mutation={UPDATE_EXPERIENCE}
         onCompleted={() =>
-          this.props.refreshAddExperience() && this.props.navigation.goBack()
+          this.props.refreshUpdateExperience() && this.props.navigation.goBack()
         }
       >
-        {addExperience => (
+        {updateExperience => (
           <AddButton
             disabled={disabled}
             onPress={() => {
               const variables = {
-                addExperienceInput: {
+                updateExperienceInput: {
+                  id,
                   employer,
                   position,
                   startDate,
                   endDate,
                 },
               }
-              addExperience({ variables })
+              updateExperience({ variables })
             }}
           >
-            <AddButtonText>ADD WORK EXPERIENCE</AddButtonText>
+            <AddButtonText>UPDATE WORK EXPERIENCE</AddButtonText>
           </AddButton>
         )}
       </Mutation>
