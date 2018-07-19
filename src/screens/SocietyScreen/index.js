@@ -9,8 +9,8 @@ import { SwiperContainer, Background } from './styles'
 const { width } = Dimensions.get('window')
 
 const GET_USERS = gql`
-  query users {
-    users {
+  query users($usersFilterInput: UsersFilterInput!) {
+    users(usersFilterInput: $usersFilterInput) {
       id
       firstName
       lastName
@@ -30,7 +30,7 @@ class SocietyScreen extends Component {
     return (
       <Background>
         <SocietyHeader navigation={this.props.navigation} />
-        <Query query={GET_USERS}>
+        <Query query={GET_USERS} variables={{ usersFilterInput: {} }}>
           {({ loading, error, data }) => {
             if (loading) return <Text>`Loading...`</Text>
             if (error) return <Text>`Error! ${error.message}`</Text>
