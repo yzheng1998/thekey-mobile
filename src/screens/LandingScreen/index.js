@@ -13,7 +13,7 @@ class LandingScreen extends Component {
         />
         <Button
           title="Apply"
-          onPress={() => this.props.navigation.navigate('Register')}
+          onPress={() => this.props.navigation.navigate('SignUp')}
         />
         <Button
           title="Splash"

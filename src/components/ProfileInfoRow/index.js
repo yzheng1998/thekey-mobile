@@ -28,7 +28,7 @@ export default class ProfileInfoRow extends Component {
         if (education) return moment(time).format('YYYY')
         return moment(time).format('MMM YYYY')
       }
-      return null
+      return 'Present'
     }
 
     const subtitleArray = [subtitle1, subtitle2].filter(Boolean)

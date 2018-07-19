@@ -26,6 +26,7 @@ export default class AddEducationButton extends Component {
       major,
       startYear,
       endYear,
+      disabled,
     } = this.props
     return (
       <Mutation
@@ -36,6 +37,7 @@ export default class AddEducationButton extends Component {
       >
         {addEducation => (
           <AddButton
+            disabled={disabled}
             onPress={() => {
               const variables = {
                 addEducationInput: {
