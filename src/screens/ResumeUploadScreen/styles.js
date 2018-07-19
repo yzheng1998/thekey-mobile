@@ -68,19 +68,16 @@ export const ClearIconButton = styled.TouchableOpacity`
   margin-left: 8px;
 `
 
-export const ProgressBar = styled.View`
+export const ProgressBarEmpty = styled.View`
   height: 4px;
   width: 100%;
   flex-direction: row;
   border-radius: 2px;
   overflow: hidden;
+  background-color: ${themeGet('colors.progressBarEmpty')};
 `
+
 export const ProgressBarFilled = styled.View`
   width: ${props => props.progress};
   background-color: ${themeGet('colors.buttonPrimary')};
-`
-
-export const ProgressBarUnfilled = styled.View`
-  flex: 1;
-  background-color: ${themeGet('colors.textAreaBorder')};
 `

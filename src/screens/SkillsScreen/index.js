@@ -11,62 +11,56 @@ import SubmitButton from '../../components/SubmitButton'
 import Header from '../../components/Header'
 
 const tags = [
-  'TECH',
-  'START-UPS',
-  'DESIGN',
-  'DEVELOPMENT',
-  'MUSIC',
-  'FINANCE',
-  'aTECH',
-  'aSTART-UPS',
-  'aDESIGN',
-  'aDEVELOPMENT',
-  'aMUSIC',
-  'aFINANCE',
-  'bTECH',
-  'bSTART-UPS',
-  'bDESIGN',
-  'bDEVELOPMENT',
-  'bMUSIC',
-  'bFINANCE',
-  'cTECH',
-  'cSTART-UPS',
-  'cDESIGN',
-  'cDEVELOPMENT',
-  'cMUSIC',
-  'cFINANCE',
+  'DRIVEN',
+  'FOCUSSED',
+  'EXTRAVERT',
+  'EFFICIENT',
+  'THOROUGH',
+  'SERIOUS',
+  'aDRIVEN',
+  'aFOCUSSED',
+  'aEXTRAVERT',
+  'aEFFICIENT',
+  'aTHOROUGH',
+  'aSERIOUS',
+  'bDRIVEN',
+  'bFOCUSSED',
+  'bEXTRAVERT',
+  'bEFFICIENT',
+  'bTHOROUGH',
+  'bSERIOUS',
 ]
 
 const MAX_NUM_INTERESTS = 3
 
-export default class InterestsScreen extends Component {
+export default class SkillsScreen extends Component {
   state = {
-    interests: [],
+    skills: [],
   }
 
-  toggleInterest = interest => {
-    const { interests } = this.state
-    if (interests.includes(interest)) {
+  toggleSkill = skill => {
+    const { skills } = this.state
+    if (skills.includes(skill)) {
       this.setState({
-        interests: this.state.interests.filter(el => el !== interest),
+        skills: this.state.skills.filter(el => el !== skill),
       })
     } else
       this.setState({
-        interests: [...this.state.interests, interest],
+        skills: [...this.state.skills, skill],
       })
   }
 
   render() {
-    const maxReached = this.state.interests.length >= MAX_NUM_INTERESTS
+    const maxReached = this.state.skills.length >= MAX_NUM_INTERESTS
     const userInfo = this.props.navigation.getParam('userInfo')
     return (
       <ScreenContainer>
         <Container>
           <Header
-            title="Your Interests"
+            title="Describe Yourself"
             showBack
             onBackPress={() => this.props.navigation.goBack()}
-            progress="71.4%"
+            progress="85.7%"
           />
           <Subtitle>
             Choose 3 options. These can be {'\n'}updated later on
@@ -77,9 +71,9 @@ export default class InterestsScreen extends Component {
                 <RegistrationTag
                   name={tag}
                   key={tag}
-                  disable={maxReached && !this.state.interests.includes(tag)}
-                  selected={this.state.interests.includes(tag)}
-                  onPress={this.toggleInterest}
+                  disable={maxReached && !this.state.skills.includes(tag)}
+                  selected={this.state.skills.includes(tag)}
+                  onPress={this.toggleSkill}
                 />
               ))}
             </TagsRow>
@@ -87,14 +81,14 @@ export default class InterestsScreen extends Component {
         </Container>
         {maxReached && (
           <SubmitButton
-            onPress={() =>
-              this.props.navigation.navigate('Skills', {
+            onPress={() => {
+              this.props.navigation.navigate('Resume', {
                 userInfo: {
                   ...userInfo,
-                  interests: this.state.interests,
+                  skills: this.state.skills,
                 },
               })
-            }
+            }}
             buttonText="CONTINUE"
           />
         )}

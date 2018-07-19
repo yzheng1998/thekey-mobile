@@ -6,9 +6,8 @@ import {
   ResumeTitle,
   ResumeDataSize,
   ClearIconButton,
-  ProgressBar,
+  ProgressBarEmpty,
   ProgressBarFilled,
-  ProgressBarUnfilled,
 } from '../../styles'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import ClearIcon from 'react-native-vector-icons/MaterialIcons'
@@ -30,10 +29,9 @@ export default class ResumeItem extends Component {
               {title} <ResumeDataSize> {dataSize}</ResumeDataSize>
             </ResumeTitle>
           </ResumeDetails>
-          <ProgressBar>
+          <ProgressBarEmpty>
             <ProgressBarFilled progress={progress} />
-            <ProgressBarUnfilled />
-          </ProgressBar>
+          </ProgressBarEmpty>
         </ResumeBody>
         <ClearIconButton onPress={() => cancel(id)}>
           <ClearIcon name="clear" size={24} color="rgb(181, 171, 202)" />

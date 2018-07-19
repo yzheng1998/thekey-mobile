@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container } from './styles'
+import { Container, Divider } from './styles'
 import SearchBar from '../SearchBar'
 import HometownSearchCard from '../HometownSearchCard'
 import { FlatList, Modal } from 'react-native'
@@ -41,6 +41,7 @@ export default class HometownSearchModal extends Component {
             searchText={this.state.searchText}
             placeholderText="Search for a city"
           />
+          <Divider />
           <FlatList
             keyExtractor={hometown => hometown.id}
             data={exampleHometowns}
