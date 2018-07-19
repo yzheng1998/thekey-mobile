@@ -1,10 +1,14 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
+import { Dimensions } from 'react-native'
+
+const { width } = Dimensions.get('window')
 
 export const Container = styled.View`
   flex: 1;
+  padding-left: 12px;
+  padding-right: 12px;
   background-color: ${themeGet('colors.background')};
-  align-items: center;
 `
 
 export const Instructions = styled.Text`
@@ -15,21 +19,38 @@ export const Instructions = styled.Text`
 `
 
 export const InstructionsContainer = styled.View`
-  margin-top: 16px;
+  margin-bottom: 12px;
 `
-export const AddEducationButton = styled.TouchableOpacity`
-  width: 87%;
-  height: 50px;
-  border-radius: 8px;
-  border-width: 2px
-  border-color: ${themeGet('colors.buttonPrimary')};
-  align-items: center;
-  justify-content: center;
+
+export const EducationItemContainer = styled.View`
+  width: 100%;
+  height: 68px;
   flex-direction: row;
-  margin-top: 32px;
+  align-items: center;
+  padding-left: 8px;
 `
-export const ButtonText = styled.Text`
-  font-family: ${themeGet('fonts.heavy')};
-  font-size: ${props => props.size || '16px'};
-  color: ${themeGet('colors.buttonPrimary')};
+
+export const EducationBody = styled.View`
+  flex-direction: column;
+  margin-left: 10px;
+  width: ${width * 0.672};
+`
+
+export const InfoContainer = styled.View`
+  margin-left: 16px;
+`
+export const SchoolName = styled.Text`
+  font-family: ${themeGet('fonts.bold')};
+  font-size: 16px;
+`
+
+export const Location = styled.Text`
+  font-family: ${themeGet('fonts.semiBold')};
+  color: ${themeGet('colors.fontDescription.quaternary')};
+  font-size: 12px;
+`
+
+export const ClearIconButton = styled.TouchableOpacity`
+  margin-right: 8px;
+  margin-left: 8px;
 `
