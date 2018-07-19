@@ -7,3 +7,8 @@ export const Container = styled.SafeAreaView`
   background-color: ${themeGet('colors.background')};
   padding-top: 30px;
 `
+
+export const Divider = styled.View`
+  height: 8px;
+  background-color: ${themeGet('colors.divider')};
+`
