@@ -1,6 +1,7 @@
 import { createStackNavigator } from 'react-navigation'
 import LoginScreen from '../screens/LoginScreen/'
 import LandingScreen from '../screens/LandingScreen/'
+import SplashScreen from '../screens/SplashScreen/'
 import SignUpScreen from '../screens/SignUpScreen'
 import PersonalDetailsScreen from '../screens/PersonalDetailsScreen'
 import GenderScreen from '../screens/GenderScreen'
@@ -16,6 +17,12 @@ const LoginStack = createStackNavigator(
       screen: LandingScreen,
       navigationOptions: () => ({
         title: 'Get Started',
+      }),
+    },
+    Splash: {
+      screen: SplashScreen,
+      navigationOptions: () => ({
+        header: null,
       }),
     },
     Login: {
