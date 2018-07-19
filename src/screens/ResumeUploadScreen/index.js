@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Feather'
 import RegisterButton from '../../components/RegisterButton'
 import ResumeList from './components/ResumeList'
 import RegistrationProgressBar from '../../components/RegistrationProgressBar'
+import SubmitButton from '../../components/SubmitButton'
 
 export default class ResumeUploadScreen extends Component {
   state = {
@@ -34,7 +35,8 @@ export default class ResumeUploadScreen extends Component {
   }
 
   render() {
-    const disabled = false
+    const userInfo = this.props.navigation.getParam('userInfo')
+    const disabled = !this.state.resumeListData.length
     const buttonText = this.state.resumeListData.length
       ? 'ADD ANOTHER FILE'
       : 'ADD FILE'
@@ -56,7 +58,7 @@ export default class ResumeUploadScreen extends Component {
           cancel={this.removeFileById}
           resumeListData={this.state.resumeListData}
         />
-        <RegisterButton secondary buttonText={buttonText} disabled={disabled}>
+        <RegisterButton secondary buttonText={buttonText}>
           <Icon
             name="upload"
             size={20}
@@ -64,6 +66,19 @@ export default class ResumeUploadScreen extends Component {
             style={{ marginRight: 5 }}
           />
         </RegisterButton>
+        {!disabled && (
+          <SubmitButton
+            onPress={() =>
+              this.props.navigation.navigate('Landing', {
+                userInfo: {
+                  ...userInfo,
+                  resumeListData: this.state.resumeListData,
+                },
+              })
+            }
+            buttonText="CONTINUE"
+          />
+        )}
       </ScreenContainer>
     )
   }
