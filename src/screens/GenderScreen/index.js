@@ -10,7 +10,6 @@ import {
 import Header from '../../components/Header'
 import RegisterButton from '../../components/RegisterButton'
 import { genderOptions } from './constants'
-import RegistrationProgressBar from '../../components/RegistrationProgressBar'
 
 import nodeEmoji from 'node-emoji'
 
@@ -34,8 +33,8 @@ export default class GenderScreen extends Component {
           title={`${nodeEmoji.get('wave')} Hi, ${userInfo.firstName}!`}
           showBack
           onBackPress={() => this.props.navigation.goBack()}
+          progress="28.5%"
         />
-        <RegistrationProgressBar progress="28.5%" />
         <SubtitleView>
           <Subtitle>
             Select the following that apply to your gender identity & experience
@@ -55,7 +54,7 @@ export default class GenderScreen extends Component {
           buttonText="NEXT"
           disabled={disabled}
           onPress={() =>
-            this.props.navigation.navigate('ResumeUpload', {
+            this.props.navigation.navigate('YourEducation', {
               userInfo: { ...userInfo, gender: this.state.gender },
             })
           }
