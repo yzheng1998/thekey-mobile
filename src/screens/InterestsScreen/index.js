@@ -12,6 +12,7 @@ import {
   TagsContainer,
 } from './styles'
 import BackButton from 'react-native-vector-icons/Ionicons'
+import RegisterButton from '../../components/RegisterButton'
 
 const tags = [
   'TECH',
@@ -43,29 +44,24 @@ const tags = [
 const MAX_NUM_INTERESTS = 3
 
 class InterestsScreen extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      interests: [],
-    }
+  state = {
+    interests: [],
   }
 
-  addInterest = interest => {
-    this.setState({
-      interests: [...this.state.interests, interest],
-    })
+  toggleInterest = interest => {
+    const { interests } = this.state
+    if (interests.includes(interest)) {
+      this.setState({
+        interests: this.state.interests.filter(el => el !== interest),
+      })
+    } else
+      this.setState({
+        interests: [...this.state.interests, interest],
+      })
   }
 
-  removeInterest = oldInterest => {
-    this.setState({
-      interests: this.state.interests.filter(
-        interest => interest !== oldInterest,
-      ),
-    })
-  }
   render() {
-    const maxReached = this.state.interests.length === MAX_NUM_INTERESTS
-    const onSelect = maxReached ? () => null : this.addInterest
+    const maxReached = this.state.interests.length >= MAX_NUM_INTERESTS
     return (
       <Container>
         <Header>
@@ -84,17 +80,18 @@ class InterestsScreen extends Component {
             {tags.map(tag => (
               <RegistrationTag
                 name={tag}
-                key={Math.random()}
-                index={tag}
+                key={tag}
+                disable={maxReached && !this.state.interests.includes(tag)}
                 selected={this.state.interests.includes(tag)}
-                currentFunction={
-                  this.state.interests.includes(tag)
-                    ? this.removeInterest
-                    : onSelect
-                }
+                onPress={this.toggleInterest}
               />
             ))}
           </TagsRow>
+          <RegisterButton
+            buttonText="NEXT"
+            disabled={!maxReached}
+            onPress={() => null}
+          />
         </TagsContainer>
       </Container>
     )

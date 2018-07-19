@@ -9,8 +9,9 @@ export const Title = styled.Text`
   flex: 2;
   padding-right: 50px;
 `
-export const Container = styled.View`
-  padding: 24px;
+export const Container = styled.ScrollView`
+  padding-left: 24px;
+  padding-right: 24px;
 `
 export const Header = styled.View`
   height: 80px;
@@ -44,9 +45,11 @@ export const TagsRow = styled.View`
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-bottom: 8px;
 `
-export const TagsContainer = styled.ScrollView`
+export const TagsContainer = styled.View`
   height: 100%;
+  margin-bottom: 12px;
 `
 export const BackButtonContainer = styled.TouchableOpacity`
   width: 4%;
