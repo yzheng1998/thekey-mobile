@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "bundle-ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file='index.js' --bundle-output='./ios/thekeymobile/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'",
+    "bundle-android": "node node_modules/react-native/local-cli/cli.js bundle --entry-file='index.js' --bundle-output='./android/app/src/main/assets/index.android.bundle' --dev=false --platform='android' --assets-dest='android/app/src/main/res'",
     "ios": "react-native run-ios",
     "test": "jest",
     "fix": "rm -rf node_modules/ && npm i && npm start --reset-cache && npm link",
