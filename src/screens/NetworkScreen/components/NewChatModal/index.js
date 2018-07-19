@@ -9,7 +9,7 @@ import {
   ThinDivider,
 } from './styles'
 import TagInput from 'react-native-tag-input'
-import UserCard from '../UserCard'
+import UserCard from '../../../../components/UserCard'
 import NewChatModalHeader from '../NewChatModalHeader'
 
 const people = [
@@ -19,7 +19,7 @@ const people = [
     lastName: 'Wang',
     profilePicture:
       'https://images.unsplash.com/photo-1531397776155-cf6b2831601b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee628aa941c5a8f1d3bacc05987fb21b&auto=format&fit=crop&w=668&q=80',
-    location: 'Fairfax, Virginia',
+    hometown: 'Fairfax, Virginia',
   },
   {
     id: '2',
@@ -27,7 +27,7 @@ const people = [
     lastName: 'Covarrubias',
     profilePicture:
       'https://images.unsplash.com/photo-1531397776155-cf6b2831601b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee628aa941c5a8f1d3bacc05987fb21b&auto=format&fit=crop&w=668&q=80',
-    location: 'Fairfax, Virginia',
+    hometown: 'Marysville, Ohio',
   },
   {
     id: '3',
@@ -35,7 +35,7 @@ const people = [
     lastName: 'Nara',
     profilePicture:
       'https://images.unsplash.com/photo-1531397776155-cf6b2831601b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee628aa941c5a8f1d3bacc05987fb21b&auto=format&fit=crop&w=668&q=80',
-    location: 'Fairfax, Virginia',
+    hometown: 'Nazareth, Israel',
   },
   {
     id: '4',
@@ -43,7 +43,7 @@ const people = [
     lastName: 'Zheng',
     profilePicture:
       'https://images.unsplash.com/photo-1531397776155-cf6b2831601b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee628aa941c5a8f1d3bacc05987fb21b&auto=format&fit=crop&w=668&q=80',
-    location: 'Fairfax, Virginia',
+    hometown: 'Cleveland, Ohio',
   },
   {
     id: '5',
@@ -51,7 +51,7 @@ const people = [
     lastName: 'Perry',
     profilePicture:
       'https://images.unsplash.com/photo-1531397776155-cf6b2831601b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee628aa941c5a8f1d3bacc05987fb21b&auto=format&fit=crop&w=668&q=80',
-    location: 'Fairfax, Virginia',
+    hometown: 'New York, New York',
   },
 ]
 
@@ -65,7 +65,7 @@ const PeopleList = ({ peopleData }) => (
         <UserCard
           name={`${person.firstName} ${person.lastName}`}
           picture={person.profilePicture}
-          location={person.location}
+          subtitle={person.hometown}
         />
       )}
     />
@@ -127,7 +127,7 @@ export default class NewChatModal extends Component {
       handleClose()
     }
     return (
-      <Modal transition="slide" {...rest}>
+      <Modal animationType="slide" {...rest}>
         <Background>
           <NewChatModalHeader handleClose={handleCloseModal} />
           <ThinDivider />
