@@ -11,6 +11,7 @@ export const EmptyBar = styled.View`
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 12px;
+  margin-top: 12px;
 `
 export const FilledBar = styled.View`
   width: ${props => props.progress};
