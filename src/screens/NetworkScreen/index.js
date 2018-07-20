@@ -31,7 +31,7 @@ class NetworkScreen extends Component {
   changeTab = tab => {
     this.setState({ tab })
   }
-  
+
   handleStartNewChat = () => {
     this.setState({ newChatModalVisible: true })
   }
@@ -56,8 +56,6 @@ class NetworkScreen extends Component {
             color="white"
             selectedColor="white"
             options={['All', 'Connections', 'Groups', 'Events']}
-            color="rgb(176, 186, 200)"
-            selectedColor="rgb(250, 53, 121)"
           />
           <ThinDivider />
         </HeaderBackground>
