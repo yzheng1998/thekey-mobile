@@ -23,10 +23,19 @@ const SEND_FRIEND_REQUEST = gql`
 `
 
 export default class SendFriendRequestButton extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      buttonText: 'CONNECT',
+    }
+  }
   render() {
     const { recipientId, swipedLeft } = this.props
     return (
-      <Mutation mutation={SEND_FRIEND_REQUEST} onCompleted={() => {}}>
+      <Mutation
+        mutation={SEND_FRIEND_REQUEST}
+        onCompleted={() => this.setState({ buttonText: 'REQUEST SENT' })}
+      >
         {createFriendRequest => (
           <Button
             activeOpacity={0.5}
@@ -38,7 +47,7 @@ export default class SendFriendRequestButton extends Component {
               createFriendRequest({ variables })
             }}
           >
-            <Label>CONNECT</Label>
+            <Label>{this.state.buttonText}</Label>
           </Button>
         )}
       </Mutation>
