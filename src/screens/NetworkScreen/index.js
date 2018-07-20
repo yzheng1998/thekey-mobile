@@ -3,6 +3,7 @@ import ChatInbox from './components/ChatInbox'
 import SearchFilterTab from '../../components/SearchFilterTab'
 import SearchBar from '../../components/SearchBar'
 import NewChatModal from './components/NewChatModal'
+import ConnectionCard from './components/ConnectionCard'
 import {
   Background,
   HeaderBackground,
@@ -12,6 +13,29 @@ import {
   ThinDivider,
 } from './styles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { FlatList, Text, View } from 'react-native'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
+
+const GET_FRIEND_REQUESTS = gql`
+  query viewer {
+    viewer {
+      friendRequests {
+        id
+        sender {
+          id
+          firstName
+          lastName
+          profilePicture
+        }
+        recipient {
+          id
+        }
+        status
+      }
+    }
+  }
+`
 
 class NetworkScreen extends Component {
   static navigationOptions = {
@@ -64,6 +88,31 @@ class NetworkScreen extends Component {
           searchText={searchText}
           placeholderText="Search Your Network"
         />
+        <Divider />
+        <Query query={GET_FRIEND_REQUESTS}>
+          {({ loading, error, data }) => {
+            if (loading) return <Text>`Loading...`</Text>
+            if (error) return <Text>`Error! ${error.message}`</Text>
+            return (
+              <View>
+                <FlatList
+                  keyExtractor={friendRequest => friendRequest.id}
+                  data={data.viewer.friendRequests}
+                  renderItem={({ item: friendRequest }) => (
+                    <ConnectionCard
+                      id={friendRequest.id}
+                      name={`${friendRequest.sender.firstName} ${
+                        friendRequest.sender.lastName
+                      }`}
+                      timeStamp="2018-07-19 23:29:09.592-04"
+                      picture={friendRequest.sender.profilePicture}
+                    />
+                  )}
+                />
+              </View>
+            )
+          }}
+        </Query>
         <Divider />
         <ChatInbox navigation={this.props.navigation} />
         <NewChatButton onPress={this.handleStartNewChat}>
