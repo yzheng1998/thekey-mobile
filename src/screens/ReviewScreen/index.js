@@ -37,7 +37,12 @@ export default class ReviewScreen extends Component {
     this.setState({ tab: value })
   }
   render() {
-    const { title, rating, companyId } = this.props.navigation.state.params
+    const {
+      title,
+      rating,
+      companyId,
+      picture,
+    } = this.props.navigation.state.params
     const variables = {
       companyReviewFilterInput: {
         companyId,
@@ -52,11 +57,7 @@ export default class ReviewScreen extends Component {
           return (
             <Background>
               <ReviewPictureBlock
-                // get pictures from props but hardcode for now
-                picture={{
-                  uri:
-                    'https://images.unsplash.com/photo-1521058001910-55b77aba2203?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=16e03fd1b22a1e9b694c0d2c3457b57a&auto=format&fit=crop&w=1947&q=80',
-                }}
+                picture={picture}
                 title={title}
                 rating={rating}
                 reviews={data.companyReviews.length}
