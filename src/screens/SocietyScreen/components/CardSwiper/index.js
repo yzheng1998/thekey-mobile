@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Swiper from 'react-native-deck-swiper'
-import { tagData, profilePicture } from '../../../../stories/SocietyCard'
 import SocietyCard from '../../components/SocietyCard'
 import ReactionSymbol from '../../components/ReactionSymbol'
 
@@ -12,16 +11,9 @@ export default class CardSwiper extends Component {
         cards={data.users}
         renderCard={item => {
           const renderUser = {
-            firstName: item.firstName,
-            lastName: item.lastName,
-            email: item.email,
+            ...item,
+            hometown: item.demographics.hometown,
             mutualFriends: item.friends,
-            state: 'Ohio',
-            hometown: 'Cleveland',
-            bio:
-              'A Harvard undergraduate student looking for a impactful and fufilling career',
-            profilePicture,
-            tags: tagData,
           }
           return (
             <SocietyCard user={renderUser} navigation={this.props.navigation} />
