@@ -15,11 +15,19 @@ const GET_USERS = gql`
       firstName
       lastName
       email
+      demographics {
+        hometown
+      }
+      profilePicture
+      bio
       friends {
         id
         profilePicture
         firstName
         lastName
+      }
+      tags {
+        name
       }
     }
   }
