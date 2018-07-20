@@ -26,6 +26,7 @@ export default class NewChatModalHeader extends Component {
             createNewChat={createNewChat}
             participantIds={participantIds}
             disabled={newChatButtonDisabled}
+            closeModal={handleClose}
           />
         </ButtonContainer>
         <Heading>New Message</Heading>

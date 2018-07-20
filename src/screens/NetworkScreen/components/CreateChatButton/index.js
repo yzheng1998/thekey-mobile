@@ -19,12 +19,13 @@ const CREATE_CHAT = gql`
 
 export default class CreateChatButton extends Component {
   render() {
-    const { participantIds, createNewChat, disabled } = this.props
+    const { participantIds, createNewChat, disabled, closeModal } = this.props
     return (
       <Mutation
         mutation={CREATE_CHAT}
         onCompleted={data => {
           createNewChat(data.createChat.chat)
+          closeModal()
         }}
       >
         {createChat => (
