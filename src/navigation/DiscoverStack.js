@@ -15,6 +15,7 @@ import ApplyNowScreen from '../screens/ApplyNowScreen'
 import SimilarJobsScreen from '../screens/SimilarJobsScreen'
 import SimilarEventsScreen from '../screens/SimilarEventsScreen'
 import PeopleList from '../screens/PeopleList'
+import MemberScreen from '../screens/MemberScreen'
 import EditProfileScreen from '../screens/EditProfileScreen'
 import AddEducationForm from '../screens/EditProfileScreen/components/AddEducationForm'
 import AddExperienceForm from '../screens/EditProfileScreen/components/AddExperienceForm'
@@ -135,6 +136,12 @@ const DiscoverStack = createStackNavigator(
     },
     PeopleList: {
       screen: PeopleList,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    Member: {
+      screen: MemberScreen,
       navigationOptions: () => ({
         header: null,
       }),
