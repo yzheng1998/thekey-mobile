@@ -4,9 +4,9 @@ import { TouchableOpacity } from 'react-native'
 
 class UserCard extends Component {
   render() {
-    const { name, picture, subtitle } = this.props
+    const { name, picture, subtitle, onPress } = this.props
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>
         <Card>
           <Picture source={{ uri: picture }} />
           <InfoContainer>

@@ -26,7 +26,7 @@ const GET_USERS = gql`
   }
 `
 
-const PeopleList = ({ peopleData }) => (
+const PeopleList = ({ peopleData, viewMember }) => (
   <PeopleListContainer>
     <FlatList
       styles={{ backgroundColor: 'red', flex: 1 }}
@@ -34,9 +34,10 @@ const PeopleList = ({ peopleData }) => (
       data={peopleData}
       renderItem={({ item: person }) => (
         <UserCard
+          onPress={() => viewMember(person.id)}
           name={`${person.firstName} ${person.lastName}`}
           picture={person.profilePicture}
-          subtitle={person.hometown}
+          subtitle={person.demographics.hometown}
         />
       )}
     />
