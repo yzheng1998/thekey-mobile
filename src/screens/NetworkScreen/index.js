@@ -13,7 +13,7 @@ import {
   ThinDivider,
 } from './styles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { FlatList, Text, View } from 'react-native'
+import { Text, View, ScrollView } from 'react-native'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 
@@ -89,16 +89,14 @@ class NetworkScreen extends Component {
           placeholderText="Search Your Network"
         />
         <Divider />
-        <Query query={GET_FRIEND_REQUESTS}>
-          {({ loading, error, data }) => {
-            if (loading) return <Text>`Loading...`</Text>
-            if (error) return <Text>`Error! ${error.message}`</Text>
-            return (
-              <View>
-                <FlatList
-                  keyExtractor={friendRequest => friendRequest.id}
-                  data={data.viewer.friendRequests}
-                  renderItem={({ item: friendRequest }) => (
+        <ScrollView>
+          <Query query={GET_FRIEND_REQUESTS}>
+            {({ loading, error, data }) => {
+              if (loading) return <Text>`Loading...`</Text>
+              if (error) return <Text>`Error! ${error.message}`</Text>
+              return (
+                <View>
+                  {data.viewer.friendRequests.map(friendRequest => (
                     <ConnectionCard
                       id={friendRequest.id}
                       name={`${friendRequest.sender.firstName} ${
@@ -107,14 +105,14 @@ class NetworkScreen extends Component {
                       timeStamp="2018-07-19 23:29:09.592-04"
                       picture={friendRequest.sender.profilePicture}
                     />
-                  )}
-                />
-              </View>
-            )
-          }}
-        </Query>
-        <Divider />
-        <ChatInbox navigation={this.props.navigation} />
+                  ))}
+                </View>
+              )
+            }}
+          </Query>
+          <Divider />
+          <ChatInbox navigation={this.props.navigation} />
+        </ScrollView>
         <NewChatButton onPress={this.handleStartNewChat}>
           <Icon name="chat-bubble" size={25} color="white" />
         </NewChatButton>
