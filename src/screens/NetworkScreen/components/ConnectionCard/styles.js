@@ -1,15 +1,14 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const Card = styled.TouchableOpacity`
+export const Card = styled.View`
   width: 100%;
-  height: 80px;
   overflow: hidden;
   background-color: ${themeGet('colors.background')};
   flex-direction: row;
   padding: 10px;
-  border-bottom-color: ${themeGet('colors.border')};
   border-bottom-width: 1px;
+  border-color: ${themeGet('colors.divider')};
 `
 export const Container = styled.View`
   flex: 1;
@@ -20,24 +19,25 @@ export const Wrapper = styled.View`
   flex-direction: row;
   margin-bottom: 5px;
   align-items: center;
+  width: 80%;
 `
-export const TimeWrapper = styled.View`
-  margin-bottom: 5px;
+export const TextWrapper = styled.View`
   flex: 1;
-  margin-left: -60px;
+  flex-direction: row;
+  width: 80%;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
 `
 export const Name = styled.Text`
   font-size: 18px;
-  margin-right: 80px;
   color: ${themeGet('colors.fontTitle')};
   font-family: ${themeGet('fonts.bold')};
+  margin-right: 4px;
 `
 export const Subtitle = styled.Text`
   font-size: 14px;
-  position: absolute;
   padding-top: 3px;
   color: ${themeGet('colors.fontDescription.secondary')};
-  margin-left: 85px;
   font-family: ${themeGet('fonts.medium')};
 `
 export const ProfileImage = styled.Image`
@@ -50,6 +50,7 @@ export const TimeStamp = styled.Text`
   font-size: 12;
   align-self: flex-end;
   color: ${themeGet('colors.fontTitle')};
+  position: absolute;
 `
 export const AcceptButton = styled.TouchableOpacity`
   width: 110px;

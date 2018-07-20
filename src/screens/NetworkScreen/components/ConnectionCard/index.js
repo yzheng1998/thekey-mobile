@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Image } from 'react-native'
 import PropTypes from 'prop-types'
 import {
   Card,
@@ -9,7 +8,7 @@ import {
   TimeStamp,
   Container,
   Wrapper,
-  TimeWrapper,
+  TextWrapper,
   AcceptButton,
   DeleteButton,
   Confirm,
@@ -18,36 +17,28 @@ import {
 import moment from 'moment'
 
 class ConnectionCard extends Component {
-  static defaultProps = {
-    onPress: null,
-  }
-
   static propTypes = {
     name: PropTypes.string.isRequired,
-    profileImage: Image.propTypes.source.isRequired,
     timeStamp: PropTypes.string.isRequired,
-    onPress: PropTypes.func,
   }
 
   render() {
     const formatTime = time => {
       const result = moment().isSame(moment(time), 'day')
         ? moment(time).format('h:mma')
-        : moment(time).format('MM/DD/YYYY')
+        : moment(time).format('MM/DD/YY')
       return result
     }
-    const { name, profileImage, timeStamp, onPress } = this.props
+    const { name, picture, timeStamp, id } = this.props
     return (
-      <Card onPress={onPress}>
-        <ProfileImage source={profileImage} />
+      <Card>
+        <ProfileImage source={{ uri: picture }} />
         <Container>
-          <Wrapper>
-            <Name numberOfLines={1}>{name}</Name>
+          <TextWrapper>
+            <Name>{name}</Name>
             <Subtitle>wants to connect</Subtitle>
-            <TimeWrapper>
-              <TimeStamp>{formatTime(timeStamp)}</TimeStamp>
-            </TimeWrapper>
-          </Wrapper>
+          </TextWrapper>
+          <TimeStamp>{formatTime(timeStamp)}</TimeStamp>
           <Wrapper>
             <AcceptButton>
               <Confirm>Confirm</Confirm>
