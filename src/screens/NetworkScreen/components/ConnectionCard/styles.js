@@ -11,20 +11,22 @@ export const Card = styled.View`
   border-color: ${themeGet('colors.divider')};
 `
 export const Container = styled.View`
-  flex: 1;
+  flex-direction: row;
   padding-left: 10px;
   align-items: flex-start;
 `
-export const Wrapper = styled.View`
+export const Content = styled.View`
+  width: 75%;
+`
+export const ButtonRow = styled.View`
   flex-direction: row;
   margin-bottom: 5px;
   align-items: center;
-  width: 80%;
+  width: 100%;
 `
-export const TextWrapper = styled.View`
-  flex: 1;
+export const TextContainer = styled.View`
   flex-direction: row;
-  width: 80%;
+  width: 100%;
   flex-wrap: wrap;
   margin-bottom: 5px;
 `
@@ -41,24 +43,15 @@ export const Subtitle = styled.Text`
   font-family: ${themeGet('fonts.medium')};
 `
 export const ProfileImage = styled.Image`
-  border-radius: 30px;
-  height: 60px;
-  width: 60px;
+  border-radius: 25px;
+  height: 50px;
+  width: 50px;
   align-self: center;
 `
 export const TimeStamp = styled.Text`
   font-size: 12;
-  align-self: flex-end;
   color: ${themeGet('colors.fontTitle')};
-  position: absolute;
-`
-export const AcceptButton = styled.TouchableOpacity`
-  width: 110px;
-  height: 30px;
-  border-radius: 7px;
-  background-color: ${themeGet('colors.buttonPrimary')};
-  margin-right: 8px;
-  align-items: center;
+  margin-top: 3px;
 `
 export const DeleteButton = styled.TouchableOpacity`
   width: 110px;
@@ -68,12 +61,7 @@ export const DeleteButton = styled.TouchableOpacity`
   border-width: 1px;
   align-items: center;
 `
-export const Confirm = styled.Text`
-  font-size: 12px;
-  padding-top: 7px;
-  color: white;
-  font-family: ${themeGet('fonts.bold')};
-`
+
 export const Delete = styled.Text`
   font-size: 12px;
   padding-top: 6px;

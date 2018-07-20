@@ -7,14 +7,14 @@ import {
   ProfileImage,
   TimeStamp,
   Container,
-  Wrapper,
-  TextWrapper,
-  AcceptButton,
+  Content,
+  ButtonRow,
+  TextContainer,
   DeleteButton,
-  Confirm,
   Delete,
 } from './styles'
 import moment from 'moment'
+import AcceptFriendRequestButton from '../AcceptFriendRequestButton'
 
 class ConnectionCard extends Component {
   static propTypes = {
@@ -34,19 +34,19 @@ class ConnectionCard extends Component {
       <Card>
         <ProfileImage source={{ uri: picture }} />
         <Container>
-          <TextWrapper>
-            <Name>{name}</Name>
-            <Subtitle>wants to connect</Subtitle>
-          </TextWrapper>
+          <Content>
+            <TextContainer>
+              <Name>{name} </Name>
+              <Subtitle>wants to connect</Subtitle>
+            </TextContainer>
+            <ButtonRow>
+              <AcceptFriendRequestButton friendRequestId={id} />
+              <DeleteButton>
+                <Delete>Delete</Delete>
+              </DeleteButton>
+            </ButtonRow>
+          </Content>
           <TimeStamp>{formatTime(timeStamp)}</TimeStamp>
-          <Wrapper>
-            <AcceptButton>
-              <Confirm>Confirm</Confirm>
-            </AcceptButton>
-            <DeleteButton>
-              <Delete>Delete</Delete>
-            </DeleteButton>
-          </Wrapper>
         </Container>
       </Card>
     )
