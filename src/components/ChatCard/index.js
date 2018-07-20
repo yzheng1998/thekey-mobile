@@ -30,7 +30,7 @@ export default class ChatCard extends Component {
     const formatTime = time => {
       const result = moment().isSame(moment(time), 'day')
         ? moment(time).format('h:mma')
-        : moment(time).format('MM/DD/YYYY')
+        : moment(time).format('MM/DD/YY')
       return result
     }
     const { name, message, profileImage, timeStamp, onPress } = this.props
