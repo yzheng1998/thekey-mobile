@@ -3,7 +3,6 @@ import { FlatList, Text } from 'react-native'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import ChatCard from '../../../../components/ChatCard'
-import placeholderAvatar from '../../../../../assets/Jon.jpg'
 
 const GET_CHATS = gql`
   query viewer {
@@ -18,6 +17,7 @@ const GET_CHATS = gql`
           id
           firstName
           lastName
+          profilePicture
         }
         messages {
           id
@@ -57,14 +57,17 @@ class ChatInbox extends Component {
                 <ChatCard
                   name={chat.participants
                     .filter(x => x.id !== data.viewer.id)
-                    .map(x => x.firstName)
+                    .map(x => `${x.firstName} ${x.lastName}`)
                     .join(', ')}
                   message={
                     chat.messages.length
                       ? chat.messages[chat.messages.length - 1].content
                       : ''
                   }
-                  profileImage={placeholderAvatar}
+                  profileImage={chat.participants
+                    .filter(x => x.id !== data.viewer.id)
+                    .map(x => `${x.profilePicture}`)
+                    .join(', ')}
                   timeStamp="2018-06-18 10:52:03.744-04"
                   onPress={() =>
                     this.props.navigation.navigate('Conversation', {

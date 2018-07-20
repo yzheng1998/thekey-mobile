@@ -34,9 +34,10 @@ export default class ChatCard extends Component {
       return result
     }
     const { name, message, profileImage, timeStamp, onPress } = this.props
+    console.log('profileImage', profileImage)
     return (
       <Card onPress={onPress}>
-        <ProfileImage source={profileImage} />
+        <ProfileImage source={{ uri: profileImage }} />
         <Wrapper>
           <TitleWrapper>
             <Name numberOfLines={1}>{name}</Name>
