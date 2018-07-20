@@ -2,21 +2,33 @@ import React, { Component } from 'react'
 import {
   Background,
   Heading,
-  CancelContainer,
+  ButtonContainer,
   CancelButton,
   CancelText,
 } from './styles'
+import CreateChatButton from '../CreateChatButton'
 
 export default class NewChatModalHeader extends Component {
   render() {
-    const { handleClose } = this.props
+    const {
+      handleClose,
+      participantIds,
+      createNewChat,
+      newChatButtonDisabled,
+    } = this.props
     return (
       <Background>
-        <CancelContainer>
+        <ButtonContainer>
           <CancelButton onPress={handleClose}>
             <CancelText>Cancel</CancelText>
           </CancelButton>
-        </CancelContainer>
+          <CreateChatButton
+            createNewChat={createNewChat}
+            participantIds={participantIds}
+            disabled={newChatButtonDisabled}
+            closeModal={handleClose}
+          />
+        </ButtonContainer>
         <Heading>New Message</Heading>
       </Background>
     )

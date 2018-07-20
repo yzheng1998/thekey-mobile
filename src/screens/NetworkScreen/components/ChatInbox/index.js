@@ -3,7 +3,6 @@ import { FlatList, Text } from 'react-native'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import ChatCard from '../../../../components/ChatCard'
-import placeholderAvatar from '../../../../../assets/Jon.jpg'
 
 const GET_CHATS = gql`
   query viewer {
@@ -18,6 +17,7 @@ const GET_CHATS = gql`
           id
           firstName
           lastName
+          profilePicture
         }
         messages {
           id
@@ -32,6 +32,7 @@ const GET_CHATS = gql`
               content
             }
           }
+          createdAt
         }
       }
     }
@@ -41,6 +42,14 @@ const GET_CHATS = gql`
 class ChatInbox extends Component {
   state = {
     userId: '',
+  }
+
+  showParticipantNames = participants => {
+    // only show first names in a group chat, first and last otherwise
+    if (participants.length > 1) {
+      return participants.map(x => x.firstName).join(', ')
+    }
+    return `${participants[0].firstName} ${participants[0].lastName}`
   }
 
   render() {
@@ -55,17 +64,23 @@ class ChatInbox extends Component {
               data={data.viewer.chats}
               renderItem={({ item: chat }) => (
                 <ChatCard
-                  name={chat.participants
-                    .filter(x => x.id !== data.viewer.id)
-                    .map(x => x.firstName)
-                    .join(', ')}
+                  name={this.showParticipantNames(
+                    chat.participants.filter(x => x.id !== data.viewer.id),
+                  )}
                   message={
                     chat.messages.length
                       ? chat.messages[chat.messages.length - 1].content
                       : ''
                   }
-                  profileImage={placeholderAvatar}
-                  timeStamp="2018-06-18 10:52:03.744-04"
+                  profileImage={chat.participants
+                    .filter(x => x.id !== data.viewer.id)
+                    .map(x => `${x.profilePicture}`)
+                    .join(', ')}
+                  timeStamp={
+                    chat.messages.length
+                      ? chat.messages[chat.messages.length - 1].createdAt
+                      : '2018-07-19 23:29:09.592-04'
+                  }
                   onPress={() =>
                     this.props.navigation.navigate('Conversation', {
                       chat,

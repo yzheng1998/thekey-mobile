@@ -45,6 +45,7 @@ class NetworkScreen extends Component {
     return (
       <Background>
         <NewChatModal
+          navigation={this.props.navigation}
           visible={this.state.newChatModalVisible}
           handleClose={this.handleCloseNewChat}
         />
