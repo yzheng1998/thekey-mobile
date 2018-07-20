@@ -71,6 +71,13 @@ export default class CardSwiper extends Component {
             inputOverlayLabelsOpacityRangeX={[-width / 4, 0, width / 4]}
             outputOverlayLabelsOpacityRangeX={[1, 0, 1]}
             overlayOpacityHorizontalThreshold={0.1}
+            onSwipedLeft={i => {
+              const variables = {
+                recipientId: userData.users[i].id,
+                swipedLeft: true,
+              }
+              createFriendRequest({ variables })
+            }}
             onSwipedRight={i => {
               const variables = {
                 recipientId: userData.users[i].id,
