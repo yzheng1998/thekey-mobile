@@ -10,17 +10,25 @@ import SocietySearchModal from './components/SocietySearchModal'
 const { width } = Dimensions.get('window')
 
 const GET_USERS = gql`
-  query users {
-    users {
+  query users($usersFilterInput: UsersFilterInput!) {
+    users(usersFilterInput: $usersFilterInput) {
       id
       firstName
       lastName
       email
+      demographics {
+        hometown
+      }
+      profilePicture
+      bio
       friends {
         id
         profilePicture
         firstName
         lastName
+      }
+      tags {
+        name
       }
     }
   }
@@ -43,6 +51,7 @@ class SocietyScreen extends Component {
     return (
       <Background>
         <SocietySearchModal
+          navigation={this.props.navigation}
           visible={this.state.searchModalVisible}
           closeModal={this.closeSearchModal}
         />
@@ -50,7 +59,7 @@ class SocietyScreen extends Component {
           navigation={this.props.navigation}
           openModal={this.openSearchModal}
         />
-        <Query query={GET_USERS}>
+        <Query query={GET_USERS} variables={{ usersFilterInput: {} }}>
           {({ loading, error, data }) => {
             if (loading) return <Text>`Loading...`</Text>
             if (error) return <Text>`Error! ${error.message}`</Text>
