@@ -10,12 +10,11 @@ import {
   Description,
   TagsContainer,
   InfoContainer,
-  StarContainer,
 } from './styles'
-import Star from 'react-native-vector-icons/FontAwesome'
 import TagLine from '../TagLine'
 import moment from 'moment'
 import questionMark from '../../stories/question-mark.jpg'
+import JobStarButton from '../../components/JobStarButton'
 
 const daysLeft = time => {
   const today = moment()
@@ -28,6 +27,9 @@ export default class JobCard extends Component {
   constructor(props) {
     super(props)
     this.state = { isInterested: false }
+  }
+  select = () => {
+    this.setState({ isInterested: !this.state.isInterested })
   }
   render() {
     const {
@@ -66,21 +68,13 @@ export default class JobCard extends Component {
               <Title>{title}</Title>
               <Host>{company || 'No Associated Company'}</Host>
             </ContentContainer>
-            <StarContainer
-              onPress={() =>
-                this.setState({ isInterested: !this.state.isInterested })
-              }
-            >
-              <Star
-                name={this.state.isInterested ? 'star' : 'star-o'}
-                size={21}
-                color={
-                  this.state.isInterested
-                    ? 'rgb(250,53,121)'
-                    : '(rgb(148,157,170)'
-                }
-              />
-            </StarContainer>
+            <JobStarButton
+              onPress={this.select}
+              isInterested={this.state.isInterested}
+              id={id}
+              startColor="rgb(250,53,121)"
+              endColor="rgb(148, 157, 170)"
+            />
           </InfoContainer>
           <Description>
             {commitment} - {location}

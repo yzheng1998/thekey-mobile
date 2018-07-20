@@ -5,6 +5,7 @@ import Suitcase from 'react-native-vector-icons/Entypo'
 import BlockButton from '../../../../components/BlockButton'
 
 export default class EditExperienceBlock extends Component {
+  // handle formatting of all experience data
   render() {
     return (
       <WideContainer>
@@ -14,13 +15,14 @@ export default class EditExperienceBlock extends Component {
             <ExperienceRow
               navigation={this.props.navigation}
               showEditButton
-              companyName={experience.companyName}
+              employer={experience.employer}
               position={experience.position}
-              startYear={experience.startYear}
-              endYear={experience.endYear}
+              startDate={experience.startDate} // show dates instead of years
+              endDate={experience.endDate}
               id={experience.id}
               key={experience.id}
               addExperience={this.props.addExperience}
+              refreshData={this.props.refreshData}
             />
           ))}
         </ExperienceList>
@@ -29,6 +31,7 @@ export default class EditExperienceBlock extends Component {
           onPress={() =>
             this.props.navigation.navigate('AddExperience', {
               addExperience: this.props.addExperience,
+              refreshData: this.props.refreshData,
             })
           }
         />

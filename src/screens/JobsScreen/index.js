@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
-import { FlatList, ScrollView, Text } from 'react-native'
+import { View, FlatList, ScrollView, Text } from 'react-native'
 import SearchBar from '../../components/SearchBar'
 import JobCard from '../../components/JobCard'
 import SearchFilterTab from '../../components/SearchFilterTab'
-import { HeaderBackground, Title, BackButton, Divider } from './styles'
+import {
+  HeaderBackground,
+  Title,
+  BackButton,
+  Divider,
+  CardDivider,
+} from './styles'
 import { Query } from 'react-apollo'
 import BackArrow from 'react-native-vector-icons/Ionicons'
 
@@ -78,7 +84,10 @@ class JobsScreen extends Component {
                 keyExtractor={job => job.id}
                 data={data.jobs}
                 renderItem={({ item: job }) => (
-                  <JobCard navigation={this.props.navigation} job={job} />
+                  <View>
+                    <JobCard navigation={this.props.navigation} job={job} />
+                    <CardDivider />
+                  </View>
                 )}
               />
             )

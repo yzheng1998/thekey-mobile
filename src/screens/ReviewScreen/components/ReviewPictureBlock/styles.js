@@ -48,7 +48,7 @@ export const ClockContainer = styled.View`
   padding-top: 6px;
   padding-right: 4px;
 `
-export const Apply = styled.TouchableOpacity`
+export const AddReviewButton = styled.TouchableOpacity`
   height: 45px;
   width: 100%;
   bottom: 0;
@@ -57,7 +57,7 @@ export const Apply = styled.TouchableOpacity`
   align-items: center;
   padding: 14px;
 `
-export const ApplyButton = styled.Text`
+export const AddReviewText = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   font-size: 14px;
   color: white;

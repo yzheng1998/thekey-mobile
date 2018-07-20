@@ -38,9 +38,9 @@ export const Message = styled.Text`
   color: ${themeGet('colors.fontDescription.secondary')};
 `
 export const ProfileImage = styled.Image`
-  border-radius: 30px;
-  height: 60px;
-  width: 60px;
+  border-radius: 25px;
+  height: 50px;
+  width: 50px;
   align-self: center;
 `
 export const TimeStamp = styled.Text`

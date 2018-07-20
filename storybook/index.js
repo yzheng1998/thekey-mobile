@@ -56,7 +56,16 @@ import '../src/stories/reviewPictureBlock'
 import '../src/stories/ReviewScreen'
 import '../src/stories/EmploymentHistoryBlock'
 import '../src/stories/connectionCard'
+import '../src/stories/ReviewTermsOfUseAndSubmit'
+import '../src/stories/OptionalInformation'
 import '../src/stories/SettingsMenu'
+import '../src/stories/SchoolSearchModal'
+import '../src/stories/YourEducationScreen'
+import '../src/stories/EssayScreen'
+import '../src/stories/LineInput'
+import '../src/stories/AddCompanyReviewScreen'
+import '../src/stories/registrationTag'
+import '../src/stories/interestsScreen'
 
 const StorybookUI = getStorybookUI({
   port: 7007,

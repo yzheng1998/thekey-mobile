@@ -6,10 +6,10 @@ export default class EmojiSelector extends Component {
     const { emoji, onSelection, selected } = this.props
     return (
       <EmojiButton
-        selected={selected.includes(emoji)}
+        selected={selected.includes(emoji.value)}
         onPress={() => onSelection(emoji)}
       >
-        <Emoji>{emoji}</Emoji>
+        <Emoji>{emoji.label}</Emoji>
       </EmojiButton>
     )
   }

@@ -13,7 +13,11 @@ class LandingScreen extends Component {
         />
         <Button
           title="Apply"
-          onPress={() => this.props.navigation.navigate('Register')}
+          onPress={() => this.props.navigation.navigate('SignUp')}
+        />
+        <Button
+          title="Splash"
+          onPress={() => this.props.navigation.navigate('Splash')}
         />
         <Button
           // For testing the rest of the app bc don't have login functionality yet

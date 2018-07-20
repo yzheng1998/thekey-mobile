@@ -12,12 +12,14 @@ export default class EditEducationBlock extends Component {
           addEducation={this.props.addEducation}
           navigation={this.props.navigation}
           educationData={this.props.educationData}
+          refreshData={this.props.refreshData}
         />
         <BlockButton
           text="ADD EDUCATION"
           onPress={() =>
             this.props.navigation.navigate('AddEducation', {
               addEducation: this.props.addEducation,
+              refreshData: this.props.refreshData,
             })
           }
         />
