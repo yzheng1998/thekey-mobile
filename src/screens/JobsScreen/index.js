@@ -34,10 +34,15 @@ const GET_JOBS = gql`
 class JobsScreen extends Component {
   state = {
     searchText: '',
+    tab: 0,
   }
 
   updateText = searchText => {
     this.setState({ searchText })
+  }
+
+  changeTab = tab => {
+    this.setState({ tab })
   }
 
   render() {
@@ -54,7 +59,13 @@ class JobsScreen extends Component {
             <BackArrow name="ios-arrow-back" color="white" size={30} />
           </BackButton>
           <Title>Jobs/Internships</Title>
-          <SearchFilterTab options={['All', 'Saved', 'Applied For']} />
+          <SearchFilterTab
+            selectedIndex={this.state.tab}
+            updateState={this.changeTab}
+            color="white"
+            selectedColor="white"
+            options={['All', 'Saved', 'Applied For']}
+          />
         </HeaderBackground>
         <SearchBar
           updateText={this.updateText}

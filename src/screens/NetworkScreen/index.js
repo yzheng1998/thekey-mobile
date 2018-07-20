@@ -20,11 +20,16 @@ class NetworkScreen extends Component {
 
   state = {
     searchText: '',
+    tab: 0,
     newChatModalVisible: false,
   }
 
   updateText = searchText => {
     this.setState({ searchText })
+  }
+
+  changeTab = tab => {
+    this.setState({ tab })
   }
 
   handleStartNewChat = () => {
@@ -46,9 +51,11 @@ class NetworkScreen extends Component {
         <HeaderBackground>
           <Title>Your Network</Title>
           <SearchFilterTab
+            updateState={this.changeTab}
+            selectedIndex={this.state.tab}
+            color="white"
+            selectedColor="white"
             options={['All', 'Connections', 'Groups', 'Events']}
-            color="rgb(176, 186, 200)"
-            selectedColor="rgb(250, 53, 121)"
           />
           <ThinDivider />
         </HeaderBackground>

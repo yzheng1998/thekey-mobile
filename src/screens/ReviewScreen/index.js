@@ -62,7 +62,10 @@ export default class ReviewScreen extends Component {
                 reviews={data.companyReviews.length}
                 navigation={this.props.navigation}
               />
-              <FilterBlock updateState={this.changeTab} />
+              <FilterBlock
+                updateState={this.changeTab}
+                selectedIndex={this.state.tab}
+              />
               <FlatList
                 keyExtractor={review => review.id}
                 data={data.companyReviews}
