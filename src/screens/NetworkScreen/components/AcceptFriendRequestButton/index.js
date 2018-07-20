@@ -26,11 +26,13 @@ export default class AcceptFriendRequestButton extends Component {
     }
   }
   render() {
-    const { friendRequestId } = this.props
+    const { friendRequestId, refreshPage } = this.props
     return (
       <Mutation
         mutation={ACCEPT_FRIEND_REQUEST}
-        onCompleted={() => this.setState({ buttonText: 'Accepted' })}
+        onCompleted={() =>
+          this.setState({ buttonText: 'Accepted' }) && refreshPage()
+        }
       >
         {acceptFriendRequest => (
           <Button

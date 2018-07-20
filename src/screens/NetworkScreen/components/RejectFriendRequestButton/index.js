@@ -26,11 +26,13 @@ export default class RejectFriendRequestButton extends Component {
     }
   }
   render() {
-    const { friendRequestId } = this.props
+    const { friendRequestId, refreshPage } = this.props
     return (
       <Mutation
         mutation={REJECT_FRIEND_REQUEST}
-        onCompleted={() => this.setState({ buttonText: 'Deleted' })}
+        onCompleted={() =>
+          this.setState({ buttonText: 'Deleted' }) && refreshPage()
+        }
       >
         {rejectFriendRequest => (
           <Button

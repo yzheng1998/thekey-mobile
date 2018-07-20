@@ -28,7 +28,7 @@ class ConnectionCard extends Component {
         : moment(time).format('MM/DD/YY')
       return result
     }
-    const { name, picture, timeStamp, id } = this.props
+    const { name, picture, timeStamp, id, refreshPage } = this.props
     return (
       <Card>
         <ProfileImage source={{ uri: picture }} />
@@ -39,8 +39,14 @@ class ConnectionCard extends Component {
               <Subtitle>wants to connect</Subtitle>
             </TextContainer>
             <ButtonRow>
-              <AcceptFriendRequestButton friendRequestId={id} />
-              <RejectFriendRequestButton friendRequestId={id} />
+              <AcceptFriendRequestButton
+                friendRequestId={id}
+                refreshPage={refreshPage}
+              />
+              <RejectFriendRequestButton
+                friendRequestId={id}
+                refreshPage={refreshPage}
+              />
             </ButtonRow>
           </Content>
           <TimeStamp>{formatTime(timeStamp)}</TimeStamp>

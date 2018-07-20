@@ -91,7 +91,7 @@ class NetworkScreen extends Component {
         <Divider />
         <ScrollView>
           <Query query={GET_FRIEND_REQUESTS}>
-            {({ loading, error, data }) => {
+            {({ loading, error, data, refetch }) => {
               if (loading) return <Text>`Loading...`</Text>
               if (error) return <Text>`Error! ${error.message}`</Text>
               return (
@@ -104,6 +104,7 @@ class NetworkScreen extends Component {
                       }`}
                       timeStamp="2018-07-19 23:29:09.592-04"
                       picture={friendRequest.sender.profilePicture}
+                      refreshPage={refetch}
                     />
                   ))}
                 </View>
