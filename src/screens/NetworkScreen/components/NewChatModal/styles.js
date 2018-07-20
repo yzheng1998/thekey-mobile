@@ -25,10 +25,11 @@ export const SearchNameContainer = styled.View`
   align-items: center;
   background-color: white;
 `
-export const PeopleListContainer = styled.View`
+export const PeopleListContainer = styled.ScrollView`
   flex: 1;
   width: 100%;
   background-color: ${themeGet('colors.background')};
+  margin-bottom: 120px;
 `
 export const ThinDivider = styled.View`
   width: 100%;
