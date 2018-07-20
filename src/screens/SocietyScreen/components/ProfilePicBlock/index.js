@@ -4,14 +4,12 @@ import PictureHeader from '../../../../components/PictureHeader'
 
 export default class ProfilePicBlock extends Component {
   render() {
-    const { profilePic, name, city, state } = this.props
+    const { profilePic, name, hometown } = this.props
     return (
       <Container>
-        <PictureHeader picture={profilePic} size={171}>
+        <PictureHeader picture={{ uri: profilePic }} avatarSize={171}>
           <NameText>{name}</NameText>
-          <LocationText>
-            {city}, {state}
-          </LocationText>
+          <LocationText>{hometown}</LocationText>
         </PictureHeader>
       </Container>
     )
