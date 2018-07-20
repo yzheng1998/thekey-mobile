@@ -17,7 +17,7 @@ export const CancelContainer = styled.View`
 export const CancelButton = styled.TouchableOpacity``
 export const CancelText = styled.Text`
   font-size: 18px;
-  color: ${themeGet('colors.fontSubtitle.primary')};
+  color: ${themeGet('colors.buttonPrimary')};
   font-family: ${themeGet('fonts.medium')};
 `
 export const Heading = styled.Text`
