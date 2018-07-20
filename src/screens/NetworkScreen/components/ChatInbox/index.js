@@ -44,6 +44,14 @@ class ChatInbox extends Component {
     userId: '',
   }
 
+  showParticipantNames = participants => {
+    // only show first names in a group chat, first and last otherwise
+    if (participants.length > 1) {
+      return participants.map(x => x.firstName).join(', ')
+    }
+    return `${participants[0].firstName} ${participants[0].lastName}`
+  }
+
   render() {
     return (
       <Query query={GET_CHATS}>
@@ -56,10 +64,9 @@ class ChatInbox extends Component {
               data={data.viewer.chats}
               renderItem={({ item: chat }) => (
                 <ChatCard
-                  name={chat.participants
-                    .filter(x => x.id !== data.viewer.id)
-                    .map(x => `${x.firstName} ${x.lastName}`)
-                    .join(', ')}
+                  name={this.showParticipantNames(
+                    chat.participants.filter(x => x.id !== data.viewer.id),
+                  )}
                   message={
                     chat.messages.length
                       ? chat.messages[chat.messages.length - 1].content
