@@ -34,7 +34,6 @@ export default class ChatCard extends Component {
       return result
     }
     const { name, message, profileImage, timeStamp, onPress } = this.props
-    console.log('profileImage', profileImage)
     return (
       <Card onPress={onPress}>
         <ProfileImage source={{ uri: profileImage }} />
