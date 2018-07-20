@@ -7,7 +7,7 @@ export default class ProfilePicBlock extends Component {
     const { profilePic, name, hometown } = this.props
     return (
       <Container>
-        <PictureHeader picture={{ uri: profilePic }} avatarSize={171}>
+        <PictureHeader picture={profilePic} avatarSize={171}>
           <NameText>{name}</NameText>
           <LocationText>{hometown}</LocationText>
         </PictureHeader>
