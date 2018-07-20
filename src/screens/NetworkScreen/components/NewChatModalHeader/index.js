@@ -10,14 +10,17 @@ import CreateChatButton from '../CreateChatButton'
 
 export default class NewChatModalHeader extends Component {
   render() {
-    const { handleClose } = this.props
+    const { handleClose, participantIds, createNewChat } = this.props
     return (
       <Background>
         <ButtonContainer>
           <CancelButton onPress={handleClose}>
             <CancelText>Cancel</CancelText>
           </CancelButton>
-          <CreateChatButton onPress={handleClose} />
+          <CreateChatButton
+            createNewChat={createNewChat}
+            participantIds={participantIds}
+          />
         </ButtonContainer>
         <Heading>New Message</Heading>
       </Background>
