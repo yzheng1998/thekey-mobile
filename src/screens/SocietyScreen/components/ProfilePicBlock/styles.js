@@ -4,6 +4,8 @@ import { themeGet } from 'styled-system'
 export const Container = styled.View`
   aspect-ratio: 1.048;
   width: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 `
 
 export const NameText = styled.Text`

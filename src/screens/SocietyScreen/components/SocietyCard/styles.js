@@ -2,12 +2,11 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const CardContainer = styled.View`
-  width: ${themeGet('width.primary')};
   height: 540px;
   border-radius: 20;
-  background-color: ${themeGet('colors.background')}
-  overflow: hidden;
-  box-shadow: 20px 20px;
+  background-color: ${themeGet('colors.background')};
+  shadow-opacity: 0.3;
+  shadow-radius: 10px;
 `
 
 export const BioText = styled.Text`
