@@ -1,7 +1,6 @@
 import { createStackNavigator } from 'react-navigation'
 import SocietyScreen from '../screens/SocietyScreen'
 import UserScreen from '../screens/UserScreen'
-import MemberScreen from '../screens/MemberScreen'
 import EventsScreen from '../screens/EventsScreen'
 import EventScreen from '../screens/EventScreen'
 import JobsScreen from '../screens/JobsScreen'
@@ -143,12 +142,6 @@ const DiscoverStack = createStackNavigator(
     },
     PeopleList: {
       screen: PeopleList,
-      navigationOptions: () => ({
-        header: null,
-      }),
-    },
-    Member: {
-      screen: MemberScreen,
       navigationOptions: () => ({
         header: null,
       }),
