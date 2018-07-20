@@ -10,10 +10,12 @@ import {
 import Header from '../../../../components/Header'
 import LineInput from '../../../../components/LineInput'
 import RegisterButton from '../../../../components/RegisterButton'
+import RegistrationPicker from '../../../../components/RegistrationPicker'
+import PickerComponent from '../../../../components/PickerComponent'
 
 export default class AddEducationModal extends Component {
   state = {
-    isCurrentEmployee: false,
+    showSchoolTypePicker: false,
   }
   render() {
     const {
@@ -23,21 +25,27 @@ export default class AddEducationModal extends Component {
       toggleEducationModal,
       addEducation,
       clearState,
+      schoolTypeOptions,
     } = this.props
     const {
       schoolName,
+      schoolType,
+      degreeType,
       location,
       major,
       startYear,
-      graduationYear,
+      endYear,
       isCurrentEmployee,
     } = state
     const toggleSwitch = () => {
       updateText({
         isCurrentEmployee: !isCurrentEmployee,
-        graduationYear: !isCurrentEmployee ? null : undefined,
+        endYear: !isCurrentEmployee ? null : undefined,
       })
     }
+    const { showSchoolTypePicker } = this.state
+    const findLabel = value =>
+      schoolTypeOptions.find(el => el.value === value).label
     return (
       <RightModal
         isVisible={visible}
@@ -58,6 +66,17 @@ export default class AddEducationModal extends Component {
               text={major}
               placeholderText="What did you study?"
             />
+            <RegistrationPicker
+              selected={showSchoolTypePicker}
+              onPress={() => this.setState({ showSchoolTypePicker: true })}
+              text={schoolType ? findLabel(schoolType) : ''}
+              placeholderText="What type of school did you attend?"
+            />
+            <LineInput
+              updateText={text => updateText({ degreeType: text })}
+              text={degreeType}
+              placeholderText="Degree type"
+            />
             <RowContainer>
               <SwitchLabel>I am currently working here</SwitchLabel>
               <Switch
@@ -74,11 +93,11 @@ export default class AddEducationModal extends Component {
                 placeholderText="Start Date"
               />
               <LineInput
-                updateText={text => updateText({ graduationYear: text })}
+                updateText={text => updateText({ endYear: text })}
                 text={
-                  graduationYear === null || isCurrentEmployee === true
+                  endYear === null || isCurrentEmployee === true
                     ? 'Present'
-                    : graduationYear
+                    : endYear
                 }
                 width="48%"
                 placeholderText="End Date"
@@ -93,6 +112,19 @@ export default class AddEducationModal extends Component {
               }}
             />
           </KeyboardAvoidingView>
+          {showSchoolTypePicker && (
+            <PickerComponent
+              options={schoolTypeOptions}
+              doneOnPress={() => {
+                this.setState({
+                  showSchoolTypePicker: false,
+                })
+              }}
+              onValueChange={updateText}
+              value={schoolType}
+              keyName="schoolType"
+            />
+          )}
         </ScreenContainer>
       </RightModal>
     )
