@@ -32,6 +32,7 @@ const GET_CHATS = gql`
               content
             }
           }
+          createdAt
         }
       }
     }
@@ -68,7 +69,11 @@ class ChatInbox extends Component {
                     .filter(x => x.id !== data.viewer.id)
                     .map(x => `${x.profilePicture}`)
                     .join(', ')}
-                  timeStamp="2018-06-18 10:52:03.744-04"
+                  timeStamp={
+                    chat.messages.length
+                      ? chat.messages[chat.messages.length - 1].createdAt
+                      : '2018-07-19 23:29:09.592-04'
+                  }
                   onPress={() =>
                     this.props.navigation.navigate('Conversation', {
                       chat,
