@@ -91,7 +91,10 @@ export default class EditProfileScreen extends Component {
           return (
             <Screen>
               <ScreenScroll>
-                <ProfilePicture profilePicture={profilePicture} />
+                <ProfilePicture
+                  profilePicture={profilePicture}
+                  defaultProfilePicture={defaultProfilePicture}
+                />
                 <BasicInfoBlock
                   state={displayData}
                   lookingForOptions={lookingForOptions}
