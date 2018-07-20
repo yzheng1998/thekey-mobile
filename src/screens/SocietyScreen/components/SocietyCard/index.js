@@ -11,7 +11,6 @@ export default class SocietyCard extends Component {
       firstName,
       lastName,
       hometown,
-      state,
       tags,
       bio,
       mutualFriends,
@@ -23,8 +22,7 @@ export default class SocietyCard extends Component {
         <ProfilePicBlock
           profilePic={profilePicture}
           name={`${firstName} ${lastName}`}
-          city={hometown}
-          state={state}
+          hometown={hometown}
         />
         <TagLine tagData={selectTags} lines={2} />
         <BioText numberOfLines={3}>{bio}</BioText>
