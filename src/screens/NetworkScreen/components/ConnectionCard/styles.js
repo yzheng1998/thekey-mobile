@@ -2,8 +2,7 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const Card = styled.View`
-  width: 100%;
-  overflow: hidden;
+  width: 99%;
   background-color: ${themeGet('colors.background')};
   flex-direction: row;
   padding: 10px;
@@ -11,9 +10,12 @@ export const Card = styled.View`
   border-color: ${themeGet('colors.divider')};
 `
 export const Container = styled.View`
+  flex: 1;
   flex-direction: row;
   padding-left: 10px;
   align-items: flex-start;
+  justify-content: space-between;
+  padding-right: 7px;
 `
 export const Content = styled.View`
   width: 75%;
