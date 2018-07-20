@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
+import { Text } from 'react-native'
 import { ScreenContainer, Divider, SecondaryTitle } from './styles'
-
 import MyProfilePicBlock from './components/MyProfilePicBlock'
 import MyProfileBioBlock from './components/MyProfileBioBlock'
 import ButtonRowView from './components/ButtonRowView'
@@ -9,226 +9,93 @@ import EducationListView from './components/EducationListView'
 import ExperienceListView from './components/ExperienceListView'
 import ContactContainerView from './components/ContactContainerView'
 import EventsInCommon from './components/EventsInCommon'
+import { Query } from 'react-apollo'
+import { GET_USER } from './query'
+import nodeEmoji from 'node-emoji'
 
 export default class MemberScreen extends Component {
   render() {
-    // Placeholder data
-    const tagData = [
-      {
-        name: 'Medicine',
-        image: {
-          uri:
-            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-        },
-      },
-      {
-        name: 'Health',
-        image: {
-          uri:
-            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-        },
-      },
-      {
-        name: 'Business',
-        image: {
-          uri:
-            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-        },
-      },
-      {
-        name: 'Venture Capital',
-        image: {
-          uri:
-            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-        },
-      },
-      {
-        name: 'Start-up',
-        image: {
-          uri:
-            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-        },
-      },
-      {
-        name: 'Tech',
-        image: {
-          uri:
-            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-        },
-      },
-      {
-        name: 'Dev',
-        image: {
-          uri:
-            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-        },
-      },
-      {
-        name: 'Computer Engineering',
-        image: {
-          uri:
-            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-        },
-      },
-      {
-        name: 'Basketball',
-        image: {
-          uri:
-            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-        },
-      },
-      {
-        name: 'Photography',
-        image: {
-          uri:
-            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-        },
-      },
-      {
-        name: 'Running',
-        image: {
-          uri:
-            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-        },
-      },
-      {
-        name: 'Swimming',
-        image: {
-          uri:
-            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-        },
-      },
-    ]
-
-    const experienceData = [
-      {
-        companyName: 'Unfiltered Network',
-        position: 'CEO',
-        startYear: '2016',
-        endYear: 'Present / 1yr 9 mos',
-        id: 0,
-      },
-      {
-        companyName: 'Facemovie',
-        position: 'Graphic Designer',
-        startYear: '2010',
-        endYear: '2016',
-        id: 1,
-      },
-    ]
-
-    const educationData = [
-      {
-        schoolType: 'UNDERGRADUATE',
-        schoolName: 'Harvard University',
-        degreeType: 'Bachelors Degree',
-        major: 'East Asian Studies',
-        startYear: '2013',
-        graduationYear: '2017',
-        id: 0,
-      },
-      {
-        schoolType: 'GRADUATE',
-        schoolName: 'Beachwood High School',
-        startYear: '2009',
-        graduationYear: '2013',
-        id: 1,
-      },
-    ]
-    const user = {
-      id: 123,
-      email: 'yz@g.com',
-      firstName: 'Yuke',
-      lastName: 'Zheng',
-      birthday: '12/28/1998',
-      gender: 'MALE',
-      hometown: 'Cleveland',
-      state: 'Ohio',
-      major: 'Chemistry',
-      bio:
-        'Lorem ipsum dolor sit amet, viderer luptatum molestiae duo id, nisl movet imperdiet id sea. Mea ea soluta sapientem, nam cu natum idque discere. Qui et possim tibique. Mea et choro invenire platonem. Aperiri evertitur usu ei, ius no mucius verterem cotidieque, et vim atomorum incorrupte definitiones. Velit eruditi mel eu. Summo veniam apeirian nec in, in eligendi molestiae intellegat vim, invidunt partiendo vel ex. No prima graecis vix, eum legere fabellas legendos et. An semper molestie mel, no causae facilisis his.',
-      tags: tagData,
-      resume: 'temp',
-      linkedIn: 'linkedin.com/yukezheng',
-      facebook: 'facebook.com/yukezheng',
-      twitter: '@yukezheng',
-      profilePicture: {
-        uri:
-          'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-      },
-      quote: 'Temporary quote',
-      highSchool: 'Beachwood High School',
-      college: 'Harvard University',
-      education: educationData,
-      graduateSchool: 'Stanford University',
-      interestingFact: 'I can ride the unicycle!',
-      ethnicity: 'ASIAN',
-      preferredWayToMeet: 'Drinks!',
-      workExperience: experienceData,
-      lookingFor: 'Business Mentor',
-      goodQualities: 'Lorem Ipsum',
-    }
-    const {
-      email,
-      firstName,
-      lastName,
-      hometown,
-      state,
-      bio,
-      tags,
-      linkedIn,
-      facebook,
-      twitter,
-      profilePicture,
-      education,
-      interestingFact,
-      preferredWayToMeet,
-      workExperience,
-      lookingFor,
-      goodQualities,
-      // } = this.props.user
-    } = user
     return (
-      <ScreenContainer>
-        <MyProfilePicBlock
-          name={`${firstName} ${lastName}`}
-          city={hometown}
-          state={state}
-          profilePic={profilePicture}
-        />
-        <ButtonRowView goBack={() => this.props.navigation.goBack()} />
-        <MyProfileBioBlock tagData={tags} bioText={bio} />
-        <Divider />
-        <Description row title="Looking For" content={lookingFor} />
-        <Description
-          row
-          title="Preferred Way To Meet"
-          content={preferredWayToMeet}
-        />
-        <Divider />
-        <EducationListView educationData={education} />
-        <Divider />
-        <ExperienceListView experienceData={workExperience} />
-        <SecondaryTitle>Events In Common</SecondaryTitle>
-        <EventsInCommon />
-        <Divider />
-        <Description
-          row={false}
-          title="Interesting Fact About Me"
-          content={interestingFact}
-        />
-        <Description
-          row={false}
-          title="Good Qualities"
-          content={goodQualities}
-        />
-        <ContactContainerView
-          linkedIn={linkedIn}
-          email={email}
-          facebook={facebook}
-          twitter={twitter}
-        />
-      </ScreenContainer>
+      <Query
+        query={GET_USER}
+        variables={{ id: this.props.navigation.getParam('id') }}
+      >
+        {({ loading, error, data }) => {
+          if (loading) return <Text>`Loading...`</Text>
+          if (error) return <Text>`Error! ${error.message}`</Text>
+          const {
+            email,
+            firstName,
+            lastName,
+            demographics,
+            bio,
+            linkedIn,
+            facebook,
+            twitter,
+            profilePicture,
+            education,
+            interestingFact,
+            preferredWaysToMeet,
+            tags,
+            workExperiences,
+            lookingFor,
+            skills,
+            friends, // will do Mutual Friends later on
+          } = data.user
+          const emojiList = preferredWaysToMeet.map(emoji =>
+            nodeEmoji.get(emoji.toLowerCase()),
+          )
+          return (
+            <ScreenContainer>
+              <MyProfilePicBlock
+                name={`${firstName} ${lastName}`}
+                hometown={demographics.hometown}
+                profilePic={{
+                  uri:
+                    profilePicture ||
+                    'https://images.unsplash.com/photo-1519145897500-869c40ccb024?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc363c8e033813d4f7b798846bb13a24&auto=format&fit=crop&w=582&q=80',
+                }}
+                mutualFriends={friends}
+                navigation={this.props.navigation}
+              />
+              <ButtonRowView
+                goBack={() => this.props.navigation.goBack()}
+                showSettings={() =>
+                  this.setState({
+                    showSettings: !this.state.showSettings,
+                  })
+                }
+              />
+              <MyProfileBioBlock tagData={tags} bioText={bio} />
+              <Divider />
+              <Description row title="Looking For" content={lookingFor} />
+              <Description
+                row
+                title="Preferred Ways To Meet"
+                content={emojiList}
+              />
+              <Divider />
+              <EducationListView educationData={education} />
+              <Divider />
+              <ExperienceListView experienceData={workExperiences} />
+              <SecondaryTitle>Events In Common</SecondaryTitle>
+              <EventsInCommon navigation={this.props.navigation} />
+              <Description
+                row={false}
+                title="Interesting Fact About Me"
+                content={interestingFact}
+              />
+              <Description row={false} title="Skills" content={skills} />
+              <ContactContainerView
+                linkedIn={linkedIn}
+                email={email}
+                facebook={facebook}
+                twitter={twitter}
+              />
+            </ScreenContainer>
+          )
+        }}
+      </Query>
     )
   }
 }
