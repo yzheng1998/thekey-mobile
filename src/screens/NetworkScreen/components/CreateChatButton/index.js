@@ -19,7 +19,7 @@ const CREATE_CHAT = gql`
 
 export default class CreateChatButton extends Component {
   render() {
-    const { participantIds, createNewChat } = this.props
+    const { participantIds, createNewChat, disabled } = this.props
     return (
       <Mutation
         mutation={CREATE_CHAT}
@@ -29,6 +29,7 @@ export default class CreateChatButton extends Component {
       >
         {createChat => (
           <Button
+            disabled={disabled}
             onPress={() => {
               const variables = {
                 participantIds,
@@ -36,7 +37,7 @@ export default class CreateChatButton extends Component {
               createChat({ variables })
             }}
           >
-            <Text>Next</Text>
+            <Text disabled={disabled}>Next</Text>
           </Button>
         )}
       </Mutation>

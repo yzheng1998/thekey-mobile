@@ -10,7 +10,12 @@ import CreateChatButton from '../CreateChatButton'
 
 export default class NewChatModalHeader extends Component {
   render() {
-    const { handleClose, participantIds, createNewChat } = this.props
+    const {
+      handleClose,
+      participantIds,
+      createNewChat,
+      newChatButtonDisabled,
+    } = this.props
     return (
       <Background>
         <ButtonContainer>
@@ -20,6 +25,7 @@ export default class NewChatModalHeader extends Component {
           <CreateChatButton
             createNewChat={createNewChat}
             participantIds={participantIds}
+            disabled={newChatButtonDisabled}
           />
         </ButtonContainer>
         <Heading>New Message</Heading>

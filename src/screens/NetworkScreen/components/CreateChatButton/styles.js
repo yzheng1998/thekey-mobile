@@ -6,6 +6,9 @@ export const Button = styled.TouchableOpacity`
 `
 export const Text = styled.Text`
   font-size: 18px;
-  color: ${themeGet('colors.buttonPrimary')};
+  color: ${props =>
+    props.disabled
+      ? themeGet('colors.buttonClicked')
+      : themeGet('colors.buttonPrimary')};
   font-family: ${themeGet('fonts.medium')};
 `
