@@ -10,11 +10,10 @@ import {
   Content,
   ButtonRow,
   TextContainer,
-  DeleteButton,
-  Delete,
 } from './styles'
 import moment from 'moment'
 import AcceptFriendRequestButton from '../AcceptFriendRequestButton'
+import RejectFriendRequestButton from '../RejectFriendRequestButton'
 
 class ConnectionCard extends Component {
   static propTypes = {
@@ -41,9 +40,7 @@ class ConnectionCard extends Component {
             </TextContainer>
             <ButtonRow>
               <AcceptFriendRequestButton friendRequestId={id} />
-              <DeleteButton>
-                <Delete>Delete</Delete>
-              </DeleteButton>
+              <RejectFriendRequestButton friendRequestId={id} />
             </ButtonRow>
           </Content>
           <TimeStamp>{formatTime(timeStamp)}</TimeStamp>
