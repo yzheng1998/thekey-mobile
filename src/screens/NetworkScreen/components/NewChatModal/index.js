@@ -111,10 +111,23 @@ export default class NewChatModal extends Component {
       })
       handleClose()
     }
+
+    const participantIds = this.state.participants.map(
+      participant => participant.id,
+    )
+
     return (
       <Modal animationType="slide" {...rest}>
         <Background>
-          <NewChatModalHeader handleClose={handleCloseModal} />
+          <NewChatModalHeader
+            handleClose={handleCloseModal}
+            participantIds={participantIds}
+            createNewChat={chatId =>
+              this.props.navigation.navigate('Conversation', {
+                chat: chatId,
+              })
+            }
+          />
           <ThinDivider />
           <SearchNameContainer>
             <Text>To: </Text>
@@ -131,6 +144,7 @@ export default class NewChatModal extends Component {
               tagContainerStyle={{ height: 31 }}
             />
           </SearchNameContainer>
+          <ThinDivider />
           <ScrollScreen>
             <Query query={SEARCH_CONTACTS} variables={variables}>
               {({ loading, error, data }) => {
