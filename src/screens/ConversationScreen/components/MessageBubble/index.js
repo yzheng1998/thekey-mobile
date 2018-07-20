@@ -6,13 +6,13 @@ export default class MessageBubble extends Component {
   static propTypes = {
     isUser: PropTypes.bool.isRequired,
     message: PropTypes.string.isRequired,
-    messageStyle: PropTypes.oneOf(
+    messageStyle: PropTypes.oneOf([
       'upperLeft',
       'upperRight',
       'lowerLeft',
       'lowerRight',
       'none',
-    ),
+    ]),
   }
   static defaultProps = {
     messageStyle: 'none',

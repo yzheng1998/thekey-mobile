@@ -6,15 +6,16 @@ export const Container = styled.KeyboardAvoidingView`
   width: 100%;
   background-color: ${themeGet('colors.background')};
   align-items: center;
+  padding-left: 12px;
+  padding-right: 12px;
 `
 export const Scroll = styled.ScrollView`
   background-color: ${themeGet('colors.background')};
   flex: 1;
   width: 100%;
 `
-export const InstructionsContainer = styled.View`
-  margin-top: 16px;
-`
+export const InstructionsContainer = styled.View``
+
 export const Instructions = styled.Text`
   color: ${themeGet('colors.fontSubtitle.primary')};
   font-size: 16px;
@@ -22,11 +23,11 @@ export const Instructions = styled.Text`
   text-align: center;
 `
 export const EssayInput = styled.TextInput`
-  align-self: center;
-  width: 87%;
   height: 264;
-  margin-top: 22px;
+  margin-left: 12px;
   padding: 10px;
+  margin-right: 12px;
+  margin-top: 22px;
   border-radius: 8px;
   border-width: 2px;
   border-color: ${themeGet('colors.buttonPrimary')};

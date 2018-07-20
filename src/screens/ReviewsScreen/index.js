@@ -51,6 +51,7 @@ class ReviewsScreen extends Component {
             options={['All', 'Saved', 'Highest Rated']}
             selectedColor="white"
             color="white"
+            selectedIndex={this.state.tab}
             updateState={this.changeTab}
           />
         </HeaderBackground>

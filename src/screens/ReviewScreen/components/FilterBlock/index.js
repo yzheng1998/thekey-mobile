@@ -5,6 +5,7 @@ import SearchFilterTab from '../../../../components/SearchFilterTab'
 export default class FilterBlock extends Component {
   static defaultProps = {}
   render() {
+    const { updateState, selectedIndex } = this.props
     return (
       <Container>
         <Title>Showing</Title>
@@ -13,7 +14,8 @@ export default class FilterBlock extends Component {
             options={['All', 'Full-time', 'Part-time', 'Internship']}
             selectedColor="rgb(250,53,121)"
             color="rgb(148,157,170)"
-            updateState={this.props.updateState}
+            updateState={updateState}
+            selectedIndex={selectedIndex}
           />
         </TabContainer>
       </Container>

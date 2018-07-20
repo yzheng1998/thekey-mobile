@@ -17,22 +17,17 @@ class JobSummaryScreen extends Component {
       'This would be a default cover letter that a user could configure in their settings. From here they could send as-is, or adjust the text to better suit the position in question. ',
     aboutCompany:
       'This would be a default cover letter that a user could configure in their settings. From here they could send as-is, or adjust the text to better suit the position in question. ',
-    companyOffer:
+    bringToRole:
       'This would be a default cover letter that a user could configure in their settings. From here they could send as-is, or adjust the text to better suit the position in question. ',
-    contribution:
-      'This would be a default cover letter that a user could configure in their settings. ',
     commitment: 'Full-time',
     industry: 'Music & Entertainment',
   }
   render() {
-    const {
-      aboutRole,
-      aboutCompany,
-      contribution,
-      companyOffer,
-      commitment,
-      industry,
-    } = this.props
+    const aboutRole = this.props.navigation.getParam('aboutRole')
+    const aboutCompany = this.props.navigation.getParam('aboutCompany')
+    const bringToRole = this.props.navigation.getParam('bringToRole')
+    const commitment = this.props.navigation.getParam('commitment')
+    const industry = this.props.navigation.getParam('industry')
     return (
       <BigContainer>
         <Container>
@@ -49,9 +44,7 @@ class JobSummaryScreen extends Component {
           <Header>About The Company</Header>
           <Body>{aboutCompany}</Body>
           <Header>What You Will Bring To The Role</Header>
-          <Body>{contribution}</Body>
-          <Header>What The Company Can Offer</Header>
-          <Body>{companyOffer}</Body>
+          <Body>{bringToRole}</Body>
           <Header>Job Details</Header>
           <Subtitle>Employment Type</Subtitle>
           <Detail>{commitment}</Detail>

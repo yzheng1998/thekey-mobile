@@ -126,6 +126,7 @@ export default class EditProfileScreen extends Component {
                 />
                 <EditExperienceBlock
                   navigation={this.props.navigation}
+                  refreshData={refetch}
                   experienceData={workExperiences}
                 />
                 <EditContactBlock

@@ -4,8 +4,8 @@ import {
   DescriptionContainer,
   Title,
   Reviews,
-  Apply,
-  ApplyButton,
+  AddReviewButton,
+  AddReviewText,
 } from './styles'
 import PictureHeader from '../../../../components/PictureHeader'
 import RatingStar from '../../../../components/RatingStar'
@@ -21,9 +21,11 @@ class ReviewPictureBlock extends Component {
             <RatingStar rating={rating} color="white" />
             <Reviews>{reviews} Total Reviews</Reviews>
           </DescriptionContainer>
-          <Apply onPress={() => this.props.navigation.navigate('ApplyNow')}>
-            <ApplyButton>ADD REVIEW</ApplyButton>
-          </Apply>
+          <AddReviewButton
+            onPress={() => this.props.navigation.navigate('AddCompanyReview')}
+          >
+            <AddReviewText>ADD REVIEW</AddReviewText>
+          </AddReviewButton>
         </PictureHeader>
       </HeaderContainer>
     )

@@ -1,6 +1,7 @@
 import { createStackNavigator } from 'react-navigation'
 import SocietyScreen from '../screens/SocietyScreen'
 import UserScreen from '../screens/UserScreen'
+import MemberScreen from '../screens/MemberScreen'
 import EventsScreen from '../screens/EventsScreen'
 import EventScreen from '../screens/EventScreen'
 import JobsScreen from '../screens/JobsScreen'
@@ -18,6 +19,7 @@ import PeopleList from '../screens/PeopleList'
 import EditProfileScreen from '../screens/EditProfileScreen'
 import AddEducationForm from '../screens/EditProfileScreen/components/AddEducationForm'
 import AddExperienceForm from '../screens/EditProfileScreen/components/AddExperienceForm'
+import AddCompanyReviewScreen from '../screens/AddCompanyReviewScreen'
 
 const DiscoverStack = createStackNavigator(
   {
@@ -37,6 +39,12 @@ const DiscoverStack = createStackNavigator(
       screen: UserScreen,
       navigationOptions: () => ({
         title: 'View User',
+      }),
+    },
+    Member: {
+      screen: MemberScreen,
+      navigationOptions: () => ({
+        header: null,
       }),
     },
     Events: {
@@ -106,6 +114,12 @@ const DiscoverStack = createStackNavigator(
       screen: AddExperienceForm,
       navigationOptions: () => ({
         title: 'Add Experience',
+      }),
+    },
+    AddCompanyReview: {
+      screen: AddCompanyReviewScreen,
+      navigationOptions: () => ({
+        title: 'Add Company Review',
       }),
     },
     ApplyNow: {

@@ -9,10 +9,8 @@ import EducationListView from './components/EducationListView'
 import ExperienceListView from './components/ExperienceListView'
 import ContactContainerView from './components/ContactContainerView'
 import SettingsMenu from './components/SettingsMenu'
-
 import { Query } from 'react-apollo'
 import { GET_USER } from './query'
-
 import nodeEmoji from 'node-emoji'
 
 const defaultProfilePicture =
@@ -24,7 +22,10 @@ export default class ProfileScreen extends Component {
   }
   render() {
     return (
-      <Query query={GET_USER}>
+      <Query
+        query={GET_USER}
+        variables={{ id: this.props.navigation.getParam('id') }}
+      >
         {({ loading, error, data }) => {
           if (loading) return <Text>`Loading...`</Text>
           if (error) return <Text>`Error! ${error.message}`</Text>

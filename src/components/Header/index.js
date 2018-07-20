@@ -1,13 +1,7 @@
 import React, { Component } from 'react'
-import {
-  Container,
-  TitleRow,
-  Title,
-  BackButtonContainer,
-  ProgressBarContainer,
-} from './styles'
-import ProgressBar from '../../components/RegistrationProgressBar'
+import { Container, TitleRow, Title, BackButtonContainer } from './styles'
 import BackButtonIcon from 'react-native-vector-icons/Ionicons'
+import RegistrationProgressBar from '../RegistrationProgressBar'
 
 class Header extends Component {
   render() {
@@ -20,11 +14,10 @@ class Header extends Component {
             )}
           </BackButtonContainer>
           <Title>{this.props.title}</Title>
+          {this.props.children}
         </TitleRow>
-        {this.props.showProgress && (
-          <ProgressBarContainer>
-            <ProgressBar progress={this.props.progress} />
-          </ProgressBarContainer>
+        {this.props.progress && (
+          <RegistrationProgressBar progress={this.props.progress} />
         )}
       </Container>
     )
