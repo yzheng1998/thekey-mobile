@@ -14,7 +14,6 @@ export default class PictureHeader extends Component {
       <BlockContainer>
         <BackgroundPicture source={displayPicture} blurRadius={20}>
           <Picture source={displayPicture} avatarSize={this.props.avatarSize} />
-
           {this.props.children}
         </BackgroundPicture>
       </BlockContainer>

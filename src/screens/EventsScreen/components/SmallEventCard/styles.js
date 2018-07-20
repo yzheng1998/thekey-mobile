@@ -38,6 +38,10 @@ export const Title = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   color: ${themeGet('colors.fontPrimary')};
 `
+export const TitleContainer = styled.View`
+  width: 80%;
+  margin-right: 5px;
+`
 export const DetailsContainer = styled.View`
   width: 100%;
   flex-direction: row;
@@ -46,7 +50,7 @@ export const DetailsContainer = styled.View`
 export const RowContainer = styled.View`
   justify-content: space-between;
   flex-direction: row;
-  width: 100%;
+  width: 95%;
 `
 export const DateTime = styled.Text`
   font-size: 13px;

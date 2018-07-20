@@ -11,51 +11,24 @@ import {
 import TagInput from 'react-native-tag-input'
 import UserCard from '../../../../components/UserCard'
 import NewChatModalHeader from '../NewChatModalHeader'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
 
-const people = [
-  {
-    id: '1',
-    firstName: 'Michele',
-    lastName: 'Wang',
-    profilePicture:
-      'https://images.unsplash.com/photo-1531397776155-cf6b2831601b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee628aa941c5a8f1d3bacc05987fb21b&auto=format&fit=crop&w=668&q=80',
-    hometown: 'Fairfax, Virginia',
-  },
-  {
-    id: '2',
-    firstName: 'Diego',
-    lastName: 'Covarrubias',
-    profilePicture:
-      'https://images.unsplash.com/photo-1531397776155-cf6b2831601b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee628aa941c5a8f1d3bacc05987fb21b&auto=format&fit=crop&w=668&q=80',
-    hometown: 'Marysville, Ohio',
-  },
-  {
-    id: '3',
-    firstName: 'Shahd',
-    lastName: 'Nara',
-    profilePicture:
-      'https://images.unsplash.com/photo-1531397776155-cf6b2831601b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee628aa941c5a8f1d3bacc05987fb21b&auto=format&fit=crop&w=668&q=80',
-    hometown: 'Nazareth, Israel',
-  },
-  {
-    id: '4',
-    firstName: 'Yuke',
-    lastName: 'Zheng',
-    profilePicture:
-      'https://images.unsplash.com/photo-1531397776155-cf6b2831601b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee628aa941c5a8f1d3bacc05987fb21b&auto=format&fit=crop&w=668&q=80',
-    hometown: 'Cleveland, Ohio',
-  },
-  {
-    id: '5',
-    firstName: 'Bliss',
-    lastName: 'Perry',
-    profilePicture:
-      'https://images.unsplash.com/photo-1531397776155-cf6b2831601b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee628aa941c5a8f1d3bacc05987fb21b&auto=format&fit=crop&w=668&q=80',
-    hometown: 'New York, New York',
-  },
-]
+const SEARCH_CONTACTS = gql`
+  query contactsSearch($substr: String!) {
+    contactsSearch(substr: $substr) {
+      id
+      profilePicture
+      demographics {
+        hometown
+      }
+      firstName
+      lastName
+    }
+  }
+`
 
-const PeopleList = ({ peopleData }) => (
+const PeopleList = ({ peopleData, addParticipant }) => (
   <PeopleListContainer>
     <FlatList
       styles={{ backgroundColor: 'red', flex: 1 }}
@@ -63,9 +36,12 @@ const PeopleList = ({ peopleData }) => (
       data={peopleData}
       renderItem={({ item: person }) => (
         <UserCard
+          onPress={() =>
+            addParticipant(`${person.firstName} ${person.lastName}`, person.id)
+          }
           name={`${person.firstName} ${person.lastName}`}
           picture={person.profilePicture}
-          subtitle={person.hometown}
+          subtitle={person.demographics.hometown}
         />
       )}
     />
@@ -79,35 +55,47 @@ export default class NewChatModal extends Component {
   state = {
     text: '',
     tags: [],
+    participants: [],
+    newChatButtonDisabled: true,
   }
 
   onChangeTags = tags => {
-    this.setState({ tags })
+    if (tags.length > this.state.tags.length) {
+      this.setState({ tags })
+    } else {
+      this.setState({
+        tags,
+        participants: this.state.participants.filter(participant =>
+          tags.includes(participant.name),
+        ),
+        newChatButtonDisabled: !(tags.length > 0),
+      })
+    }
   }
 
   onChangeText = text => {
-    const lastTyped = text.charAt(text.length - 1)
-    const parseWhen = [',', ' ']
-    // make tag
-    const cleanText = text.replace(',', '').trim()
-    if (parseWhen.indexOf(lastTyped) > -1 && cleanText !== '') {
-      this.setState({
-        tags: [...this.state.tags, this.state.text.trim()],
-        text: '',
-      })
-    } else {
-      // don't make tag, let user keep typing
-      this.setState({ text: text.trim() })
-    }
+    this.setState({ text: text.trim() })
   }
 
   setModalVisible(visible) {
     this.setState({ modalVisible: visible })
   }
 
+  addParticipant = (name, id) => {
+    this.setState({
+      tags: [...this.state.tags, name],
+      text: '',
+      participants: [...this.state.participants, { id, name }],
+      newChatButtonDisabled: false,
+    })
+  }
+
   labelExtractor = tag => tag
 
   render() {
+    const variables = {
+      substr: this.state.text,
+    }
     const inputProps = {
       keyboardType: 'default',
       placeholder: 'search',
@@ -126,10 +114,23 @@ export default class NewChatModal extends Component {
       })
       handleClose()
     }
+
+    const participantIds = this.state.participants.map(
+      participant => participant.id,
+    )
     return (
       <Modal animationType="slide" {...rest}>
         <Background>
-          <NewChatModalHeader handleClose={handleCloseModal} />
+          <NewChatModalHeader
+            handleClose={handleCloseModal}
+            participantIds={participantIds}
+            createNewChat={chatId =>
+              this.props.navigation.navigate('Conversation', {
+                chat: chatId,
+              })
+            }
+            newChatButtonDisabled={this.state.newChatButtonDisabled}
+          />
           <ThinDivider />
           <SearchNameContainer>
             <Text>To: </Text>
@@ -146,8 +147,22 @@ export default class NewChatModal extends Component {
               tagContainerStyle={{ height: 31 }}
             />
           </SearchNameContainer>
+          <ThinDivider />
           <ScrollScreen>
-            <PeopleList peopleData={people} />
+            <Query query={SEARCH_CONTACTS} variables={variables}>
+              {({ loading, error, data }) => {
+                if (loading) return <Text>Loading...</Text>
+                if (error) {
+                  return <Text>Error! {error.message}</Text>
+                }
+                return (
+                  <PeopleList
+                    peopleData={data.contactsSearch}
+                    addParticipant={this.addParticipant}
+                  />
+                )
+              }}
+            </Query>
           </ScrollScreen>
         </Background>
       </Modal>

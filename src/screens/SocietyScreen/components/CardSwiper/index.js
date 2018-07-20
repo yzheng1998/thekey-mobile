@@ -11,10 +11,6 @@ export default class CardSwiper extends Component {
         cards={data.users}
         renderCard={item => {
           const renderUser = {
-            firstName: item.firstName,
-            lastName: item.lastName,
-            email: item.email,
-            profilePicture: item.profilePicture,
             ...item,
             hometown: item.demographics.hometown,
             mutualFriends: item.friends,

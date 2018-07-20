@@ -39,6 +39,9 @@ const waysToMeet = [
   { label: nodeEmoji.get('beers'), value: 'BEERS' },
 ]
 
+const defaultProfilePicture =
+  'https://images.unsplash.com/photo-1519145897500-869c40ccb024?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc363c8e033813d4f7b798846bb13a24&auto=format&fit=crop&w=582&q=80'
+
 export default class EditProfileScreen extends Component {
   state = {
     lookingForPickerEnabled: false,
@@ -91,11 +94,7 @@ export default class EditProfileScreen extends Component {
             <Screen>
               <ScreenScroll>
                 <Picture
-                  source={{
-                    uri:
-                      profilePicture ||
-                      'https://images.unsplash.com/photo-1519145897500-869c40ccb024?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc363c8e033813d4f7b798846bb13a24&auto=format&fit=crop&w=582&q=80',
-                  }}
+                  source={{ uri: profilePicture || defaultProfilePicture }}
                 >
                   <PictureButton>
                     <EditLabel>EDIT</EditLabel>
