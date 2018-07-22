@@ -48,9 +48,6 @@ const theme = {
     pickerPlaceholder: 'rgb(139, 133, 150)',
     activeTag: 'rgb(92, 78, 121)',
   },
-  width: {
-    primary: 0.872 * width,
-  },
   ...Platform.select({
     ios: {
       fonts: {

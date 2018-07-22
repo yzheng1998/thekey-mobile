@@ -3,6 +3,8 @@ import styled from 'styled-components'
 export const BlockContainer = styled.View`
   overflow: hidden;
   width: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 `
 
 export const BackgroundPicture = styled.ImageBackground`
@@ -10,6 +12,8 @@ export const BackgroundPicture = styled.ImageBackground`
   height: 100%;
   align-items: center;
   justify-content: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 `
 
 export const Picture = styled.Image`

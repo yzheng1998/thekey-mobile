@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const Background = styled.View`
-  background-color: ${themeGet('colors.buttonSecondary')}
+  background-color: ${themeGet('colors.buttonSecondary')};
   flex: 1;
 `
 export const HeaderBackground = styled.View`
