@@ -31,7 +31,9 @@ class YourEducationScreen extends Component {
   }
 
   removeEducationById = id => {
-    const filteredList = this.state.educationListData.filter(el => el.id !== id)
+    const filteredList = this.state.educationListData.filter(
+      el => el.schoolId !== id,
+    )
     this.setState({ educationListData: filteredList })
   }
 
@@ -41,6 +43,7 @@ class YourEducationScreen extends Component {
 
   clearState = () => {
     this.setState({
+      schoolId: '',
       schoolName: '',
       location: '',
       major: '',
@@ -63,6 +66,7 @@ class YourEducationScreen extends Component {
       })
     }
     const {
+      schoolId,
       schoolName,
       location,
       major,
@@ -93,6 +97,7 @@ class YourEducationScreen extends Component {
         <AddEducationModal
           addEducation={() => {
             addEducation({
+              schoolId,
               schoolName,
               location,
               major,

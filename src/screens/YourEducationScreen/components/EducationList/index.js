@@ -10,8 +10,8 @@ export default class EducationList extends Component {
         {educationListData.map(item => (
           <EducationItem
             cancel={cancel}
-            key={item.id}
-            id={item.id}
+            key={item.schoolId}
+            id={item.schoolId}
             item={item}
           />
         ))}

@@ -5,12 +5,18 @@ import Icon from 'react-native-vector-icons/Ionicons'
 
 export default class SchoolSearchCard extends Component {
   render() {
-    const { updateState, toggleSchoolModal, schoolName, location } = this.props
+    const {
+      updateState,
+      toggleSchoolModal,
+      schoolName,
+      location,
+      schoolId,
+    } = this.props
     return (
       <Container
         onPress={() => {
           toggleSchoolModal()
-          updateState({ schoolName, location })
+          updateState({ schoolName, location, schoolId })
         }}
       >
         <Icon
