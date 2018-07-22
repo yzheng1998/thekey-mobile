@@ -6,6 +6,8 @@ import RegisterButton from '../../components/RegisterButton'
 import ResumeList from './components/ResumeList'
 import RegistrationProgressBar from '../../components/RegistrationProgressBar'
 import SubmitButton from '../../components/SubmitButton'
+import { SEND_MEMBERSHIP_APPLICATION } from './mutations'
+import { Mutation } from 'react-apollo'
 
 export default class ResumeUploadScreen extends Component {
   state = {
@@ -40,6 +42,44 @@ export default class ResumeUploadScreen extends Component {
     const buttonText = this.state.resumeListData.length
       ? 'ADD ANOTHER FILE'
       : 'ADD FILE'
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      ethnicity,
+      gender,
+      hometown,
+      educationListData,
+      essay,
+      interests,
+      skills,
+    } = userInfo
+
+    const variables = {
+      sendMembershipApplicationInput: {
+        firstName,
+        lastName,
+        email,
+        password,
+        ethnicity,
+        gender,
+        hometown,
+        sexualOrientation: 'HETEROSEXUAL',
+        essay,
+        interests: interests.join(', '),
+        selfDescription: skills.join(', '),
+        resumes: this.state.resumeListData.map(el => ({ resume: el.title })),
+        educations: educationListData.map(el => ({
+          schoolName: el.schoolName,
+          schoolType: el.schoolType,
+          degreeType: el.degreeType,
+          major: el.major,
+          startYear: el.startYear,
+          endYear: el.endYear,
+        })),
+      },
+    }
     return (
       <ScreenContainer>
         <Header
@@ -67,17 +107,20 @@ export default class ResumeUploadScreen extends Component {
           />
         </RegisterButton>
         {!disabled && (
-          <SubmitButton
-            onPress={() =>
-              this.props.navigation.navigate('Landing', {
-                userInfo: {
-                  ...userInfo,
-                  resumeListData: this.state.resumeListData,
-                },
-              })
-            }
-            buttonText="CONTINUE"
-          />
+          <Mutation
+            mutation={SEND_MEMBERSHIP_APPLICATION}
+            variables={variables}
+            onCompleted={() => this.props.navigation.navigate('Landing')}
+          >
+            {sendMembershipApplication => (
+              <SubmitButton
+                onPress={() => {
+                  sendMembershipApplication({ variables })
+                }}
+                buttonText="CONTINUE"
+              />
+            )}
+          </Mutation>
         )}
       </ScreenContainer>
     )

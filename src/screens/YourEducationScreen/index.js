@@ -9,15 +9,23 @@ import AddEducationModal from './components/AddEducationModal'
 
 import nodeEmoji from 'node-emoji'
 
+const schoolTypeOptions = [
+  { label: 'Secondary', value: 'SECONDARY' },
+  { label: 'Undergraduate', value: 'UNDERGRADUATE' },
+  { label: 'Graduate', value: 'GRADUATE' },
+]
+
 class YourEducationScreen extends Component {
   state = {
     showSchoolSearchModal: false,
     showAddEducationModal: false,
     schoolName: '',
+    schoolType: '',
+    degreeType: '',
     location: '',
     major: '',
     startYear: '',
-    graduationYear: '',
+    endYear: '',
     isCurrentEmployee: false,
     educationListData: [],
   }
@@ -45,8 +53,10 @@ class YourEducationScreen extends Component {
       location: '',
       major: '',
       startYear: '',
-      graduationYear: '',
+      endYear: '',
       isCurrentEmployee: '',
+      schoolType: '',
+      degreeType: '',
     })
   }
 
@@ -64,10 +74,12 @@ class YourEducationScreen extends Component {
     }
     const {
       schoolName,
+      schoolType,
+      degreeType,
       location,
       major,
       startYear,
-      graduationYear,
+      endYear,
     } = this.state
     return (
       <Container>
@@ -94,12 +106,15 @@ class YourEducationScreen extends Component {
           addEducation={() => {
             addEducation({
               schoolName,
+              schoolType,
+              degreeType,
               location,
               major,
               startYear,
-              graduationYear,
+              endYear,
             })
           }}
+          schoolTypeOptions={schoolTypeOptions}
           clearState={this.clearState}
           state={this.state}
           updateText={this.updateState}
