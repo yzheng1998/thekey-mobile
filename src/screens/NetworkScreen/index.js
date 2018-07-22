@@ -3,7 +3,7 @@ import ChatInbox from './components/ChatInbox'
 import SearchFilterTab from '../../components/SearchFilterTab'
 import SearchBar from '../../components/SearchBar'
 import NewChatModal from './components/NewChatModal'
-import ConnectionCard from './components/ConnectionCard'
+import FriendRequestList from './components/FriendRequestList'
 import {
   Background,
   HeaderBackground,
@@ -13,29 +13,7 @@ import {
   ThinDivider,
 } from './styles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { Text, View, ScrollView } from 'react-native'
-import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
-
-const GET_FRIEND_REQUESTS = gql`
-  query viewer {
-    viewer {
-      friendRequests {
-        id
-        sender {
-          id
-          firstName
-          lastName
-          profilePicture
-        }
-        recipient {
-          id
-        }
-        status
-      }
-    }
-  }
-`
+import { ScrollView } from 'react-native'
 
 class NetworkScreen extends Component {
   static navigationOptions = {
@@ -90,28 +68,7 @@ class NetworkScreen extends Component {
         />
         <Divider />
         <ScrollView>
-          <Query query={GET_FRIEND_REQUESTS}>
-            {({ loading, error, data, refetch }) => {
-              if (loading) return <Text>`Loading...`</Text>
-              if (error) return <Text>`Error! ${error.message}`</Text>
-              return (
-                <View>
-                  {data.viewer.friendRequests.map(friendRequest => (
-                    <ConnectionCard
-                      id={friendRequest.id}
-                      name={`${friendRequest.sender.firstName} ${
-                        friendRequest.sender.lastName
-                      }`}
-                      timeStamp="2018-07-19 23:29:09.592-04"
-                      picture={friendRequest.sender.profilePicture}
-                      refreshPage={refetch}
-                    />
-                  ))}
-                </View>
-              )
-            }}
-          </Query>
-          <Divider />
+          <FriendRequestList />
           <ChatInbox navigation={this.props.navigation} />
         </ScrollView>
         <NewChatButton onPress={this.handleStartNewChat}>
