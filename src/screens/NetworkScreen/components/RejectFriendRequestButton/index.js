@@ -19,20 +19,12 @@ const REJECT_FRIEND_REQUEST = gql`
   }
 `
 export default class RejectFriendRequestButton extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      buttonText: 'Delete',
-    }
-  }
   render() {
     const { friendRequestId, refreshPage } = this.props
     return (
       <Mutation
         mutation={REJECT_FRIEND_REQUEST}
-        onCompleted={() =>
-          this.setState({ buttonText: 'Deleted' }) && refreshPage()
-        }
+        onCompleted={() => refreshPage()}
       >
         {rejectFriendRequest => (
           <Button
@@ -43,7 +35,7 @@ export default class RejectFriendRequestButton extends Component {
               rejectFriendRequest({ variables })
             }}
           >
-            <Label>{this.state.buttonText}</Label>
+            <Label>Delete</Label>
           </Button>
         )}
       </Mutation>
