@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
 import React from 'react'
 import Jon from '../../assets/Jon.jpg'
-import ConnectionCard from '../components/ConnectionCard'
+import ConnectionCard from '../screens/NetworkScreen/components/ConnectionCard'
 
 const style = {
   flex: 1,

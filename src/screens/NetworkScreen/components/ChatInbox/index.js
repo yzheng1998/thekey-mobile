@@ -54,7 +54,7 @@ class ChatInbox extends Component {
 
   render() {
     return (
-      <Query query={GET_CHATS}>
+      <Query query={GET_CHATS} pollInterval={5000}>
         {({ loading, error, data }) => {
           if (loading) return <Text>Loading...</Text>
           if (error) return <Text>Error! ${error.message}</Text>
