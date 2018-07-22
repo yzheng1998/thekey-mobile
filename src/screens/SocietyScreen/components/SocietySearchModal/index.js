@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, FlatList } from 'react-native'
+import { Modal, FlatList, Text } from 'react-native'
 import {
   Background,
   ScrollScreen,
@@ -9,51 +9,24 @@ import {
 import UserCard from '../../../../components/UserCard'
 import SearchModalHeader from '../SearchModalHeader'
 import SearchBar from '../../../../components/SearchBar'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
 
-const people = [
-  {
-    id: '1',
-    firstName: 'Michele',
-    lastName: 'Wang',
-    profilePicture:
-      'https://images.unsplash.com/photo-1531397776155-cf6b2831601b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee628aa941c5a8f1d3bacc05987fb21b&auto=format&fit=crop&w=668&q=80',
-    hometown: 'Fairfax, Virginia',
-  },
-  {
-    id: '2',
-    firstName: 'Diego',
-    lastName: 'Covarrubias',
-    profilePicture:
-      'https://images.unsplash.com/photo-1531397776155-cf6b2831601b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee628aa941c5a8f1d3bacc05987fb21b&auto=format&fit=crop&w=668&q=80',
-    hometown: 'Marysville, Ohio',
-  },
-  {
-    id: '3',
-    firstName: 'Shahd',
-    lastName: 'Nara',
-    profilePicture:
-      'https://images.unsplash.com/photo-1531397776155-cf6b2831601b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee628aa941c5a8f1d3bacc05987fb21b&auto=format&fit=crop&w=668&q=80',
-    hometown: 'Nazareth, Israel',
-  },
-  {
-    id: '4',
-    firstName: 'Yuke',
-    lastName: 'Zheng',
-    profilePicture:
-      'https://images.unsplash.com/photo-1531397776155-cf6b2831601b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee628aa941c5a8f1d3bacc05987fb21b&auto=format&fit=crop&w=668&q=80',
-    hometown: 'Cleveland, Ohio',
-  },
-  {
-    id: '5',
-    firstName: 'Bliss',
-    lastName: 'Perry',
-    profilePicture:
-      'https://images.unsplash.com/photo-1531397776155-cf6b2831601b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee628aa941c5a8f1d3bacc05987fb21b&auto=format&fit=crop&w=668&q=80',
-    hometown: 'New York, New York',
-  },
-]
+const GET_USERS = gql`
+  query users($usersFilterInput: UsersFilterInput!) {
+    users(usersFilterInput: $usersFilterInput) {
+      id
+      firstName
+      lastName
+      demographics {
+        hometown
+      }
+      profilePicture
+    }
+  }
+`
 
-const PeopleList = ({ peopleData }) => (
+const PeopleList = ({ peopleData, viewMember }) => (
   <PeopleListContainer>
     <FlatList
       styles={{ backgroundColor: 'red', flex: 1 }}
@@ -61,9 +34,10 @@ const PeopleList = ({ peopleData }) => (
       data={peopleData}
       renderItem={({ item: person }) => (
         <UserCard
+          onPress={() => viewMember(person.id)}
           name={`${person.firstName} ${person.lastName}`}
           picture={person.profilePicture}
-          subtitle={person.hometown}
+          subtitle={person.demographics.hometown}
         />
       )}
     />
@@ -83,7 +57,14 @@ export default class SocietySearchModal extends Component {
   }
 
   render() {
-    const { closeModal, ...rest } = this.props
+    const variables = { usersFilterInput: { name: this.state.searchText } }
+    const { closeModal, navigation, ...rest } = this.props
+    const viewMember = memberId => {
+      navigation.navigate('Member', {
+        id: memberId,
+      })
+      closeModal()
+    }
     const closeSearchModal = () => {
       this.setState({
         searchText: '',
@@ -101,7 +82,21 @@ export default class SocietySearchModal extends Component {
           />
           <ThinDivider />
           <ScrollScreen>
-            <PeopleList peopleData={people} />
+            <Query query={GET_USERS} variables={variables}>
+              {({ loading, error, data }) => {
+                if (loading) return <Text>Loading...</Text>
+                if (error) {
+                  return <Text>Error! {error.message}</Text>
+                }
+                return (
+                  <PeopleList
+                    viewMember={viewMember}
+                    peopleData={data.users}
+                    addParticipant={this.addParticipant}
+                  />
+                )
+              }}
+            </Query>
           </ScrollScreen>
         </Background>
       </Modal>
