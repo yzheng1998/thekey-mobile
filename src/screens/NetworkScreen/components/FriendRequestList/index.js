@@ -8,6 +8,7 @@ import { Query } from 'react-apollo'
 const GET_FRIEND_REQUESTS = gql`
   query viewer {
     viewer {
+      id
       friendRequests {
         id
         sender {
@@ -28,7 +29,7 @@ const GET_FRIEND_REQUESTS = gql`
 export default class FriendRequestList extends Component {
   render() {
     return (
-      <Query query={GET_FRIEND_REQUESTS}>
+      <Query query={GET_FRIEND_REQUESTS} pollInterval={5000}>
         {({ loading, error, data, refetch }) => {
           if (loading) return <Text>`Loading...`</Text>
           if (error) return <Text>`Error! ${error.message}`</Text>
@@ -45,7 +46,7 @@ export default class FriendRequestList extends Component {
                   refreshPage={refetch}
                 />
               ))}
-              {data.viewer.friendRequests.length && <Divider />}
+              {data.viewer.friendRequests.length !== 0 && <Divider />}
             </View>
           )
         }}
