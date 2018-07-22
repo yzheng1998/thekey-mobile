@@ -15,6 +15,7 @@ import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { Text } from 'react-native'
 import moment from 'moment'
+import uuidv4 from 'uuid/v4'
 
 const TIME_ZONE_LEN = 3
 const tagData = [
@@ -93,6 +94,7 @@ const interestedFriends = [
     },
   },
 ]
+
 const exampleEvent = {
   image:
     'https://www.telegraph.co.uk/content/dam/Travel/galleries/travel/picturegalleries/The-worlds-best-city-skylines/skyline-new-york_3461538a.jpg',
@@ -100,6 +102,14 @@ const exampleEvent = {
   dateRange: ['2018-06-18 12:52:03.744-04', '2018-06-18 12:52:03.744-04'],
   interestedFriends,
 }
+
+const exampleEvents = [exampleEvent, exampleEvent, exampleEvent]
+
+const exampleEventsWithIds = exampleEvents.map(event => ({
+  ...event,
+  id: uuidv4(),
+}))
+
 function formatTimeStamp(timeStamp) {
   const parsedTimeStamp = timeStamp.substr(0, timeStamp.length - TIME_ZONE_LEN)
   const momentTimeStamp = moment(parsedTimeStamp, 'YYYY-MM-DD HH:mm:ss')
@@ -142,9 +152,7 @@ class EventScreen extends Component {
               {
                 // event query not yet written, hardcoded
               }
-              <SimilarEventsBlock
-                events={[exampleEvent, exampleEvent, exampleEvent]}
-              />
+              <SimilarEventsBlock events={exampleEventsWithIds} />
               <BackButtonContainer
                 onPress={() => this.props.navigation.goBack()}
               >
