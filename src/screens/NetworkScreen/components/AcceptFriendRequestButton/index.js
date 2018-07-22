@@ -19,20 +19,12 @@ const ACCEPT_FRIEND_REQUEST = gql`
   }
 `
 export default class AcceptFriendRequestButton extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      buttonText: 'Confirm',
-    }
-  }
   render() {
     const { friendRequestId, refreshPage } = this.props
     return (
       <Mutation
         mutation={ACCEPT_FRIEND_REQUEST}
-        onCompleted={() =>
-          this.setState({ buttonText: 'Accepted' }) && refreshPage()
-        }
+        onCompleted={() => refreshPage()}
       >
         {acceptFriendRequest => (
           <Button
@@ -43,7 +35,7 @@ export default class AcceptFriendRequestButton extends Component {
               acceptFriendRequest({ variables })
             }}
           >
-            <Label>{this.state.buttonText}</Label>
+            <Label>Confirm</Label>
           </Button>
         )}
       </Mutation>
