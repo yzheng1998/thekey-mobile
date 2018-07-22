@@ -6,14 +6,12 @@ import EditEducationBlock from './components/EditEducationBlock'
 import EditExperienceBlock from './components/EditExperienceBlock'
 import PickerComponent from '../../components/PickerComponent'
 import EmojiModal from './components/EmojiModal'
+import ProfilePicture from './components/ProfilePicture'
 import {
   Screen,
   Block,
   BlockTitle,
   ScreenScroll,
-  Picture,
-  PictureButton,
-  EditLabel,
   Divider,
   ColumnContainer,
   LargeInput,
@@ -93,13 +91,10 @@ export default class EditProfileScreen extends Component {
           return (
             <Screen>
               <ScreenScroll>
-                <Picture
-                  source={{ uri: profilePicture || defaultProfilePicture }}
-                >
-                  <PictureButton>
-                    <EditLabel>EDIT</EditLabel>
-                  </PictureButton>
-                </Picture>
+                <ProfilePicture
+                  profilePicture={profilePicture}
+                  defaultProfilePicture={defaultProfilePicture}
+                />
                 <BasicInfoBlock
                   state={displayData}
                   lookingForOptions={lookingForOptions}
