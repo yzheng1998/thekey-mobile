@@ -22,7 +22,7 @@ export default class MutualConnectionsRow extends Component {
           {mutualFriends.map(friend => (
             <Avatar
               avatarSize={avatarSize}
-              source={friend.profilePicture}
+              source={{ uri: friend.profilePicture }}
               key={friend.id}
             />
           ))}
