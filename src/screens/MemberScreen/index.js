@@ -16,6 +16,14 @@ import nodeEmoji from 'node-emoji'
 const defaultProfilePicture =
   'https://images.unsplash.com/photo-1519145897500-869c40ccb024?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc363c8e033813d4f7b798846bb13a24&auto=format&fit=crop&w=582&q=80'
 
+const lookingForOptions = [
+  { label: 'Business Mentor', value: 'BUSINESSMENTOR' },
+  { label: 'Friends', value: 'FRIENDS' },
+  { label: 'Business Partner', value: 'BUSINESSPARTNER' },
+  { label: 'Employment', value: 'EMPLOYMENT' },
+  { label: 'School Advice', value: 'SCHOOLADVICE' },
+]
+
 export default class MemberScreen extends Component {
   render() {
     return (
@@ -67,7 +75,13 @@ export default class MemberScreen extends Component {
               />
               <MyProfileBioBlock tagData={tags} bioText={bio} />
               <Divider />
-              <Description row title="Looking For" content={lookingFor} />
+              <Description
+                row
+                title="Looking For"
+                content={
+                  lookingForOptions.find(el => el.value === lookingFor).label
+                }
+              />
               <Description
                 row
                 title="Preferred Ways To Meet"
