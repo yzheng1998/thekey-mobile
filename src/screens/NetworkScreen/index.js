@@ -56,8 +56,8 @@ class NetworkScreen extends Component {
           <SearchFilterTab
             updateState={this.changeTab}
             selectedIndex={this.state.tab}
-            color="white"
-            selectedColor="white"
+            color="rgb(176, 186, 200)"
+            selectedColor="rgb(250, 53, 121)"
             options={['All', 'Connections', 'Groups', 'Events']}
           />
           <ThinDivider />
