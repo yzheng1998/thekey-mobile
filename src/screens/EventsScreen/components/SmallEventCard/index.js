@@ -86,11 +86,7 @@ export default class SmallEventCard extends Component {
       <Card
         width={this.props.width}
         activeOpacity={0.9}
-        onPress={() =>
-          this.props.navigation.navigate('Event', {
-            id,
-          })
-        }
+        onPress={() => this.props.navigate(id)}
       >
         <BackgroundImage source={{ uri: image }} />
         <FullContainer>

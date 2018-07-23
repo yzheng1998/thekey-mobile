@@ -152,7 +152,10 @@ class EventScreen extends Component {
               {
                 // event query not yet written, hardcoded
               }
-              <SimilarEventsBlock events={exampleEventsWithIds} />
+              <SimilarEventsBlock
+                navigation={this.props.navigation}
+                events={exampleEventsWithIds}
+              />
               <BackButtonContainer
                 onPress={() => this.props.navigation.goBack()}
               >
