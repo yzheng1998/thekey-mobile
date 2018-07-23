@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { FlatList } from 'react-native'
 import SmallEventCard from '../../../EventsScreen/components/SmallEventCard'
 import { SmallCardContainer } from './styles'
+import uuidv4 from 'uuid/v4'
 
 const friends = [
   {
@@ -42,12 +43,19 @@ const friends = [
   },
 ]
 
-const event = {
+const exampleEvent = {
   image: 'https://c1.staticflickr.com/1/126/387606063_408c203f6c_b.jpg',
   title: 'A super fun eventA super fun event',
   dateRange: ['2018-06-18 12:52:03.744-04', '2018-06-18 12:52:03.744-04'],
   interestedFriends: friends,
 }
+
+const events = [exampleEvent, exampleEvent, exampleEvent]
+
+const eventsWithIds = events.map(event => ({
+  ...event,
+  id: uuidv4(),
+}))
 
 class EventsInCommon extends Component {
   render() {
@@ -55,7 +63,7 @@ class EventsInCommon extends Component {
       <FlatList
         horizontal
         keyExtractor={item => item.id}
-        data={[event, event, event]}
+        data={eventsWithIds}
         renderItem={({ item }) => (
           <SmallCardContainer>
             <SmallEventCard
