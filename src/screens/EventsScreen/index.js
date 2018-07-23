@@ -13,7 +13,7 @@ import {
   SmallCardContainer,
   Spacer,
 } from './styles'
-// need to write another query for similar events later
+
 const GET_EVENTS = gql`
   query events($eventsFilterInput: EventsFilterInput!) {
     events(eventsFilterInput: $eventsFilterInput) {
@@ -25,6 +25,9 @@ const GET_EVENTS = gql`
       details
       link
       price
+      tags {
+        name
+      }
     }
   }
 `

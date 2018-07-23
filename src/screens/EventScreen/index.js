@@ -15,31 +15,6 @@ import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { Text } from 'react-native'
 import moment from 'moment'
-import uuidv4 from 'uuid/v4'
-
-const tagData = [
-  {
-    name: 'Headphones',
-    image: {
-      uri:
-        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-    },
-  },
-  {
-    name: 'Tech',
-    image: {
-      uri:
-        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-    },
-  },
-  {
-    name: 'Leadership',
-    image: {
-      uri:
-        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-    },
-  },
-]
 
 const GET_EVENT = gql`
   query event($id: ID!) {
@@ -97,21 +72,6 @@ const interestedFriends = [
   },
 ]
 
-const exampleEvent = {
-  image:
-    'https://www.telegraph.co.uk/content/dam/Travel/galleries/travel/picturegalleries/The-worlds-best-city-skylines/skyline-new-york_3461538a.jpg',
-  title: 'A super fun eventA super fun event',
-  dateRange: ['2018-07-21 01:01:01-04', '2018-06-18 12:52:03.744-04'],
-  interestedFriends,
-}
-
-const exampleEvents = [exampleEvent, exampleEvent, exampleEvent]
-
-const exampleEventsWithIds = exampleEvents.map(event => ({
-  ...event,
-  id: uuidv4(),
-}))
-
 function formatTimeStamp(timeStamp) {
   const momentTimeStamp = moment(timeStamp, 'YYYY-MM-DD HH:mm:ss')
   const dayOfWeek = momentTimeStamp.format('ddd').toUpperCase()
@@ -131,7 +91,14 @@ class EventScreen extends Component {
           if (loading) return <Text>Loading...</Text>
           if (error) return <Text>Error! ${error.message}</Text>
 
-          const { location, dateRange, title, picture, details } = data.event
+          const {
+            location,
+            dateRange,
+            title,
+            picture,
+            details,
+            tags,
+          } = data.event
           const usableTimeStamp = new Date(dateRange[0])
 
           return (
@@ -142,20 +109,16 @@ class EventScreen extends Component {
                 title={title}
                 location={location}
                 date={formatTimeStamp(usableTimeStamp)}
-                // friends are not part of database yet, so hardcoded for now
                 friends={interestedFriends}
                 connectionsNum={interestedFriends.length}
               />
               <AboutBlock about={details} />
               <TagsContainer>
-                <TagLine tagData={tagData} lines={1} />
+                <TagLine tagData={tags} lines={1} />
               </TagsContainer>
-              {
-                // event query not yet written, hardcoded
-              }
               <SimilarEventsBlock
                 navigation={this.props.navigation}
-                events={exampleEventsWithIds}
+                id={this.props.navigation.getParam('id')}
               />
               <BackButtonContainer
                 onPress={() => this.props.navigation.goBack()}
