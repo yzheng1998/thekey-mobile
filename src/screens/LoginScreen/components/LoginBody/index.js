@@ -28,6 +28,7 @@ const LOGIN_USER = gql`
       user {
         id
         firstName
+        profilePicture
       }
       token
       error {
@@ -55,6 +56,7 @@ class LoginBody extends Component {
               await AsyncStorage.setItem('token', token)
               await AsyncStorage.setItem('userId', user.id)
               await AsyncStorage.setItem('firstName', user.firstName)
+              await AsyncStorage.setItem('profilePicture', user.profilePicture)
               this.props.navigation.navigate('MainTab')
             }
           }}
