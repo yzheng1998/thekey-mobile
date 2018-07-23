@@ -1,27 +1,38 @@
 import React, { Component } from 'react'
 import {
-  HeaderBackground,
+  SafeView,
+  Tint,
   ButtonRow,
   BackButton,
   SearchButton,
   Title,
+  BackgroundImage,
 } from './styles'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 export default class EventsHeader extends Component {
   render() {
     return (
-      <HeaderBackground>
-        <ButtonRow>
-          <BackButton onPress={() => this.props.navigation.goBack()}>
-            <Icon name="ios-arrow-back" color="white" size={30} />
-          </BackButton>
-          <SearchButton onPress={this.props.openModal}>
-            <Icon name="md-search" color="white" size={25} />
-          </SearchButton>
-        </ButtonRow>
-        <Title>The Society</Title>
-      </HeaderBackground>
+      <BackgroundImage
+        source={{
+          uri:
+            'https://images.unsplash.com/photo-1503238774835-1e800884d53b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e47ac33daae3f0b9c2add178ea367801&auto=format&fit=crop&w=1950&q=80',
+        }}
+      >
+        <Tint>
+          <SafeView>
+            <ButtonRow>
+              <BackButton onPress={() => this.props.navigation.goBack()}>
+                <Icon name="ios-arrow-back" color="white" size={30} />
+              </BackButton>
+              <SearchButton onPress={this.props.openModal}>
+                <Icon name="md-search" color="white" size={25} />
+              </SearchButton>
+            </ButtonRow>
+            <Title>The Society</Title>
+          </SafeView>
+        </Tint>
+      </BackgroundImage>
     )
   }
 }
