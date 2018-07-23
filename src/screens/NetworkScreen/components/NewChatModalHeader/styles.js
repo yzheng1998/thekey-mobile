@@ -27,3 +27,6 @@ export const Heading = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   position: absolute;
 `
+export const SafeView = styled.SafeAreaView`
+  width: 100%;
+`
