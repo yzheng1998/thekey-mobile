@@ -1,9 +1,6 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const PicContainer = styled.View`
-  padding-top: 10px;
-`
 export const Title = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   font-size: 24px;
@@ -41,17 +38,10 @@ export const ApplyButton = styled.Text`
   font-size: 14px;
   color: white;
 `
-
 export const DescriptionContainer = styled.View`
   align-items: center;
 `
 export const HeaderContainer = styled.View`
   width: 100%;
   aspect-ratio: 1.03878;
-`
-export const BackButtonContainer = styled.TouchableOpacity`
-  position: absolute;
-  background-color: blue;
-  top: 40px;
-  left: 20px;
 `
