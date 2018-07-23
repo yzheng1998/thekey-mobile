@@ -13,6 +13,7 @@ import { FlatList } from 'react-native'
 class SimilarEventsBlock extends Component {
   render() {
     const { events } = this.props
+    console.log('Similar Events Block events', events)
     return (
       <Container>
         <Header>

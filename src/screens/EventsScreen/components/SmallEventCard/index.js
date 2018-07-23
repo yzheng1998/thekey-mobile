@@ -15,11 +15,8 @@ import StarButton from '../../../../components/EventStarButton'
 import moment from 'moment'
 import InterestedFriendsRow from '../InterestedFriendsRow'
 
-const TIME_ZONE_LEN = 3
-
 function formatTimeStamp(timeStamp) {
-  const parsedTimeStamp = timeStamp.substr(0, timeStamp.length - TIME_ZONE_LEN)
-  const momentTimeStamp = moment(parsedTimeStamp, 'YYYY-MM-DD HH:mm:ss')
+  const momentTimeStamp = moment(timeStamp, 'YYYY-MM-DD HH:mm:ss')
   const dayOfWeek = momentTimeStamp.format('ddd').toUpperCase()
   const month = momentTimeStamp.format('MMM').toUpperCase()
   const time = momentTimeStamp.format('h:mm A')
@@ -80,7 +77,7 @@ export default class SmallEventCard extends Component {
       'https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg'
     const { title, id, dateRange } = this.props.event
 
-    const usableTimeStamp = new Date(dateRange[0]).toISOString()
+    const usableTimeStamp = new Date(dateRange[0])
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
       <Card
@@ -110,7 +107,7 @@ export default class SmallEventCard extends Component {
         {interestedFriends &&
           interestedFriends.length > 0 && (
             <InterestedFriendsRow
-              navigation={this.props.navigation}
+              navigation={this.props.navigate}
               avatarNum={5}
               avatarSize={22}
               connectionsNum={interestedFriends.length}
