@@ -25,8 +25,9 @@ export default class ProfileInfoRow extends Component {
 
     const formatTime = time => {
       if (time) {
-        if (education) return moment(time).format('YYYY')
-        return moment(time).format('MMM YYYY')
+        const usableTime = new Date(time)
+        if (education) return moment(usableTime).format('YYYY')
+        return moment(usableTime).format('MMM YYYY')
       }
       return 'Present'
     }
