@@ -3,7 +3,6 @@ import { themeGet } from 'styled-system'
 
 export const Background = styled.View`
   width: 100%;
-  height: 65px;
   padding: 10px;
   flex-direction: row;
   align-items: center;
@@ -24,4 +23,7 @@ export const Heading = styled.Text`
   font-size: 18px;
   color: ${themeGet('colors.fontHeader')};
   font-family: ${themeGet('fonts.bold')};
+`
+export const SafeView = styled.SafeAreaView`
+  width: 100%;
 `
