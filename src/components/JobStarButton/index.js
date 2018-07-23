@@ -36,7 +36,7 @@ export default class JobStarButton extends Component {
             >
               <Star
                 name={isInterested ? 'star' : 'star-o'}
-                size={27}
+                size={this.props.size || 27}
                 color={color}
               />
             </Button>

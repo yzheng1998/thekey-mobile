@@ -6,9 +6,10 @@ import {
   Header,
   SeeAll,
   ButtonContainer,
+  List,
 } from './styles'
 import JobCard from '../../components/JobCard'
-import { FlatList, Text, View } from 'react-native'
+import { Text } from 'react-native'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 
@@ -35,59 +36,57 @@ const SIMILAR_JOBS = gql`
 class SimilarJobsBlock extends Component {
   render() {
     return (
-      <Container>
-        <Query
-          query={SIMILAR_JOBS}
-          variables={{ id: this.props.navigation.getParam('id') }}
-        >
-          {({ loading, error, data }) => {
-            if (loading) return <Text>Loading...</Text>
-            if (error) {
-              return <Text>Error! {error.message}</Text>
-            }
+      <Query
+        query={SIMILAR_JOBS}
+        variables={{ id: this.props.navigation.getParam('id') }}
+      >
+        {({ loading, error, data }) => {
+          if (loading) return <Text>Loading...</Text>
+          if (error) {
+            return <Text>Error! {error.message}</Text>
+          }
 
-            if (_.isEmpty(data.similarJobs)) {
-              return null
-            }
-            return (
-              <View>
-                <Header>
-                  <Title>Similar Jobs</Title>
-                  <ButtonContainer
-                    onPress={() =>
-                      this.props.navigation.push('SimilarJobsScreen', {
-                        data,
-                      })
-                    }
+          if (_.isEmpty(data.similarJobs)) {
+            return null
+          }
+          return (
+            <Container>
+              <Header>
+                <Title>Similar Jobs</Title>
+                <ButtonContainer
+                  onPress={() =>
+                    this.props.navigation.push('SimilarJobsScreen', {
+                      data,
+                    })
+                  }
+                >
+                  <SeeAll>See All</SeeAll>
+                </ButtonContainer>
+              </Header>
+              <List
+                showsHorizontalScrollIndicator="false"
+                horizontal
+                keyExtractor={job => job.id}
+                data={data.similarJobs}
+                renderItem={({ item }) => (
+                  <JobContainer
+                    style={{ shadowOffset: { width: 5, height: 5 } }}
                   >
-                    <SeeAll>See All</SeeAll>
-                  </ButtonContainer>
-                </Header>
-                <FlatList
-                  horizontal
-                  keyExtractor={job => job.id}
-                  data={data.similarJobs}
-                  renderItem={({ item }) => (
-                    <JobContainer>
-                      <JobCard
-                        job={item}
-                        navigate={id =>
-                          this.props.navigation.push('Job', { id })
-                        }
-                        width="300px"
-                        height="102px"
-                        activeOpacity={0.5}
-                        borderRadius={20}
-                        tagsOff
-                      />
-                    </JobContainer>
-                  )}
-                />
-              </View>
-            )
-          }}
-        </Query>
-      </Container>
+                    <JobCard
+                      job={item}
+                      navigate={id => this.props.navigation.push('Job', { id })}
+                      isCard
+                      activeOpacity={0.5}
+                      borderRadius={20}
+                      tagsOff
+                    />
+                  </JobContainer>
+                )}
+              />
+            </Container>
+          )
+        }}
+      </Query>
     )
   }
 }
