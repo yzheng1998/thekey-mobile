@@ -5,7 +5,7 @@ import EmploymentHistoryBlock from './components/EmploymentHistoryBlock'
 import OptionalInfoBlock from './components/OptionalInfoBlock'
 import TermsOfServiceConfirmation from './components/TermsOfServiceConfirmation'
 import SubmitReviewButton from './components/SubmitReviewButton'
-import { Background, Divider, ScreenScroll } from './styles'
+import { Background, Divider, ScreenScroll, SafeView } from './styles'
 
 export default class AddCompanyReviewScreen extends Component {
   constructor(props) {
@@ -76,40 +76,42 @@ export default class AddCompanyReviewScreen extends Component {
   render() {
     return (
       <Background>
-        <ScreenScroll>
-          <EmploymentHistoryBlock
-            rating={this.state.rating}
-            handleStarRating={this.handleStarRating}
-            employmentType={this.state.employmentType}
-            updateEmploymentType={this.updateEmploymentType}
-            isCurrentEmployee={this.state.isCurrentEmployee}
-            yearLastWorked={this.state.yearLastWorked}
-            companyName={this.state.companyName}
-            onChangeCompanyText={this.onChangeCompanyText}
-            handleEnablePicker={this.handleEnablePicker}
-            handleCheckBox={this.handleCheckBox}
-          />
-          <Divider />
-          <DescriptionBlock
-            reviewTitle={this.state.reviewTitle}
-            reviewPros={this.state.reviewPros}
-            reviewCons={this.state.reviewCons}
-            onChangeText={this.onChangeText}
-          />
-          <Divider />
-          <OptionalInfoBlock
-            jobTitle={this.state.jobTitle}
-            location={this.state.location}
-            updateJobTitle={this.updateJobTitle}
-            updateLocation={this.updateLocation}
-          />
-          <Divider />
-          <TermsOfServiceConfirmation
-            acceptedTerms={this.state.acceptedTerms}
-            handleAcceptedTerms={this.handleAcceptedTerms}
-          />
-          <SubmitReviewButton />
-        </ScreenScroll>
+        <SafeView>
+          <ScreenScroll>
+            <EmploymentHistoryBlock
+              rating={this.state.rating}
+              handleStarRating={this.handleStarRating}
+              employmentType={this.state.employmentType}
+              updateEmploymentType={this.updateEmploymentType}
+              isCurrentEmployee={this.state.isCurrentEmployee}
+              yearLastWorked={this.state.yearLastWorked}
+              companyName={this.state.companyName}
+              onChangeCompanyText={this.onChangeCompanyText}
+              handleEnablePicker={this.handleEnablePicker}
+              handleCheckBox={this.handleCheckBox}
+            />
+            <Divider />
+            <DescriptionBlock
+              reviewTitle={this.state.reviewTitle}
+              reviewPros={this.state.reviewPros}
+              reviewCons={this.state.reviewCons}
+              onChangeText={this.onChangeText}
+            />
+            <Divider />
+            <OptionalInfoBlock
+              jobTitle={this.state.jobTitle}
+              location={this.state.location}
+              updateJobTitle={this.updateJobTitle}
+              updateLocation={this.updateLocation}
+            />
+            <Divider />
+            <TermsOfServiceConfirmation
+              acceptedTerms={this.state.acceptedTerms}
+              handleAcceptedTerms={this.handleAcceptedTerms}
+            />
+            <SubmitReviewButton />
+          </ScreenScroll>
+        </SafeView>
         {this.state.yearPickerEnabled && (
           <Picker
             options={EmploymentHistoryBlock.createYearData()}
