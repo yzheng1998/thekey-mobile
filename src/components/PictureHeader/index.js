@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { BlockContainer, BackgroundPicture, Picture } from './styles'
+import {
+  BlockContainer,
+  BackgroundPicture,
+  Picture,
+  SafeView,
+  PictureContainer,
+} from './styles'
 
 export default class PictureHeader extends Component {
   render() {
@@ -13,8 +19,15 @@ export default class PictureHeader extends Component {
     return (
       <BlockContainer>
         <BackgroundPicture source={displayPicture} blurRadius={20}>
-          <Picture source={displayPicture} avatarSize={this.props.avatarSize} />
-          {this.props.children}
+          <SafeView>
+            <PictureContainer>
+              <Picture
+                source={displayPicture}
+                avatarSize={this.props.avatarSize}
+              />
+              {this.props.children}
+            </PictureContainer>
+          </SafeView>
         </BackgroundPicture>
       </BlockContainer>
     )
