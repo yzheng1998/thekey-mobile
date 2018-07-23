@@ -8,37 +8,68 @@ import {
   ButtonContainer,
 } from './styles'
 import SmallEventCard from '../../../../screens/EventsScreen/components/SmallEventCard'
-import { FlatList } from 'react-native'
+import { FlatList, Text } from 'react-native'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
+
+const GET_SIMILAR_EVENTS = gql`
+  query similarEvents($id: ID!) {
+    similarEvents(id: $id) {
+      id
+      location
+      dateRange
+      title
+      picture
+      details
+      link
+      price
+      tags {
+        name
+      }
+    }
+  }
+`
 
 class SimilarEventsBlock extends Component {
   render() {
-    const { events } = this.props
-    console.log('Similar Events Block events', events)
+    const { id } = this.props
     return (
-      <Container>
-        <Header>
-          <Title>Similar Events</Title>
-          <ButtonContainer
-            onPress={() => this.props.navigation.push('SimilarEventsScreen')}
-          >
-            <SeeAll>See All</SeeAll>
-          </ButtonContainer>
-        </Header>
-        <FlatList
-          horizontal
-          keyExtractor={eventarr => eventarr.id}
-          data={events}
-          renderItem={({ item }) => (
-            <EventContainer>
-              <SmallEventCard
-                navigate={id => this.props.navigation.push('Event', { id })}
-                width="350px"
-                event={item}
+      <Query query={GET_SIMILAR_EVENTS} variables={{ id }}>
+        {({ loading, error, data }) => {
+          if (loading) return <Text>Loading...</Text>
+          if (error) return <Text>Error! ${error.message}</Text>
+          return (
+            <Container>
+              <Header>
+                <Title>Similar Events</Title>
+                <ButtonContainer
+                  onPress={() =>
+                    this.props.navigation.push('SimilarEventsScreen')
+                  }
+                >
+                  <SeeAll>See All</SeeAll>
+                </ButtonContainer>
+              </Header>
+              <FlatList
+                horizontal
+                keyExtractor={eventarr => eventarr.id}
+                data={data.similarEvents}
+                renderItem={({ item }) => (
+                  <EventContainer>
+                    <SmallEventCard
+                      navigate={() =>
+                        this.props.navigation.push('Event', { id })
+                      }
+                      width="350px"
+                      event={item}
+                    />
+                  </EventContainer>
+                )}
               />
-            </EventContainer>
-          )}
-        />
-      </Container>
+            </Container>
+          )
+        }}
+      </Query>
     )
   }
 }
