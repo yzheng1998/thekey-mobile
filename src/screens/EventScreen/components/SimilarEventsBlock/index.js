@@ -18,9 +18,7 @@ class SimilarEventsBlock extends Component {
         <Header>
           <Title>Similar Events</Title>
           <ButtonContainer
-            onPress={() =>
-              this.props.navigation.navigate('SimilarEventsScreen')
-            }
+            onPress={() => this.props.navigation.push('SimilarEventsScreen')}
           >
             <SeeAll>See All</SeeAll>
           </ButtonContainer>
@@ -31,7 +29,11 @@ class SimilarEventsBlock extends Component {
           data={events}
           renderItem={({ item }) => (
             <EventContainer>
-              <SmallEventCard width="350px" event={item} />
+              <SmallEventCard
+                navigate={id => this.props.navigation.push('Event', { id })}
+                width="350px"
+                event={item}
+              />
             </EventContainer>
           )}
         />

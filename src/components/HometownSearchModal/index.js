@@ -3,20 +3,21 @@ import { Container, Divider } from './styles'
 import SearchBar from '../SearchBar'
 import HometownSearchCard from '../HometownSearchCard'
 import { FlatList, Modal } from 'react-native'
+import uuidv4 from 'uuid/v4'
 
 const exampleHometowns = [
   {
-    id: 0,
+    id: uuidv4(),
     city: 'Cleveland',
     state: 'Ohio',
   },
   {
-    id: 1,
+    id: uuidv4(),
     city: 'San Francisco',
     state: 'Bay Area, California',
   },
   {
-    id: 2,
+    id: uuidv4(),
     city: 'Cambridge',
     state: 'Massachusetts',
   },

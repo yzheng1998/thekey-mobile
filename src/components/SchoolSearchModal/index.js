@@ -47,6 +47,7 @@ export default class SchoolSearchModal extends Component {
             data={schoolsWithIds}
             renderItem={({ item: university }) => (
               <SchoolSearchCard
+                schoolId={university.id}
                 updateState={this.props.updateState}
                 navigation={this.props.navigation}
                 toggleSchoolModal={toggleSchoolModal}

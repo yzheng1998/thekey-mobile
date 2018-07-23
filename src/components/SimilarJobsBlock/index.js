@@ -17,6 +17,7 @@ const _ = require('lodash')
 const SIMILAR_JOBS = gql`
   query similarJobs($id: ID!) {
     similarJobs(id: $id) {
+      id
       title
       description
       picture
@@ -54,7 +55,7 @@ class SimilarJobsBlock extends Component {
                   <Title>Similar Jobs</Title>
                   <ButtonContainer
                     onPress={() =>
-                      this.props.navigation.navigate('SimilarJobsScreen', {
+                      this.props.navigation.push('SimilarJobsScreen', {
                         data,
                       })
                     }
@@ -70,6 +71,9 @@ class SimilarJobsBlock extends Component {
                     <JobContainer>
                       <JobCard
                         job={item}
+                        navigate={id =>
+                          this.props.navigation.push('Job', { id })
+                        }
                         width="300px"
                         height="102px"
                         activeOpacity={0.5}

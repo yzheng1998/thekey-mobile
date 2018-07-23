@@ -14,14 +14,18 @@ class SimilarJobsScreen extends Component {
           <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
             <BackButton name="ios-arrow-back" size={33} color="white" />
           </BackButtonContainer>
-          <Title>People Also Viewed</Title>
+          <Title>Similar Jobs</Title>
         </HeaderBackground>
         <FlatList
           keyExtractor={job => job.id}
           data={jobs}
-          renderItem={({ item: job }) => <JobCard job={job} />}
+          renderItem={({ item: job }) => (
+            <JobCard
+              navigate={id => this.props.navigation.push('Job', { id })}
+              job={job}
+            />
+          )}
         />
-        )
       </ScrollView>
     )
   }

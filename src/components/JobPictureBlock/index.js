@@ -14,7 +14,8 @@ import moment from 'moment'
 
 const timePosted = time => {
   const today = moment()
-  const date = moment(time)
+  const formattedTime = new Date(time)
+  const date = moment(formattedTime)
   const diff = today.diff(date, 'hours')
   const result =
     diff < 24
@@ -32,7 +33,6 @@ class JobPictureBlock extends Component {
       commitment,
       location,
       time,
-      views,
       id,
     } = this.props
     return (
@@ -44,9 +44,7 @@ class JobPictureBlock extends Component {
             <Description>
               {commitment} - {location}
             </Description>
-            <Deadline>
-              {timePosted(time)} - {views} views
-            </Deadline>
+            <Deadline>{timePosted(time)}</Deadline>
           </DescriptionContainer>
           <Apply
             onPress={() => this.props.navigation.navigate('ApplyNow', { id })}

@@ -118,7 +118,9 @@ class EventsScreen extends Component {
                   renderItem={({ item }) => (
                     <SmallCardContainer>
                       <SmallEventCard
-                        navigation={this.props.navigation}
+                        navigate={id =>
+                          this.props.navigation.navigate('Event', { id })
+                        }
                         event={item}
                       />
                     </SmallCardContainer>

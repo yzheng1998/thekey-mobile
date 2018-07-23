@@ -17,11 +17,12 @@ import questionMark from '../../stories/question-mark.jpg'
 import JobStarButton from '../../components/JobStarButton'
 
 const daysLeft = time => {
+  const formattedTime = new Date(time)
+  const deadline = moment(formattedTime, 'YYYY-MM-DD HH:mm:ss')
   const today = moment()
-  const date = moment(time)
-  const diff = date.diff(today, 'hours')
-  const result = diff < 24 ? `${diff} h` : `${date.diff(today, 'days')} d`
-  return result
+  const diff = deadline.diff(today, 'hours')
+  const result = diff < 24 ? `${diff} h` : `${deadline.diff(today, 'days')} d`
+  return `${result}`
 }
 export default class JobCard extends Component {
   constructor(props) {
@@ -42,14 +43,10 @@ export default class JobCard extends Component {
       deadline,
       picture,
     } = this.props.job
-    const { tagsOff } = this.props
+    const { tagsOff, navigate } = this.props
     return (
       <Card
-        onPress={() =>
-          this.props.navigation.navigate('Job', {
-            id,
-          })
-        }
+        onPress={() => navigate(id)}
         width={this.props.width}
         height={this.props.height}
         activeOpacity={this.props.activeOpacity}

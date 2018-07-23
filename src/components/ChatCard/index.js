@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Image } from 'react-native'
 import PropTypes from 'prop-types'
 import {
   Card,
@@ -21,16 +20,16 @@ export default class ChatCard extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
-    profileImage: Image.propTypes.source.isRequired,
     timeStamp: PropTypes.string.isRequired,
     onPress: PropTypes.func,
   }
 
   render() {
     const formatTime = time => {
-      const result = moment().isSame(moment(time), 'day')
-        ? moment(time).format('h:mma')
-        : moment(time).format('MM/DD/YY')
+      const formattedTime = new Date(time)
+      const result = moment().isSame(moment(formattedTime), 'day')
+        ? moment(formattedTime).format('h:mma')
+        : moment(formattedTime).format('MM/DD/YY')
       return result
     }
     const { name, message, profileImage, timeStamp, onPress } = this.props

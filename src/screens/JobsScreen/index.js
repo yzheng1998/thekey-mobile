@@ -85,7 +85,12 @@ class JobsScreen extends Component {
                 data={data.jobs}
                 renderItem={({ item: job }) => (
                   <View>
-                    <JobCard navigation={this.props.navigation} job={job} />
+                    <JobCard
+                      navigate={id =>
+                        this.props.navigation.navigate('Job', { id })
+                      }
+                      job={job}
+                    />
                     <CardDivider />
                   </View>
                 )}

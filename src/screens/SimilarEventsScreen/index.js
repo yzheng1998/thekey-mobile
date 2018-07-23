@@ -31,7 +31,6 @@ class SimilarEventsScreen extends Component {
               </EventContainer>
             )}
           />
-          )
         </EventsContainer>
       </View>
     )

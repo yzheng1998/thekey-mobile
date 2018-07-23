@@ -19,6 +19,7 @@ export const GET_USER = gql`
       twitter
       profilePicture
       education {
+        id
         schoolType
         schoolName
         degreeType
