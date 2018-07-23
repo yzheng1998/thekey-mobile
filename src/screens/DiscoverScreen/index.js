@@ -11,12 +11,18 @@ class DiscoverScreen extends Component {
   }
   state = {
     name: '',
+    profilePicture:
+      'https://images.unsplash.com/photo-1476983109555-18ebaf412d7c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c508869d7645131d98c453dd9ce0ae6&auto=format&fit=crop&w=2420&q=80',
   }
 
   componentDidMount = async () => {
     const firstName = await AsyncStorage.getItem('firstName')
+    const profilePicture = await AsyncStorage.getItem('profilePicture')
     if (firstName) {
       this.setState({ name: firstName })
+    }
+    if (profilePicture) {
+      this.setState({ profilePicture })
     }
   }
 
@@ -26,7 +32,7 @@ class DiscoverScreen extends Component {
         <List>
           <Header
             name={this.state.name}
-            avatar={placeholder}
+            avatar={this.state.profilePicture}
             navigation={this.props.navigation}
           />
           <DiscoverCard
