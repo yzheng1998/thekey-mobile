@@ -66,7 +66,7 @@ class ReviewsScreen extends Component {
             if (error) return <Text>Error! ${error.message}</Text>
             return (
               <FlatList
-                keyExtractor={review => review.id}
+                keyExtractor={company => company.id}
                 data={data.companies}
                 renderItem={({ item }) => (
                   <CompanyCard
