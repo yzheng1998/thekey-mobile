@@ -5,7 +5,7 @@ import LineInput from '../../../../components/LineInput'
 import AddExperienceButton from './components/AddExperienceButton'
 import UpdateExperienceButton from './components/UpdateExperienceButton'
 import DeleteExperienceButton from './components/DeleteExperienceButton'
-import { Switch } from 'react-native'
+import { Switch, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import _ from 'lodash'
 
 export default class AddExperienceForm extends Component {
@@ -64,82 +64,85 @@ export default class AddExperienceForm extends Component {
     }
 
     return (
-      <Screen>
-        <Block>
-          <LineInput
-            text={employer}
-            placeholderText="Company"
-            updateText={text => this.updateEmployer(text)}
-          />
-          <LineInput
-            text={position}
-            placeholderText="Position"
-            updateText={text => this.updatePosition(text)}
-          />
-          <RowContainer>
-            <SwitchLabel>I am currently working here</SwitchLabel>
-            <Switch
-              onValueChange={toggleSwitch}
-              value={this.state.isCurrentEmployee}
-              onTintColor="rgb(250, 53, 121)"
-            />
-          </RowContainer>
-          <RowContainer>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+        <Screen>
+          <Block>
             <LineInput
-              text={startDate}
-              width="48%"
-              placeholderText="Start Date"
-              updateText={text => this.updateStartDate(text)}
+              text={employer}
+              placeholderText="Company"
+              updateText={text => this.updateEmployer(text)}
             />
             <LineInput
-              // if endDate is null (currentEmployee) display endDate as "Present"
-              text={
-                endDate === null || isCurrentEmployee === true
-                  ? 'Present'
-                  : endDate
-              }
-              width="48%"
-              placeholderText="End Date"
-              updateText={text => this.updateEndDate(text)}
+              text={position}
+              placeholderText="Position"
+              updateText={text => this.updatePosition(text)}
             />
-          </RowContainer>
-          <ButtonContainer>
-            {this.editMode ? (
-              <UpdateExperienceButton
-                disabled={disabled}
-                refreshUpdateExperience={this.props.navigation.getParam(
-                  'refreshData',
-                )}
-                id={id}
-                employer={employer}
-                position={position}
-                startDate={startDate}
-                endDate={endDate}
-                navigation={this.props.navigation}
+            <RowContainer>
+              <SwitchLabel>I am currently working here</SwitchLabel>
+              <Switch
+                onValueChange={toggleSwitch}
+                value={this.state.isCurrentEmployee}
+                onTintColor="rgb(250, 53, 121)"
               />
-            ) : (
-              <AddExperienceButton
-                disabled={disabled}
-                refreshAddExperience={this.props.navigation.getParam(
-                  'refreshData',
-                )}
-                employer={employer}
-                position={position}
-                startDate={startDate}
-                endDate={endDate}
-                navigation={this.props.navigation}
+            </RowContainer>
+            <RowContainer>
+              <LineInput
+                text={startDate}
+                width="48%"
+                placeholderText="Start Date"
+                updateText={text => this.updateStartDate(text)}
               />
-            )}
-            <DeleteExperienceButton
-              refreshDeleteExperience={this.props.navigation.getParam(
-                'refreshData',
+              <LineInput
+                // if endDate is null (currentEmployee) display endDate as "Present"
+                text={
+                  endDate === null || isCurrentEmployee === true
+                    ? 'Present'
+                    : endDate
+                }
+                width="48%"
+                placeholderText="End Date"
+                updateText={text => this.updateEndDate(text)}
+              />
+            </RowContainer>
+            <ButtonContainer>
+              {this.editMode && (
+                <UpdateExperienceButton
+                  disabled={disabled}
+                  refreshUpdateExperience={this.props.navigation.getParam(
+                    'refreshData',
+                  )}
+                  id={id}
+                  employer={employer}
+                  position={position}
+                  startDate={startDate}
+                  endDate={endDate}
+                  navigation={this.props.navigation}
+                />
               )}
-              navigation={this.props.navigation}
-              id={id}
-            />
-          </ButtonContainer>
-        </Block>
-      </Screen>
+              {!this.editMode && (
+                <AddExperienceButton
+                  disabled={disabled}
+                  refreshAddExperience={this.props.navigation.getParam(
+                    'refreshData',
+                  )}
+                  employer={employer}
+                  position={position}
+                  startDate={startDate}
+                  endDate={endDate}
+                  navigation={this.props.navigation}
+                />
+              )}
+              <DeleteExperienceButton
+                refreshDeleteExperience={this.props.navigation.getParam(
+                  'refreshData',
+                )}
+                navigation={this.props.navigation}
+                id={id}
+              />
+            </ButtonContainer>
+          </Block>
+        </Screen>
+      </TouchableWithoutFeedback>
     )
   }
 }
