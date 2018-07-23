@@ -43,14 +43,10 @@ export default class JobCard extends Component {
       deadline,
       picture,
     } = this.props.job
-    const { tagsOff } = this.props
+    const { tagsOff, navigate } = this.props
     return (
       <Card
-        onPress={() =>
-          this.props.navigation.navigate('Job', {
-            id,
-          })
-        }
+        onPress={() => navigate(id)}
         width={this.props.width}
         height={this.props.height}
         activeOpacity={this.props.activeOpacity}
