@@ -17,6 +17,7 @@ const _ = require('lodash')
 const SIMILAR_JOBS = gql`
   query similarJobs($id: ID!) {
     similarJobs(id: $id) {
+      id
       title
       description
       picture
