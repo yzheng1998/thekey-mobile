@@ -63,14 +63,14 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires access to the camera to search for QR codes and take photos.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
-  <key>NSPhotoLibraryUsageDescription</key>
-  <string>The Key requires access to the photo library in order to choose a profile picture.</string>
-  <key>NSMicrophoneUsageDescription</key>
-  <string>This app does not require access to the microphone.</string>
-  <key>NSCameraUsageDescription</key>
-  <string>This app requires access to the camera to search for QR codes and take photos.</string>
+	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app does not require access to the microphone.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>The Key requires access to the photo library in order to choose a profile picture.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
