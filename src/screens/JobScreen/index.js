@@ -34,6 +34,7 @@ const GET_JOB = gql`
       aboutCompany
       bringToRole
       industry
+      createdAt
     }
   }
 `
@@ -61,7 +62,7 @@ class JobScreen extends Component {
             picture,
             location,
             commitment,
-            deadline,
+            createdAt,
             tags,
             aboutRole,
             aboutCompany,
@@ -77,7 +78,7 @@ class JobScreen extends Component {
                 company={company.name}
                 commitment={commitment}
                 location={location}
-                time={deadline}
+                time={createdAt}
               />
               <AboutBlock
                 navigation={this.props.navigation}
