@@ -6,21 +6,76 @@ PODS:
     - AppCenter/Core
   - AppCenterReactNativeShared (1.5.1):
     - AppCenter/Core (= 1.6.1)
+  - React (0.56.0):
+    - React/Core (= 0.56.0)
+  - react-native-document-picker (2.1.0):
+    - React
+  - React/Core (0.56.0):
+    - yoga (= 0.56.0.React)
+  - React/DevSupport (0.56.0):
+    - React/Core
+    - React/RCTWebSocket
+  - React/fishhook (0.56.0)
+  - React/RCTBlob (0.56.0):
+    - React/Core
+  - React/RCTImage (0.56.0):
+    - React/Core
+    - React/RCTNetwork
+  - React/RCTNetwork (0.56.0):
+    - React/Core
+  - React/RCTText (0.56.0):
+    - React/Core
+  - React/RCTWebSocket (0.56.0):
+    - React/Core
+    - React/fishhook
+    - React/RCTBlob
+  - rn-fetch-blob (0.10.6):
+    - React/Core
+  - RNFS (2.10.14):
+    - React
+  - yoga (0.56.0.React)
 
 DEPENDENCIES:
   - AppCenter/Analytics (~> 1.6.1)
   - AppCenter/Crashes (~> 1.6.1)
   - AppCenterReactNativeShared (~> 1.5.1)
+  - react-native-document-picker (from `../node_modules/react-native-document-picker`)
+  - React/Core (from `../node_modules/react-native`)
+  - React/DevSupport (from `../node_modules/react-native`)
+  - React/RCTImage (from `../node_modules/react-native`)
+  - React/RCTNetwork (from `../node_modules/react-native`)
+  - React/RCTText (from `../node_modules/react-native`)
+  - React/RCTWebSocket (from `../node_modules/react-native`)
+  - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
+  - RNFS (from `../node_modules/react-native-fs`)
+  - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AppCenter
     - AppCenterReactNativeShared
 
+EXTERNAL SOURCES:
+  React:
+    :path: "../node_modules/react-native"
+  react-native-document-picker:
+    :path: "../node_modules/react-native-document-picker"
+  rn-fetch-blob:
+    :path: "../node_modules/rn-fetch-blob"
+  RNFS:
+    :path: "../node_modules/react-native-fs"
+  yoga:
+    :path: "../node_modules/react-native/ReactCommon/yoga"
+
 SPEC CHECKSUMS:
   AppCenter: f9eb653a45cece34549232f295aec05260dfc24f
   AppCenterReactNativeShared: 5b40dc5bbaf891697d1982e0ae0e9b1120dd4274
+  React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-document-picker: e7934f6a3c898a1b62fa68b1f09371beef6ac51a
+  rn-fetch-blob: 76a8f798dae965bbcd146a2438f2e1d381c91ae3
+  RNFS: bbb1a64eb245763daf34aea86f97c97c4e85f74c
+  yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 3e085f0df39cbd55e3a572a397c656815d124d5f
+PODFILE CHECKSUM: f363613b20be9cc272dc929d97c71f51dde1c442
 
 COCOAPODS: 1.5.3
