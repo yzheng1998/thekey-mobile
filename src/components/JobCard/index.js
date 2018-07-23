@@ -17,11 +17,12 @@ import questionMark from '../../stories/question-mark.jpg'
 import JobStarButton from '../../components/JobStarButton'
 
 const daysLeft = time => {
+  const formattedTime = new Date(time)
+  const deadline = moment(formattedTime, 'YYYY-MM-DD HH:mm:ss')
   const today = moment()
-  const date = moment(time)
-  const diff = date.diff(today, 'hours')
-  const result = diff < 24 ? `${diff} h` : `${date.diff(today, 'days')} d`
-  return result
+  const diff = deadline.diff(today, 'hours')
+  const result = diff < 24 ? `${diff} h` : `${deadline.diff(today, 'days')} d`
+  return `${result}`
 }
 export default class JobCard extends Component {
   constructor(props) {
