@@ -14,9 +14,6 @@ const CHAT_SUBSCRIPTION = gql`
       id
       sender {
         id
-        profilePicture
-        firstName
-        lastName
       }
       content
     }
@@ -55,7 +52,6 @@ class ConversationScreen extends Component {
               chat,
               viewer: { id: userId },
             } = data
-            console.log('data', data)
             return (
               <MessagesDisplay
                 ref={el => {
