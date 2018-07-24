@@ -24,6 +24,12 @@ const timePosted = time => {
   return result
 }
 
+const commitmentOptions = [
+  { value: 'FULLTIME', label: 'Full Time' },
+  { value: 'PARTTIME', label: 'Part Time' },
+  { value: 'INTERNSHIP', label: 'value' },
+]
+
 class JobPictureBlock extends Component {
   render() {
     const {
@@ -42,7 +48,8 @@ class JobPictureBlock extends Component {
             <Title>{title}</Title>
             <Company>{company}</Company>
             <Description>
-              {commitment} - {location}
+              {commitmentOptions.find(el => el.value === commitment).label} —{' '}
+              {location}
             </Description>
             <Deadline>{timePosted(time)}</Deadline>
           </DescriptionContainer>
