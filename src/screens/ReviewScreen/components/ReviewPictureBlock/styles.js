@@ -33,7 +33,6 @@ export const HeaderContainer = styled.View`
 `
 export const BackButtonContainer = styled.TouchableOpacity`
   position: absolute;
-  background-color: blue;
   top: 40px;
   left: 20px;
 `

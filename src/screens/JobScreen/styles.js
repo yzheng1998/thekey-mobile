@@ -3,6 +3,7 @@ import { themeGet } from 'styled-system'
 
 export const Container = styled.ScrollView`
   flex: 1;
+  background-color: ${themeGet('colors.background')};
 `
 export const BackButtonContainer = styled.TouchableOpacity``
 

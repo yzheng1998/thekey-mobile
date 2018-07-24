@@ -1,5 +1,8 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
+import { Dimensions } from 'react-native'
+
+const { width } = Dimensions.get('window')
 
 export const Background = styled.View`
   background-color: ${themeGet('colors.buttonSecondary')};
@@ -9,7 +12,8 @@ export const CardContainer = styled.View`
   padding-top: 15px;
 `
 export const SwiperContainer = styled.View`
-  flex: 1;
+  width: ${width};
   justify-content: center;
   align-items: center;
+  align-self: center;
 `

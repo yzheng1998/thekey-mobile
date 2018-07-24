@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
-import { Image } from 'react-native'
 import {
   Host,
   Card,
   LeftContainer,
+  AvatarContainer,
   Deadline,
   ContentContainer,
   Title,
   Description,
+  RightContainer,
   TagsContainer,
-  InfoContainer,
+  TopContainer,
+  Avatar,
 } from './styles'
 import TagLine from '../TagLine'
 import moment from 'moment'
@@ -24,6 +26,13 @@ const daysLeft = time => {
   const result = diff < 24 ? `${diff} h` : `${deadline.diff(today, 'days')} d`
   return `${result}`
 }
+
+const commitmentOptions = [
+  { value: 'FULLTIME', label: 'Full-Time' },
+  { value: 'PARTTIME', label: 'Part-Time' },
+  { value: 'INTERNSHIP', label: 'Internship' },
+]
+
 export default class JobCard extends Component {
   constructor(props) {
     super(props)
@@ -52,34 +61,37 @@ export default class JobCard extends Component {
         activeOpacity={this.props.activeOpacity}
         borderRadius={this.props.borderRadius}
       >
-        <LeftContainer>
-          <Image
-            source={picture ? { uri: picture } : questionMark}
-            style={{ width: 46, height: 46 }}
-          />
-          <Deadline>{daysLeft(deadline)}</Deadline>
-        </LeftContainer>
-        <ContentContainer>
-          <InfoContainer>
+        <TopContainer isCard={this.props.isCard}>
+          <LeftContainer>
+            <AvatarContainer>
+              <Avatar source={picture ? { uri: picture } : questionMark} />
+              <Deadline>{daysLeft(deadline)}</Deadline>
+            </AvatarContainer>
             <ContentContainer>
               <Title>{title}</Title>
               <Host>{company || 'No Associated Company'}</Host>
+              <Description>
+                {commitmentOptions.find(el => el.value === commitment).label} —{' '}
+                {location}
+              </Description>
             </ContentContainer>
+          </LeftContainer>
+          <RightContainer>
             <JobStarButton
               onPress={this.select}
               isInterested={this.state.isInterested}
               id={id}
-              startColor="rgb(250,53,121)"
+              size={24}
+              startColor="rgb(250, 53, 121)"
               endColor="rgb(148, 157, 170)"
             />
-          </InfoContainer>
-          <Description>
-            {commitment} - {location}
-          </Description>
+          </RightContainer>
+        </TopContainer>
+        {!tagsOff && (
           <TagsContainer>
-            <TagLine tagData={tagsOff ? [] : tags} lines={1} />
+            <TagLine tagData={tags} lines={tags.length ? 1 : 0} />
           </TagsContainer>
-        </ContentContainer>
+        )}
       </Card>
     )
   }

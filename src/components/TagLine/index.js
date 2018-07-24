@@ -5,9 +5,10 @@ import hands from './hands.jpg'
 
 export default class TagLine extends Component {
   render() {
+    const { tagData, lines } = this.props
     return (
-      <TagList height={this.props.lines * 42.5}>
-        {this.props.tagData.map(tag => (
+      <TagList height={!Number.isNaN(lines) ? lines * 42.5 : null}>
+        {tagData.map(tag => (
           <Tag tagImage={hands} tagText={tag.name} key={tag.name} />
         ))}
       </TagList>

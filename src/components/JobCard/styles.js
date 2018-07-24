@@ -3,57 +3,59 @@ import { themeGet } from 'styled-system'
 
 export const Card = styled.TouchableOpacity`
   width: ${props => (props.width ? props.width : '100%')};
-  height: ${props => (props.height ? props.height : '140px')};
-  overflow: hidden;
-  background-color: white;
-  flex-direction: row;
-  padding: 10px;
+  background-color: ${themeGet('colors.background')};
   border-radius: ${props => (props.borderRadius ? props.borderRadius : '0px')};
 `
+export const AvatarContainer = styled.View`
+  margin-left: 16px;
+  margin-right: 15px;
+`
+export const Avatar = styled.Image`
+  width: 46px;
+  height: 46px;
+  border-radius: 23px;
+`
+export const TopContainer = styled.View`
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
+  margin-bottom: ${props => (props.isCard ? 16 : 0)};
+`
 export const LeftContainer = styled.View`
-  padding: 10px;
-  align-items: flex-start;
-  padding-right: -15px;
+  flex-direction: row;
 `
 export const Deadline = styled.Text`
   font-size: 12px;
+  line-height: 14px;
+  margin-top: 4px;
   font-family: ${themeGet('fonts.bold')};
   align-self: center;
 `
-export const ContentContainer = styled.View`
-  padding-top: 10px;
-  flex: 1;
-  align-items: flex-start;
-  margin-left: 12px;
-`
+export const ContentContainer = styled.View``
 export const Title = styled.Text`
+  line-height: 21px;
   font-size: 18px;
   font-family: ${themeGet('fonts.bold')};
   padding-bottom: 2px;
 `
 export const Host = styled.Text`
-  font-size: 15px;
-  font-family: ${themeGet('fonts.medium')};
+  font-size: 16px;
+  line-height: 19px;
+  margin-top: 2px;
+  font-family: ${themeGet('fonts.semiBold')};
   color: ${themeGet('colors.fontSubtitle.primary')};
-  padding-bottom: 4px;
 `
 export const Description = styled.Text`
-  font-size: 12px;
+  font-size: 14px;
   font-family: ${themeGet('fonts.medium')};
+  margin-top: 4px;
   color: ${themeGet('colors.fontDescription.primary')};
 `
-export const TagsContainer = styled.View`
-  margin-left: -16px;
-  margin-top: -6px;
+export const RightContainer = styled.View`
+  margin-right: 24px;
+  margin-bottom: 18px;
 `
-export const InfoContainer = styled.View`
-  flex-direction: row;
-  margin-left: -13px;
-  margin-top: -9px;
-  align-items: center;
-  padding-right: 8px;
-`
-export const StarContainer = styled.TouchableOpacity`
-  padding-top: 20px;
-  padding-right: 20px;
-`
+export const TagsContainer = styled.View``
+export const StarContainer = styled.TouchableOpacity``

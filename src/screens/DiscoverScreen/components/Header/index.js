@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Image } from 'react-native'
 import { Background, Icon, IconButton, Name, Title, TextBox } from './styles'
 
 export default class Header extends Component {
@@ -8,7 +7,7 @@ export default class Header extends Component {
 
   static propTypes = {
     name: PropTypes.string.isRequired,
-    avatar: Image.propTypes.source.isRequired,
+    avatar: PropTypes.string.isRequired,
   }
 
   render() {
@@ -20,7 +19,7 @@ export default class Header extends Component {
           <Title>Discover</Title>
         </TextBox>
         <IconButton onPress={() => this.props.navigation.navigate('Profile')}>
-          <Icon source={avatar} />
+          <Icon source={{ uri: avatar }} />
         </IconButton>
       </Background>
     )
