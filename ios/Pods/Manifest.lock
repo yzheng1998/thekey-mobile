@@ -7,8 +7,15 @@ PODS:
   - AppCenterReactNativeShared (1.5.1):
     - AppCenter/Core (= 1.6.1)
   - QBImagePickerController (3.4.0)
+  - React (0.56.0):
+    - React/Core (= 0.56.0)
+  - react-native-document-picker (2.1.0):
+    - React
   - React/Core (0.56.0):
     - yoga (= 0.56.0.React)
+  - React/DevSupport (0.56.0):
+    - React/Core
+    - React/RCTWebSocket
   - React/fishhook (0.56.0)
   - React/RCTActionSheet (0.56.0):
     - React/Core
@@ -35,18 +42,24 @@ PODS:
     - React/Core
     - React/fishhook
     - React/RCTBlob
+  - rn-fetch-blob (0.10.6):
+    - React/Core
+  - RNFS (2.10.14):
+    - React
   - RNImageCropPicker (0.20.3):
     - QBImagePickerController
     - React/Core
     - RSKImageCropper
-  - RSKImageCropper (2.0.1)
+  - RSKImageCropper (2.1.0)
   - yoga (0.56.0.React)
 
 DEPENDENCIES:
   - AppCenter/Analytics (~> 1.6.1)
   - AppCenter/Crashes (~> 1.6.1)
   - AppCenterReactNativeShared (~> 1.5.1)
+  - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - React/Core (from `../node_modules/react-native`)
+  - React/DevSupport (from `../node_modules/react-native`)
   - React/RCTActionSheet (from `../node_modules/react-native`)
   - React/RCTAnimation (from `../node_modules/react-native`)
   - React/RCTGeolocation (from `../node_modules/react-native`)
@@ -57,6 +70,8 @@ DEPENDENCIES:
   - React/RCTText (from `../node_modules/react-native`)
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
+  - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
+  - RNFS (from `../node_modules/react-native-fs`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga/yoga.podspec`)
 
@@ -70,6 +85,12 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   React:
     :path: "../node_modules/react-native"
+  react-native-document-picker:
+    :path: "../node_modules/react-native-document-picker"
+  rn-fetch-blob:
+    :path: "../node_modules/rn-fetch-blob"
+  RNFS:
+    :path: "../node_modules/react-native-fs"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
   yoga:
@@ -80,10 +101,13 @@ SPEC CHECKSUMS:
   AppCenterReactNativeShared: 5b40dc5bbaf891697d1982e0ae0e9b1120dd4274
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-document-picker: e7934f6a3c898a1b62fa68b1f09371beef6ac51a
+  rn-fetch-blob: 76a8f798dae965bbcd146a2438f2e1d381c91ae3
+  RNFS: bbb1a64eb245763daf34aea86f97c97c4e85f74c
   RNImageCropPicker: 32ca4b9fef4e1b7b85ba69494242122948117e06
-  RSKImageCropper: 50d5a3e4160f0309b14d75b89d5ae2f496d56e0d
+  RSKImageCropper: 0d0c6d8525a2381f03fde32a47c6703817a2feed
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 5e91dd8bee7c4469faaed1166f819fff5d992037
+PODFILE CHECKSUM: 1920a81a0139f67c7fda200ff91474ec2ca9dd75
 
 COCOAPODS: 1.5.3
