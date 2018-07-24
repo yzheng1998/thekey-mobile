@@ -1,6 +1,5 @@
 import { AsyncStorage, View, Text } from 'react-native'
 import React, { Component } from 'react'
-
 import { Background } from './styles'
 import { GET_CHAT_AND_VIEWER } from './queries'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
@@ -15,6 +14,9 @@ const CHAT_SUBSCRIPTION = gql`
       id
       sender {
         id
+        profilePicture
+        firstName
+        lastName
       }
       content
     }
@@ -53,6 +55,7 @@ class ConversationScreen extends Component {
               chat,
               viewer: { id: userId },
             } = data
+            console.log('data', data)
             return (
               <MessagesDisplay
                 ref={el => {
@@ -60,6 +63,7 @@ class ConversationScreen extends Component {
                 }}
                 chat={chat}
                 userId={userId}
+                isGroupMessage={chat.participants.length > 2}
                 subscribe={async () => {
                   const token = await AsyncStorage.getItem('token')
                   subscribeToMore({
