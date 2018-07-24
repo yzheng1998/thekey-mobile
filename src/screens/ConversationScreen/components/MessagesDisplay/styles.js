@@ -22,6 +22,6 @@ export const WideMessageContainer = styled.View`
 export const Screen = styled.View`
   flex: 1;
   padding-top: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
 `
