@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { FlatList, ScrollView, Text } from 'react-native'
 import CompanyCard from '../../components/CompanyCard'
-import SearchFilterTab from '../../components/SearchFilterTab'
-import { HeaderBackground, Title, BackButtonContainer } from './styles'
-import BackButton from 'react-native-vector-icons/Ionicons'
 import SearchBar from '../../components/SearchBar'
+import ReviewsHeader from './components/ReviewsHeader'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -42,19 +40,11 @@ class ReviewsScreen extends Component {
     }
     return (
       <ScrollView>
-        <HeaderBackground>
-          <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
-            <BackButton name="ios-arrow-back" size={27} color="white" />
-          </BackButtonContainer>
-          <Title>Reviews</Title>
-          <SearchFilterTab
-            options={['All', 'Saved', 'Highest Rated']}
-            selectedColor="white"
-            color="white"
-            selectedIndex={this.state.tab}
-            updateState={this.changeTab}
-          />
-        </HeaderBackground>
+        <ReviewsHeader
+          navigation={this.props.navigation}
+          selectedIndex={this.state.tab}
+          changeTab={this.changeTab}
+        />
         <SearchBar
           updateText={this.updateText}
           searchText={searchText}

@@ -9,20 +9,30 @@ export const ButtonRow = styled.View`
   justify-content: space-between;
   align-items: center;
 `
-export const HeaderBackground = styled.View`
+export const HeaderContainer = styled.View`
   width: 100%;
   justify-content: flex-start;
   flex-direction: column;
-  background-color: black;
-  padding-top: 40px;
   padding-bottom: 10px;
 `
 export const Title = styled.Text`
   color: ${themeGet('colors.fontPrimary')};
   font-family: ${themeGet('fonts.heavy')};
-  font-size: 30px;
+  font-size: 34px;
   margin-left: 20px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 `
 export const NewEventButton = styled.TouchableOpacity``
 export const BackButton = styled.TouchableOpacity``
+export const BackgroundImage = styled.ImageBackground`
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+`
+export const Tint = styled.View`
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+`
+export const SafeView = styled.SafeAreaView`
+  width: 100%;
+`

@@ -3,9 +3,8 @@ import { themeGet } from 'styled-system'
 
 export const BlockContainer = styled.View`
   width: 100%;
-  margin-top: 16px;
+  margin-top: 30px;
 `
-
 export const BioText = styled.Text`
   font-size: 18;
   line-height: 23;
@@ -14,5 +13,4 @@ export const BioText = styled.Text`
   margin-left: 16;
   margin-right: 16;
 `
-
 export const TextButton = styled.TouchableOpacity``

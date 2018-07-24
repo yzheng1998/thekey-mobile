@@ -6,10 +6,10 @@ export const Background = styled.View`
 `
 export const HeaderBackground = styled.View`
   width: 100%;
+  padding-top: 10px;
   justify-content: flex-start;
   flex-direction: column;
   background-color: white;
-  padding-top: 40px;
 `
 export const Title = styled.Text`
   color: black;
@@ -41,4 +41,8 @@ export const ThinDivider = styled.View`
   height: 4px;
   margin-top: 5px;
   background-color: ${themeGet('colors.divider')};
+`
+export const SafeView = styled.SafeAreaView`
+  flex: 1;
+  background-color: white;
 `

@@ -5,6 +5,9 @@ export const ScreenScroll = styled.ScrollView`
   width: 100%;
   padding-top: 5px;
 `
+export const SafeView = styled.SafeAreaView`
+  width: 100%;
+`
 export const Background = styled.View`
   flex: 1;
   background-color: ${themeGet('colors.background')};

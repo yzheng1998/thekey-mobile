@@ -5,20 +5,23 @@ import {
   CancelContainer,
   CancelButton,
   CancelText,
+  SafeView,
 } from './styles'
 
 export default class SearchModalHeader extends Component {
   render() {
     const { closeModal } = this.props
     return (
-      <Background>
-        <CancelContainer>
-          <CancelButton onPress={closeModal}>
-            <CancelText>Cancel</CancelText>
-          </CancelButton>
-        </CancelContainer>
-        <Heading>Search Users</Heading>
-      </Background>
+      <SafeView>
+        <Background>
+          <CancelContainer>
+            <CancelButton onPress={closeModal}>
+              <CancelText>Cancel</CancelText>
+            </CancelButton>
+          </CancelContainer>
+          <Heading>Search Users</Heading>
+        </Background>
+      </SafeView>
     )
   }
 }
