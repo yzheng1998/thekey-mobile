@@ -91,7 +91,7 @@ export default class InterestsScreen extends Component {
               this.props.navigation.navigate('Skills', {
                 userInfo: {
                   ...userInfo,
-                  interests: this.state.interests,
+                  interests: this.state.interests.join(', '),
                 },
               })
             }

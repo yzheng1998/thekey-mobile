@@ -139,7 +139,7 @@ class YourEducationScreen extends Component {
               this.props.navigation.navigate('Essay', {
                 userInfo: {
                   ...userInfo,
-                  educationListData: this.state.educationListData,
+                  educations: this.state.educationListData,
                 },
               })
             }

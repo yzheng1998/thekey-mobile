@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { ScreenContainer, SubtitleView, Subtitle } from './styles'
+import { Text } from 'react-native'
 import Header from '../../components/Header'
 import RegisterButton from '../../components/RegisterButton'
+import SubmitButton from '../../components/SubmitButton'
 import ResumeList from './components/ResumeList'
 import RegistrationProgressBar from '../../components/RegistrationProgressBar'
-import { withApollo } from 'react-apollo'
+import { withApollo, Mutation } from 'react-apollo'
 import {
   DocumentPicker,
   DocumentPickerUtil,
@@ -13,6 +15,7 @@ import RNFS from 'react-native-fs'
 import uuid from 'uuid/v4'
 
 import gql from 'graphql-tag'
+import { SEND_MEMBERSHIP_APPLICATION } from './mutations'
 
 function humanFileSize(bytes, si) {
   const thresh = si ? 1000 : 1024
@@ -41,20 +44,7 @@ const SIGN_S3_URL = gql`
 
 class ResumeUploadScreen extends Component {
   state = {
-    resumeListData: [
-      {
-        id: 0,
-        title: 'Zena_Resume(2018).pdf',
-        dataSize: '3mb',
-        progress: '32.5%',
-      },
-      {
-        id: 1,
-        title: 'Yuke_Resume(2018).pdf',
-        dataSize: '15mb',
-        progress: '67.5%',
-      },
-    ],
+    resumeListData: [],
   }
 
   updateText = (key, text) => {
@@ -81,15 +71,6 @@ class ResumeUploadScreen extends Component {
 
   handleFile = (err, res) => {
     const id = uuid()
-    const item = {
-      id,
-      title: res.fileName,
-      dataSize: humanFileSize(res.fileSize),
-      progress: '0%',
-    }
-    this.setState({
-      resumeListData: [item, ...this.state.resumeListData],
-    })
 
     this.props.client
       .mutate({
@@ -105,6 +86,16 @@ class ResumeUploadScreen extends Component {
         const {
           signS3Url: { url },
         } = data
+        const item = {
+          id,
+          title: res.fileName,
+          dataSize: humanFileSize(res.fileSize),
+          progress: '0%',
+          url,
+        }
+        this.setState({
+          resumeListData: [item, ...this.state.resumeListData],
+        })
         const fileUrl = res.uri.substring(7)
         const split = fileUrl.split('/')
         const name = split.pop()
@@ -143,6 +134,7 @@ class ResumeUploadScreen extends Component {
     const buttonText = this.state.resumeListData.length
       ? 'ADD ANOTHER FILE'
       : 'ADD FILE'
+    const userInfo = this.props.navigation.getParam('userInfo')
 
     return (
       <ScreenContainer>
@@ -167,6 +159,40 @@ class ResumeUploadScreen extends Component {
           buttonText={buttonText}
           onPress={this.handlePress}
         />
+        {this.state.resumeListData.length > 0 &&
+          this.state.resumeListData.every(
+            resume => resume.progress === '100%',
+          ) && (
+            <Mutation
+              mutation={SEND_MEMBERSHIP_APPLICATION}
+              onCompleted={() => {
+                this.props.navigation.navigate('Splash')
+              }}
+            >
+              {(sendMembershipApplication, { error }) => {
+                if (error) {
+                  return <Text>{error.message}</Text>
+                }
+                return (
+                  <SubmitButton
+                    onPress={() => {
+                      const userInfoFinal = {
+                        ...userInfo,
+                        resumes: this.state.resumeListData.map(resume => ({
+                          resume: resume.url,
+                        })),
+                      }
+                      const variables = {
+                        sendMembershipApplicationInput: { ...userInfoFinal },
+                      }
+                      sendMembershipApplication({ variables })
+                    }}
+                    buttonText="SUBMIT"
+                  />
+                )
+              }}
+            </Mutation>
+          )}
       </ScreenContainer>
     )
   }
