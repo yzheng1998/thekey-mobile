@@ -36,6 +36,7 @@ const GET_EVENTS = gql`
       company {
         id
       }
+      isInterested
     }
   }
 `

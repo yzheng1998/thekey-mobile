@@ -8,15 +8,26 @@ import gql from 'graphql-tag'
 const TOGGLE_JOB_INTEREST = gql`
   mutation toggleInterestInJob($jobId: ID!) {
     toggleInterestInJob(jobId: $jobId) {
+      id
       interestedJob {
         id
+        title
+        description
+        picture
+        location
+        commitment
+        deadline
+        tags {
+          name
+        }
+        isInterested
       }
     }
   }
 `
 export default class JobStarButton extends Component {
   render() {
-    const { onPress, isInterested, id } = this.props
+    const { isInterested, id } = this.props
     const color = isInterested
       ? this.props.startColor || 'white'
       : this.props.endColor || 'white'
@@ -30,7 +41,6 @@ export default class JobStarButton extends Component {
             <Button
               onPress={() => {
                 const variables = { jobId: id }
-                onPress()
                 toggleInterestInJob({ variables })
               }}
             >

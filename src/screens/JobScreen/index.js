@@ -18,6 +18,7 @@ import JobStarButton from '../../components/JobStarButton'
 const GET_JOB = gql`
   query job($id: ID!) {
     job(id: $id) {
+      id
       title
       company {
         name
@@ -35,15 +36,12 @@ const GET_JOB = gql`
       bringToRole
       industry
       createdAt
+      isInterested
     }
   }
 `
 
 class JobScreen extends Component {
-  state = { isInterested: false }
-  select = () => {
-    this.setState({ isInterested: !this.state.isInterested })
-  }
   render() {
     const variables = {
       id: this.props.navigation.getParam('id'),
@@ -68,6 +66,7 @@ class JobScreen extends Component {
             aboutCompany,
             bringToRole,
             industry,
+            isInterested,
           } = data.job
           return (
             <Container>
@@ -100,8 +99,7 @@ class JobScreen extends Component {
                   <BackButton name="ios-arrow-back" size={27} color="white" />
                 </BackButtonContainer>
                 <JobStarButton
-                  onPress={this.select}
-                  isInterested={this.state.isInterested}
+                  isInterested={isInterested}
                   id={this.props.navigation.getParam('id')}
                 />
               </ButtonHeader>

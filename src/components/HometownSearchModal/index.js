@@ -3,25 +3,18 @@ import { Container, Divider } from './styles'
 import SearchBar from '../SearchBar'
 import HometownSearchCard from '../HometownSearchCard'
 import { FlatList, Modal } from 'react-native'
-import uuidv4 from 'uuid/v4'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
 
-const exampleHometowns = [
-  {
-    id: uuidv4(),
-    city: 'Cleveland',
-    state: 'Ohio',
-  },
-  {
-    id: uuidv4(),
-    city: 'San Francisco',
-    state: 'Bay Area, California',
-  },
-  {
-    id: uuidv4(),
-    city: 'Cambridge',
-    state: 'Massachusetts',
-  },
-]
+const GET_HOMETOWNS = gql`
+  query hometowns($substr: String!) {
+    hometowns(substr: $substr) {
+      id
+      city
+      state
+    }
+  }
+`
 
 export default class HometownSearchModal extends Component {
   state = {
@@ -34,29 +27,35 @@ export default class HometownSearchModal extends Component {
 
   render() {
     const { visible, onPress, setText } = this.props
+    const variables = { substr: this.state.searchText }
     return (
       <Modal animationType="slide" transparent={false} visible={visible}>
         <Container>
           <SearchBar
+            closeModal={onPress}
             updateText={this.updateText}
             searchText={this.state.searchText}
             placeholderText="Search for a city"
           />
           <Divider />
-          <FlatList
-            keyExtractor={hometown => hometown.id}
-            data={exampleHometowns}
-            renderItem={({ item: hometown }) => (
-              <HometownSearchCard
-                onPress={obj => {
-                  onPress()
-                  setText(obj)
-                }}
-                city={hometown.city}
-                state={hometown.state}
+          <Query query={GET_HOMETOWNS} variables={variables}>
+            {({ data }) => (
+              <FlatList
+                keyExtractor={hometown => hometown.id}
+                data={data.hometowns}
+                renderItem={({ item: hometown }) => (
+                  <HometownSearchCard
+                    onPress={obj => {
+                      onPress()
+                      setText(obj)
+                    }}
+                    city={hometown.city}
+                    state={hometown.state}
+                  />
+                )}
               />
             )}
-          />
+          </Query>
         </Container>
       </Modal>
     )
