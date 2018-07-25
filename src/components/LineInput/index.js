@@ -31,6 +31,7 @@ export default class LineInput extends Component {
             onChangeText={txt => updateText(txt)}
             onFocus={() => this.setState({ selected: true })}
             onBlur={() => this.setState({ selected: false })}
+            returnKeyType="done"
             {...rest}
           />
           {text !== undefined &&
