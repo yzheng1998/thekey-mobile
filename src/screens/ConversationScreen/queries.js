@@ -4,7 +4,9 @@ import gql from 'graphql-tag'
 export const GET_CHAT_AND_VIEWER = gql`
   query chatAndViewer($chatId: ID!) {
     viewer {
-      id
+      ... on User {
+        id
+      }
     }
     chat(id: $chatId) {
       participants {

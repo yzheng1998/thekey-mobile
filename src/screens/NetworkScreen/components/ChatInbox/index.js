@@ -7,32 +7,34 @@ import ChatCard from '../../../../components/ChatCard'
 const GET_CHATS = gql`
   query viewer {
     viewer {
-      id
-      firstName
-      lastName
-      email
-      chats {
+      ... on User {
         id
-        participants {
+        firstName
+        lastName
+        email
+        chats {
           id
-          firstName
-          lastName
-          profilePicture
-        }
-        messages {
-          id
-          sender {
+          participants {
             id
             firstName
             lastName
+            profilePicture
           }
-          content
-          chat {
-            messages {
-              content
+          messages {
+            id
+            sender {
+              id
+              firstName
+              lastName
             }
+            content
+            chat {
+              messages {
+                content
+              }
+            }
+            createdAt
           }
-          createdAt
         }
       }
     }

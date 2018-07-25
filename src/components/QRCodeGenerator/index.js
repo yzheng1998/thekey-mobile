@@ -6,7 +6,9 @@ import QRCode from 'react-native-qrcode'
 const GET_USERID = gql`
   query viewer {
     viewer {
-      id
+      ... on User {
+        id
+      }
     }
   }
 `
