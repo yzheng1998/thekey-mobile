@@ -85,7 +85,7 @@ export default class SkillsScreen extends Component {
               this.props.navigation.navigate('Resume', {
                 userInfo: {
                   ...userInfo,
-                  skills: this.state.skills,
+                  selfDescription: this.state.skills.join(', '),
                 },
               })
             }}
