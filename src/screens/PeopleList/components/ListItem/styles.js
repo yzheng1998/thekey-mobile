@@ -7,6 +7,7 @@ export const Card = styled.View`
   background-color: white;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
   border-bottom-width: 1px;
   border-bottom-color: ${themeGet('colors.border')};
 `
@@ -16,8 +17,8 @@ export const Name = styled.Text`
   padding: 20px;
 `
 export const Picture = styled.Image`
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  margin: 6px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  margin-left: 16px;
 `

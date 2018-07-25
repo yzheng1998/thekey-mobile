@@ -6,7 +6,7 @@ class ListItem extends Component {
     const { name, picture } = this.props
     return (
       <Card>
-        <Picture source={picture} />
+        <Picture source={{ uri: picture }} />
         <Name>{name}</Name>
       </Card>
     )
