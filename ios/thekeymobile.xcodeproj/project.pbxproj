@@ -32,6 +32,7 @@
 		2211685F20D40641000216D2 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		22FD6E6621063F4B0057A8C6 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FD6E6321063F020057A8C6 /* libRCTPushNotification.a */; };
 		254F748340F74529AEDE145C /* SF-Pro-Display-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97E06529390F489EB5575924 /* SF-Pro-Display-BoldItalic.otf */; };
+		2845B3092107861C005CC9C3 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2845B305210785E5005CC9C3 /* libRNSVG.a */; };
 		28EB3F5E618F487E800AF733 /* SF-Pro-Display-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE5D683A0343A59354EA70 /* SF-Pro-Display-BlackItalic.otf */; };
 		294053A4D0504EBBBA9B3CC5 /* SF-Pro-Display-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 406C08C2738C461B87BC1536 /* SF-Pro-Display-LightItalic.otf */; };
 		295CDE953B8A4F268CBA9D00 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 00F112A1E4F84D28A4E78210 /* SF-Pro-Text-Regular.otf */; };
@@ -182,6 +183,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3D05745F1DE6004600184BB4;
 			remoteInfo = "RCTPushNotification-tvOS";
+		};
+		2845B304210785E5005CC9C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2845B2D7210785E5005CC9C3 /* RNSVG.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
+			remoteInfo = RNSVG;
+		};
+		2845B306210785E5005CC9C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2845B2D7210785E5005CC9C3 /* RNSVG.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 94DDAC5C1F3D024300EED511;
+			remoteInfo = "RNSVG-tvOS";
 		};
 		2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -452,6 +467,7 @@
 
 		22FD6E5C21063E720057A8C6 /* thekeymobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = thekeymobile.entitlements; path = thekeymobile/thekeymobile.entitlements; sourceTree = "<group>"; };
 		22FD6E5D21063F020057A8C6 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
+		2845B2D7210785E5005CC9C3 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		29954D5A8DA44CEE86698978 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* thekeymobile-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "thekeymobile-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* thekeymobile-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "thekeymobile-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -596,6 +612,7 @@
 				EBBA8FBC292C489E86F2A7EE /* libAppCenterReactNativeAnalytics.a in Frameworks */,
 				CB684F2C61FE48528244A665 /* (null) in Frameworks */,
 				FABA81C9D0556D6707D72315 /* libPods-thekeymobile.a in Frameworks */,
+				2845B3092107861C005CC9C3 /* libRNSVG.a in Frameworks */,
 				86EA3D286A2A490DB1188250 /* libRCTLinkedinLogin.a in Frameworks */,
 				22FD6E6621063F4B0057A8C6 /* libRCTPushNotification.a in Frameworks */,
 			);
@@ -784,6 +801,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2845B2D8210785E5005CC9C3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2845B305210785E5005CC9C3 /* libRNSVG.a */,
+				2845B307210785E5005CC9C3 /* libRNSVG-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -862,6 +888,7 @@
 			isa = PBXGroup;
 			children = (
 				22FD6E5D21063F020057A8C6 /* RCTPushNotification.xcodeproj */,
+				2845B2D7210785E5005CC9C3 /* RNSVG.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -1177,6 +1204,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 2845B2D8210785E5005CC9C3 /* Products */;
+					ProjectRef = 2845B2D7210785E5005CC9C3 /* RNSVG.xcodeproj */;
+				},
+				{
 					ProductGroup = 3BD3292020D0404B003331F0 /* Products */;
 					ProjectRef = 4BF1A27DC11447458EF0F49D /* RNVectorIcons.xcodeproj */;
 				},
@@ -1267,6 +1298,20 @@
 			fileType = archive.ar;
 			path = "libRCTPushNotification-tvOS.a";
 			remoteRef = 22FD6E6421063F020057A8C6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2845B305210785E5005CC9C3 /* libRNSVG.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSVG.a;
+			remoteRef = 2845B304210785E5005CC9C3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2845B307210785E5005CC9C3 /* libRNSVG-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRNSVG-tvOS.a";
+			remoteRef = 2845B306210785E5005CC9C3 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */ = {
