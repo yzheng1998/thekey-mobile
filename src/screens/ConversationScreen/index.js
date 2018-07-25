@@ -5,6 +5,7 @@ import { GET_CHAT_AND_VIEWER } from './queries'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
 import MessageInput from './components/MessageInput'
 import MessagesDisplay from './components/MessagesDisplay'
+import ConversationHeader from './components/ConversationHeader'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -52,35 +53,43 @@ class ConversationScreen extends Component {
               chat,
               viewer: { id: userId },
             } = data
+
             return (
-              <MessagesDisplay
-                ref={el => {
-                  this.messageDisplay = el
-                }}
-                chat={chat}
-                userId={userId}
-                isGroupMessage={chat.participants.length > 2}
-                subscribe={async () => {
-                  const token = await AsyncStorage.getItem('token')
-                  subscribeToMore({
-                    document: CHAT_SUBSCRIPTION,
-                    variables: { chatId, token },
-                    updateQuery: (oldQuery, { subscriptionData }) => {
-                      if (!subscriptionData.data) return oldQuery
-                      const message = subscriptionData.data.messageAdded
-                      const newQuery = {
-                        ...oldQuery,
-                        chat: {
-                          ...oldQuery.chat,
-                          messages: [message, ...oldQuery.chat.messages],
-                        },
-                      }
-                      handlePress()
-                      return newQuery
-                    },
-                  })
-                }}
-              />
+              <View style={{ flex: 1 }}>
+                <ConversationHeader
+                  navigation={this.props.navigation}
+                  participants={chat.participants}
+                  userId={userId}
+                />
+                <MessagesDisplay
+                  ref={el => {
+                    this.messageDisplay = el
+                  }}
+                  chat={chat}
+                  userId={userId}
+                  isGroupMessage={chat.participants.length > 2}
+                  subscribe={async () => {
+                    const token = await AsyncStorage.getItem('token')
+                    subscribeToMore({
+                      document: CHAT_SUBSCRIPTION,
+                      variables: { chatId, token },
+                      updateQuery: (oldQuery, { subscriptionData }) => {
+                        if (!subscriptionData.data) return oldQuery
+                        const message = subscriptionData.data.messageAdded
+                        const newQuery = {
+                          ...oldQuery,
+                          chat: {
+                            ...oldQuery.chat,
+                            messages: [message, ...oldQuery.chat.messages],
+                          },
+                        }
+                        handlePress()
+                        return newQuery
+                      },
+                    })
+                  }}
+                />
+              </View>
             )
           }}
         </Query>
