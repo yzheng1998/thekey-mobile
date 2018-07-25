@@ -20,6 +20,7 @@ const GET_JOBS = gql`
       tags {
         name
       }
+      isInterested
     }
   }
 `
