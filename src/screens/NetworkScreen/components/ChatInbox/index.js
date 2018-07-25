@@ -11,6 +11,7 @@ const GET_CHATS = gql`
         id
         firstName
         lastName
+        profilePicture
         email
         chats {
           id

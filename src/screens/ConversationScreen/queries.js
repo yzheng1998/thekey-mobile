@@ -6,6 +6,9 @@ export const GET_CHAT_AND_VIEWER = gql`
     viewer {
       ... on User {
         id
+        firstName
+        lastName
+        profilePicture
       }
     }
     chat(id: $chatId) {
