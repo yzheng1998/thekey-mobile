@@ -25,15 +25,6 @@ function formatTimeStamp(timeStamp) {
 }
 
 export default class SmallEventCard extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { isInterested: false }
-  }
-
-  select = () => {
-    this.setState({ isInterested: !this.state.isInterested })
-  }
-
   render() {
     const interestedFriends = [
       {
@@ -75,7 +66,7 @@ export default class SmallEventCard extends Component {
     ]
     const image =
       'https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg'
-    const { title, id, dateRange } = this.props.event
+    const { title, id, dateRange, isInterested } = this.props.event
 
     const usableTimeStamp = new Date(dateRange[0])
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
@@ -96,11 +87,7 @@ export default class SmallEventCard extends Component {
               <TitleContainer>
                 <Title numberOfLines={1}>{title}</Title>
               </TitleContainer>
-              <StarButton
-                onPress={this.select}
-                isInterested={this.state.isInterested}
-                id={id}
-              />
+              <StarButton isInterested={isInterested} id={id} />
             </RowContainer>
           </ContentContainer>
         </FullContainer>

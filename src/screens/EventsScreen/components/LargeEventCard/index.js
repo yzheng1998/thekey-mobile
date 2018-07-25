@@ -37,15 +37,6 @@ function formatTimeStamp(timeStamp) {
 }
 
 export default class LargeEventsCard extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { isInterested: false }
-  }
-
-  select = () => {
-    this.setState({ isInterested: !this.state.isInterested })
-  }
-
   render() {
     const image =
       'https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg'
@@ -90,7 +81,7 @@ export default class LargeEventsCard extends Component {
     const usableTimeStamp = new Date(
       this.props.event.dateRange[0],
     ).toISOString()
-    const { price, title, location, id } = this.props.event
+    const { price, title, location, id, isInterested } = this.props.event
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
       <Card
@@ -106,11 +97,7 @@ export default class LargeEventsCard extends Component {
             <PriceContainer>
               <Price>{formatPrice(price)}</Price>
             </PriceContainer>
-            <StarButton
-              onPress={this.select}
-              isInterested={this.state.isInterested}
-              id={id}
-            />
+            <StarButton isInterested={isInterested} id={id} />
           </TopContainer>
           <ContentContainer>
             <DetailsContainer>

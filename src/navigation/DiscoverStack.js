@@ -56,7 +56,7 @@ const DiscoverStack = createStackNavigator(
     Event: {
       screen: EventScreen,
       navigationOptions: () => ({
-        title: 'View Event',
+        header: null,
       }),
     },
     Jobs: {
