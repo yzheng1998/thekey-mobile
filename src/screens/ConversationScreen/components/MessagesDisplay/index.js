@@ -60,9 +60,7 @@ class MessagesDisplay extends Component {
     return (
       <Screen>
         <FlatList
-          ref={el => {
-            this.flatList = el
-          }}
+          ref={this.props.flatListRef}
           inverted
           keyExtractor={message => message.id}
           data={chat.messages}

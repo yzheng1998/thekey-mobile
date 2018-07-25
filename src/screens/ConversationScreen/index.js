@@ -29,13 +29,18 @@ const MessageInputDisplay = ({ chatId, onPress }) => (
 )
 
 class ConversationScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.flatListRef = React.createRef()
+  }
+
   render() {
     const { id: chatId } = this.props.navigation.getParam('chat')
 
     const variables = { chatId }
 
     const handlePress = () => {
-      this.messageDisplay.flatList.scrollToOffset({
+      this.flatListRef.current.scrollToOffset({
         x: 0,
         y: 0,
         animated: true,
@@ -62,11 +67,9 @@ class ConversationScreen extends Component {
                   userId={userId}
                 />
                 <MessagesDisplay
-                  ref={el => {
-                    this.messageDisplay = el
-                  }}
                   chat={chat}
                   userId={userId}
+                  flatListRef={this.flatListRef}
                   isGroupMessage={chat.participants.length > 2}
                   subscribe={async () => {
                     const token = await AsyncStorage.getItem('token')
