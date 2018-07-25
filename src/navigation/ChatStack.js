@@ -12,9 +12,7 @@ const ChatStack = createStackNavigator(
     },
     Conversation: {
       screen: ConversationScreen,
-      navigationOptions: () => ({
-        title: 'Message Thread',
-      }),
+      navigationOptions: () => ({ header: null }),
     },
   },
   {
