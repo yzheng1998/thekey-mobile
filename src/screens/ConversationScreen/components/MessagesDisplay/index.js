@@ -18,35 +18,38 @@ function isSendersFirstMessage(chat, item) {
   return item.sender.id !== previousMessage.sender.id
 }
 
-const SenderGroupChatMessage = ({ chat, item, userId }) =>
+const SenderGroupChatMessage = ({ chat, item, userId }) => (
   // show sender's names and pictures next to their message in a group chat
   // if it is not the sender's first message, don't show avatar/name but keep margins
-  (isSendersFirstMessage(chat, item) && (
-    <View>
-      <Name>
-        {item.sender.firstName} {item.sender.lastName}
-      </Name>
-      <GroupMessageContainer>
-        <Avatar source={{ uri: item.sender.profilePicture }} />
+  <View>
+    {isSendersFirstMessage(chat, item) && (
+      <View>
+        <Name>
+          {item.sender.firstName} {item.sender.lastName}
+        </Name>
+        <GroupMessageContainer>
+          <Avatar source={{ uri: item.sender.profilePicture }} />
+          <MessageBubble
+            messageStyle="lowerLeft"
+            key={item.id}
+            isUser={item.sender.id === userId}
+            message={item.content}
+          />
+        </GroupMessageContainer>
+      </View>
+    )}
+    {isSendersFirstMessage(chat, item) === false && (
+      <WideMessageContainer>
         <MessageBubble
-          messageStyle="lowerLeft"
+          messageStyle="upperLeft"
           key={item.id}
           isUser={item.sender.id === userId}
           message={item.content}
         />
-      </GroupMessageContainer>
-    </View>
-  )) ||
-  (isSendersFirstMessage(chat, item) === false && (
-    <WideMessageContainer>
-      <MessageBubble
-        messageStyle="upperLeft"
-        key={item.id}
-        isUser={item.sender.id === userId}
-        message={item.content}
-      />
-    </WideMessageContainer>
-  ))
+      </WideMessageContainer>
+    )}
+  </View>
+)
 
 class MessagesDisplay extends Component {
   componentDidMount() {
