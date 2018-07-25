@@ -27,6 +27,12 @@ const GET_USERS = gql`
         firstName
         lastName
       }
+      mutualFriends {
+        id
+        profilePicture
+        firstName
+        lastName
+      }
       tags {
         name
       }
