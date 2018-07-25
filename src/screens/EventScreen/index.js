@@ -3,18 +3,18 @@ import {
   Container,
   TagsContainer,
   BackButtonContainer,
-  StarContainer,
+  ButtonHeader,
 } from './styles'
 import EventPictureBlock from './components/EventPictureBlock'
 import AboutBlock from '../../components/AboutBlock'
 import TagLine from '../../components/TagLine'
 import SimilarEventsBlock from './components/SimilarEventsBlock'
 import BackButton from 'react-native-vector-icons/Ionicons'
-import Star from 'react-native-vector-icons/Feather'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { Text } from 'react-native'
 import moment from 'moment'
+import EventStarButton from '../../components/EventStarButton'
 
 const GET_EVENT = gql`
   query event($id: ID!) {
@@ -30,6 +30,7 @@ const GET_EVENT = gql`
       tags {
         name
       }
+      isInterested
     }
   }
 `
@@ -92,12 +93,14 @@ class EventScreen extends Component {
           if (error) return <Text>Error! ${error.message}</Text>
 
           const {
+            id,
             location,
             dateRange,
             title,
             picture,
             details,
             tags,
+            isInterested,
           } = data.event
           const usableTimeStamp = new Date(dateRange[0])
 
@@ -120,14 +123,14 @@ class EventScreen extends Component {
                 navigation={this.props.navigation}
                 id={this.props.navigation.getParam('id')}
               />
-              <BackButtonContainer
-                onPress={() => this.props.navigation.goBack()}
-              >
-                <BackButton name="ios-arrow-back" size={27} color="white" />
-              </BackButtonContainer>
-              <StarContainer>
-                <Star name="star" size={27} color="white" />
-              </StarContainer>
+              <ButtonHeader>
+                <BackButtonContainer
+                  onPress={() => this.props.navigation.goBack()}
+                >
+                  <BackButton name="ios-arrow-back" size={27} color="white" />
+                </BackButtonContainer>
+                <EventStarButton isInterested={isInterested} id={id} />
+              </ButtonHeader>
             </Container>
           )
         }}

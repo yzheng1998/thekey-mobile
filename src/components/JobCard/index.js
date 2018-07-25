@@ -34,13 +34,6 @@ const commitmentOptions = [
 ]
 
 export default class JobCard extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { isInterested: false }
-  }
-  select = () => {
-    this.setState({ isInterested: !this.state.isInterested })
-  }
   render() {
     const {
       id,
@@ -51,6 +44,7 @@ export default class JobCard extends Component {
       tags,
       deadline,
       picture,
+      isInterested,
     } = this.props.job
     const { tagsOff, navigate } = this.props
     return (
@@ -78,8 +72,7 @@ export default class JobCard extends Component {
           </LeftContainer>
           <RightContainer>
             <JobStarButton
-              onPress={this.select}
-              isInterested={this.state.isInterested}
+              isInterested={isInterested}
               id={id}
               size={24}
               startColor="rgb(250, 53, 121)"

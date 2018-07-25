@@ -28,6 +28,7 @@ const GET_EVENTS = gql`
       tags {
         name
       }
+      isInterested
     }
   }
 `
