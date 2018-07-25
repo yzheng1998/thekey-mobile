@@ -29,6 +29,7 @@ const SenderGroupChatMessage = ({ chat, item, userId }) =>
       <GroupMessageContainer>
         <Avatar source={{ uri: item.sender.profilePicture }} />
         <MessageBubble
+          messageStyle="lowerLeft"
           key={item.id}
           isUser={item.sender.id === userId}
           message={item.content}
@@ -39,6 +40,7 @@ const SenderGroupChatMessage = ({ chat, item, userId }) =>
   (isSendersFirstMessage(chat, item) === false && (
     <WideMessageContainer>
       <MessageBubble
+        messageStyle="upperLeft"
         key={item.id}
         isUser={item.sender.id === userId}
         message={item.content}
