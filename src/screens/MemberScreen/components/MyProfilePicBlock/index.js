@@ -12,14 +12,18 @@ import MutualFriends from '../MutualFriends'
 
 export default class MyProfilePicBlock extends Component {
   render() {
-    const { profilePic, mutualFriends, name, hometown } = this.props
+    const { profilePic, mutualFriends, name, hometown, navigation } = this.props
     return (
       <BlockContainer>
         <PictureHeader picture={profilePic} avatarSize={123}>
           <EventTitleText>{name}</EventTitleText>
           <LocationText>{hometown}</LocationText>
           <Container>
-            <MutualFriends mutualFriends={mutualFriends} avatarSize={26} />
+            <MutualFriends
+              mutualFriends={mutualFriends}
+              avatarSize={26}
+              navigation={navigation}
+            />
           </Container>
           <EditButton
             activeOpacity={0.5}
