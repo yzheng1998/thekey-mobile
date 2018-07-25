@@ -11,6 +11,9 @@ export const GET_CHAT_AND_VIEWER = gql`
     chat(id: $chatId) {
       participants {
         id
+        firstName
+        lastName
+        profilePicture
       }
       messages {
         id
