@@ -52,7 +52,6 @@ export default class LargeEventsCard extends Component {
     const usableTimeStamp = new Date(
       this.props.event.dateRange[0],
     ).toISOString()
-    console.log('event', this.props.event)
     const { price, title, location, id, interestedFriends } = this.props.event
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
