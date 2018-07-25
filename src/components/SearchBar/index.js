@@ -28,7 +28,7 @@ export default class SearchBar extends Component {
   }
 
   render() {
-    const { updateText, searchText, placeholderText } = this.props
+    const { updateText, searchText, placeholderText, closeModal } = this.props
     return (
       <SearchBarContainer>
         <SearchContainer
@@ -77,6 +77,9 @@ export default class SearchBar extends Component {
               updateText('')
               this.slide()
               Keyboard.dismiss()
+              if (closeModal) {
+                closeModal()
+              }
             }}
           >
             <CancelText>Cancel</CancelText>
