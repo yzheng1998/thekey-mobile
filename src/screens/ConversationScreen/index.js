@@ -46,7 +46,6 @@ class ConversationScreen extends Component {
       <Background>
         <Query query={GET_CHAT_AND_VIEWER} variables={variables}>
           {({ data, loading, error, subscribeToMore }) => {
-            console.log(error)
             if (loading) return <Text>loading</Text>
             if (error) return <Text>error</Text>
 
