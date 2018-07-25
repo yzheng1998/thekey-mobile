@@ -10,15 +10,16 @@ import {
 export default class MutualFriends extends Component {
   static defaultProps = {
     numberOfPics: 4,
+    title: 'Mutual Friends',
   }
   render() {
-    const { mutualFriends, avatarSize, numberOfPics } = this.props
+    const { mutualFriends, avatarSize, numberOfPics, title } = this.props
     return (
       <ConnectionsRowContainer
         onPress={() =>
           this.props.navigation.navigate('PeopleList', {
             people: mutualFriends,
-            title: 'Mutual Friends',
+            title,
           })
         }
       >

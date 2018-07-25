@@ -41,6 +41,7 @@ const ParticipantPictures = ({ otherParticipants, numberOfPics, navigation }) =>
         avatarSize={26}
         numberOfPics={numberOfPics}
         navigation={navigation}
+        title="Group Members"
       />
     </AvatarRowContainer>
   ) : (
