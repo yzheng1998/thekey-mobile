@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Image } from 'react-native'
-import { Card, LeftContainer, Title } from './styles'
+import { Card, LeftContainer, Title, Avatar } from './styles'
 import Rating from './components/RatingStar'
 import DevLogo from '../../../assets/devlogo.png'
 
@@ -18,10 +17,7 @@ export default class CompanyCard extends Component {
           })
         }
       >
-        <Image
-          source={picture ? { uri: picture } : DevLogo}
-          style={{ width: 46, height: 46 }}
-        />
+        <Avatar source={picture ? { uri: picture } : DevLogo} />
         <LeftContainer>
           <Title>{title}</Title>
           <Rating rating={rating} />
