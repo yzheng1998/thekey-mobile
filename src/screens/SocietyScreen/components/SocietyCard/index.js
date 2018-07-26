@@ -17,6 +17,7 @@ export default class SocietyCard extends Component {
     } = this.props.user
     const selectMutualFriends = [...mutualFriends].slice(0, 5)
     const selectTags = [...tags].slice(0, 10)
+    const lines = selectTags.length > 4 ? 2 : 1
     return (
       <CardContainer>
         <ProfilePicBlock

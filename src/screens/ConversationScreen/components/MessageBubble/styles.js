@@ -7,14 +7,15 @@ const otherUserColor = themeGet('colors.messageBubbleOtherUser')
 export const MessageContainer = styled.View`
   max-width: 60%;
   padding: 5px;
+  /* larger radius makes it rounder, smaller radius makes it less round */
   border-top-left-radius: ${props =>
-    props.tailPosition === 'upperLeft' ? 5 : 25};
+    props.tailPosition === 'upperLeft' ? 5 : 18};
   border-top-right-radius: ${props =>
-    props.tailPosition === 'upperRight' ? 5 : 25};
+    props.tailPosition === 'upperRight' ? 5 : 18};
   border-bottom-left-radius: ${props =>
-    props.tailPosition === 'lowerLeft' ? 5 : 25};
+    props.tailPosition === 'lowerLeft' ? 5 : 18};
   border-bottom-right-radius: ${props =>
-    props.tailPosition === 'lowerRight' ? 5 : 25};
+    props.tailPosition === 'lowerRight' ? 5 : 18};
   overflow: hidden;
   background-color: ${props =>
     props.isUser ? currentUserColor : otherUserColor};
