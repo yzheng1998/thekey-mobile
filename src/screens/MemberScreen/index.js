@@ -35,6 +35,7 @@ export default class MemberScreen extends Component {
           if (loading) return <Text>`Loading...`</Text>
           if (error) return <Text>`Error! ${error.message}`</Text>
           const {
+            id,
             email,
             firstName,
             lastName,
@@ -51,7 +52,8 @@ export default class MemberScreen extends Component {
             workExperiences,
             lookingFor,
             skills,
-            friends, // will do Mutual Friends later on
+            mutualFriends,
+            eventsInCommon,
           } = data.user
           const emojiList = preferredWaysToMeet.map(emoji =>
             nodeEmoji.get(emoji.toLowerCase()),
@@ -59,10 +61,11 @@ export default class MemberScreen extends Component {
           return (
             <ScreenContainer>
               <MyProfilePicBlock
+                id={id}
                 name={`${firstName} ${lastName}`}
                 hometown={demographics.hometown}
                 profilePic={profilePicture || defaultProfilePicture}
-                mutualFriends={friends}
+                mutualFriends={mutualFriends}
                 navigation={this.props.navigation}
               />
               <ButtonRowView
@@ -92,7 +95,10 @@ export default class MemberScreen extends Component {
               <Divider />
               <ExperienceListView experienceData={workExperiences} />
               <SecondaryTitle>Events In Common</SecondaryTitle>
-              <EventsInCommon navigation={this.props.navigation} />
+              <EventsInCommon
+                navigation={this.props.navigation}
+                events={eventsInCommon}
+              />
               <Description
                 row={false}
                 title="Interesting Fact About Me"

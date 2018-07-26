@@ -29,6 +29,7 @@ const SIMILAR_JOBS = gql`
       tags {
         name
       }
+      isInterested
     }
   }
 `

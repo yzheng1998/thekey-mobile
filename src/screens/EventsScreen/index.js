@@ -28,6 +28,15 @@ const GET_EVENTS = gql`
       tags {
         name
       }
+      interestedFriends {
+        id
+        firstName
+        profilePicture
+      }
+      company {
+        id
+      }
+      isInterested
     }
   }
 `

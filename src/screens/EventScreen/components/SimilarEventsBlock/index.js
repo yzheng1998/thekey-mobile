@@ -26,6 +26,13 @@ const GET_SIMILAR_EVENTS = gql`
       tags {
         name
       }
+      isInterested
+      interestedFriends {
+        id
+        firstName
+        lastName
+        profilePicture
+      }
     }
   }
 `
@@ -57,8 +64,9 @@ class SimilarEventsBlock extends Component {
                 renderItem={({ item }) => (
                   <EventContainer>
                     <SmallEventCard
+                      isInterested={item.isInterested}
                       navigate={() =>
-                        this.props.navigation.push('Event', { id })
+                        this.props.navigation.push('Event', { id: item.id })
                       }
                       width="350px"
                       event={item}

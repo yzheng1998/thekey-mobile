@@ -8,20 +8,32 @@ import gql from 'graphql-tag'
 const TOGGLE_EVENT_INTEREST = gql`
   mutation toggleInterestInEvent($eventId: ID!) {
     toggleInterestInEvent(eventId: $eventId) {
+      id
       interestedEvent {
         id
+        location
+        dateRange
+        title
+        picture
+        details
+        link
+        price
+        tags {
+          name
+        }
+        isInterested
       }
     }
   }
 `
 export default class EventStarButton extends Component {
   render() {
-    const { onPress, isInterested, id } = this.props
+    const { isInterested, id } = this.props
     const color = isInterested
       ? this.props.startColor || 'white'
       : this.props.endColor || 'white'
     return (
-      <Mutation mutation={TOGGLE_EVENT_INTEREST} variables={{ eventId: id }}>
+      <Mutation mutation={TOGGLE_EVENT_INTEREST} key={id}>
         {(toggleInterestInEvent, { error }) => {
           if (error) {
             return <Text>error</Text>
@@ -30,7 +42,6 @@ export default class EventStarButton extends Component {
             <Button
               onPress={() => {
                 const variables = { eventId: id }
-                onPress()
                 toggleInterestInEvent({ variables })
               }}
             >

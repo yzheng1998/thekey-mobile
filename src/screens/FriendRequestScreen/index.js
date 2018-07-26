@@ -7,13 +7,15 @@ import FriendRequestListItem from './FriendRequestListItem'
 const GET_FRIEND_REQUESTS = gql`
   query viewer {
     viewer {
-      id
-      friendRequests {
+      ... on User {
         id
-        sender {
+        friendRequests {
           id
-          firstName
-          lastName
+          sender {
+            id
+            firstName
+            lastName
+          }
         }
       }
     }

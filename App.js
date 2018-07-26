@@ -5,6 +5,9 @@ import RootNavigator from './src/navigation/RootNavigator'
 import { ThemeProvider } from 'styled-components/native'
 import { client } from './src/apollo'
 import theme from './theme'
+import * as pushNotifications from './src/services/pushNotifications'
+
+pushNotifications.configure()
 
 export default class App extends Component {
   render() {

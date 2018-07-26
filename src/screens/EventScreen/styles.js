@@ -44,16 +44,16 @@ export const ApplyButton = styled.Text`
   font-size: 14px;
   color: white;
 `
-export const BackButtonContainer = styled.TouchableOpacity`
+export const ButtonHeader = styled.View`
   position: absolute;
   top: 50px;
-  left: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 `
-export const StarContainer = styled.TouchableOpacity`
-  position: absolute;
-  top: 50px;
-  right: 20px;
-`
+export const BackButtonContainer = styled.TouchableOpacity``
 export const DescriptionContainer = styled.View`
   align-items: center;
 `

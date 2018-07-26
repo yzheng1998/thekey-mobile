@@ -3,15 +3,15 @@ import styled from 'styled-components'
 export const BlockContainer = styled.View`
   overflow: hidden;
   width: 100%;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
 `
-export const PictureContainer = styled.View`
+export const ContentContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
   padding-bottom: 50px;
 `
+export const PictureContainer = styled.View``
+
 export const SafeView = styled.SafeAreaView`
   align-items: center;
   flex: 1;
@@ -29,4 +29,15 @@ export const Picture = styled.Image`
   border-radius: ${props =>
     props.avatarSize ? props.avatarSize / 2 : 171 / 2};
   aspect-ratio: 1;
+`
+export const MiniQRCode = styled.TouchableHighlight`
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  border-radius: 19px;
+  width: 38px;
+  height: 38px;
+  background-color: white;
+  bottom: 0px;
+  left: 0px;
 `

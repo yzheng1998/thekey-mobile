@@ -38,6 +38,7 @@ export default class ProfileScreen extends Component {
           if (loading) return <Text>`Loading...`</Text>
           if (error) return <Text>`Error! ${error.message}`</Text>
           const {
+            id,
             email,
             firstName,
             lastName,
@@ -78,6 +79,7 @@ export default class ProfileScreen extends Component {
                 name={`${firstName} ${lastName}`}
                 hometown={demographics.hometown}
                 profilePic={profilePicture || defaultProfilePicture}
+                id={id}
                 navigation={this.props.navigation}
               />
               <ButtonRowView

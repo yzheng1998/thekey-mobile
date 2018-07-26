@@ -44,6 +44,24 @@ export const GET_USER = gql`
         lastName
         profilePicture
       }
+      mutualFriends {
+        id
+        firstName
+        lastName
+        profilePicture
+      }
+      eventsInCommon {
+        id
+        title
+        dateRange
+        interestedFriends {
+          id
+          firstName
+          lastName
+          profilePicture
+        }
+        isInterested
+      }
     }
   }
 `

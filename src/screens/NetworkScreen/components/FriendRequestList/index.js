@@ -8,19 +8,21 @@ import { Query } from 'react-apollo'
 const GET_FRIEND_REQUESTS = gql`
   query viewer {
     viewer {
-      id
-      friendRequests {
+      ... on User {
         id
-        sender {
+        friendRequests {
           id
-          firstName
-          lastName
-          profilePicture
+          sender {
+            id
+            firstName
+            lastName
+            profilePicture
+          }
+          recipient {
+            id
+          }
+          status
         }
-        recipient {
-          id
-        }
-        status
       }
     }
   }

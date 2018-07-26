@@ -3,18 +3,18 @@ import {
   Container,
   TagsContainer,
   BackButtonContainer,
-  StarContainer,
+  ButtonHeader,
 } from './styles'
 import EventPictureBlock from './components/EventPictureBlock'
 import AboutBlock from '../../components/AboutBlock'
 import TagLine from '../../components/TagLine'
 import SimilarEventsBlock from './components/SimilarEventsBlock'
 import BackButton from 'react-native-vector-icons/Ionicons'
-import Star from 'react-native-vector-icons/Feather'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { Text } from 'react-native'
 import moment from 'moment'
+import EventStarButton from '../../components/EventStarButton'
 
 const GET_EVENT = gql`
   query event($id: ID!) {
@@ -30,47 +30,16 @@ const GET_EVENT = gql`
       tags {
         name
       }
+      isInterested
+      interestedFriends {
+        id
+        firstName
+        lastName
+        profilePicture
+      }
     }
   }
 `
-const interestedFriends = [
-  {
-    firstName: 'Yuke',
-    id: 1,
-    profilePicture: {
-      uri:
-        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-    },
-  },
-  {
-    firstName: 'Noah',
-    id: 2,
-    profilePicture: {
-      uri: 'https://www.dev.hsa.net/img/team/Noah.jpg',
-    },
-  },
-  {
-    firstName: 'Humprey',
-    id: 3,
-    profilePicture: {
-      uri: 'https://www.dev.hsa.net/img/team/humphrey.JPG',
-    },
-  },
-  {
-    firstName: 'Ivraj',
-    id: 4,
-    profilePicture: {
-      uri: 'https://www.dev.hsa.net/img/team/Ivraj.jpg',
-    },
-  },
-  {
-    firstName: 'Jovi',
-    id: 5,
-    profilePicture: {
-      uri: 'https://www.dev.hsa.net/img/team/Jovin.jpg',
-    },
-  },
-]
 
 function formatTimeStamp(timeStamp) {
   const momentTimeStamp = moment(timeStamp, 'YYYY-MM-DD HH:mm:ss')
@@ -92,12 +61,15 @@ class EventScreen extends Component {
           if (error) return <Text>Error! ${error.message}</Text>
 
           const {
+            id,
             location,
             dateRange,
             title,
             picture,
             details,
             tags,
+            isInterested,
+            interestedFriends,
           } = data.event
           const usableTimeStamp = new Date(dateRange[0])
 
@@ -120,14 +92,14 @@ class EventScreen extends Component {
                 navigation={this.props.navigation}
                 id={this.props.navigation.getParam('id')}
               />
-              <BackButtonContainer
-                onPress={() => this.props.navigation.goBack()}
-              >
-                <BackButton name="ios-arrow-back" size={27} color="white" />
-              </BackButtonContainer>
-              <StarContainer>
-                <Star name="star" size={27} color="white" />
-              </StarContainer>
+              <ButtonHeader>
+                <BackButtonContainer
+                  onPress={() => this.props.navigation.goBack()}
+                >
+                  <BackButton name="ios-arrow-back" size={27} color="white" />
+                </BackButtonContainer>
+                <EventStarButton isInterested={isInterested} id={id} />
+              </ButtonHeader>
             </Container>
           )
         }}
