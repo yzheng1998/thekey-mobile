@@ -6,17 +6,17 @@ import {
   AvatarContainer,
 } from './styles'
 
-const renderConnectionsText = connectionsNum => {
-  if (connectionsNum === 0) {
-    return '0 mutual connections'
-  } else if (connectionsNum === 1) {
+const getConnectionsText = connectionsNum => {
+  if (connectionsNum === 1) {
     return '1 mutual connection'
   }
   return `${connectionsNum} mutual connections`
 }
 
 const ConnectionsText = ({ connectionsNum }) => (
-  <MutualConnections>{renderConnectionsText(connectionsNum)}</MutualConnections>
+  <MutualConnections>
+    {connectionsNum > 0 && getConnectionsText(connectionsNum)}
+  </MutualConnections>
 )
 
 export default class MutualConnectionsRow extends Component {
