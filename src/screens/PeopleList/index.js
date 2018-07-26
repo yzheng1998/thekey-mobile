@@ -35,7 +35,7 @@ class PeopleList extends Component {
         <SearchBar
           updateText={this.updateText}
           searchText={searchText}
-          placeholderText="Search Jobs & Internships"
+          placeholderText="Search people"
         />
         <Divider />
         <Container>

@@ -1,6 +1,8 @@
 import { createStackNavigator } from 'react-navigation'
 import NetworkScreen from '../screens/NetworkScreen'
 import ConversationScreen from '../screens/ConversationScreen'
+import GroupMembersScreen from '../screens/GroupMembersScreen'
+import MemberScreen from '../screens/MemberScreen'
 
 const ChatStack = createStackNavigator(
   {
@@ -12,8 +14,18 @@ const ChatStack = createStackNavigator(
     },
     Conversation: {
       screen: ConversationScreen,
+      navigationOptions: () => ({ header: null }),
+    },
+    GroupMembers: {
+      screen: GroupMembersScreen,
       navigationOptions: () => ({
-        title: 'Message Thread',
+        header: null,
+      }),
+    },
+    Member: {
+      screen: MemberScreen,
+      navigationOptions: () => ({
+        header: null,
       }),
     },
   },

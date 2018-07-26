@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 
-// not sure if this was the best way to get the user id
 export const GET_CHAT_AND_VIEWER = gql`
   query chatAndViewer($chatId: ID!) {
     viewer {
@@ -14,11 +13,17 @@ export const GET_CHAT_AND_VIEWER = gql`
     chat(id: $chatId) {
       participants {
         id
+        firstName
+        lastName
+        profilePicture
       }
       messages {
         id
         sender {
           id
+          firstName
+          lastName
+          profilePicture
         }
         content
       }

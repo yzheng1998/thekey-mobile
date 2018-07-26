@@ -70,11 +70,7 @@ class ChatInbox extends Component {
                   name={this.showParticipantNames(
                     chat.participants.filter(x => x.id !== data.viewer.id),
                   )}
-                  message={
-                    chat.messages.length
-                      ? chat.messages[chat.messages.length - 1].content
-                      : ''
-                  }
+                  message={chat.messages.length ? chat.messages[0].content : ''}
                   profileImage={chat.participants
                     .filter(x => x.id !== data.viewer.id)
                     .map(x => `${x.profilePicture}`)
