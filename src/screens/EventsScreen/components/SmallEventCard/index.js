@@ -28,7 +28,13 @@ export default class SmallEventCard extends Component {
   render() {
     const image =
       'https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg'
-    const { title, id, dateRange, interestedFriends, isInterested } = this.props.event
+    const {
+      title,
+      id,
+      dateRange,
+      interestedFriends,
+      isInterested,
+    } = this.props.event
 
     const usableTimeStamp = new Date(dateRange[0])
     const selectMutualFriends = [...interestedFriends].slice(0, 5)

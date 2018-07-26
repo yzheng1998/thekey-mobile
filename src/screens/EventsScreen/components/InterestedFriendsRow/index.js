@@ -6,19 +6,19 @@ import {
   AvatarContainer,
 } from './styles'
 
-const renderConnectionsText = (connectionsNum, interestedFriends) => {
-  if (connectionsNum === 0) {
-    return '0 interested friends'
-  } else if (connectionsNum === 1) {
+const getConnectionsText = (connectionsNum, interestedFriends) => {
+  if (connectionsNum === 1) {
     return `${interestedFriends[0].firstName} is interested`
   }
   return `${interestedFriends[0].firstName} and ${connectionsNum - 1} friends`
 }
+
 const ConnectionsText = ({ connectionsNum, interestedFriends }) => (
   <InterestedFriendsContainer>
-    {renderConnectionsText(connectionsNum, interestedFriends)}
+    {getConnectionsText(connectionsNum, interestedFriends)}
   </InterestedFriendsContainer>
 )
+
 export default class InterestedFriendsRow extends Component {
   render() {
     const { connectionsNum, interestedFriends, avatarSize } = this.props
@@ -40,10 +40,12 @@ export default class InterestedFriendsRow extends Component {
             />
           ))}
         </AvatarContainer>
-        <ConnectionsText
-          connectionsNum={connectionsNum}
-          interestedFriends={interestedFriends}
-        />
+        {connectionsNum !== 0 && (
+          <ConnectionsText
+            connectionsNum={connectionsNum}
+            interestedFriends={interestedFriends}
+          />
+        )}
       </ConnectionsRowContainer>
     )
   }
