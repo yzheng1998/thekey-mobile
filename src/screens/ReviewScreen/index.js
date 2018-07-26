@@ -24,6 +24,7 @@ const GET_COMPANY_REVIEWS = gql`
         id
       }
       lastWorked
+      createdAt
     }
   }
 `
@@ -81,7 +82,7 @@ export default class ReviewScreen extends Component {
                 renderItem={({ item: review }) => (
                   <ReviewBlock
                     subject={review.title}
-                    date="placeholder date"
+                    date={review.createdAt}
                     rating={review.rating}
                     role={
                       review.current ? 'Current Employee' : 'Former Employee'
