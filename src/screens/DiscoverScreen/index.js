@@ -4,6 +4,7 @@ import DiscoverCard from './components/DiscoverCard'
 import Header from './components/Header'
 import placeholder from '../../../assets/city.png'
 import { AsyncStorage } from 'react-native'
+import PushNotification from 'react-native-push-notification'
 
 class DiscoverScreen extends Component {
   static navigationOptions = {
@@ -18,6 +19,7 @@ class DiscoverScreen extends Component {
   componentDidMount = async () => {
     const firstName = await AsyncStorage.getItem('firstName')
     const profilePicture = await AsyncStorage.getItem('profilePicture')
+    PushNotification.requestPermissions()
     if (firstName) {
       this.setState({ name: firstName })
     }
