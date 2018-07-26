@@ -3,8 +3,6 @@ import { themeGet } from 'styled-system'
 
 export const BackgroundImage = styled.ImageBackground`
   width: 100%;
-  align-items: center;
-  justify-content: center;
 `
 export const Tint = styled.View`
   background-color: rgba(0, 0, 0, 0.4);
