@@ -19,7 +19,11 @@ export default class MyProfilePicBlock extends Component {
           <EventTitleText>{name}</EventTitleText>
           <LocationText>{hometown}</LocationText>
           <Container>
-            <MutualFriends mutualFriends={mutualFriends} avatarSize={26} />
+            <MutualFriends
+              mutualFriends={mutualFriends}
+              avatarSize={26}
+              navigation={this.props.navigation}
+            />
           </Container>
           <EditButton
             activeOpacity={0.5}

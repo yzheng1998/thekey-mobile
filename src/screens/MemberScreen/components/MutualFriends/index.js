@@ -21,7 +21,7 @@ export default class MutualFriends extends Component {
       >
         <AvatarContainer>
           {mutualFriends
-            .slice(0, 4)
+            .slice(0, 3)
             .map(friend => (
               <Avatar
                 avatarSize={avatarSize}
@@ -29,7 +29,7 @@ export default class MutualFriends extends Component {
                 key={friend.id}
               />
             ))}
-          {mutualFriends.length >= 5 && (
+          {mutualFriends.length >= 4 && (
             <Container>
               <Avatar
                 avatarSize={avatarSize}
@@ -39,7 +39,7 @@ export default class MutualFriends extends Component {
                 }}
                 key={Math.random()}
               />
-              <Number>+{mutualFriends.length - 4}</Number>
+              <Number>+{mutualFriends.length - 3}</Number>
             </Container>
           )}
         </AvatarContainer>
