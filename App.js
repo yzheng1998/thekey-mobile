@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-
-import { ApolloProvider } from 'react-apollo'
 import RootNavigator from './src/navigation/RootNavigator'
+import { ApolloProvider } from 'react-apollo'
 import { ThemeProvider } from 'styled-components/native'
 import { client } from './src/apollo'
 import theme from './theme'
