@@ -7,11 +7,11 @@ import EditExperienceBlock from './components/EditExperienceBlock'
 import PickerComponent from '../../components/PickerComponent'
 import EmojiModal from './components/EmojiModal'
 import ProfilePicture from './components/ProfilePicture'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {
   Screen,
   Block,
   BlockTitle,
-  ScreenScroll,
   Divider,
   ColumnContainer,
   LargeInput,
@@ -90,7 +90,7 @@ export default class EditProfileScreen extends Component {
           }
           return (
             <Screen>
-              <ScreenScroll>
+              <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <ProfilePicture
                   profilePicture={profilePicture}
                   defaultProfilePicture={defaultProfilePicture}
@@ -131,7 +131,7 @@ export default class EditProfileScreen extends Component {
                   twitter={twitter}
                   onChangeText={this.updateText}
                 />
-              </ScreenScroll>
+              </KeyboardAwareScrollView>
               {lookingForPickerEnabled && (
                 <PickerComponent
                   options={lookingForOptions}
