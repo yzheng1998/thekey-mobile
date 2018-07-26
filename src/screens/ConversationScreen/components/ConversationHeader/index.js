@@ -12,7 +12,7 @@ import {
 } from './styles'
 import BackArrow from 'react-native-vector-icons/Ionicons'
 import AvatarRow from '../../../MemberScreen/components/MutualFriends'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 
 const getConversationTitle = (participants, userId) => {
   const otherParticipants = participants.filter(p => p.id !== userId)
@@ -33,34 +33,42 @@ const ConversationTitle = ({ participants, userId }) => (
   <Title numberOfLines={1}>{getConversationTitle(participants, userId)}</Title>
 )
 
-const ParticipantPictures = ({ otherParticipants, numberOfPics, navigation }) =>
-  otherParticipants.length > 1 ? (
-    <AvatarRowContainer>
-      <AvatarRow
-        mutualFriends={otherParticipants}
-        avatarSize={26}
-        numberOfPics={numberOfPics}
-        navigation={navigation}
-        navigateTo="GroupMembers"
-      />
-    </AvatarRowContainer>
-  ) : (
-    <AvatarContainer>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('Member', {
-            id: otherParticipants[0].id,
-          })
-        }}
-      >
-        <Avatar
-          source={{
-            uri: otherParticipants[0].profilePicture,
-          }}
+const ParticipantPictures = ({
+  otherParticipants,
+  numberOfPics,
+  navigation,
+}) => (
+  <View>
+    {otherParticipants.length > 1 && (
+      <AvatarRowContainer>
+        <AvatarRow
+          mutualFriends={otherParticipants}
+          avatarSize={26}
+          numberOfPics={numberOfPics}
+          navigation={navigation}
+          navigateTo="GroupMembers"
         />
-      </TouchableOpacity>
-    </AvatarContainer>
-  )
+      </AvatarRowContainer>
+    )}
+    {otherParticipants.length <= 1 && (
+      <AvatarContainer>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Member', {
+              id: otherParticipants[0].id,
+            })
+          }}
+        >
+          <Avatar
+            source={{
+              uri: otherParticipants[0].profilePicture,
+            }}
+          />
+        </TouchableOpacity>
+      </AvatarContainer>
+    )}
+  </View>
+)
 
 export default class ConversationHeader extends Component {
   render() {

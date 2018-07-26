@@ -12,7 +12,6 @@ export const HeaderContainer = styled.View`
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  /* background-color: ${themeGet('colors.background')}; */
   padding-left: 16px;
   position: absolute;
 `
