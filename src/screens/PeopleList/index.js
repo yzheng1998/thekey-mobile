@@ -41,6 +41,12 @@ class PeopleList extends Component {
                   <ListItem
                     name={`${person.firstName} ${person.lastName}`}
                     picture={person.profilePicture}
+                    navigate={id =>
+                      this.props.navigation.navigate('Member', {
+                        id,
+                      })
+                    }
+                    id={person.id}
                   />
                 )}
               />
