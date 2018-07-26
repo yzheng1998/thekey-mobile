@@ -14,6 +14,7 @@ export default class CompanyCard extends Component {
             title,
             rating,
             companyId,
+            picture,
           })
         }
       >
