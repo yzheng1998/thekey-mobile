@@ -3,16 +3,15 @@ import {
   BlockContainer,
   EventTitleText,
   LocationText,
-  EditButton,
-  EditLabel,
   Container,
 } from './styles'
 import PictureHeader from '../../../../components/PictureHeader'
 import MutualFriends from '../MutualFriends'
+import SendFriendRequestButton from '../SendFriendRequestButton'
 
 export default class MyProfilePicBlock extends Component {
   render() {
-    const { profilePic, mutualFriends, name, hometown } = this.props
+    const { profilePic, mutualFriends, name, hometown, id } = this.props
     return (
       <BlockContainer>
         <PictureHeader picture={profilePic} avatarSize={123}>
@@ -21,12 +20,7 @@ export default class MyProfilePicBlock extends Component {
           <Container>
             <MutualFriends mutualFriends={mutualFriends} avatarSize={26} />
           </Container>
-          <EditButton
-            activeOpacity={0.5}
-            onPress={() => this.props.navigation.navigate('EditProfile')}
-          >
-            <EditLabel>CONNECT</EditLabel>
-          </EditButton>
+          <SendFriendRequestButton recipientId={id} swipedLeft={false} />
         </PictureHeader>
       </BlockContainer>
     )

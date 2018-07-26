@@ -35,6 +35,7 @@ export default class MemberScreen extends Component {
           if (loading) return <Text>`Loading...`</Text>
           if (error) return <Text>`Error! ${error.message}`</Text>
           const {
+            id,
             email,
             firstName,
             lastName,
@@ -59,6 +60,7 @@ export default class MemberScreen extends Component {
           return (
             <ScreenContainer>
               <MyProfilePicBlock
+                id={id}
                 name={`${firstName} ${lastName}`}
                 hometown={demographics.hometown}
                 profilePic={profilePicture || defaultProfilePicture}
