@@ -3,19 +3,20 @@ import { FlatList, Modal } from 'react-native'
 import { Container, Divider } from './styles'
 import SearchBar from '../SearchBar'
 import SchoolSearchCard from '../SchoolSearchCard'
-import uuidv4 from 'uuid/v4'
 
-const exampleSchool = {
-  name: 'Harvard University',
-  location: 'Cambridge, Massachusetts',
-}
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
 
-const exampleSchools = [exampleSchool, exampleSchool, exampleSchool]
-
-const schoolsWithIds = exampleSchools.map(school => ({
-  ...school,
-  id: uuidv4(),
-}))
+const GET_SCHOOLS = gql`
+  query schools($substr: String!) {
+    schools(substr: $substr) {
+      id
+      name
+      city
+      state
+    }
+  }
+`
 
 export default class SchoolSearchModal extends Component {
   state = {
@@ -28,6 +29,7 @@ export default class SchoolSearchModal extends Component {
 
   render() {
     const { visible, toggleSchoolModal, toggleEducationModal } = this.props
+    const variables = { substr: this.state.searchText }
     return (
       <Modal
         animationType="slide"
@@ -42,20 +44,24 @@ export default class SchoolSearchModal extends Component {
             placeholderText="Search for a school"
           />
           <Divider />
-          <FlatList
-            keyExtractor={university => university.id}
-            data={schoolsWithIds}
-            renderItem={({ item: university }) => (
-              <SchoolSearchCard
-                schoolId={university.id}
-                updateState={this.props.updateState}
-                navigation={this.props.navigation}
-                toggleSchoolModal={toggleSchoolModal}
-                schoolName={university.name}
-                location={university.location}
+          <Query query={GET_SCHOOLS} variables={variables}>
+            {({ data }) => (
+              <FlatList
+                keyExtractor={university => university.id}
+                data={data.schools}
+                renderItem={({ item: university }) => (
+                  <SchoolSearchCard
+                    schoolId={university.id}
+                    updateState={this.props.updateState}
+                    navigation={this.props.navigation}
+                    toggleSchoolModal={toggleSchoolModal}
+                    schoolName={university.name}
+                    location={`${university.city}, ${university.state}`}
+                  />
+                )}
               />
             )}
-          />
+          </Query>
         </Container>
       </Modal>
     )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { KeyboardAvoidingView, Switch } from 'react-native'
+import { KeyboardAvoidingView, Switch, Keyboard } from 'react-native'
 import {
   ScreenContainer,
   Subtitle,
@@ -68,7 +68,10 @@ export default class AddEducationModal extends Component {
             />
             <RegistrationPicker
               selected={showSchoolTypePicker}
-              onPress={() => this.setState({ showSchoolTypePicker: true })}
+              onPress={() => {
+                Keyboard.dismiss()
+                this.setState({ showSchoolTypePicker: true })
+              }}
               text={schoolType ? findLabel(schoolType) : ''}
               placeholderText="What type of school did you attend?"
             />
