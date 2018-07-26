@@ -11,7 +11,14 @@ import SendFriendRequestButton from '../SendFriendRequestButton'
 
 export default class MyProfilePicBlock extends Component {
   render() {
-    const { profilePic, mutualFriends, name, hometown, id, navigation } = this.props
+    const {
+      profilePic,
+      mutualFriends,
+      name,
+      hometown,
+      id,
+      navigation,
+    } = this.props
     return (
       <BlockContainer>
         <PictureHeader picture={profilePic} avatarSize={123}>
