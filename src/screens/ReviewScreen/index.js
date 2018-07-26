@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import FilterBlock from './components/FilterBlock'
 import ReviewBlock from './components/ReviewBlock'
 import ReviewPictureBlock from './components/ReviewPictureBlock'
-import { Background } from './styles'
+import BackButton from 'react-native-vector-icons/Ionicons'
+import { Background, Header, BackButtonContainer } from './styles'
 import { FlatList, Text } from 'react-native'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -63,6 +64,13 @@ export default class ReviewScreen extends Component {
                 reviews={data.companyReviews.length}
                 navigation={this.props.navigation}
               />
+              <Header>
+                <BackButtonContainer
+                  onPress={() => this.props.navigation.goBack()}
+                >
+                  <BackButton name="ios-arrow-back" size={27} color="white" />
+                </BackButtonContainer>
+              </Header>
               <FilterBlock
                 updateState={this.changeTab}
                 selectedIndex={this.state.tab}
