@@ -32,3 +32,9 @@ export const Description = styled.Text`
   font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.fontDescription.primary')};
 `
+export const Avatar = styled.Image`
+  width: 46px;
+  height: 46px;
+  border-radius: 23px;
+  margin-bottom: 13px;
+`
