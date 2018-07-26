@@ -24,7 +24,7 @@ export default class SocietyCard extends Component {
           name={`${firstName} ${lastName}`}
           hometown={hometown}
         />
-        <TagLine tagData={selectTags} lines={2} />
+        <TagLine tagData={selectTags} />
         <BioText numberOfLines={3}>{bio}</BioText>
         <MutualConnectionsRow
           navigation={this.props.navigation}
