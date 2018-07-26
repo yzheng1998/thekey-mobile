@@ -81,7 +81,12 @@ export default class LargeEventsCard extends Component {
           </ContentContainer>
           {interestedFriends && (
             <InterestedFriendsRow
-              navigation={this.props.navigation}
+              navigate={friends =>
+                this.props.navigation.navigate('PeopleList', {
+                  people: friends,
+                  title: 'Interested Friends',
+                })
+              }
               avatarNum={5}
               avatarSize={30}
               connectionsNum={interestedFriends.length}
