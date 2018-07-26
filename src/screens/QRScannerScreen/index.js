@@ -3,7 +3,6 @@ import { Background, Text, SafeView } from './styles'
 
 export default class QRScannerScreen extends Component {
   render() {
-    const { currentUserId } = this.props
     return (
       <SafeView>
         <Background>

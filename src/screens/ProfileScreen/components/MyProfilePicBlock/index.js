@@ -26,7 +26,7 @@ export default class MyProfilePicBlock extends Component {
   }
 
   render() {
-    const { profilePic, name, hometown, id } = this.props
+    const { profilePic, name, hometown, id, navigation } = this.props
     return (
       <View>
         <Modal
@@ -41,6 +41,7 @@ export default class MyProfilePicBlock extends Component {
                 showQRCodeModal: false,
               })
             }
+            navigate={() => navigation.push('QRScanner', { currentUserId: id })}
           />
         </Modal>
         <BlockContainer>
