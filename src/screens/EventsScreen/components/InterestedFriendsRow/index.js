@@ -21,16 +21,16 @@ const ConnectionsText = ({ connectionsNum, interestedFriends }) => (
 
 export default class InterestedFriendsRow extends Component {
   render() {
-    const { connectionsNum, interestedFriends, avatarSize } = this.props
+    const {
+      connectionsNum,
+      interestedFriends,
+      avatarSize,
+      navigate,
+    } = this.props
+    console.log('interested Friends in row', interestedFriends)
+    console.log('navigate', navigate)
     return (
-      <ConnectionsRowContainer
-        onPress={() =>
-          this.props.navigation.navigate('PeopleList', {
-            people: interestedFriends,
-            title: 'Interested Friends',
-          })
-        }
-      >
+      <ConnectionsRowContainer onPress={() => navigate(interestedFriends)}>
         <AvatarContainer>
           {interestedFriends.map(friend => (
             <Avatar
