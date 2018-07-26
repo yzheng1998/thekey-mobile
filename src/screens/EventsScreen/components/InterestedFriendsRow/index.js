@@ -27,12 +27,11 @@ export default class InterestedFriendsRow extends Component {
       avatarSize,
       navigate,
     } = this.props
-    console.log('interested Friends in row', interestedFriends)
-    console.log('navigate', navigate)
+    const selectInterestedFriends = [...interestedFriends].slice(0, 5)
     return (
       <ConnectionsRowContainer onPress={() => navigate(interestedFriends)}>
         <AvatarContainer>
-          {interestedFriends.map(friend => (
+          {selectInterestedFriends.map(friend => (
             <Avatar
               avatarSize={avatarSize}
               source={{ uri: friend.profilePicture }}
