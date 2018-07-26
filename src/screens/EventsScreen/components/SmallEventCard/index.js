@@ -26,47 +26,15 @@ function formatTimeStamp(timeStamp) {
 
 export default class SmallEventCard extends Component {
   render() {
-    const interestedFriends = [
-      {
-        firstName: 'Yuke',
-        id: 1,
-        profilePicture: {
-          uri:
-            'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-        },
-      },
-      {
-        firstName: 'Noah',
-        id: 2,
-        profilePicture: {
-          uri: 'https://www.dev.hsa.net/img/team/Noah.jpg',
-        },
-      },
-      {
-        firstName: 'Humprey',
-        id: 3,
-        profilePicture: {
-          uri: 'https://www.dev.hsa.net/img/team/humphrey.JPG',
-        },
-      },
-      {
-        firstName: 'Ivraj',
-        id: 4,
-        profilePicture: {
-          uri: 'https://www.dev.hsa.net/img/team/Ivraj.jpg',
-        },
-      },
-      {
-        firstName: 'Jovi',
-        id: 5,
-        profilePicture: {
-          uri: 'https://www.dev.hsa.net/img/team/Jovin.jpg',
-        },
-      },
-    ]
     const image =
       'https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg'
-    const { title, id, dateRange, isInterested } = this.props.event
+    const {
+      title,
+      id,
+      dateRange,
+      interestedFriends,
+      isInterested,
+    } = this.props.event
 
     const usableTimeStamp = new Date(dateRange[0])
     const selectMutualFriends = [...interestedFriends].slice(0, 5)
@@ -91,16 +59,15 @@ export default class SmallEventCard extends Component {
             </RowContainer>
           </ContentContainer>
         </FullContainer>
-        {interestedFriends &&
-          interestedFriends.length > 0 && (
-            <InterestedFriendsRow
-              navigation={this.props.navigate}
-              avatarNum={5}
-              avatarSize={22}
-              connectionsNum={interestedFriends.length}
-              interestedFriends={selectMutualFriends}
-            />
-          )}
+        {interestedFriends && (
+          <InterestedFriendsRow
+            navigation={this.props.navigate}
+            avatarNum={5}
+            avatarSize={22}
+            connectionsNum={interestedFriends.length}
+            interestedFriends={selectMutualFriends}
+          />
+        )}
       </Card>
     )
   }

@@ -27,6 +27,12 @@ const GET_SIMILAR_EVENTS = gql`
         name
       }
       isInterested
+      interestedFriends {
+        id
+        firstName
+        lastName
+        profilePicture
+      }
     }
   }
 `

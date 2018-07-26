@@ -31,47 +31,15 @@ const GET_EVENT = gql`
         name
       }
       isInterested
+      interestedFriends {
+        id
+        firstName
+        lastName
+        profilePicture
+      }
     }
   }
 `
-const interestedFriends = [
-  {
-    firstName: 'Yuke',
-    id: 1,
-    profilePicture: {
-      uri:
-        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
-    },
-  },
-  {
-    firstName: 'Noah',
-    id: 2,
-    profilePicture: {
-      uri: 'https://www.dev.hsa.net/img/team/Noah.jpg',
-    },
-  },
-  {
-    firstName: 'Humprey',
-    id: 3,
-    profilePicture: {
-      uri: 'https://www.dev.hsa.net/img/team/humphrey.JPG',
-    },
-  },
-  {
-    firstName: 'Ivraj',
-    id: 4,
-    profilePicture: {
-      uri: 'https://www.dev.hsa.net/img/team/Ivraj.jpg',
-    },
-  },
-  {
-    firstName: 'Jovi',
-    id: 5,
-    profilePicture: {
-      uri: 'https://www.dev.hsa.net/img/team/Jovin.jpg',
-    },
-  },
-]
 
 function formatTimeStamp(timeStamp) {
   const momentTimeStamp = moment(timeStamp, 'YYYY-MM-DD HH:mm:ss')
@@ -101,6 +69,7 @@ class EventScreen extends Component {
             details,
             tags,
             isInterested,
+            interestedFriends,
           } = data.event
           const usableTimeStamp = new Date(dateRange[0])
 

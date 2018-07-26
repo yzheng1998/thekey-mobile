@@ -3,7 +3,7 @@ import { themeGet } from 'styled-system'
 
 export const ConnectionsRowContainer = styled.TouchableOpacity`
   flex-direction: row;
-  margin-left: 16;
+  margin-left: 5;
   margin-bottom: 19;
 `
 export const InterestedFriendsContainer = styled.Text`
@@ -11,7 +11,7 @@ export const InterestedFriendsContainer = styled.Text`
   line-height: 19;
   font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.fontPrimary')}
-  margin-left: 8;
+  margin-left: 8px;
 `
 export const AvatarContainer = styled.View`
   flex-direction: row;
