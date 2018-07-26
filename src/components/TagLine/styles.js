@@ -2,9 +2,10 @@ import styled from 'styled-components'
 
 export const TagList = styled.View`
   margin: 11px;
-  background-color: rgba(0, 0, 0, 0);
+  width: 100%;
   overflow: hidden;
   flex-wrap: wrap;
   flex-direction: row;
-  height: ${props => (!Number.isNaN(props.height) ? props.height : 85)};
+  max-height: ${props =>
+    !Number.isNaN(props.maxLines) ? props.maxLines * 42.5 : 85};
 `
