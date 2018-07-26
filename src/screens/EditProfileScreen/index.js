@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Text } from 'react-native'
+import { Modal, Text, TouchableOpacity } from 'react-native'
 import EditContactBlock from './components/EditContactBlock'
 import BasicInfoBlock from './components/BasicInfoBlock'
 import EditEducationBlock from './components/EditEducationBlock'
@@ -7,6 +7,7 @@ import EditExperienceBlock from './components/EditExperienceBlock'
 import PickerComponent from '../../components/PickerComponent'
 import EmojiModal from './components/EmojiModal'
 import ProfilePicture from './components/ProfilePicture'
+import InterestsSearchModal from './components/InterestsSearchModal'
 import {
   Screen,
   Block,
@@ -44,10 +45,17 @@ export default class EditProfileScreen extends Component {
   state = {
     lookingForPickerEnabled: false,
     meetByPickerEnabled: false,
+    interestsModalVisible: false,
   }
 
   updateText = obj => {
     this.setState(obj)
+  }
+  openInterestsModal = () => {
+    this.setState({ newChatModalVisible: true })
+  }
+  closeInterestsModal = () => {
+    this.setState({ newChatModalVisible: false })
   }
 
   render() {
@@ -110,6 +118,14 @@ export default class EditProfileScreen extends Component {
                       defaultValue={tags.map(tag => tag.name).toString()}
                       onChangeText={interests => this.setState({ interests })}
                       placeholder="#Medicine #Health #Business #Tech #Venture Capital #Start-up"
+                    />
+                    <TouchableOpacity onPress={() => this.openInterestsModal}>
+                      <Text>Add Interests</Text>
+                    </TouchableOpacity>
+                    <InterestsSearchModal
+                      navigation={this.props.navigation}
+                      visible={this.state.newChatModalVisible}
+                      closeModal={this.closeInterestsModal}
                     />
                   </ColumnContainer>
                 </Block>
