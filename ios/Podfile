@@ -35,6 +35,10 @@ target 'thekeymobile' do
 
   pod 'RNFS', :path => '../node_modules/react-native-fs'
 
+  pod 'FBSDKLoginKit'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKShareKit'
+
   target 'thekeymobileTests' do
     inherit! :search_paths
     # Pods for testing

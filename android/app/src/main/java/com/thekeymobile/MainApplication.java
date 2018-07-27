@@ -3,6 +3,7 @@ package com.thekeymobile;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.rnfs.RNFSPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import net.jodybrewster.linkedinlogin.RNLinkedinLoginPackage;
@@ -31,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new FBSDKPackage(),
             new RNFSPackage(),
             new RNFetchBlobPackage(),
             new RNLinkedinLoginPackage(),

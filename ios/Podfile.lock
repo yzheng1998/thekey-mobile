@@ -6,6 +6,18 @@ PODS:
     - AppCenter/Core
   - AppCenterReactNativeShared (1.5.1):
     - AppCenter/Core (= 1.6.1)
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.9.0)
+  - FBSDKCoreKit (4.34.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.34.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.34.0):
+    - FBSDKCoreKit (~> 4.34.0)
   - QBImagePickerController (3.4.0)
   - React (0.56.0):
     - React/Core (= 0.56.0)
@@ -57,6 +69,9 @@ DEPENDENCIES:
   - AppCenter/Analytics (~> 1.6.1)
   - AppCenter/Crashes (~> 1.6.1)
   - AppCenterReactNativeShared (~> 1.5.1)
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - React/Core (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
@@ -79,6 +94,10 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AppCenter
     - AppCenterReactNativeShared
+    - Bolts
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FBSDKShareKit
     - QBImagePickerController
     - RSKImageCropper
 
@@ -99,6 +118,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AppCenter: f9eb653a45cece34549232f295aec05260dfc24f
   AppCenterReactNativeShared: 5b40dc5bbaf891697d1982e0ae0e9b1120dd4274
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  FBSDKCoreKit: 0ff57f093b85c8c9d5aba697d3edf68a8960ce78
+  FBSDKLoginKit: 8c78f57a145afb756e4755e69195ebe08a42466e
+  FBSDKShareKit: 511d1dfc71204c0a8d69e6c5e3c964dcf0d4f3d9
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
   react-native-document-picker: e7934f6a3c898a1b62fa68b1f09371beef6ac51a
@@ -108,6 +131,6 @@ SPEC CHECKSUMS:
   RSKImageCropper: 0d0c6d8525a2381f03fde32a47c6703817a2feed
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 1920a81a0139f67c7fda200ff91474ec2ca9dd75
+PODFILE CHECKSUM: 53bc7940a81f874678e4eb549ee7a8d45f0f364a
 
 COCOAPODS: 1.5.3
