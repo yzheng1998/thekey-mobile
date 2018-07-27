@@ -15,9 +15,7 @@ const GET_COMPANIES = gql`
       about
       rating
       profilePicture
-      reviews {
-        id
-      }
+      reviewCount
     }
   }
 `
@@ -69,7 +67,7 @@ class ReviewsScreen extends Component {
                     companyId={item.id}
                     picture={item.profilePicture}
                     navigation={this.props.navigation}
-                    numReviews={item.reviews.length}
+                    numReviews={item.reviewCount}
                   />
                 )}
               />

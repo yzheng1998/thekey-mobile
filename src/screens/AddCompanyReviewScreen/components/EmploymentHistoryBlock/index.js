@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
-import { Buttons, StarsContainer, SubBlock, SpacedHeading } from './styles'
+import {
+  Buttons,
+  StarsContainer,
+  SubBlock,
+  SpacedHeading,
+  Avatar,
+} from './styles'
 import {
   BlockBackground,
   Block,
   Heading,
-  Image,
   InputField,
   RowHeader,
   Text,
@@ -66,6 +71,7 @@ export default class EmploymentHistoryBlock extends Component {
       companyName,
       onChangeCompanyText,
       handleEnablePicker,
+      companyPicture,
     } = this.props
     const employmentTypes = ['Full-time', 'Part-time', 'Internship']
     return (
@@ -97,10 +103,9 @@ export default class EmploymentHistoryBlock extends Component {
                   onChangeCompanyText(text)
                 }}
               />
-              <Image
+              <Avatar
                 source={{
-                  uri:
-                    'https://facebook.github.io/react-native/docs/assets/favicon.png',
+                  uri: companyPicture,
                 }}
               />
             </RowHeader>

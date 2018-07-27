@@ -60,6 +60,7 @@ export default class ReviewScreen extends Component {
           rating={rating}
           reviews={numReviews}
           navigation={this.props.navigation}
+          companyId={companyId}
         />
         <Header>
           <BackButtonContainer onPress={() => this.props.navigation.goBack()}>

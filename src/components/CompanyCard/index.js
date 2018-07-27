@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { Card, LeftContainer, Title, Avatar } from './styles'
 import Rating from './components/RatingStar'
-import DevLogo from '../../../assets/devlogo.png'
+
+const defaultPicture =
+  'https://images.unsplash.com/photo-1486108334972-f02b6c78ba07?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7b5a12ea524ae41d923b50f2e43f1cb8&auto=format&fit=crop&w=1500&q=80'
 
 export default class CompanyCard extends Component {
   render() {
@@ -25,7 +27,7 @@ export default class CompanyCard extends Component {
           })
         }
       >
-        <Avatar source={picture ? { uri: picture } : DevLogo} />
+        <Avatar source={{ uri: picture || defaultPicture }} />
         <LeftContainer>
           <Title>{title}</Title>
           <Rating rating={rating} />
