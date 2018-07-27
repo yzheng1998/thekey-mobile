@@ -12,7 +12,9 @@ export const Text = styled.Text`
   font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.fontDescription.primary')};
 `
-export const ScrollScreen = styled.ScrollView``
+export const ScrollScreen = styled.ScrollView`
+  margin-bottom: 120px;
+`
 export const InputField = styled.TextInput`
   font-size: 14px;
   color: ${themeGet('colors.fontDescription.primary')};

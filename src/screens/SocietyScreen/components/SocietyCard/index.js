@@ -15,7 +15,6 @@ export default class SocietyCard extends Component {
       bio,
       mutualFriends,
     } = this.props.user
-    const selectMutualFriends = [...mutualFriends].slice(0, 5)
     const selectTags = [...tags].slice(0, 10)
     return (
       <CardContainer>
@@ -30,7 +29,7 @@ export default class SocietyCard extends Component {
           navigation={this.props.navigation}
           avatarSize={28}
           connectionsNum={mutualFriends.length}
-          mutualFriends={selectMutualFriends}
+          mutualFriends={mutualFriends}
         />
       </CardContainer>
     )
