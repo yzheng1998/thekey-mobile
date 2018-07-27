@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { FlatList, ScrollView, Text, View } from 'react-native'
 import { AddReviewButton, Divider } from './styles'
+import { FlatList, ScrollView, Text, View } from 'react-native'
 import CompanyCard from '../../components/CompanyCard'
 import SearchBar from '../../components/SearchBar'
 import ReviewsHeader from './components/ReviewsHeader'
