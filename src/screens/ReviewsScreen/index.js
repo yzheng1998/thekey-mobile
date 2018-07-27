@@ -39,7 +39,7 @@ class ReviewsScreen extends Component {
     const variables = {
       companyFilterInput: {
         name: this.state.searchText,
-        highestRated: false,
+        highestRated: this.state.tab === 1,
       },
     }
     return (
