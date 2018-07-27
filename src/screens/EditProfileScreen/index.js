@@ -115,7 +115,7 @@ export default class EditProfileScreen extends Component {
                     <BlockTitle>My Interests</BlockTitle>
                     <LargeInput
                       multiline
-                      defaultValue={tags.map(tag => tag.name).toString()}
+                      defaultValue={tags.map(tag => tag.name).join(', ')}
                       onChangeText={interests => this.setState({ interests })}
                       placeholder="#Medicine #Health #Business #Tech #Venture Capital #Start-up"
                     />
@@ -126,6 +126,9 @@ export default class EditProfileScreen extends Component {
                       navigation={this.props.navigation}
                       visible={this.state.interestsModalVisible}
                       closeModal={this.closeInterestsModal}
+                      updateInterests={tagArray =>
+                        this.setState({ tags: tagArray })
+                      }
                     />
                   </ColumnContainer>
                 </Block>

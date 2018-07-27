@@ -23,25 +23,17 @@ const SEARCH_TAGS = gql`
   }
 `
 
-const PeopleList = ({ peopleData, addParticipant }) => (
+const InterestList = ({ interestData, addInterest }) => (
   <PeopleListContainer>
     <FlatList
       styles={{ backgroundColor: 'red', flex: 1 }}
-      keyExtractor={person => person.id}
-      data={peopleData}
-      renderItem={({ item: person }) => (
-        <TouchableOpacity>
-          <ListItem
-            onPress={() =>
-              addParticipant(
-                `${person.firstName} ${person.lastName}`,
-                person.id,
-              )
-            }
-            name={`${person.firstName} ${person.lastName}`}
-            picture={person.profilePicture}
-            subtitle={person.demographics.hometown}
-          />
+      keyExtractor={interest => interest.id}
+      data={interestData}
+      renderItem={({ item: interest }) => (
+        <TouchableOpacity
+          onPress={() => addInterest(`${interest.name}`, interest.id)}
+        >
+          <Text> {interest.name}</Text>
         </TouchableOpacity>
       )}
     />
@@ -49,14 +41,11 @@ const PeopleList = ({ peopleData, addParticipant }) => (
 )
 
 export default class InterestsSearchModal extends Component {
-  static navigationOptions = {
-    header: 'Select your interests',
-  }
   state = {
     text: '',
     tags: [],
-    participants: [],
-    newChatButtonDisabled: true,
+    interests: [],
+    doneButtonDisabled: true,
   }
 
   onChangeTags = tags => {
@@ -65,10 +54,10 @@ export default class InterestsSearchModal extends Component {
     } else {
       this.setState({
         tags,
-        participants: this.state.participants.filter(participant =>
-          tags.includes(participant.name),
+        interests: this.state.interests.filter(interest =>
+          tags.includes(interest.name),
         ),
-        newChatButtonDisabled: !(tags.length > 0),
+        doneButtonDisabled: !(tags.length > 0),
       })
     }
   }
@@ -77,16 +66,12 @@ export default class InterestsSearchModal extends Component {
     this.setState({ text: text.trim() })
   }
 
-  setModalVisible(visible) {
-    this.setState({ modalVisible: visible })
-  }
-
-  addParticipant = (name, id) => {
+  addInterest = (name, id) => {
     this.setState({
       tags: [...this.state.tags, name],
       text: '',
-      participants: [...this.state.participants, { id, name }],
-      newChatButtonDisabled: false,
+      interests: [...this.state.interests, { id, name }],
+      doneButtonDisabled: false,
     })
   }
 
@@ -106,7 +91,7 @@ export default class InterestsSearchModal extends Component {
       },
     }
 
-    const { closeModal, ...rest } = this.props
+    const { closeModal, updateInterests, ...rest } = this.props
     const handleCloseModal = () => {
       this.setState({
         text: '',
@@ -115,25 +100,19 @@ export default class InterestsSearchModal extends Component {
       closeModal()
     }
 
-    const participantIds = this.state.participants.map(
-      participant => participant.id,
-    )
+    // const interestIds = this.state.interests.map(interest => interest.id)
+    // const interestNames = this.state.interests.map(interest => interest.name)
     return (
       <Modal animationType="slide" {...rest}>
         <Background>
           <InterestsModalHeader
             handleClose={handleCloseModal}
-            participantIds={participantIds}
-            createNewChat={chatId =>
-              this.props.navigation.navigate('Conversation', {
-                chat: chatId,
-              })
-            }
-            newChatButtonDisabled={this.state.newChatButtonDisabled}
+            interests={this.state.interests} // object
+            updateInterests={updateInterests}
+            doneButtonDisabled={this.state.doneButtonDisabled}
           />
           <ThinDivider />
           <SearchNameContainer>
-            <Text>Your interests: </Text>
             <TagInput
               value={this.state.tags}
               onChange={this.onChangeTags}
@@ -156,9 +135,9 @@ export default class InterestsSearchModal extends Component {
                   return <Text>Error! {error.message}</Text>
                 }
                 return (
-                  <PeopleList
-                    peopleData={data.tags}
-                    addParticipant={this.addParticipant}
+                  <InterestList
+                    interestData={data.tags}
+                    addInterest={this.addInterest}
                   />
                 )
               }}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { TouchableOpacity, Text } from 'react-native'
 import {
   Background,
   Heading,
@@ -12,9 +13,9 @@ export default class InterestsModalHeader extends Component {
   render() {
     const {
       handleClose,
-      participantIds,
-      createNewChat,
-      newChatButtonDisabled,
+      updateInterests,
+      interests,
+      doneButtonDisabled,
     } = this.props
     return (
       <SafeView>
@@ -23,8 +24,18 @@ export default class InterestsModalHeader extends Component {
             <CancelButton onPress={handleClose}>
               <CancelText>Cancel</CancelText>
             </CancelButton>
+            <TouchableOpacity
+              disabled={doneButtonDisabled}
+              onPress={() => {
+                console.log('interests in header', interests)
+                updateInterests(interests)
+                handleClose()
+              }}
+            >
+              <Text>Done</Text>
+            </TouchableOpacity>
           </ButtonContainer>
-          <Heading>New Message</Heading>
+          <Heading>Add Interests</Heading>
         </Background>
       </SafeView>
     )
