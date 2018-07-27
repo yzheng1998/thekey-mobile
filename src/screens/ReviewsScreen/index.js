@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { FlatList, ScrollView, Text } from 'react-native'
-import { Divider } from './styles'
+import { FlatList, ScrollView, Text, View } from 'react-native'
+import { AddReviewButton, Divider } from './styles'
 import CompanyCard from '../../components/CompanyCard'
 import SearchBar from '../../components/SearchBar'
 import ReviewsHeader from './components/ReviewsHeader'
+import Icon from 'react-native-vector-icons/Entypo'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -42,41 +43,46 @@ class ReviewsScreen extends Component {
       },
     }
     return (
-      <ScrollView>
-        <ReviewsHeader
-          navigation={this.props.navigation}
-          selectedIndex={this.state.tab}
-          changeTab={this.changeTab}
-        />
-        <SearchBar
-          updateText={this.updateText}
-          searchText={searchText}
-          placeholderText="Search All Reviews"
-        />
-        <Divider />
-        <Query query={GET_COMPANIES} variables={variables}>
-          {({ loading, error, data }) => {
-            if (loading) return <Text>Loading...</Text>
-            if (error) return <Text>Error! ${error.message}</Text>
-            return (
-              <FlatList
-                keyExtractor={company => company.id}
-                data={data.companies}
-                renderItem={({ item }) => (
-                  <CompanyCard
-                    title={item.name}
-                    rating={item.rating}
-                    companyId={item.id}
-                    picture={item.profilePicture}
-                    navigation={this.props.navigation}
-                    numReviews={item.reviewCount}
-                  />
-                )}
-              />
-            )
-          }}
-        </Query>
-      </ScrollView>
+      <View>
+        <ScrollView>
+          <ReviewsHeader
+            navigation={this.props.navigation}
+            selectedIndex={this.state.tab}
+            changeTab={this.changeTab}
+          />
+          <SearchBar
+            updateText={this.updateText}
+            searchText={searchText}
+            placeholderText="Search All Reviews"
+          />
+          <Divider />
+          <Query query={GET_COMPANIES} variables={variables}>
+            {({ loading, error, data }) => {
+              if (loading) return <Text>Loading...</Text>
+              if (error) return <Text>Error! ${error.message}</Text>
+              return (
+                <FlatList
+                  keyExtractor={company => company.id}
+                  data={data.companies}
+                  renderItem={({ item }) => (
+                    <CompanyCard
+                      title={item.name}
+                      rating={item.rating}
+                      companyId={item.id}
+                      navigation={this.props.navigation}
+                    />
+                  )}
+                />
+              )
+            }}
+          </Query>
+        </ScrollView>
+        <AddReviewButton
+          onPress={() => this.props.navigation.navigate('AddCompanyReview')}
+        >
+          <Icon name="plus" size={18} color="white" />
+        </AddReviewButton>
+      </View>
     )
   }
 }
