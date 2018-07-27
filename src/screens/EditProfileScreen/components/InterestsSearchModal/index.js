@@ -65,12 +65,16 @@ export default class InterestsSearchModal extends Component {
   }
 
   addInterest = (name, id) => {
-    this.setState({
-      tags: [...this.state.tags, name],
-      text: '',
-      interests: [...this.state.interests, { id, name }],
-      doneButtonDisabled: false,
-    })
+    if (this.state.interests.map(interest => interest.name).includes(name)) {
+      this.setState({})
+    } else {
+      this.setState({
+        tags: [...this.state.tags, name],
+        text: '',
+        interests: [...this.state.interests, { id, name }],
+        doneButtonDisabled: false,
+      })
+    }
   }
 
   labelExtractor = tag => tag
