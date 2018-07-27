@@ -9,9 +9,9 @@ import SocietySearchModal from './components/SocietySearchModal'
 
 const { width } = Dimensions.get('window')
 
-const GET_USERS = gql`
-  query users($usersFilterInput: UsersFilterInput!) {
-    users(usersFilterInput: $usersFilterInput) {
+const GET_SOCIETY_USERS = gql`
+  query societyQuery {
+    societyQuery {
       id
       firstName
       lastName
@@ -72,7 +72,7 @@ class SocietyScreen extends Component {
             openModal={this.openSearchModal}
           />
           <CardContainer>
-            <Query query={GET_USERS} variables={{ usersFilterInput: {} }}>
+            <Query query={GET_SOCIETY_USERS}>
               {({ loading, error, data }) => {
                 if (loading) return <Text>`Loading...`</Text>
                 if (error) return <Text>`Error! ${error.message}`</Text>
@@ -81,7 +81,7 @@ class SocietyScreen extends Component {
                     <CardSwiper
                       navigation={this.props.navigation}
                       width={width}
-                      userData={data}
+                      userData={data.societyQuery}
                     />
                   </SwiperContainer>
                 )
