@@ -17,7 +17,6 @@ export default class SocietyCard extends Component {
     } = this.props.user
     const selectMutualFriends = [...mutualFriends].slice(0, 5)
     const selectTags = [...tags].slice(0, 10)
-    const lines = selectTags.length > 4 ? 2 : 1
     return (
       <CardContainer>
         <ProfilePicBlock
@@ -25,7 +24,7 @@ export default class SocietyCard extends Component {
           name={`${firstName} ${lastName}`}
           hometown={hometown}
         />
-        <TagLine tagData={selectTags} lines={lines} />
+        <TagLine tagData={selectTags} />
         <BioText numberOfLines={3}>{bio}</BioText>
         <MutualConnectionsRow
           navigation={this.props.navigation}
