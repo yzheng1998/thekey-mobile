@@ -68,7 +68,6 @@ export default class EmploymentHistoryBlock extends Component {
       handleEnablePicker,
       companyPicture,
     } = this.props
-    console.log('company Name', companyName)
     const employmentTypes = ['Full-time', 'Part-time', 'Internship']
     return (
       <BlockBackground>
