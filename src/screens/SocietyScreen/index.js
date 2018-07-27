@@ -34,6 +34,7 @@ const GET_USERS = gql`
         lastName
       }
       tags {
+        id
         name
       }
     }

@@ -1,15 +1,20 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const Background = styled.View`
-  flex: 1;
+export const BackgroundImage = styled.ImageBackground`
+  width: 100%;
+`
+export const Tint = styled.View`
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+`
+export const SafeView = styled.SafeAreaView`
+  width: 100%;
 `
 export const HeaderBackground = styled.View`
   width: 100%;
   justify-content: flex-start;
   flex-direction: column;
-  background-color: black;
-  padding-top: 40px;
   padding-bottom: 10px;
 `
 export const Title = styled.Text`
@@ -22,14 +27,11 @@ export const Title = styled.Text`
 export const BackButton = styled.TouchableOpacity`
   margin-left: 20px;
 `
-export const Container = styled.View`
-  flex: 1;
-  width: 100%;
-  background-color: ${themeGet('colors.background')};
-`
-
 export const Divider = styled.View`
   width: 100%;
   height: 8px;
   background-color: ${themeGet('colors.divider')};
+`
+export const ScrollScreen = styled.ScrollView`
+  background-color: ${themeGet('colors.background')};
 `

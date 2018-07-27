@@ -11,6 +11,7 @@ export const GET_USER = gql`
         hometown
       }
       tags {
+        id
         name
       }
       bio
@@ -28,7 +29,10 @@ export const GET_USER = gql`
         endYear
       }
       interestingFact
-      preferredWaysToMeet
+      preferredWaysToMeet {
+        id
+        wayToMeet
+      }
       workExperiences {
         id
         employer
@@ -62,6 +66,8 @@ export const GET_USER = gql`
         }
         isInterested
       }
+      isFriend
+      hasFriendRequest
     }
   }
 `

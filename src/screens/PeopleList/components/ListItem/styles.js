@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const Card = styled.View`
+export const Card = styled.TouchableOpacity`
   height: 62px;
   width: 100%;
   background-color: white;

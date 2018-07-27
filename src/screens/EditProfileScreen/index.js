@@ -9,11 +9,11 @@ import EmojiModal from './components/EmojiModal'
 import ProfilePicture from './components/ProfilePicture'
 import InterestsSearchModal from './components/InterestsSearchModal'
 import EditPencil from 'react-native-vector-icons/MaterialIcons'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {
   Screen,
   Block,
   BlockTitle,
-  ScreenScroll,
   Divider,
   ColumnContainer,
   TagText,
@@ -101,7 +101,7 @@ export default class EditProfileScreen extends Component {
           }
           return (
             <Screen>
-              <ScreenScroll>
+              <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <ProfilePicture
                   profilePicture={profilePicture}
                   defaultProfilePicture={defaultProfilePicture}
@@ -152,7 +152,7 @@ export default class EditProfileScreen extends Component {
                   twitter={twitter}
                   onChangeText={this.updateText}
                 />
-              </ScreenScroll>
+              </KeyboardAwareScrollView>
               {lookingForPickerEnabled && (
                 <PickerComponent
                   options={lookingForOptions}

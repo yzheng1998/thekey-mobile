@@ -37,7 +37,6 @@ export default class SmallEventCard extends Component {
     } = this.props.event
 
     const usableTimeStamp = new Date(dateRange[0])
-    const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
       <Card
         width={this.props.width}
@@ -61,11 +60,11 @@ export default class SmallEventCard extends Component {
         </FullContainer>
         {interestedFriends && (
           <InterestedFriendsRow
-            navigation={this.props.navigate}
+            navigate={this.props.navigateToPeopleList}
             avatarNum={5}
             avatarSize={22}
             connectionsNum={interestedFriends.length}
-            interestedFriends={selectMutualFriends}
+            interestedFriends={interestedFriends}
           />
         )}
       </Card>
