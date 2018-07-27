@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, FlatList, Platform, TouchableOpacity } from 'react-native'
+import { Modal, FlatList, Platform } from 'react-native'
 import {
   Background,
   ScrollScreen,
@@ -9,8 +9,8 @@ import {
   ThinDivider,
 } from './styles'
 import TagInput from 'react-native-tag-input'
-import { ListItem } from 'react-native-elements'
-import InterestsModalHeader from '../InterestsModalHeader'
+import InterestCard from './components/InterestCard'
+import InterestsModalHeader from './components/InterestsModalHeader'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -26,15 +26,13 @@ const SEARCH_TAGS = gql`
 const InterestList = ({ interestData, addInterest }) => (
   <PeopleListContainer>
     <FlatList
-      styles={{ backgroundColor: 'red', flex: 1 }}
       keyExtractor={interest => interest.id}
       data={interestData}
       renderItem={({ item: interest }) => (
-        <TouchableOpacity
+        <InterestCard
           onPress={() => addInterest(`${interest.name}`, interest.id)}
-        >
-          <Text> {interest.name}</Text>
-        </TouchableOpacity>
+          title={interest.name}
+        />
       )}
     />
   </PeopleListContainer>
@@ -100,8 +98,6 @@ export default class InterestsSearchModal extends Component {
       closeModal()
     }
 
-    // const interestIds = this.state.interests.map(interest => interest.id)
-    // const interestNames = this.state.interests.map(interest => interest.name)
     return (
       <Modal animationType="slide" {...rest}>
         <Background>

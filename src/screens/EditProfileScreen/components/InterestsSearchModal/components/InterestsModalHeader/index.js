@@ -27,7 +27,6 @@ export default class InterestsModalHeader extends Component {
             <TouchableOpacity
               disabled={doneButtonDisabled}
               onPress={() => {
-                console.log('interests in header', interests)
                 updateInterests(interests)
                 handleClose()
               }}
