@@ -75,6 +75,8 @@ export default class AddCompanyReviewScreen extends Component {
   }
   render() {
     const companyId = this.props.navigation.getParam('companyId')
+    const companyName = this.props.navigation.getParam('companyName')
+    const companyPicture = this.props.navigation.getParam('picture')
     return (
       <Background>
         <SafeView>
@@ -86,10 +88,11 @@ export default class AddCompanyReviewScreen extends Component {
               updateEmploymentType={this.updateEmploymentType}
               isCurrentEmployee={this.state.isCurrentEmployee}
               yearLastWorked={this.state.yearLastWorked}
-              companyName={this.state.companyName}
+              companyName={companyName}
               onChangeCompanyText={this.onChangeCompanyText}
               handleEnablePicker={this.handleEnablePicker}
               handleCheckBox={this.handleCheckBox}
+              companyPicture={companyPicture}
             />
             <Divider />
             <DescriptionBlock

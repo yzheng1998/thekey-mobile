@@ -14,6 +14,7 @@ const GET_COMPANIES = gql`
       email
       about
       rating
+      profilePicture
     }
   }
 `
@@ -64,6 +65,7 @@ class ReviewsScreen extends Component {
                     rating={item.rating}
                     companyId={item.id}
                     navigation={this.props.navigation}
+                    picture={item.profilePicture}
                   />
                 )}
               />

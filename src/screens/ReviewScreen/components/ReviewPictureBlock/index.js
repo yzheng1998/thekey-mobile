@@ -32,6 +32,8 @@ class ReviewPictureBlock extends Component {
             onPress={() =>
               this.props.navigation.navigate('AddCompanyReview', {
                 companyId,
+                picture,
+                companyName: title,
                 refreshData,
               })
             }

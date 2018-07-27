@@ -66,7 +66,9 @@ export default class EmploymentHistoryBlock extends Component {
       companyName,
       onChangeCompanyText,
       handleEnablePicker,
+      companyPicture,
     } = this.props
+    console.log('company Name', companyName)
     const employmentTypes = ['Full-time', 'Part-time', 'Internship']
     return (
       <BlockBackground>
@@ -99,8 +101,7 @@ export default class EmploymentHistoryBlock extends Component {
               />
               <Image
                 source={{
-                  uri:
-                    'https://facebook.github.io/react-native/docs/assets/favicon.png',
+                  uri: companyPicture,
                 }}
               />
             </RowHeader>
