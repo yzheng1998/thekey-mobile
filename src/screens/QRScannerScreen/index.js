@@ -32,4 +32,3 @@ class QRScannerScreen extends Component {
 }
 
 export default QRScannerScreen
-
