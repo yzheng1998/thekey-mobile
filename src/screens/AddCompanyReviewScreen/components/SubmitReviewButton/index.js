@@ -29,25 +29,61 @@ const ADD_COMPANY_REVIEW = gql`
     }
   }
 `
+
 export default class SubmitReviewButton extends Component {
+  getEmploymentType = selectedIndex => {
+    switch (selectedIndex) {
+      case 0:
+        return 'FULLTIME'
+      case 1:
+        return 'PARTTIME'
+      default:
+        return 'INTERNSHIP'
+    }
+  }
   render() {
     // add validation
+    const {
+      rating,
+      title,
+      pros,
+      cons,
+      current,
+      jobTitle,
+      location,
+      acceptedTerms,
+      companyId,
+    } = this.props
+    console.log('accepted terms', acceptedTerms)
+    const employmentType = this.getEmploymentType(this.props.employmentType)
+    const lastWorked = this.props.lastWorked.toString()
     return (
       <Mutation
         mutation={ADD_COMPANY_REVIEW}
         onCompleted={() => this.props.navigation.goBack()}
       >
-        {(applyToJob, { error }) => {
-          if (error) return <Text>(error.message)</Text>
+        {(addCompanyReview, { error }) => {
+          if (error) return <Text>{error.message}</Text>
           return (
             <SubmitButton
+              disabled={!acceptedTerms}
               onPress={() => {
                 const variables = {
-                  resume: 'resume',
-                  coverLetter: this.props.coverLetter,
-                  jobId: this.props.id,
+                  addCompanyReviewInput: {
+                    rating,
+                    title,
+                    pros,
+                    cons,
+                    employmentType,
+                    current,
+                    jobTitle,
+                    location,
+                    companyId,
+                    lastWorked,
+                  },
                 }
-                applyToJob({ variables })
+                console.log('variables', variables)
+                addCompanyReview({ variables })
               }}
             >
               <SubmitButtonText>SUBMIT REVIEW</SubmitButtonText>
