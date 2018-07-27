@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Text, TouchableOpacity } from 'react-native'
+import { Modal, Text } from 'react-native'
 import EditContactBlock from './components/EditContactBlock'
 import BasicInfoBlock from './components/BasicInfoBlock'
 import EditEducationBlock from './components/EditEducationBlock'
@@ -8,6 +8,7 @@ import PickerComponent from '../../components/PickerComponent'
 import EmojiModal from './components/EmojiModal'
 import ProfilePicture from './components/ProfilePicture'
 import InterestsSearchModal from './components/InterestsSearchModal'
+import EditPencil from 'react-native-vector-icons/MaterialIcons'
 import {
   Screen,
   Block,
@@ -15,7 +16,9 @@ import {
   ScreenScroll,
   Divider,
   ColumnContainer,
-  LargeInput,
+  TagText,
+  EditTagsContainer,
+  EditTagsButton,
 } from './styles'
 
 import nodeEmoji from 'node-emoji'
@@ -113,15 +116,14 @@ export default class EditProfileScreen extends Component {
                 <Block>
                   <ColumnContainer>
                     <BlockTitle>My Interests</BlockTitle>
-                    <LargeInput
-                      multiline
-                      defaultValue={tags.map(tag => tag.name).join(', ')}
-                      onChangeText={interests => this.setState({ interests })}
-                      placeholder="#Medicine #Health #Business #Tech #Venture Capital #Start-up"
-                    />
-                    <TouchableOpacity onPress={this.openInterestsModal}>
-                      <Text>Add Interests</Text>
-                    </TouchableOpacity>
+                    <EditTagsContainer>
+                      <TagText>
+                        {tags.map(tag => `#${tag.name}`).join(' ')}
+                      </TagText>
+                      <EditTagsButton onPress={this.openInterestsModal}>
+                        <EditPencil name="edit" color="black" size={15} />
+                      </EditTagsButton>
+                    </EditTagsContainer>
                     <InterestsSearchModal
                       navigation={this.props.navigation}
                       visible={this.state.interestsModalVisible}
