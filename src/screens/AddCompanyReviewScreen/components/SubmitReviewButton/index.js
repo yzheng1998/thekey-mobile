@@ -29,17 +29,20 @@ const ADD_COMPANY_REVIEW = gql`
     }
   }
 `
-
+const getEmploymentType = selectedIndex => {
+  switch (selectedIndex) {
+    case 0:
+      return 'FULLTIME'
+    case 1:
+      return 'PARTTIME'
+    default:
+      return 'INTERNSHIP'
+  }
+}
 export default class SubmitReviewButton extends Component {
-  getEmploymentType = selectedIndex => {
-    switch (selectedIndex) {
-      case 0:
-        return 'FULLTIME'
-      case 1:
-        return 'PARTTIME'
-      default:
-        return 'INTERNSHIP'
-    }
+  refreshAndGoBack = () => {
+    this.props.refreshData()
+    this.props.navigation.goBack()
   }
   render() {
     // add validation
@@ -54,14 +57,13 @@ export default class SubmitReviewButton extends Component {
       acceptedTerms,
       companyId,
     } = this.props
-    const employmentType = this.getEmploymentType(this.props.employmentType)
+
     const lastWorked = this.props.lastWorked.toString()
+    const employmentType = getEmploymentType(this.props.employmentType)
     return (
       <Mutation
         mutation={ADD_COMPANY_REVIEW}
-        onCompleted={() =>
-          this.props.refreshData() && this.props.navigation.goBack()
-        }
+        onCompleted={this.refreshAndGoBack}
       >
         {(addCompanyReview, { error }) => {
           if (error) return <Text>{error.message}</Text>
