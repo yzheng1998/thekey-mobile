@@ -52,10 +52,10 @@ export default class EditProfileScreen extends Component {
     this.setState(obj)
   }
   openInterestsModal = () => {
-    this.setState({ newChatModalVisible: true })
+    this.setState({ interestsModalVisible: true })
   }
   closeInterestsModal = () => {
-    this.setState({ newChatModalVisible: false })
+    this.setState({ interestsModalVisible: false })
   }
 
   render() {
@@ -119,12 +119,12 @@ export default class EditProfileScreen extends Component {
                       onChangeText={interests => this.setState({ interests })}
                       placeholder="#Medicine #Health #Business #Tech #Venture Capital #Start-up"
                     />
-                    <TouchableOpacity onPress={() => this.openInterestsModal}>
+                    <TouchableOpacity onPress={this.openInterestsModal}>
                       <Text>Add Interests</Text>
                     </TouchableOpacity>
                     <InterestsSearchModal
                       navigation={this.props.navigation}
-                      visible={this.state.newChatModalVisible}
+                      visible={this.state.interestsModalVisible}
                       closeModal={this.closeInterestsModal}
                     />
                   </ColumnContainer>
