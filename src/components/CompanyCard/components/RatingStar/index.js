@@ -16,8 +16,10 @@ export default class RatingStar extends Component {
     return (
       <RatingContainer>
         {stars}
-        <RateText>{roundedRating}</RateText>
-        {!rating && <RateText style={{ fontSize: 14 }}>No Rating</RateText>}
+        {roundedRating > 0 && <RateText>{roundedRating}</RateText>}
+        {!roundedRating && (
+          <RateText style={{ fontSize: 14 }}>No Rating</RateText>
+        )}
       </RatingContainer>
     )
   }

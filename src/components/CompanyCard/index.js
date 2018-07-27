@@ -14,18 +14,21 @@ export default class CompanyCard extends Component {
       companyId,
       navigation,
       numReviews,
+      onPress,
     } = this.props
     return (
       <Card
-        onPress={() =>
-          navigation.navigate('Review', {
-            title,
-            rating,
-            companyId,
-            picture,
-            numReviews,
-          })
-        }
+        onPress={() => {
+          if (onPress) onPress()
+          else
+            navigation.navigate('Review', {
+              title,
+              rating,
+              companyId,
+              picture,
+              numReviews,
+            })
+        }}
       >
         <CompanyPicture
           source={{

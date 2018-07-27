@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { AddReviewButton, Divider } from './styles'
 import { FlatList, ScrollView, Text, View } from 'react-native'
 import CompanyCard from '../../components/CompanyCard'
+import CompanySearchModal from './components/CompanySearchModal'
 import SearchBar from '../../components/SearchBar'
 import ReviewsHeader from './components/ReviewsHeader'
 import Icon from 'react-native-vector-icons/Entypo'
@@ -25,6 +26,7 @@ class ReviewsScreen extends Component {
   state = {
     searchText: '',
     tab: 0,
+    showSearchModal: false,
   }
 
   updateText = searchText => {
@@ -32,6 +34,9 @@ class ReviewsScreen extends Component {
   }
   changeTab = value => {
     this.setState({ tab: value })
+  }
+  toggleSearchModal = () => {
+    this.setState({ showSearchModal: !this.state.showSearchModal })
   }
 
   render() {
@@ -77,11 +82,14 @@ class ReviewsScreen extends Component {
             }}
           </Query>
         </ScrollView>
-        <AddReviewButton
-          onPress={() => this.props.navigation.navigate('AddCompanyReview')}
-        >
+        <AddReviewButton onPress={this.toggleSearchModal}>
           <Icon name="plus" size={18} color="white" />
         </AddReviewButton>
+        <CompanySearchModal
+          navigation={this.props.navigation}
+          closeModal={this.toggleSearchModal}
+          visible={this.state.showSearchModal}
+        />
       </View>
     )
   }
