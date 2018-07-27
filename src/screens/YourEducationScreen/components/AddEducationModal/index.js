@@ -37,7 +37,6 @@ export default class AddEducationModal extends Component {
       endYear,
       isCurrentEmployee,
     } = state
-    console.log(isNaN('12312hey'), isNaN('1'), endYear)
     const toggleSwitch = () => {
       updateText({
         isCurrentEmployee: !isCurrentEmployee,
@@ -52,9 +51,9 @@ export default class AddEducationModal extends Component {
       schoolType &&
       degreeType &&
       major &&
-      !isNaN(startYear) &&
+      !Number.isNaN(startYear) &&
       startYear.length === 4 &&
-      (isCurrentEmployee || (!isNaN(endYear) && endYear.length === 4))
+      (isCurrentEmployee || (!Number.isNaN(endYear) && endYear.length === 4))
     )
     return (
       <RightModal
