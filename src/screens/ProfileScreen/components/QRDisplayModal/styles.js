@@ -14,11 +14,14 @@ export const Container = styled.View`
   width: 100%;
   flex: 1;
 `
-export const QRCodeContainer = styled.TouchableOpacity``
+export const QRCodeContainer = styled.TouchableOpacity`
+  background-color: white;
+  padding: 30px;
+`
 export const SurroundingContainer = styled.TouchableOpacity`
   width: 100%;
   flex: 1;
-  padding-bottom: 200px;
+  padding-bottom: 180px;
   padding-top: 50px;
   justify-content: space-around;
   align-items: center;
