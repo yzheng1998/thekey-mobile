@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, Text } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import {
   Background,
   Heading,
@@ -7,6 +7,7 @@ import {
   CancelButton,
   CancelText,
   SafeView,
+  DoneText,
 } from './styles'
 
 export default class InterestsModalHeader extends Component {
@@ -31,7 +32,7 @@ export default class InterestsModalHeader extends Component {
                 handleClose()
               }}
             >
-              <Text>Done</Text>
+              <DoneText disabled={doneButtonDisabled}>Done</DoneText>
             </TouchableOpacity>
           </ButtonContainer>
           <Heading>Add Interests</Heading>

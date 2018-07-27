@@ -30,3 +30,11 @@ export const Heading = styled.Text`
 export const SafeView = styled.SafeAreaView`
   width: 100%;
 `
+export const DoneText = styled.Text`
+  font-size: 18px;
+  color: ${props =>
+    props.disabled
+      ? themeGet('colors.buttonClicked')
+      : themeGet('colors.buttonPrimary')};
+  font-family: ${themeGet('fonts.medium')};
+`
