@@ -106,13 +106,13 @@ export default class InterestsSearchModal extends Component {
       },
     }
 
-    const { handleClose, ...rest } = this.props
+    const { closeModal, ...rest } = this.props
     const handleCloseModal = () => {
       this.setState({
         text: '',
         users: [],
       })
-      handleClose()
+      closeModal()
     }
 
     const participantIds = this.state.participants.map(
