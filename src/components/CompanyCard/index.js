@@ -5,7 +5,14 @@ import DevLogo from '../../../assets/devlogo.png'
 
 export default class CompanyCard extends Component {
   render() {
-    const { picture, title, rating, companyId, navigation } = this.props
+    const {
+      picture,
+      title,
+      rating,
+      companyId,
+      navigation,
+      numReviews,
+    } = this.props
     return (
       <Card
         onPress={() =>
@@ -14,6 +21,7 @@ export default class CompanyCard extends Component {
             rating,
             companyId,
             picture,
+            numReviews,
           })
         }
       >

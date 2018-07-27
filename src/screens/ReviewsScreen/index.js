@@ -15,6 +15,22 @@ const GET_COMPANIES = gql`
       about
       rating
       profilePicture
+      reviews {
+        id
+        rating
+        title
+        pros
+        cons
+        employmentType
+        current
+        jobTitle
+        location
+        company {
+          id
+        }
+        lastWorked
+        createdAt
+      }
     }
   }
 `
@@ -66,6 +82,7 @@ class ReviewsScreen extends Component {
                     companyId={item.id}
                     picture={item.profilePicture}
                     navigation={this.props.navigation}
+                    numReviews={item.reviews.length}
                   />
                 )}
               />

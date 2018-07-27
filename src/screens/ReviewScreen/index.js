@@ -44,6 +44,7 @@ export default class ReviewScreen extends Component {
       rating,
       companyId,
       picture,
+      numReviews,
     } = this.props.navigation.state.params
     const variables = {
       companyReviewFilterInput: {
@@ -52,30 +53,28 @@ export default class ReviewScreen extends Component {
       },
     }
     return (
-      <Query query={GET_COMPANY_REVIEWS} variables={variables}>
-        {({ loading, error, data }) => {
-          if (loading) return <Text>Loading...</Text>
-          if (error) return <Text>Error! ${error.message}</Text>
-          return (
-            <Background>
-              <ReviewPictureBlock
-                picture={picture}
-                title={title}
-                rating={rating}
-                reviews={data.companyReviews.length}
-                navigation={this.props.navigation}
-              />
-              <Header>
-                <BackButtonContainer
-                  onPress={() => this.props.navigation.goBack()}
-                >
-                  <BackButton name="ios-arrow-back" size={27} color="white" />
-                </BackButtonContainer>
-              </Header>
-              <FilterBlock
-                updateState={this.changeTab}
-                selectedIndex={this.state.tab}
-              />
+      <Background>
+        <ReviewPictureBlock
+          picture={picture}
+          title={title}
+          rating={rating}
+          reviews={numReviews}
+          navigation={this.props.navigation}
+        />
+        <Header>
+          <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
+            <BackButton name="ios-arrow-back" size={27} color="white" />
+          </BackButtonContainer>
+        </Header>
+        <FilterBlock
+          updateState={this.changeTab}
+          selectedIndex={this.state.tab}
+        />
+        <Query query={GET_COMPANY_REVIEWS} variables={variables}>
+          {({ loading, error, data }) => {
+            if (loading) return <Text>Loading...</Text>
+            if (error) return <Text>Error! ${error.message}</Text>
+            return (
               <FlatList
                 keyExtractor={review => review.id}
                 data={data.companyReviews}
@@ -94,10 +93,10 @@ export default class ReviewScreen extends Component {
                   />
                 )}
               />
-            </Background>
-          )
-        }}
-      </Query>
+            )
+          }}
+        </Query>
+      </Background>
     )
   }
 }
