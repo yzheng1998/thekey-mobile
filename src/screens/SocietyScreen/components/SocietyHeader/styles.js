@@ -27,7 +27,7 @@ export const Title = styled.Text`
   font-family: ${themeGet('fonts.heavy')};
   font-size: 34px;
   margin-left: 20px;
-  margin-top: 3px;
+  margin-top: 7px;
   margin-bottom: 10px;
 `
 export const SearchButton = styled.TouchableOpacity``

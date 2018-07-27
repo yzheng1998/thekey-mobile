@@ -8,20 +8,31 @@ import {
 } from './styles'
 
 export default class MutualFriends extends Component {
+  static defaultProps = {
+    numberOfPics: 4,
+    title: 'Mutual Friends',
+    navigateTo: 'PeopleList',
+  }
   render() {
-    const { mutualFriends, avatarSize } = this.props
+    const {
+      mutualFriends,
+      avatarSize,
+      numberOfPics,
+      title,
+      navigateTo,
+    } = this.props
     return (
       <ConnectionsRowContainer
         onPress={() =>
-          this.props.navigation.navigate('PeopleList', {
+          this.props.navigation.navigate(navigateTo, {
             people: mutualFriends,
-            title: 'Mutual Friends',
+            title,
           })
         }
       >
         <AvatarContainer>
           {mutualFriends
-            .slice(0, 4)
+            .slice(0, numberOfPics)
             .map(friend => (
               <Avatar
                 avatarSize={avatarSize}
@@ -29,7 +40,7 @@ export default class MutualFriends extends Component {
                 key={friend.id}
               />
             ))}
-          {mutualFriends.length >= 5 && (
+          {mutualFriends.length > numberOfPics && (
             <Container>
               <Avatar
                 avatarSize={avatarSize}
@@ -39,7 +50,7 @@ export default class MutualFriends extends Component {
                 }}
                 key={Math.random()}
               />
-              <Number>+{mutualFriends.length - 4}</Number>
+              <Number>+{mutualFriends.length - numberOfPics}</Number>
             </Container>
           )}
         </AvatarContainer>

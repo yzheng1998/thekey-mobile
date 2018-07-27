@@ -70,6 +70,12 @@ class SimilarEventsBlock extends Component {
                       }
                       width="350px"
                       event={item}
+                      navigateToPeopleList={interestedFriends =>
+                        this.props.navigation.navigate('PeopleList', {
+                          people: interestedFriends,
+                          title: 'Interested Friends',
+                        })
+                      }
                     />
                   </EventContainer>
                 )}

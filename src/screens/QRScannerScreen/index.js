@@ -1,14 +1,35 @@
 import React, { Component } from 'react'
-import { Background, Text, SafeView } from './styles'
+import { View } from 'react-native'
+import { RNCamera } from 'react-native-camera'
 
-export default class QRScannerScreen extends Component {
+class QRScannerScreen extends Component {
   render() {
     return (
-      <SafeView>
-        <Background>
-          <Text>hi</Text>
-        </Background>
-      </SafeView>
+      <View
+        style={{
+          flex: 1,
+          flexDirection: 'row',
+        }}
+      >
+        <RNCamera
+          barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
+          flashMode={RNCamera.Constants.FlashMode.on}
+          style={{
+            flex: 1,
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+          }}
+          onBarCodeRead={qrCode => {
+            this.props.sendFriendRequest(qrCode.data)
+          }}
+          ref={cam => {
+            this.camera = cam
+          }}
+        />
+      </View>
     )
   }
 }
+
+export default QRScannerScreen
+

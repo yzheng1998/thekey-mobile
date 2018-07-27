@@ -3,30 +3,44 @@ import {
   BlockContainer,
   EventTitleText,
   LocationText,
-  EditButton,
-  EditLabel,
   Container,
 } from './styles'
 import PictureHeader from '../../../../components/PictureHeader'
 import MutualFriends from '../MutualFriends'
+import SendFriendRequestButton from '../SendFriendRequestButton'
 
 export default class MyProfilePicBlock extends Component {
   render() {
-    const { profilePic, mutualFriends, name, hometown } = this.props
+    const {
+      profilePic,
+      mutualFriends,
+      name,
+      hometown,
+      id,
+      navigation,
+      isFriend,
+      hasFriendRequest,
+      refreshScreen,
+    } = this.props
     return (
       <BlockContainer>
         <PictureHeader picture={profilePic} avatarSize={123}>
           <EventTitleText>{name}</EventTitleText>
           <LocationText>{hometown}</LocationText>
           <Container>
-            <MutualFriends mutualFriends={mutualFriends} avatarSize={26} />
+            <MutualFriends
+              mutualFriends={mutualFriends}
+              avatarSize={26}
+              navigation={navigation}
+            />
           </Container>
-          <EditButton
-            activeOpacity={0.5}
-            onPress={() => this.props.navigation.navigate('EditProfile')}
-          >
-            <EditLabel>CONNECT</EditLabel>
-          </EditButton>
+          <SendFriendRequestButton
+            isFriend={isFriend}
+            hasFriendRequest={hasFriendRequest}
+            recipientId={id}
+            swipedLeft={false}
+            refreshScreen={refreshScreen}
+          />
         </PictureHeader>
       </BlockContainer>
     )

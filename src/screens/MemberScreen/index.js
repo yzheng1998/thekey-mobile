@@ -31,10 +31,11 @@ export default class MemberScreen extends Component {
         query={GET_USER}
         variables={{ id: this.props.navigation.getParam('id') }}
       >
-        {({ loading, error, data }) => {
+        {({ loading, error, data, refetch }) => {
           if (loading) return <Text>`Loading...`</Text>
           if (error) return <Text>`Error! ${error.message}`</Text>
           const {
+            id,
             email,
             firstName,
             lastName,
@@ -51,19 +52,26 @@ export default class MemberScreen extends Component {
             workExperiences,
             lookingFor,
             skills,
-            friends, // will do Mutual Friends later on
+            mutualFriends,
+            eventsInCommon,
+            isFriend,
+            hasFriendRequest,
           } = data.user
           const emojiList = preferredWaysToMeet.map(emoji =>
-            nodeEmoji.get(emoji.toLowerCase()),
+            nodeEmoji.get(emoji.wayToMeet.toLowerCase()),
           )
           return (
             <ScreenContainer>
               <MyProfilePicBlock
+                id={id}
                 name={`${firstName} ${lastName}`}
                 hometown={demographics.hometown}
                 profilePic={profilePicture || defaultProfilePicture}
-                mutualFriends={friends}
+                mutualFriends={mutualFriends}
                 navigation={this.props.navigation}
+                isFriend={isFriend}
+                hasFriendRequest={hasFriendRequest}
+                refreshScreen={refetch}
               />
               <ButtonRowView
                 goBack={() => this.props.navigation.goBack()}
@@ -92,7 +100,10 @@ export default class MemberScreen extends Component {
               <Divider />
               <ExperienceListView experienceData={workExperiences} />
               <SecondaryTitle>Events In Common</SecondaryTitle>
-              <EventsInCommon navigation={this.props.navigation} />
+              <EventsInCommon
+                navigation={this.props.navigation}
+                events={eventsInCommon}
+              />
               <Description
                 row={false}
                 title="Interesting Fact About Me"
