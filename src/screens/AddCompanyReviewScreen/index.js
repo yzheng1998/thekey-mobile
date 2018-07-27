@@ -119,8 +119,10 @@ export default class AddCompanyReviewScreen extends Component {
               current={this.state.isCurrentEmployee}
               jobTitle={this.state.jobTitle}
               location={this.state.location}
+              acceptedTerms={this.state.acceptedTerms}
               companyId={companyId}
               lastWorked={this.state.yearLastWorked}
+              navigation={this.props.navigation}
             />
           </ScreenScroll>
         </SafeView>
