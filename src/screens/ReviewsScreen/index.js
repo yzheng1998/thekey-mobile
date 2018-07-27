@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { FlatList, ScrollView, Text } from 'react-native'
+import { Divider } from './styles'
 import CompanyCard from '../../components/CompanyCard'
 import SearchBar from '../../components/SearchBar'
 import ReviewsHeader from './components/ReviewsHeader'
@@ -52,6 +53,7 @@ class ReviewsScreen extends Component {
           searchText={searchText}
           placeholderText="Search All Reviews"
         />
+        <Divider />
         <Query query={GET_COMPANIES} variables={variables}>
           {({ loading, error, data }) => {
             if (loading) return <Text>Loading...</Text>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, LeftContainer, Title, Avatar } from './styles'
+import { Card, RightContainer, Title, CompanyPicture } from './styles'
 import Rating from './components/RatingStar'
 
 const defaultPicture =
@@ -27,11 +27,15 @@ export default class CompanyCard extends Component {
           })
         }
       >
-        <Avatar source={{ uri: picture || defaultPicture }} />
-        <LeftContainer>
+        <CompanyPicture
+          source={{
+            uri: picture || defaultPicture,
+          }}
+        />
+        <RightContainer>
           <Title>{title}</Title>
           <Rating rating={rating} />
-        </LeftContainer>
+        </RightContainer>
       </Card>
     )
   }
