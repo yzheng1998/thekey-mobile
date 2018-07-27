@@ -27,7 +27,7 @@ export default class CardSwiper extends Component {
               const renderUser = {
                 ...item,
                 hometown: item.demographics.hometown,
-                mutualFriends: item.friends,
+                mutualFriends: item.mutualFriends,
               }
               return (
                 <SocietyCard

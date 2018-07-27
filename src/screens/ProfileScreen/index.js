@@ -57,7 +57,7 @@ export default class ProfileScreen extends Component {
             skills,
           } = data.viewer
           const emojiList = preferredWaysToMeet.map(emoji =>
-            nodeEmoji.get(emoji.toLowerCase()),
+            nodeEmoji.get(emoji.wayToMeet.toLowerCase()),
           )
           return (
             <ScreenContainer>

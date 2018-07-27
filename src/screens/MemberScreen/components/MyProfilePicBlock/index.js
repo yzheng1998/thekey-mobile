@@ -11,7 +11,17 @@ import SendFriendRequestButton from '../SendFriendRequestButton'
 
 export default class MyProfilePicBlock extends Component {
   render() {
-    const { profilePic, mutualFriends, name, hometown, id } = this.props
+    const {
+      profilePic,
+      mutualFriends,
+      name,
+      hometown,
+      id,
+      navigation,
+      isFriend,
+      hasFriendRequest,
+      refreshScreen,
+    } = this.props
     return (
       <BlockContainer>
         <PictureHeader picture={profilePic} avatarSize={123}>
@@ -21,10 +31,16 @@ export default class MyProfilePicBlock extends Component {
             <MutualFriends
               mutualFriends={mutualFriends}
               avatarSize={26}
-              navigation={this.props.navigation}
+              navigation={navigation}
             />
           </Container>
-          <SendFriendRequestButton recipientId={id} swipedLeft={false} />
+          <SendFriendRequestButton
+            isFriend={isFriend}
+            hasFriendRequest={hasFriendRequest}
+            recipientId={id}
+            swipedLeft={false}
+            refreshScreen={refreshScreen}
+          />
         </PictureHeader>
       </BlockContainer>
     )

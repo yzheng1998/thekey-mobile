@@ -31,7 +31,7 @@ export default class MemberScreen extends Component {
         query={GET_USER}
         variables={{ id: this.props.navigation.getParam('id') }}
       >
-        {({ loading, error, data }) => {
+        {({ loading, error, data, refetch }) => {
           if (loading) return <Text>`Loading...`</Text>
           if (error) return <Text>`Error! ${error.message}`</Text>
           const {
@@ -54,9 +54,11 @@ export default class MemberScreen extends Component {
             skills,
             mutualFriends,
             eventsInCommon,
+            isFriend,
+            hasFriendRequest,
           } = data.user
           const emojiList = preferredWaysToMeet.map(emoji =>
-            nodeEmoji.get(emoji.toLowerCase()),
+            nodeEmoji.get(emoji.wayToMeet.toLowerCase()),
           )
           return (
             <ScreenContainer>
@@ -67,6 +69,9 @@ export default class MemberScreen extends Component {
                 profilePic={profilePicture || defaultProfilePicture}
                 mutualFriends={mutualFriends}
                 navigation={this.props.navigation}
+                isFriend={isFriend}
+                hasFriendRequest={hasFriendRequest}
+                refreshScreen={refetch}
               />
               <ButtonRowView
                 goBack={() => this.props.navigation.goBack()}
