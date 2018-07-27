@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { SubmitButton, SubmitButtonText } from './styles'
+import { Text } from 'react-native'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 
@@ -32,9 +33,28 @@ export default class SubmitReviewButton extends Component {
   render() {
     // add validation
     return (
-      <SubmitButton>
-        <SubmitButtonText>SUBMIT REVIEW</SubmitButtonText>
-      </SubmitButton>
+      <Mutation
+        mutation={ADD_COMPANY_REVIEW}
+        onCompleted={() => this.props.navigation.goBack()}
+      >
+        {(applyToJob, { error }) => {
+          if (error) return <Text>(error.message)</Text>
+          return (
+            <SubmitButton
+              onPress={() => {
+                const variables = {
+                  resume: 'resume',
+                  coverLetter: this.props.coverLetter,
+                  jobId: this.props.id,
+                }
+                applyToJob({ variables })
+              }}
+            >
+              <SubmitButtonText>SUBMIT REVIEW</SubmitButtonText>
+            </SubmitButton>
+          )
+        }}
+      </Mutation>
     )
   }
 }

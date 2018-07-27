@@ -64,6 +64,7 @@ export default class ReviewScreen extends Component {
                 rating={rating}
                 reviews={data.companyReviews.length}
                 navigation={this.props.navigation}
+                companyId={companyId}
               />
               <Header>
                 <BackButtonContainer

@@ -74,6 +74,7 @@ export default class AddCompanyReviewScreen extends Component {
     this.setState({ acceptedTerms: !this.state.acceptedTerms })
   }
   render() {
+    const companyId = this.props.navigation.getParam('companyId')
     return (
       <Background>
         <SafeView>
@@ -109,7 +110,18 @@ export default class AddCompanyReviewScreen extends Component {
               acceptedTerms={this.state.acceptedTerms}
               handleAcceptedTerms={this.handleAcceptedTerms}
             />
-            <SubmitReviewButton />
+            <SubmitReviewButton
+              rating={this.state.rating}
+              title={this.state.reviewTitle}
+              pros={this.state.reviewPros}
+              cons={this.state.reviewCons}
+              employmentType={this.employmentType}
+              current={this.state.isCurrentEmployee}
+              jobTitle={this.state.jobTitle}
+              location={this.state.location}
+              companyId={companyId}
+              lastWorked={this.state.yearLastWorked}
+            />
           </ScreenScroll>
         </SafeView>
         {this.state.yearPickerEnabled && (
