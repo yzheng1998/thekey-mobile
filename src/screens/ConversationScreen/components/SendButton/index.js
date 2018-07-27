@@ -12,6 +12,9 @@ const SEND_MESSAGE = gql`
         content
         sender {
           id
+          firstName
+          lastName
+          profilePicture
         }
         id
       }

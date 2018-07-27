@@ -31,6 +31,7 @@ const GET_EVENTS = gql`
       interestedFriends {
         id
         firstName
+        lastName
         profilePicture
       }
       company {
@@ -134,6 +135,12 @@ class EventsScreen extends Component {
                           this.props.navigation.navigate('Event', { id })
                         }
                         event={item}
+                        navigateToPeopleList={friends =>
+                          this.props.navigation.navigate('PeopleList', {
+                            people: friends,
+                            title: 'Interested Friends',
+                          })
+                        }
                       />
                     </SmallCardContainer>
                   )}
