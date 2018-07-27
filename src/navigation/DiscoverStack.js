@@ -20,6 +20,7 @@ import EditProfileScreen from '../screens/EditProfileScreen'
 import AddEducationForm from '../screens/EditProfileScreen/components/AddEducationForm'
 import AddExperienceForm from '../screens/EditProfileScreen/components/AddExperienceForm'
 import AddCompanyReviewScreen from '../screens/AddCompanyReviewScreen'
+import QRScannerScreen from '../screens/QRScannerScreen'
 
 const DiscoverStack = createStackNavigator(
   {
@@ -142,6 +143,12 @@ const DiscoverStack = createStackNavigator(
     },
     PeopleList: {
       screen: PeopleList,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    QRScanner: {
+      screen: QRScannerScreen,
       navigationOptions: () => ({
         header: null,
       }),

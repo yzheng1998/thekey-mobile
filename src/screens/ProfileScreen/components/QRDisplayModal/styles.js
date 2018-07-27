@@ -13,33 +13,32 @@ export const SafeView = styled.SafeAreaView`
 export const Container = styled.View`
   width: 100%;
   flex: 1;
-  justify-content: center;
-  align-items: center;
 `
-export const HeaderContainer = styled.View`
-  width: 100%;
-  height: 65px;
-  padding: 10px;
-  padding-top: 15px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+export const QRCodeContainer = styled.TouchableOpacity`
+  background-color: white;
+  padding: 30px;
 `
-export const CancelButton = styled.TouchableOpacity``
-export const CancelText = styled.Text`
-  font-size: 18px;
-  color: ${themeGet('colors.buttonPrimary')};
-  font-family: ${themeGet('fonts.medium')};
-`
-export const Heading = styled.Text`
-  font-size: 18px;
-  color: ${themeGet('colors.fontPrimary')};
-  font-family: ${themeGet('fonts.bold')};
-`
-export const QRCodeContainer = styled.TouchableOpacity``
 export const SurroundingContainer = styled.TouchableOpacity`
   width: 100%;
   flex: 1;
+  padding-bottom: 180px;
+  padding-top: 50px;
+  justify-content: space-around;
+  align-items: center;
+`
+export const ScannerText = styled.Text`
+  font-size: 17px;
+  font-family: ${themeGet('fonts.light')};
+  color: ${themeGet('colors.fontPrimary')};
+  margin-top: 4;
+`
+export const ScannerButtonContainer = styled.View`
   justify-content: center;
   align-items: center;
+`
+export const Button = styled.TouchableOpacity``
+export const ScanImage = styled.Image`
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
 `
