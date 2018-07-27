@@ -2,18 +2,31 @@ import React, { Component } from 'react'
 import { Container, Title, TitleContainer, DismissButton } from './styles'
 import SettingsGear from 'react-native-vector-icons/Feather'
 import DownArrow from 'react-native-vector-icons/EvilIcons'
+import BackButton from '../../../../components/BackButtonRelative'
 
-export default class SettingsMenu extends Component {
+export default class SettingsHeader extends Component {
   render() {
+    const { settingsMain, title, hideSettings, onPress } = this.props
     return (
       <Container>
         <TitleContainer>
-          <SettingsGear name="settings" color="black" size={25} />
-          <Title>Settings</Title>
+          {settingsMain && (
+            <SettingsGear name="settings" color="black" size={25} />
+          )}
+          <Title>{title}</Title>
         </TitleContainer>
-        <DismissButton onPress={this.props.hideSettings}>
-          <DownArrow name="chevron-down" color="rgb(176,186,200)" size={40} />
-        </DismissButton>
+        {settingsMain && (
+          <DismissButton onPress={hideSettings}>
+            <DownArrow name="chevron-down" color="rgb(176,186,200)" size={40} />
+          </DismissButton>
+        )}
+        {!settingsMain && (
+          <BackButton
+            color="rgb(176,186,200)"
+            size={25}
+            onBackPress={() => onPress(0)}
+          />
+        )}
       </Container>
     )
   }
