@@ -12,7 +12,14 @@ import RatingStar from '../../../../components/RatingStar'
 
 class ReviewPictureBlock extends Component {
   render() {
-    const { picture, title, rating, reviews, companyId } = this.props
+    const {
+      picture,
+      title,
+      rating,
+      reviews,
+      companyId,
+      refreshData,
+    } = this.props
     return (
       <Container>
         <PictureHeader picture={picture} avatarSize={123}>
@@ -25,6 +32,7 @@ class ReviewPictureBlock extends Component {
             onPress={() =>
               this.props.navigation.navigate('AddCompanyReview', {
                 companyId,
+                refreshData,
               })
             }
           >

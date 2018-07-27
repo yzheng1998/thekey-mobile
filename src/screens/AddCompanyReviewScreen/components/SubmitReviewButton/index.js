@@ -54,13 +54,14 @@ export default class SubmitReviewButton extends Component {
       acceptedTerms,
       companyId,
     } = this.props
-    console.log('accepted terms', acceptedTerms)
     const employmentType = this.getEmploymentType(this.props.employmentType)
     const lastWorked = this.props.lastWorked.toString()
     return (
       <Mutation
         mutation={ADD_COMPANY_REVIEW}
-        onCompleted={() => this.props.navigation.goBack()}
+        onCompleted={() =>
+          this.props.refreshData() && this.props.navigation.goBack()
+        }
       >
         {(addCompanyReview, { error }) => {
           if (error) return <Text>{error.message}</Text>
@@ -82,7 +83,6 @@ export default class SubmitReviewButton extends Component {
                     lastWorked,
                   },
                 }
-                console.log('variables', variables)
                 addCompanyReview({ variables })
               }}
             >

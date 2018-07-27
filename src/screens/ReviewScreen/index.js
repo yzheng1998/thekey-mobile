@@ -53,7 +53,7 @@ export default class ReviewScreen extends Component {
     }
     return (
       <Query query={GET_COMPANY_REVIEWS} variables={variables}>
-        {({ loading, error, data }) => {
+        {({ loading, error, data, refetch }) => {
           if (loading) return <Text>Loading...</Text>
           if (error) return <Text>Error! ${error.message}</Text>
           return (
@@ -65,6 +65,7 @@ export default class ReviewScreen extends Component {
                 reviews={data.companyReviews.length}
                 navigation={this.props.navigation}
                 companyId={companyId}
+                refreshData={refetch}
               />
               <Header>
                 <BackButtonContainer

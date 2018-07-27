@@ -123,6 +123,7 @@ export default class AddCompanyReviewScreen extends Component {
               companyId={companyId}
               lastWorked={this.state.yearLastWorked}
               navigation={this.props.navigation}
+              refreshData={this.props.navigation.getParam('refreshData')}
             />
           </ScreenScroll>
         </SafeView>
