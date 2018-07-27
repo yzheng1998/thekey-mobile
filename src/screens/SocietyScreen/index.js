@@ -72,7 +72,7 @@ class SocietyScreen extends Component {
             openModal={this.openSearchModal}
           />
           <CardContainer>
-            <Query query={GET_SOCIETY_USERS}>
+            <Query query={GET_SOCIETY_USERS} fetchPolicy="network-only">
               {({ loading, error, data }) => {
                 if (loading) return <Text>`Loading...`</Text>
                 if (error) return <Text>`Error! ${error.message}`</Text>
