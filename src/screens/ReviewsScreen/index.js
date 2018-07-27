@@ -17,19 +17,6 @@ const GET_COMPANIES = gql`
       profilePicture
       reviews {
         id
-        rating
-        title
-        pros
-        cons
-        employmentType
-        current
-        jobTitle
-        location
-        company {
-          id
-        }
-        lastWorked
-        createdAt
       }
     }
   }
