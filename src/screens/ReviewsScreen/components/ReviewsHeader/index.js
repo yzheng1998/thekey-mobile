@@ -28,7 +28,7 @@ export default class ReviewsHeader extends Component {
               >
                 <BackArrow name="ios-arrow-back" size={27} color="white" />
               </BackButtonContainer>
-              <Title>Reviews</Title>
+              <Title>Company Reviews</Title>
               <SearchFilterTab
                 options={['All', 'Highest Rated']}
                 selectedColor="white"

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, LeftContainer, Title, Avatar } from './styles'
+import { Card, RightContainer, Title, CompanyPicture } from './styles'
 import Rating from './components/RatingStar'
 
 const defaultPicture =
@@ -14,24 +14,31 @@ export default class CompanyCard extends Component {
       companyId,
       navigation,
       numReviews,
+      onPress,
     } = this.props
     return (
       <Card
-        onPress={() =>
-          navigation.navigate('Review', {
-            title,
-            rating,
-            companyId,
-            picture,
-            numReviews,
-          })
-        }
+        onPress={() => {
+          if (onPress) onPress()
+          else
+            navigation.navigate('Review', {
+              title,
+              rating,
+              companyId,
+              picture,
+              numReviews,
+            })
+        }}
       >
-        <Avatar source={{ uri: picture || defaultPicture }} />
-        <LeftContainer>
+        <CompanyPicture
+          source={{
+            uri: picture || defaultPicture,
+          }}
+        />
+        <RightContainer>
           <Title>{title}</Title>
           <Rating rating={rating} />
-        </LeftContainer>
+        </RightContainer>
       </Card>
     )
   }
