@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const CardContainer = styled.View`
+export const CardContainer = styled.TouchableOpacity`
   height: 540px;
   border-radius: 20;
   background-color: ${themeGet('colors.background')};

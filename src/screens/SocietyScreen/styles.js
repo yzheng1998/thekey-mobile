@@ -20,3 +20,4 @@ export const SwiperContainer = styled.View`
   align-items: center;
   align-self: center;
 `
+export const CardButton = styled.TouchableOpacity``

@@ -5,8 +5,14 @@ import TagLine from '../../../../components/TagLine'
 import MutualConnectionsRow from '../MutualConnectionsRow'
 
 export default class SocietyCard extends Component {
+  viewMember = memberId => {
+    this.props.navigation.navigate('Member', {
+      id: memberId,
+    })
+  }
   render() {
     const {
+      id,
       profilePicture,
       firstName,
       lastName,
@@ -17,7 +23,7 @@ export default class SocietyCard extends Component {
     } = this.props.user
     const selectTags = [...tags].slice(0, 10)
     return (
-      <CardContainer>
+      <CardContainer activeOpacity={1} onPress={() => this.viewMember(id)}>
         <ProfilePicBlock
           profilePic={profilePicture}
           name={`${firstName} ${lastName}`}

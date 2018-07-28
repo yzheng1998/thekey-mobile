@@ -4,6 +4,7 @@ import { Query } from 'react-apollo'
 import { Dimensions, Text, View } from 'react-native'
 import SocietyHeader from './components/SocietyHeader'
 import CardSwiper from './components/CardSwiper'
+import OutOfMatchesCard from './components/OutOfMatchesCard'
 import { SwiperContainer, Background, CardContainer, Screen } from './styles'
 import SocietySearchModal from './components/SocietySearchModal'
 
@@ -78,18 +79,14 @@ class SocietyScreen extends Component {
                 if (error) return <Text>`Error! ${error.message}`</Text>
                 return (
                   <View>
-                    {data.societyQuery.length > 0 && (
-                      <SwiperContainer>
-                        <CardSwiper
-                          navigation={this.props.navigation}
-                          width={width}
-                          userData={data.societyQuery}
-                        />
-                      </SwiperContainer>
-                    )}
-                    {data.societyQuery.length === 0 && (
-                      <Text>You ran out of matches! </Text>
-                    )}
+                    <SwiperContainer>
+                      <CardSwiper
+                        navigation={this.props.navigation}
+                        width={width}
+                        userData={data.societyQuery}
+                      />
+                    </SwiperContainer>
+                    <OutOfMatchesCard navigation={this.props.navigation} />
                   </View>
                 )
               }}
