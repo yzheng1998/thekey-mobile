@@ -11,6 +11,7 @@ export const RatingContainer = styled.View`
 export const RateText = styled.Text`
   color: ${themeGet('colors.buttonPrimary')};
   font-size: 16px;
+  line-height: 19px;
   font-family: ${themeGet('fonts.medium')};
   margin-top: -1px;
 `

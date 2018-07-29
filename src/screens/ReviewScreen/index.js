@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import FilterBlock from './components/FilterBlock'
 import ReviewBlock from './components/ReviewBlock'
 import ReviewPictureBlock from './components/ReviewPictureBlock'
-import { Background } from './styles'
+import BackButton from 'react-native-vector-icons/Ionicons'
+import { Background, Header, BackButtonContainer } from './styles'
 import { FlatList, Text } from 'react-native'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -23,6 +24,7 @@ const GET_COMPANY_REVIEWS = gql`
         id
       }
       lastWorked
+      createdAt
     }
   }
 `
@@ -42,6 +44,7 @@ export default class ReviewScreen extends Component {
       rating,
       companyId,
       picture,
+      numReviews,
     } = this.props.navigation.state.params
     const variables = {
       companyReviewFilterInput: {
@@ -50,30 +53,36 @@ export default class ReviewScreen extends Component {
       },
     }
     return (
-      <Query query={GET_COMPANY_REVIEWS} variables={variables}>
-        {({ loading, error, data }) => {
-          if (loading) return <Text>Loading...</Text>
-          if (error) return <Text>Error! ${error.message}</Text>
-          return (
-            <Background>
-              <ReviewPictureBlock
-                picture={picture}
-                title={title}
-                rating={rating}
-                reviews={data.companyReviews.length}
-                navigation={this.props.navigation}
-              />
-              <FilterBlock
-                updateState={this.changeTab}
-                selectedIndex={this.state.tab}
-              />
+      <Background>
+        <ReviewPictureBlock
+          picture={picture}
+          title={title}
+          rating={rating}
+          reviews={numReviews}
+          navigation={this.props.navigation}
+          companyId={companyId}
+        />
+        <Header>
+          <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
+            <BackButton name="ios-arrow-back" size={27} color="white" />
+          </BackButtonContainer>
+        </Header>
+        <FilterBlock
+          updateState={this.changeTab}
+          selectedIndex={this.state.tab}
+        />
+        <Query query={GET_COMPANY_REVIEWS} variables={variables}>
+          {({ loading, error, data }) => {
+            if (loading) return <Text>Loading...</Text>
+            if (error) return <Text>Error! ${error.message}</Text>
+            return (
               <FlatList
                 keyExtractor={review => review.id}
                 data={data.companyReviews}
                 renderItem={({ item: review }) => (
                   <ReviewBlock
                     subject={review.title}
-                    date="placeholder date"
+                    date={review.createdAt}
                     rating={review.rating}
                     role={
                       review.current ? 'Current Employee' : 'Former Employee'
@@ -85,10 +94,10 @@ export default class ReviewScreen extends Component {
                   />
                 )}
               />
-            </Background>
-          )
-        }}
-      </Query>
+            )
+          }}
+        </Query>
+      </Background>
     )
   }
 }

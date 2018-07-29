@@ -20,5 +20,5 @@ export const TitleContainer = styled.View`
   position: absolute;
 `
 export const DismissButton = styled.TouchableOpacity`
-  width: 50;
+  margin-left: 4px;
 `

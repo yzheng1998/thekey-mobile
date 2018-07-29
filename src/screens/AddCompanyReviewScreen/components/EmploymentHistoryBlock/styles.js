@@ -23,3 +23,8 @@ export const SpacedHeading = styled.Text`
   margin-top: 10px;
   margin-bottom: 10px;
 `
+export const Avatar = styled.Image`
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+`

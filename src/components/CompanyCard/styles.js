@@ -3,24 +3,19 @@ import { themeGet } from 'styled-system'
 
 export const Card = styled.TouchableOpacity`
   width: 100%;
-  height: 100px;
   overflow: hidden;
   background-color: white;
   flex-direction: row;
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-left: 16px;
   align-items: center;
 `
-export const LeftContainer = styled.View`
-  align-items: flex-start;
-  padding-top: 13px;
-  margin-left: 13px;
+export const RightContainer = styled.View`
+  margin-left: 15px;
+  padding-top: 18px;
   border-bottom-width: 1px;
   border-bottom-color: ${themeGet('colors.border')};
   flex: 1;
-  height: 100%;
-  padding-bottom: 5px;
+  padding-bottom: 20px; */
 `
 export const Title = styled.Text`
   font-size: 18px;
@@ -31,4 +26,9 @@ export const Description = styled.Text`
   font-size: 13px;
   font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.fontDescription.primary')};
+`
+export const CompanyPicture = styled.Image`
+  width: 46;
+  height: 46;
+  border-radius: 23;
 `

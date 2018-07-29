@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import { FlatList, ScrollView, Text } from 'react-native'
+import { AddReviewButton, Divider } from './styles'
+import { FlatList, ScrollView, Text, View } from 'react-native'
 import CompanyCard from '../../components/CompanyCard'
+import CompanySearchModal from './components/CompanySearchModal'
 import SearchBar from '../../components/SearchBar'
 import ReviewsHeader from './components/ReviewsHeader'
+import Icon from 'react-native-vector-icons/Entypo'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -14,6 +17,8 @@ const GET_COMPANIES = gql`
       email
       about
       rating
+      profilePicture
+      reviewCount
     }
   }
 `
@@ -21,6 +26,7 @@ class ReviewsScreen extends Component {
   state = {
     searchText: '',
     tab: 0,
+    showSearchModal: false,
   }
 
   updateText = searchText => {
@@ -29,48 +35,62 @@ class ReviewsScreen extends Component {
   changeTab = value => {
     this.setState({ tab: value })
   }
+  toggleSearchModal = () => {
+    this.setState({ showSearchModal: !this.state.showSearchModal })
+  }
 
   render() {
     const { searchText } = this.state
     const variables = {
       companyFilterInput: {
         name: this.state.searchText,
-        highestRated: false,
+        highestRated: this.state.tab === 1,
       },
     }
     return (
-      <ScrollView>
-        <ReviewsHeader
+      <View>
+        <ScrollView>
+          <ReviewsHeader
+            navigation={this.props.navigation}
+            selectedIndex={this.state.tab}
+            changeTab={this.changeTab}
+          />
+          <SearchBar
+            updateText={this.updateText}
+            searchText={searchText}
+            placeholderText="Search All Reviews"
+          />
+          <Divider />
+          <Query query={GET_COMPANIES} variables={variables}>
+            {({ loading, error, data }) => {
+              if (loading) return <Text>Loading...</Text>
+              if (error) return <Text>Error! ${error.message}</Text>
+              return (
+                <FlatList
+                  keyExtractor={company => company.id}
+                  data={data.companies}
+                  renderItem={({ item }) => (
+                    <CompanyCard
+                      title={item.name}
+                      rating={item.rating}
+                      companyId={item.id}
+                      navigation={this.props.navigation}
+                    />
+                  )}
+                />
+              )
+            }}
+          </Query>
+        </ScrollView>
+        <AddReviewButton onPress={this.toggleSearchModal}>
+          <Icon name="plus" size={18} color="white" />
+        </AddReviewButton>
+        <CompanySearchModal
           navigation={this.props.navigation}
-          selectedIndex={this.state.tab}
-          changeTab={this.changeTab}
+          closeModal={this.toggleSearchModal}
+          visible={this.state.showSearchModal}
         />
-        <SearchBar
-          updateText={this.updateText}
-          searchText={searchText}
-          placeholderText="Search All Reviews"
-        />
-        <Query query={GET_COMPANIES} variables={variables}>
-          {({ loading, error, data }) => {
-            if (loading) return <Text>Loading...</Text>
-            if (error) return <Text>Error! ${error.message}</Text>
-            return (
-              <FlatList
-                keyExtractor={company => company.id}
-                data={data.companies}
-                renderItem={({ item }) => (
-                  <CompanyCard
-                    title={item.name}
-                    rating={item.rating}
-                    companyId={item.id}
-                    navigation={this.props.navigation}
-                  />
-                )}
-              />
-            )
-          }}
-        </Query>
-      </ScrollView>
+      </View>
     )
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { KeyboardAvoidingView, Switch } from 'react-native'
+import { KeyboardAvoidingView, Switch, Keyboard } from 'react-native'
 import {
   ScreenContainer,
   Subtitle,
@@ -46,6 +46,15 @@ export default class AddEducationModal extends Component {
     const { showSchoolTypePicker } = this.state
     const findLabel = value =>
       schoolTypeOptions.find(el => el.value === value).label
+    const disabled = !(
+      schoolName &&
+      schoolType &&
+      degreeType &&
+      major &&
+      !Number.isNaN(startYear) &&
+      startYear.length === 4 &&
+      (isCurrentEmployee || (!Number.isNaN(endYear) && endYear.length === 4))
+    )
     return (
       <RightModal
         isVisible={visible}
@@ -68,7 +77,10 @@ export default class AddEducationModal extends Component {
             />
             <RegistrationPicker
               selected={showSchoolTypePicker}
-              onPress={() => this.setState({ showSchoolTypePicker: true })}
+              onPress={() => {
+                Keyboard.dismiss()
+                this.setState({ showSchoolTypePicker: true })
+              }}
               text={schoolType ? findLabel(schoolType) : ''}
               placeholderText="What type of school did you attend?"
             />
@@ -110,6 +122,7 @@ export default class AddEducationModal extends Component {
                 toggleEducationModal()
                 clearState()
               }}
+              disabled={disabled}
             />
           </KeyboardAvoidingView>
           {showSchoolTypePicker && (

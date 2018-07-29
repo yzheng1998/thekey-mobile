@@ -17,4 +17,5 @@ export const BioText = styled.Text`
   color: rgb(69, 77, 88);
   margin-left: 16;
   margin-right: 16;
+  margin-bottom: 7px;
 `

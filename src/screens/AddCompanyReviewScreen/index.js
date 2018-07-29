@@ -74,6 +74,11 @@ export default class AddCompanyReviewScreen extends Component {
     this.setState({ acceptedTerms: !this.state.acceptedTerms })
   }
   render() {
+    const {
+      companyId,
+      companyName,
+      picture,
+    } = this.props.navigation.state.params
     return (
       <Background>
         <SafeView>
@@ -85,10 +90,11 @@ export default class AddCompanyReviewScreen extends Component {
               updateEmploymentType={this.updateEmploymentType}
               isCurrentEmployee={this.state.isCurrentEmployee}
               yearLastWorked={this.state.yearLastWorked}
-              companyName={this.state.companyName}
+              companyName={companyName}
               onChangeCompanyText={this.onChangeCompanyText}
               handleEnablePicker={this.handleEnablePicker}
               handleCheckBox={this.handleCheckBox}
+              companyPicture={picture}
             />
             <Divider />
             <DescriptionBlock
@@ -109,7 +115,20 @@ export default class AddCompanyReviewScreen extends Component {
               acceptedTerms={this.state.acceptedTerms}
               handleAcceptedTerms={this.handleAcceptedTerms}
             />
-            <SubmitReviewButton />
+            <SubmitReviewButton
+              rating={this.state.rating}
+              title={this.state.reviewTitle}
+              pros={this.state.reviewPros}
+              cons={this.state.reviewCons}
+              employmentType={this.employmentType}
+              current={this.state.isCurrentEmployee}
+              jobTitle={this.state.jobTitle}
+              location={this.state.location}
+              acceptedTerms={this.state.acceptedTerms}
+              companyId={companyId}
+              lastWorked={this.state.yearLastWorked}
+              navigation={this.props.navigation}
+            />
           </ScreenScroll>
         </SafeView>
         {this.state.yearPickerEnabled && (

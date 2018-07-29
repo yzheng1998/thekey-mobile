@@ -4,12 +4,15 @@ import { Dimensions } from 'react-native'
 
 const { width } = Dimensions.get('window')
 
-export const Background = styled.View`
+export const Screen = styled.View`
+  flex: 1;
+`
+export const Background = styled.ScrollView`
   background-color: ${themeGet('colors.buttonSecondary')};
   flex: 1;
 `
 export const CardContainer = styled.View`
-  padding-top: 15px;
+  height: 560px;
 `
 export const SwiperContainer = styled.View`
   width: ${width};

@@ -42,6 +42,12 @@ class EventPictureBlock extends Component {
               <Date>{date}</Date>
             </Container>
             <InterestedFriendsRow
+              navigate={interestedFriends =>
+                this.props.navigation.navigate('PeopleList', {
+                  people: interestedFriends,
+                  title: 'Interested Friends',
+                })
+              }
               connectionsNum={connectionsNum}
               interestedFriends={friends}
               avatarSize={26}

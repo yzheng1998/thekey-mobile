@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-import { Dimensions, Text } from 'react-native'
+import { Dimensions, Text, View } from 'react-native'
 import SocietyHeader from './components/SocietyHeader'
 import CardSwiper from './components/CardSwiper'
-import { SwiperContainer, Background, CardContainer } from './styles'
+import { SwiperContainer, Background, CardContainer, Screen } from './styles'
 import SocietySearchModal from './components/SocietySearchModal'
 
 const { width } = Dimensions.get('window')
 
-const GET_USERS = gql`
-  query users($usersFilterInput: UsersFilterInput!) {
-    users(usersFilterInput: $usersFilterInput) {
+const GET_SOCIETY_USERS = gql`
+  query societyQuery {
+    societyQuery {
       id
       firstName
       lastName
@@ -27,7 +27,14 @@ const GET_USERS = gql`
         firstName
         lastName
       }
+      mutualFriends {
+        id
+        profilePicture
+        firstName
+        lastName
+      }
       tags {
+        id
         name
       }
     }
@@ -49,34 +56,47 @@ class SocietyScreen extends Component {
 
   render() {
     return (
-      <Background>
+      <Screen>
         <SocietySearchModal
           navigation={this.props.navigation}
           visible={this.state.searchModalVisible}
           closeModal={this.closeSearchModal}
         />
-        <SocietyHeader
-          navigation={this.props.navigation}
-          openModal={this.openSearchModal}
-        />
-        <CardContainer>
-          <Query query={GET_USERS} variables={{ usersFilterInput: {} }}>
-            {({ loading, error, data }) => {
-              if (loading) return <Text>`Loading...`</Text>
-              if (error) return <Text>`Error! ${error.message}`</Text>
-              return (
-                <SwiperContainer>
-                  <CardSwiper
-                    navigation={this.props.navigation}
-                    width={width}
-                    userData={data}
-                  />
-                </SwiperContainer>
-              )
-            }}
-          </Query>
-        </CardContainer>
-      </Background>
+        <Background
+          snapToAlignment="end"
+          alwaysBounceVertical={false}
+          showVerticalScrollIndicator={false}
+        >
+          <SocietyHeader
+            navigation={this.props.navigation}
+            openModal={this.openSearchModal}
+          />
+          <CardContainer>
+            <Query query={GET_SOCIETY_USERS} fetchPolicy="network-only">
+              {({ loading, error, data }) => {
+                if (loading) return <Text>`Loading...`</Text>
+                if (error) return <Text>`Error! ${error.message}`</Text>
+                return (
+                  <View>
+                    {data.societyQuery.length > 0 && (
+                      <SwiperContainer>
+                        <CardSwiper
+                          navigation={this.props.navigation}
+                          width={width}
+                          userData={data.societyQuery}
+                        />
+                      </SwiperContainer>
+                    )}
+                    {data.societyQuery.length === 0 && (
+                      <Text>You ran out of matches! </Text>
+                    )}
+                  </View>
+                )
+              }}
+            </Query>
+          </CardContainer>
+        </Background>
+      </Screen>
     )
   }
 }

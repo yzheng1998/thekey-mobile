@@ -22,6 +22,12 @@ const SEND_FRIEND_REQUEST = gql`
   }
 `
 
+const determineButtonText = (isFriend, hasFriendRequest) => {
+  if (isFriend) return 'CONNECTED'
+  else if (hasFriendRequest) return 'REQUEST SENT'
+  return 'CONNECT'
+}
+
 export default class SendFriendRequestButton extends Component {
   constructor(props) {
     super(props)
@@ -30,15 +36,22 @@ export default class SendFriendRequestButton extends Component {
     }
   }
   render() {
-    const { recipientId, swipedLeft } = this.props
+    const {
+      recipientId,
+      swipedLeft,
+      isFriend,
+      hasFriendRequest,
+      refreshScreen,
+    } = this.props
     return (
       <Mutation
         mutation={SEND_FRIEND_REQUEST}
-        onCompleted={() => this.setState({ buttonText: 'REQUEST SENT' })}
+        onCompleted={() => refreshScreen()}
       >
         {createFriendRequest => (
           <Button
             activeOpacity={0.5}
+            disabled={isFriend || hasFriendRequest}
             onPress={() => {
               const variables = {
                 recipientId,
@@ -47,7 +60,7 @@ export default class SendFriendRequestButton extends Component {
               createFriendRequest({ variables })
             }}
           >
-            <Label>{this.state.buttonText}</Label>
+            <Label>{determineButtonText(isFriend, hasFriendRequest)}</Label>
           </Button>
         )}
       </Mutation>

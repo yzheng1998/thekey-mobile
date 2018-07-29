@@ -51,7 +51,6 @@ export default class LargeEventsCard extends Component {
       interestedFriends,
       isInterested,
     } = this.props.event
-    const selectMutualFriends = [...interestedFriends].slice(0, 5)
     return (
       <Card
         activeOpacity={0.9}
@@ -81,11 +80,16 @@ export default class LargeEventsCard extends Component {
           </ContentContainer>
           {interestedFriends && (
             <InterestedFriendsRow
-              navigation={this.props.navigation}
+              navigate={friends =>
+                this.props.navigation.navigate('PeopleList', {
+                  people: friends,
+                  title: 'Interested Friends',
+                })
+              }
               avatarNum={5}
               avatarSize={30}
               connectionsNum={interestedFriends.length}
-              interestedFriends={selectMutualFriends}
+              interestedFriends={interestedFriends}
             />
           )}
         </BackgroundImage>
