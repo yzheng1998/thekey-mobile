@@ -1,9 +1,37 @@
 import PushNotification from 'react-native-push-notification'
-import { PushNotificationIOS } from 'react-native'
+import { PushNotificationIOS, Alert } from 'react-native'
+import { client } from '../apollo'
+import gql from 'graphql-tag'
 
 const configure = () => {
   PushNotification.configure({
     onRegister(token) {
+      client
+        .mutate({
+          variables: {
+            registerDeviceInput: {
+              type: token.os.toUpperCase(),
+              deviceId: token.token,
+            },
+          },
+          mutation: gql`
+            mutation registerDevice(
+              $registerDeviceInput: RegisterDeviceInput!
+            ) {
+              registerDevice(registerDeviceInput: $registerDeviceInput) {
+                error {
+                  message
+                }
+              }
+            }
+          `,
+        })
+        .catch(() => {
+          Alert.alert(
+            'Something Went Wrong',
+            'Could not Register for Push Notifications',
+          )
+        })
       return token.length
     },
 
@@ -17,8 +45,8 @@ const configure = () => {
       sound: true,
     },
 
-    popInitialNotification: true,
-    requestPermissions: true,
+    popInitialNotification: false,
+    requestPermissions: false,
   })
 }
 
