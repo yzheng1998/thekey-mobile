@@ -3,9 +3,9 @@ import { Card, Name, Picture } from './styles'
 
 class ListItem extends Component {
   render() {
-    const { name, picture } = this.props
+    const { id, name, picture, navigate } = this.props
     return (
-      <Card>
+      <Card onPress={() => navigate(id)}>
         <Picture source={{ uri: picture }} />
         <Name>{name}</Name>
       </Card>

@@ -21,18 +21,17 @@ const ConnectionsText = ({ connectionsNum, interestedFriends }) => (
 
 export default class InterestedFriendsRow extends Component {
   render() {
-    const { connectionsNum, interestedFriends, avatarSize } = this.props
+    const {
+      connectionsNum,
+      interestedFriends,
+      avatarSize,
+      navigate,
+    } = this.props
+    const selectInterestedFriends = [...interestedFriends].slice(0, 5)
     return (
-      <ConnectionsRowContainer
-        onPress={() =>
-          this.props.navigation.navigate('PeopleList', {
-            people: interestedFriends,
-            title: 'Interested Friends',
-          })
-        }
-      >
+      <ConnectionsRowContainer onPress={() => navigate(interestedFriends)}>
         <AvatarContainer>
-          {interestedFriends.map(friend => (
+          {selectInterestedFriends.map(friend => (
             <Avatar
               avatarSize={avatarSize}
               source={{ uri: friend.profilePicture }}

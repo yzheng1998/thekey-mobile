@@ -7,14 +7,18 @@ import EditExperienceBlock from './components/EditExperienceBlock'
 import PickerComponent from '../../components/PickerComponent'
 import EmojiModal from './components/EmojiModal'
 import ProfilePicture from './components/ProfilePicture'
+import InterestsSearchModal from './components/InterestsSearchModal'
+import EditPencil from 'react-native-vector-icons/MaterialIcons'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {
   Screen,
   Block,
   BlockTitle,
-  ScreenScroll,
   Divider,
   ColumnContainer,
-  LargeInput,
+  TagText,
+  EditTagsContainer,
+  EditTagsButton,
 } from './styles'
 
 import nodeEmoji from 'node-emoji'
@@ -44,10 +48,17 @@ export default class EditProfileScreen extends Component {
   state = {
     lookingForPickerEnabled: false,
     meetByPickerEnabled: false,
+    interestsModalVisible: false,
   }
 
   updateText = obj => {
     this.setState(obj)
+  }
+  openInterestsModal = () => {
+    this.setState({ interestsModalVisible: true })
+  }
+  closeInterestsModal = () => {
+    this.setState({ interestsModalVisible: false })
   }
 
   render() {
@@ -90,7 +101,7 @@ export default class EditProfileScreen extends Component {
           }
           return (
             <Screen>
-              <ScreenScroll>
+              <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <ProfilePicture
                   profilePicture={profilePicture}
                   defaultProfilePicture={defaultProfilePicture}
@@ -105,11 +116,21 @@ export default class EditProfileScreen extends Component {
                 <Block>
                   <ColumnContainer>
                     <BlockTitle>My Interests</BlockTitle>
-                    <LargeInput
-                      multiline
-                      defaultValue={tags.map(tag => tag.name).toString()}
-                      onChangeText={interests => this.setState({ interests })}
-                      placeholder="#Medicine #Health #Business #Tech #Venture Capital #Start-up"
+                    <EditTagsContainer>
+                      <TagText>
+                        {tags.map(tag => `#${tag.name}`).join(' ')}
+                      </TagText>
+                      <EditTagsButton onPress={this.openInterestsModal}>
+                        <EditPencil name="edit" color="black" size={15} />
+                      </EditTagsButton>
+                    </EditTagsContainer>
+                    <InterestsSearchModal
+                      navigation={this.props.navigation}
+                      visible={this.state.interestsModalVisible}
+                      closeModal={this.closeInterestsModal}
+                      updateInterests={tagArray =>
+                        this.setState({ tags: tagArray })
+                      }
                     />
                   </ColumnContainer>
                 </Block>
@@ -131,7 +152,7 @@ export default class EditProfileScreen extends Component {
                   twitter={twitter}
                   onChangeText={this.updateText}
                 />
-              </ScreenScroll>
+              </KeyboardAwareScrollView>
               {lookingForPickerEnabled && (
                 <PickerComponent
                   options={lookingForOptions}

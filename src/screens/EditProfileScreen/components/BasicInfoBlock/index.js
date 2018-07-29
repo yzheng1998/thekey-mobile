@@ -30,7 +30,7 @@ export default class BasicInfoBlock extends Component {
     ).label
 
     const waysToMeetLabels = preferredWaysToMeet.map(
-      el => waysToMeet.find(emoji => emoji.value === el).label,
+      el => waysToMeet.find(emoji => emoji.value === el.wayToMeet).label,
     )
 
     const { onChangeText } = this.props

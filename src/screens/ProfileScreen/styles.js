@@ -29,3 +29,52 @@ export const Title = styled.Text`
   margin-top: 3;
   margin-bottom: 3;
 `
+
+export const SettingsContainer = styled.View`
+  flex: 1;
+  width: 100%;
+  margin-top: 50px;
+`
+export const Menu = styled.View`
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+  background-color: ${themeGet('colors.backgroundSecondary')};
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+`
+export const MenuItemList = styled.ScrollView`
+  width: 100%;
+  height: 100%;
+`
+export const EmailAddress = styled.Text`
+  font-family: ${themeGet('fonts.medium')};
+  font-size: 16px;
+  letter-spacing: -0.1;
+  color: ${themeGet('colors.fontProfileFields')};
+`
+export const CancelMembershipButton = styled.TouchableOpacity`
+  width: 91%;
+  height: 45px;
+  background-color: ${themeGet('colors.buttonPrimary')};
+  border-radius: 8px;
+  margin-top: 8px;
+  margin-bottom: 80px;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+`
+export const ButtonText = styled.Text`
+  font-size: 14px;
+  font-family: ${themeGet('fonts.bold')};
+  color: ${themeGet('colors.fontButtonPrimary')};
+`
+
+export const ModalScreenContainer = styled.View`
+  width: 100%;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 12px;
+  flex: 1;
+  background-color: ${themeGet('colors.background')};
+`

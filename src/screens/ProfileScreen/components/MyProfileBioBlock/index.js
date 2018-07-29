@@ -19,7 +19,7 @@ export default class MyProfile extends Component {
             {this.props.bioText}
           </BioText>
         </TextButton>
-        <TagLine tagData={this.props.tagData} lines={2} />
+        <TagLine tagData={this.props.tagData} />
       </BlockContainer>
     )
   }

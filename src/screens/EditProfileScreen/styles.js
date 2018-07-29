@@ -78,6 +78,11 @@ export const Input = styled.TextInput`
   color: ${themeGet('colors.fontProfileFields')};
 `
 
+export const TagText = styled.Text`
+  font-size: 16px;
+  font-family: ${themeGet('fonts.medium')};
+  color: ${themeGet('colors.fontProfileFields')};
+`
 export const LargeInput = styled.TextInput`
   font-size: 16px;
   font-family: ${themeGet('fonts.medium')};
@@ -89,7 +94,11 @@ export const BlockTitle = styled.Text`
   font-size: 16px;
   font-family: ${themeGet('fonts.bold')};
 `
-
+export const EditTagsContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`
+export const EditTagsButton = styled.TouchableOpacity``
 export const ContactContent = styled.TextInput`
   font-size: 18px;
   font-family: ${themeGet('fonts.light')};

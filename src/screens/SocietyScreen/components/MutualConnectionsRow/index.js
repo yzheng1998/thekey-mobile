@@ -22,6 +22,7 @@ const ConnectionsText = ({ connectionsNum }) => (
 export default class MutualConnectionsRow extends Component {
   render() {
     const { connectionsNum, mutualFriends, avatarSize } = this.props
+    const selectMutualFriends = [...mutualFriends].slice(0, 5)
     return (
       <ConnectionsRowContainer
         onPress={() =>
@@ -32,7 +33,7 @@ export default class MutualConnectionsRow extends Component {
         }
       >
         <AvatarContainer>
-          {mutualFriends.map(friend => (
+          {selectMutualFriends.map(friend => (
             <Avatar
               avatarSize={avatarSize}
               source={{ uri: friend.profilePicture }}

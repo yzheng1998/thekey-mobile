@@ -46,6 +46,15 @@ export default class AddEducationModal extends Component {
     const { showSchoolTypePicker } = this.state
     const findLabel = value =>
       schoolTypeOptions.find(el => el.value === value).label
+    const disabled = !(
+      schoolName &&
+      schoolType &&
+      degreeType &&
+      major &&
+      !Number.isNaN(startYear) &&
+      startYear.length === 4 &&
+      (isCurrentEmployee || (!Number.isNaN(endYear) && endYear.length === 4))
+    )
     return (
       <RightModal
         isVisible={visible}
@@ -113,6 +122,7 @@ export default class AddEducationModal extends Component {
                 toggleEducationModal()
                 clearState()
               }}
+              disabled={disabled}
             />
           </KeyboardAvoidingView>
           {showSchoolTypePicker && (

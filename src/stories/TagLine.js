@@ -99,14 +99,38 @@ const tagData = [
   },
 ]
 
+const tagData2 = [
+  {
+    name: 'Medicine',
+    image: {
+      uri:
+        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+    },
+  },
+  {
+    name: 'Health',
+    image: {
+      uri:
+        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+    },
+  },
+  {
+    name: 'Business',
+    image: {
+      uri:
+        'https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/19095354_1322253334562342_5268478069300274794_o.jpg?_nc_cat=0&oh=5998f02ad58ac913850952492aaa62ba&oe=5BBDE33A',
+    },
+  },
+]
+
 storiesOf('CenteredView')
-  .add('TagLine1', () => (
+  .add('TagLineLong', () => (
     <CenteredView>
-      <TagLine tagData={tagData} lines={2} />
+      <TagLine tagData={tagData} maxNumberOfLines={2} />
     </CenteredView>
   ))
-  .add('TagLine2', () => (
+  .add('TagLineShort', () => (
     <CenteredView>
-      <TagLine tagData={tagData} lines={1} />
+      <TagLine tagData={tagData2} lines={1} />
     </CenteredView>
   ))

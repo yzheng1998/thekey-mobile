@@ -4,10 +4,13 @@ import { TagList } from './styles'
 import hands from './hands.jpg'
 
 export default class TagLine extends Component {
+  static defaultProps = {
+    maxNumberOfLines: 2,
+  }
   render() {
-    const { tagData, lines } = this.props
+    const { tagData, maxNumberOfLines } = this.props
     return (
-      <TagList height={!Number.isNaN(lines) ? lines * 42.5 : null}>
+      <TagList maxLines={maxNumberOfLines}>
         {tagData.map(tag => (
           <Tag tagImage={hands} tagText={tag.name} key={tag.name} />
         ))}

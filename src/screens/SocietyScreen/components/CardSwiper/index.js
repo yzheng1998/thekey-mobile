@@ -22,7 +22,7 @@ export default class CardSwiper extends Component {
       <Mutation mutation={SEND_FRIEND_REQUEST}>
         {createFriendRequest => (
           <Swiper
-            cards={userData.users}
+            cards={userData}
             renderCard={item => {
               const renderUser = {
                 ...item,
@@ -73,14 +73,14 @@ export default class CardSwiper extends Component {
             overlayOpacityHorizontalThreshold={0.1}
             onSwipedLeft={i => {
               const variables = {
-                recipientId: userData.users[i].id,
+                recipientId: userData[i].id,
                 swipedLeft: true,
               }
               createFriendRequest({ variables })
             }}
             onSwipedRight={i => {
               const variables = {
-                recipientId: userData.users[i].id,
+                recipientId: userData[i].id,
                 swipedLeft: false,
               }
               createFriendRequest({ variables })

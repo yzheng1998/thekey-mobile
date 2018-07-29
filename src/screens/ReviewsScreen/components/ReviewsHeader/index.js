@@ -10,7 +10,7 @@ import {
 } from './styles'
 import BackArrow from 'react-native-vector-icons/Ionicons'
 
-export default class JobsHeader extends Component {
+export default class ReviewsHeader extends Component {
   render() {
     const { changeTab, selectedIndex } = this.props
     return (
@@ -28,9 +28,9 @@ export default class JobsHeader extends Component {
               >
                 <BackArrow name="ios-arrow-back" size={27} color="white" />
               </BackButtonContainer>
-              <Title>Reviews</Title>
+              <Title>Company Reviews</Title>
               <SearchFilterTab
-                options={['All', 'Saved', 'Highest Rated']}
+                options={['All', 'Highest Rated']}
                 selectedColor="white"
                 color="white"
                 selectedIndex={selectedIndex}

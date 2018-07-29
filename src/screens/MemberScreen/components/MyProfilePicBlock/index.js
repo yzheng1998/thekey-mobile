@@ -18,6 +18,9 @@ export default class MyProfilePicBlock extends Component {
       hometown,
       id,
       navigation,
+      isFriend,
+      hasFriendRequest,
+      refreshScreen,
     } = this.props
     return (
       <BlockContainer>
@@ -31,7 +34,13 @@ export default class MyProfilePicBlock extends Component {
               navigation={navigation}
             />
           </Container>
-          <SendFriendRequestButton recipientId={id} swipedLeft={false} />
+          <SendFriendRequestButton
+            isFriend={isFriend}
+            hasFriendRequest={hasFriendRequest}
+            recipientId={id}
+            swipedLeft={false}
+            refreshScreen={refreshScreen}
+          />
         </PictureHeader>
       </BlockContainer>
     )
