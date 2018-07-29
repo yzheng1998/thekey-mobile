@@ -18,6 +18,7 @@ import com.horcrux.svg.SvgPackage;
 
 import java.util.Arrays;
 import java.util.List;
+import com.testfairy.TestFairy;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -56,6 +57,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+
     SoLoader.init(this, /* native exopackage */ false);
   }
 }
