@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { FlatList, View } from 'react-native'
+import { FlatList, Text } from 'react-native'
 import EventCard from '../EventsScreen/components/SmallEventCard'
 import {
+  Background,
   HeaderBackground,
   Title,
   BackButtonContainer,
@@ -9,30 +10,65 @@ import {
   EventContainer,
 } from './styles'
 import BackButton from 'react-native-vector-icons/Ionicons'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
+
+const GET_SIMILAR_EVENTS = gql`
+  query similarEvents($id: ID!) {
+    similarEvents(id: $id) {
+      id
+      location
+      dateRange
+      title
+      picture
+      details
+      link
+      price
+      tags {
+        name
+      }
+      isInterested
+      interestedFriends {
+        id
+        firstName
+        lastName
+        profilePicture
+      }
+    }
+  }
+`
 
 class SimilarEventsScreen extends Component {
   render() {
-    const { events } = this.props
+    const { id } = this.props.navigation.state.params
     return (
-      <View>
+      <Background>
         <HeaderBackground>
           <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
             <BackButton name="ios-arrow-back" size={33} color="white" />
           </BackButtonContainer>
-          <Title>People Also Viewed</Title>
+          <Title>Similar Events</Title>
         </HeaderBackground>
         <EventsContainer>
-          <FlatList
-            keyExtractor={event => event.id}
-            data={events}
-            renderItem={({ item: event }) => (
-              <EventContainer>
-                <EventCard event={event} />
-              </EventContainer>
-            )}
-          />
+          <Query query={GET_SIMILAR_EVENTS} variables={{ id }}>
+            {({ loading, error, data }) => {
+              if (loading) return <Text>Loading...</Text>
+              if (error) return <Text>Error! ${error.message}</Text>
+              return (
+                <FlatList
+                  keyExtractor={event => event.id}
+                  data={data.similarEvents}
+                  renderItem={({ item: event }) => (
+                    <EventContainer>
+                      <EventCard event={event} />
+                    </EventContainer>
+                  )}
+                />
+              )
+            }}
+          </Query>
         </EventsContainer>
-      </View>
+      </Background>
     )
   }
 }

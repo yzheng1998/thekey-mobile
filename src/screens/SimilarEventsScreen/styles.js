@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const Background = styled.View`
-  flex: 1;
+  padding-bottom: 100px;
 `
 export const HeaderBackground = styled.View`
   width: 100%;
