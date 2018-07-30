@@ -23,7 +23,7 @@ export default class OptionalInfoBlock extends Component {
           <RowHeader>
             <Heading>Job Title</Heading>
             <TextInputField
-              placeholder={jobTitle}
+              placeholder="General Manager"
               value={jobTitle}
               updateState={updateJobTitle}
             />
@@ -33,7 +33,7 @@ export default class OptionalInfoBlock extends Component {
           <RowHeader>
             <Heading>Location</Heading>
             <TextInputField
-              placeholder={location}
+              placeholder="Enter location"
               value={location}
               updateState={updateLocation}
             />

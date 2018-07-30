@@ -15,12 +15,13 @@ export const Background = styled(Modal)`
   background-color: ${themeGet('colors.background')};
 `
 export const BlockBackground = styled.View`
-  padding: 15px;
+  padding: 16px;
   width: 100%;
 `
 export const Heading = styled.Text`
   font-size: 16px;
   font-family: ${themeGet('fonts.bold')};
+  margin-bottom: 5px;
 `
 export const Text = styled.Text`
   font-size: 16px;
@@ -41,6 +42,8 @@ export const Block = styled.View`
   margin-bottom: 10px;
 `
 export const RowHeader = styled.View`
+  margin-top: 10px;
+  margin-bottom: 5px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -57,7 +60,8 @@ export const PickerText = styled.Text`
 export const RowContainer = styled.View`
   width: 100%;
   flex-direction: row;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  margin-top: 10px;
   align-items: center;
 `
 export const PickerButton = styled.TouchableOpacity`
