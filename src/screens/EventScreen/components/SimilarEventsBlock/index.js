@@ -68,7 +68,7 @@ class SimilarEventsBlock extends Component {
                       navigate={() =>
                         this.props.navigation.push('Event', { id: item.id })
                       }
-                      width="350px"
+                      width="327px"
                       event={item}
                       navigateToPeopleList={interestedFriends =>
                         this.props.navigation.navigate('PeopleList', {
