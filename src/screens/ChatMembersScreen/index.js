@@ -30,6 +30,7 @@ export default class ChatMembersScreen extends Component {
           navigation={this.props.navigation}
           visible={this.state.newChatModalVisible}
           handleClose={this.closeAddToChatModal}
+          isExistingChat
         />
         <Divider />
         <ScrollScreen>
