@@ -25,14 +25,6 @@ export default class BasicInfoBlock extends Component {
     } = this.props.state
     const { lookingForOptions, waysToMeet } = this.props
 
-    console.log('Basic info block', this.props)
-    console.log('preferred ways', preferredWaysToMeet)
-    console.log(
-      'element',
-      preferredWaysToMeet.map(el =>
-        waysToMeet.find(emoji => emoji.value === el.wayToMeet),
-      ),
-    )
     const lookingForLabel = lookingForOptions.find(
       element => element.value === lookingFor,
     ).label
