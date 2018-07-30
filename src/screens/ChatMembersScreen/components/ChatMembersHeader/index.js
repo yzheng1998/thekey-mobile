@@ -8,13 +8,13 @@ import {
   BackButton,
 } from './styles'
 
-export default class GroupMembersHeader extends Component {
+export default class ChatMembersHeader extends Component {
   render() {
     const { navigation } = this.props
     return (
       <SafeView>
         <TitleContainer>
-          <Title>Group Members</Title>
+          <Title>Chat Members</Title>
           <BackButtonContainer>
             <BackButton onPress={() => navigation.goBack()}>
               <BackArrow name="ios-arrow-back" color="rgb(3,3,3)" size={26} />

@@ -1,8 +1,9 @@
 import { createStackNavigator } from 'react-navigation'
 import NetworkScreen from '../screens/NetworkScreen'
 import ConversationScreen from '../screens/ConversationScreen'
-import GroupMembersScreen from '../screens/GroupMembersScreen'
+import ChatMembersScreen from '../screens/ChatMembersScreen'
 import MemberScreen from '../screens/MemberScreen'
+import PeopleList from '../screens/PeopleList'
 
 const ChatStack = createStackNavigator(
   {
@@ -16,14 +17,20 @@ const ChatStack = createStackNavigator(
       screen: ConversationScreen,
       navigationOptions: () => ({ header: null }),
     },
-    GroupMembers: {
-      screen: GroupMembersScreen,
+    ChatMembers: {
+      screen: ChatMembersScreen,
       navigationOptions: () => ({
         header: null,
       }),
     },
     Member: {
       screen: MemberScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    PeopleList: {
+      screen: PeopleList,
       navigationOptions: () => ({
         header: null,
       }),

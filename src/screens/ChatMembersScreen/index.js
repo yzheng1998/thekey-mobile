@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { Background, ScrollScreen, Divider, Container } from './styles'
 import { FlatList } from 'react-native'
-import GroupMembersHeader from './components/GroupMembersHeader'
+import ChatMembersHeader from './components/ChatMembersHeader'
 import ListItem from './components/ListItem'
 
-export default class GroupMembersScreen extends Component {
+export default class ChatMembersScreen extends Component {
   render() {
     const people = this.props.navigation.getParam('people')
     return (
       <Background>
-        <GroupMembersHeader navigation={this.props.navigation} />
+        <ChatMembersHeader navigation={this.props.navigation} />
         <Divider />
         <ScrollScreen>
           <Container>
