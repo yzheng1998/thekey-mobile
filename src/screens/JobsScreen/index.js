@@ -43,30 +43,34 @@ class JobsScreen extends Component {
     const { searchText } = this.state
     const variables = {
       jobsFilterInput: {
+        savedOnly: this.state.tab === 2,
+        appliedOnly: this.state.tab === 1,
+        position: searchText,
+        company: searchText,
         tag: searchText,
       },
     }
     return (
       <View style={{ flex: 1 }}>
-        <ScrollView keyboardShouldPersistTaps="always">
-          <JobsHeader
-            navigation={this.props.navigation}
-            changeTab={this.changeTab}
-            selectedIndex={this.state.tab}
-          />
-          <SearchBar
-            updateText={this.updateText}
-            searchText={searchText}
-            placeholderText="Search Jobs & Internships"
-          />
-          <Divider />
-          <Query query={GET_JOBS} variables={variables}>
-            {({ loading, error, data }) => {
-              if (loading) return <Text>Loading...</Text>
-              if (error) {
-                return <Text>Error! {error.message}</Text>
-              }
-              return (
+        <Query query={GET_JOBS} variables={variables}>
+          {({ error, data, refetch }) => {
+            if (error) {
+              return <Text>Error! {error.message}</Text>
+            }
+            if (this.state.tab === 2) refetch()
+            return (
+              <ScrollView keyboardShouldPersistTaps="always">
+                <JobsHeader
+                  navigation={this.props.navigation}
+                  changeTab={this.changeTab}
+                  selectedIndex={this.state.tab}
+                />
+                <SearchBar
+                  updateText={this.updateText}
+                  searchText={searchText}
+                  placeholderText="Search Jobs & Internships"
+                />
+                <Divider />
                 <FlatList
                   keyExtractor={job => job.id}
                   data={data.jobs}
@@ -82,10 +86,10 @@ class JobsScreen extends Component {
                     </View>
                   )}
                 />
-              )
-            }}
-          </Query>
-        </ScrollView>
+              </ScrollView>
+            )
+          }}
+        </Query>
       </View>
     )
   }

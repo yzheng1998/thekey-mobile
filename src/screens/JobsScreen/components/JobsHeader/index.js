@@ -32,7 +32,7 @@ export default class JobsHeader extends Component {
                 updateState={changeTab}
                 color="white"
                 selectedColor="white"
-                options={['All', 'Applied For']}
+                options={['All', 'Applied For', 'Saved']}
               />
             </HeaderContainer>
           </SafeView>
