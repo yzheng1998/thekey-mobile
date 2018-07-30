@@ -15,6 +15,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
+import org.reactnative.camera.RNCameraPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,6 +36,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNFSPackage(),
             new RNFetchBlobPackage(),
             new RNLinkedinLoginPackage(),
+            new RNCameraPackage(),
             new ReactNativeDocumentPicker(),
             new AppCenterReactNativeAnalyticsPackage(MainApplication.this, getResources().getString(R.string.appCenterAnalytics_whenToEnableAnalytics)),
             new AppCenterReactNativePackage(MainApplication.this),

@@ -147,6 +147,13 @@ dependencies {
     compile "com.android.support:appcompat-v7:26.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile project(':react-native-svg')
+    compile (project(':react-native-camera')) {
+        exclude group: "com.google.android.gms"
+        compile 'com.android.support:exifinterface:26.+'
+        compile ('com.google.android.gms:play-services-vision:12.0.1') {
+            force = true
+        }
+    }
     implementation 'testfairy:testfairy-android-sdk:1.+@aar'
 }
 
