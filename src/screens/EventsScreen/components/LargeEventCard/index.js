@@ -16,6 +16,7 @@ import {
 import StarButton from '../../../../components/EventStarButton'
 import moment from 'moment'
 import InterestedFriendsRow from '../InterestedFriendsRow'
+import defaultCardBackground from '../../../../../assets/eventCardImage.jpeg'
 
 const TIME_ZONE_LEN = 3
 
@@ -38,12 +39,11 @@ function formatTimeStamp(timeStamp) {
 
 export default class LargeEventsCard extends Component {
   render() {
-    const image =
-      'https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg'
     const usableTimeStamp = new Date(
       this.props.event.dateRange[0],
     ).toISOString()
     const {
+      picture,
       price,
       title,
       location,
@@ -51,6 +51,7 @@ export default class LargeEventsCard extends Component {
       interestedFriends,
       isInterested,
     } = this.props.event
+    const cardImage = picture ? { uri: picture } : defaultCardBackground
     return (
       <Card
         activeOpacity={0.9}
@@ -60,7 +61,7 @@ export default class LargeEventsCard extends Component {
           })
         }
       >
-        <BackgroundImage source={{ uri: image }}>
+        <BackgroundImage source={cardImage}>
           <TopContainer>
             <PriceContainer>
               <Price>{formatPrice(price)}</Price>

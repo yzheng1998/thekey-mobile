@@ -44,16 +44,6 @@ export const ApplyButton = styled.Text`
   font-size: 14px;
   color: white;
 `
-export const ButtonHeader = styled.View`
-  position: absolute;
-  top: 50px;
-  padding-left: 20px;
-  padding-right: 20px;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-`
-export const BackButtonContainer = styled.TouchableOpacity``
 export const DescriptionContainer = styled.View`
   align-items: center;
 `

@@ -14,6 +14,7 @@ import {
 import StarButton from '../../../../components/EventStarButton'
 import moment from 'moment'
 import InterestedFriendsRow from '../InterestedFriendsRow'
+import defaultCardBackground from '../../../../../assets/eventCardImage.jpeg'
 
 function formatTimeStamp(timeStamp) {
   const momentTimeStamp = moment(timeStamp, 'YYYY-MM-DD HH:mm:ss')
@@ -26,9 +27,8 @@ function formatTimeStamp(timeStamp) {
 
 export default class SmallEventCard extends Component {
   render() {
-    const image =
-      'https://c1.staticflickr.com/2/1679/25672866665_4ccec2fd37_b.jpg'
     const {
+      picture,
       title,
       id,
       dateRange,
@@ -37,13 +37,14 @@ export default class SmallEventCard extends Component {
     } = this.props.event
 
     const usableTimeStamp = new Date(dateRange[0])
+    const cardImage = picture ? { uri: picture } : defaultCardBackground
     return (
       <Card
         width={this.props.width}
         activeOpacity={0.9}
         onPress={() => this.props.navigate(id)}
       >
-        <BackgroundImage source={{ uri: image }} />
+        <BackgroundImage source={cardImage} />
         <FullContainer>
           <ContentContainer>
             <DetailsContainer>

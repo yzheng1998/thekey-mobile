@@ -1,25 +1,19 @@
 import React, { Component } from 'react'
-import {
-  Container,
-  TagsContainer,
-  BackButtonContainer,
-  ButtonHeader,
-} from './styles'
+import { Container, TagsContainer } from './styles'
 import EventPictureBlock from './components/EventPictureBlock'
 import AboutBlock from '../../components/AboutBlock'
 import TagLine from '../../components/TagLine'
 import SimilarEventsBlock from './components/SimilarEventsBlock'
-import BackButton from 'react-native-vector-icons/Ionicons'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { Text } from 'react-native'
 import moment from 'moment'
-import EventStarButton from '../../components/EventStarButton'
 
 const GET_EVENT = gql`
   query event($id: ID!) {
     event(id: $id) {
       id
+      picture
       location
       dateRange
       title
@@ -49,6 +43,10 @@ function formatTimeStamp(timeStamp) {
   const day = momentTimeStamp.format('D')
   return `${dayOfWeek}, ${day} ${month} @ ${time}`
 }
+
+const defaultEventImage =
+  'https://images.unsplash.com/photo-1470753937643-efeb931202a9?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=605dda29d7945345968d2dfb3eeb672e&auto=format&fit=crop&w=1500&q=80'
+
 class EventScreen extends Component {
   render() {
     return (
@@ -72,34 +70,25 @@ class EventScreen extends Component {
             interestedFriends,
           } = data.event
           const usableTimeStamp = new Date(dateRange[0])
-
+          const displayImage = picture || defaultEventImage
           return (
             <Container>
               <EventPictureBlock
+                id={id}
                 navigation={this.props.navigation}
-                picture={picture}
+                picture={displayImage}
                 title={title}
                 location={location}
                 date={formatTimeStamp(usableTimeStamp)}
                 friends={interestedFriends}
                 connectionsNum={interestedFriends.length}
+                isInterested={isInterested}
               />
               <AboutBlock about={details} />
               <TagsContainer>
                 <TagLine tagData={tags} lines={1} />
               </TagsContainer>
-              <SimilarEventsBlock
-                navigation={this.props.navigation}
-                id={this.props.navigation.getParam('id')}
-              />
-              <ButtonHeader>
-                <BackButtonContainer
-                  onPress={() => this.props.navigation.goBack()}
-                >
-                  <BackButton name="ios-arrow-back" size={27} color="white" />
-                </BackButtonContainer>
-                <EventStarButton isInterested={isInterested} id={id} />
-              </ButtonHeader>
+              <SimilarEventsBlock navigation={this.props.navigation} id={id} />
             </Container>
           )
         }}

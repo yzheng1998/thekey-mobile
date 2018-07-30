@@ -8,25 +8,31 @@ import {
   Container,
   LocationContainer,
   ClockContainer,
+  ButtonHeader,
+  BackButtonContainer,
 } from './styles'
 import PictureHeader from '../../../../components/PictureHeader'
 import InterestedFriendsRow from '../../../../screens/EventsScreen/components/InterestedFriendsRow'
 import LocationIcon from 'react-native-vector-icons/SimpleLineIcons'
 import ClockIcon from 'react-native-vector-icons/Feather'
+import BackButton from 'react-native-vector-icons/Ionicons'
+import EventStarButton from '../../../../components/EventStarButton'
 
 class EventPictureBlock extends Component {
   render() {
     const {
+      id,
       picture,
       title,
       location,
       date,
       friends,
       connectionsNum,
+      isInterested,
     } = this.props
     return (
       <HeaderContainer>
-        <PictureHeader source={picture} avatarSize={123}>
+        <PictureHeader picture={picture} avatarSize={123}>
           <DescriptionContainer>
             <Title>{title}</Title>
             <Container>
@@ -53,6 +59,12 @@ class EventPictureBlock extends Component {
               avatarSize={26}
             />
           </DescriptionContainer>
+          <ButtonHeader>
+            <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
+              <BackButton name="ios-arrow-back" size={30} color="white" />
+            </BackButtonContainer>
+            <EventStarButton isInterested={isInterested} id={id} />
+          </ButtonHeader>
         </PictureHeader>
       </HeaderContainer>
     )
