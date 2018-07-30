@@ -51,7 +51,7 @@ class SimilarEventsBlock extends Component {
                 <Title>Similar Events</Title>
                 <ButtonContainer
                   onPress={() =>
-                    this.props.navigation.push('SimilarEventsScreen')
+                    this.props.navigation.push('SimilarEventsScreen', { id })
                   }
                 >
                   <SeeAll>See All</SeeAll>
