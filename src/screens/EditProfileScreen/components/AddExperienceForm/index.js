@@ -5,6 +5,7 @@ import LineInput from '../../../../components/LineInput'
 import AddExperienceButton from './components/AddExperienceButton'
 import UpdateExperienceButton from './components/UpdateExperienceButton'
 import DeleteExperienceButton from './components/DeleteExperienceButton'
+import Header from '../Header'
 import { Switch, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import _ from 'lodash'
 
@@ -66,6 +67,11 @@ export default class AddExperienceForm extends Component {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <Screen>
+          <Header
+            onBackPress={() => this.props.navigation.goBack()}
+            showBack
+            title={this.editMode ? 'Edit Work Experience' : 'Work Experience'}
+          />
           <Block>
             <LineInput
               text={employer}
