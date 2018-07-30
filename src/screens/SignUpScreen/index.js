@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { KeyboardAvoidingView, Text } from 'react-native'
+import { KeyboardAvoidingView, Text, Alert } from 'react-native'
 import { ScreenContainer, SubtitleView, Subtitle } from './styles'
 import Header from '../../components/Header'
 import LineInput from '../../components/LineInput'
@@ -101,9 +101,12 @@ export default class SignUpScreen extends Component {
             readPermissions={['email']}
             onLoginFinished={(error, result) => {
               if (error) {
-                console.log(`login has error: ${result.error}`)
+                Alert.alert('Error Ocurred', 'Could not log in to facebook')
               } else if (result.isCancelled) {
-                console.log('login is cancelled.')
+                Alert.alert(
+                  'Error Occurred',
+                  'facebook log in was unexpectedly cancelled',
+                )
               } else {
                 AccessToken.getCurrentAccessToken().then(async data => {
                   const token = data.accessToken.toString()
