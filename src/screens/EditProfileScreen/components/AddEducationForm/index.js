@@ -11,6 +11,7 @@ import PickerComponent from '../../../../components/PickerComponent'
 import AddEducationButton from './components/AddEducationButton'
 import UpdateEducationButton from './components/UpdateEducationButton'
 import DeleteEducationButton from './components/DeleteEducationButton'
+import Header from '../Header'
 import LineInput from '../../../../components/LineInput'
 import _ from 'lodash'
 import { Keyboard, TouchableWithoutFeedback } from 'react-native'
@@ -75,6 +76,11 @@ export default class AddEducationForm extends Component {
         accessible={false}
       >
         <Screen>
+          <Header
+            onBackPress={() => this.props.navigation.goBack()}
+            showBack
+            title={this.editMode ? 'Edit School' : 'Education'}
+          />
           <Block>
             <LineInput
               text={schoolName}
