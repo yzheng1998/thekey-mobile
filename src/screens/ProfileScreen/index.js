@@ -14,6 +14,7 @@ import { Query } from 'react-apollo'
 import { GET_USER } from './query'
 import nodeEmoji from 'node-emoji'
 import Logout from './components/SettingsScreens/Logout'
+import { client } from '../../apollo'
 
 const screens = [
   {
@@ -53,6 +54,7 @@ export default class ProfileScreen extends Component {
 
   logout = async () => {
     await AsyncStorage.clear()
+    client.resetStore()
     this.props.navigation.navigate('Landing')
   }
 
