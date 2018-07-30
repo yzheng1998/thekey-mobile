@@ -49,6 +49,7 @@ class NetworkScreen extends Component {
       <SafeView>
         <Background>
           <NewChatModal
+            isExistingChat={false}
             navigation={this.props.navigation}
             visible={this.state.newChatModalVisible}
             handleClose={this.handleCloseNewChat}
