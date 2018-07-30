@@ -7,24 +7,21 @@ import TermsOfServiceConfirmation from './components/TermsOfServiceConfirmation'
 import SubmitReviewButton from './components/SubmitReviewButton'
 import { Background, Divider, ScreenScroll, SafeView } from './styles'
 
-export default class AddCompanyReviewScreen extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      rating: 0,
-      employmentType: 0,
-      isCurrentEmployee: false,
-      yearLastWorked: new Date().getFullYear(),
-      yearPickerEnabled: false,
-      companyName: 'Beats by Dre',
-      jobTitle: 'General Manager',
-      location: 'Enter Location',
-      acceptedTerms: false,
-      reviewTitle: '',
-      reviewPros: '',
-      reviewCons: '',
-    }
+export default class AddCompanyReviewModal extends Component {
+  state = {
+    rating: 0,
+    employmentType: 0,
+    isCurrentEmployee: false,
+    yearLastWorked: new Date().getFullYear(),
+    yearPickerEnabled: false,
+    jobTitle: 'General Manager',
+    location: 'Enter Location',
+    acceptedTerms: false,
+    reviewTitle: '',
+    reviewPros: '',
+    reviewCons: '',
   }
+
   // handling state change for DescriptionBlock
   onChangeText = obj => {
     this.setState(obj)
@@ -74,13 +71,14 @@ export default class AddCompanyReviewScreen extends Component {
     this.setState({ acceptedTerms: !this.state.acceptedTerms })
   }
   render() {
-    const {
-      companyId,
-      companyName,
-      picture,
-    } = this.props.navigation.state.params
+    const { isVisible, hideAddReview } = this.props
+    const { companyId, companyName, picture } = this.props.state
     return (
-      <Background>
+      <Background
+        animationIn="slideInRight"
+        animationOut="slideOutRight"
+        isVisible={isVisible}
+      >
         <SafeView>
           <ScreenScroll>
             <EmploymentHistoryBlock
@@ -116,6 +114,22 @@ export default class AddCompanyReviewScreen extends Component {
               handleAcceptedTerms={this.handleAcceptedTerms}
             />
             <SubmitReviewButton
+              hideAddReview={hideAddReview}
+              clearState={() =>
+                this.setState({
+                  rating: 0,
+                  employmentType: 0,
+                  isCurrentEmployee: false,
+                  yearLastWorked: new Date().getFullYear(),
+                  yearPickerEnabled: false,
+                  jobTitle: 'General Manager',
+                  location: 'Enter Location',
+                  acceptedTerms: false,
+                  reviewTitle: '',
+                  reviewPros: '',
+                  reviewCons: '',
+                })
+              }
               rating={this.state.rating}
               title={this.state.reviewTitle}
               pros={this.state.reviewPros}

@@ -51,6 +51,8 @@ export default class SubmitReviewButton extends Component {
       location,
       acceptedTerms,
       companyId,
+      hideAddReview,
+      clearState,
     } = this.props
 
     const lastWorked = this.props.lastWorked.toString()
@@ -58,7 +60,10 @@ export default class SubmitReviewButton extends Component {
     return (
       <Mutation
         mutation={ADD_COMPANY_REVIEW}
-        onCompleted={() => this.props.navigation.goBack()}
+        onCompleted={() => {
+          hideAddReview()
+          clearState()
+        }}
       >
         {(addCompanyReview, { error }) => {
           if (error) return <Text>{error.message}</Text>

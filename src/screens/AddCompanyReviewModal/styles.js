@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
+import Modal from 'react-native-modal'
 
 export const ScreenScroll = styled.ScrollView`
   width: 100%;
@@ -8,8 +9,9 @@ export const ScreenScroll = styled.ScrollView`
 export const SafeView = styled.SafeAreaView`
   width: 100%;
 `
-export const Background = styled.View`
+export const Background = styled(Modal)`
   flex: 1;
+  margin: 0px;
   background-color: ${themeGet('colors.background')};
 `
 export const BlockBackground = styled.View`

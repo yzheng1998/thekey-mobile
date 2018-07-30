@@ -40,7 +40,13 @@ export default class CompanySearchModal extends Component {
         highestRated: false,
       },
     }
-    const { closeModal, navigation, ...rest } = this.props
+    const {
+      closeModal,
+      showAddReview,
+      setCompanyInfo,
+      navigation,
+      ...rest
+    } = this.props
     const closeSearchModal = () => {
       this.setState({
         searchText: '',
@@ -49,7 +55,7 @@ export default class CompanySearchModal extends Component {
     }
 
     return (
-      <Modal animationType="slide" {...rest}>
+      <Modal onDismiss={showAddReview} animationType="slide" {...rest}>
         <Background>
           <SearchModalHeader closeModal={closeSearchModal} />
           <SearchBar
@@ -67,17 +73,18 @@ export default class CompanySearchModal extends Component {
                 }
                 return (
                   <FlatList
+                    showsVerticalScrollIndicator={false}
                     keyExtractor={company => company.id}
                     data={data.companies}
                     renderItem={({ item }) => (
                       <CompanyCard
                         onPress={() => {
                           closeSearchModal()
-                          navigation.navigate('AddCompanyReview', {
-                            companyId: item.id,
-                            companyName: item.name,
-                            picture: item.profilePicture,
-                          })
+                          setCompanyInfo(
+                            item.id,
+                            item.name,
+                            item.profilePicture,
+                          )
                         }}
                         title={item.name}
                         rating={item.rating}
