@@ -20,6 +20,7 @@ import org.reactnative.camera.RNCameraPackage;
 import java.util.Arrays;
 import java.util.List;
 import com.testfairy.TestFairy;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -37,6 +38,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNFetchBlobPackage(),
             new RNLinkedinLoginPackage(),
             new RNCameraPackage(),
+            new ReactNativePushNotificationPackage(),
             new ReactNativeDocumentPicker(),
             new AppCenterReactNativeAnalyticsPackage(MainApplication.this, getResources().getString(R.string.appCenterAnalytics_whenToEnableAnalytics)),
             new AppCenterReactNativePackage(MainApplication.this),
