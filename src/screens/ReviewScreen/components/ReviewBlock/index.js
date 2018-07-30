@@ -41,7 +41,7 @@ export default class ReviewBlock extends Component {
     } = this.props
     return (
       <Card>
-        <SubTitle>{moment(date).format('MM/DD/YYYY')}</SubTitle>
+        <SubTitle>{moment(new Date(date)).format('MM/DD/YYYY')}</SubTitle>
         <Title>{subject}</Title>
         <RatingContainer>
           <RatingStar rating={rating} scoreOff />
