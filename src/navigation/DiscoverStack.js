@@ -102,7 +102,7 @@ const DiscoverStack = createStackNavigator(
     EditProfile: {
       screen: EditProfileScreen,
       navigationOptions: () => ({
-        title: 'Edit Profile',
+        header: null,
       }),
     },
     AddEducation: {
