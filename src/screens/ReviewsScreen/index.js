@@ -8,6 +8,7 @@ import ReviewsHeader from './components/ReviewsHeader'
 import Icon from 'react-native-vector-icons/Entypo'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import AddCompanyReviewModal from '../AddCompanyReviewModal'
 
 const GET_COMPANIES = gql`
   query companies($companyFilterInput: CompanyFilterInput!) {
@@ -27,6 +28,10 @@ class ReviewsScreen extends Component {
     searchText: '',
     tab: 0,
     showSearchModal: false,
+    showAddReview: false,
+    companyId: '',
+    companyName: '',
+    picture: '',
   }
 
   updateText = searchText => {
@@ -74,6 +79,7 @@ class ReviewsScreen extends Component {
                       picture={item.profilePicture}
                       title={item.name}
                       rating={item.rating}
+                      companyName={item.name}
                       companyId={item.id}
                       navigation={this.props.navigation}
                     />
@@ -90,6 +96,30 @@ class ReviewsScreen extends Component {
           navigation={this.props.navigation}
           closeModal={this.toggleSearchModal}
           visible={this.state.showSearchModal}
+          showAddReview={() =>
+            this.setState({
+              showAddReview: !this.state.showAddReview,
+            })
+          }
+          setCompanyInfo={(companyId, companyName, picture) =>
+            this.setState({
+              companyId,
+              companyName,
+              picture,
+            })
+          }
+        />
+        <AddCompanyReviewModal
+          state={this.state}
+          isVisible={this.state.showAddReview}
+          hideAddReview={() =>
+            this.setState({
+              showAddReview: !this.state.showAddReview,
+              companyId: '',
+              companyName: '',
+              picture: '',
+            })
+          }
         />
       </View>
     )
