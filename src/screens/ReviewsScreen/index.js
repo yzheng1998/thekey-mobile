@@ -71,6 +71,7 @@ class ReviewsScreen extends Component {
                   data={data.companies}
                   renderItem={({ item }) => (
                     <CompanyCard
+                      picture={item.profilePicture}
                       title={item.name}
                       rating={item.rating}
                       companyId={item.id}
