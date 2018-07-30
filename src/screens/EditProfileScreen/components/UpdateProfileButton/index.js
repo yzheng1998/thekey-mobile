@@ -6,20 +6,13 @@ import gql from 'graphql-tag'
 const UPDATE_USER = gql`
   mutation updateUser($updateUserInput: UpdateUserInput!) {
     updateUser(updateUserInput: $updateUserInput) {
-      email
-      linkedIn
-      facebook
-      twitter
-      profilePicture
-      lookingFor
-      bio
-      hometown
-      tags {
+      updatedUser {
         id
-        name
+        hometown
+        bio
       }
-      preferredWaysToMeet {
-        id
+      error {
+        message
       }
     }
   }
@@ -28,12 +21,17 @@ const UPDATE_USER = gql`
 export default class UpdateProfileButton extends Component {
   render() {
     const { variables, goBack } = this.props
+    console.log('variables', variables)
     return (
-      <Mutation mutation={UPDATE_USER} onCompleted={() => goBack}>
+      <Mutation
+        mutation={UPDATE_USER}
+        variables={variables}
+        onCompleted={() => goBack()}
+      >
         {updateUser => (
           <Button
             onPress={() => {
-              updateUser({ variables })
+              updateUser(variables)
             }}
           >
             <Text>Save</Text>
