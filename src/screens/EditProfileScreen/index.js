@@ -8,6 +8,7 @@ import PickerComponent from '../../components/PickerComponent'
 import EmojiModal from './components/EmojiModal'
 import ProfilePicture from './components/ProfilePicture'
 import InterestsSearchModal from './components/InterestsSearchModal'
+import EditProfileHeader from './components/EditProfileHeader'
 import EditPencil from 'react-native-vector-icons/MaterialIcons'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {
@@ -78,6 +79,8 @@ export default class EditProfileScreen extends Component {
             facebook,
             twitter,
             profilePicture,
+            bio,
+            hometown,
             education,
             preferredWaysToMeet,
             tags,
@@ -88,6 +91,7 @@ export default class EditProfileScreen extends Component {
           } = displayData
 
           const toggleWayToMeet = emoji => {
+            console.log(emoji)
             if (preferredWaysToMeet.includes(emoji.value)) {
               this.setState({
                 preferredWaysToMeet: preferredWaysToMeet.filter(
@@ -96,11 +100,31 @@ export default class EditProfileScreen extends Component {
               })
             } else
               this.setState({
-                preferredWaysToMeet: [...preferredWaysToMeet, emoji.value],
+                preferredWaysToMeet: [...preferredWaysToMeet, emoji],
               })
+          }
+          const preferredWaysToMeetIds = preferredWaysToMeet.map(p => p.id)
+          const tagIds = tags.map(t => t.id)
+          const updateProfileVariables = {
+            updateUserInput: {
+              email,
+              bio,
+              linkedIn,
+              facebook,
+              twitter,
+              profilePicture,
+              lookingFor,
+              hometown,
+              tags: tagIds,
+              preferredWaysToMeet: preferredWaysToMeetIds,
+            },
           }
           return (
             <Screen>
+              <EditProfileHeader
+                goBack={() => this.props.navigation.goBack()}
+                mutationVariables={updateProfileVariables}
+              />
               <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <ProfilePicture
                   profilePicture={profilePicture}
