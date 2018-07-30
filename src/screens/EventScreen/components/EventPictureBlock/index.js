@@ -32,7 +32,7 @@ class EventPictureBlock extends Component {
     } = this.props
     return (
       <HeaderContainer>
-        <PictureHeader source={picture} avatarSize={123}>
+        <PictureHeader picture={picture} avatarSize={123}>
           <DescriptionContainer>
             <Title>{title}</Title>
             <Container>
