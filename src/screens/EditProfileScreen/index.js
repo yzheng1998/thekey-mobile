@@ -91,7 +91,6 @@ export default class EditProfileScreen extends Component {
           } = displayData
 
           const toggleWayToMeet = emoji => {
-            console.log(emoji)
             if (preferredWaysToMeet.includes(emoji.value)) {
               this.setState({
                 preferredWaysToMeet: preferredWaysToMeet.filter(
