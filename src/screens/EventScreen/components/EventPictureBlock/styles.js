@@ -28,13 +28,6 @@ export const DescriptionContainer = styled.View`
 `
 export const HeaderContainer = styled.View`
   width: 100%;
-  aspect-ratio: 1.03878;
-`
-export const BackButtonContainer = styled.TouchableOpacity`
-  position: absolute;
-  background-color: blue;
-  top: 40px;
-  left: 20px;
 `
 export const Container = styled.View`
   flex-direction: row;
@@ -47,3 +40,13 @@ export const ClockContainer = styled.View`
   padding-top: 6px;
   padding-right: 4px;
 `
+export const ButtonHeader = styled.View`
+  position: absolute;
+  top: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+`
+export const BackButtonContainer = styled.TouchableOpacity``

@@ -1,20 +1,13 @@
 import React, { Component } from 'react'
-import {
-  Container,
-  TagsContainer,
-  BackButtonContainer,
-  ButtonHeader,
-} from './styles'
+import { Container, TagsContainer } from './styles'
 import EventPictureBlock from './components/EventPictureBlock'
 import AboutBlock from '../../components/AboutBlock'
 import TagLine from '../../components/TagLine'
 import SimilarEventsBlock from './components/SimilarEventsBlock'
-import BackButton from 'react-native-vector-icons/Ionicons'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { Text } from 'react-native'
 import moment from 'moment'
-import EventStarButton from '../../components/EventStarButton'
 
 const GET_EVENT = gql`
   query event($id: ID!) {
@@ -76,6 +69,7 @@ class EventScreen extends Component {
           return (
             <Container>
               <EventPictureBlock
+                id={id}
                 navigation={this.props.navigation}
                 picture={picture}
                 title={title}
@@ -83,23 +77,13 @@ class EventScreen extends Component {
                 date={formatTimeStamp(usableTimeStamp)}
                 friends={interestedFriends}
                 connectionsNum={interestedFriends.length}
+                isInterested={isInterested}
               />
               <AboutBlock about={details} />
               <TagsContainer>
                 <TagLine tagData={tags} lines={1} />
               </TagsContainer>
-              <SimilarEventsBlock
-                navigation={this.props.navigation}
-                id={this.props.navigation.getParam('id')}
-              />
-              <ButtonHeader>
-                <BackButtonContainer
-                  onPress={() => this.props.navigation.goBack()}
-                >
-                  <BackButton name="ios-arrow-back" size={27} color="white" />
-                </BackButtonContainer>
-                <EventStarButton isInterested={isInterested} id={id} />
-              </ButtonHeader>
+              <SimilarEventsBlock navigation={this.props.navigation} id={id} />
             </Container>
           )
         }}
