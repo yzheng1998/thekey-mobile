@@ -16,7 +16,7 @@ export default class EditProfileHeader extends Component {
       <SafeView>
         <Background>
           <ButtonContainer>
-            <CancelButton onPress={() => goBack}>
+            <CancelButton onPress={goBack}>
               <CancelText>Cancel</CancelText>
             </CancelButton>
             <UpdateProfileButton
