@@ -19,7 +19,6 @@ import MemberScreen from '../screens/MemberScreen'
 import EditProfileScreen from '../screens/EditProfileScreen'
 import AddEducationForm from '../screens/EditProfileScreen/components/AddEducationForm'
 import AddExperienceForm from '../screens/EditProfileScreen/components/AddExperienceForm'
-import AddCompanyReviewScreen from '../screens/AddCompanyReviewScreen'
 import QRScannerScreen from '../screens/QRScannerScreen'
 
 const DiscoverStack = createStackNavigator(
@@ -115,12 +114,6 @@ const DiscoverStack = createStackNavigator(
       screen: AddExperienceForm,
       navigationOptions: () => ({
         title: 'Add Experience',
-      }),
-    },
-    AddCompanyReview: {
-      screen: AddCompanyReviewScreen,
-      navigationOptions: () => ({
-        title: 'Add Company Review',
       }),
     },
     ApplyNow: {
