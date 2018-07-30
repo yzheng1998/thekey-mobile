@@ -108,13 +108,13 @@ const DiscoverStack = createStackNavigator(
     AddEducation: {
       screen: AddEducationForm,
       navigationOptions: () => ({
-        title: 'Add Education',
+        header: null,
       }),
     },
     AddExperience: {
       screen: AddExperienceForm,
       navigationOptions: () => ({
-        title: 'Add Experience',
+        header: null,
       }),
     },
     AddCompanyReview: {
