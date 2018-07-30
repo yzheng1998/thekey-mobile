@@ -12,7 +12,7 @@ import {
 
 export default class ChatMembersHeader extends Component {
   render() {
-    const { navigation } = this.props
+    const { navigation, openAddToChatModal } = this.props
     return (
       <SafeView>
         <TitleContainer>
@@ -21,7 +21,7 @@ export default class ChatMembersHeader extends Component {
             <BackButton onPress={() => navigation.goBack()}>
               <BackArrow name="ios-arrow-back" color="rgb(3,3,3)" size={26} />
             </BackButton>
-            <PlusButton onPress={() => navigation.goBack()}>
+            <PlusButton onPress={openAddToChatModal}>
               <PlusIcon name="plus" size={23} color="black" />
             </PlusButton>
           </ButtonRow>

@@ -3,13 +3,34 @@ import { Background, ScrollScreen, Divider, Container } from './styles'
 import { FlatList } from 'react-native'
 import ChatMembersHeader from './components/ChatMembersHeader'
 import ListItem from './components/ListItem'
+import NewChatModal from '../NetworkScreen/components/NewChatModal'
 
 export default class ChatMembersScreen extends Component {
+  state = {
+    searchText: '',
+    newChatModalVisible: false,
+  }
+
+  openAddToChatModal = () => {
+    this.setState({ newChatModalVisible: true })
+  }
+  closeAddToChatModal = () => {
+    this.setState({ newChatModalVisible: false })
+  }
+
   render() {
     const people = this.props.navigation.getParam('people')
     return (
       <Background>
-        <ChatMembersHeader navigation={this.props.navigation} />
+        <ChatMembersHeader
+          navigation={this.props.navigation}
+          openAddToChatModal={this.openAddToChatModal}
+        />
+        <NewChatModal
+          navigation={this.props.navigation}
+          visible={this.state.newChatModalVisible}
+          handleClose={this.closeAddToChatModal}
+        />
         <Divider />
         <ScrollScreen>
           <Container>
