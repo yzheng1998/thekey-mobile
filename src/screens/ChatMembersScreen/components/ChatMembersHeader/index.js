@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import BackArrow from 'react-native-vector-icons/Ionicons'
+import PlusIcon from 'react-native-vector-icons/Entypo'
 import {
   SafeView,
   Title,
   TitleContainer,
-  BackButtonContainer,
+  ButtonRow,
   BackButton,
+  PlusButton,
 } from './styles'
 
 export default class ChatMembersHeader extends Component {
@@ -15,11 +17,14 @@ export default class ChatMembersHeader extends Component {
       <SafeView>
         <TitleContainer>
           <Title>Chat Members</Title>
-          <BackButtonContainer>
+          <ButtonRow>
             <BackButton onPress={() => navigation.goBack()}>
               <BackArrow name="ios-arrow-back" color="rgb(3,3,3)" size={26} />
             </BackButton>
-          </BackButtonContainer>
+            <PlusButton onPress={() => navigation.goBack()}>
+              <PlusIcon name="plus" size={23} color="black" />
+            </PlusButton>
+          </ButtonRow>
         </TitleContainer>
       </SafeView>
     )
