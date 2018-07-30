@@ -25,6 +25,7 @@ class AboutBlock extends Component {
         <See
           onPress={() =>
             this.props.navigation.navigate('Summary', {
+              about,
               aboutRole,
               aboutCompany,
               bringToRole,
