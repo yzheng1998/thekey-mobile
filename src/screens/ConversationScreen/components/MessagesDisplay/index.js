@@ -56,7 +56,8 @@ class MessagesDisplay extends Component {
     this.props.subscribe()
   }
   render() {
-    const { chat, userId, isGroupMessage } = this.props
+    const { chat, userId, isGroupMessage, refreshData } = this.props
+    refreshData()
     return (
       <Screen>
         <FlatList
