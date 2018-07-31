@@ -3,15 +3,18 @@ import { Button, Text } from './styles'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 
-const CREATE_CHAT = gql`
-  mutation createChat($participantIds: [ID!]!) {
-    createChat(participantIds: $participantIds) {
-      chat {
+const ADD_TO_CHAT = gql`
+  mutation addToChat($chatId: ID!, $participantIds: [ID!]!) {
+    addToChat(chatId: $chatId, participantIds: $participantIds) {
+      updatedChat {
         id
         participants {
           firstName
           id
         }
+      }
+      error {
+        message
       }
     }
   }
@@ -19,12 +22,19 @@ const CREATE_CHAT = gql`
 
 export default class AddToChatButton extends Component {
   render() {
-    const { participantIds, createNewChat, disabled, closeModal } = this.props
+    const {
+      participantIds,
+      chatId,
+      navigateToChat,
+      disabled,
+      closeModal,
+    } = this.props
     return (
       <Mutation
-        mutation={CREATE_CHAT}
+        mutation={ADD_TO_CHAT}
         onCompleted={data => {
-          createNewChat(data.createChat.chat)
+          console.log('data', data)
+          navigateToChat(data.addToChat.updatedChat)
           closeModal()
         }}
       >
@@ -33,8 +43,10 @@ export default class AddToChatButton extends Component {
             disabled={disabled}
             onPress={() => {
               const variables = {
+                chatId,
                 participantIds,
               }
+              console.log('variables', variables)
               createChat({ variables })
             }}
           >
