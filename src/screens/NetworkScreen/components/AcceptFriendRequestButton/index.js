@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { Button, Label } from './styles'
+import { Alert } from 'react-native'
 
 const ACCEPT_FRIEND_REQUEST = gql`
   mutation acceptFriendRequest($id: ID!) {
@@ -26,18 +27,28 @@ export default class AcceptFriendRequestButton extends Component {
         mutation={ACCEPT_FRIEND_REQUEST}
         onCompleted={() => refreshPage()}
       >
-        {acceptFriendRequest => (
-          <Button
-            onPress={() => {
-              const variables = {
-                id: friendRequestId,
-              }
-              acceptFriendRequest({ variables })
-            }}
-          >
-            <Label>Confirm</Label>
-          </Button>
-        )}
+        {(acceptFriendRequest, { error }) => {
+          if (error) {
+            Alert.alert(
+              'Failed to accept friend request',
+              'There was an error accepting your friend request. Please try again.',
+              [{ text: 'OK', onPress: () => {} }],
+              { cancelable: true },
+            )
+          }
+          return (
+            <Button
+              onPress={() => {
+                const variables = {
+                  id: friendRequestId,
+                }
+                acceptFriendRequest({ variables })
+              }}
+            >
+              <Label>Confirm</Label>
+            </Button>
+          )
+        }}
       </Mutation>
     )
   }
