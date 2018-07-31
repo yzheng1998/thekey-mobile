@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 import { Button, Label } from './styles'
+import { Alert } from 'react-native'
 
 const SEND_FRIEND_REQUEST = gql`
   mutation createFriendRequest($recipientId: ID!, $swipedLeft: Boolean!) {
@@ -48,21 +49,31 @@ export default class SendFriendRequestButton extends Component {
         mutation={SEND_FRIEND_REQUEST}
         onCompleted={() => refreshScreen()}
       >
-        {createFriendRequest => (
-          <Button
-            activeOpacity={0.5}
-            disabled={isFriend || hasFriendRequest}
-            onPress={() => {
-              const variables = {
-                recipientId,
-                swipedLeft,
-              }
-              createFriendRequest({ variables })
-            }}
-          >
-            <Label>{determineButtonText(isFriend, hasFriendRequest)}</Label>
-          </Button>
-        )}
+        {(createFriendRequest, { error }) => {
+          if (error) {
+            Alert.alert(
+              'Friend Request Failed to Send',
+              'There was an error sending your friend request. Please try again.',
+              [{ text: 'OK', onPress: () => {} }],
+              { cancelable: true },
+            )
+          }
+          return (
+            <Button
+              activeOpacity={0.5}
+              disabled={isFriend || hasFriendRequest}
+              onPress={() => {
+                const variables = {
+                  recipientId,
+                  swipedLeft,
+                }
+                createFriendRequest({ variables })
+              }}
+            >
+              <Label>{determineButtonText(isFriend, hasFriendRequest)}</Label>
+            </Button>
+          )
+        }}
       </Mutation>
     )
   }
