@@ -12,6 +12,7 @@ export default class MutualFriends extends Component {
     numberOfPics: 4,
     title: 'Mutual Friends',
     navigateTo: 'PeopleList',
+    chatId: null,
   }
   render() {
     const {
@@ -20,6 +21,7 @@ export default class MutualFriends extends Component {
       numberOfPics,
       title,
       navigateTo,
+      chatId,
     } = this.props
     return (
       <ConnectionsRowContainer
@@ -27,6 +29,7 @@ export default class MutualFriends extends Component {
           this.props.navigation.navigate(navigateTo, {
             people: mutualFriends,
             title,
+            chatId,
           })
         }
       >

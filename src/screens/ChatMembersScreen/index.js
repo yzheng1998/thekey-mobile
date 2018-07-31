@@ -20,6 +20,7 @@ export default class ChatMembersScreen extends Component {
 
   render() {
     const people = this.props.navigation.getParam('people')
+    const chatId = this.props.navigation.getParam('chatId')
     return (
       <Background>
         <ChatMembersHeader
@@ -31,12 +32,12 @@ export default class ChatMembersScreen extends Component {
           visible={this.state.newChatModalVisible}
           handleClose={this.closeAddToChatModal}
           isExistingChat
+          chatId={chatId}
         />
         <Divider />
         <ScrollScreen>
           <Container>
             <FlatList
-              styles={{ backgroundColor: 'red', flex: 1 }}
               keyExtractor={person => person.id}
               data={people}
               renderItem={({ item: person }) => (

@@ -65,6 +65,7 @@ class ConversationScreen extends Component {
                   navigation={this.props.navigation}
                   participants={chat.participants}
                   userId={userId}
+                  chatId={chatId}
                 />
                 <MessagesDisplay
                   chat={chat}

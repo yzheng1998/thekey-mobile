@@ -106,7 +106,7 @@ export default class NewChatModal extends Component {
       },
     }
 
-    const { handleClose, isExistingChat, ...rest } = this.props
+    const { handleClose, isExistingChat, chatId, ...rest } = this.props
     const handleCloseModal = () => {
       this.setState({
         text: '',
@@ -122,12 +122,13 @@ export default class NewChatModal extends Component {
       <Modal animationType="slide" {...rest}>
         <Background>
           <NewChatModalHeader
+            chatId={chatId}
             isExistingChat={isExistingChat}
             handleClose={handleCloseModal}
             participantIds={participantIds}
-            createNewChat={chatId =>
+            createNewChat={id =>
               this.props.navigation.navigate('Conversation', {
-                chat: chatId,
+                chat: id,
               })
             }
             newChatButtonDisabled={this.state.newChatButtonDisabled}
