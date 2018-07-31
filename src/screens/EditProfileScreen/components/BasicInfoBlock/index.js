@@ -38,11 +38,13 @@ export default class BasicInfoBlock extends Component {
       <WideContainer>
         <Block>
           <HorizontalEditField
+            disabled
             title="First Name"
             onChangeText={text => onChangeText({ firstName: text })}
             value={firstName}
           />
           <HorizontalEditField
+            disabled
             title="Last Name"
             onChangeText={text => onChangeText({ lastName: text })}
             value={lastName}

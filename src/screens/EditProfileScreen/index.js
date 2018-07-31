@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Text } from 'react-native'
+import { Modal, Text, AsyncStorage } from 'react-native'
 import EditContactBlock from './components/EditContactBlock'
 import BasicInfoBlock from './components/BasicInfoBlock'
 import EditEducationBlock from './components/EditEducationBlock'
@@ -8,6 +8,7 @@ import PickerComponent from '../../components/PickerComponent'
 import EmojiModal from './components/EmojiModal'
 import ProfilePicture from './components/ProfilePicture'
 import InterestsSearchModal from './components/InterestsSearchModal'
+import EditProfileHeader from './components/EditProfileHeader'
 import EditPencil from 'react-native-vector-icons/MaterialIcons'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {
@@ -54,6 +55,13 @@ export default class EditProfileScreen extends Component {
   updateText = obj => {
     this.setState(obj)
   }
+
+  updateProfilePicture = pic => {
+    this.setState({ profilePicture: pic }, async () => {
+      const completeStore = await AsyncStorage.setItem('profilePicture', pic)
+      return completeStore
+    })
+  }
   openInterestsModal = () => {
     this.setState({ interestsModalVisible: true })
   }
@@ -78,6 +86,8 @@ export default class EditProfileScreen extends Component {
             facebook,
             twitter,
             profilePicture,
+            bio,
+            hometown,
             education,
             preferredWaysToMeet,
             tags,
@@ -88,23 +98,51 @@ export default class EditProfileScreen extends Component {
           } = displayData
 
           const toggleWayToMeet = emoji => {
-            if (preferredWaysToMeet.includes(emoji.value)) {
+            if (
+              preferredWaysToMeet
+                .map(obj => obj.wayToMeet)
+                .includes(emoji.wayToMeet)
+            ) {
               this.setState({
                 preferredWaysToMeet: preferredWaysToMeet.filter(
-                  el => el !== emoji.value,
+                  el => el.wayToMeet !== emoji.wayToMeet,
                 ),
               })
             } else
               this.setState({
-                preferredWaysToMeet: [...preferredWaysToMeet, emoji.value],
+                preferredWaysToMeet: [...preferredWaysToMeet, emoji],
               })
+          }
+
+          const preferredWaysToMeetIds = preferredWaysToMeet.map(p => p.id)
+          const tagIds = tags.map(t => t.id)
+          const updateProfileVariables = {
+            updateUserInput: {
+              email,
+              bio,
+              linkedIn,
+              facebook,
+              twitter,
+              profilePicture,
+              lookingFor,
+              hometown,
+              tags: tagIds,
+              preferredWaysToMeet: preferredWaysToMeetIds,
+            },
           }
           return (
             <Screen>
+              <EditProfileHeader
+                goBack={() => this.props.navigation.goBack()}
+                mutationVariables={updateProfileVariables}
+                refreshData={refetch}
+              />
               <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <ProfilePicture
                   profilePicture={profilePicture}
                   defaultProfilePicture={defaultProfilePicture}
+                  refreshData={refetch}
+                  updateProfilePicture={this.updateProfilePicture}
                 />
                 <BasicInfoBlock
                   state={displayData}
@@ -178,7 +216,6 @@ export default class EditProfileScreen extends Component {
                     })
                   }}
                   onSelection={toggleWayToMeet}
-                  options={waysToMeet}
                   selected={preferredWaysToMeet}
                 />
               </Modal>

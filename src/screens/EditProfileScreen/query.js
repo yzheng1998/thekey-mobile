@@ -1,5 +1,14 @@
 import gql from 'graphql-tag'
 
+export const GET_WAYS_TO_MEET = gql`
+  query waysToMeet {
+    waysToMeet {
+      id
+      wayToMeet
+    }
+  }
+`
+
 export const GET_USER = gql`
   query viewer {
     viewer {
