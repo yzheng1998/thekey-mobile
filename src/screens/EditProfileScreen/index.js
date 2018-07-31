@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Text } from 'react-native'
+import { Modal, Text, AsyncStorage } from 'react-native'
 import EditContactBlock from './components/EditContactBlock'
 import BasicInfoBlock from './components/BasicInfoBlock'
 import EditEducationBlock from './components/EditEducationBlock'
@@ -55,8 +55,12 @@ export default class EditProfileScreen extends Component {
   updateText = obj => {
     this.setState(obj)
   }
+
   updateProfilePicture = pic => {
-    this.setState({ profilePicture: pic })
+    this.setState({ profilePicture: pic }, async () => {
+      const completeStore = await AsyncStorage.setItem('profilePicture', pic)
+      return completeStore
+    })
   }
   openInterestsModal = () => {
     this.setState({ interestsModalVisible: true })
