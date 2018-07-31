@@ -19,7 +19,11 @@ export default class ProfilePicture extends Component {
     image: '',
   }
   render() {
-    const { profilePicture, defaultProfilePicture } = this.props
+    const {
+      profilePicture,
+      defaultProfilePicture,
+      updateProfilePicture,
+    } = this.props
     return (
       <Picture
         source={{
@@ -44,6 +48,15 @@ export default class ProfilePicture extends Component {
               },
               RNFetchBlob.wrap(this.state.image.path),
             )
+
+            const bucketString = 'https://s3.amazonaws.com/thekey-events/'
+            const stringContainingKey = data.signS3Url.url.split('/')[3]
+            const key = stringContainingKey.substring(
+              0,
+              stringContainingKey.indexOf('JPG?') + 4,
+            )
+            const finalUrl = bucketString + key
+            updateProfilePicture(finalUrl)
           }}
         >
           {signS3Url => (

@@ -55,6 +55,9 @@ export default class EditProfileScreen extends Component {
   updateText = obj => {
     this.setState(obj)
   }
+  updateProfilePicture = pic => {
+    this.setState({ profilePicture: pic })
+  }
   openInterestsModal = () => {
     this.setState({ interestsModalVisible: true })
   }
@@ -106,6 +109,7 @@ export default class EditProfileScreen extends Component {
                 preferredWaysToMeet: [...preferredWaysToMeet, emoji],
               })
           }
+
           const preferredWaysToMeetIds = preferredWaysToMeet.map(p => p.id)
           const tagIds = tags.map(t => t.id)
           const updateProfileVariables = {
@@ -133,6 +137,8 @@ export default class EditProfileScreen extends Component {
                 <ProfilePicture
                   profilePicture={profilePicture}
                   defaultProfilePicture={defaultProfilePicture}
+                  refreshData={refetch}
+                  updateProfilePicture={this.updateProfilePicture}
                 />
                 <BasicInfoBlock
                   state={displayData}
