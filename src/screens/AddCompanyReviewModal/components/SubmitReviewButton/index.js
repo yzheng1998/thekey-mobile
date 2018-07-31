@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { SubmitButton, SubmitButtonText } from './styles'
-import { Text } from 'react-native'
+import { Text, Alert } from 'react-native'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 
@@ -66,7 +66,15 @@ export default class SubmitReviewButton extends Component {
         }}
       >
         {(addCompanyReview, { error }) => {
-          if (error) return <Text>{error.message}</Text>
+          if (error) {
+            Alert.alert(
+              'Review Submission Failed',
+              'There was an error submitting your review. Please try again.',
+              [{ text: 'OK', onPress: () => {} }],
+              { cancelable: true },
+            )
+          }
+
           return (
             <SubmitButton
               disabled={!acceptedTerms}
