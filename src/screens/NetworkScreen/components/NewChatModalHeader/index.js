@@ -8,6 +8,7 @@ import {
   SafeView,
 } from './styles'
 import CreateChatButton from '../CreateChatButton'
+import AddToChatButton from '../AddToChatButton'
 
 export default class NewChatModalHeader extends Component {
   render() {
@@ -16,7 +17,9 @@ export default class NewChatModalHeader extends Component {
       participantIds,
       createNewChat,
       newChatButtonDisabled,
+      isExistingChat,
     } = this.props
+    const heading = isExistingChat ? 'Add to Chat' : 'New Message'
     return (
       <SafeView>
         <Background>
@@ -24,14 +27,23 @@ export default class NewChatModalHeader extends Component {
             <CancelButton onPress={handleClose}>
               <CancelText>Cancel</CancelText>
             </CancelButton>
-            <CreateChatButton
-              createNewChat={createNewChat}
-              participantIds={participantIds}
-              disabled={newChatButtonDisabled}
-              closeModal={handleClose}
-            />
+            {isExistingChat ? (
+              <AddToChatButton
+                createNewChat={createNewChat}
+                participantIds={participantIds}
+                disabled={newChatButtonDisabled}
+                closeModal={handleClose}
+              />
+            ) : (
+              <CreateChatButton
+                createNewChat={createNewChat}
+                participantIds={participantIds}
+                disabled={newChatButtonDisabled}
+                closeModal={handleClose}
+              />
+            )}
           </ButtonContainer>
-          <Heading>New Message</Heading>
+          <Heading>{heading}</Heading>
         </Background>
       </SafeView>
     )

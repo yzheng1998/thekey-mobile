@@ -5,20 +5,23 @@ export const TitleContainer = styled.View`
   width: 100%;
   justify-content: center;
   align-items: center;
-  background-color: ${themeGet('colors.background')};
-  height: 60px;
 `
 export const BackButton = styled.TouchableOpacity``
-export const BackButtonContainer = styled.View`
+export const PlusButton = styled.TouchableOpacity``
+export const ButtonRow = styled.View`
   width: 100%;
-  position: absolute;
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   padding-left: 16px;
+  padding-right: 16px;
+  height: 60px;
 `
 export const Title = styled.Text`
   font-size: 17px;
   color: ${themeGet('colors.fontHeader')};
   font-family: ${themeGet('fonts.heavy')};
+  position: absolute;
 `
 export const SafeView = styled.SafeAreaView`
   width: 100%;

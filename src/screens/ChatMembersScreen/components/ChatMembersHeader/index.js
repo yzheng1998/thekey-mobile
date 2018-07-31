@@ -1,25 +1,30 @@
 import React, { Component } from 'react'
 import BackArrow from 'react-native-vector-icons/Ionicons'
+import PlusIcon from 'react-native-vector-icons/Entypo'
 import {
   SafeView,
   Title,
   TitleContainer,
-  BackButtonContainer,
+  ButtonRow,
   BackButton,
+  PlusButton,
 } from './styles'
 
-export default class GroupMembersHeader extends Component {
+export default class ChatMembersHeader extends Component {
   render() {
-    const { navigation } = this.props
+    const { navigation, openAddToChatModal } = this.props
     return (
       <SafeView>
         <TitleContainer>
-          <Title>Group Members</Title>
-          <BackButtonContainer>
+          <Title>Chat Members</Title>
+          <ButtonRow>
             <BackButton onPress={() => navigation.goBack()}>
               <BackArrow name="ios-arrow-back" color="rgb(3,3,3)" size={26} />
             </BackButton>
-          </BackButtonContainer>
+            <PlusButton onPress={openAddToChatModal}>
+              <PlusIcon name="plus" size={23} color="black" />
+            </PlusButton>
+          </ButtonRow>
         </TitleContainer>
       </SafeView>
     )

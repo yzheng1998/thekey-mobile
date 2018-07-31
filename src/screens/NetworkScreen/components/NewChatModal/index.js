@@ -106,7 +106,7 @@ export default class NewChatModal extends Component {
       },
     }
 
-    const { handleClose, ...rest } = this.props
+    const { handleClose, isExistingChat, ...rest } = this.props
     const handleCloseModal = () => {
       this.setState({
         text: '',
@@ -122,6 +122,7 @@ export default class NewChatModal extends Component {
       <Modal animationType="slide" {...rest}>
         <Background>
           <NewChatModalHeader
+            isExistingChat={isExistingChat}
             handleClose={handleCloseModal}
             participantIds={participantIds}
             createNewChat={chatId =>

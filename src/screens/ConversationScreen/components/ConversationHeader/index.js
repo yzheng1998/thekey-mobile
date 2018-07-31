@@ -46,7 +46,7 @@ const ParticipantPictures = ({
           avatarSize={26}
           numberOfPics={numberOfPics}
           navigation={navigation}
-          navigateTo="GroupMembers"
+          navigateTo="ChatMembers"
         />
       </AvatarRowContainer>
     )}
