@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { SubmitButton, SubmitButtonText } from './styles'
-import { Text, Alert } from 'react-native'
+import { Alert } from 'react-native'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 
