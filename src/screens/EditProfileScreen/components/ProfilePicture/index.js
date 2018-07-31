@@ -3,7 +3,7 @@ import { Picture, PictureButton, EditLabel } from '../../styles'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 import RNFetchBlob from 'rn-fetch-blob'
-
+import { Alert } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
 
 const SIGN_S3_URL = gql`
@@ -46,28 +46,38 @@ export default class ProfilePicture extends Component {
             )
           }}
         >
-          {signS3Url => (
-            <PictureButton
-              onPress={() =>
-                ImagePicker.openPicker({
-                  width: 300,
-                  height: 300,
-                  cropping: true,
-                }).then(image => {
-                  const variables = {
-                    signS3UrlInput: {
-                      fileName: image.filename,
-                      contentType: image.mime,
-                    },
-                  }
-                  signS3Url({ variables })
-                  this.setState({ image })
-                })
-              }
-            >
-              <EditLabel>EDIT</EditLabel>
-            </PictureButton>
-          )}
+          {(signS3Url, { error }) => {
+            if (error) {
+              Alert.alert(
+                'Picture upload failed',
+                'There was an error uploading your picture. Please try again.',
+                [{ text: 'OK', onPress: () => {} }],
+                { cancelable: true },
+              )
+            }
+            return (
+              <PictureButton
+                onPress={() =>
+                  ImagePicker.openPicker({
+                    width: 300,
+                    height: 300,
+                    cropping: true,
+                  }).then(image => {
+                    const variables = {
+                      signS3UrlInput: {
+                        fileName: image.filename,
+                        contentType: image.mime,
+                      },
+                    }
+                    signS3Url({ variables })
+                    this.setState({ image })
+                  })
+                }
+              >
+                <EditLabel>EDIT</EditLabel>
+              </PictureButton>
+            )
+          }}
         </Mutation>
       </Picture>
     )
