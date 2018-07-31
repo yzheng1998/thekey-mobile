@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, AsyncStorage } from 'react-native'
+import { Text, View, AsyncStorage, Alert } from 'react-native'
 import LinkedInModal from 'react-native-linkedin'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
@@ -70,7 +70,13 @@ class LinkedInLoginButton extends Component {
               data.linkedinLogin.error && (
                 <Text>{data.linkedinLogin.error.message}</Text>
               )}
-            {error && <Text>Server error</Text>}
+            {error &&
+              Alert.alert(
+                'Failed to log in',
+                'There was an error logging you in. Please try again.',
+                [{ text: 'OK', onPress: () => {} }],
+                { cancelable: true },
+              )}
           </View>
         )}
       </Mutation>
