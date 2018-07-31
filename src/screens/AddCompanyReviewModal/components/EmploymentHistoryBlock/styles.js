@@ -10,18 +10,19 @@ export const StarsContainer = styled.View`
   justify-content: flex-start;
   height: 38;
 `
-export const SubBlock = styled.View`
+export const RowSubContainer = styled.View`
   width: 50%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  flex: 1;
-  justify-content: flex-start;
+  padding-left: 6px;
+  padding-right: 10px;
+  justify-content: space-between;
+  flex-direction: row;
 `
 export const SpacedHeading = styled.Text`
   font-size: 16px;
   font-family: ${themeGet('fonts.bold')};
   margin-top: 10px;
   margin-bottom: 10px;
+  width: 50%;
 `
 export const Avatar = styled.Image`
   width: 36px;

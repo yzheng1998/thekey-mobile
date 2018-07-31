@@ -3,7 +3,7 @@ import { CheckButton, CheckBoxContainer } from './styles'
 
 export default class CheckBox extends Component {
   render() {
-    const { isCurrentEmployee, handleCheckBox } = this.props
+    const { isCurrentEmployee, toggleCheckBox } = this.props
     return (
       <CheckBoxContainer>
         <CheckButton
@@ -15,7 +15,7 @@ export default class CheckBox extends Component {
           uncheckedIcon="circle-o"
           checked={isCurrentEmployee}
           onIconPress={() => {
-            handleCheckBox(isCurrentEmployee)
+            toggleCheckBox(isCurrentEmployee)
           }}
           textStyle={{
             flex: 1,

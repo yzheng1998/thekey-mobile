@@ -1,21 +1,23 @@
 import React, { Component } from 'react'
 import Picker from '../../components/PickerComponent'
+import CancelHeader from '../../components/CancelHeader'
 import DescriptionBlock from './components/DescriptionBlock'
 import EmploymentHistoryBlock from './components/EmploymentHistoryBlock'
 import OptionalInfoBlock from './components/OptionalInfoBlock'
 import TermsOfServiceConfirmation from './components/TermsOfServiceConfirmation'
 import SubmitReviewButton from './components/SubmitReviewButton'
 import { Background, Divider, ScreenScroll, SafeView } from './styles'
+import { KeyboardAvoidingView } from 'react-native'
 
 export default class AddCompanyReviewModal extends Component {
   state = {
     rating: 0,
     employmentType: 0,
     isCurrentEmployee: false,
-    yearLastWorked: new Date().getFullYear(),
+    yearLastWorked: '',
     yearPickerEnabled: false,
-    jobTitle: 'General Manager',
-    location: 'Enter Location',
+    jobTitle: '',
+    location: '',
     acceptedTerms: false,
     reviewTitle: '',
     reviewPros: '',
@@ -27,33 +29,25 @@ export default class AddCompanyReviewModal extends Component {
     this.setState(obj)
   }
   // handling state change for EmploymentHistoryBlock
-  onChangeCompanyText = text => {
+  onChangeCompanyText = companyName => {
+    this.setState({ companyName })
+  }
+  handleStarRating = rating => {
+    this.setState({ rating })
+  }
+  updateEmploymentType = employmentType => {
+    this.setState({ employmentType })
+  }
+  togglePicker = () => {
     this.setState({
-      companyName: text,
+      yearPickerEnabled: !this.state.yearPickerEnabled,
     })
   }
-  handleStarRating = val => {
-    this.setState({ rating: val })
-  }
-  updateEmploymentType = employment => {
-    this.setState({
-      employmentType: employment,
-    })
-  }
-  handleEnablePicker = () => {
-    this.setState({
-      yearPickerEnabled: true,
-    })
-  }
-  handleDisablePicker = () => {
-    this.setState({
-      yearPickerEnabled: false,
-    })
-  }
+
   handleUsePicker = obj => {
     this.setState(obj)
   }
-  handleCheckBox = isCurrentEmployee => {
+  toggleCheckBox = isCurrentEmployee => {
     this.setState({
       isCurrentEmployee: !isCurrentEmployee,
     })
@@ -70,8 +64,36 @@ export default class AddCompanyReviewModal extends Component {
   handleAcceptedTerms = () => {
     this.setState({ acceptedTerms: !this.state.acceptedTerms })
   }
+  clearState = () => {
+    this.setState({
+      rating: 0,
+      employmentType: 0,
+      isCurrentEmployee: false,
+      yearLastWorked: '',
+      yearPickerEnabled: false,
+      jobTitle: '',
+      location: '',
+      acceptedTerms: false,
+      reviewTitle: '',
+      reviewPros: '',
+      reviewCons: '',
+    })
+  }
   render() {
     const { isVisible, hideAddReview } = this.props
+    const {
+      rating,
+      employmentType,
+      isCurrentEmployee,
+      yearLastWorked,
+      yearPickerEnabled,
+      jobTitle,
+      location,
+      acceptedTerms,
+      reviewTitle,
+      reviewPros,
+      reviewCons,
+    } = this.state
     const { companyId, companyName, picture } = this.props.state
     return (
       <Background
@@ -80,79 +102,74 @@ export default class AddCompanyReviewModal extends Component {
         isVisible={isVisible}
       >
         <SafeView>
-          <ScreenScroll>
-            <EmploymentHistoryBlock
-              rating={this.state.rating}
-              handleStarRating={this.handleStarRating}
-              employmentType={this.state.employmentType}
-              updateEmploymentType={this.updateEmploymentType}
-              isCurrentEmployee={this.state.isCurrentEmployee}
-              yearLastWorked={this.state.yearLastWorked}
-              companyName={companyName}
-              onChangeCompanyText={this.onChangeCompanyText}
-              handleEnablePicker={this.handleEnablePicker}
-              handleCheckBox={this.handleCheckBox}
-              companyPicture={picture}
-            />
-            <Divider />
-            <DescriptionBlock
-              reviewTitle={this.state.reviewTitle}
-              reviewPros={this.state.reviewPros}
-              reviewCons={this.state.reviewCons}
-              onChangeText={this.onChangeText}
-            />
-            <Divider />
-            <OptionalInfoBlock
-              jobTitle={this.state.jobTitle}
-              location={this.state.location}
-              updateJobTitle={this.updateJobTitle}
-              updateLocation={this.updateLocation}
-            />
-            <Divider />
-            <TermsOfServiceConfirmation
-              acceptedTerms={this.state.acceptedTerms}
-              handleAcceptedTerms={this.handleAcceptedTerms}
-            />
-            <SubmitReviewButton
-              hideAddReview={hideAddReview}
-              clearState={() =>
-                this.setState({
-                  rating: 0,
-                  employmentType: 0,
-                  isCurrentEmployee: false,
-                  yearLastWorked: new Date().getFullYear(),
-                  yearPickerEnabled: false,
-                  jobTitle: 'General Manager',
-                  location: 'Enter Location',
-                  acceptedTerms: false,
-                  reviewTitle: '',
-                  reviewPros: '',
-                  reviewCons: '',
-                })
-              }
-              rating={this.state.rating}
-              title={this.state.reviewTitle}
-              pros={this.state.reviewPros}
-              cons={this.state.reviewCons}
-              employmentType={this.employmentType}
-              current={this.state.isCurrentEmployee}
-              jobTitle={this.state.jobTitle}
-              location={this.state.location}
-              acceptedTerms={this.state.acceptedTerms}
-              companyId={companyId}
-              lastWorked={this.state.yearLastWorked}
-              navigation={this.props.navigation}
-            />
-          </ScreenScroll>
+          <KeyboardAvoidingView enabled behavior="position">
+            <ScreenScroll>
+              <CancelHeader
+                onCancel={() => {
+                  hideAddReview()
+                  this.clearState()
+                }}
+                title="Add Company Review"
+              />
+              <EmploymentHistoryBlock
+                rating={rating}
+                handleStarRating={this.handleStarRating}
+                employmentType={employmentType}
+                updateEmploymentType={this.updateEmploymentType}
+                isCurrentEmployee={isCurrentEmployee}
+                yearLastWorked={yearLastWorked}
+                companyName={companyName}
+                onChangeCompanyText={this.onChangeCompanyText}
+                togglePicker={this.togglePicker}
+                toggleCheckBox={this.toggleCheckBox}
+                companyPicture={picture}
+              />
+              <Divider />
+              <DescriptionBlock
+                reviewTitle={reviewTitle}
+                reviewPros={reviewPros}
+                reviewCons={reviewCons}
+                onChangeText={this.onChangeText}
+              />
+              <Divider />
+              <OptionalInfoBlock
+                jobTitle={jobTitle}
+                location={location}
+                updateJobTitle={this.updateJobTitle}
+                updateLocation={this.updateLocation}
+              />
+              <Divider />
+              <TermsOfServiceConfirmation
+                acceptedTerms={acceptedTerms}
+                handleAcceptedTerms={this.handleAcceptedTerms}
+              />
+              <SubmitReviewButton
+                hideAddReview={hideAddReview}
+                clearState={this.clearState}
+                rating={rating}
+                title={reviewTitle}
+                pros={reviewPros}
+                cons={reviewCons}
+                employmentType={this.employmentType}
+                current={isCurrentEmployee}
+                jobTitle={jobTitle}
+                location={location}
+                acceptedTerms={acceptedTerms}
+                companyId={companyId}
+                lastWorked={yearLastWorked}
+                navigation={this.props.navigation}
+              />
+            </ScreenScroll>
+          </KeyboardAvoidingView>
         </SafeView>
-        {this.state.yearPickerEnabled && (
+        {yearPickerEnabled && (
           <Picker
             options={EmploymentHistoryBlock.createYearData()}
             doneOnPress={() => {
-              this.handleDisablePicker()
+              this.togglePicker()
             }}
             onValueChange={this.handleUsePicker}
-            value={this.state.yearLastWorked}
+            value={yearLastWorked}
             keyName="yearLastWorked"
           />
         )}

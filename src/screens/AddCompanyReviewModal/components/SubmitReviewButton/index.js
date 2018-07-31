@@ -7,6 +7,7 @@ import { Mutation } from 'react-apollo'
 const ADD_COMPANY_REVIEW = gql`
   mutation addCompanyReview($addCompanyReviewInput: AddCompanyReviewInput!) {
     addCompanyReview(addCompanyReviewInput: $addCompanyReviewInput) {
+      id
       companyReview {
         id
         rating
@@ -64,6 +65,7 @@ export default class SubmitReviewButton extends Component {
           hideAddReview()
           clearState()
         }}
+        key={companyId}
       >
         {(addCompanyReview, { error }) => {
           if (error) return <Text>{error.message}</Text>

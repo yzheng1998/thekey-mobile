@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 import {
   Buttons,
   StarsContainer,
-  SubBlock,
   SpacedHeading,
   Avatar,
+  RowSubContainer,
 } from './styles'
 import {
   BlockBackground,
   Block,
   Heading,
   InputField,
-  RowHeader,
   Text,
   RowContainer,
 } from '../../styles'
@@ -66,53 +65,53 @@ export default class EmploymentHistoryBlock extends Component {
       updateEmploymentType,
       employmentType,
       isCurrentEmployee,
-      handleCheckBox,
+      toggleCheckBox,
       yearLastWorked,
       companyName,
       onChangeCompanyText,
-      handleEnablePicker,
+      togglePicker,
       companyPicture,
     } = this.props
     const employmentTypes = ['Full-time', 'Part-time', 'Internship']
     return (
       <BlockBackground>
-        <RowHeader>
-          <SubBlock>
-            <SpacedHeading>Select Rating</SpacedHeading>
-            <SpacedHeading>Company Name</SpacedHeading>
-          </SubBlock>
-          <SubBlock>
-            <StarsContainer>
-              <Stars
-                rating={rating}
-                update={val => {
-                  handleStarRating(val)
-                }}
-                spacing={10}
-                starSize={23}
-                count={5}
-                fullStar={fullStar}
-                emptyStar={emptyStar}
-              />
-            </StarsContainer>
-            <RowHeader>
-              <InputField
-                placeholderTextColor="rgb(250, 53, 121)"
-                placeholder={companyName}
-                onChangeText={text => {
-                  onChangeCompanyText(text)
-                }}
-              />
-              <Avatar
-                source={{
-                  uri: companyPicture,
-                }}
-              />
-            </RowHeader>
-          </SubBlock>
-        </RowHeader>
+        <RowContainer>
+          <SpacedHeading>Select Rating</SpacedHeading>
+          <StarsContainer>
+            <Stars
+              rating={rating}
+              update={val => {
+                handleStarRating(val)
+              }}
+              spacing={10}
+              starSize={23}
+              count={5}
+              fullStar={fullStar}
+              emptyStar={emptyStar}
+            />
+          </StarsContainer>
+        </RowContainer>
+        <RowContainer>
+          <SpacedHeading>Company Name</SpacedHeading>
+          <RowSubContainer>
+            <InputField
+              placeholderTextColor="rgb(250, 53, 121)"
+              placeholder={companyName}
+              onChangeText={text => {
+                onChangeCompanyText(text)
+              }}
+            />
+            <Avatar
+              source={{
+                uri: companyPicture,
+              }}
+            />
+          </RowSubContainer>
+        </RowContainer>
         <Block>
-          <Heading>Employment Type</Heading>
+          <RowContainer>
+            <Heading>Employment Type</Heading>
+          </RowContainer>
           <Buttons
             onPress={index => {
               this.setState({
@@ -133,11 +132,11 @@ export default class EmploymentHistoryBlock extends Component {
         <Block>
           <CheckBox
             isCurrentEmployee={isCurrentEmployee}
-            handleCheckBox={handleCheckBox}
+            toggleCheckBox={toggleCheckBox}
           />
           <RowContainer>
-            <Text onPress={() => handleEnablePicker()}>
-              Last worked here in... <Text>{yearLastWorked}</Text>
+            <Text onPress={() => togglePicker()}>
+              Last worked here in {yearLastWorked || `...`}
             </Text>
           </RowContainer>
         </Block>
