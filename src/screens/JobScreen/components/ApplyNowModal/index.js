@@ -18,7 +18,7 @@ const CUSTOM_TEMPLATE = 1
 const coverLetter =
   'This would be a default cover letter that a user could configure in their settings. From here they could send as-is, or adjust the text to better suit the position in question.'
 
-export default class ApplyNowScreen extends Component {
+export default class ApplyNowModal extends Component {
   constructor() {
     super()
     this.state = {
@@ -34,12 +34,25 @@ export default class ApplyNowScreen extends Component {
       content: selectedIndex === CUSTOM_TEMPLATE ? '' : coverLetter,
     })
   }
+  clearContent = () => {
+    this.setState({ content: '' })
+  }
   render() {
     const { selectedIndex } = this.state
+    const { isVisible, toggleApplyModal } = this.props
     return (
-      <BigContainer>
+      <BigContainer
+        isVisible={isVisible}
+        animationIn="slideInRight"
+        animationOut="slideOutRight"
+      >
         <Container>
-          <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
+          <BackButtonContainer
+            onPress={() => {
+              toggleApplyModal()
+              this.clearContent()
+            }}
+          >
             <BackButton
               name="ios-arrow-back"
               size={27}
@@ -66,9 +79,11 @@ export default class ApplyNowScreen extends Component {
           />
         </Container>
         <ApplyButton
+          toggleApplyModal={toggleApplyModal}
           coverLetter={this.state.content}
           navigation={this.props.navigation}
-          id={this.props.navigation.getParam('id')}
+          id={this.props.id}
+          clearContent={this.clearContent}
         />
         <KeyboardSpacer />
       </BigContainer>

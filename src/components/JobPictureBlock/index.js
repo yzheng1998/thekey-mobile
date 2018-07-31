@@ -39,7 +39,7 @@ class JobPictureBlock extends Component {
       commitment,
       location,
       time,
-      id,
+      toggleApplyModal,
     } = this.props
     return (
       <HeaderContainer>
@@ -53,9 +53,7 @@ class JobPictureBlock extends Component {
             </Description>
             <Deadline>{timePosted(time)}</Deadline>
           </DescriptionContainer>
-          <Apply
-            onPress={() => this.props.navigation.navigate('ApplyNow', { id })}
-          >
+          <Apply onPress={toggleApplyModal}>
             <ApplyButton>APPLY NOW</ApplyButton>
           </Apply>
         </PictureHeader>

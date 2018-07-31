@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
+import Modal from 'react-native-modal'
 
-export const BigContainer = styled.View`
+export const BigContainer = styled(Modal)`
   flex: 1;
+  margin: 0px;
 `
 export const Title = styled.Text`
   font-family: ${themeGet('fonts.bold')};

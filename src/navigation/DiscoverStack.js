@@ -11,7 +11,6 @@ import Summary from '../screens/JobSummaryScreen'
 import ReviewsScreen from '../screens/ReviewsScreen'
 import ReviewScreen from '../screens/ReviewScreen'
 import ProfileScreen from '../screens/ProfileScreen'
-import ApplyNowScreen from '../screens/ApplyNowScreen'
 import SimilarJobsScreen from '../screens/SimilarJobsScreen'
 import SimilarEventsScreen from '../screens/SimilarEventsScreen'
 import PeopleList from '../screens/PeopleList'
@@ -112,12 +111,6 @@ const DiscoverStack = createStackNavigator(
     },
     AddExperience: {
       screen: AddExperienceForm,
-      navigationOptions: () => ({
-        header: null,
-      }),
-    },
-    ApplyNow: {
-      screen: ApplyNowScreen,
       navigationOptions: () => ({
         header: null,
       }),

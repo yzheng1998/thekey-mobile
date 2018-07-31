@@ -14,6 +14,7 @@ import BackButton from 'react-native-vector-icons/Ionicons'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import JobStarButton from '../../components/JobStarButton'
+import ApplyNowModal from './components/ApplyNowModal'
 
 const GET_JOB = gql`
   query job($id: ID!) {
@@ -42,6 +43,13 @@ const GET_JOB = gql`
 `
 
 class JobScreen extends Component {
+  state = {
+    showApplyModal: false,
+  }
+  toggleApplyModal = () => {
+    this.setState({ showApplyModal: !this.state.showApplyModal })
+  }
+
   render() {
     const variables = {
       id: this.props.navigation.getParam('id'),
@@ -78,6 +86,7 @@ class JobScreen extends Component {
                 commitment={commitment}
                 location={location}
                 time={createdAt}
+                toggleApplyModal={this.toggleApplyModal}
               />
               <AboutBlock
                 navigation={this.props.navigation}
@@ -103,6 +112,11 @@ class JobScreen extends Component {
                   id={this.props.navigation.getParam('id')}
                 />
               </ButtonHeader>
+              <ApplyNowModal
+                toggleApplyModal={this.toggleApplyModal}
+                id={this.props.navigation.getParam('id')}
+                isVisible={this.state.showApplyModal}
+              />
             </Container>
           )
         }}
