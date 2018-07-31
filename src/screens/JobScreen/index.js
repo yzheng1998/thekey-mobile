@@ -23,6 +23,7 @@ const GET_JOB = gql`
       title
       company {
         name
+        about
       }
       description
       picture
@@ -32,8 +33,6 @@ const GET_JOB = gql`
       tags {
         name
       }
-      aboutRole
-      aboutCompany
       bringToRole
       industry
       createdAt
@@ -70,8 +69,6 @@ class JobScreen extends Component {
             commitment,
             createdAt,
             tags,
-            aboutRole,
-            aboutCompany,
             bringToRole,
             industry,
             isInterested,
@@ -91,8 +88,8 @@ class JobScreen extends Component {
               <AboutBlock
                 navigation={this.props.navigation}
                 about={description}
-                aboutRole={aboutRole}
-                aboutCompany={aboutCompany}
+                aboutRole={description}
+                aboutCompany={company.about}
                 bringToRole={bringToRole}
                 industry={industry}
                 commitment={commitment}

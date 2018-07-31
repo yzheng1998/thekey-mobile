@@ -11,6 +11,12 @@ import {
 } from './styles'
 import BackButton from 'react-native-vector-icons/Ionicons'
 
+const commitmentOptions = [
+  { value: 'FULLTIME', label: 'Full-Time' },
+  { value: 'PARTTIME', label: 'Part-Time' },
+  { value: 'INTERNSHIP', label: 'Internship' },
+]
+
 class JobSummaryScreen extends Component {
   static defaultProps = {
     aboutRole:
@@ -47,7 +53,9 @@ class JobSummaryScreen extends Component {
           <Body>{bringToRole}</Body>
           <Header>Job Details</Header>
           <Subtitle>Employment Type</Subtitle>
-          <Detail>{commitment}</Detail>
+          <Detail>
+            {commitmentOptions.find(el => el.value === commitment).label}
+          </Detail>
           <Subtitle>Industry</Subtitle>
           <Detail>{industry}</Detail>
         </Container>
