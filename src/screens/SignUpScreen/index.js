@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
-import { KeyboardAvoidingView } from 'react-native'
+import { KeyboardAvoidingView, Text, Alert } from 'react-native'
 import { ScreenContainer, SubtitleView, Subtitle } from './styles'
 import Header from '../../components/Header'
 import LineInput from '../../components/LineInput'
 import Icon from 'react-native-vector-icons/Feather'
 import RegisterButton from '../../components/RegisterButton'
+import { LoginButton, AccessToken } from 'react-native-fbsdk'
+import axios from 'axios'
+
+const FACEBOOK_API_URL = 'https://graph.facebook.com/v3.1/'
 
 export default class SignUpScreen extends Component {
   state = {
@@ -91,6 +95,38 @@ export default class SignUpScreen extends Component {
             }
             buttonText="SIGN UP & ACCEPT"
             disabled={disabled}
+          />
+          <Text>asf</Text>
+          <LoginButton
+            readPermissions={['email']}
+            onLoginFinished={(error, result) => {
+              if (error) {
+                Alert.alert('Error Ocurred', 'Could not log in to facebook')
+              } else if (result.isCancelled) {
+                Alert.alert(
+                  'Error Occurred',
+                  'facebook log in was unexpectedly cancelled',
+                )
+              } else {
+                AccessToken.getCurrentAccessToken().then(async data => {
+                  const token = data.accessToken.toString()
+
+                  const { data: user } = await axios.get(
+                    `${FACEBOOK_API_URL}/me?fields=id,name,first_name,last_name,email&access_token=${token}`,
+                  )
+
+                  this.props.navigation.navigate('PersonalDetails', {
+                    userInfo: {
+                      facebookToken: token,
+                      firstName: user.first_name,
+                      lastName: user.last_name,
+                      email: user.email,
+                      password: '',
+                    },
+                  })
+                })
+              }
+            }}
           />
         </KeyboardAvoidingView>
       </ScreenContainer>

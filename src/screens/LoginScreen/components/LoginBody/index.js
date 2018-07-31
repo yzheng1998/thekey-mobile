@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, AsyncStorage } from 'react-native'
+import { View, AsyncStorage, Alert } from 'react-native'
 import {
   Container,
   TextInputContainer,
@@ -21,10 +21,19 @@ import LockIcon from 'react-native-vector-icons/Feather'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 import LinkedInLoginButton from '../../components/LinkedInLoginButton'
+import { LoginButton, AccessToken } from 'react-native-fbsdk'
 
 const LOGIN_USER = gql`
-  mutation loginUser($email: String!, $password: String!) {
-    loginUser(email: $email, password: $password) {
+  mutation loginUser(
+    $email: String
+    $password: String
+    $facebookToken: String
+  ) {
+    loginUser(
+      email: $email
+      password: $password
+      facebookToken: $facebookToken
+    ) {
       user {
         id
         firstName
@@ -121,6 +130,28 @@ class LoginBody extends Component {
                   <LinkedInLoginButton />
                 </LinkedInIconContainer>
               </SmallContainer>
+              <LoginButton
+                readPermissions={['email']}
+                onLoginFinished={(fbError, result) => {
+                  if (fbError) {
+                    Alert.alert('Error Ocurred', 'Could not log in to facebook')
+                  } else if (result.isCancelled) {
+                    Alert.alert(
+                      'Error Occurred',
+                      'facebook log in was unexpectedly cancelled',
+                    )
+                  } else {
+                    AccessToken.getCurrentAccessToken().then(async response => {
+                      const token = response.accessToken.toString()
+
+                      const variables = {
+                        facebookToken: token,
+                      }
+                      loginUser({ variables })
+                    })
+                  }
+                }}
+              />
             </Container>
           )}
         </Mutation>
