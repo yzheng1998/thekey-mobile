@@ -12,3 +12,5 @@ export const ButtonRow = styled.View`
 `
 
 export const BackButton = styled.TouchableOpacity``
+
+export const ReportUserButton = styled.TouchableOpacity``

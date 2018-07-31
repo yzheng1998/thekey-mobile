@@ -12,6 +12,7 @@ import EventsInCommon from './components/EventsInCommon'
 import { Query } from 'react-apollo'
 import { GET_USER } from './query'
 import nodeEmoji from 'node-emoji'
+import ActionSheet from 'react-native-actionsheet'
 
 const defaultProfilePicture =
   'https://images.unsplash.com/photo-1519145897500-869c40ccb024?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc363c8e033813d4f7b798846bb13a24&auto=format&fit=crop&w=582&q=80'
@@ -25,6 +26,9 @@ const lookingForOptions = [
 ]
 
 export default class MemberScreen extends Component {
+  showActionSheet = () => {
+    this.ActionSheet.show()
+  }
   render() {
     return (
       <Query
@@ -62,6 +66,15 @@ export default class MemberScreen extends Component {
           )
           return (
             <ScreenContainer>
+              <ActionSheet
+                ref={o => {
+                  this.ActionSheet = o
+                }}
+                options={['Report', 'Cancel']}
+                cancelButtonIndex={1}
+                destructiveButtonIndex={0}
+                onPress={() => null}
+              />
               <MyProfilePicBlock
                 id={id}
                 name={`${firstName} ${lastName}`}
@@ -74,6 +87,7 @@ export default class MemberScreen extends Component {
                 refreshScreen={refetch}
               />
               <ButtonRowView
+                reportUser={this.showActionSheet}
                 goBack={() => this.props.navigation.goBack()}
                 showSettings={() =>
                   this.setState({
@@ -81,6 +95,7 @@ export default class MemberScreen extends Component {
                   })
                 }
               />
+
               <MyProfileBioBlock tagData={tags} bioText={bio} />
               <Divider />
               <Description
