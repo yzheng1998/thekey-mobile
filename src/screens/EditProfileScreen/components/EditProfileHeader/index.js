@@ -11,7 +11,7 @@ import UpdateProfileButton from '../UpdateProfileButton'
 
 export default class EditProfileHeader extends Component {
   render() {
-    const { goBack, mutationVariables } = this.props
+    const { goBack, mutationVariables, refreshData } = this.props
     return (
       <SafeView>
         <Background>
@@ -22,6 +22,7 @@ export default class EditProfileHeader extends Component {
             <UpdateProfileButton
               variables={mutationVariables}
               goBack={goBack}
+              refreshData={refreshData}
             />
           </ButtonContainer>
           <Heading>Edit Profile</Heading>

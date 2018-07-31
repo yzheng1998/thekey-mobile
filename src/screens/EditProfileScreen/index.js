@@ -127,6 +127,7 @@ export default class EditProfileScreen extends Component {
               <EditProfileHeader
                 goBack={() => this.props.navigation.goBack()}
                 mutationVariables={updateProfileVariables}
+                refreshData={refetch}
               />
               <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
                 <ProfilePicture
@@ -205,7 +206,6 @@ export default class EditProfileScreen extends Component {
                     })
                   }}
                   onSelection={toggleWayToMeet}
-                  options={waysToMeet}
                   selected={preferredWaysToMeet}
                 />
               </Modal>
