@@ -13,8 +13,7 @@ import { Text } from 'react-native'
 
 export default class EmojiModal extends Component {
   render() {
-    const { doneOnPress, options, onSelection, selected } = this.props
-    console.log('selected', selected)
+    const { doneOnPress, onSelection, selected } = this.props
     return (
       <ModalContainer>
         <DoneButton onPress={doneOnPress}>
@@ -25,14 +24,13 @@ export default class EmojiModal extends Component {
             {({ loading, error, data, refetch }) => {
               if (loading) return <Text>Loading...</Text>
               if (error) return <Text>Error! ${error.message}</Text>
-              console.log('data', data)
               return (
                 <EmojiWrapper>
                   {data.waysToMeet.map(emoji => (
                     <EmojiSelector
                       onSelection={onSelection}
                       emoji={emoji}
-                      key={emoji.label}
+                      key={emoji.id}
                       selected={selected}
                     />
                   ))}

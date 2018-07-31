@@ -91,10 +91,14 @@ export default class EditProfileScreen extends Component {
           } = displayData
 
           const toggleWayToMeet = emoji => {
-            if (preferredWaysToMeet.includes(emoji.value)) {
+            if (
+              preferredWaysToMeet
+                .map(obj => obj.wayToMeet)
+                .includes(emoji.wayToMeet)
+            ) {
               this.setState({
                 preferredWaysToMeet: preferredWaysToMeet.filter(
-                  el => el !== emoji.value,
+                  el => el.wayToMeet !== emoji.wayToMeet,
                 ),
               })
             } else
