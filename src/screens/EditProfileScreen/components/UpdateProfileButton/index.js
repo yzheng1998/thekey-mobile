@@ -20,13 +20,15 @@ const UPDATE_USER = gql`
 
 export default class UpdateProfileButton extends Component {
   render() {
-    const { variables, goBack } = this.props
-    console.log('variables', variables)
+    const { variables, goBack, refreshData } = this.props
     return (
       <Mutation
         mutation={UPDATE_USER}
         variables={variables}
-        onCompleted={() => goBack()}
+        onCompleted={() => {
+          goBack()
+          refreshData()
+        }}
       >
         {updateUser => (
           <Button

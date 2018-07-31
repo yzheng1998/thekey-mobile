@@ -21,7 +21,7 @@ export default class EmojiModal extends Component {
         </DoneButton>
         <EmojiContainer>
           <Query query={GET_WAYS_TO_MEET}>
-            {({ loading, error, data, refetch }) => {
+            {({ loading, error, data }) => {
               if (loading) return <Text>Loading...</Text>
               if (error) return <Text>Error! ${error.message}</Text>
               return (
