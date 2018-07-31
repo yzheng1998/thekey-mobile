@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text } from 'react-native'
+import { Alert } from 'react-native'
 import { Button, Placeholder } from '../styles'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
@@ -37,7 +37,14 @@ export default class ApplyButton extends Component {
     return (
       <Mutation mutation={SEND_APPLICATION} onCompleted={toggleApplyModal}>
         {(applyToJob, { error }) => {
-          if (error) return <Text>(error.message)</Text>
+          if (error) {
+            Alert.alert(
+              'Failed to submit application',
+              'There was an error submitting your application. Please try again.',
+              [{ text: 'OK', onPress: () => {} }],
+              { cancelable: true },
+            )
+          }
           return (
             <Button
               onPress={() => {
