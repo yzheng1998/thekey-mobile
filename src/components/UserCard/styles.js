@@ -31,3 +31,13 @@ export const Picture = styled.Image`
   border-radius: 23px;
   margin: 6px;
 `
+export const AddedText = styled.Text`
+  font-size: 14px;
+  font-family: ${themeGet('fonts.medium')};
+  color: ${themeGet('colors.fontSubtitle.primary')};
+`
+export const RightContainer = styled.View`
+  justify-content: center;
+  align-items: center;
+  right: 30px;
+`
