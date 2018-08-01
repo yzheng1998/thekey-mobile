@@ -23,28 +23,43 @@ const SEND_FRIEND_REQUEST = gql`
     }
   }
 `
+
+const resetAction = StackActions.reset({
+  index: 1,
+  actions: [
+    NavigationActions.navigate({ routeName: 'Discover' }),
+    NavigationActions.navigate({ routeName: 'Profile' }),
+  ],
+})
+
 class QRScannerScreen extends Component {
+  state = { scannerEnabled: true }
   render() {
-    const resetAction = StackActions.reset({
-      index: 1,
-      actions: [
-        NavigationActions.navigate({ routeName: 'Discover' }),
-        NavigationActions.navigate({ routeName: 'Profile' }),
-      ],
-    })
     return (
       <Mutation
         mutation={SEND_FRIEND_REQUEST}
         onCompleted={() => this.props.navigation.dispatch(resetAction)}
+        onError={() =>
+          Alert.alert(
+            'Error',
+            'Could not scan QR Code',
+            [
+              {
+                text: 'Try Again',
+                onPress: () => this.setState({ scannerEnabled: true }),
+              },
+            ],
+            { cancelable: false },
+          )
+        }
       >
-        {(createFriendRequest, { error }) => (
+        {createFriendRequest => (
           <View
             style={{
               flex: 1,
               flexDirection: 'row',
             }}
           >
-            {error && Alert.alert('Error', 'Could not read QR code')}
             <RNCamera
               barCodeTypes={[RNCamera.Constants.BarCodeType.qr]}
               flashMode={RNCamera.Constants.FlashMode.on}
@@ -53,12 +68,16 @@ class QRScannerScreen extends Component {
                 justifyContent: 'flex-end',
                 alignItems: 'center',
               }}
-              onBarCodeRead={qrCode => {
-                const variables = {
-                  recipientId: qrCode.data,
-                  swipedLeft: false,
+              onBarCodeRead={async qrCode => {
+                if (this.state.scannerEnabled) {
+                  this.setState({ scannerEnabled: false }, () => {
+                    const variables = {
+                      recipientId: qrCode.data,
+                      swipedLeft: false,
+                    }
+                    createFriendRequest({ variables })
+                  })
                 }
-                createFriendRequest({ variables })
               }}
               ref={cam => {
                 this.camera = cam
