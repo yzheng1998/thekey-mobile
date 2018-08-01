@@ -110,7 +110,13 @@ class LoginBody extends Component {
                 data.loginUser.error && (
                   <Message>{data.loginUser.error.message}</Message>
                 )}
-              {error && <Message>Server error</Message>}
+              {error &&
+                Alert.alert(
+                  'Failed to log in',
+                  'There was an error logging you in. Please try again.',
+                  [{ text: 'OK', onPress: () => {} }],
+                  { cancelable: true },
+                )}
               <SignInButton
                 onPress={() => {
                   const variables = {
@@ -123,7 +129,6 @@ class LoginBody extends Component {
               >
                 <SignInText>SIGN IN</SignInText>
               </SignInButton>
-
               <SmallContainer>
                 <Subtitle>or sign in with</Subtitle>
                 <LinkedInIconContainer>

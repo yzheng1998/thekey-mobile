@@ -108,11 +108,13 @@ export default class NewChatModal extends Component {
 
     const { handleClose, isExistingChat, ...rest } = this.props
     const handleCloseModal = () => {
-      this.setState({
-        text: '',
-        users: [],
-      })
-      handleClose()
+      this.setState(
+        {
+          text: '',
+          tags: [],
+        },
+        () => handleClose(),
+      )
     }
 
     const participantIds = this.state.participants.map(
@@ -125,11 +127,12 @@ export default class NewChatModal extends Component {
             isExistingChat={isExistingChat}
             handleClose={handleCloseModal}
             participantIds={participantIds}
-            createNewChat={chatId =>
+            createNewChat={chatId => {
               this.props.navigation.navigate('Conversation', {
                 chat: chatId,
               })
-            }
+              handleCloseModal()
+            }}
             newChatButtonDisabled={this.state.newChatButtonDisabled}
           />
           <ThinDivider />

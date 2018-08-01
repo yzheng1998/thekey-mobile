@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScreenContainer, SubtitleView, Subtitle } from './styles'
-import { Text } from 'react-native'
+import { Alert } from 'react-native'
 import Header from '../../components/Header'
 import RegisterButton from '../../components/RegisterButton'
 import SubmitButton from '../../components/SubmitButton'
@@ -171,7 +171,12 @@ class ResumeUploadScreen extends Component {
             >
               {(sendMembershipApplication, { error }) => {
                 if (error) {
-                  return <Text>{error.message}</Text>
+                  Alert.alert(
+                    'Failed to upload your application',
+                    'There was an error sending in your application. Please try again.',
+                    [{ text: 'OK', onPress: () => {} }],
+                    { cancelable: true },
+                  )
                 }
                 return (
                   <SubmitButton
