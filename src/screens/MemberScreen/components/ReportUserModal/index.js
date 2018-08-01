@@ -41,7 +41,7 @@ export default class ReportUserModal extends Component {
     this.setState({ response: '' })
   }
   render() {
-    const { isVisible, closeModal } = this.props
+    const { isVisible, closeModal, reportedUserId } = this.props
     return (
       <Background
         animationIn="slideInRight"
@@ -64,7 +64,13 @@ export default class ReportUserModal extends Component {
                 />
               </TextContainer>
             </ScrollView>
-            <ReportProfileButton />
+            <ReportProfileButton
+              disabled={this.state.response === ''}
+              closeModal={closeModal}
+              clearResponse={this.clearResponse}
+              message={this.state.response}
+              reportedUserId={reportedUserId}
+            />
           </View>
           <KeyboardSpacer />
         </SafeView>
