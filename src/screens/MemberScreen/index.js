@@ -142,6 +142,7 @@ export default class MemberScreen extends Component {
                 twitter={twitter}
               />
               <ReportUserModal
+                reportedUserId={id}
                 isVisible={this.state.showReportUserModal}
                 closeModal={() =>
                   this.setState({
