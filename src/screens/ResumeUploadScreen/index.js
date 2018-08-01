@@ -68,6 +68,7 @@ class ResumeUploadScreen extends Component {
       ],
     })
   }
+  parseUrl = url => url.substring(0, url.indexOf('.pdf?') + 4)
 
   handleFile = (err, res) => {
     const id = uuid()
@@ -160,46 +161,51 @@ class ResumeUploadScreen extends Component {
             buttonText={buttonText}
             onPress={this.handlePress}
           />
-          {this.state.resumeListData.length > 0 &&
-            this.state.resumeListData.every(
-              resume => resume.progress === '100%',
-            ) && (
-              <Mutation
-                mutation={SEND_MEMBERSHIP_APPLICATION}
-                onCompleted={() => {
-                  this.props.navigation.navigate('Splash')
-                }}
-              >
-                {(sendMembershipApplication, { error }) => {
-                  if (error) {
-                    Alert.alert(
-                      'Failed to upload your application',
-                      'There was an error sending in your application. Please try again.',
-                      [{ text: 'OK', onPress: () => {} }],
-                      { cancelable: true },
-                    )
-                  }
-                  return (
-                    <SubmitButton
-                      onPress={() => {
-                        const userInfoFinal = {
-                          ...userInfo,
-                          resumes: this.state.resumeListData.map(resume => ({
-                            resume: resume.url,
-                          })),
-                        }
-                        const variables = {
-                          sendMembershipApplicationInput: { ...userInfoFinal },
-                        }
-                        sendMembershipApplication({ variables })
-                      }}
-                      buttonText="SUBMIT"
-                    />
-                  )
-                }}
-              </Mutation>
-            )}
         </SafeAreaView>
+
+        {this.state.resumeListData.length > 0 &&
+          this.state.resumeListData.every(
+            resume => resume.progress === '100%',
+          ) && (
+            <Mutation
+              mutation={SEND_MEMBERSHIP_APPLICATION}
+              onCompleted={() => {
+                this.props.navigation.navigate('Splash')
+              }}
+            >
+              {(sendMembershipApplication, { error }) => {
+                if (error) {
+                  Alert.alert(
+                    'Failed to upload your application',
+                    'There was an error sending in your application. Please try again.',
+                    [{ text: 'OK', onPress: () => {} }],
+                    { cancelable: true },
+                  )
+                }
+                return (
+                  <SubmitButton
+                    onPress={() => {
+                      const userInfoFinal = {
+                        ...userInfo,
+                        resumes: this.state.resumeListData.map(resume => ({
+                          resume: this.parseUrl(resume.url),
+                          // resume: resume.url,
+                        })),
+                      }
+                      const variables = {
+                        sendMembershipApplicationInput: { ...userInfoFinal },
+                      }
+                      sendMembershipApplication({ variables })
+                      this.props.navigation.navigate('Splash', {
+                        hasApplied: true,
+                      })
+                    }}
+                    buttonText="SUBMIT"
+                  />
+                )
+              }}
+            </Mutation>
+          )}
       </ScreenContainer>
     )
   }
