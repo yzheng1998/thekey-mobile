@@ -12,6 +12,17 @@ import {
 } from './styles'
 import moment from 'moment'
 
+const formatTime = time => {
+  if (time) {
+    const formattedTime = new Date(time)
+    const result = moment().isSame(moment(formattedTime), 'day')
+      ? moment(formattedTime).format('h:mma')
+      : moment(formattedTime).format('MM/DD/YY')
+    return result
+  }
+  return ''
+}
+
 export default class ChatCard extends Component {
   static defaultProps = {
     onPress: null,
@@ -25,13 +36,6 @@ export default class ChatCard extends Component {
   }
 
   render() {
-    const formatTime = time => {
-      const formattedTime = new Date(time)
-      const result = moment().isSame(moment(formattedTime), 'day')
-        ? moment(formattedTime).format('h:mma')
-        : moment(formattedTime).format('MM/DD/YY')
-      return result
-    }
     const { name, message, profileImage, timeStamp, onPress } = this.props
     return (
       <Card onPress={onPress}>
