@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
+export const SafeView = styled.SafeAreaView`
+  flex: 1;
+`
 export const Container = styled.View`
   align-items: center;
   border-bottom-width: 1px;
@@ -62,9 +65,13 @@ export const Subtitle = styled.Text`
   padding-right: 5px;
 `
 export const SmallContainer = styled.View`
-  padding-top: 64px;
+  padding-top: 30px;
   flex-direction: row;
-  padding-bottom: 64px;
+`
+export const ColumnContainer = styled.View`
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
 `
 export const LinkedInIconContainer = styled.View`
   margin-top: -6px;
