@@ -5,6 +5,12 @@ import Modal from 'react-native-modal'
 export const SafeView = styled.SafeAreaView`
   flex: 1;
 `
+export const View = styled.View`
+  flex: 1;
+`
+export const ScrollView = styled.ScrollView`
+  flex: 1;
+`
 export const Background = styled(Modal)`
   margin: 0px;
   background-color: ${themeGet('colors.background')};
