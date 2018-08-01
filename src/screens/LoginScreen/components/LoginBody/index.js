@@ -173,8 +173,10 @@ class LoginBody extends Component {
           }}
         </Mutation>
         <SignUpContainer>
-          <Subtitle>Dont have an account?</Subtitle>
-          <PinkSubtitle>
+          <Subtitle>Don&apos;t have an account?</Subtitle>
+          <PinkSubtitle
+            onPress={() => this.props.navigation.navigate('SignUp')}
+          >
             <PinkSubtitleText>Sign Up</PinkSubtitleText>
           </PinkSubtitle>
         </SignUpContainer>
