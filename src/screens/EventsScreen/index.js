@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { FlatList, Text, View } from 'react-native'
 import SearchBar from '../../components/SearchBar'
@@ -13,34 +12,8 @@ import {
   SmallCardContainer,
   Spacer,
 } from './styles'
+import { GET_EVENTS, GET_SUGGESTED_EVENTS } from './query'
 
-const GET_EVENTS = gql`
-  query events($eventsFilterInput: EventsFilterInput!) {
-    events(eventsFilterInput: $eventsFilterInput) {
-      id
-      location
-      dateRange
-      title
-      picture
-      details
-      link
-      price
-      tags {
-        name
-      }
-      interestedFriends {
-        id
-        firstName
-        lastName
-        profilePicture
-      }
-      company {
-        id
-      }
-      isInterested
-    }
-  }
-`
 class EventsScreen extends Component {
   static navigationOptions = {
     header: null,
@@ -67,7 +40,7 @@ class EventsScreen extends Component {
       THIS_WEEK: 3,
     }
 
-    const customVariable = tab => {
+    const getTabName = tab => {
       switch (tab) {
         case tabs.ALL:
           return ''
@@ -84,15 +57,18 @@ class EventsScreen extends Component {
 
     const { searchText } = this.state
 
+    const currentTab = getTabName(this.state.tab)
+
+    const query = searchText || currentTab ? GET_EVENTS : GET_SUGGESTED_EVENTS
+
     const variables = {
       eventsFilterInput: {
-        startsAt: customVariable(this.state.tab),
+        startsAt: currentTab,
         location: this.state.searchText,
         tag: this.state.searchText,
         title: this.state.searchText,
       },
     }
-
     return (
       <View>
         <EventsHeader
@@ -106,13 +82,17 @@ class EventsScreen extends Component {
           placeholderText="Search Events"
         />
         <Background>
-          <Query query={GET_EVENTS} variables={variables}>
+          <Query query={query} variables={variables}>
             {({ loading, error, data }) => {
               if (loading) return <Text>Loading...</Text>
               if (error) return <Text>Error! ${error.message}</Text>
+
+              const usableData =
+                searchText || currentTab ? data.events : data.suggestedEvents
+
               return (
                 <HorizontalEventsScroll
-                  eventsList={data.events}
+                  eventsList={usableData}
                   navigation={this.props.navigation}
                 />
               )
