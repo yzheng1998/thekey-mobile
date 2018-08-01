@@ -9,6 +9,7 @@ import {
 } from './styles'
 import SubmitButton from '../../components/SubmitButton'
 import Header from '../../components/Header'
+import { SafeAreaView } from 'react-native'
 
 const tags = [
   'TECH',
@@ -61,43 +62,45 @@ export default class InterestsScreen extends Component {
     const userInfo = this.props.navigation.getParam('userInfo')
     return (
       <ScreenContainer>
-        <Container>
-          <Header
-            title="Your Interests"
-            showBack
-            onBackPress={() => this.props.navigation.goBack()}
-            progress="71.4%"
-          />
-          <Subtitle>
-            Choose 3 options. These can be {'\n'}updated later on
-          </Subtitle>
-          <TagsContainer>
-            <TagsRow>
-              {tags.map(tag => (
-                <RegistrationTag
-                  name={tag}
-                  key={tag}
-                  disable={maxReached && !this.state.interests.includes(tag)}
-                  selected={this.state.interests.includes(tag)}
-                  onPress={this.toggleInterest}
-                />
-              ))}
-            </TagsRow>
-          </TagsContainer>
-        </Container>
-        {maxReached && (
-          <SubmitButton
-            onPress={() =>
-              this.props.navigation.navigate('Skills', {
-                userInfo: {
-                  ...userInfo,
-                  interests: this.state.interests.join(', '),
-                },
-              })
-            }
-            buttonText="CONTINUE"
-          />
-        )}
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+          <Container>
+            <Header
+              title="Your Interests"
+              showBack
+              onBackPress={() => this.props.navigation.goBack()}
+              progress="71.4%"
+            />
+            <Subtitle>
+              Choose 3 options. These can be {'\n'}updated later on
+            </Subtitle>
+            <TagsContainer>
+              <TagsRow>
+                {tags.map(tag => (
+                  <RegistrationTag
+                    name={tag}
+                    key={tag}
+                    disable={maxReached && !this.state.interests.includes(tag)}
+                    selected={this.state.interests.includes(tag)}
+                    onPress={this.toggleInterest}
+                  />
+                ))}
+              </TagsRow>
+            </TagsContainer>
+          </Container>
+          {maxReached && (
+            <SubmitButton
+              onPress={() =>
+                this.props.navigation.navigate('Skills', {
+                  userInfo: {
+                    ...userInfo,
+                    interests: this.state.interests.join(', '),
+                  },
+                })
+              }
+              buttonText="CONTINUE"
+            />
+          )}
+        </SafeAreaView>
       </ScreenContainer>
     )
   }

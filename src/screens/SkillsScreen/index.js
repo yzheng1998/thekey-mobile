@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import RegistrationTag from '../../components/RegistrationTag'
+import { SafeAreaView } from 'react-native'
 import {
   ScreenContainer,
   Container,
@@ -55,43 +56,45 @@ export default class SkillsScreen extends Component {
     const userInfo = this.props.navigation.getParam('userInfo')
     return (
       <ScreenContainer>
-        <Container>
-          <Header
-            title="Describe Yourself"
-            showBack
-            onBackPress={() => this.props.navigation.goBack()}
-            progress="85.7%"
-          />
-          <Subtitle>
-            Choose 3 options. These can be {'\n'}updated later on
-          </Subtitle>
-          <TagsContainer>
-            <TagsRow>
-              {tags.map(tag => (
-                <RegistrationTag
-                  name={tag}
-                  key={tag}
-                  disable={maxReached && !this.state.skills.includes(tag)}
-                  selected={this.state.skills.includes(tag)}
-                  onPress={this.toggleSkill}
-                />
-              ))}
-            </TagsRow>
-          </TagsContainer>
-        </Container>
-        {maxReached && (
-          <SubmitButton
-            onPress={() => {
-              this.props.navigation.navigate('Resume', {
-                userInfo: {
-                  ...userInfo,
-                  selfDescription: this.state.skills.join(', '),
-                },
-              })
-            }}
-            buttonText="CONTINUE"
-          />
-        )}
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+          <Container>
+            <Header
+              title="Describe Yourself"
+              showBack
+              onBackPress={() => this.props.navigation.goBack()}
+              progress="85.7%"
+            />
+            <Subtitle>
+              Choose 3 options. These can be {'\n'}updated later on
+            </Subtitle>
+            <TagsContainer>
+              <TagsRow>
+                {tags.map(tag => (
+                  <RegistrationTag
+                    name={tag}
+                    key={tag}
+                    disable={maxReached && !this.state.skills.includes(tag)}
+                    selected={this.state.skills.includes(tag)}
+                    onPress={this.toggleSkill}
+                  />
+                ))}
+              </TagsRow>
+            </TagsContainer>
+          </Container>
+          {maxReached && (
+            <SubmitButton
+              onPress={() => {
+                this.props.navigation.navigate('Resume', {
+                  userInfo: {
+                    ...userInfo,
+                    selfDescription: this.state.skills.join(', '),
+                  },
+                })
+              }}
+              buttonText="CONTINUE"
+            />
+          )}
+        </SafeAreaView>
       </ScreenContainer>
     )
   }

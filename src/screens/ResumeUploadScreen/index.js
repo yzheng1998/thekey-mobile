@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScreenContainer, SubtitleView, Subtitle } from './styles'
-import { Alert } from 'react-native'
+import { Alert, SafeAreaView } from 'react-native'
 import Header from '../../components/Header'
 import RegisterButton from '../../components/RegisterButton'
 import SubmitButton from '../../components/SubmitButton'
@@ -138,66 +138,68 @@ class ResumeUploadScreen extends Component {
 
     return (
       <ScreenContainer>
-        <Header
-          title="Your Resume"
-          showBack
-          onBackPress={() => this.props.navigation.goBack()}
-        />
-        <RegistrationProgressBar progress="100%" />
-        <SubtitleView>
-          <Subtitle>
-            Last step, add your resume. This should include GPA, School,
-            Extracurriculars, Internships/Work Experience, etc.
-          </Subtitle>
-        </SubtitleView>
-        <ResumeList
-          cancel={this.removeFileById}
-          resumeListData={this.state.resumeListData}
-        />
-        <RegisterButton
-          secondary
-          buttonText={buttonText}
-          onPress={this.handlePress}
-        />
-        {this.state.resumeListData.length > 0 &&
-          this.state.resumeListData.every(
-            resume => resume.progress === '100%',
-          ) && (
-            <Mutation
-              mutation={SEND_MEMBERSHIP_APPLICATION}
-              onCompleted={() => {
-                this.props.navigation.navigate('Splash')
-              }}
-            >
-              {(sendMembershipApplication, { error }) => {
-                if (error) {
-                  Alert.alert(
-                    'Failed to upload your application',
-                    'There was an error sending in your application. Please try again.',
-                    [{ text: 'OK', onPress: () => {} }],
-                    { cancelable: true },
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+          <Header
+            title="Your Resume"
+            showBack
+            onBackPress={() => this.props.navigation.goBack()}
+          />
+          <RegistrationProgressBar progress="100%" />
+          <SubtitleView>
+            <Subtitle>
+              Last step, add your resume. This should include GPA, School,
+              Extracurriculars, Internships/Work Experience, etc.
+            </Subtitle>
+          </SubtitleView>
+          <ResumeList
+            cancel={this.removeFileById}
+            resumeListData={this.state.resumeListData}
+          />
+          <RegisterButton
+            secondary
+            buttonText={buttonText}
+            onPress={this.handlePress}
+          />
+          {this.state.resumeListData.length > 0 &&
+            this.state.resumeListData.every(
+              resume => resume.progress === '100%',
+            ) && (
+              <Mutation
+                mutation={SEND_MEMBERSHIP_APPLICATION}
+                onCompleted={() => {
+                  this.props.navigation.navigate('Splash')
+                }}
+              >
+                {(sendMembershipApplication, { error }) => {
+                  if (error) {
+                    Alert.alert(
+                      'Failed to upload your application',
+                      'There was an error sending in your application. Please try again.',
+                      [{ text: 'OK', onPress: () => {} }],
+                      { cancelable: true },
+                    )
+                  }
+                  return (
+                    <SubmitButton
+                      onPress={() => {
+                        const userInfoFinal = {
+                          ...userInfo,
+                          resumes: this.state.resumeListData.map(resume => ({
+                            resume: resume.url,
+                          })),
+                        }
+                        const variables = {
+                          sendMembershipApplicationInput: { ...userInfoFinal },
+                        }
+                        sendMembershipApplication({ variables })
+                      }}
+                      buttonText="SUBMIT"
+                    />
                   )
-                }
-                return (
-                  <SubmitButton
-                    onPress={() => {
-                      const userInfoFinal = {
-                        ...userInfo,
-                        resumes: this.state.resumeListData.map(resume => ({
-                          resume: resume.url,
-                        })),
-                      }
-                      const variables = {
-                        sendMembershipApplicationInput: { ...userInfoFinal },
-                      }
-                      sendMembershipApplication({ variables })
-                    }}
-                    buttonText="SUBMIT"
-                  />
-                )
-              }}
-            </Mutation>
-          )}
+                }}
+              </Mutation>
+            )}
+        </SafeAreaView>
       </ScreenContainer>
     )
   }
