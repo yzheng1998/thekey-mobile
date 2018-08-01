@@ -6,7 +6,7 @@ import EducationList from './components/EducationList'
 import SubmitButton from '../../components/SubmitButton'
 import SchoolSearchModal from '../../components/SchoolSearchModal'
 import AddEducationModal from './components/AddEducationModal'
-
+import { SafeAreaView } from 'react-native'
 import nodeEmoji from 'node-emoji'
 
 const schoolTypeOptions = [
@@ -87,65 +87,67 @@ class YourEducationScreen extends Component {
     } = this.state
     return (
       <Container>
-        <Header
-          title={`Your Education ${nodeEmoji.get('mortar_board')}`}
-          showBack
-          onBackPress={() => this.props.navigation.goBack()}
-          progress="42.8%"
-        />
-        <InstructionsContainer>
-          <Instructions>Below, add the schools you attended</Instructions>
-          <Instructions>throughout your education</Instructions>
-        </InstructionsContainer>
-        <EducationList
-          cancel={this.removeEducationById}
-          educationListData={this.state.educationListData}
-        />
-        <RegisterButton
-          buttonText={buttonText}
-          secondary
-          onPress={() => this.setState({ showSchoolSearchModal: true })}
-        />
-        <AddEducationModal
-          addEducation={() => {
-            addEducation({
-              schoolId,
-              schoolName,
-              schoolType,
-              degreeType,
-              location,
-              major,
-              startYear,
-              endYear,
-            })
-          }}
-          schoolTypeOptions={schoolTypeOptions}
-          clearState={this.clearState}
-          state={this.state}
-          updateText={this.updateState}
-          toggleEducationModal={this.toggleEducationModal}
-          visible={this.state.showAddEducationModal}
-        />
-        <SchoolSearchModal
-          updateState={this.updateState}
-          toggleEducationModal={this.toggleEducationModal}
-          navigation={this.props.navigation}
-          toggleSchoolModal={this.toggleSchoolModal}
-          visible={this.state.showSchoolSearchModal}
-        />
-        {!disabled && (
-          <SubmitButton
-            onPress={() =>
-              this.props.navigation.navigate('Essay', {
-                userInfo: {
-                  ...userInfo,
-                  educations: this.state.educationListData,
-                },
-              })
-            }
-            buttonText="CONTINUE"
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+          <Header
+            title={`Your Education ${nodeEmoji.get('mortar_board')}`}
+            showBack
+            onBackPress={() => this.props.navigation.goBack()}
+            progress="42.8%"
           />
-        )}
+          <InstructionsContainer>
+            <Instructions>Below, add the schools you attended</Instructions>
+            <Instructions>throughout your education</Instructions>
+          </InstructionsContainer>
+          <EducationList
+            cancel={this.removeEducationById}
+            educationListData={this.state.educationListData}
+          />
+          <RegisterButton
+            buttonText={buttonText}
+            secondary
+            onPress={() => this.setState({ showSchoolSearchModal: true })}
+          />
+          <AddEducationModal
+            addEducation={() => {
+              addEducation({
+                schoolId,
+                schoolName,
+                schoolType,
+                degreeType,
+                location,
+                major,
+                startYear,
+                endYear,
+              })
+            }}
+            schoolTypeOptions={schoolTypeOptions}
+            clearState={this.clearState}
+            state={this.state}
+            updateText={this.updateState}
+            toggleEducationModal={this.toggleEducationModal}
+            visible={this.state.showAddEducationModal}
+          />
+          <SchoolSearchModal
+            updateState={this.updateState}
+            toggleEducationModal={this.toggleEducationModal}
+            navigation={this.props.navigation}
+            toggleSchoolModal={this.toggleSchoolModal}
+            visible={this.state.showSchoolSearchModal}
+          />
+          {!disabled && (
+            <SubmitButton
+              onPress={() =>
+                this.props.navigation.navigate('Essay', {
+                  userInfo: {
+                    ...userInfo,
+                    educations: this.state.educationListData,
+                  },
+                })
+              }
+              buttonText="CONTINUE"
+            />
+          )}
+        </SafeAreaView>
       </Container>
     )
   }
