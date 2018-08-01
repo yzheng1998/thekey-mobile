@@ -85,6 +85,7 @@ export default class ProfileScreen extends Component {
             workExperiences,
             lookingFor,
             skills,
+            settings,
           } = data.viewer
           const emojiList = preferredWaysToMeet.map(emoji =>
             nodeEmoji.get(emoji.wayToMeet.toLowerCase()),
@@ -120,7 +121,12 @@ export default class ProfileScreen extends Component {
                         this.setState({ id: index })
                       }}
                     >
-                      <SettingsMenu email={email} onPress={swipe} />
+                      <SettingsMenu
+                        email={email}
+                        onPress={swipe}
+                        emailPreferences={settings.emailPreferences}
+                        newsLetterPreferences={settings.newsLetterPreferences}
+                      />
                       <Logout onPress={this.logout} />
                     </Swiper>
                   </Menu>
