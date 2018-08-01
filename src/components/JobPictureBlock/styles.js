@@ -5,7 +5,7 @@ export const Title = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   font-size: 24px;
   color: ${themeGet('colors.fontTag')};
-  padding-top: 15px;
+  margin-top: 10px;
 `
 export const Company = styled.Text`
   font-family: ${themeGet('fonts.medium')};
@@ -16,13 +16,13 @@ export const Description = styled.Text`
   font-family: ${themeGet('fonts.medium')};
   font-size: 14px;
   color: ${themeGet('colors.fontTag')};
-  padding-top: 5px;
+  margin-top: 3px;
 `
 export const Deadline = styled.Text`
   font-family: ${themeGet('fonts.medium')};
   font-size: 12px;
   color: ${themeGet('colors.fontTag')};
-  padding-top: 5px;
+  margin-top: 3px;
 `
 export const Apply = styled.TouchableOpacity`
   height: 45px;
