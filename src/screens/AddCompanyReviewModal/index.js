@@ -7,7 +7,7 @@ import OptionalInfoBlock from './components/OptionalInfoBlock'
 import TermsOfServiceConfirmation from './components/TermsOfServiceConfirmation'
 import SubmitReviewButton from './components/SubmitReviewButton'
 import { Background, Divider, ScreenScroll, SafeView } from './styles'
-import { KeyboardAvoidingView } from 'react-native'
+import { KeyboardAvoidingView, Alert } from 'react-native'
 
 export default class AddCompanyReviewModal extends Component {
   state = {
@@ -106,8 +106,24 @@ export default class AddCompanyReviewModal extends Component {
             <ScreenScroll>
               <CancelHeader
                 onCancel={() => {
-                  hideAddReview()
-                  this.clearState()
+                  Alert.alert(
+                    'All information enetered will not be saved',
+                    'Are you sure you want to cancel this review?',
+                    [
+                      {
+                        text: 'Cancel',
+                        onPress: () => null,
+                      },
+                      {
+                        text: 'Yes',
+                        onPress: () => {
+                          hideAddReview()
+                          this.clearState()
+                        },
+                      },
+                    ],
+                    { cancelable: false },
+                  )
                 }}
                 title="Add Company Review"
               />
