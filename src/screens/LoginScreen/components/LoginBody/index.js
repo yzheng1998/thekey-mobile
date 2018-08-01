@@ -12,15 +12,15 @@ import {
   SignInText,
   Subtitle,
   SmallContainer,
-  LinkedInIconContainer,
   SignUpContainer,
   Message,
+  ColumnContainer,
 } from './styles'
+import LargeLinkedInLoginButton from '../../components/LargeLinkedInLoginButton'
 import EmailIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import LockIcon from 'react-native-vector-icons/Feather'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
-import LinkedInLoginButton from '../../components/LinkedInLoginButton'
 import { LoginButton, AccessToken } from 'react-native-fbsdk'
 
 const LOGIN_USER = gql`
@@ -61,6 +61,9 @@ class LoginBody extends Component {
             const {
               loginUser: { token, user },
             } = data
+            if (data && data.loginUser.error) {
+              Alert.alert('Failed to log in', data.loginUser.error.message)
+            }
             if (!data.loginUser.error) {
               await AsyncStorage.setItem('token', token)
               await AsyncStorage.setItem('userId', user.id)
@@ -70,90 +73,104 @@ class LoginBody extends Component {
             }
           }}
         >
-          {(loginUser, { loading, data, error }) => (
-            <Container>
-              <TextInputContainer>
-                <IconContainer>
-                  <EmailIcon
-                    name="email-outline"
-                    color="rgb(181, 171, 202)"
-                    size={18}
+          {(loginUser, { loading, error }) => {
+            if (error) {
+              Alert.alert('Failed to log in', error.message)
+            }
+            if (loading) {
+              return <Message>Loading</Message>
+            }
+            return (
+              <Container>
+                <TextInputContainer>
+                  <IconContainer>
+                    <EmailIcon
+                      name="email-outline"
+                      color="rgb(181, 171, 202)"
+                      size={18}
+                    />
+                  </IconContainer>
+                  <TextInput
+                    placeholder="Enter your email address..."
+                    placeholderTextColor="rgb(139, 133, 150)"
+                    onChangeText={newText => this.setState({ email: newText })}
+                    type="text"
+                    name="email"
+                    autoCapitalize="none"
                   />
-                </IconContainer>
-                <TextInput
-                  placeholder="Enter your email address..."
-                  placeholderTextColor="rgb(139, 133, 150)"
-                  onChangeText={newText => this.setState({ email: newText })}
-                  type="text"
-                  name="email"
-                  autoCapitalize="none"
-                />
-              </TextInputContainer>
-              <TextInputContainer>
-                <IconContainer>
-                  <LockIcon name="lock" color="rgb(181, 171, 202)" size={18} />
-                </IconContainer>
-                <TextInput
-                  placeholder="Enter your password..."
-                  placeholderTextColor="rgb(139, 133, 150)"
-                  onChangeText={newText => this.setState({ password: newText })}
-                  secureTextEntry
-                  name="password"
-                  autoCapitalize="none"
-                />
-              </TextInputContainer>
-              <ForgotPass>
-                <PinkSubtitleText>Forgot password?</PinkSubtitleText>
-              </ForgotPass>
-              {loading && <Message>Logging you in...</Message>}
-              {data &&
-                data.loginUser.error && (
-                  <Message>{data.loginUser.error.message}</Message>
-                )}
-              {error && <Message>Server error</Message>}
-              <SignInButton
-                onPress={() => {
-                  const variables = {
-                    email: this.state.email,
-                    password: this.state.password,
+                </TextInputContainer>
+                <TextInputContainer>
+                  <IconContainer>
+                    <LockIcon
+                      name="lock"
+                      color="rgb(181, 171, 202)"
+                      size={18}
+                    />
+                  </IconContainer>
+                  <TextInput
+                    placeholder="Enter your password..."
+                    placeholderTextColor="rgb(139, 133, 150)"
+                    onChangeText={newText =>
+                      this.setState({ password: newText })
+                    }
+                    secureTextEntry
+                    name="password"
+                    autoCapitalize="none"
+                  />
+                </TextInputContainer>
+                <ForgotPass>
+                  <PinkSubtitleText>Forgot password?</PinkSubtitleText>
+                </ForgotPass>
+                <SignInButton
+                  onPress={() => {
+                    const variables = {
+                      email: this.state.email,
+                      password: this.state.password,
+                    }
+                    loginUser({ variables })
+                  }}
+                  disabled={
+                    this.state.email === '' || this.state.password === ''
                   }
-                  loginUser({ variables })
-                }}
-                disabled={this.state.email === '' || this.state.password === ''}
-              >
-                <SignInText>SIGN IN</SignInText>
-              </SignInButton>
+                >
+                  <SignInText>SIGN IN</SignInText>
+                </SignInButton>
 
-              <SmallContainer>
-                <Subtitle>or sign in with</Subtitle>
-                <LinkedInIconContainer>
-                  <LinkedInLoginButton />
-                </LinkedInIconContainer>
-              </SmallContainer>
-              <LoginButton
-                readPermissions={['email']}
-                onLoginFinished={(fbError, result) => {
-                  if (fbError) {
-                    Alert.alert('Error Ocurred', 'Could not log in to facebook')
-                  } else if (result.isCancelled) {
-                    Alert.alert(
-                      'Error Occurred',
-                      'facebook log in was unexpectedly cancelled',
-                    )
-                  } else {
-                    AccessToken.getCurrentAccessToken().then(async response => {
-                      const token = response.accessToken.toString()
+                <ColumnContainer>
+                  <SmallContainer>
+                    <LargeLinkedInLoginButton />
+                  </SmallContainer>
+                  <LoginButton
+                    readPermissions={['email']}
+                    onLoginFinished={(fbError, result) => {
+                      if (fbError) {
+                        Alert.alert(
+                          'Error Ocurred',
+                          'Could not log in to facebook',
+                        )
+                      } else if (result.isCancelled) {
+                        Alert.alert(
+                          'Error Occurred',
+                          'facebook log in was unexpectedly cancelled',
+                        )
+                      } else {
+                        AccessToken.getCurrentAccessToken().then(
+                          async response => {
+                            const token = response.accessToken.toString()
 
-                      const variables = {
-                        facebookToken: token,
+                            const variables = {
+                              facebookToken: token,
+                            }
+                            loginUser({ variables })
+                          },
+                        )
                       }
-                      loginUser({ variables })
-                    })
-                  }
-                }}
-              />
-            </Container>
-          )}
+                    }}
+                  />
+                </ColumnContainer>
+              </Container>
+            )
+          }}
         </Mutation>
         <SignUpContainer>
           <Subtitle>Dont have an account?</Subtitle>

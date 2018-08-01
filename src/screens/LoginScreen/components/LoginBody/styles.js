@@ -66,15 +66,12 @@ export const Subtitle = styled.Text`
 `
 export const SmallContainer = styled.View`
   padding-top: 30px;
-  flex-direction: row;
+  align-items: center;
 `
 export const ColumnContainer = styled.View`
   justify-content: center;
   align-items: center;
   margin-bottom: 30px;
-`
-export const LinkedInIconContainer = styled.View`
-  margin-top: -6px;
 `
 export const SignUpContainer = styled.View`
   flex-direction: row;
