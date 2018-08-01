@@ -78,7 +78,7 @@ class ChatInbox extends Component {
                   timeStamp={
                     chat.messages.length
                       ? chat.messages[chat.messages.length - 1].createdAt
-                      : '2018-07-19 23:29:09.592-04'
+                      : ''
                   }
                   onPress={() =>
                     this.props.navigation.navigate('Conversation', {
