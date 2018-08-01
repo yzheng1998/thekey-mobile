@@ -4,6 +4,7 @@ import Header from '../../components/Header'
 import { KeyboardAvoidingView } from 'react-native'
 import LineInput from '../../components/LineInput'
 import Icon from 'react-native-vector-icons/Feather'
+import ResetPasswordButton from './components/ResetPasswordButton'
 
 export default class ResetPasswordScreen extends Component {
   state = {
@@ -43,6 +44,7 @@ export default class ResetPasswordScreen extends Component {
                 style={{ marginLeft: 8 }}
               />
             </LineInput>
+            <ResetPasswordButton />
           </KeyboardAvoidingView>
         </SafeView>
       </ScreenContainer>
