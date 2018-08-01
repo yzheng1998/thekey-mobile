@@ -9,6 +9,7 @@ import EducationListView from './components/EducationListView'
 import ExperienceListView from './components/ExperienceListView'
 import ContactContainerView from './components/ContactContainerView'
 import EventsInCommon from './components/EventsInCommon'
+import ReportUserModal from './components/ReportUserModal'
 import { Query } from 'react-apollo'
 import { GET_USER } from './query'
 import nodeEmoji from 'node-emoji'
@@ -26,6 +27,12 @@ const lookingForOptions = [
 ]
 
 export default class MemberScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showReportUserModal: false,
+    }
+  }
   showActionSheet = () => {
     this.ActionSheet.show()
   }
@@ -35,9 +42,8 @@ export default class MemberScreen extends Component {
         query={GET_USER}
         variables={{ id: this.props.navigation.getParam('id') }}
       >
-        {({ loading, error, data, refetch }) => {
+        {({ loading, data, refetch }) => {
           if (loading) return <Text>`Loading...`</Text>
-          if (error) return <Text>`Error! ${error.message}`</Text>
           const {
             id,
             email,
@@ -73,7 +79,11 @@ export default class MemberScreen extends Component {
                 options={['Report', 'Cancel']}
                 cancelButtonIndex={1}
                 destructiveButtonIndex={0}
-                onPress={() => null}
+                onPress={() =>
+                  this.setState({
+                    showReportUserModal: true,
+                  })
+                }
               />
               <MyProfilePicBlock
                 id={id}
@@ -130,6 +140,14 @@ export default class MemberScreen extends Component {
                 email={email}
                 facebook={facebook}
                 twitter={twitter}
+              />
+              <ReportUserModal
+                isVisible={this.state.showReportUserModal}
+                closeModal={() =>
+                  this.setState({
+                    showReportUserModal: !this.state.showReportUserModal,
+                  })
+                }
               />
             </ScreenContainer>
           )
