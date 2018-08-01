@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image, Alert } from 'react-native'
+import { Image } from 'react-native'
 import {
   Background,
   Container,
@@ -19,14 +19,8 @@ import LinkedInLoginButton from './components/LinkedInLoginButton'
 
 export default class SplashScreen extends Component {
   render() {
-    const hasApplied = this.props.navigation.getParam('hasApplied')
     return (
       <Background>
-        {hasApplied &&
-          Alert.alert(
-            'Thank you for applying to The Key!',
-            'We will review your application and get back to you shortly.',
-          )}
         <Container>
           <Content>
             <Image source={Logo} style={{ height: 105, width: 79 }} />

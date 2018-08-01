@@ -170,6 +170,10 @@ class ResumeUploadScreen extends Component {
               mutation={SEND_MEMBERSHIP_APPLICATION}
               onCompleted={() => {
                 this.props.navigation.navigate('Splash')
+                Alert.alert(
+                  'Thank you for applying to The Key!',
+                  'We will review your application and get back to you shortly.',
+                )
               }}
             >
               {(sendMembershipApplication, { error }) => {
