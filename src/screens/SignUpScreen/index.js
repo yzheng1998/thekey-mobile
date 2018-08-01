@@ -72,14 +72,14 @@ export default class SignUpScreen extends Component {
           </LineInput>
           <SubtitleView>
             <Subtitle>
-              “By clicking “sign up & accept” you agree to The Keys{' '}
+              By clicking “Sign up & Accept”, you agree to The Key's{' '}
               <Subtitle hyperlink onPress={() => null}>
-                terms & conditions{' '}
+                Terms & Conditions{' '}
               </Subtitle>
               and{' '}
               <Subtitle hyperlink onPress={() => null}>
-                privacy policy
-              </Subtitle>”
+                Privacy Policy
+              </Subtitle>.
             </Subtitle>
           </SubtitleView>
           <RegisterButton
@@ -96,16 +96,15 @@ export default class SignUpScreen extends Component {
             buttonText="SIGN UP & ACCEPT"
             disabled={disabled}
           />
-          <Text>asf</Text>
           <LoginButton
             readPermissions={['email']}
             onLoginFinished={(error, result) => {
               if (error) {
-                Alert.alert('Error Ocurred', 'Could not log in to facebook')
+                Alert.alert('Error Ocurred', 'Could not log in to Facebook')
               } else if (result.isCancelled) {
                 Alert.alert(
                   'Error Occurred',
-                  'facebook log in was unexpectedly cancelled',
+                  'Facebook login was unexpectedly cancelled.',
                 )
               } else {
                 AccessToken.getCurrentAccessToken().then(async data => {
