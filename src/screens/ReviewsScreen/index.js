@@ -82,6 +82,7 @@ class ReviewsScreen extends Component {
                       companyName={item.name}
                       companyId={item.id}
                       navigation={this.props.navigation}
+                      numReviews={item.reviewCount}
                     />
                   )}
                 />
