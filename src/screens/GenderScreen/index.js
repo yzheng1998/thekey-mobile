@@ -12,7 +12,6 @@ import RegisterButton from '../../components/RegisterButton'
 import { genderOptions } from './constants'
 
 import nodeEmoji from 'node-emoji'
-import uuidv4 from 'uuid/v4'
 
 export default class GenderScreen extends Component {
   state = {
@@ -46,7 +45,7 @@ export default class GenderScreen extends Component {
           <View>
             {genderOptions.map(option => (
               <GenderButton
-                key={uuidv4()}
+                key={option.value}
                 clicked={option.value === this.state.gender}
                 onPress={() => this.setState({ gender: option.value })}
               >
