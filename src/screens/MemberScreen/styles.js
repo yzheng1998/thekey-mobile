@@ -5,6 +5,9 @@ export const ScreenContainer = styled.ScrollView`
   width: 100%;
   background-color: ${themeGet('colors.background')};
 `
+export const SafeView = styled.SafeAreaView`
+  flex: 1;
+`
 
 export const Divider = styled.View`
   width: 100%;
