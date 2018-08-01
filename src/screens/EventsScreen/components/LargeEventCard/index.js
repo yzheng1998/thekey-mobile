@@ -63,8 +63,8 @@ export default class LargeEventsCard extends Component {
       >
         <BackgroundImage source={cardImage}>
           <TopContainer>
-            <PriceContainer>
-              <Price>{formatPrice(price)}</Price>
+            <PriceContainer price={price}>
+              {price && <Price>{formatPrice(price)}</Price>}
             </PriceContainer>
             <StarButton isInterested={isInterested} id={id} />
           </TopContainer>
