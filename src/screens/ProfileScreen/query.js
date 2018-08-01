@@ -43,6 +43,10 @@ export const GET_USER = gql`
         }
         lookingFor
         skills
+        settings {
+          emailPreferences
+          newsLetterPreferences
+        }
       }
     }
   }
