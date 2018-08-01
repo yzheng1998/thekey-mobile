@@ -33,7 +33,7 @@ export default class SplashScreen extends Component {
             <SignInText>SIGN IN</SignInText>
           </SignInButton>
           <RegisterButton
-            onPress={() => this.props.navigation.navigate('Register')}
+            onPress={() => this.props.navigation.navigate('SignUp')}
           >
             <RegisterText>REGISTER</RegisterText>
           </RegisterButton>
