@@ -10,6 +10,7 @@ import EssayScreen from '../screens/EssayScreen'
 import InterestsScreen from '../screens/InterestsScreen'
 import SkillsScreen from '../screens/SkillsScreen'
 import ResumeUploadScreen from '../screens/ResumeUploadScreen'
+import ResetPasswordScreen from '../screens/ResetPasswordScreen'
 
 const LoginStack = createStackNavigator(
   {
@@ -75,6 +76,12 @@ const LoginStack = createStackNavigator(
     },
     Resume: {
       screen: ResumeUploadScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    ResetPassword: {
+      screen: ResetPasswordScreen,
       navigationOptions: () => ({
         header: null,
       }),
