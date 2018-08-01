@@ -8,7 +8,7 @@ export const ButtonRow = styled.View`
   width: 100%;
   position: absolute;
   justify-content: space-between;
-  top: 25px;
+  top: 40px;
 `
 
 export const BackButton = styled.TouchableOpacity``
