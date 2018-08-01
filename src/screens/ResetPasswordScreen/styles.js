@@ -11,17 +11,21 @@ export const ScreenContainer = styled.View`
 export const SubtitleView = styled.View`
   width: 100%;
   margin-top: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   padding-left: 12px;
   padding-right: 12px;
 `
-
 export const Subtitle = styled.Text`
   color: ${props =>
     props.hyperlink
       ? themeGet('colors.fontButtonTertiary')
       : themeGet('colors.fontSubtitle.primary')};
   font-family: ${themeGet('fonts.medium')};
-  font-size: 14px
+  font-size: 16px;
   line-height: 20px;
+  text-align: center;
+`
+export const SafeView = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${themeGet('colors.background')};
 `
