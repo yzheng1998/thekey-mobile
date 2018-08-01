@@ -68,7 +68,6 @@ class ResumeUploadScreen extends Component {
       ],
     })
   }
-  parseUrl = url => url.substring(0, url.indexOf('.pdf?') + 4)
 
   handleFile = (err, res) => {
     const id = uuid()
@@ -188,8 +187,10 @@ class ResumeUploadScreen extends Component {
                       const userInfoFinal = {
                         ...userInfo,
                         resumes: this.state.resumeListData.map(resume => ({
-                          resume: this.parseUrl(resume.url),
-                          // resume: resume.url,
+                          resume: resume.url.substring(
+                            0,
+                            resume.url.indexOf('.pdf?') + 4,
+                          ),
                         })),
                       }
                       const variables = {
