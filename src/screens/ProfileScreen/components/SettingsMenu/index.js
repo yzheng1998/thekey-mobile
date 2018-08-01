@@ -22,17 +22,25 @@ const MenuItemWithNavigation = ({ title, onPress }) => (
 
 export default class SettingsMenu extends Component {
   render() {
-    const { email, onPress } = this.props
+    const {
+      email,
+      onPress,
+      emailPreferences,
+      newsLetterPreferences,
+    } = this.props
     return (
       <MenuItemList showsVerticalScrollIndicator={false}>
         <SettingsMenuItem title="Email Address" disabled>
           <EmailAddress>{email}</EmailAddress>
         </SettingsMenuItem>
         <SettingsMenuItem title="Enable Email Notifications" disabled>
-          <Switch backgroundActive="rgb(250,53,121)" />
+          <Switch backgroundActive="rgb(250,53,121)" value={emailPreferences} />
         </SettingsMenuItem>
         <SettingsMenuItem title="Recieve Monthly Newsletter" disabled>
-          <Switch backgroundActive="rgb(250,53,121)" />
+          <Switch
+            backgroundActive="rgb(250,53,121)"
+            value={newsLetterPreferences}
+          />
         </SettingsMenuItem>
         <MenuItemWithNavigation title="Password" />
         <MenuItemWithNavigation title="About" />
