@@ -52,7 +52,7 @@ export const DateTime = styled.Text`
 `
 export const PriceContainer = styled.View`
   border-radius: 20px;
-  border-width: 1px;
+  border-width: ${props => (props.price ? `1px` : `0px`)};
   width: 95px;
   height: 35px;
   margin: 5px;
