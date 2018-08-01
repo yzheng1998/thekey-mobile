@@ -134,20 +134,20 @@ class YourEducationScreen extends Component {
             toggleSchoolModal={this.toggleSchoolModal}
             visible={this.state.showSchoolSearchModal}
           />
-          {!disabled && (
-            <SubmitButton
-              onPress={() =>
-                this.props.navigation.navigate('Essay', {
-                  userInfo: {
-                    ...userInfo,
-                    educations: this.state.educationListData,
-                  },
-                })
-              }
-              buttonText="CONTINUE"
-            />
-          )}
         </SafeAreaView>
+        {!disabled && (
+          <SubmitButton
+            onPress={() =>
+              this.props.navigation.navigate('Essay', {
+                userInfo: {
+                  ...userInfo,
+                  educations: this.state.educationListData,
+                },
+              })
+            }
+            buttonText="CONTINUE"
+          />
+        )}
       </Container>
     )
   }

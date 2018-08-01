@@ -90,7 +90,7 @@ export default class AddEducationModal extends Component {
               placeholderText="Degree type"
             />
             <RowContainer>
-              <SwitchLabel>I am currently working here</SwitchLabel>
+              <SwitchLabel>I am currently studying here</SwitchLabel>
               <Switch
                 onValueChange={toggleSwitch}
                 value={isCurrentEmployee}

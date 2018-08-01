@@ -5,8 +5,6 @@ export const PickerContainer = styled.TouchableOpacity`
   flex-direction: row;
   height: 50px;
   border-radius: 8px;
-  margin-left: 12px;
-  margin-right: 12px;
   align-items: center;
   padding-left: 4px;
   padding-right: 4px;
