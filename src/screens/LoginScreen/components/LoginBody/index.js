@@ -148,20 +148,21 @@ class LoginBody extends Component {
                           'Error Ocurred',
                           'Could not log in to facebook',
                         )
+                        return null
                       } else if (result.isCancelled) {
                         return null
-                      } else {
-                        AccessToken.getCurrentAccessToken().then(
-                          async response => {
-                            const token = response.accessToken.toString()
-
-                            const variables = {
-                              facebookToken: token,
-                            }
-                            loginUser({ variables })
-                          },
-                        )
                       }
+                      AccessToken.getCurrentAccessToken().then(
+                        async response => {
+                          const token = response.accessToken.toString()
+
+                          const variables = {
+                            facebookToken: token,
+                          }
+                          loginUser({ variables })
+                        },
+                      )
+                      return null
                     }}
                   />
                 </ColumnContainer>

@@ -8,6 +8,7 @@ import {
 } from './styles'
 import Header from '../../components/Header'
 import SubmitButton from '../../components/SubmitButton'
+import { SafeAreaView } from 'react-native'
 
 import nodeEmoji from 'node-emoji'
 
@@ -20,7 +21,8 @@ class EssayScreen extends Component {
     const disabled = !this.state.essay.length
     return (
       <Container behavior="padding" enabled>
-        <Scroll contentContaineStyle={{ alignItems: 'center' }}>
+        <SafeAreaView style={{ backgroundColor: 'white' }} />
+        <Scroll>
           <Header
             title={`Initiation ${nodeEmoji.get('sunglasses')}`}
             showBack

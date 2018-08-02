@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScreenContainer, SubtitleView, Subtitle } from './styles'
-import { Alert } from 'react-native'
+import { Alert, SafeAreaView } from 'react-native'
 import Header from '../../components/Header'
 import RegisterButton from '../../components/RegisterButton'
 import SubmitButton from '../../components/SubmitButton'
@@ -138,27 +138,30 @@ class ResumeUploadScreen extends Component {
 
     return (
       <ScreenContainer>
-        <Header
-          title="Your Resume"
-          showBack
-          onBackPress={() => this.props.navigation.goBack()}
-        />
-        <RegistrationProgressBar progress="100%" />
-        <SubtitleView>
-          <Subtitle>
-            Last step, add your resume. This should include GPA, School,
-            Extracurriculars, Internships/Work Experience, etc.
-          </Subtitle>
-        </SubtitleView>
-        <ResumeList
-          cancel={this.removeFileById}
-          resumeListData={this.state.resumeListData}
-        />
-        <RegisterButton
-          secondary
-          buttonText={buttonText}
-          onPress={this.handlePress}
-        />
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+          <Header
+            title="Your Resume"
+            showBack
+            onBackPress={() => this.props.navigation.goBack()}
+          />
+          <RegistrationProgressBar progress="100%" />
+          <SubtitleView>
+            <Subtitle>
+              Last step, add your resume. This should include GPA, School,
+              Extracurriculars, Internships/Work Experience, etc.
+            </Subtitle>
+          </SubtitleView>
+          <ResumeList
+            cancel={this.removeFileById}
+            resumeListData={this.state.resumeListData}
+          />
+          <RegisterButton
+            secondary
+            buttonText={buttonText}
+            onPress={this.handlePress}
+          />
+        </SafeAreaView>
+
         {this.state.resumeListData.length > 0 &&
           this.state.resumeListData.every(
             resume => resume.progress === '100%',
@@ -167,6 +170,10 @@ class ResumeUploadScreen extends Component {
               mutation={SEND_MEMBERSHIP_APPLICATION}
               onCompleted={() => {
                 this.props.navigation.navigate('Splash')
+                Alert.alert(
+                  'Thank you for applying to The Key!',
+                  'We will review your application and get back to you shortly.',
+                )
               }}
             >
               {(sendMembershipApplication, { error }) => {
@@ -184,13 +191,19 @@ class ResumeUploadScreen extends Component {
                       const userInfoFinal = {
                         ...userInfo,
                         resumes: this.state.resumeListData.map(resume => ({
-                          resume: resume.url,
+                          resume: resume.url.substring(
+                            0,
+                            resume.url.indexOf('.pdf?') + 4,
+                          ),
                         })),
                       }
                       const variables = {
                         sendMembershipApplicationInput: { ...userInfoFinal },
                       }
                       sendMembershipApplication({ variables })
+                      this.props.navigation.navigate('Splash', {
+                        hasApplied: true,
+                      })
                     }}
                     buttonText="SUBMIT"
                   />

@@ -53,7 +53,11 @@ export default class AddEducationModal extends Component {
       major &&
       !Number.isNaN(startYear) &&
       startYear.length === 4 &&
-      (isCurrentEmployee || (!Number.isNaN(endYear) && endYear.length === 4))
+      (isCurrentEmployee ||
+        (!Number.isNaN(endYear) &&
+          endYear !== null &&
+          endYear !== undefined &&
+          endYear.length === 4))
     )
     return (
       <RightModal
@@ -90,7 +94,7 @@ export default class AddEducationModal extends Component {
               placeholderText="Degree type"
             />
             <RowContainer>
-              <SwitchLabel>I am currently working here</SwitchLabel>
+              <SwitchLabel>I am currently studying here</SwitchLabel>
               <Switch
                 onValueChange={toggleSwitch}
                 value={isCurrentEmployee}
