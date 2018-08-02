@@ -87,7 +87,7 @@ class YourEducationScreen extends Component {
     } = this.state
     return (
       <Container>
-        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'transparent' }}>
           <Header
             title={`Your Education ${nodeEmoji.get('mortar_board')}`}
             showBack
@@ -134,20 +134,20 @@ class YourEducationScreen extends Component {
             toggleSchoolModal={this.toggleSchoolModal}
             visible={this.state.showSchoolSearchModal}
           />
-          {!disabled && (
-            <SubmitButton
-              onPress={() =>
-                this.props.navigation.navigate('Essay', {
-                  userInfo: {
-                    ...userInfo,
-                    educations: this.state.educationListData,
-                  },
-                })
-              }
-              buttonText="CONTINUE"
-            />
-          )}
         </SafeAreaView>
+        {!disabled && (
+          <SubmitButton
+            onPress={() =>
+              this.props.navigation.navigate('Essay', {
+                userInfo: {
+                  ...userInfo,
+                  educations: this.state.educationListData,
+                },
+              })
+            }
+            buttonText="CONTINUE"
+          />
+        )}
       </Container>
     )
   }
