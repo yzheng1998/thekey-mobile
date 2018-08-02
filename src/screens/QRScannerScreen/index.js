@@ -4,6 +4,8 @@ import { RNCamera } from 'react-native-camera'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { NavigationActions, StackActions } from 'react-navigation'
+import { NavigationBar, SafeView, BackButtonContainer } from './styles'
+import BackButtonIcon from 'react-native-vector-icons/Ionicons'
 
 const SEND_FRIEND_REQUEST = gql`
   mutation createFriendRequest($recipientId: ID!, $swipedLeft: Boolean!) {
@@ -65,7 +67,6 @@ class QRScannerScreen extends Component {
               flashMode={RNCamera.Constants.FlashMode.on}
               style={{
                 flex: 1,
-                justifyContent: 'flex-end',
                 alignItems: 'center',
               }}
               onBarCodeRead={async qrCode => {
@@ -79,10 +80,22 @@ class QRScannerScreen extends Component {
                   })
                 }
               }}
-              ref={cam => {
-                this.camera = cam
-              }}
-            />
+            >
+              <NavigationBar>
+                <SafeView>
+                  <BackButtonContainer
+                    hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}
+                    onPress={() => this.props.navigation.goBack()}
+                  >
+                    <BackButtonIcon
+                      name="ios-arrow-back"
+                      size={33}
+                      color="white"
+                    />
+                  </BackButtonContainer>
+                </SafeView>
+              </NavigationBar>
+            </RNCamera>
           </View>
         )}
       </Mutation>
