@@ -1,13 +1,15 @@
 import styled from 'styled-components'
-import { themeGet } from 'styled-system'
 
-export const Background = styled.View`
-  flex: 1;
-  background-color: ${themeGet('colors.background')};
+export const SafeView = styled.View`
+  justify-content: center;
+  width: 100%;
+  height: 70px;
 `
-export const SafeView = styled.SafeAreaView`
-  flex: 1;
+export const NavigationBar = styled.SafeAreaView`
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
 `
-export const Text = styled.Text`
-  font-size: 40px;
+export const BackButtonContainer = styled.TouchableOpacity`
+  margin-left: 15px;
+  width: 20px;
 `
