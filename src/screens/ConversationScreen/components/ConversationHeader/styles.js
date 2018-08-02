@@ -41,7 +41,6 @@ export const AvatarRowContainer = styled.View`
   align-items: center;
   justify-content: center;
   margin-top: 15px;
-  margin-right: 16px;
 `
 export const Avatar = styled.Image`
   height: 30px;
