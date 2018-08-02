@@ -118,7 +118,11 @@ class LoginBody extends Component {
                     autoCapitalize="none"
                   />
                 </TextInputContainer>
-                <ForgotPass>
+                <ForgotPass
+                  onPress={() =>
+                    this.props.navigation.navigate('ResetPassword')
+                  }
+                >
                   <PinkSubtitleText>Forgot password?</PinkSubtitleText>
                 </ForgotPass>
                 <SignInButton
