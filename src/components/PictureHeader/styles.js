@@ -17,7 +17,7 @@ export const SafeView = styled.SafeAreaView`
 `
 export const BackgroundPicture = styled.ImageBackground`
   width: 100%;
-  height: 365px;
+  height: ${props => (props.height ? props.height : 365)};
   align-items: center;
   justify-content: center;
   border-top-left-radius: 20px;

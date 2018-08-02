@@ -18,13 +18,14 @@ const SmallQRCode = ({ id, openModal }) => (
 )
 export default class PictureHeader extends Component {
   static defaultProps = {
+    height: 365,
     showQRCode: false,
     id: '',
     openModal: null,
   }
 
   render() {
-    const { picture, showQRCode, id, openModal } = this.props
+    const { picture, showQRCode, id, openModal, height } = this.props
     const displayPicture = picture
       ? { uri: picture }
       : {
@@ -34,7 +35,11 @@ export default class PictureHeader extends Component {
 
     return (
       <BlockContainer>
-        <BackgroundPicture source={displayPicture} blurRadius={20}>
+        <BackgroundPicture
+          source={displayPicture}
+          blurRadius={20}
+          height={height}
+        >
           <SafeView>
             <ContentContainer>
               <PictureContainer>
