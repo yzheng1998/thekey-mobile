@@ -3,7 +3,6 @@ package com.thekeymobile;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.rnfs.RNFSPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import net.jodybrewster.linkedinlogin.RNLinkedinLoginPackage;
@@ -21,7 +20,6 @@ import org.reactnative.camera.RNCameraPackage;
 import java.util.Arrays;
 import java.util.List;
 import com.testfairy.TestFairy;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -35,12 +33,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new FBSDKPackage(),
             new RNFSPackage(),
             new RNFetchBlobPackage(),
             new RNLinkedinLoginPackage(),
             new RNCameraPackage(),
-            new ReactNativePushNotificationPackage(),
             new ReactNativeDocumentPicker(),
             new AppCenterReactNativeAnalyticsPackage(MainApplication.this, getResources().getString(R.string.appCenterAnalytics_whenToEnableAnalytics)),
             new AppCenterReactNativePackage(MainApplication.this),
