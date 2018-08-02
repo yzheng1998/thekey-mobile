@@ -65,7 +65,7 @@ class SimilarJobsBlock extends Component {
                 </ButtonContainer>
               </Header>
               <List
-                showsHorizontalScrollIndicator="false"
+                showsHorizontalScrollIndicator={false}
                 horizontal
                 keyExtractor={job => job.id}
                 data={data.similarJobs}
