@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, SafeAreaView } from 'react-native'
 import { ScreenContainer, SubtitleView, Subtitle } from './styles'
 import PickerComponent from '../../components/PickerComponent'
 import Header from '../../components/Header'
@@ -41,68 +41,72 @@ export default class PersonalDetailsScreen extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <ScreenContainer>
-          <HometownSearchModal
-            setText={this.updateText}
-            onPress={this.closeHometownPicker}
-            visible={showHometownPicker}
-          />
-          <Header
-            title={`${nodeEmoji.get('wave')} Hi, ${userInfo.firstName}!`}
-            showBack
-            onBackPress={() => this.props.navigation.goBack()}
-            progress="14.2%"
-          />
-          <SubtitleView>
-            <Subtitle>
-              Before you can get started, tell us a little bit about yourself.
-              This information is private
-            </Subtitle>
-          </SubtitleView>
-          <RegistrationPicker
-            selected={showHometownPicker}
-            onPress={() => {
-              if (!showEthnictyPicker)
-                this.setState({ showHometownPicker: true })
-            }}
-            text={hometown}
-            placeholderText="What's your hometown?"
-          />
-          <RegistrationPicker
-            selected={showEthnictyPicker}
-            onPress={() => {
-              if (!showHometownPicker)
-                this.setState({
-                  showEthnictyPicker: true,
-                  ethnicity: ethnicity || ethnicityOptions[0].value,
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+          <ScreenContainer>
+            <HometownSearchModal
+              setText={this.updateText}
+              onPress={this.closeHometownPicker}
+              visible={showHometownPicker}
+            />
+            <Header
+              title={`${nodeEmoji.get('wave')} Hi, ${userInfo.firstName}!`}
+              showBack
+              onBackPress={() => this.props.navigation.goBack()}
+              progress="14.2%"
+            />
+            <SubtitleView>
+              <Subtitle>
+                Before you can get started, tell us a little bit about yourself.
+                This information is private
+              </Subtitle>
+            </SubtitleView>
+            <RegistrationPicker
+              selected={showHometownPicker}
+              onPress={() => {
+                if (!showEthnictyPicker)
+                  this.setState({ showHometownPicker: true })
+              }}
+              text={hometown}
+              placeholderText="What's your hometown?"
+            />
+            <RegistrationPicker
+              selected={showEthnictyPicker}
+              onPress={() => {
+                if (!showHometownPicker)
+                  this.setState({
+                    showEthnictyPicker: true,
+                    ethnicity: ethnicity || ethnicityOptions[0].value,
+                  })
+              }}
+              text={
+                ethnicity ? this.findLabel(ethnicity, ethnicityOptions) : ''
+              }
+              placeholderText="What's your ethnicity"
+            />
+            <RegisterButton
+              buttonText="NEXT"
+              disabled={disabled}
+              onPress={() =>
+                this.props.navigation.navigate('Gender', {
+                  userInfo: { ...userInfo, ethnicity, hometown },
                 })
-            }}
-            text={ethnicity ? this.findLabel(ethnicity, ethnicityOptions) : ''}
-            placeholderText="What's your ethnicity"
-          />
-          <RegisterButton
-            buttonText="NEXT"
-            disabled={disabled}
-            onPress={() =>
-              this.props.navigation.navigate('Gender', {
-                userInfo: { ...userInfo, ethnicity, hometown },
-              })
-            }
-          />
-        </ScreenContainer>
-        {showEthnictyPicker && (
-          <PickerComponent
-            options={ethnicityOptions}
-            doneOnPress={() => {
-              this.updateText({
-                showEthnictyPicker: false,
-              })
-            }}
-            onValueChange={this.updateText}
-            value={ethnicity}
-            keyName="ethnicity"
-          />
-        )}
+              }
+            />
+          </ScreenContainer>
+          {showEthnictyPicker && (
+            <PickerComponent
+              options={ethnicityOptions}
+              doneOnPress={() => {
+                this.updateText({
+                  showEthnictyPicker: false,
+                })
+              }}
+              onValueChange={this.updateText}
+              value={ethnicity}
+              keyName="ethnicity"
+            />
+          )}
+        </SafeAreaView>
       </View>
     )
   }

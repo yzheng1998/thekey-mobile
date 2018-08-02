@@ -105,7 +105,6 @@ export default class MemberScreen extends Component {
                   })
                 }
               />
-
               <MyProfileBioBlock tagData={tags} bioText={bio} />
               <Divider />
               <Description

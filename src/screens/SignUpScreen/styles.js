@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
+export const SafeView = styled.SafeAreaView`
+  flex: 1;
+`
 export const ScreenContainer = styled.View`
   flex: 1;
   padding-left: 12px;

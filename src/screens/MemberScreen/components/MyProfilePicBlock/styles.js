@@ -3,9 +3,7 @@ import { themeGet } from 'styled-system'
 
 export const BlockContainer = styled.View`
   width: 100%;
-  aspect-ratio: 1.057;
 `
-
 export const EventTitleText = styled.Text`
   font-size: 24;
   line-height: 29;

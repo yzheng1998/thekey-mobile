@@ -17,7 +17,7 @@ export const Title = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   font-size: 24px;
 `
-export const BackButtonContainer = styled.TouchableOpacity`
+export const BackButton = styled.TouchableOpacity`
   position: absolute;
   left: 20px;
   top: 1px;

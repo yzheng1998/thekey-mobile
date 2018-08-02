@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
+export const SafeView = styled.SafeAreaView`
+  flex: 1;
+`
 export const Container = styled.View`
   height: 303px;
   width: 100%;
   background-color: white;
-  border-width: 1px;
-  border-color: ${themeGet('colors.border')};
   align-items: center;
 `
 export const Content = styled.View`

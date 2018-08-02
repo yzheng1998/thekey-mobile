@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container, Divider } from './styles'
 import SearchBar from '../SearchBar'
 import HometownSearchCard from '../HometownSearchCard'
-import { FlatList, Modal } from 'react-native'
+import { FlatList, Modal, Keyboard } from 'react-native'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 
@@ -48,6 +48,7 @@ export default class HometownSearchModal extends Component {
                     onPress={obj => {
                       onPress()
                       setText(obj)
+                      Keyboard.dismiss()
                     }}
                     city={hometown.city}
                     state={hometown.state}
