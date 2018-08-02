@@ -18,6 +18,7 @@ export default class NewChatModalHeader extends Component {
       createNewChat,
       newChatButtonDisabled,
       isExistingChat,
+      chatId,
     } = this.props
     const heading = isExistingChat ? 'Add to Chat' : 'New Message'
     return (
@@ -29,10 +30,11 @@ export default class NewChatModalHeader extends Component {
             </CancelButton>
             {isExistingChat ? (
               <AddToChatButton
-                createNewChat={createNewChat}
+                navigateToChat={createNewChat}
                 participantIds={participantIds}
                 disabled={newChatButtonDisabled}
                 closeModal={handleClose}
+                chatId={chatId}
               />
             ) : (
               <CreateChatButton

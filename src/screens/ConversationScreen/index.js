@@ -50,7 +50,7 @@ class ConversationScreen extends Component {
     return (
       <Background>
         <Query query={GET_CHAT_AND_VIEWER} variables={variables}>
-          {({ data, loading, error, subscribeToMore }) => {
+          {({ data, loading, error, subscribeToMore, refetch }) => {
             if (loading) return <Text>loading</Text>
             if (error) return <Text>error</Text>
 
@@ -65,8 +65,10 @@ class ConversationScreen extends Component {
                   navigation={this.props.navigation}
                   participants={chat.participants}
                   userId={userId}
+                  chatId={chatId}
                 />
                 <MessagesDisplay
+                  refreshData={refetch}
                   chat={chat}
                   userId={userId}
                   flatListRef={this.flatListRef}

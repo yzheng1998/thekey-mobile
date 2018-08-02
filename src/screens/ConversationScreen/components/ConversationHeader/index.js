@@ -36,6 +36,7 @@ const ConversationTitle = ({ participants, userId }) => (
 const ParticipantPictures = ({
   otherParticipants,
   numberOfPics,
+  chatId,
   navigation,
 }) => (
   <View>
@@ -47,6 +48,7 @@ const ParticipantPictures = ({
           numberOfPics={numberOfPics}
           navigation={navigation}
           navigateTo="ChatMembers"
+          chatId={chatId}
         />
       </AvatarRowContainer>
     )}
@@ -72,7 +74,7 @@ const ParticipantPictures = ({
 
 export default class ConversationHeader extends Component {
   render() {
-    const { navigation, participants, userId } = this.props
+    const { navigation, participants, userId, chatId } = this.props
 
     return (
       <SafeView>
@@ -88,6 +90,7 @@ export default class ConversationHeader extends Component {
               otherParticipants={participants.filter(p => p.id !== userId)}
               numberOfPics={2}
               navigation={navigation}
+              chatId={chatId}
             />
           </HeaderContainer>
         </TitleContainer>

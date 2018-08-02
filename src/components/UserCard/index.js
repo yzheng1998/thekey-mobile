@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
-import { Card, Name, Picture, Subtitle, InfoContainer } from './styles'
+import {
+  Card,
+  Name,
+  Picture,
+  Subtitle,
+  InfoContainer,
+  RightContainer,
+  AddedText,
+} from './styles'
 import { TouchableOpacity } from 'react-native'
 
 class UserCard extends Component {
   render() {
-    const { name, picture, subtitle, ...rest } = this.props
+    const { name, picture, subtitle, alreadyInChat, ...rest } = this.props
     return (
       <TouchableOpacity {...rest}>
         <Card>
@@ -13,6 +21,9 @@ class UserCard extends Component {
             <Name>{name}</Name>
             <Subtitle>{subtitle}</Subtitle>
           </InfoContainer>
+          <RightContainer>
+            <AddedText>{alreadyInChat ? 'Added' : ''}</AddedText>
+          </RightContainer>
         </Card>
       </TouchableOpacity>
     )
