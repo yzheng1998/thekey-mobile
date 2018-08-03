@@ -10,6 +10,7 @@ export const Container = styled.View`
   border-bottom-color: ${themeGet('colors.border')};
 `
 export const TextInputContainer = styled.View`
+  width: 100%;
   flex-direction: row;
   align-items: center;
   padding-left: 24px;
