@@ -94,12 +94,12 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion project.compileSdkVersion.toInteger()
 
     defaultConfig {
         applicationId "com.thekeymobile"
         minSdkVersion 16
-        targetSdkVersion 26
+        targetSdkVersion project.targetSdkVersion.toInteger()
         versionCode 2
         versionName "1.1"
         ndk {
@@ -136,6 +136,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile project(':react-native-fbsdk')
     compile project(':react-native-fs')
     compile project(':rn-fetch-blob')
@@ -145,18 +146,13 @@ dependencies {
     compile project(':appcenter')
     compile project(':react-native-vector-icons')
     compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:26.0.1"
+    compile "com.android.support:appcompat-v7:$rootProject.supportLibVersion"
     compile "com.facebook.react:react-native:+"  // From node_modules
     compile project(':react-native-svg')
-    compile project(':react-native-push-notification')
-    compile ('com.google.android.gms:play-services-gcm:15.0.1') {
-        force = true
-    }
-    compile 'com.google.firebase:firebase-core:16.0.0'
     compile (project(':react-native-camera')) {
         exclude group: "com.google.android.gms"
-        compile 'com.android.support:exifinterface:26.+'
-        compile ('com.google.android.gms:play-services-vision:15.0.1') {
+        compile 'com.android.support:exifinterface:27.+'
+        compile ('com.google.android.gms:play-services-vision:12.0.1') {
             force = true
         }
     }
@@ -169,5 +165,3 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
-
-apply plugin: 'com.google.gms.google-services'
