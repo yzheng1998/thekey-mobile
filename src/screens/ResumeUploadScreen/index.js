@@ -16,6 +16,7 @@ import uuid from 'uuid/v4'
 
 import gql from 'graphql-tag'
 import { SEND_MEMBERSHIP_APPLICATION } from './mutations'
+import config from '../../../config'
 
 function humanFileSize(bytes, si) {
   const thresh = si ? 1000 : 1024
@@ -86,12 +87,16 @@ class ResumeUploadScreen extends Component {
         const {
           signS3Url: { url },
         } = data
+        const imageNameRegEx = /.*amazonaws.com\/(.*)\?.*/
+        const match = imageNameRegEx.exec(data.signS3Url.url)
+        const imageName = match.length > 0 ? match[1] : ''
+        const finalUrl = config.s3Bucket + imageName
         const item = {
           id,
           title: res.fileName,
           dataSize: humanFileSize(res.fileSize),
           progress: '0%',
-          url,
+          url: finalUrl,
         }
         this.setState({
           resumeListData: [item, ...this.state.resumeListData],
@@ -191,10 +196,7 @@ class ResumeUploadScreen extends Component {
                       const userInfoFinal = {
                         ...userInfo,
                         resumes: this.state.resumeListData.map(resume => ({
-                          resume: resume.url.substring(
-                            0,
-                            resume.url.indexOf('.pdf?') + 4,
-                          ),
+                          resume: resume.url,
                         })),
                       }
                       const variables = {
