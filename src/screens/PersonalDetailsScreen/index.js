@@ -7,15 +7,18 @@ import RegisterButton from '../../components/RegisterButton'
 import RegistrationPicker from '../../components/RegistrationPicker'
 import { ethnicityOptions } from './constants'
 import HometownSearchModal from '../../components/HometownSearchModal'
-
+import moment from 'moment'
+import DatePicker from '../../components/DatePicker/DatePicker'
 import nodeEmoji from 'node-emoji'
 
 export default class PersonalDetailsScreen extends Component {
   state = {
     ethnicity: '',
     hometown: '',
-    showEthnictyPicker: false,
+    birthday: '',
+    showEthnicityPicker: false,
     showHometownPicker: false,
+    showBirthdayPicker: false,
   }
 
   updateText = obj => {
@@ -32,13 +35,14 @@ export default class PersonalDetailsScreen extends Component {
     const {
       ethnicity,
       hometown,
-      showEthnictyPicker,
+      birthday,
+      showEthnicityPicker,
       showHometownPicker,
+      showBirthdayPicker,
     } = this.state
     const disabled =
-      !(ethnicity && hometown) || showEthnictyPicker || showHometownPicker
+      !(ethnicity && hometown) || showEthnicityPicker || showHometownPicker
     const userInfo = this.props.navigation.getParam('userInfo')
-
     return (
       <View style={{ flex: 1 }}>
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -63,18 +67,18 @@ export default class PersonalDetailsScreen extends Component {
             <RegistrationPicker
               selected={showHometownPicker}
               onPress={() => {
-                if (!showEthnictyPicker)
+                if (!showEthnicityPicker && !showBirthdayPicker)
                   this.setState({ showHometownPicker: true })
               }}
               text={hometown}
               placeholderText="What's your hometown?"
             />
             <RegistrationPicker
-              selected={showEthnictyPicker}
+              selected={showEthnicityPicker}
               onPress={() => {
-                if (!showHometownPicker)
+                if (!showHometownPicker && !showBirthdayPicker)
                   this.setState({
-                    showEthnictyPicker: true,
+                    showEthnicityPicker: true,
                     ethnicity: ethnicity || ethnicityOptions[0].value,
                   })
               }}
@@ -83,22 +87,50 @@ export default class PersonalDetailsScreen extends Component {
               }
               placeholderText="What's your ethnicity"
             />
+            <RegistrationPicker
+              selected={showBirthdayPicker}
+              onPress={() => {
+                if (!showHometownPicker && !showEthnicityPicker)
+                  this.setState({
+                    showBirthdayPicker: true,
+                    birthday: birthday,
+                  })
+              }}
+              text={birthday ? moment(birthday).format('MMMM D, YYYY') : ''}
+              placeholderText="What's your birthday?"
+            />
+
             <RegisterButton
               buttonText="NEXT"
               disabled={disabled}
               onPress={() =>
                 this.props.navigation.navigate('Gender', {
-                  userInfo: { ...userInfo, ethnicity, hometown },
+                  userInfo: { ...userInfo, ethnicity, hometown, birthday },
                 })
               }
             />
           </ScreenContainer>
-          {showEthnictyPicker && (
+          <DatePicker
+            visible={showBirthdayPicker}
+            mode="date"
+            date={birthday || new Date(2000, 0, 1)}
+            doneOnPress={() => {
+              this.setState({
+                showBirthdayPicker: false,
+              })
+            }}
+            setDate={birthday => {
+              this.setState({
+                birthday,
+              })
+            }}
+          />
+          {showEthnicityPicker && (
             <PickerComponent
               options={ethnicityOptions}
               doneOnPress={() => {
                 this.updateText({
-                  showEthnictyPicker: false,
+                  showEthnicityPicker: false,
                 })
               }}
               onValueChange={this.updateText}
