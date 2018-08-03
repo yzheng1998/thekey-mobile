@@ -51,6 +51,7 @@ export default class MyProfilePicBlock extends Component {
             id={id}
             showQRCode
             openModal={this.openQRModal}
+            height={350}
           >
             <EventTitleText onPress={this.openQRModal}>{name}</EventTitleText>
             <LocationText>{hometown}</LocationText>
