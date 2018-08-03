@@ -3,6 +3,7 @@ import { FlatList, Modal } from 'react-native'
 import { Container, Divider } from './styles'
 import SearchBar from '../SearchBar'
 import SchoolSearchCard from '../SchoolSearchCard'
+import uuidv4 from 'uuid/v4'
 
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
@@ -42,11 +43,21 @@ export default class SchoolSearchModal extends Component {
             updateText={this.updateText}
             searchText={this.state.searchText}
             placeholderText="Search for a school"
+            onSubmitEditing={() => {
+              toggleSchoolModal()
+              this.props.updateState({
+                schoolName: this.state.searchText,
+                location: 'Unknown Location',
+                schoolId: uuidv4(),
+              })
+            }}
+            returnKeyType="next"
           />
           <Divider />
           <Query query={GET_SCHOOLS} variables={variables}>
             {({ data }) => (
               <FlatList
+                keyboardShouldPersistTaps="handled"
                 keyExtractor={university => university.id}
                 data={data.schools}
                 renderItem={({ item: university }) => (

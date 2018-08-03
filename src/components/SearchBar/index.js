@@ -28,7 +28,13 @@ export default class SearchBar extends Component {
   }
 
   render() {
-    const { updateText, searchText, placeholderText, closeModal } = this.props
+    const {
+      updateText,
+      searchText,
+      placeholderText,
+      closeModal,
+      ...rest
+    } = this.props
     return (
       <SearchBarContainer>
         <SearchContainer
@@ -52,6 +58,7 @@ export default class SearchBar extends Component {
             }}
             value={searchText}
             autoCapitalize="none"
+            {...rest}
           />
           {searchText !== '' && (
             <ClearIconButton onPress={() => updateText('')}>
