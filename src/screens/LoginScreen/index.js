@@ -8,19 +8,19 @@ class LoginScreen extends Component {
   render() {
     return (
       <SafeView>
-        <KeyboardAvoidingView
-          style={{ backgroundColor: 'white', flex: 1 }}
-          behavior="position"
-          enabled
-        >
-          <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <KeyboardAvoidingView
+            style={{ backgroundColor: 'white', flex: 1 }}
+            behavior="padding"
+            enabled
+          >
             <BackButton onBackPress={() => this.props.navigation.goBack()} />
             <TitleContainer>
-              <Title>Sign in</Title>
+              <Title>Sign In</Title>
             </TitleContainer>
             <LoginBody navigation={this.props.navigation} />
-          </ScrollView>
-        </KeyboardAvoidingView>
+          </KeyboardAvoidingView>
+        </ScrollView>
       </SafeView>
     )
   }

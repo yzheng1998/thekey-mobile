@@ -15,7 +15,7 @@ export const TitleContainer = styled.View`
   justify-content: flex-end;
   height: 80px;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `
 export const ColumnContainer = styled.View`
   flex: 1;
