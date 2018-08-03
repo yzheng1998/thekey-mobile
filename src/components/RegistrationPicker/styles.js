@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const PickerContainer = styled.TouchableOpacity`
+  margin-left: 8px;
+  margin-right: 8px;
   flex-direction: row;
   height: 50px;
   border-radius: 8px;
@@ -13,8 +15,7 @@ export const PickerContainer = styled.TouchableOpacity`
     props.selected
       ? themeGet('colors.buttonPrimary')
       : themeGet('colors.textInputBorder')};
-  margin-top: 11px;
-  margin-bottom: 11px;
+  margin-top: 4px;
 `
 
 export const TextField = styled.Text`
