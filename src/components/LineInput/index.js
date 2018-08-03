@@ -10,6 +10,9 @@ import ClearIcon from 'react-native-vector-icons/MaterialIcons'
 import Error from '../../components/Error'
 
 export default class LineInput extends Component {
+  static defaultProps = {
+    staticBorder: false,
+  }
   state = {
     selected: false,
   }
@@ -18,20 +21,27 @@ export default class LineInput extends Component {
       updateText,
       children,
       placeholderText,
+      placeholderTextColor,
       text,
       onBlur,
       error,
+      staticBorder,
       ...rest
     } = this.props
     return (
       <RowContainer>
-        <LineInputContainer selected={this.state.selected}>
+        <LineInputContainer
+          staticBorder={staticBorder}
+          selected={this.state.selected}
+        >
           <InputContainer>
             {children}
             <Input
               placeholder={placeholderText}
               value={text}
-              placeholderTextColor="rgb(139, 133, 150)"
+              placeholderTextColor={
+                placeholderTextColor || 'rgb(139, 133, 150)'
+              }
               onChangeText={txt => updateText(txt)}
               onFocus={() => this.setState({ selected: true })}
               onBlur={() => {

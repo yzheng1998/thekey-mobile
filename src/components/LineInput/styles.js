@@ -12,7 +12,7 @@ export const LineInputContainer = styled.View`
   padding-right: 4px;
   border-width: 1px;
   border-color: ${props =>
-    props.selected
+    props.selected && !props.staticBorder
       ? themeGet('colors.buttonPrimary')
       : themeGet('colors.textInputBorder')};
   margin-top: 4px;
