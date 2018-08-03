@@ -16,6 +16,8 @@ export const TitleRow = styled.View`
 export const Title = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   font-size: 24px;
+  text-align: center;
+  width: 80%;
 `
 export const BackButton = styled.TouchableOpacity`
   position: absolute;

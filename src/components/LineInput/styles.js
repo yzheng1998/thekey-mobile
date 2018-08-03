@@ -4,7 +4,8 @@ import { themeGet } from 'styled-system'
 export const LineInputContainer = styled.View`
   flex-direction: row;
   height: 50px;
-  width: ${props => props.width || '100%'};
+  margin-left: 8px;
+  margin-right: 8px;
   border-radius: 8px;
   align-items: center;
   padding-left: 4px;
@@ -14,8 +15,7 @@ export const LineInputContainer = styled.View`
     props.selected
       ? themeGet('colors.buttonPrimary')
       : themeGet('colors.textInputBorder')};
-  margin-top: 11px;
-  margin-bottom: 11px;
+  margin-top: 4px;
 `
 export const InputContainer = styled.View`
   font-family: ${themeGet('fonts.regular')};
@@ -29,4 +29,8 @@ export const Input = styled.TextInput`
 `
 export const ClearIconButton = styled.TouchableOpacity`
   margin-right: 8px;
+`
+export const RowContainer = styled.View`
+  flex: 1;
+  width: 100%;
 `

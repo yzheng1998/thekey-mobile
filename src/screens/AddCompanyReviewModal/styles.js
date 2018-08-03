@@ -38,8 +38,8 @@ export const InputField = styled.TextInput`
 `
 export const Block = styled.View`
   width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 `
 export const RowHeader = styled.View`
   margin-top: 10px;

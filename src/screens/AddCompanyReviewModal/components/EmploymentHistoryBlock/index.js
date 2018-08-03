@@ -19,6 +19,12 @@ import fullStar from './full-star-pink.png'
 import emptyStar from './empty-star-grey.png'
 import Stars from 'react-native-stars'
 
+const employmentTypes = [
+  { value: 'FULLTIME', label: 'Full-Time' },
+  { value: 'PARTTIME', label: 'Part-Time' },
+  { value: 'INTERNSHIP', label: 'Internship' },
+]
+
 export default class EmploymentHistoryBlock extends Component {
   static createYearData() {
     const yearArray = []
@@ -27,61 +33,25 @@ export default class EmploymentHistoryBlock extends Component {
     }
     return yearArray
   }
-  constructor(props) {
-    super(props)
-    this.state = {
-      selectedEmploymentIndex: this.matchEmploymentTypeWithIndex(
-        this.props.employmentType,
-      ),
-    }
-  }
-
-  matchEmploymentTypeWithIndex = employmentType => {
-    switch (employmentType) {
-      case 'Full-time':
-        return 0
-      case 'Part-time':
-        return 1
-      default:
-        // internship
-        return 2
-    }
-  }
-  matchIndexWithEmploymentType = selectedIndex => {
-    switch (selectedIndex) {
-      case 0:
-        return 'Full-time'
-      case 1:
-        return 'Part-time'
-      default:
-        return 'Internship'
-    }
-  }
 
   render() {
+    const { state, updateState } = this.props
     const {
-      handleStarRating,
-      rating,
-      updateEmploymentType,
+      picture,
       employmentType,
       isCurrentEmployee,
-      toggleCheckBox,
+      yearPickerEnabled,
       yearLastWorked,
-      companyName,
-      onChangeCompanyText,
-      togglePicker,
-      companyPicture,
-    } = this.props
-    const employmentTypes = ['Full-time', 'Part-time', 'Internship']
+    } = state
     return (
       <BlockBackground>
         <RowContainer>
           <SpacedHeading>Select Rating</SpacedHeading>
           <StarsContainer>
             <Stars
-              rating={rating}
-              update={val => {
-                handleStarRating(val)
+              rating={state.rating}
+              update={rating => {
+                updateState({ rating })
               }}
               spacing={10}
               starSize={23}
@@ -96,14 +66,14 @@ export default class EmploymentHistoryBlock extends Component {
           <RowSubContainer>
             <InputField
               placeholderTextColor="rgb(250, 53, 121)"
-              placeholder={companyName}
-              onChangeText={text => {
-                onChangeCompanyText(text)
+              placeholder={state.companyName}
+              onChangeText={companyName => {
+                updateState({ companyName })
               }}
             />
             <Avatar
               source={{
-                uri: companyPicture,
+                uri: picture,
               }}
             />
           </RowSubContainer>
@@ -113,14 +83,13 @@ export default class EmploymentHistoryBlock extends Component {
             <Heading>Employment Type</Heading>
           </RowContainer>
           <Buttons
-            onPress={index => {
-              this.setState({
-                selectedEmploymentIndex: index,
-              })
-              updateEmploymentType(this.matchIndexWithEmploymentType(index))
+            onPress={i => {
+              updateState({ employmentType: employmentTypes[i].value })
             }}
-            buttons={employmentTypes}
-            selectedIndex={this.matchEmploymentTypeWithIndex(employmentType)}
+            buttons={employmentTypes.map(el => el.label)}
+            selectedIndex={employmentTypes.findIndex(
+              el => el.value === employmentType,
+            )}
             containerStyle={{ height: 30 }}
             textStyle={{ color: 'rgb(250,53,121)', fontWeight: '600' }}
             selectedTextStyle={{ color: 'white', fontWeight: '600' }}
@@ -132,10 +101,18 @@ export default class EmploymentHistoryBlock extends Component {
         <Block>
           <CheckBox
             isCurrentEmployee={isCurrentEmployee}
-            toggleCheckBox={toggleCheckBox}
+            toggleCheckBox={() =>
+              updateState({
+                isCurrentEmployee: !isCurrentEmployee,
+              })
+            }
           />
           <RowContainer>
-            <Text onPress={() => togglePicker()}>
+            <Text
+              onPress={() =>
+                updateState({ yearPickerEnabled: !yearPickerEnabled })
+              }
+            >
               Last worked here in {yearLastWorked || `...`}
             </Text>
           </RowContainer>

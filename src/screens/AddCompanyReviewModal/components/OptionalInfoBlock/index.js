@@ -15,7 +15,7 @@ const TextInputField = ({ value, placeholder, updateState }) => (
 
 export default class OptionalInfoBlock extends Component {
   render() {
-    const { jobTitle, updateJobTitle, location, updateLocation } = this.props
+    const { state, updateState } = this.props
     return (
       <BlockBackground>
         <Block>
@@ -24,8 +24,8 @@ export default class OptionalInfoBlock extends Component {
             <Heading>Job Title</Heading>
             <TextInputField
               placeholder="General Manager"
-              value={jobTitle}
-              updateState={updateJobTitle}
+              value={state.jobTitle}
+              updateState={jobTitle => updateState({ jobTitle })}
             />
           </RowHeader>
         </Block>
@@ -34,8 +34,8 @@ export default class OptionalInfoBlock extends Component {
             <Heading>Location</Heading>
             <TextInputField
               placeholder="Enter location"
-              value={location}
-              updateState={updateLocation}
+              value={state.location}
+              updateState={location => updateState({ location })}
             />
           </RowHeader>
         </Block>

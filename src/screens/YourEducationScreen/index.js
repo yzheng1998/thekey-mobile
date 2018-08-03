@@ -8,6 +8,9 @@ import SchoolSearchModal from '../../components/SchoolSearchModal'
 import AddEducationModal from './components/AddEducationModal'
 import { SafeAreaView } from 'react-native'
 import nodeEmoji from 'node-emoji'
+import constraints from './constraints'
+
+const validate = require('validate.js')
 
 const schoolTypeOptions = [
   { label: 'Secondary', value: 'SECONDARY' },
@@ -16,18 +19,25 @@ const schoolTypeOptions = [
 ]
 
 class YourEducationScreen extends Component {
-  state = {
-    showSchoolSearchModal: false,
-    showAddEducationModal: false,
-    schoolName: '',
-    schoolType: '',
-    degreeType: '',
-    location: '',
-    major: '',
-    startYear: '',
-    endYear: '',
-    isCurrentEmployee: false,
-    educationListData: [],
+  constructor(props) {
+    super(props)
+    this.updateState = this.setState.bind(this)
+    this.state = {
+      showSchoolSearchModal: false,
+      showAddEducationModal: false,
+      schoolName: '',
+      schoolType: '',
+      degreeType: '',
+      location: '',
+      major: '',
+      startYear: '',
+      endYear: '',
+      isCurrentEmployee: false,
+      educationListData: [],
+      displayErrors: {},
+      errors: {},
+      touched: {},
+    }
   }
 
   toggleSchoolModal = () => {
@@ -57,10 +67,54 @@ class YourEducationScreen extends Component {
       major: '',
       startYear: '',
       endYear: '',
-      isCurrentEmployee: '',
+      isCurrentEmployee: false,
       schoolType: '',
       degreeType: '',
+      displayErrors: {},
+      errors: {},
+      touched: {},
     })
+  }
+
+  validateForm = isOnChangeText => {
+    const errors = validate(
+      {
+        schoolName: this.state.schoolName,
+        schoolType: this.state.schoolType,
+        degreeType: this.state.degreeType,
+        major: this.state.major,
+        startYear: this.state.startYear,
+        endYear: this.state.endYear,
+      },
+      constraints,
+    )
+
+    const constructDisplayErrors = () => {
+      const displayErrors = {}
+      Object.keys(errors || {}).forEach(key => {
+        if (this.state.touched[key]) {
+          displayErrors[key] = errors[key]
+        }
+      })
+      return displayErrors
+    }
+
+    const errorsReduced =
+      Object.keys(errors || {}).length <
+      Object.keys(this.state.errors || {}).length
+
+    if (!isOnChangeText || (isOnChangeText && errorsReduced)) {
+      this.setState({ displayErrors: constructDisplayErrors() })
+    }
+    this.setState({ errors })
+  }
+
+  addTouched = key => {
+    const touched = {
+      ...this.state.touched,
+      [key]: true,
+    }
+    this.setState({ touched })
   }
 
   render() {
@@ -126,6 +180,8 @@ class YourEducationScreen extends Component {
             updateText={this.updateState}
             toggleEducationModal={this.toggleEducationModal}
             visible={this.state.showAddEducationModal}
+            validateForm={this.validateForm}
+            addTouched={this.addTouched}
           />
           <SchoolSearchModal
             updateState={this.updateState}

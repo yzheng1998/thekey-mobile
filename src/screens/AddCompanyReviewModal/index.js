@@ -8,8 +8,16 @@ import TermsOfServiceConfirmation from './components/TermsOfServiceConfirmation'
 import SubmitReviewButton from './components/SubmitReviewButton'
 import { Background, Divider, ScreenScroll, SafeView } from './styles'
 import { KeyboardAvoidingView, Alert } from 'react-native'
+import constraints from './constraints'
+
+const validate = require('validate.js')
 
 export default class AddCompanyReviewModal extends Component {
+  constructor(props) {
+    super(props)
+    this.updateState = this.setState.bind(this)
+  }
+
   state = {
     rating: 0,
     employmentType: 0,
@@ -22,48 +30,58 @@ export default class AddCompanyReviewModal extends Component {
     reviewTitle: '',
     reviewPros: '',
     reviewCons: '',
+    displayErrors: {},
+    errors: {},
+    touched: {},
   }
 
-  // handling state change for DescriptionBlock
-  onChangeText = obj => {
-    this.setState(obj)
+  validateForm = isOnChangeText => {
+    const errors = validate(
+      {
+        reviewTitle: this.state.reviewTitle,
+        reviewPros: this.state.reviewPros,
+        reviewCons: this.state.reviewCons,
+      },
+      constraints,
+    )
+
+    const constructDisplayErrors = () => {
+      const displayErrors = {}
+      Object.keys(errors || {}).forEach(key => {
+        if (this.state.touched[key]) {
+          displayErrors[key] = errors[key]
+        }
+      })
+      return displayErrors
+    }
+
+    const errorsReduced =
+      Object.keys(errors || {}).length <
+      Object.keys(this.state.errors || {}).length
+
+    if (!isOnChangeText || (isOnChangeText && errorsReduced)) {
+      this.setState({ displayErrors: constructDisplayErrors() })
+    }
+    this.setState({ errors })
   }
-  // handling state change for EmploymentHistoryBlock
-  onChangeCompanyText = companyName => {
-    this.setState({ companyName })
+
+  addTouched = key => {
+    const touched = {
+      ...this.state.touched,
+      [key]: true,
+    }
+    this.setState({ touched })
   }
-  handleStarRating = rating => {
-    this.setState({ rating })
-  }
-  updateEmploymentType = employmentType => {
-    this.setState({ employmentType })
-  }
+
   togglePicker = () => {
     this.setState({
       yearPickerEnabled: !this.state.yearPickerEnabled,
     })
   }
-
   handleUsePicker = obj => {
     this.setState(obj)
   }
-  toggleCheckBox = isCurrentEmployee => {
-    this.setState({
-      isCurrentEmployee: !isCurrentEmployee,
-    })
-  }
 
-  // handling state change for OptionalInfoBlock
-  updateJobTitle = title => {
-    this.setState({ jobTitle: title })
-  }
-  updateLocation = location => {
-    this.setState({ location })
-  }
-  // handling state change for terms of use
-  handleAcceptedTerms = () => {
-    this.setState({ acceptedTerms: !this.state.acceptedTerms })
-  }
   clearState = () => {
     this.setState({
       rating: 0,
@@ -77,24 +95,22 @@ export default class AddCompanyReviewModal extends Component {
       reviewTitle: '',
       reviewPros: '',
       reviewCons: '',
+      displayErrors: {},
+      errors: {},
+      touched: [],
     })
   }
   render() {
     const { isVisible, hideAddReview } = this.props
     const {
-      rating,
-      employmentType,
-      isCurrentEmployee,
       yearLastWorked,
       yearPickerEnabled,
-      jobTitle,
-      location,
       acceptedTerms,
-      reviewTitle,
-      reviewPros,
-      reviewCons,
+      errors,
+      rating,
+      employmentType,
     } = this.state
-    const { companyId, companyName, picture } = this.props.state
+    const noErrors = !errors && acceptedTerms && rating && employmentType
     return (
       <Background
         animationIn="slideInRight"
@@ -128,52 +144,32 @@ export default class AddCompanyReviewModal extends Component {
                 title="Add Company Review"
               />
               <EmploymentHistoryBlock
-                rating={rating}
-                handleStarRating={this.handleStarRating}
-                employmentType={employmentType}
-                updateEmploymentType={this.updateEmploymentType}
-                isCurrentEmployee={isCurrentEmployee}
-                yearLastWorked={yearLastWorked}
-                companyName={companyName}
-                onChangeCompanyText={this.onChangeCompanyText}
-                togglePicker={this.togglePicker}
-                toggleCheckBox={this.toggleCheckBox}
-                companyPicture={picture}
+                state={{ ...this.state, ...this.props.state }}
+                updateState={this.updateState}
               />
               <Divider />
               <DescriptionBlock
-                reviewTitle={reviewTitle}
-                reviewPros={reviewPros}
-                reviewCons={reviewCons}
-                onChangeText={this.onChangeText}
+                addTouched={this.addTouched}
+                validateForm={this.validateForm}
+                state={this.state}
+                updateState={this.updateState}
               />
               <Divider />
               <OptionalInfoBlock
-                jobTitle={jobTitle}
-                location={location}
-                updateJobTitle={this.updateJobTitle}
-                updateLocation={this.updateLocation}
+                state={this.state}
+                updateState={this.updateState}
               />
               <Divider />
               <TermsOfServiceConfirmation
                 acceptedTerms={acceptedTerms}
-                handleAcceptedTerms={this.handleAcceptedTerms}
+                updateState={this.updateState}
               />
               <SubmitReviewButton
+                state={{ ...this.state, ...this.props.state }}
                 hideAddReview={hideAddReview}
                 clearState={this.clearState}
-                rating={rating}
-                title={reviewTitle}
-                pros={reviewPros}
-                cons={reviewCons}
-                employmentType={this.employmentType}
-                current={isCurrentEmployee}
-                jobTitle={jobTitle}
-                location={location}
-                acceptedTerms={acceptedTerms}
-                companyId={companyId}
-                lastWorked={yearLastWorked}
                 navigation={this.props.navigation}
+                disabled={!noErrors}
               />
             </ScreenScroll>
           </KeyboardAvoidingView>

@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
-import { KeyboardAvoidingView, Switch, Keyboard } from 'react-native'
-import {
-  ScreenContainer,
-  Subtitle,
-  RightModal,
-  RowContainer,
-  SwitchLabel,
-} from './styles'
+import { Keyboard } from 'react-native'
+import { ScreenContainer, Subtitle, RightModal, RowContainer } from './styles'
 import Header from '../../../../components/Header'
 import LineInput from '../../../../components/LineInput'
 import RegisterButton from '../../../../components/RegisterButton'
 import RegistrationPicker from '../../../../components/RegistrationPicker'
 import PickerComponent from '../../../../components/PickerComponent'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 export default class AddEducationModal extends Component {
   state = {
@@ -26,6 +21,8 @@ export default class AddEducationModal extends Component {
       addEducation,
       clearState,
       schoolTypeOptions,
+      validateForm,
+      addTouched,
     } = this.props
     const {
       schoolName,
@@ -36,29 +33,14 @@ export default class AddEducationModal extends Component {
       startYear,
       endYear,
       isCurrentEmployee,
+      errors,
+      displayErrors,
     } = state
-    const toggleSwitch = () => {
-      updateText({
-        isCurrentEmployee: !isCurrentEmployee,
-        endYear: !isCurrentEmployee ? null : undefined,
-      })
-    }
+
     const { showSchoolTypePicker } = this.state
     const findLabel = value =>
       schoolTypeOptions.find(el => el.value === value).label
-    const disabled = !(
-      schoolName &&
-      schoolType &&
-      degreeType &&
-      major &&
-      !Number.isNaN(startYear) &&
-      startYear.length === 4 &&
-      (isCurrentEmployee ||
-        (!Number.isNaN(endYear) &&
-          endYear !== null &&
-          endYear !== undefined &&
-          endYear.length === 4))
-    )
+    const noErrors = !errors
     return (
       <RightModal
         isVisible={visible}
@@ -66,57 +48,75 @@ export default class AddEducationModal extends Component {
         animationOut="slideOutRight"
       >
         <ScreenContainer>
-          <KeyboardAvoidingView behavior="position" enabled>
+          <KeyboardAwareScrollView>
             <Header
               title={schoolName}
               showBack
-              onBackPress={toggleEducationModal}
+              onBackPress={() => {
+                toggleEducationModal()
+                clearState()
+              }}
             >
               <Subtitle>{location}</Subtitle>
             </Header>
             <LineInput
-              updateText={text => updateText({ major: text })}
               text={major}
               placeholderText="What did you study?"
+              updateText={text => {
+                updateText({ major: text }, () => validateForm(true))
+              }}
+              onFocus={() => addTouched('major')}
+              onBlur={() => validateForm(false)}
+              error={displayErrors.major}
             />
             <RegistrationPicker
               selected={showSchoolTypePicker}
               onPress={() => {
                 Keyboard.dismiss()
                 this.setState({ showSchoolTypePicker: true })
+                if (!schoolType) {
+                  updateText({ schoolType: schoolTypeOptions[0].value })
+                }
               }}
               text={schoolType ? findLabel(schoolType) : ''}
               placeholderText="What type of school did you attend?"
             />
             <LineInput
-              updateText={text => updateText({ degreeType: text })}
               text={degreeType}
               placeholderText="Degree type"
+              updateText={text => {
+                updateText({ degreeType: text }, () => validateForm(true))
+              }}
+              onFocus={() => addTouched('degreeType')}
+              onBlur={() => validateForm(false)}
+              error={displayErrors.degreeType}
             />
             <RowContainer>
-              <SwitchLabel>I am currently studying here</SwitchLabel>
-              <Switch
-                onValueChange={toggleSwitch}
-                value={isCurrentEmployee}
-                onTintColor="rgb(250, 53, 121)"
-              />
-            </RowContainer>
-            <RowContainer>
               <LineInput
-                updateText={text => updateText({ startYear: text })}
                 width="48%"
                 text={startYear}
-                placeholderText="Start Date"
+                placeholderText="Start Year"
+                updateText={text => {
+                  updateText({ startYear: text }, () => validateForm(true))
+                }}
+                onFocus={() => addTouched('startYear')}
+                onBlur={() => validateForm(false)}
+                error={displayErrors.startYear}
               />
               <LineInput
-                updateText={text => updateText({ endYear: text })}
                 text={
                   endYear === null || isCurrentEmployee === true
                     ? 'Present'
                     : endYear
                 }
                 width="48%"
-                placeholderText="End Date"
+                placeholderText="Graduation Year"
+                updateText={text => {
+                  updateText({ endYear: text }, () => validateForm(true))
+                }}
+                onFocus={() => addTouched('endYear')}
+                onBlur={() => validateForm(false)}
+                error={displayErrors.endYear}
               />
             </RowContainer>
             <RegisterButton
@@ -126,9 +126,9 @@ export default class AddEducationModal extends Component {
                 toggleEducationModal()
                 clearState()
               }}
-              disabled={disabled}
+              disabled={!noErrors}
             />
-          </KeyboardAvoidingView>
+          </KeyboardAwareScrollView>
           {showSchoolTypePicker && (
             <PickerComponent
               options={schoolTypeOptions}

@@ -29,3 +29,9 @@ export const Subtitle = styled.Text`
   font-size: 14px
   line-height: 20px;
 `
+
+export const FacebookButtonContainer = styled.View`
+  width: 100%;
+  align-items: center;
+  margin-top: 12px;
+`

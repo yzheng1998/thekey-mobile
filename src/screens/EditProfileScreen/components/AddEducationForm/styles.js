@@ -13,17 +13,16 @@ export const RemoveButtonText = styled.Text`
 `
 export const AddButton = styled.TouchableOpacity`
   height: 50px;
-  width: 100%;
   background-color: ${props =>
     props.disabled
       ? themeGet('colors.buttonClicked')
       : themeGet('colors.buttonPrimary')};
-  margin-top: 24px;
+  margin-top: 12px;
   border-radius: 10px;
   align-items: center;
   padding: 16px;
-  margin-left: 12px;
-  margin-right: 12px;
+  margin-left: 8px;
+  margin-right: 8px;
 `
 export const RemoveButton = styled.TouchableOpacity`
   background-color: white;
@@ -36,20 +35,18 @@ export const RemoveButton = styled.TouchableOpacity`
 `
 export const ButtonContainer = styled.View`
   width: 100%;
-  flex-direction: column;
-  align-items: center;
 `
 
 export const DateInputRow = styled.View`
   flex-direction: row;
   width: 100%;
-  justify-content: space-between;
 `
 
 export const OptionsInputContainer = styled.TouchableOpacity`
+  margin-left: 8px;
+  margin-right: 8px;
   flex-direction: row;
   height: 50px;
-  width: ${props => props.width || '100%'};
   border-radius: 8px;
   align-items: center;
   padding-left: 4px;
@@ -59,13 +56,12 @@ export const OptionsInputContainer = styled.TouchableOpacity`
     props.selected
       ? themeGet('colors.buttonPrimary')
       : themeGet('colors.textInputBorder')};
-  margin-top: 11px;
-  margin-bottom: 11px;
+  margin-top: 4px;
 `
 export const OptionsPlaceholder = styled.Text`
   font-size: 15px;
   flex: 1;
-  color: ${themeGet('colors.fontSubtitle.primary')};
+  color: ${themeGet('colors.pickerPlaceholder')};
   margin-left: 12px;
 `
 export const OptionsText = styled.Text`

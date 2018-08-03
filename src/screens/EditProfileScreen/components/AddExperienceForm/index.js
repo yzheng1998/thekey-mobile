@@ -1,13 +1,30 @@
 import React, { Component } from 'react'
 import { Screen, Block } from '../../styles'
-import { RowContainer, ButtonContainer, SwitchLabel } from './styles'
+import {
+  RowContainer,
+  ButtonContainer,
+  SwitchLabel,
+  SwitchContainer,
+} from './styles'
 import LineInput from '../../../../components/LineInput'
 import AddExperienceButton from './components/AddExperienceButton'
 import UpdateExperienceButton from './components/UpdateExperienceButton'
 import DeleteExperienceButton from './components/DeleteExperienceButton'
 import Header from '../Header'
-import { Switch, Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { Switch, Keyboard, TouchableWithoutFeedback, View } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import _ from 'lodash'
+import constraints from './constraints'
+
+const validate = require('validate.js')
+
+const moment = require('moment')
+
+const format = 'MMM YYYY'
+validate.extend(validate.validators.datetime, {
+  format: value => value.format(format),
+  parse: value => moment(value, format, true),
+})
 
 export default class AddExperienceForm extends Component {
   constructor(props) {
@@ -23,22 +40,51 @@ export default class AddExperienceForm extends Component {
     this.state = {
       ...experienceInfo,
       isCurrentEmployee: experienceInfo.endDate === null,
+      displayErrors: {},
+      errors: {},
+      touched: {},
     }
   }
 
-  // functions to update state
-  updateEmployer = text => {
-    this.setState({ employer: text })
+  validateForm = isOnChangeText => {
+    const errors = validate(
+      {
+        employer: this.state.employer,
+        position: this.state.position,
+        startDate: this.state.startDate,
+        endDate: this.state.endDate,
+      },
+      constraints,
+    )
+
+    const constructDisplayErrors = () => {
+      const displayErrors = {}
+      Object.keys(errors || {}).forEach(key => {
+        if (this.state.touched[key]) {
+          displayErrors[key] = errors[key]
+        }
+      })
+      return displayErrors
+    }
+
+    const errorsReduced =
+      Object.keys(errors || {}).length <
+      Object.keys(this.state.errors || {}).length
+
+    if (!isOnChangeText || (isOnChangeText && errorsReduced)) {
+      this.setState({ displayErrors: constructDisplayErrors() })
+    }
+    this.setState({ errors })
   }
-  updatePosition = text => {
-    this.setState({ position: text })
+
+  addTouched = key => {
+    const touched = {
+      ...this.state.touched,
+      [key]: true,
+    }
+    this.setState({ touched })
   }
-  updateStartDate = text => {
-    this.setState({ startDate: text })
-  }
-  updateEndDate = text => {
-    this.setState({ endDate: text })
-  }
+
   editMode = this.props.navigation.getParam('editMode')
 
   render() {
@@ -50,12 +96,8 @@ export default class AddExperienceForm extends Component {
       isCurrentEmployee,
       id,
     } = this.state
-    const disabled = !(
-      employer &&
-      position &&
-      startDate &&
-      endDate !== undefined
-    ) // endDate can be null (means user is currently employed)
+
+    const noErrors = !this.state.errors
 
     const toggleSwitch = () => {
       this.setState({
@@ -67,86 +109,118 @@ export default class AddExperienceForm extends Component {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <Screen>
-          <Header
-            onBackPress={() => this.props.navigation.goBack()}
-            showBack
-            title={this.editMode ? 'Edit Work Experience' : 'Work Experience'}
-          />
-          <Block>
-            <LineInput
-              text={employer}
-              placeholderText="Company"
-              updateText={text => this.updateEmployer(text)}
+          <KeyboardAwareScrollView zIndex={-1}>
+            <Header
+              onBackPress={() => this.props.navigation.goBack()}
+              showBack
+              title={this.editMode ? 'Edit Work Experience' : 'Work Experience'}
             />
-            <LineInput
-              text={position}
-              placeholderText="Position"
-              updateText={text => this.updatePosition(text)}
-            />
-            <RowContainer>
-              <SwitchLabel>I am currently working here</SwitchLabel>
-              <Switch
-                onValueChange={toggleSwitch}
-                value={this.state.isCurrentEmployee}
-                onTintColor="rgb(250, 53, 121)"
-              />
-            </RowContainer>
-            <RowContainer>
+            <Block>
               <LineInput
-                text={startDate}
-                width="48%"
-                placeholderText="Start Date"
-                updateText={text => this.updateStartDate(text)}
+                text={employer}
+                placeholderText="Company"
+                updateText={text => {
+                  this.setState({ employer: text }, () =>
+                    this.validateForm(true),
+                  )
+                }}
+                onFocus={() => this.addTouched('employer')}
+                onBlur={() => this.validateForm(false)}
+                error={this.state.displayErrors.employer}
               />
               <LineInput
-                // if endDate is null (currentEmployee) display endDate as "Present"
-                text={
-                  endDate === null || isCurrentEmployee === true
-                    ? 'Present'
-                    : endDate
-                }
-                width="48%"
-                placeholderText="End Date"
-                updateText={text => this.updateEndDate(text)}
+                text={position}
+                placeholderText="Position"
+                updateText={text => {
+                  this.setState({ position: text }, () =>
+                    this.validateForm(true),
+                  )
+                }}
+                onFocus={() => this.addTouched('position')}
+                onBlur={() => this.validateForm(false)}
+                error={this.state.displayErrors.position}
               />
-            </RowContainer>
-            <ButtonContainer>
-              {this.editMode && (
-                <UpdateExperienceButton
-                  disabled={disabled}
-                  refreshUpdateExperience={this.props.navigation.getParam(
-                    'refreshData',
-                  )}
-                  id={id}
-                  employer={employer}
-                  position={position}
-                  startDate={startDate}
-                  endDate={endDate}
-                  navigation={this.props.navigation}
+              <SwitchContainer>
+                <SwitchLabel>I am currently working here</SwitchLabel>
+                <Switch
+                  onValueChange={toggleSwitch}
+                  value={this.state.isCurrentEmployee}
+                  onTintColor="rgb(250, 53, 121)"
                 />
-              )}
-              {!this.editMode && (
-                <AddExperienceButton
-                  disabled={disabled}
-                  refreshAddExperience={this.props.navigation.getParam(
-                    'refreshData',
-                  )}
-                  employer={employer}
-                  position={position}
-                  startDate={startDate}
-                  endDate={endDate}
-                  navigation={this.props.navigation}
+              </SwitchContainer>
+              <RowContainer>
+                <LineInput
+                  text={startDate}
+                  width="48%"
+                  placeholderText="Start Date"
+                  updateText={text => {
+                    this.setState({ startDate: text }, () =>
+                      this.validateForm(true),
+                    )
+                  }}
+                  onFocus={() => this.addTouched('startDate')}
+                  onBlur={() => this.validateForm(false)}
+                  error={this.state.displayErrors.startDate}
                 />
-              )}
-              <DeleteExperienceButton
-                refreshDeleteExperience={this.props.navigation.getParam(
-                  'refreshData',
+                <LineInput
+                  // if endDate is null (currentEmployee) display endDate as "Present"
+                  text={
+                    endDate === null || isCurrentEmployee === true
+                      ? 'Present'
+                      : endDate
+                  }
+                  width="48%"
+                  placeholderText="End Date"
+                  updateText={text => {
+                    this.setState({ endDate: text }, () =>
+                      this.validateForm(true),
+                    )
+                  }}
+                  onFocus={() => this.addTouched('endDate')}
+                  onBlur={() => this.validateForm(false)}
+                  error={this.state.displayErrors.endDate}
+                />
+              </RowContainer>
+              <ButtonContainer>
+                {this.editMode && (
+                  <View>
+                    <UpdateExperienceButton
+                      disabled={!noErrors}
+                      refreshUpdateExperience={this.props.navigation.getParam(
+                        'refreshData',
+                      )}
+                      id={id}
+                      employer={employer}
+                      position={position}
+                      startDate={startDate}
+                      endDate={endDate}
+                      navigation={this.props.navigation}
+                    />
+                    <DeleteExperienceButton
+                      refreshDeleteExperience={this.props.navigation.getParam(
+                        'refreshData',
+                      )}
+                      navigation={this.props.navigation}
+                      id={id}
+                    />
+                  </View>
                 )}
-                navigation={this.props.navigation}
-                id={id}
-              />
-            </ButtonContainer>
-          </Block>
+                {!this.editMode && (
+                  <AddExperienceButton
+                    disabled={!noErrors}
+                    refreshAddExperience={this.props.navigation.getParam(
+                      'refreshData',
+                    )}
+                    employer={employer}
+                    position={position}
+                    startDate={startDate}
+                    endDate={endDate}
+                    navigation={this.props.navigation}
+                  />
+                )}
+              </ButtonContainer>
+            </Block>
+          </KeyboardAwareScrollView>
         </Screen>
       </TouchableWithoutFeedback>
     )

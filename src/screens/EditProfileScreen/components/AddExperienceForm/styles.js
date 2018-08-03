@@ -5,7 +5,15 @@ export const RowContainer = styled.View`
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+`
+export const SwitchContainer = styled.View`
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
   align-items: center;
+  padding-right: 11px;
+  margin-bottom: 14px;
+  margin-top: -4px;
 `
 export const AddButtonText = styled.Text`
   font-family: ${themeGet('fonts.heavy')};
@@ -19,17 +27,16 @@ export const RemoveButtonText = styled.Text`
 `
 export const AddButton = styled.TouchableOpacity`
   height: 50px;
-  width: 100%;
   background-color: ${props =>
     props.disabled
       ? themeGet('colors.buttonClicked')
       : themeGet('colors.buttonPrimary')};
-  margin-top: 24px;
+  margin-top: 12px;
   border-radius: 10px;
   align-items: center;
   padding: 16px;
-  margin-left: 12px;
-  margin-right: 12px;
+  margin-left: 8px;
+  margin-right: 8px;
 `
 export const RemoveButton = styled.TouchableOpacity`
   background-color: white;
@@ -43,7 +50,6 @@ export const RemoveButton = styled.TouchableOpacity`
 export const ButtonContainer = styled.View`
   width: 100%;
   flex-direction: column;
-  align-items: center;
 `
 export const SwitchLabel = styled.Text`
   font-size: 16px;

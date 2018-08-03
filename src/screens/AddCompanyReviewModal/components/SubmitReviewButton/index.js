@@ -7,7 +7,6 @@ import { Mutation } from 'react-apollo'
 const ADD_COMPANY_REVIEW = gql`
   mutation addCompanyReview($addCompanyReviewInput: AddCompanyReviewInput!) {
     addCompanyReview(addCompanyReviewInput: $addCompanyReviewInput) {
-      id
       companyReview {
         id
         rating
@@ -30,34 +29,24 @@ const ADD_COMPANY_REVIEW = gql`
     }
   }
 `
-const getEmploymentType = selectedIndex => {
-  switch (selectedIndex) {
-    case 0:
-      return 'FULLTIME'
-    case 1:
-      return 'PARTTIME'
-    default:
-      return 'INTERNSHIP'
-  }
-}
+
 export default class SubmitReviewButton extends Component {
   render() {
+    const { state, hideAddReview, clearState, disabled } = this.props
     const {
       rating,
-      title,
-      pros,
-      cons,
-      current,
+      reviewTitle,
+      reviewPros,
+      reviewCons,
+      isCurrentEmployee,
       jobTitle,
       location,
-      acceptedTerms,
       companyId,
-      hideAddReview,
-      clearState,
-    } = this.props
+      yearLastWorked,
+      employmentType,
+    } = state
 
-    const lastWorked = this.props.lastWorked.toString()
-    const employmentType = getEmploymentType(this.props.employmentType)
+    const lastWorked = yearLastWorked.toString()
     return (
       <Mutation
         mutation={ADD_COMPANY_REVIEW}
@@ -79,16 +68,16 @@ export default class SubmitReviewButton extends Component {
 
           return (
             <SubmitButton
-              disabled={!acceptedTerms}
+              disabled={disabled}
               onPress={() => {
                 const variables = {
                   addCompanyReviewInput: {
                     rating,
-                    title,
-                    pros,
-                    cons,
+                    title: reviewTitle,
+                    pros: reviewPros,
+                    cons: reviewCons,
                     employmentType,
-                    current,
+                    current: isCurrentEmployee,
                     jobTitle,
                     location,
                     companyId,

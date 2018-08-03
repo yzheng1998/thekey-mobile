@@ -8,7 +8,14 @@ import {
 
 export default class PickerComponent extends Component {
   render() {
-    const { options, doneOnPress, onValueChange, value, keyName } = this.props
+    const {
+      options,
+      doneOnPress,
+      onValueChange,
+      value,
+      keyName,
+      validateForm,
+    } = this.props
     return (
       <PickerContainer>
         <DoneButton onPress={doneOnPress}>
@@ -16,7 +23,11 @@ export default class PickerComponent extends Component {
         </DoneButton>
         <PickerView
           selectedValue={value}
-          onValueChange={text => onValueChange({ [keyName]: text })}
+          onValueChange={text => {
+            onValueChange({ [keyName]: text }, () => {
+              if (validateForm) validateForm(true)
+            })
+          }}
           itemStyle={{ color: 'rgb(250, 53, 121)' }}
         >
           {options.map(option => (
