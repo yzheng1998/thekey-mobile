@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { StatusBar } from 'react-native'
 import {
   BlockContainer,
   BackgroundPicture,
@@ -35,6 +36,7 @@ export default class PictureHeader extends Component {
 
     return (
       <BlockContainer>
+        <StatusBar barStyle="light-content" />
         <BackgroundPicture
           source={displayPicture}
           blurRadius={20}
