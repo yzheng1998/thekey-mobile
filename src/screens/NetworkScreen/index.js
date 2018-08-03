@@ -73,7 +73,11 @@ class NetworkScreen extends Component {
           <Divider />
           <ScrollView>
             <FriendRequestList />
-            <ChatInbox navigation={this.props.navigation} />
+            <ChatInbox
+              searchText={this.state.searchText}
+              tab={this.state.tab}
+              navigation={this.props.navigation}
+            />
           </ScrollView>
           <NewChatButton onPress={this.handleStartNewChat}>
             <Icon name="chat-bubble" size={25} color="white" />

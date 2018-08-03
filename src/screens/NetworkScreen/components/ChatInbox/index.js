@@ -5,7 +5,7 @@ import gql from 'graphql-tag'
 import ChatCard from '../../../../components/ChatCard'
 
 const GET_CHATS = gql`
-  query viewer {
+  query viewerWithChats($chatsFilterInput: ChatsFilterInput!) {
     viewer {
       ... on User {
         id
@@ -13,7 +13,7 @@ const GET_CHATS = gql`
         lastName
         profilePicture
         email
-        chats {
+        chats(chatsFilterInput: $chatsFilterInput) {
           id
           participants {
             id
@@ -56,8 +56,19 @@ class ChatInbox extends Component {
   }
 
   render() {
+    const { searchText, tab } = this.props
     return (
-      <Query query={GET_CHATS} pollInterval={5000}>
+      <Query
+        query={GET_CHATS}
+        variables={{
+          chatsFilterInput: {
+            participant: searchText,
+            connectionsOnly: tab === 1,
+            groupsOnly: tab === 2,
+          },
+        }}
+        pollInterval={5000}
+      >
         {({ loading, error, data }) => {
           if (loading) return <Text>Loading...</Text>
           if (error) return <Text>Error! ${error.message}</Text>
