@@ -14,7 +14,7 @@ import {
   SafeView,
 } from './styles'
 import Icon from 'react-native-vector-icons/MaterialIcons'
-import { ScrollView } from 'react-native'
+import { ScrollView, StatusBar } from 'react-native'
 
 class NetworkScreen extends Component {
   static navigationOptions = {
@@ -47,6 +47,8 @@ class NetworkScreen extends Component {
     const { searchText } = this.state
     return (
       <SafeView>
+        <StatusBar barStyle="dark-content" />
+
         <Background>
           <NewChatModal
             isExistingChat={false}

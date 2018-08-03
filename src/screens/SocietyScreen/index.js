@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-import { Dimensions, Text, View } from 'react-native'
+import { Dimensions, Text, View, StatusBar } from 'react-native'
 import SocietyHeader from './components/SocietyHeader'
 import CardSwiper from './components/CardSwiper'
 import OutOfMatchesCard from './components/OutOfMatchesCard'
@@ -58,6 +58,7 @@ class SocietyScreen extends Component {
   render() {
     return (
       <Screen>
+        <StatusBar barStyle="light-content" />
         <SocietySearchModal
           navigation={this.props.navigation}
           visible={this.state.searchModalVisible}
