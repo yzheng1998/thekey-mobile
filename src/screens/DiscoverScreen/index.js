@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import { Background, List } from './styles'
 import DiscoverCard from './components/DiscoverCard'
 import Header from './components/Header'
-import placeholder from '../../../assets/city.png'
 import { AsyncStorage } from 'react-native'
 import PushNotification from 'react-native-push-notification'
+import TheSocietyCard from '../../../assets/TheSocietyCard.png'
+import JobsAndInternshipsCard from '../../../assets/JobsAndInternshipsCard.png'
+import EventsCard from '../../../assets/EventsCard.png'
+import ReviewsCard from '../../../assets/ReviewsCard.png'
 
 class DiscoverScreen extends Component {
   static navigationOptions = {
@@ -40,25 +43,25 @@ class DiscoverScreen extends Component {
           <DiscoverCard
             title="The Society"
             description="View other users on the site"
-            image={placeholder}
+            image={TheSocietyCard}
             onPress={() => this.props.navigation.navigate('Society')}
           />
           <DiscoverCard
             title="Jobs/Internships"
             description="View jobs posted on the site"
-            image={placeholder}
+            image={JobsAndInternshipsCard}
             onPress={() => this.props.navigation.navigate('Jobs')}
           />
           <DiscoverCard
             title="Events"
             description="View events posted on the site"
-            image={placeholder}
+            image={EventsCard}
             onPress={() => this.props.navigation.navigate('Events')}
           />
           <DiscoverCard
             title="Reviews"
             description="Review companies on the site"
-            image={placeholder}
+            image={ReviewsCard}
             onPress={() => this.props.navigation.navigate('Reviews')}
           />
         </List>
