@@ -41,8 +41,8 @@ export default class CardSwiper extends Component {
             stackSize={3}
             cardVerticalMargin={10}
             animateCardOpacity
-            inputCardOpacityRangeX={[-width / 2, 0, width / 2]}
-            outputCardOpacityRangeX={[0.8, 1, 0.8]}
+            inputCardOpacityRangeX={[-width, width]}
+            outputCardOpacityRangeX={[1, 1]}
             overlayLabels={{
               left: {
                 element: <ReactionSymbol reaction="dislike" width={88} />,
