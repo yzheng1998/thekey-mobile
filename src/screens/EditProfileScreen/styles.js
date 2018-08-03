@@ -3,6 +3,7 @@ import { themeGet } from 'styled-system'
 
 export const Screen = styled.View`
   flex: 1;
+  padding-top: 15px;
   width: 100%;
   background-color: ${themeGet('colors.background')};
 `
@@ -12,6 +13,7 @@ export const ScreenScroll = styled.ScrollView`
 `
 
 export const Block = styled.View`
+  margin-top: 8px;
   width: 100%;
   padding-left: 12px;
   padding-right: 12px;

@@ -48,7 +48,7 @@ export default class AddEducationModal extends Component {
         animationOut="slideOutRight"
       >
         <ScreenContainer>
-          <KeyboardAwareScrollView>
+          <KeyboardAwareScrollView style={{ paddingTop: 18 }}>
             <Header
               title={schoolName}
               showBack
