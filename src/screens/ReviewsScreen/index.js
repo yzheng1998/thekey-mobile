@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { AddReviewButton, Divider } from './styles'
-import { FlatList, ScrollView, Text, View } from 'react-native'
+import { FlatList, ScrollView, Text, View, StatusBar } from 'react-native'
 import CompanyCard from '../../components/CompanyCard'
 import CompanySearchModal from './components/CompanySearchModal'
 import SearchBar from '../../components/SearchBar'
@@ -54,6 +54,7 @@ class ReviewsScreen extends Component {
     }
     return (
       <View>
+        <StatusBar barStyle="light-content" />
         <ScrollView>
           <ReviewsHeader
             navigation={this.props.navigation}

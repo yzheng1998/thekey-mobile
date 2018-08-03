@@ -43,7 +43,7 @@ class JobPictureBlock extends Component {
     } = this.props
     return (
       <HeaderContainer>
-        <PictureHeader picture={picture} avatarSize={123}>
+        <PictureHeader picture={picture} avatarSize={123} height={360}>
           <DescriptionContainer>
             <Title>{title}</Title>
             <Company>{company}</Company>

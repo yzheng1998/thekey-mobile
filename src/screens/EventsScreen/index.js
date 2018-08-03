@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Query } from 'react-apollo'
-import { FlatList, Text, View } from 'react-native'
+import { FlatList, Text, View, StatusBar } from 'react-native'
 import SearchBar from '../../components/SearchBar'
 import HorizontalEventsScroll from './components/HorizontalEventsScroll'
 import SmallEventCard from './components/SmallEventCard'
@@ -71,6 +71,7 @@ class EventsScreen extends Component {
     }
     return (
       <View>
+        <StatusBar barStyle="light-content" />
         <EventsHeader
           navigation={this.props.navigation}
           selectedIndex={this.state.tab}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
-import { View, FlatList, ScrollView, Text } from 'react-native'
+import { View, FlatList, ScrollView, Text, StatusBar } from 'react-native'
 import SearchBar from '../../components/SearchBar'
 import JobCard from '../../components/JobCard'
 import JobsHeader from './components/JobsHeader'
@@ -52,6 +52,7 @@ class JobsScreen extends Component {
     }
     return (
       <View style={{ flex: 1 }}>
+        <StatusBar barStyle="light-content" />
         <Query query={GET_JOBS} variables={variables}>
           {({ error, data, refetch }) => {
             if (error) {

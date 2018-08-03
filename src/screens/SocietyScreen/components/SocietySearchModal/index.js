@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, FlatList, Text } from 'react-native'
+import { Modal, FlatList, Text, StatusBar } from 'react-native'
 import {
   Background,
   ScrollScreen,
@@ -29,7 +29,6 @@ const GET_USERS = gql`
 const PeopleList = ({ peopleData, viewMember }) => (
   <PeopleListContainer>
     <FlatList
-      styles={{ backgroundColor: 'red', flex: 1 }}
       keyExtractor={person => person.id}
       data={peopleData}
       renderItem={({ item: person }) => (
@@ -73,6 +72,7 @@ export default class SocietySearchModal extends Component {
     }
     return (
       <Modal animationType="slide" {...rest}>
+        <StatusBar barStyle="dark-content" />
         <Background>
           <SearchModalHeader closeModal={closeSearchModal} />
           <SearchBar
