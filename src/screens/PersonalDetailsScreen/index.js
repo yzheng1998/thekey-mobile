@@ -8,7 +8,11 @@ import RegistrationPicker from '../../components/RegistrationPicker'
 import { ethnicityOptions } from './constants'
 import HometownSearchModal from '../../components/HometownSearchModal'
 import moment from 'moment'
-import DatePicker from '../../components/DatePicker/DatePicker'
+
+/* eslint-disable */
+import DatePicker from '../../components/DatePicker/DatePicker/'
+/* eslint-enable */
+
 import nodeEmoji from 'node-emoji'
 
 export default class PersonalDetailsScreen extends Component {
@@ -93,7 +97,7 @@ export default class PersonalDetailsScreen extends Component {
                 if (!showHometownPicker && !showEthnicityPicker)
                   this.setState({
                     showBirthdayPicker: true,
-                    birthday: birthday,
+                    birthday,
                   })
               }}
               text={birthday ? moment(birthday).format('MMMM D, YYYY') : ''}
@@ -119,9 +123,9 @@ export default class PersonalDetailsScreen extends Component {
                 showBirthdayPicker: false,
               })
             }}
-            setDate={birthday => {
+            setDate={date => {
               this.setState({
-                birthday,
+                birthday: date,
               })
             }}
           />
