@@ -14,7 +14,12 @@ import DeleteEducationButton from './components/DeleteEducationButton'
 import Header from '../Header'
 import LineInput from '../../../../components/LineInput'
 import _ from 'lodash'
-import { Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
+import Error from '../../../../components/Error'
+import constraints from './constraints'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+const validate = require('validate.js')
 
 const schoolTypes = [
   { label: 'Secondary', value: 'SECONDARY' },
@@ -25,6 +30,7 @@ const schoolTypes = [
 export default class AddEducationForm extends Component {
   constructor(props) {
     super(props)
+    this.updateState = this.setState.bind(this)
     const formElements = this.props.navigation.getParam('formElements')
     this.state = {
       ..._.pick(formElements, [
@@ -39,21 +45,64 @@ export default class AddEducationForm extends Component {
       schoolTypePickerEnabled: false,
       optionsInputSelected: false,
       optionsInputClicked: false,
+      displayErrors: {},
+      errors: {},
+      touched: {},
     }
   }
 
-  updateText = (key, text) => {
-    this.setState({ [key]: text })
+  validateForm = isOnChangeText => {
+    const errors = validate(
+      {
+        schoolName: this.state.schoolName,
+        schoolType: this.state.schoolType,
+        degreeType: this.state.degreeType,
+        major: this.state.major,
+        startYear: this.state.startYear,
+        endYear: this.state.endYear,
+      },
+      constraints,
+    )
+
+    const constructDisplayErrors = () => {
+      const displayErrors = {}
+      Object.keys(errors || {}).forEach(key => {
+        if (this.state.touched[key]) {
+          displayErrors[key] = errors[key]
+        }
+      })
+      return displayErrors
+    }
+
+    const errorsReduced =
+      Object.keys(errors || {}).length <
+      Object.keys(this.state.errors || {}).length
+
+    if (!isOnChangeText || (isOnChangeText && errorsReduced)) {
+      this.setState({ displayErrors: constructDisplayErrors() })
+    }
+    this.setState({ errors })
   }
-  updateState = obj => {
-    this.setState(obj)
+
+  addTouched = key => {
+    const touched = {
+      ...this.state.touched,
+      [key]: true,
+    }
+    this.setState({ touched })
   }
+
   editMode = this.props.navigation.getParam('editMode')
 
   renderSelectedOption = optionsInputSelected => {
     // if a selection has been made, change text from placeholder
     if (optionsInputSelected || this.editMode)
-      return <OptionsText>{this.state.schoolType}</OptionsText>
+      return (
+        <OptionsText>
+          {this.state.schoolType &&
+            schoolTypes.find(el => el.value === this.state.schoolType).label}
+        </OptionsText>
+      )
     return <OptionsPlaceholder>School Type</OptionsPlaceholder>
   }
 
@@ -69,102 +118,146 @@ export default class AddEducationForm extends Component {
       optionsInputSelected,
       optionsInputClicked,
     } = this.state
-    const disabled = !(schoolName && schoolType && startYear && endYear)
+
+    const noErrors = !this.state.errors
+
     return (
       <TouchableWithoutFeedback
         onPress={() => Keyboard.dismiss()}
         accessible={false}
       >
         <Screen>
-          <Header
-            onBackPress={() => this.props.navigation.goBack()}
-            showBack
-            title={this.editMode ? 'Edit School' : 'Education'}
-          />
-          <Block>
-            <LineInput
-              text={schoolName}
-              placeholderText="School Name"
-              updateText={text => this.updateText('schoolName', text)}
+          <KeyboardAwareScrollView zIndex={-1}>
+            <Header
+              onBackPress={() => this.props.navigation.goBack()}
+              showBack
+              title={this.editMode ? 'Edit School' : 'Education'}
             />
-            <OptionsInputContainer
-              selected={optionsInputClicked}
-              onPress={() => {
-                Keyboard.dismiss()
-                this.setState({
-                  schoolTypePickerEnabled: true,
-                  optionsInputSelected: true,
-                  optionsInputClicked: true,
-                })
-              }}
-            >
-              {this.renderSelectedOption(optionsInputSelected)}
-            </OptionsInputContainer>
-            <LineInput
-              text={degreeType}
-              placeholderText="Degree Type"
-              updateText={text => this.updateText('degreeType', text)}
-            />
-            <LineInput
-              text={major}
-              placeholderText="Field of Study"
-              updateText={text => this.updateText('major', text)}
-            />
-            <DateInputRow>
+            <Block>
               <LineInput
-                text={startYear}
-                placeholderText="Start Date"
-                width="48%"
-                updateText={text => this.updateText('startYear', text)}
+                text={schoolName}
+                placeholderText="School Name"
+                updateText={text => {
+                  this.setState({ schoolName: text }, () =>
+                    this.validateForm(true),
+                  )
+                }}
+                onFocus={() => this.addTouched('schoolName')}
+                onBlur={() => this.validateForm(false)}
+                error={this.state.displayErrors.schoolName}
+              />
+              <View>
+                <OptionsInputContainer
+                  selected={optionsInputClicked}
+                  onPress={() => {
+                    Keyboard.dismiss()
+                    this.addTouched('schoolType')
+                    if (!this.state.schoolType) {
+                      this.setState({ schoolType: schoolTypes[0].value })
+                    }
+                    this.setState({
+                      schoolTypePickerEnabled: true,
+                      optionsInputSelected: true,
+                      optionsInputClicked: true,
+                    })
+                  }}
+                >
+                  {this.renderSelectedOption(optionsInputSelected)}
+                </OptionsInputContainer>
+                <Error error={this.state.displayErrors.schoolType} />
+              </View>
+              <LineInput
+                text={degreeType}
+                placeholderText="Degree Type"
+                updateText={text => {
+                  this.setState({ degreeType: text }, () =>
+                    this.validateForm(true),
+                  )
+                }}
+                onFocus={() => this.addTouched('degreeType')}
+                onBlur={() => this.validateForm(false)}
+                error={this.state.displayErrors.degreeType}
               />
               <LineInput
-                text={endYear}
-                placeholderText="Graduation Date"
-                width="48%"
-                updateText={text => this.updateText('endYear', text)}
+                text={major}
+                placeholderText="Field of Study"
+                updateText={text => {
+                  this.setState({ major: text }, () => this.validateForm(true))
+                }}
+                onFocus={() => this.addTouched('major')}
+                onBlur={() => this.validateForm(false)}
+                error={this.state.displayErrors.major}
               />
-            </DateInputRow>
-            <ButtonContainer>
-              {this.editMode && (
-                <UpdateEducationButton
-                  refreshEditProfile={this.props.navigation.getParam(
-                    'refreshData',
-                  )}
-                  disabled={disabled}
-                  id={id}
-                  schoolName={schoolName}
-                  schoolType={schoolType}
-                  degreeType={degreeType}
-                  major={major}
-                  startYear={startYear}
-                  endYear={endYear}
-                  navigation={this.props.navigation}
+              <DateInputRow>
+                <LineInput
+                  text={startYear}
+                  placeholderText="Start Year"
+                  updateText={text => {
+                    this.setState({ startYear: text }, () =>
+                      this.validateForm(true),
+                    )
+                  }}
+                  onFocus={() => this.addTouched('startYear')}
+                  onBlur={() => this.validateForm(false)}
+                  error={this.state.displayErrors.startYear}
                 />
-              )}
-              {!this.editMode && (
-                <AddEducationButton
-                  refreshAddEducation={this.props.navigation.getParam(
-                    'refreshData',
-                  )}
-                  disabled={disabled}
-                  schoolName={schoolName}
-                  schoolType={schoolType}
-                  degreeType={degreeType}
-                  major={major}
-                  startYear={startYear}
-                  endYear={endYear}
-                  navigation={this.props.navigation}
+                <LineInput
+                  text={endYear}
+                  placeholderText="Graduation Year"
+                  updateText={text => {
+                    this.setState({ endYear: text }, () =>
+                      this.validateForm(true),
+                    )
+                  }}
+                  onFocus={() => this.addTouched('endYear')}
+                  onBlur={() => this.validateForm(false)}
+                  error={this.state.displayErrors.endYear}
                 />
-              )}
-              <DeleteEducationButton
-                refreshDeleteEducation={this.props.navigation.getParam(
-                  'refreshData',
+              </DateInputRow>
+              <ButtonContainer>
+                {this.editMode && (
+                  <View>
+                    <UpdateEducationButton
+                      refreshEditProfile={this.props.navigation.getParam(
+                        'refreshData',
+                      )}
+                      disabled={!noErrors}
+                      id={id}
+                      schoolName={schoolName}
+                      schoolType={schoolType}
+                      degreeType={degreeType}
+                      major={major}
+                      startYear={startYear}
+                      endYear={endYear}
+                      navigation={this.props.navigation}
+                    />
+                    <DeleteEducationButton
+                      refreshDeleteEducation={this.props.navigation.getParam(
+                        'refreshData',
+                      )}
+                      navigation={this.props.navigation}
+                      id={id}
+                    />
+                  </View>
                 )}
-                navigation={this.props.navigation}
-                id={id}
-              />
-            </ButtonContainer>
-          </Block>
+                {!this.editMode && (
+                  <AddEducationButton
+                    refreshAddEducation={this.props.navigation.getParam(
+                      'refreshData',
+                    )}
+                    disabled={!noErrors}
+                    schoolName={schoolName}
+                    schoolType={schoolType}
+                    degreeType={degreeType}
+                    major={major}
+                    startYear={startYear}
+                    endYear={endYear}
+                    navigation={this.props.navigation}
+                  />
+                )}
+              </ButtonContainer>
+            </Block>
+          </KeyboardAwareScrollView>
           {this.state.schoolTypePickerEnabled && (
             <PickerComponent
               options={schoolTypes}
@@ -173,8 +266,10 @@ export default class AddEducationForm extends Component {
                   schoolTypePickerEnabled: false,
                   optionsInputClicked: false, // handles border color of optionsInput
                 })
+                this.validateForm(false)
               }}
               onValueChange={this.updateState}
+              validateForm={this.validateForm}
               value={schoolType}
               keyName="schoolType"
             />
