@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, Alert } from 'react-native'
 import LinkedInModal from 'react-native-linkedin'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
@@ -16,6 +16,9 @@ const GET_LINKEDIN_INFO = gql`
   mutation getLinkedInInfo($authorizationCode: String!) {
     getLinkedInInfo(authorizationCode: $authorizationCode) {
       linkedInId
+      firstName
+      lastName
+      email
       error {
         message
       }
@@ -28,10 +31,28 @@ export default class LinkedInRegisterButton extends Component {
       <Mutation
         mutation={GET_LINKEDIN_INFO}
         onCompleted={async data => {
-          const { linkedInId, error } = data.getLinkedInInfo
+          const {
+            linkedInId,
+            error,
+            firstName,
+            lastName,
+            email,
+          } = data.getLinkedInInfo
+          if (error) {
+            Alert.alert('Error Occurred', 'Could not log in with LinkedIn')
+          }
+          this.props.navigation.navigate('PersonalDetails', {
+            userInfo: {
+              linkedInId,
+              firstName,
+              lastName,
+              email,
+              password: '',
+            },
+          })
         }}
       >
-        {(getLinkedInInfo, { loading, data, error }) => (
+        {(getLinkedInInfo, { loading, error }) => (
           <View>
             <LinkedInModal
               ref={ref => {
@@ -55,7 +76,6 @@ export default class LinkedInRegisterButton extends Component {
               <LinkedInButtonText>Continue with LinkedIn</LinkedInButtonText>
             </LinkedInButton>
             {loading && <Text>Logging you in...</Text>}
-            {console.log('data', data)}
             {error && <Text>Server error</Text>}
           </View>
         )}
