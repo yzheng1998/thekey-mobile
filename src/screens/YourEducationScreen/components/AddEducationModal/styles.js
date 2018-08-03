@@ -35,13 +35,4 @@ export const RightModal = styled(Modal)`
 
 export const RowContainer = styled.View`
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`
-
-export const SwitchLabel = styled.Text`
-  font-size: 16px;
-  font-family: ${themeGet('fonts.medium')};
-  color: ${themeGet('colors.fontSubtitle.primary')};
-  margin-left: 12px;
 `
