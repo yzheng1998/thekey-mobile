@@ -14,13 +14,13 @@ const CheckBox = ({ accepted }) => (
 
 export default class TermsOfServiceConfirmation extends Component {
   render() {
-    const { handleAcceptedTerms, acceptedTerms } = this.props
+    const { updateState, acceptedTerms } = this.props
     return (
       <BlockBackground>
         <RowContainer>
           <TouchableOpacity
             onPress={() => {
-              handleAcceptedTerms()
+              updateState({ acceptedTerms: !acceptedTerms })
             }}
           >
             <CheckBox accepted={acceptedTerms} />

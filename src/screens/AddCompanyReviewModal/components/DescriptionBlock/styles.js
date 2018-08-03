@@ -8,7 +8,7 @@ export const HelpText = styled.Text`
 `
 export const ReviewInputField = styled.TextInput`
   font-size: 18px;
-  color: ${themeGet('colors.fontDescription.primary')};
+  color: ${themeGet('colors.fontDescription.secondary')};
   font-family: ${themeGet('fonts.light')};
   max-height: 80px;
   overflow: scroll;
