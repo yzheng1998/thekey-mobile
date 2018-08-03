@@ -22,7 +22,7 @@ export const TextBox = styled.View`
 `
 export const Title = styled.Text`
   color: black;
-  font-family: ${themeGet('fonts.bold')};
+  font-family: ${themeGet('fonts.heavy')};
   font-size: 34px;
   font-weight: bold;
 `
