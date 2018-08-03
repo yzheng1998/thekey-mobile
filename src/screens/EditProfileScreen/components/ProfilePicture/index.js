@@ -5,6 +5,7 @@ import { Mutation } from 'react-apollo'
 import RNFetchBlob from 'rn-fetch-blob'
 import { Alert } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
+import config from '../../../../../config'
 
 const SIGN_S3_URL = gql`
   mutation signS3Url($signS3UrlInput: SignS3UrlInput!) {
@@ -48,14 +49,10 @@ export default class ProfilePicture extends Component {
               },
               RNFetchBlob.wrap(this.state.image.path),
             )
-
-            const bucketString = 'https://s3.amazonaws.com/thekey-events/'
-            const stringContainingKey = data.signS3Url.url.split('/')[3]
-            const key = stringContainingKey.substring(
-              0,
-              stringContainingKey.indexOf('JPG?') + 4,
-            )
-            const finalUrl = bucketString + key
+            const imageNameRegEx = /.*amazonaws.com\/(.*)\?.*/
+            const match = imageNameRegEx.exec(data.signS3Url.url)
+            const imageName = match.length > 0 ? match[1] : ''
+            const finalUrl = config.s3Bucket + imageName
             updateProfilePicture(finalUrl)
           }}
         >
