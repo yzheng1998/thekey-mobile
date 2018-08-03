@@ -29,3 +29,8 @@ export const Subtitle = styled.Text`
   font-size: 14px
   line-height: 20px;
 `
+export const ColumnContainer = styled.View`
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+`
