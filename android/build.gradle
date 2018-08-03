@@ -33,14 +33,17 @@ allprojects {
     }
 }
 
+ext {
+    supportLibVersion = "27.0.2"
+}
 
 subprojects {
     // match dependencies for android support versions
     project.configurations.all {
         resolutionStrategy.eachDependency { details ->
             if (details.requested.group == 'com.android.support'
-                    && !details.requested.name.contains('multidex') ) {
-                details.useVersion "27.0.2"
+                    && !details.requested.name.contains('multidex')) {
+                details.useVersion "$supportLibVersion"
             }
         }
     }
@@ -48,8 +51,8 @@ subprojects {
     afterEvaluate {project ->
         if (project.hasProperty("android")) {
             android {
-                compileSdkVersion 27
-                buildToolsVersion '27.0.3'
+                compileSdkVersion project.compileSdkVersion.toInteger()
+                buildToolsVersion "27.0.3"
             }
         }
     }
