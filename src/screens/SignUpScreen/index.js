@@ -11,6 +11,7 @@ import Header from '../../components/Header'
 import LineInput from '../../components/LineInput'
 import Icon from 'react-native-vector-icons/Feather'
 import RegisterButton from '../../components/RegisterButton'
+import LinkedInRegisterButton from './components/LinkedInRegisterButton'
 import { LoginButton, AccessToken } from 'react-native-fbsdk'
 import axios from 'axios'
 import constraints from './constraints'
@@ -221,6 +222,7 @@ export default class SignUpScreen extends Component {
                     }
                   }}
                 />
+                <LinkedInRegisterButton navigation={this.props.navigation} />
               </FacebookButtonContainer>
             </KeyboardAvoidingView>
           </ScrollView>

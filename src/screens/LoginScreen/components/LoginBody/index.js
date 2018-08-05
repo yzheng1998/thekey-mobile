@@ -149,7 +149,7 @@ class LoginBody extends Component {
                     onLoginFinished={(fbError, result) => {
                       if (fbError) {
                         Alert.alert(
-                          'Error Ocurred',
+                          'Error Occurred',
                           'Could not log in to facebook',
                         )
                         return null

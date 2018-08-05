@@ -26,7 +26,7 @@ export const Subtitle = styled.Text`
       ? themeGet('colors.fontButtonTertiary')
       : themeGet('colors.fontSubtitle.primary')};
   font-family: ${themeGet('fonts.medium')};
-  font-size: 14px
+  font-size: 14px;
   line-height: 20px;
 `
 
@@ -34,4 +34,9 @@ export const FacebookButtonContainer = styled.View`
   width: 100%;
   align-items: center;
   margin-top: 12px;
+`
+export const ColumnContainer = styled.View`
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
 `
