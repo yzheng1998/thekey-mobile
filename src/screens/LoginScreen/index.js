@@ -1,23 +1,27 @@
 import React, { Component } from 'react'
 import { ScrollView, KeyboardAvoidingView } from 'react-native'
-import LoginHeader from './components/LoginHeader'
 import LoginBody from './components/LoginBody'
 import BackButton from '../../components/BackButton'
+import { SafeView, Title, TitleContainer } from './styles'
 
 class LoginScreen extends Component {
   render() {
     return (
-      <KeyboardAvoidingView
-        style={{ backgroundColor: 'white', flex: 1 }}
-        behavior="position"
-        enabled
-      >
+      <SafeView>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <BackButton onBackPress={() => this.props.navigation.goBack()} />
-          <LoginHeader />
-          <LoginBody navigation={this.props.navigation} />
+          <KeyboardAvoidingView
+            style={{ backgroundColor: 'white', flex: 1 }}
+            behavior="padding"
+            enabled
+          >
+            <BackButton onBackPress={() => this.props.navigation.goBack()} />
+            <TitleContainer>
+              <Title>Sign In</Title>
+            </TitleContainer>
+            <LoginBody navigation={this.props.navigation} />
+          </KeyboardAvoidingView>
         </ScrollView>
-      </KeyboardAvoidingView>
+      </SafeView>
     )
   }
 }

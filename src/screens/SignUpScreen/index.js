@@ -91,8 +91,8 @@ export default class SignUpScreen extends Component {
     return (
       <ScreenContainer>
         <SafeView>
-          <ScrollView>
-            <KeyboardAvoidingView behavior="position" enabled>
+          <KeyboardAvoidingView behavior="padding" enabled>
+            <ScrollView>
               <Header
                 title="Sign Up"
                 showBack
@@ -224,8 +224,8 @@ export default class SignUpScreen extends Component {
                 />
                 <LinkedInRegisterButton navigation={this.props.navigation} />
               </FacebookButtonContainer>
-            </KeyboardAvoidingView>
-          </ScrollView>
+            </ScrollView>
+          </KeyboardAvoidingView>
         </SafeView>
       </ScreenContainer>
     )

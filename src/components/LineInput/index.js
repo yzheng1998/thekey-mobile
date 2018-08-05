@@ -21,11 +21,15 @@ export default class LineInput extends Component {
       text,
       onBlur,
       error,
+      staticBorder,
       ...rest
     } = this.props
     return (
       <RowContainer>
-        <LineInputContainer selected={this.state.selected}>
+        <LineInputContainer
+          staticBorder={staticBorder}
+          selected={this.state.selected}
+        >
           <InputContainer>
             {children}
             <Input

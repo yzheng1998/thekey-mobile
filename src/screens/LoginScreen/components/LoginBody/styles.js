@@ -1,39 +1,23 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const SafeView = styled.SafeAreaView`
+export const Screen = styled.View`
   flex: 1;
 `
 export const Container = styled.View`
   align-items: center;
-  border-bottom-width: 1px;
+  border-bottom-width: 0px;
   border-bottom-color: ${themeGet('colors.border')};
-  background-color: ${themeGet('colors.buttonSecondary')};
-`
-export const TextInput = styled.TextInput`
-  margin-top: 30px;
-  margin-bottom: 10px;
-  height: 50px;
-  width: 85%;
-  border-width: 1px;
-  background-color: white;
-  border-color: ${themeGet('colors.border')};
-  border-radius: 10px;
-  padding-left: 44px;
 `
 export const TextInputContainer = styled.View`
+  width: 100%;
   flex-direction: row;
   align-items: center;
-`
-export const IconContainer = styled.View`
-  position: absolute;
-  padding-top: 20px;
-  margin-left: 13px;
-  z-index: 10px;
+  padding-left: 24px;
+  padding-right: 24px;
 `
 export const ForgotPass = styled.TouchableOpacity`
-  align-self: flex-end;
-  margin-right: 25px;
+  align-self: center;
 `
 export const PinkSubtitleText = styled.Text`
   font-family: ${themeGet('fonts.bold')};
@@ -64,22 +48,19 @@ export const Subtitle = styled.Text`
   font-size: 14px;
   padding-right: 5px;
 `
-export const SmallContainer = styled.View`
-  padding-top: 30px;
-  align-items: center;
-`
 export const ColumnContainer = styled.View`
   justify-content: center;
   align-items: center;
   margin-bottom: 30px;
+  margin-top: 130px;
 `
 export const SignUpContainer = styled.View`
   flex-direction: row;
-  background-color: white;
   height: 50px;
   align-items: center;
-  padding-left: 90px;
+  justify-content: center;
   width: 100%;
+  margin-top: 200px;
 `
 export const Message = styled.Text`
   margin: 100px 0 100px 0;

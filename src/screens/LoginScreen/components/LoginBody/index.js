@@ -1,27 +1,24 @@
 import React, { Component } from 'react'
-import { View, AsyncStorage, Alert } from 'react-native'
+import { AsyncStorage, KeyboardAvoidingView } from 'react-native'
 import {
   Container,
   TextInputContainer,
-  TextInput,
-  IconContainer,
   ForgotPass,
   PinkSubtitle,
   PinkSubtitleText,
   SignInButton,
   SignInText,
   Subtitle,
-  SmallContainer,
   SignUpContainer,
   Message,
-  ColumnContainer,
+  Screen,
 } from './styles'
-import LargeLinkedInLoginButton from '../../components/LargeLinkedInLoginButton'
 import EmailIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import LockIcon from 'react-native-vector-icons/Feather'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
-import { LoginButton, AccessToken } from 'react-native-fbsdk'
+import LineInput from '../../../../components/LineInput'
+import AlertMessage from '../AlertMessage'
 
 const LOGIN_USER = gql`
   mutation loginUser(
@@ -51,10 +48,12 @@ class LoginBody extends Component {
   state = {
     email: '',
     password: '',
+    showAlertError: false,
+    errorMessage: '',
   }
   render() {
     return (
-      <View>
+      <Screen>
         <Mutation
           mutation={LOGIN_USER}
           onCompleted={async data => {
@@ -62,7 +61,10 @@ class LoginBody extends Component {
               loginUser: { token, user },
             } = data
             if (data && data.loginUser.error) {
-              Alert.alert('Failed to log in', data.loginUser.error.message)
+              this.setState({
+                showAlertError: true,
+                errorMessage: data.loginUser.error.message,
+              })
             }
             if (!data.loginUser.error) {
               await AsyncStorage.setItem('token', token)
@@ -75,49 +77,63 @@ class LoginBody extends Component {
         >
           {(loginUser, { loading, error }) => {
             if (error) {
-              Alert.alert('Failed to log in', error.message)
+              this.setState({
+                showAlertError: true,
+                errorMessage: error.message,
+              })
             }
             if (loading) {
               return <Message>Loading</Message>
             }
             return (
               <Container>
-                <TextInputContainer>
-                  <IconContainer>
-                    <EmailIcon
-                      name="email-outline"
-                      color="rgb(181, 171, 202)"
-                      size={18}
-                    />
-                  </IconContainer>
-                  <TextInput
-                    placeholder="Enter your email address..."
-                    placeholderTextColor="rgb(139, 133, 150)"
-                    onChangeText={newText => this.setState({ email: newText })}
-                    type="text"
-                    name="email"
-                    autoCapitalize="none"
-                  />
-                </TextInputContainer>
-                <TextInputContainer>
-                  <IconContainer>
-                    <LockIcon
-                      name="lock"
-                      color="rgb(181, 171, 202)"
-                      size={18}
-                    />
-                  </IconContainer>
-                  <TextInput
-                    placeholder="Enter your password..."
-                    placeholderTextColor="rgb(139, 133, 150)"
-                    onChangeText={newText =>
-                      this.setState({ password: newText })
-                    }
-                    secureTextEntry
-                    name="password"
-                    autoCapitalize="none"
-                  />
-                </TextInputContainer>
+                {this.state.showAlertError && (
+                  <AlertMessage isError message={this.state.errorMessage} />
+                )}
+                <KeyboardAvoidingView
+                  style={{ backgroundColor: 'white', width: ' 100%' }}
+                  behavior="position"
+                  enabled
+                >
+                  <TextInputContainer>
+                    <LineInput
+                      updateText={newText => this.setState({ email: newText })}
+                      text={this.state.email}
+                      placeholderText="Email"
+                      placeholderTextColor="rgb(139, 133, 150)"
+                      autoCapitalize="none"
+                      staticBorder
+                    >
+                      <EmailIcon
+                        name="email-outline"
+                        color="rgb(181, 171, 202)"
+                        size={18}
+                        style={{ marginLeft: 8 }}
+                      />
+                    </LineInput>
+                  </TextInputContainer>
+                  <TextInputContainer>
+                    <LineInput
+                      updateText={newText =>
+                        this.setState({ password: newText })
+                      }
+                      text={this.state.password}
+                      placeholderText="Password"
+                      placeholderTextColor="rgb(139, 133, 150)"
+                      autoCapitalize="none"
+                      staticBorder
+                      secureTextEntry
+                    >
+                      <LockIcon
+                        name="lock"
+                        color="rgb(181, 171, 202)"
+                        size={18}
+                        style={{ marginLeft: 8 }}
+                      />
+                    </LineInput>
+                  </TextInputContainer>
+                </KeyboardAvoidingView>
+
                 <ForgotPass
                   onPress={() =>
                     this.props.navigation.navigate('ResetPassword')
@@ -139,37 +155,6 @@ class LoginBody extends Component {
                 >
                   <SignInText>SIGN IN</SignInText>
                 </SignInButton>
-
-                <ColumnContainer>
-                  <SmallContainer>
-                    <LargeLinkedInLoginButton />
-                  </SmallContainer>
-                  <LoginButton
-                    readPermissions={['email']}
-                    onLoginFinished={(fbError, result) => {
-                      if (fbError) {
-                        Alert.alert(
-                          'Error Occurred',
-                          'Could not log in to facebook',
-                        )
-                        return null
-                      } else if (result.isCancelled) {
-                        return null
-                      }
-                      AccessToken.getCurrentAccessToken().then(
-                        async response => {
-                          const token = response.accessToken.toString()
-
-                          const variables = {
-                            facebookToken: token,
-                          }
-                          loginUser({ variables })
-                        },
-                      )
-                      return null
-                    }}
-                  />
-                </ColumnContainer>
               </Container>
             )
           }}
@@ -182,7 +167,7 @@ class LoginBody extends Component {
             <PinkSubtitleText>Sign Up</PinkSubtitleText>
           </PinkSubtitle>
         </SignUpContainer>
-      </View>
+      </Screen>
     )
   }
 }
