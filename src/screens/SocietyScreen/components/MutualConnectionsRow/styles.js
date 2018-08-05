@@ -3,15 +3,17 @@ import { themeGet } from 'styled-system'
 
 export const ConnectionsRowContainer = styled.TouchableOpacity`
   flex-direction: row;
-  margin-left: 16;
-  margin-bottom: 19;
+  margin-left: 16px;
+  margin-bottom: 19px;
+  position: absolute;
+  bottom: 3px;
 `
 export const MutualConnections = styled.Text`
-  font-size: 16;
-  line-height: 19;
+  font-size: 16px;
+  line-height: 19px;
   font-family: ${themeGet('fonts.medium')};
-  color: ${themeGet('colors.fontSubtitle.primary')}
-  margin-left: 8;
+  color: ${themeGet('colors.fontSubtitle.primary')};
+  margin-left: 8px;
 `
 export const AvatarContainer = styled.View`
   flex-direction: row;
