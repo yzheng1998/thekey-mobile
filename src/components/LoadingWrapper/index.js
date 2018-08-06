@@ -4,7 +4,7 @@ import { Container, CenteredContainer } from './styles'
 
 export default class LoadingWrapper extends Component {
   render() {
-    const { children, loading } = this.props
+    const { children, loading, style } = this.props
     return (
       <Container>
         {loading ? (
@@ -12,7 +12,7 @@ export default class LoadingWrapper extends Component {
             <ActivityIndicator color="rgb(250, 53, 121)" />
           </CenteredContainer>
         ) : (
-          <Container>{children}</Container>
+          <Container style={style}>{children}</Container>
         )}
       </Container>
     )

@@ -79,11 +79,12 @@ export default class MemberScreen extends Component {
                 options={['Report', 'Cancel']}
                 cancelButtonIndex={1}
                 destructiveButtonIndex={0}
-                onPress={() =>
-                  this.setState({
-                    showReportUserModal: true,
-                  })
-                }
+                onPress={index => {
+                  if (index === 0)
+                    this.setState({
+                      showReportUserModal: true,
+                    })
+                }}
               />
               <MyProfilePicBlock
                 id={id}
