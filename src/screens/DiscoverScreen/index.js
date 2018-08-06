@@ -21,13 +21,9 @@ class DiscoverScreen extends Component {
 
   componentDidMount = async () => {
     const firstName = await AsyncStorage.getItem('firstName')
-    const profilePicture = await AsyncStorage.getItem('profilePicture')
     PushNotification.requestPermissions()
     if (firstName) {
       this.setState({ name: firstName })
-    }
-    if (profilePicture) {
-      this.setState({ profilePicture })
     }
   }
 
@@ -35,11 +31,7 @@ class DiscoverScreen extends Component {
     return (
       <Background>
         <List>
-          <Header
-            name={this.state.name}
-            avatar={this.state.profilePicture}
-            navigation={this.props.navigation}
-          />
+          <Header name={this.state.name} navigation={this.props.navigation} />
           <DiscoverCard
             title="The Society"
             description="Connect with others on The Key"
