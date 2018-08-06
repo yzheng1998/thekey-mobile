@@ -121,7 +121,6 @@ export default class MemberScreen extends Component {
               />
               <Divider />
               <EducationListView educationData={education} />
-              <Divider />
               <ExperienceListView experienceData={workExperiences} />
               <SecondaryTitle>Events In Common</SecondaryTitle>
               <EventsInCommon
