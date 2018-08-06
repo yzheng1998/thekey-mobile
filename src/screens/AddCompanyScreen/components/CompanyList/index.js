@@ -7,6 +7,7 @@ class CompanyList extends Component {
     const { companies } = this.props
     return (
       <FlatList
+        keyboardShouldPersistTaps="handled"
         keyExtractor={item => item.id}
         data={companies}
         renderItem={({ item }) => <CompanyCard company={item} />}
