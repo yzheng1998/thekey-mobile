@@ -55,7 +55,6 @@ export default class DescriptionBlock extends Component {
         <Block>
           <Header heading="Cons" helpText="Minimum 10 words" />
           <ReviewInputField
-            onFocus={() => addTouched('reviewCons')}
             onBlur={() => validateForm(false)}
             multiline
             placeholder="What are the downsides of working here?"

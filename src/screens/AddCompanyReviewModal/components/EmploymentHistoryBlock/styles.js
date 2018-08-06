@@ -29,3 +29,7 @@ export const Avatar = styled.Image`
   height: 36px;
   border-radius: 18px;
 `
+export const TextContainer = styled.View`
+  justify-content: center;
+  align-items: center;
+`

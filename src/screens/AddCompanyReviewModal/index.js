@@ -100,6 +100,12 @@ export default class AddCompanyReviewModal extends Component {
       touched: [],
     })
   }
+
+  scrollToInput(textInput) {
+    // Add a 'scroll' ref to your ScrollView
+    this.scroll.scrollToFocusedInput(textInput)
+  }
+
   render() {
     const { isVisible, hideAddReview } = this.props
     const {
@@ -118,12 +124,12 @@ export default class AddCompanyReviewModal extends Component {
         isVisible={isVisible}
       >
         <SafeView>
-          <KeyboardAvoidingView enabled behavior="position">
+          <KeyboardAvoidingView enabled behavior="padding">
             <ScreenScroll>
               <CancelHeader
                 onCancel={() => {
                   Alert.alert(
-                    'All information enetered will not be saved',
+                    'All information entered will not be saved',
                     'Are you sure you want to cancel this review?',
                     [
                       {
