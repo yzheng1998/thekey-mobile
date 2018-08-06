@@ -29,3 +29,8 @@ export const SafeView = styled.SafeAreaView`
   flex: 1;
   background-color: ${themeGet('colors.background')};
 `
+export const ButtonContainer = styled.View`
+  margin-top: 54px;
+  margin-left: 8px;
+  margin-right: 8px;
+`

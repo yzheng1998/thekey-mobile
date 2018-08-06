@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { ScreenContainer, SubtitleView, Subtitle, SafeView } from './styles'
+import {
+  ScreenContainer,
+  SubtitleView,
+  Subtitle,
+  SafeView,
+  ButtonContainer,
+} from './styles'
 import Header from '../../components/Header'
 import { KeyboardAvoidingView } from 'react-native'
 import LineInput from '../../components/LineInput'
@@ -44,7 +50,9 @@ export default class ResetPasswordScreen extends Component {
                 style={{ marginLeft: 8 }}
               />
             </LineInput>
-            <ResetPasswordButton />
+            <ButtonContainer>
+              <ResetPasswordButton />
+            </ButtonContainer>
           </KeyboardAvoidingView>
         </SafeView>
       </ScreenContainer>
