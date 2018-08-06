@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Modal, FlatList, Platform } from 'react-native'
 import {
   Background,
-  ScrollScreen,
   SearchNameContainer,
   PeopleListContainer,
   Text,
@@ -26,6 +25,7 @@ const SEARCH_TAGS = gql`
 const InterestList = ({ interestData, addInterest }) => (
   <PeopleListContainer>
     <FlatList
+      keyboardShouldPersistTaps="handled"
       keyExtractor={interest => interest.id}
       data={interestData}
       renderItem={({ item: interest }) => (
@@ -127,22 +127,20 @@ export default class InterestsSearchModal extends Component {
             />
           </SearchNameContainer>
           <ThinDivider />
-          <ScrollScreen>
-            <Query query={SEARCH_TAGS} variables={variables}>
-              {({ loading, error, data }) => {
-                if (loading) return <Text>Loading...</Text>
-                if (error) {
-                  return <Text>Error! {error.message}</Text>
-                }
-                return (
-                  <InterestList
-                    interestData={data.tags}
-                    addInterest={this.addInterest}
-                  />
-                )
-              }}
-            </Query>
-          </ScrollScreen>
+          <Query query={SEARCH_TAGS} variables={variables}>
+            {({ loading, error, data }) => {
+              if (loading) return <Text>Loading...</Text>
+              if (error) {
+                return <Text>Error! {error.message}</Text>
+              }
+              return (
+                <InterestList
+                  interestData={data.tags}
+                  addInterest={this.addInterest}
+                />
+              )
+            }}
+          </Query>
         </Background>
       </Modal>
     )
