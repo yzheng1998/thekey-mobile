@@ -13,6 +13,10 @@ export default class LineInput extends Component {
   state = {
     selected: false,
   }
+  focus = () => {
+    this.textInput.focus()
+  }
+
   render() {
     const {
       updateText,
@@ -33,6 +37,9 @@ export default class LineInput extends Component {
           <InputContainer>
             {children}
             <Input
+              innerRef={comp => {
+                this.textInput = comp
+              }}
               placeholder={placeholderText}
               value={text}
               placeholderTextColor="rgb(139, 133, 150)"
