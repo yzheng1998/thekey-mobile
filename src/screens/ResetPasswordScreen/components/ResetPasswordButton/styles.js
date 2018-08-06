@@ -3,7 +3,6 @@ import { themeGet } from 'styled-system'
 
 export const Button = styled.TouchableOpacity`
   height: 50px;
-  width: 100%;
   background-color: ${props =>
     props.disabled
       ? themeGet('colors.buttonClicked')
@@ -12,6 +11,8 @@ export const Button = styled.TouchableOpacity`
   border-radius: 8px;
   align-items: center;
   padding: 16px;
+  margin-left: 24px;
+  margin-right: 24px;
 `
 
 export const ButtonText = styled.Text`
