@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { ExperienceList } from './styles'
-
 import ExperienceRow from './ExperienceRow'
-import SeeAllButton from './SeeAllButton'
+import SeeAllButton from '../../../../components/SeeAllButton'
 import Suitcase from 'react-native-vector-icons/Entypo'
 
 export default class ExperienceListView extends Component {
@@ -17,7 +16,7 @@ export default class ExperienceListView extends Component {
 
   render() {
     const experiencesShown = this.state.truncated
-      ? 1
+      ? 2
       : this.props.experienceData.length
     return (
       <View style={{ width: '100%' }}>
@@ -29,18 +28,20 @@ export default class ExperienceListView extends Component {
               <ExperienceRow
                 navigation={this.props.navigation}
                 showEditButton={this.props.showEditButton}
-                companyName={experience.companyName}
+                employer={experience.employer}
                 position={experience.position}
-                startYear={experience.startYear}
-                endYear={experience.endYear}
+                startDate={experience.startDate}
+                endDate={experience.endDate}
                 key={experience.id}
               />
             ))}
         </ExperienceList>
-        <SeeAllButton
-          onPress={() => this.toggleSeeAll()}
-          truncated={this.state.truncated}
-        />
+        {this.props.experienceData.length > 2 && (
+          <SeeAllButton
+            onPress={() => this.toggleSeeAll()}
+            truncated={this.state.truncated}
+          />
+        )}
       </View>
     )
   }
