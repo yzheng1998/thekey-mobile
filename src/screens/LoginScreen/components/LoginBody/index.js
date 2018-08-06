@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AsyncStorage, KeyboardAvoidingView } from 'react-native'
+import { AsyncStorage } from 'react-native'
 import {
   Container,
   TextInputContainer,
@@ -10,7 +10,6 @@ import {
   SignInText,
   Subtitle,
   SignUpContainer,
-  Message,
   Screen,
 } from './styles'
 import EmailIcon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -78,96 +77,79 @@ class LoginBody extends Component {
               this.props.navigation.navigate('MainTab')
             }
           }}
+          onError={error =>
+            this.setState({
+              showAlertError: true,
+              errorMessage: error.message,
+            })
+          }
         >
-          {(loginUser, { loading, error }) => {
-            if (error) {
-              this.setState({
-                showAlertError: true,
-                errorMessage: error.message,
-              })
-            }
-            if (loading) {
-              return <Message>Loading</Message>
-            }
-            return (
-              <Container>
-                {this.state.showAlertError && (
-                  <AlertMessage isError message={this.state.errorMessage} />
-                )}
-                <KeyboardAvoidingView
-                  style={{ backgroundColor: 'white', width: ' 100%' }}
-                  behavior="position"
-                  enabled
+          {loginUser => (
+            <Container>
+              {this.state.showAlertError && (
+                <AlertMessage isError message={this.state.errorMessage} />
+              )}
+              <TextInputContainer>
+                <LineInput
+                  updateText={newText => this.setState({ email: newText })}
+                  text={this.state.email}
+                  placeholderText="Email"
+                  placeholderTextColor="rgb(139, 133, 150)"
+                  autoCapitalize="none"
+                  staticBorder
+                  onSubmitEditing={() => this.passwordInput.focus()}
+                  returnKeyType="next"
                 >
-                  <TextInputContainer>
-                    <LineInput
-                      updateText={newText => this.setState({ email: newText })}
-                      text={this.state.email}
-                      placeholderText="Email"
-                      placeholderTextColor="rgb(139, 133, 150)"
-                      autoCapitalize="none"
-                      staticBorder
-                      onSubmitEditing={() => this.passwordInput.focus()}
-                      returnKeyType="next"
-                    >
-                      <EmailIcon
-                        name="email-outline"
-                        color="rgb(181, 171, 202)"
-                        size={18}
-                        style={{ marginLeft: 8 }}
-                      />
-                    </LineInput>
-                  </TextInputContainer>
-                  <TextInputContainer>
-                    <LineInput
-                      ref={passwordInput => {
-                        this.passwordInput = passwordInput
-                      }}
-                      updateText={newText =>
-                        this.setState({ password: newText })
-                      }
-                      text={this.state.password}
-                      placeholderText="Password"
-                      placeholderTextColor="rgb(139, 133, 150)"
-                      autoCapitalize="none"
-                      staticBorder
-                      secureTextEntry
-                      returnKeyType="done"
-                    >
-                      <LockIcon
-                        name="lock"
-                        color="rgb(181, 171, 202)"
-                        size={18}
-                        style={{ marginLeft: 8 }}
-                      />
-                    </LineInput>
-                  </TextInputContainer>
-                </KeyboardAvoidingView>
-
-                <ForgotPass
-                  onPress={() =>
-                    this.props.navigation.navigate('ResetPassword')
-                  }
-                >
-                  <PinkSubtitleText>Forgot password?</PinkSubtitleText>
-                </ForgotPass>
-                <SignInButton
-                  onPress={() => {
-                    const variables = {
-                      email: this.state.email,
-                      password: this.state.password,
-                    }
-                    loginUser({ variables })
+                  <EmailIcon
+                    name="email-outline"
+                    color="rgb(181, 171, 202)"
+                    size={18}
+                    style={{ marginLeft: 8 }}
+                  />
+                </LineInput>
+              </TextInputContainer>
+              <TextInputContainer>
+                <LineInput
+                  ref={passwordInput => {
+                    this.passwordInput = passwordInput
                   }}
-                  disabled={
-                    this.state.email === '' || this.state.password === ''
-                  }
+                  updateText={newText => this.setState({ password: newText })}
+                  text={this.state.password}
+                  placeholderText="Password"
+                  placeholderTextColor="rgb(139, 133, 150)"
+                  autoCapitalize="none"
+                  staticBorder
+                  secureTextEntry
+                  returnKeyType="done"
                 >
-                  <SignInText>SIGN IN</SignInText>
-                </SignInButton>
-              </Container>
-            )
-          }}
+                  <LockIcon
+                    name="lock"
+                    color="rgb(181, 171, 202)"
+                    size={18}
+                    style={{ marginLeft: 8 }}
+                  />
+                </LineInput>
+              </TextInputContainer>
+
+              <ForgotPass
+                onPress={() => this.props.navigation.navigate('ResetPassword')}
+              >
+                <PinkSubtitleText>Forgot password?</PinkSubtitleText>
+              </ForgotPass>
+              <SignInButton
+                onPress={() => {
+                  const variables = {
+                    email: this.state.email,
+                    password: this.state.password,
+                  }
+                  loginUser({ variables })
+                }}
+                disabled={this.state.email === '' || this.state.password === ''}
+              >
+                <SignInText>SIGN IN</SignInText>
+              </SignInButton>
+            </Container>
+          )}
         </Mutation>
         <SignUpContainer>
           <Subtitle>Don&apos;t have an account?</Subtitle>

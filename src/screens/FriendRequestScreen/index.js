@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { FlatList } from 'react-native'
 import FriendRequestListItem from './FriendRequestListItem'
+import LoadingWrapper from '../../components/LoadingWrapper'
 
 const GET_FRIEND_REQUESTS = gql`
   query viewer {
@@ -26,9 +27,8 @@ class FriendRequestScreen extends Component {
   render() {
     return (
       <Query query={GET_FRIEND_REQUESTS}>
-        {({ loading, error, data }) => {
-          if (loading) return 'Loading...'
-          if (error) return `Error! ${error.message}`
+        {({ loading, data }) => {
+          if (loading) return <LoadingWrapper loading />
           return (
             <FlatList
               keyExtractor={friendRequest => friendRequest.id}

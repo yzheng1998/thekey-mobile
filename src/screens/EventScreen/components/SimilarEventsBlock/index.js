@@ -8,9 +8,10 @@ import {
   ButtonContainer,
 } from './styles'
 import SmallEventCard from '../../../../screens/EventsScreen/components/SmallEventCard'
-import { FlatList, Text } from 'react-native'
+import { FlatList } from 'react-native'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
+import LoadingWrapper from '../../../../components/LoadingWrapper'
 
 const GET_SIMILAR_EVENTS = gql`
   query similarEvents($id: ID!) {
@@ -42,9 +43,8 @@ class SimilarEventsBlock extends Component {
     const { id } = this.props
     return (
       <Query query={GET_SIMILAR_EVENTS} variables={{ id }}>
-        {({ loading, error, data }) => {
-          if (loading) return <Text>Loading...</Text>
-          if (error) return <Text>Error! ${error.message}</Text>
+        {({ loading, data }) => {
+          if (loading) return <LoadingWrapper loading />
           return (
             <Container>
               <Header>

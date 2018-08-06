@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { themeGet } from 'styled-system'
 
 export const Card = styled.TouchableOpacity`
   width: 100%;
@@ -8,6 +9,7 @@ export const Card = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background-color: ${themeGet('colors.cardLoading')};
 `
 export const TextContainer = styled.View`
   position: absolute;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, FlatList, Text, StatusBar } from 'react-native'
+import { Modal, FlatList, StatusBar } from 'react-native'
 import {
   Background,
   ScrollScreen,
@@ -11,6 +11,7 @@ import SearchModalHeader from '../SearchModalHeader'
 import SearchBar from '../../../../components/SearchBar'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
+import LoadingWrapper from '../../../../components/LoadingWrapper'
 
 const GET_USERS = gql`
   query users($usersFilterInput: UsersFilterInput!) {
@@ -83,11 +84,8 @@ export default class SocietySearchModal extends Component {
           <ThinDivider />
           <ScrollScreen>
             <Query query={GET_USERS} variables={variables}>
-              {({ loading, error, data }) => {
-                if (loading) return <Text>Loading...</Text>
-                if (error) {
-                  return <Text>Error! {error.message}</Text>
-                }
+              {({ loading, data }) => {
+                if (loading) return <LoadingWrapper loading />
                 return (
                   <PeopleList
                     viewMember={viewMember}

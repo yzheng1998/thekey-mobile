@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { View, Text, FlatList } from 'react-native'
 import { ListItem, Button } from 'react-native-elements'
+import LoadingWrapper from '../../components/LoadingWrapper'
 
 const GET_USER = gql`
   query user($id: ID!) {
@@ -27,10 +28,8 @@ class UserScreen extends Component {
         query={GET_USER}
         variables={{ id: this.props.navigation.getParam('id') }}
       >
-        {({ loading, error, data }) => {
-          if (loading) return <Text>Loading...</Text>
-          if (error) return <Text>Error! ${error.message}</Text>
-
+        {({ loading, data }) => {
+          if (loading) return <LoadingWrapper loading />
           const { firstName, lastName, email } = data.user
 
           return (
