@@ -6,7 +6,7 @@ import TagLine from '../../components/TagLine'
 import SimilarEventsBlock from './components/SimilarEventsBlock'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-import { Text } from 'react-native'
+import LoadingWrapper from '../../components/LoadingWrapper'
 import moment from 'moment'
 
 const GET_EVENT = gql`
@@ -54,10 +54,8 @@ class EventScreen extends Component {
         query={GET_EVENT}
         variables={{ id: this.props.navigation.getParam('id') }}
       >
-        {({ loading, error, data }) => {
-          if (loading) return <Text>Loading...</Text>
-          if (error) return <Text>Error! ${error.message}</Text>
-
+        {({ loading, data }) => {
+          if (loading) return <LoadingWrapper loading />
           const {
             id,
             location,

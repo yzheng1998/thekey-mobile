@@ -5,7 +5,6 @@ import {
   ScrollScreen,
   SearchNameContainer,
   PeopleListContainer,
-  Text,
   ThinDivider,
 } from './styles'
 import TagInput from 'react-native-tag-input'
@@ -13,6 +12,7 @@ import InterestCard from './components/InterestCard'
 import InterestsModalHeader from './components/InterestsModalHeader'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import LoadingWrapper from '../../../../components/LoadingWrapper'
 
 const SEARCH_TAGS = gql`
   query tags($substr: String!) {
@@ -129,11 +129,8 @@ export default class InterestsSearchModal extends Component {
           <ThinDivider />
           <ScrollScreen>
             <Query query={SEARCH_TAGS} variables={variables}>
-              {({ loading, error, data }) => {
-                if (loading) return <Text>Loading...</Text>
-                if (error) {
-                  return <Text>Error! {error.message}</Text>
-                }
+              {({ loading, data }) => {
+                if (loading) return <LoadingWrapper loading />
                 return (
                   <InterestList
                     interestData={data.tags}

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Query } from 'react-apollo'
-import { FlatList, Text, View, StatusBar } from 'react-native'
+import { FlatList, View, StatusBar } from 'react-native'
 import SearchBar from '../../components/SearchBar'
 import HorizontalEventsScroll from './components/HorizontalEventsScroll'
 import SmallEventCard from './components/SmallEventCard'
 import EventsHeader from './components/EventsHeader'
+import LoadingWrapper from '../../components/LoadingWrapper'
 import {
   Background,
   Subtitle,
@@ -84,28 +85,25 @@ class EventsScreen extends Component {
         />
         <Background>
           <Query query={query} variables={variables}>
-            {({ loading, error, data }) => {
-              if (loading) return <Text>Loading...</Text>
-              if (error) return <Text>Error! ${error.message}</Text>
-
+            {({ loading, data }) => {
               const usableData =
                 searchText || currentTab ? data.events : data.suggestedEvents
 
               return (
-                <HorizontalEventsScroll
-                  eventsList={usableData}
-                  navigation={this.props.navigation}
-                />
+                <LoadingWrapper loading={loading}>
+                  <HorizontalEventsScroll
+                    eventsList={usableData}
+                    navigation={this.props.navigation}
+                  />
+                </LoadingWrapper>
               )
             }}
           </Query>
           <Subtitle>More Events</Subtitle>
           <Description>Other events nearby</Description>
           <Query query={GET_EVENTS} variables={{ eventsFilterInput: {} }}>
-            {({ loading, error, data }) => {
-              if (loading) return <Text>Loading...</Text>
-              if (error) return <Text>Error! ${error.message}</Text>
-              return (
+            {({ loading, data }) => (
+              <LoadingWrapper loading={loading}>
                 <FlatList
                   keyExtractor={event => event.id}
                   data={data.events}
@@ -126,8 +124,8 @@ class EventsScreen extends Component {
                     </SmallCardContainer>
                   )}
                 />
-              )
-            }}
+              </LoadingWrapper>
+            )}
           </Query>
           <Spacer />
         </Background>

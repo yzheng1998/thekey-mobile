@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import ConnectionCard from '../ConnectionCard'
 import { Divider } from '../../styles'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
+import LoadingWrapper from '../../../../components/LoadingWrapper'
 
 const GET_FRIEND_REQUESTS = gql`
   query viewer {
@@ -32,9 +33,8 @@ export default class FriendRequestList extends Component {
   render() {
     return (
       <Query query={GET_FRIEND_REQUESTS} pollInterval={5000}>
-        {({ loading, error, data, refetch }) => {
-          if (loading) return <Text>`Loading...`</Text>
-          if (error) return <Text>`Error! ${error.message}`</Text>
+        {({ loading, data, refetch }) => {
+          if (loading) return <LoadingWrapper loading />
           return (
             <View>
               {data.viewer.friendRequests.map(friendRequest => (

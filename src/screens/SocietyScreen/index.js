@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-import { Dimensions, Text, View, StatusBar } from 'react-native'
+import { Dimensions, StatusBar } from 'react-native'
 import SocietyHeader from './components/SocietyHeader'
 import CardSwiper from './components/CardSwiper'
 import OutOfMatchesCard from './components/OutOfMatchesCard'
 import { SwiperContainer, Background, CardContainer, Screen } from './styles'
 import SocietySearchModal from './components/SocietySearchModal'
+import LoadingWrapper from '../../components/LoadingWrapper'
 
 const { width } = Dimensions.get('window')
 
@@ -75,22 +76,18 @@ class SocietyScreen extends Component {
           />
           <CardContainer>
             <Query query={GET_SOCIETY_USERS} fetchPolicy="network-only">
-              {({ loading, error, data }) => {
-                if (loading) return <Text>`Loading...`</Text>
-                if (error) return <Text>`Error! ${error.message}`</Text>
-                return (
-                  <View>
-                    <SwiperContainer>
-                      <CardSwiper
-                        navigation={this.props.navigation}
-                        width={width}
-                        userData={data.societyQuery}
-                      />
-                    </SwiperContainer>
-                    <OutOfMatchesCard navigation={this.props.navigation} />
-                  </View>
-                )
-              }}
+              {({ loading, data }) => (
+                <LoadingWrapper loading={loading}>
+                  <SwiperContainer>
+                    <CardSwiper
+                      navigation={this.props.navigation}
+                      width={width}
+                      userData={data.societyQuery}
+                    />
+                  </SwiperContainer>
+                  <OutOfMatchesCard navigation={this.props.navigation} />
+                </LoadingWrapper>
+              )}
             </Query>
           </CardContainer>
         </Background>

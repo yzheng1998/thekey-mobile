@@ -4,6 +4,7 @@ import { AsyncStorage, Alert } from 'react-native'
 
 import LoginStack from '../navigation/LoginStack'
 import MainTabNavigator from '../navigation/MainTabNavigator'
+import LoadingWrapper from '../components/LoadingWrapper'
 
 const isSignedIn = async () => {
   const token = await AsyncStorage.getItem('token')
@@ -46,7 +47,7 @@ export default class RootNavigator extends Component {
   render() {
     const { loading, signedIn } = this.state
     if (loading) {
-      return null
+      return <LoadingWrapper loading={loading} />
     }
     const RootNavigatorComponent = createRootNavigator(signedIn)
 

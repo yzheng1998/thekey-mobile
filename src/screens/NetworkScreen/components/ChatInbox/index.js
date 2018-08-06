@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { FlatList, Text } from 'react-native'
+import { FlatList } from 'react-native'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import ChatCard from '../../../../components/ChatCard'
+import LoadingWrapper from '../../../../components/LoadingWrapper'
 
 const GET_CHATS = gql`
   query viewerWithChats($chatsFilterInput: ChatsFilterInput!) {
@@ -69,9 +70,8 @@ class ChatInbox extends Component {
         }}
         pollInterval={5000}
       >
-        {({ loading, error, data }) => {
-          if (loading) return <Text>Loading...</Text>
-          if (error) return <Text>Error! ${error.message}</Text>
+        {({ loading, data }) => {
+          if (loading) return <LoadingWrapper loading />
           return (
             <FlatList
               keyExtractor={chat => chat.id}
