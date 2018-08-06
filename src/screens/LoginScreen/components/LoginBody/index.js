@@ -103,6 +103,8 @@ class LoginBody extends Component {
                       placeholderTextColor="rgb(139, 133, 150)"
                       autoCapitalize="none"
                       staticBorder
+                      onSubmitEditing={() => this.passwordInput.focus()}
+                      returnKeyType="next"
                     >
                       <EmailIcon
                         name="email-outline"
@@ -114,6 +116,9 @@ class LoginBody extends Component {
                   </TextInputContainer>
                   <TextInputContainer>
                     <LineInput
+                      ref={passwordInput => {
+                        this.passwordInput = passwordInput
+                      }}
                       updateText={newText =>
                         this.setState({ password: newText })
                       }
@@ -123,6 +128,7 @@ class LoginBody extends Component {
                       autoCapitalize="none"
                       staticBorder
                       secureTextEntry
+                      returnKeyType="done"
                     >
                       <LockIcon
                         name="lock"
