@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { OptionalHeading, InputField } from './styles'
-import { Block, BlockBackground, RowHeader, Heading } from '../../styles'
+import { Block, BlockBackground, RowHeader, Heading, Text } from '../../styles'
+import { TouchableOpacity } from 'react-native'
 
 const TextInputField = ({ value, placeholder, updateState }) => (
   <InputField
@@ -15,7 +16,7 @@ const TextInputField = ({ value, placeholder, updateState }) => (
 
 export default class OptionalInfoBlock extends Component {
   render() {
-    const { state, updateState } = this.props
+    const { state, updateState, toggleLocationModal } = this.props
     return (
       <BlockBackground>
         <Block>
@@ -23,6 +24,8 @@ export default class OptionalInfoBlock extends Component {
           <RowHeader>
             <Heading>Job Title</Heading>
             <TextInputField
+              onFocus={toggleLocationModal}
+              onBlur={toggleLocationModal}
               placeholder="General Manager"
               value={state.jobTitle}
               updateState={jobTitle => updateState({ jobTitle })}
@@ -32,11 +35,11 @@ export default class OptionalInfoBlock extends Component {
         <Block>
           <RowHeader>
             <Heading>Location</Heading>
-            <TextInputField
-              placeholder="Enter location"
-              value={state.location}
-              updateState={location => updateState({ location })}
-            />
+            <TouchableOpacity onPress={toggleLocationModal}>
+              <Text>
+                {state.location === '' ? 'Enter Location' : state.location}
+              </Text>
+            </TouchableOpacity>
           </RowHeader>
         </Block>
       </BlockBackground>
