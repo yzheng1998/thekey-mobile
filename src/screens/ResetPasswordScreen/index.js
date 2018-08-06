@@ -10,15 +10,24 @@ import Header from '../../components/Header'
 import { KeyboardAvoidingView } from 'react-native'
 import LineInput from '../../components/LineInput'
 import Icon from 'react-native-vector-icons/Feather'
-import ResetPasswordButton from './components/ResetPasswordButton'
+import SendResetEmailButton from './components/SendResetEmailButton'
+import ResetPasswordModal from './components/ResetPasswordModal'
+import { Button } from '../NetworkScreen/components/CreateChatButton/styles'
 
 export default class ResetPasswordScreen extends Component {
   state = {
-    newPassword: '',
+    email: '',
+    showResetPasswordModal: false,
   }
 
-  updateNewPassword = text => {
-    this.setState({ newPassword: text })
+  updateEmail = text => {
+    this.setState({ email: text })
+  }
+  openModal = () => {
+    this.setState({ showResetPasswordModal: true })
+  }
+  closeModal = () => {
+    this.setState({ showResetPasswordModal: false })
   }
 
   render() {
@@ -33,12 +42,12 @@ export default class ResetPasswordScreen extends Component {
           <KeyboardAvoidingView behavior="position" enabled>
             <SubtitleView>
               <Subtitle>
-                Enter your email address, and we will send you a link to reset
+                Enter your email address, and we will send you a token to reset
                 your password.
               </Subtitle>
             </SubtitleView>
             <LineInput
-              updateText={text => this.updateText('email', text)}
+              updateText={text => this.updateEmail(text)}
               text={this.state.email}
               placeholderText="Email"
               autoCapitalize="none"
@@ -51,10 +60,21 @@ export default class ResetPasswordScreen extends Component {
               />
             </LineInput>
             <ButtonContainer>
-              <ResetPasswordButton />
+              <SendResetEmailButton
+                disabled={this.state.email.length < 1}
+                email={this.state.email}
+                onPress={() => this.props.navigation.goBack()}
+                openModal={this.openModal}
+              />
             </ButtonContainer>
           </KeyboardAvoidingView>
         </SafeView>
+        <ResetPasswordModal
+          isVisible={this.state.showResetPasswordModal}
+          email={this.state.email}
+          closeModal={this.closeModal}
+          navigateToLogin={() => this.props.navigation.navigate('Login')}
+        />
       </ScreenContainer>
     )
   }
