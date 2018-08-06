@@ -1,19 +1,36 @@
 import React, { Component } from 'react'
-import EducationListView from '../../../ProfileScreen/components/EducationListView'
+import EducationRow from '../../../ProfileScreen/components/EducationListView/EducationRow'
 import BlockButton from '../../../../components/BlockButton'
-import { WideContainer } from '../../styles'
+import { WideContainer, ExperienceList } from '../../styles'
+import GraduationCap from 'react-native-vector-icons/FontAwesome'
 
 export default class EditEducationBlock extends Component {
   render() {
     return (
       <WideContainer>
-        <EducationListView
-          showEditButton
-          addEducation={this.props.addEducation}
-          navigation={this.props.navigation}
-          educationData={this.props.educationData}
-          refreshData={this.props.refreshData}
-        />
+        <ExperienceList>
+          <GraduationCap
+            name="graduation-cap"
+            size={36}
+            style={{ marginBottom: 4 }}
+          />
+          {this.props.educationData.map(school => (
+            <EducationRow
+              refreshData={this.props.refreshData}
+              addEducation={this.props.addEducation}
+              navigation={this.props.navigation}
+              showEditButton
+              schoolName={school.schoolName}
+              schoolType={school.schoolType}
+              degreeType={school.degreeType}
+              major={school.major}
+              startYear={school.startYear}
+              endYear={school.endYear}
+              id={school.id}
+              key={school.id}
+            />
+          ))}
+        </ExperienceList>
         <BlockButton
           text="ADD EDUCATION"
           onPress={() =>
