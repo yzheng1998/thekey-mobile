@@ -5,6 +5,9 @@ import HometownSearchCard from '../HometownSearchCard'
 import { FlatList, Modal, Keyboard } from 'react-native'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
+import nodeEmoji from 'node-emoji'
+
+const house = nodeEmoji.get('house_with_garden')
 
 const GET_HOMETOWNS = gql`
   query hometowns($substr: String!) {
@@ -36,6 +39,7 @@ export default class HometownSearchModal extends Component {
             updateText={this.updateText}
             searchText={this.state.searchText}
             placeholderText="Search for a city"
+            rightEmoji={house}
           />
           <Divider />
           <Query query={GET_HOMETOWNS} variables={variables}>

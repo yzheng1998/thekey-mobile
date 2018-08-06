@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Keyboard, Animated } from 'react-native'
+import { Keyboard, Animated, Text } from 'react-native'
 import {
   SearchBarContainer,
   SearchContainer,
@@ -33,6 +33,7 @@ export default class SearchBar extends Component {
       searchText,
       placeholderText,
       closeModal,
+      rightEmoji,
       ...rest
     } = this.props
     return (
@@ -60,6 +61,7 @@ export default class SearchBar extends Component {
             autoCapitalize="none"
             {...rest}
           />
+          {rightEmoji && <Text>{rightEmoji}</Text>}
           {searchText !== '' && (
             <ClearIconButton onPress={() => updateText('')}>
               <ClearIcon name="ios-close-circle" size={18} />
