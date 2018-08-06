@@ -22,15 +22,7 @@ export default class ResetPasswordModal extends Component {
     password: '',
     confirmPassword: '',
   }
-  updateToken = text => {
-    this.setState({ token: text })
-  }
-  updatePassword = pass => {
-    this.setState({ password: pass })
-  }
-  updateConfirmPassword = pass => {
-    this.setState({ confirmPassword: pass })
-  }
+
   clearContent = () => {
     this.setState({ token: '', password: '', confirmPassword: '' })
   }
@@ -53,7 +45,7 @@ export default class ResetPasswordModal extends Component {
                 </Subtitle>
               </SubtitleView>
               <LineInput
-                updateText={text => this.updateToken(text)}
+                updateText={text => this.setState({ token: text })}
                 text={this.state.token}
                 placeholderText="Token"
                 autoCapitalize="none"
@@ -61,7 +53,7 @@ export default class ResetPasswordModal extends Component {
                 <TokenImage source={KeyIcon} />
               </LineInput>
               <LineInput
-                updateText={text => this.updatePassword(text)}
+                updateText={text => this.setState({ password: text })}
                 text={this.state.password}
                 placeholderText="Password (minimum 6 characters)"
                 autoCapitalize="none"
@@ -70,7 +62,7 @@ export default class ResetPasswordModal extends Component {
                 <LockIcon name="lock" color="rgb(181, 171, 202)" size={18} />
               </LineInput>
               <LineInput
-                updateText={text => this.updateConfirmPassword(text)}
+                updateText={text => this.setState({ confirmPassword: text })}
                 text={this.state.confirmPassword}
                 placeholderText="Confirm password"
                 autoCapitalize="none"
