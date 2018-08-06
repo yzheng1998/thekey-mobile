@@ -4,6 +4,7 @@ import { ExperienceList } from './styles'
 import ExperienceRow from './ExperienceRow'
 import SeeAllButton from '../../../../components/SeeAllButton'
 import Suitcase from 'react-native-vector-icons/Entypo'
+import Divider from '../../styles'
 
 export default class ExperienceListView extends Component {
   state = {
@@ -36,11 +37,13 @@ export default class ExperienceListView extends Component {
               />
             ))}
         </ExperienceList>
-        {this.props.experienceData.length > 2 && (
+        {this.props.experienceData.length > 2 ? (
           <SeeAllButton
             onPress={() => this.toggleSeeAll()}
             truncated={this.state.truncated}
           />
+        ) : (
+          <Divider />
         )}
       </View>
     )
