@@ -12,16 +12,64 @@ import LineInput from '../../components/LineInput'
 import Icon from 'react-native-vector-icons/Feather'
 import SendResetEmailButton from './components/SendResetEmailButton'
 import ResetPasswordModal from './components/ResetPasswordModal'
-import { Button } from '../NetworkScreen/components/CreateChatButton/styles'
+import constraints from './constraints'
+
+const validate = require('validate.js')
 
 export default class ResetPasswordScreen extends Component {
-  state = {
-    email: '',
-    showResetPasswordModal: false,
+  constructor(props) {
+    super(props)
+    this.updateState = this.setState.bind(this)
+    this.state = {
+      email: '',
+      showResetPasswordModal: false,
+      displayErrors: {},
+      errors: {},
+      touched: {},
+    }
+  }
+
+  validateForm = isOnChangeText => {
+    const errors = validate(
+      {
+        email: this.state.email,
+      },
+      constraints,
+    )
+
+    const constructDisplayErrors = () => {
+      const displayErrors = {}
+      Object.keys(errors || {}).forEach(key => {
+        if (this.state.touched[key]) {
+          displayErrors[key] = errors[key]
+        }
+      })
+      return displayErrors
+    }
+
+    const errorsReduced =
+      Object.keys(errors || {}).length <
+      Object.keys(this.state.errors || {}).length
+
+    if (!isOnChangeText || (isOnChangeText && errorsReduced)) {
+      this.setState({ displayErrors: constructDisplayErrors() })
+    }
+    this.setState({ errors })
+  }
+
+  addTouched = key => {
+    const touched = {
+      ...this.state.touched,
+      [key]: true,
+    }
+    this.setState({ touched })
   }
 
   updateEmail = text => {
     this.setState({ email: text })
+  }
+  toggleEmailAlert = () => {
+    this.setState({ emailAlertDisplayed: !this.state.emailAlertDisplayed })
   }
   openModal = () => {
     this.setState({ showResetPasswordModal: true })
@@ -29,8 +77,9 @@ export default class ResetPasswordScreen extends Component {
   closeModal = () => {
     this.setState({ showResetPasswordModal: false })
   }
-
   render() {
+    const { errors, displayErrors } = this.state
+    const noErrors = !errors
     return (
       <ScreenContainer>
         <SafeView>
@@ -47,10 +96,15 @@ export default class ResetPasswordScreen extends Component {
               </Subtitle>
             </SubtitleView>
             <LineInput
-              updateText={text => this.updateEmail(text)}
               text={this.state.email}
               placeholderText="Email"
               autoCapitalize="none"
+              updateText={text => {
+                this.setState({ email: text }, () => this.validateForm(true))
+              }}
+              onFocus={() => this.addTouched('email')}
+              onBlur={() => this.validateForm(false)}
+              error={displayErrors.email}
             >
               <Icon
                 name="mail"
@@ -61,7 +115,7 @@ export default class ResetPasswordScreen extends Component {
             </LineInput>
             <ButtonContainer>
               <SendResetEmailButton
-                disabled={this.state.email.length < 1}
+                disabled={!noErrors}
                 email={this.state.email}
                 onPress={() => this.props.navigation.goBack()}
                 openModal={this.openModal}
