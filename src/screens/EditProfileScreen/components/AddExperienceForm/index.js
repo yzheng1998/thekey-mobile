@@ -97,13 +97,24 @@ export default class AddExperienceForm extends Component {
       id,
     } = this.state
 
+    const endDateIsPresent = endDate === null || isCurrentEmployee === true
+
+    const returnKeyType = this.editMode ? 'done' : 'next'
+
     const noErrors = !this.state.errors
 
     const toggleSwitch = () => {
-      this.setState({
-        isCurrentEmployee: !this.state.isCurrentEmployee,
-        endDate: !isCurrentEmployee ? null : undefined,
-      })
+      this.setState(
+        {
+          isCurrentEmployee: !this.state.isCurrentEmployee,
+          endDate: !isCurrentEmployee ? null : undefined,
+        },
+        () => {
+          if (!this.editMode && !startDate) {
+            this.startDateInput.focus()
+          }
+        },
+      )
     }
 
     return (
@@ -126,9 +137,16 @@ export default class AddExperienceForm extends Component {
                 }}
                 onFocus={() => this.addTouched('employer')}
                 onBlur={() => this.validateForm(false)}
+                returnKeyType={returnKeyType}
+                onSubmitEditing={() => {
+                  if (!this.editMode) this.positionInput.focus()
+                }}
                 error={this.state.displayErrors.employer}
               />
               <LineInput
+                ref={positionInput => {
+                  this.positionInput = positionInput
+                }}
                 text={position}
                 placeholderText="Position"
                 updateText={text => {
@@ -138,6 +156,7 @@ export default class AddExperienceForm extends Component {
                 }}
                 onFocus={() => this.addTouched('position')}
                 onBlur={() => this.validateForm(false)}
+                returnKeyType={returnKeyType}
                 error={this.state.displayErrors.position}
               />
               <SwitchContainer>
@@ -150,6 +169,9 @@ export default class AddExperienceForm extends Component {
               </SwitchContainer>
               <RowContainer>
                 <LineInput
+                  ref={startDateInput => {
+                    this.startDateInput = startDateInput
+                  }}
                   text={startDate}
                   width="48%"
                   placeholderText="Start Date"
@@ -160,15 +182,23 @@ export default class AddExperienceForm extends Component {
                   }}
                   onFocus={() => this.addTouched('startDate')}
                   onBlur={() => this.validateForm(false)}
+                  returnKeyType={
+                    this.editMode || (!this.editMode && endDateIsPresent)
+                      ? 'done'
+                      : 'next'
+                  }
+                  onSubmitEditing={() => {
+                    if (!this.editMode && !endDateIsPresent)
+                      this.endDateInput.focus()
+                  }}
                   error={this.state.displayErrors.startDate}
                 />
                 <LineInput
+                  ref={endDateInput => {
+                    this.endDateInput = endDateInput
+                  }}
                   // if endDate is null (currentEmployee) display endDate as "Present"
-                  text={
-                    endDate === null || isCurrentEmployee === true
-                      ? 'Present'
-                      : endDate
-                  }
+                  text={endDateIsPresent ? 'Present' : endDate}
                   width="48%"
                   placeholderText="End Date"
                   updateText={text => {
