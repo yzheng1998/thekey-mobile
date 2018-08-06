@@ -20,3 +20,8 @@ export const Divider = styled.View`
   height: 4px;
   background-color: ${themeGet('colors.divider')};
 `
+export const ThinDivider = styled.View`
+  width: 100%;
+  height: 2px;
+  background-color: ${themeGet('colors.divider')};
+`
