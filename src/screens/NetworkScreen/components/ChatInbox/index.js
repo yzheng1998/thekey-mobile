@@ -74,6 +74,7 @@ class ChatInbox extends Component {
           if (error) return <Text>Error! ${error.message}</Text>
           return (
             <FlatList
+              keyboardShouldPersistTaps="handled"
               keyExtractor={chat => chat.id}
               data={data.viewer.chats}
               renderItem={({ item: chat }) => (

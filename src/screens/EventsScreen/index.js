@@ -82,7 +82,7 @@ class EventsScreen extends Component {
           searchText={searchText}
           placeholderText="Search Events"
         />
-        <Background>
+        <Background keyboardShouldPersistTaps="handled">
           <Query query={query} variables={variables}>
             {({ loading, error, data }) => {
               if (loading) return <Text>Loading...</Text>
@@ -107,6 +107,7 @@ class EventsScreen extends Component {
               if (error) return <Text>Error! ${error.message}</Text>
               return (
                 <FlatList
+                  keyboardShouldPersistTaps="handled"
                   keyExtractor={event => event.id}
                   data={data.events}
                   renderItem={({ item }) => (

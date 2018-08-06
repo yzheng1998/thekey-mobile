@@ -48,7 +48,6 @@ class NetworkScreen extends Component {
     return (
       <SafeView>
         <StatusBar barStyle="dark-content" />
-
         <Background>
           <NewChatModal
             isExistingChat={false}
@@ -73,7 +72,7 @@ class NetworkScreen extends Component {
             placeholderText="Search Your Network"
           />
           <Divider />
-          <ScrollView>
+          <ScrollView keyboardShouldPersistTaps="handled">
             <FriendRequestList />
             <ChatInbox
               searchText={this.state.searchText}
