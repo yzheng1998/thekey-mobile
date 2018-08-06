@@ -8,7 +8,7 @@ import {
 } from './styles'
 import Header from '../../components/Header'
 import SubmitButton from '../../components/SubmitButton'
-import { SafeAreaView } from 'react-native'
+import { SafeAreaView, Keyboard } from 'react-native'
 
 import nodeEmoji from 'node-emoji'
 
@@ -37,6 +37,7 @@ class EssayScreen extends Component {
             value={this.state.essay}
             onChangeText={text => this.setState({ essay: text })}
             multiline
+            onBlur={Keyboard.dismiss}
             autoGrow={false}
           />
         </Scroll>
