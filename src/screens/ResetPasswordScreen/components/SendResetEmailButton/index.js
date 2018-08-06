@@ -18,30 +18,31 @@ export default class SendResetEmailButton extends Component {
   render() {
     const { email, disabled, openModal } = this.props
     return (
-      <Mutation mutation={SEND_RESET_EMAIL} onCompleted={openModal}>
-        {(sendResetEmail, { error }) => {
+      <Mutation
+        mutation={SEND_RESET_EMAIL}
+        onCompleted={openModal}
+        onError={error => {
           if (error) {
             Alert.alert(
               'Email failed to send',
               'There was an error sending the email with the token to reset your password. Please try again.',
-              [{ text: 'OK', onPress: () => {} }],
-              { cancelable: true },
             )
           }
-          return (
-            <Button
-              disabled={disabled}
-              onPress={() => {
-                const variables = {
-                  email,
-                }
-                sendResetEmail({ variables })
-              }}
-            >
-              <ButtonText>SEND RESET PASSWORD LINK</ButtonText>
-            </Button>
-          )
         }}
+      >
+        {sendResetEmail => (
+          <Button
+            disabled={disabled}
+            onPress={() => {
+              const variables = {
+                email,
+              }
+              sendResetEmail({ variables })
+            }}
+          >
+            <ButtonText>SEND RESET PASSWORD LINK</ButtonText>
+          </Button>
+        )}
       </Mutation>
     )
   }
