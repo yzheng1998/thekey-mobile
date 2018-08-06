@@ -46,7 +46,7 @@ export default class ApplyNowModal extends Component {
         animationIn="slideInRight"
         animationOut="slideOutRight"
       >
-        <Container>
+        <Container keyboardShouldPersistTaps="handled">
           <BackButtonContainer
             onPress={() => {
               toggleApplyModal()

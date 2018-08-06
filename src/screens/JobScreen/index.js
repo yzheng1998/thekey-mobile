@@ -74,7 +74,7 @@ class JobScreen extends Component {
             isInterested,
           } = data.job
           return (
-            <Container>
+            <Container keyboardShouldPersistTaps="handled">
               <JobPictureBlock
                 navigation={this.props.navigation}
                 picture={picture}
