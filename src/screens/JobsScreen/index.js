@@ -59,10 +59,7 @@ class JobsScreen extends Component {
             if (loading) return <LoadingWrapper loading />
             if (this.state.tab === 2) refetch()
             return (
-              <ScrollView
-                style={{ flex: 1, backgroundColor: 'white' }}
-                keyboardShouldPersistTaps="always"
-              >
+              <ScrollView keyboardShouldPersistTaps="handled">
                 <JobsHeader
                   navigation={this.props.navigation}
                   changeTab={this.changeTab}
@@ -75,6 +72,7 @@ class JobsScreen extends Component {
                 />
                 <Divider />
                 <FlatList
+                  keyboardShouldPersistTaps="handled"
                   keyExtractor={job => job.id}
                   data={data.jobs}
                   renderItem={({ item: job }) => (

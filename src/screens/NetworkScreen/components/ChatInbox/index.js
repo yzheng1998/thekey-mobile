@@ -74,6 +74,7 @@ class ChatInbox extends Component {
           if (loading) return <LoadingWrapper loading />
           return (
             <FlatList
+              keyboardShouldPersistTaps="handled"
               keyExtractor={chat => chat.id}
               data={data.viewer.chats}
               renderItem={({ item: chat }) => (

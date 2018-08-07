@@ -17,6 +17,7 @@ export default class HorizontalEventsScroll extends Component {
     return (
       <Container>
         <CardList
+          keyboardShouldPersistTaps="handled"
           horizontal
           keyExtractor={event => event.id}
           data={eventsList}

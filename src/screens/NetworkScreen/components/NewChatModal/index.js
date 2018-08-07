@@ -30,8 +30,9 @@ const SEARCH_CONTACTS = gql`
 `
 
 const PeopleList = ({ peopleData, addParticipant }) => (
-  <PeopleListContainer>
+  <PeopleListContainer keyboardShouldPersistTaps="handled">
     <FlatList
+      keyboardShouldPersistTaps="handled"
       styles={{ backgroundColor: 'red', flex: 1 }}
       keyExtractor={person => person.id}
       data={peopleData}
@@ -154,7 +155,7 @@ export default class NewChatModal extends Component {
             />
           </SearchNameContainer>
           <ThinDivider />
-          <ScrollScreen>
+          <ScrollScreen keyboardShouldPersistTaps="handled">
             <Query query={SEARCH_CONTACTS} variables={variables}>
               {({ loading, data }) => {
                 if (loading) return <LoadingWrapper loading />

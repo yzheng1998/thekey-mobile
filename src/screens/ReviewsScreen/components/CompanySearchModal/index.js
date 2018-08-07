@@ -65,12 +65,13 @@ export default class CompanySearchModal extends Component {
             placeholderText="Search for a company"
           />
           <ThinDivider />
-          <ScrollScreen>
+          <ScrollScreen keyboardShouldPersistTaps="handled">
             <Query query={GET_COMPANIES} variables={variables}>
               {({ loading, data }) => {
                 if (loading) return <LoadingWrapper loading />
                 return (
                   <FlatList
+                    keyboardShouldPersistTaps="handled"
                     showsVerticalScrollIndicator={false}
                     keyExtractor={company => company.id}
                     data={data.companies}

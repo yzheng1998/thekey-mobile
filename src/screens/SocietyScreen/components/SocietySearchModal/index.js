@@ -30,6 +30,7 @@ const GET_USERS = gql`
 const PeopleList = ({ peopleData, viewMember }) => (
   <PeopleListContainer>
     <FlatList
+      keyboardShouldPersistTaps="handled"
       keyExtractor={person => person.id}
       data={peopleData}
       renderItem={({ item: person }) => (
@@ -82,7 +83,7 @@ export default class SocietySearchModal extends Component {
             placeholderText="Search for a user"
           />
           <ThinDivider />
-          <ScrollScreen>
+          <ScrollScreen keyboardShouldPersistTaps="handled">
             <Query query={GET_USERS} variables={variables}>
               {({ loading, data }) => {
                 if (loading) return <LoadingWrapper loading />

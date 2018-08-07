@@ -96,7 +96,6 @@ export default class EditProfileScreen extends Component {
             lookingForPickerEnabled,
             meetByPickerEnabled,
           } = displayData
-
           const toggleWayToMeet = emoji => {
             if (
               preferredWaysToMeet
@@ -137,7 +136,10 @@ export default class EditProfileScreen extends Component {
                 mutationVariables={updateProfileVariables}
                 refreshData={refetch}
               />
-              <KeyboardAwareScrollView showsVerticalScrollIndicator={false}>
+              <KeyboardAwareScrollView
+                keyboardShouldPersistTaps="handled"
+                showsVerticalScrollIndicator={false}
+              >
                 <ProfilePicture
                   profilePicture={profilePicture}
                   defaultProfilePicture={defaultProfilePicture}

@@ -56,7 +56,7 @@ class ReviewsScreen extends Component {
     return (
       <View>
         <StatusBar barStyle="light-content" />
-        <ScrollView>
+        <ScrollView keyboardShouldPersistTaps="handled">
           <ReviewsHeader
             navigation={this.props.navigation}
             selectedIndex={this.state.tab}
@@ -73,6 +73,7 @@ class ReviewsScreen extends Component {
               if (loading) return <LoadingWrapper loading />
               return (
                 <FlatList
+                  keyboardShouldPersistTaps="handled"
                   keyExtractor={company => company.id}
                   data={data.companies}
                   renderItem={({ item }) => (

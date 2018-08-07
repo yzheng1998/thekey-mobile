@@ -83,7 +83,7 @@ class EventsScreen extends Component {
           searchText={searchText}
           placeholderText="Search Events"
         />
-        <Background>
+        <Background keyboardShouldPersistTaps="handled">
           <Query query={query} variables={variables}>
             {({ loading, data }) => {
               const usableData =
@@ -105,6 +105,7 @@ class EventsScreen extends Component {
             {({ loading, data }) => (
               <LoadingWrapper loading={loading}>
                 <FlatList
+                  keyboardShouldPersistTaps="handled"
                   keyExtractor={event => event.id}
                   data={data.events}
                   renderItem={({ item }) => (

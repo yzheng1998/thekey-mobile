@@ -12,7 +12,6 @@ export const Text = styled.Text`
   font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.fontDescription.primary')};
 `
-export const ScrollScreen = styled.ScrollView``
 export const InputField = styled.TextInput`
   font-size: 14px;
   color: ${themeGet('colors.fontDescription.primary')};
@@ -25,8 +24,7 @@ export const SearchNameContainer = styled.View`
   align-items: center;
   background-color: white;
 `
-export const PeopleListContainer = styled.ScrollView`
-  flex: 1;
+export const PeopleListContainer = styled.View`
   width: 100%;
   background-color: ${themeGet('colors.background')};
   margin-bottom: 120px;

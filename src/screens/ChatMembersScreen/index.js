@@ -38,6 +38,7 @@ export default class ChatMembersScreen extends Component {
         <ScrollScreen>
           <Container>
             <FlatList
+              keyboardShouldPersistTaps="handled"
               keyExtractor={person => person.id}
               data={people}
               renderItem={({ item: person }) => (

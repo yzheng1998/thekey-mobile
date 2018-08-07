@@ -5,12 +5,12 @@ import {
   SpacedHeading,
   Avatar,
   RowSubContainer,
+  TextContainer,
 } from './styles'
 import {
   BlockBackground,
   Block,
   Heading,
-  InputField,
   Text,
   RowContainer,
 } from '../../styles'
@@ -64,13 +64,9 @@ export default class EmploymentHistoryBlock extends Component {
         <RowContainer>
           <SpacedHeading>Company Name</SpacedHeading>
           <RowSubContainer>
-            <InputField
-              placeholderTextColor="rgb(250, 53, 121)"
-              placeholder={state.companyName}
-              onChangeText={companyName => {
-                updateState({ companyName })
-              }}
-            />
+            <TextContainer>
+              <Text>{state.companyName}</Text>
+            </TextContainer>
             <Avatar
               source={{
                 uri: picture,

@@ -44,6 +44,7 @@ export default class HometownSearchModal extends Component {
           <Query query={GET_HOMETOWNS} variables={variables}>
             {({ data }) => (
               <FlatList
+                keyboardShouldPersistTaps="handled"
                 keyExtractor={hometown => hometown.id}
                 data={data.hometowns}
                 renderItem={({ item: hometown }) => (

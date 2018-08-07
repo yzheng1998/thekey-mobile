@@ -92,7 +92,7 @@ export default class SignUpScreen extends Component {
       <ScreenContainer>
         <SafeView>
           <KeyboardAvoidingView behavior="padding" enabled>
-            <ScrollView>
+            <ScrollView keyboardShouldPersistTaps="always">
               <Header
                 title="Sign Up"
                 showBack
@@ -190,6 +190,7 @@ export default class SignUpScreen extends Component {
                 </Subtitle>
               </SubtitleView>
               <RegisterButton
+                keyboardShouldPersistTaps="always"
                 onPress={() =>
                   this.props.navigation.navigate('PersonalDetails', {
                     userInfo: {
