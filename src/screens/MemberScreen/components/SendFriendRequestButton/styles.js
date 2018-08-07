@@ -6,7 +6,10 @@ export const Button = styled.TouchableOpacity`
   position: absolute;
   bottom: 0;
   width: 100%;
-  background-color: ${themeGet('colors.buttonPrimary')};
+  background-color: ${props =>
+    props.disabled
+      ? themeGet('colors.confirmation')
+      : themeGet('colors.buttonPrimary')};
   justify-content: center;
   align-items: center;
   flex-direction: row;

@@ -46,6 +46,7 @@ const theme = {
     pickerPlaceholder: 'rgb(139, 133, 150)',
     activeTag: 'rgb(92, 78, 121)',
     cardLoading: 'rgb(100, 108, 132)',
+    confirmation: 'rgb(119, 210, 103)',
   },
   ...Platform.select({
     ios: {
