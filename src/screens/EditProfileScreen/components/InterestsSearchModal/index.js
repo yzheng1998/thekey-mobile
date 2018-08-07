@@ -128,11 +128,8 @@ export default class InterestsSearchModal extends Component {
           </SearchNameContainer>
           <ThinDivider />
           <Query query={SEARCH_TAGS} variables={variables}>
-            {({ loading, error, data }) => {
-              if (loading) return <Text>Loading...</Text>
-              if (error) {
-                return <Text>Error! {error.message}</Text>
-              }
+            {({ loading, data }) => {
+              if (loading) return <LoadingWrapper loading />
               return (
                 <InterestList
                   interestData={data.tags}
