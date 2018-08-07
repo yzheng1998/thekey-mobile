@@ -10,7 +10,6 @@ export const Card = styled.TouchableOpacity`
   overflow: hidden;
 `
 export const BackgroundImage = styled.ImageBackground`
-  padding: 20px;
   opacity: 0.9;
   flex: 1;
 `
@@ -70,4 +69,10 @@ export const ClockIcon = styled(Icon1)`
 `
 export const LocationIcon = styled(Icon2)`
   color: ${themeGet('colors.fontPrimary')};
+`
+export const Tint = styled.View`
+  background-color: ${themeGet('colors.eventCardTint')};
+  width: 100%;
+  flex: 1;
+  padding: 20px;
 `

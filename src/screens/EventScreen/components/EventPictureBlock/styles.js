@@ -42,7 +42,7 @@ export const ClockContainer = styled.View`
 `
 export const ButtonHeader = styled.View`
   position: absolute;
-  top: 15px;
+  top: 20px;
   padding-left: 20px;
   padding-right: 20px;
   flex-direction: row;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  AvatarRowContainer,
   BackgroundImage,
   Card,
   FullContainer,
@@ -10,6 +11,7 @@ import {
   Title,
   TimeIcon,
   TitleContainer,
+  Tint,
 } from './styles'
 import StarButton from '../../../../components/EventStarButton'
 import moment from 'moment'
@@ -44,30 +46,35 @@ export default class SmallEventCard extends Component {
         activeOpacity={0.9}
         onPress={() => this.props.navigate(id)}
       >
-        <BackgroundImage source={cardImage} />
-        <FullContainer>
-          <ContentContainer>
-            <DetailsContainer>
-              <TimeIcon name="clock" size={19} />
-              {<DateTime>{formatTimeStamp(usableTimeStamp)}</DateTime>}
-            </DetailsContainer>
-            <RowContainer>
-              <TitleContainer>
-                <Title numberOfLines={1}>{title}</Title>
-              </TitleContainer>
-              <StarButton isInterested={isInterested} id={id} />
-            </RowContainer>
-          </ContentContainer>
-        </FullContainer>
-        {interestedFriends && (
-          <InterestedFriendsRow
-            navigate={this.props.navigateToPeopleList}
-            avatarNum={5}
-            avatarSize={22}
-            connectionsNum={interestedFriends.length}
-            interestedFriends={interestedFriends}
-          />
-        )}
+        <BackgroundImage source={cardImage}>
+          <Tint>
+            <FullContainer>
+              <ContentContainer>
+                <DetailsContainer>
+                  <TimeIcon name="clock" size={19} />
+                  {<DateTime>{formatTimeStamp(usableTimeStamp)}</DateTime>}
+                </DetailsContainer>
+                <RowContainer>
+                  <TitleContainer>
+                    <Title numberOfLines={1}>{title}</Title>
+                  </TitleContainer>
+                  <StarButton isInterested={isInterested} id={id} />
+                </RowContainer>
+              </ContentContainer>
+            </FullContainer>
+            <AvatarRowContainer>
+              {interestedFriends && (
+                <InterestedFriendsRow
+                  navigate={this.props.navigateToPeopleList}
+                  avatarNum={5}
+                  avatarSize={22}
+                  connectionsNum={interestedFriends.length}
+                  interestedFriends={interestedFriends}
+                />
+              )}
+            </AvatarRowContainer>
+          </Tint>
+        </BackgroundImage>
       </Card>
     )
   }

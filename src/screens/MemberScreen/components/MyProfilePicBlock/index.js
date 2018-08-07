@@ -25,6 +25,13 @@ export default class MyProfilePicBlock extends Component {
     return (
       <BlockContainer>
         <PictureHeader picture={profilePic} avatarSize={123}>
+          <SendFriendRequestButton
+            isFriend={isFriend}
+            hasFriendRequest={hasFriendRequest}
+            recipientId={id}
+            swipedLeft={false}
+            refreshScreen={refreshScreen}
+          />
           <EventTitleText>{name}</EventTitleText>
           <LocationText>{hometown}</LocationText>
           <Container>
@@ -34,13 +41,6 @@ export default class MyProfilePicBlock extends Component {
               navigation={navigation}
             />
           </Container>
-          <SendFriendRequestButton
-            isFriend={isFriend}
-            hasFriendRequest={hasFriendRequest}
-            recipientId={id}
-            swipedLeft={false}
-            refreshScreen={refreshScreen}
-          />
         </PictureHeader>
       </BlockContainer>
     )

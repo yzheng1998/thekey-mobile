@@ -12,7 +12,7 @@ export const Card = styled.TouchableOpacity`
   margin-bottom: 20px;
   margin-left: 15px;
 `
-export const BackgroundImage = styled.Image`
+export const BackgroundImage = styled.ImageBackground`
   position: absolute;
   width: 115%;
   opacity: 0.9;
@@ -59,7 +59,15 @@ export const DateTime = styled.Text`
   margin-left: 3px;
   margin-top: 1px;
 `
-
 export const TimeIcon = styled(Icon1)`
   color: ${themeGet('colors.fontSubtitle.secondary')};
+`
+export const Tint = styled.View`
+  background-color: ${themeGet('colors.eventCardTint')};
+  width: 100%;
+  flex: 1;
+  justify-content: center;
+`
+export const AvatarRowContainer = styled.View`
+  margin-left: 10px;
 `

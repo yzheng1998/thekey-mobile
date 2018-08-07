@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { themeGet } from 'styled-system'
 
 export const BlockContainer = styled.View`
   overflow: hidden;
@@ -6,8 +7,10 @@ export const BlockContainer = styled.View`
 `
 export const ContentContainer = styled.View`
   flex: 1;
+  margin-bottom: 8px;
   align-items: center;
   justify-content: center;
+  height: ${props => (props.height ? props.height : 365)};
 `
 export const PictureContainer = styled.View``
 
@@ -39,4 +42,9 @@ export const MiniQRCode = styled.TouchableHighlight`
   background-color: white;
   bottom: 0px;
   left: 0px;
+`
+export const Tint = styled.View`
+  background-color: ${themeGet('colors.pictureHeaderTint')};
+  width: 100%;
+  position: absolute;
 `

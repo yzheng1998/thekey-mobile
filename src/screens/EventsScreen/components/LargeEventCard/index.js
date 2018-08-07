@@ -12,6 +12,7 @@ import {
   Location,
   ClockIcon,
   LocationIcon,
+  Tint,
 } from './styles'
 import StarButton from '../../../../components/EventStarButton'
 import moment from 'moment'
@@ -62,37 +63,39 @@ export default class LargeEventsCard extends Component {
         }
       >
         <BackgroundImage source={cardImage}>
-          <TopContainer>
-            <PriceContainer price={price}>
-              {price && <Price>{formatPrice(price)}</Price>}
-            </PriceContainer>
-            <StarButton isInterested={isInterested} id={id} />
-          </TopContainer>
-          <ContentContainer>
-            <DetailsContainer>
-              <ClockIcon name="clock" size={19} />
-              <DateTime>{formatTimeStamp(usableTimeStamp)}</DateTime>
-            </DetailsContainer>
-            <Title numberOfLines={3}>{title}</Title>
-            <DetailsContainer>
-              <LocationIcon name="location" size={25} />
-              <Location>{location}</Location>
-            </DetailsContainer>
-          </ContentContainer>
-          {interestedFriends && (
-            <InterestedFriendsRow
-              navigate={friends =>
-                this.props.navigation.navigate('PeopleList', {
-                  people: friends,
-                  title: 'Interested Friends',
-                })
-              }
-              avatarNum={5}
-              avatarSize={30}
-              connectionsNum={interestedFriends.length}
-              interestedFriends={interestedFriends}
-            />
-          )}
+          <Tint>
+            <TopContainer>
+              <PriceContainer price={price}>
+                {price && <Price>{formatPrice(price)}</Price>}
+              </PriceContainer>
+              <StarButton isInterested={isInterested} id={id} />
+            </TopContainer>
+            <ContentContainer>
+              <DetailsContainer>
+                <ClockIcon name="clock" size={19} />
+                <DateTime>{formatTimeStamp(usableTimeStamp)}</DateTime>
+              </DetailsContainer>
+              <Title numberOfLines={3}>{title}</Title>
+              <DetailsContainer>
+                <LocationIcon name="location" size={25} />
+                <Location>{location}</Location>
+              </DetailsContainer>
+            </ContentContainer>
+            {interestedFriends && (
+              <InterestedFriendsRow
+                navigate={friends =>
+                  this.props.navigation.navigate('PeopleList', {
+                    people: friends,
+                    title: 'Interested Friends',
+                  })
+                }
+                avatarNum={5}
+                avatarSize={30}
+                connectionsNum={interestedFriends.length}
+                interestedFriends={interestedFriends}
+              />
+            )}
+          </Tint>
         </BackgroundImage>
       </Card>
     )
