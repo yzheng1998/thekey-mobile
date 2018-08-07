@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, AsyncStorage, Alert } from 'react-native'
+import { View, AsyncStorage, Alert } from 'react-native'
 import LinkedInModal from 'react-native-linkedin'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
@@ -18,6 +18,7 @@ const LINKEDIN_LOGIN = gql`
       user {
         id
         firstName
+        profilePicture
       }
       token
       error {
@@ -33,16 +34,25 @@ class LinkedInLoginButton extends Component {
         mutation={LINKEDIN_LOGIN}
         onCompleted={async data => {
           const {
-            linkedinLogin: { token, user },
+            linkedinLogin: { token, user, error },
           } = data
-          if (!data.loginUser.error) {
+          if (!error) {
             await AsyncStorage.setItem('token', token)
             await AsyncStorage.setItem('userId', user.id)
+            await AsyncStorage.setItem('firstName', user.firstName)
             this.props.navigation.navigate('MainTab')
           }
         }}
+        onError={() => {
+          Alert.alert(
+            'Failed to log in',
+            'There was an error logging you in. Please try again.',
+            [{ text: 'OK', onPress: () => {} }],
+            { cancelable: true },
+          )
+        }}
       >
-        {(linkedinLogin, { loading, data, error }) => (
+        {linkedinLogin => (
           <View>
             <LinkedInModal
               ref={ref => {
@@ -65,18 +75,6 @@ class LinkedInLoginButton extends Component {
               </RowContainer>
               <LinkedInButtonText>Sign in with LinkedIn</LinkedInButtonText>
             </LinkedInButton>
-            {loading && <Text>Logging you in...</Text>}
-            {data &&
-              data.linkedinLogin.error && (
-                <Text>{data.linkedinLogin.error.message}</Text>
-              )}
-            {error &&
-              Alert.alert(
-                'Failed to log in',
-                'There was an error logging you in. Please try again.',
-                [{ text: 'OK', onPress: () => {} }],
-                { cancelable: true },
-              )}
           </View>
         )}
       </Mutation>

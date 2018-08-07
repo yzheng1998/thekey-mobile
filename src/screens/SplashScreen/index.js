@@ -42,7 +42,7 @@ export default class SplashScreen extends Component {
             <DividerText>OR</DividerText>
             <Divider />
           </DividerRow>
-          <LinkedInLoginButton />
+          <LinkedInLoginButton navigation={this.props.navigation} />
         </Container>
       </Background>
     )
