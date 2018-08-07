@@ -4,7 +4,7 @@ import { ExperienceList } from './styles'
 import ExperienceRow from './ExperienceRow'
 import SeeAllButton from '../../../../components/SeeAllButton'
 import Suitcase from 'react-native-vector-icons/Entypo'
-import Divider from '../../styles'
+import { Divider } from '../../styles'
 
 export default class ExperienceListView extends Component {
   state = {
