@@ -5,7 +5,7 @@ import { ButtonGroup } from 'react-native-elements'
 export const Buttons = styled(ButtonGroup)``
 export const ButtonContainer = styled.View`
   margin-top: 5px;
-  margin-bottom: 15px;
+  margin-bottom: -6px;
 `
 export const StarsContainer = styled.View`
   align-items: flex-start;
@@ -35,4 +35,9 @@ export const Avatar = styled.Image`
 export const TextContainer = styled.View`
   justify-content: center;
   align-items: center;
+`
+export const SwitchContainer = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-end;
 `

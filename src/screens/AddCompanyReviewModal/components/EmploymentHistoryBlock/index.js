@@ -7,6 +7,7 @@ import {
   RowSubContainer,
   TextContainer,
   ButtonContainer,
+  SwitchContainer,
 } from './styles'
 import {
   BlockBackground,
@@ -15,11 +16,11 @@ import {
   Text,
   RowContainer,
 } from '../../styles'
-import CheckBox from '../CheckBox'
 import fullStar from './full-star-pink.png'
 import emptyStar from './empty-star-grey.png'
 import Stars from 'react-native-stars'
 import { TouchableOpacity } from 'react-native'
+import Switch from 'react-native-switch-pro'
 
 const employmentTypes = [
   { value: 'FULLTIME', label: 'Full-Time' },
@@ -99,15 +100,24 @@ export default class EmploymentHistoryBlock extends Component {
           </ButtonContainer>
         </Block>
         <Block>
-          <CheckBox
-            isCurrentEmployee={isCurrentEmployee}
-            toggleCheckBox={() =>
-              updateState({
-                isCurrentEmployee: !isCurrentEmployee,
-                yearPickerEnabled: false,
-              })
-            }
-          />
+          <RowContainer>
+            <SpacedHeading>Current Employee</SpacedHeading>
+            <SwitchContainer>
+              <Switch
+                height={23}
+                width={45}
+                backgroundActive="rgb(250,53,121)"
+                value={isCurrentEmployee}
+                onSyncPress={() => {
+                  updateState({
+                    isCurrentEmployee: !isCurrentEmployee,
+                    yearPickerEnabled: false,
+                  })
+                }}
+              />
+            </SwitchContainer>
+          </RowContainer>
+
           <RowContainer>
             <TouchableOpacity
               disabled={isCurrentEmployee}
