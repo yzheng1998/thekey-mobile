@@ -38,8 +38,7 @@ export default class HometownSearchModal extends Component {
             closeModal={onPress}
             updateText={this.updateText}
             searchText={this.state.searchText}
-            placeholderText="Search for a city"
-            rightEmoji={house}
+            placeholderText={`Search for a city ${house}`}
           />
           <Divider />
           <Query query={GET_HOMETOWNS} variables={variables}>
