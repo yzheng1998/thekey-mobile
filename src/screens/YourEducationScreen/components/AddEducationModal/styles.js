@@ -26,6 +26,7 @@ export const Subtitle = styled.Text`
   font-family: ${themeGet('fonts.medium')};
   font-size: 14px
   line-height: 20px;
+  margin-bottom: 8px;
 `
 
 export const RightModal = styled(Modal)`

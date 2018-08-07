@@ -6,6 +6,7 @@ import {
   CancelButton,
   CancelText,
   SafeView,
+  Divider,
 } from './styles'
 import UpdateProfileButton from '../UpdateProfileButton'
 
@@ -19,14 +20,15 @@ export default class EditProfileHeader extends Component {
             <CancelButton onPress={goBack}>
               <CancelText>Cancel</CancelText>
             </CancelButton>
+            <Heading>Edit Profile</Heading>
             <UpdateProfileButton
               variables={mutationVariables}
               goBack={goBack}
               refreshData={refreshData}
             />
           </ButtonContainer>
-          <Heading>Edit Profile</Heading>
         </Background>
+        <Divider />
       </SafeView>
     )
   }
