@@ -29,10 +29,6 @@ export const BackgroundImage = styled.ImageBackground`
   align-items: center;
   justify-content: center;
 `
-export const Tint = styled.View`
-  background-color: rgba(0, 0, 0, 0.4);
-  width: 100%;
-`
 export const SafeView = styled.SafeAreaView`
   width: 100%;
 `
