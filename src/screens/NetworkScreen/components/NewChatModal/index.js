@@ -100,11 +100,11 @@ export default class NewChatModal extends Component {
     }
     const inputProps = {
       keyboardType: 'default',
-      placeholder: 'search',
+      placeholder: this.state.tags.length ? '' : 'Search...',
       autoFocus: true,
       style: {
         fontSize: 14,
-        marginVertical: Platform.OS === 'ios' ? 10 : -2,
+        marginVertical: Platform.OS === 'ios' ? 8.5 : -2,
       },
     }
 
@@ -140,7 +140,7 @@ export default class NewChatModal extends Component {
           />
           <ThinDivider />
           <SearchNameContainer>
-            <Text>To: </Text>
+            <Text>To:</Text>
             <TagInput
               value={this.state.tags}
               onChange={this.onChangeTags}
@@ -149,9 +149,22 @@ export default class NewChatModal extends Component {
               onChangeText={this.onChangeText}
               tagColor="rgb(250, 53, 121)"
               tagTextColor="white"
+              tagTextStyle={{ fontSize: 14 }}
               inputProps={inputProps}
-              maxHeight={80}
-              tagContainerStyle={{ height: 31 }}
+              scrollViewProps={{
+                horizontal: true,
+                showsHorizontalScrollIndicator: false,
+              }}
+              inputColor="black"
+              maxHeight={800}
+              tagContainerStyle={{
+                borderRadius: 10,
+                margin: 0,
+                marginRight: 5,
+                padding: 0,
+                paddingLeft: 7,
+                paddingRight: 7,
+              }}
             />
           </SearchNameContainer>
           <ThinDivider />

@@ -28,6 +28,7 @@ export default class NewChatModalHeader extends Component {
             <CancelButton onPress={handleClose}>
               <CancelText>Cancel</CancelText>
             </CancelButton>
+            <Heading>{heading}</Heading>
             {isExistingChat ? (
               <AddToChatButton
                 navigateToChat={createNewChat}
@@ -45,7 +46,6 @@ export default class NewChatModalHeader extends Component {
               />
             )}
           </ButtonContainer>
-          <Heading>{heading}</Heading>
         </Background>
       </SafeView>
     )
