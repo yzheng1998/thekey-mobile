@@ -54,23 +54,24 @@ class JobsScreen extends Component {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" />
-        <Query query={GET_JOBS} variables={variables}>
-          {({ loading, data, refetch }) => {
-            if (loading) return <LoadingWrapper loading />
-            if (this.state.tab === 2) refetch()
-            return (
-              <ScrollView keyboardShouldPersistTaps="handled">
-                <JobsHeader
-                  navigation={this.props.navigation}
-                  changeTab={this.changeTab}
-                  selectedIndex={this.state.tab}
-                />
-                <SearchBar
-                  updateText={this.updateText}
-                  searchText={searchText}
-                  placeholderText="Search Jobs & Internships"
-                />
-                <Divider />
+
+        <ScrollView keyboardShouldPersistTaps="handled">
+          <JobsHeader
+            navigation={this.props.navigation}
+            changeTab={this.changeTab}
+            selectedIndex={this.state.tab}
+          />
+          <SearchBar
+            updateText={this.updateText}
+            searchText={searchText}
+            placeholderText="Search Jobs & Internships"
+          />
+          <Divider />
+          <Query query={GET_JOBS} variables={variables}>
+            {({ loading, data, refetch }) => {
+              if (loading) return <LoadingWrapper loading />
+              if (this.state.tab === 2) refetch()
+              return (
                 <FlatList
                   keyboardShouldPersistTaps="handled"
                   keyExtractor={job => job.id}
@@ -87,10 +88,10 @@ class JobsScreen extends Component {
                     </View>
                   )}
                 />
-              </ScrollView>
-            )
-          }}
-        </Query>
+              )
+            }}
+          </Query>
+        </ScrollView>
       </View>
     )
   }
