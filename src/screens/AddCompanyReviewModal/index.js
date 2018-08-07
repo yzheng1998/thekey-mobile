@@ -9,6 +9,7 @@ import SubmitReviewButton from './components/SubmitReviewButton'
 import { Background, Divider, ScreenScroll, SafeView } from './styles'
 import { KeyboardAvoidingView, Alert } from 'react-native'
 import constraints from './constraints'
+import LocationSearchModal from '../../components/HometownSearchModal'
 
 const validate = require('validate.js')
 
@@ -33,6 +34,7 @@ export default class AddCompanyReviewModal extends Component {
     displayErrors: {},
     errors: {},
     touched: {},
+    showLocationSearchModal: false,
   }
 
   validateForm = isOnChangeText => {
@@ -81,6 +83,11 @@ export default class AddCompanyReviewModal extends Component {
   handleUsePicker = obj => {
     this.setState(obj)
   }
+  toggleLocationSearchModal = () => {
+    this.setState({
+      showLocationSearchModal: !this.state.showLocationSearchModal,
+    })
+  }
 
   clearState = () => {
     this.setState({
@@ -98,6 +105,7 @@ export default class AddCompanyReviewModal extends Component {
       displayErrors: {},
       errors: {},
       touched: [],
+      showLocationSearchModal: false,
     })
   }
 
@@ -115,6 +123,7 @@ export default class AddCompanyReviewModal extends Component {
       errors,
       rating,
       employmentType,
+      showLocationSearchModal,
     } = this.state
     const noErrors = !errors && acceptedTerms && rating && employmentType
     return (
@@ -123,6 +132,11 @@ export default class AddCompanyReviewModal extends Component {
         animationOut="slideOutRight"
         isVisible={isVisible}
       >
+        <LocationSearchModal
+          setText={obj => this.setState({ location: obj.hometown })}
+          onPress={this.toggleLocationSearchModal}
+          visible={showLocationSearchModal}
+        />
         <SafeView>
           <KeyboardAvoidingView enabled behavior="padding">
             <ScreenScroll>
@@ -163,7 +177,8 @@ export default class AddCompanyReviewModal extends Component {
               <Divider />
               <OptionalInfoBlock
                 state={this.state}
-                updateState={this.updateState}
+                updateLocation={this.updateLocation}
+                toggleLocationModal={this.toggleLocationSearchModal}
               />
               <Divider />
               <TermsOfServiceConfirmation

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AddReviewButton, Divider } from './styles'
+import { AddReviewButton, ThinDivider } from './styles'
 import { FlatList, ScrollView, View, StatusBar } from 'react-native'
 import CompanyCard from '../../components/CompanyCard'
 import CompanySearchModal from './components/CompanySearchModal'
@@ -67,7 +67,7 @@ class ReviewsScreen extends Component {
             searchText={searchText}
             placeholderText="Search All Reviews"
           />
-          <Divider />
+          <ThinDivider />
           <Query query={GET_COMPANIES} variables={variables}>
             {({ loading, data }) => {
               if (loading) return <LoadingWrapper loading />
