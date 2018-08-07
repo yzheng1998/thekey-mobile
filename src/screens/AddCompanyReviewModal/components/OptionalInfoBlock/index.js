@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { OptionalHeading, InputField } from './styles'
-import { Block, BlockBackground, RowHeader, Heading, Text } from '../../styles'
+import { OptionalHeading, InputField, Text } from './styles'
+import { Block, BlockBackground, RowHeader, Heading } from '../../styles'
 import { TouchableOpacity } from 'react-native'
 
 const TextInputField = ({ value, placeholder, updateState }) => (

@@ -7,6 +7,11 @@ export const OptionalHeading = styled.Text`
   margin-bottom: 15px;
   color: ${themeGet('colors.fontSubtitle.primary')};
 `
+export const Text = styled.Text`
+  font-size: 16px;
+  font-family: ${themeGet('fonts.medium')};
+  color: ${themeGet('colors.fontDescription.primary')};
+`
 export const InputField = styled.TextInput`
   font-size: 16px;
   color: ${themeGet('colors.buttonPrimary')};
