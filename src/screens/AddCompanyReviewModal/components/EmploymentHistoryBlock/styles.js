@@ -2,13 +2,16 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 import { ButtonGroup } from 'react-native-elements'
 
-export const Buttons = styled(ButtonGroup)`
-  margin-top: 10px;
+export const Buttons = styled(ButtonGroup)``
+export const ButtonContainer = styled.View`
+  margin-top: 5px;
+  margin-bottom: 15px;
 `
 export const StarsContainer = styled.View`
   align-items: flex-start;
   justify-content: flex-start;
-  height: 38;
+  height: 32;
+  margin-top: 6px;
 `
 export const RowSubContainer = styled.View`
   width: 50%;

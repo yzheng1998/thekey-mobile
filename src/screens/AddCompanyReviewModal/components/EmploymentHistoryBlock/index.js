@@ -6,6 +6,7 @@ import {
   Avatar,
   RowSubContainer,
   TextContainer,
+  ButtonContainer,
 } from './styles'
 import {
   BlockBackground,
@@ -18,6 +19,7 @@ import CheckBox from '../CheckBox'
 import fullStar from './full-star-pink.png'
 import emptyStar from './empty-star-grey.png'
 import Stars from 'react-native-stars'
+import { TouchableOpacity } from 'react-native'
 
 const employmentTypes = [
   { value: 'FULLTIME', label: 'Full-Time' },
@@ -78,21 +80,23 @@ export default class EmploymentHistoryBlock extends Component {
           <RowContainer>
             <Heading>Employment Type</Heading>
           </RowContainer>
-          <Buttons
-            onPress={i => {
-              updateState({ employmentType: employmentTypes[i].value })
-            }}
-            buttons={employmentTypes.map(el => el.label)}
-            selectedIndex={employmentTypes.findIndex(
-              el => el.value === employmentType,
-            )}
-            containerStyle={{ height: 30 }}
-            textStyle={{ color: 'rgb(250,53,121)', fontWeight: '600' }}
-            selectedTextStyle={{ color: 'white', fontWeight: '600' }}
-            selectedButtonStyle={{
-              backgroundColor: 'rgb(250,53,121)',
-            }}
-          />
+          <ButtonContainer>
+            <Buttons
+              onPress={i => {
+                updateState({ employmentType: employmentTypes[i].value })
+              }}
+              buttons={employmentTypes.map(el => el.label)}
+              selectedIndex={employmentTypes.findIndex(
+                el => el.value === employmentType,
+              )}
+              containerStyle={{ height: 30 }}
+              textStyle={{ color: 'rgb(250,53,121)', fontWeight: '600' }}
+              selectedTextStyle={{ color: 'white', fontWeight: '600' }}
+              selectedButtonStyle={{
+                backgroundColor: 'rgb(250,53,121)',
+              }}
+            />
+          </ButtonContainer>
         </Block>
         <Block>
           <CheckBox
@@ -100,17 +104,21 @@ export default class EmploymentHistoryBlock extends Component {
             toggleCheckBox={() =>
               updateState({
                 isCurrentEmployee: !isCurrentEmployee,
+                yearPickerEnabled: false,
               })
             }
           />
           <RowContainer>
-            <Text
+            <TouchableOpacity
+              disabled={isCurrentEmployee}
               onPress={() =>
                 updateState({ yearPickerEnabled: !yearPickerEnabled })
               }
             >
-              Last worked here in {yearLastWorked || `...`}
-            </Text>
+              <Text disabled={isCurrentEmployee}>
+                I last worked here in {yearLastWorked || `...`}
+              </Text>
+            </TouchableOpacity>
           </RowContainer>
         </Block>
       </BlockBackground>
