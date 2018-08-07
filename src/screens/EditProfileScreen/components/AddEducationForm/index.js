@@ -18,6 +18,7 @@ import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
 import Error from '../../../../components/Error'
 import constraints from './constraints'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import moment from 'moment'
 
 const validate = require('validate.js')
 
@@ -27,21 +28,30 @@ const schoolTypes = [
   { label: 'Graduate', value: 'GRADUATE' },
 ]
 
+const formatYear = date => {
+  if (date) return moment(new Date(date)).format('YYYY')
+  return ''
+}
+
 export default class AddEducationForm extends Component {
   constructor(props) {
     super(props)
     this.updateState = this.setState.bind(this)
     const formElements = this.props.navigation.getParam('formElements')
+    const educationInfo = _.pick(formElements, [
+      'schoolName',
+      'schoolType',
+      'degreeType',
+      'major',
+      'startYear',
+      'endYear',
+      'id',
+    ])
+
     this.state = {
-      ..._.pick(formElements, [
-        'schoolName',
-        'schoolType',
-        'degreeType',
-        'major',
-        'startYear',
-        'endYear',
-        'id',
-      ]),
+      ...educationInfo,
+      startYear: formatYear(educationInfo.startYear),
+      endYear: formatYear(educationInfo.endYear),
       schoolTypePickerEnabled: false,
       optionsInputSelected: false,
       optionsInputClicked: false,

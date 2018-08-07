@@ -26,6 +26,11 @@ validate.extend(validate.validators.datetime, {
   parse: value => moment(value, format, true),
 })
 
+const formatDate = date => {
+  if (date) return moment(new Date(date)).format('MMM YYYY')
+  return ''
+}
+
 export default class AddExperienceForm extends Component {
   constructor(props) {
     super(props)
@@ -39,6 +44,8 @@ export default class AddExperienceForm extends Component {
     ])
     this.state = {
       ...experienceInfo,
+      startDate: formatDate(experienceInfo.startDate),
+      endDate: formatDate(experienceInfo.endDate),
       isCurrentEmployee: experienceInfo.endDate === null,
       displayErrors: {},
       errors: {},

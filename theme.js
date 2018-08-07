@@ -48,6 +48,7 @@ const theme = {
     cardLoading: 'rgb(100, 108, 132)',
     pictureHeaderTint: 'rgba(0, 0, 0, 0.3)',
     eventCardTint: 'rgba(0, 0, 0, 0.4)',
+    confirmation: 'rgb(119, 210, 103)',
   },
   ...Platform.select({
     ios: {

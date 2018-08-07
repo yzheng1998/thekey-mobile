@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 import { Button, Label } from './styles'
 import { Alert } from 'react-native'
+import LoadingWrapper from '../../../../components/LoadingWrapper'
 
 const SEND_FRIEND_REQUEST = gql`
   mutation createFriendRequest($recipientId: ID!, $swipedLeft: Boolean!) {
@@ -30,12 +31,10 @@ const determineButtonText = (isFriend, hasFriendRequest) => {
 }
 
 export default class SendFriendRequestButton extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      buttonText: 'CONNECT',
-    }
+  state = {
+    buttonText: 'CONNECT',
   }
+
   render() {
     const {
       recipientId,
@@ -49,7 +48,7 @@ export default class SendFriendRequestButton extends Component {
         mutation={SEND_FRIEND_REQUEST}
         onCompleted={() => refreshScreen()}
       >
-        {(createFriendRequest, { error }) => {
+        {(createFriendRequest, { loading, error }) => {
           if (error) {
             Alert.alert(
               'Friend Request Failed to Send',
@@ -70,7 +69,12 @@ export default class SendFriendRequestButton extends Component {
                 createFriendRequest({ variables })
               }}
             >
-              <Label>{determineButtonText(isFriend, hasFriendRequest)}</Label>
+              <LoadingWrapper
+                loading={loading}
+                style={{ alignItems: 'center', justifyContent: 'center' }}
+              >
+                <Label>{determineButtonText(isFriend, hasFriendRequest)}</Label>
+              </LoadingWrapper>
             </Button>
           )
         }}
