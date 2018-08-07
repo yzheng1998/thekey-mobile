@@ -8,14 +8,9 @@ import {
   TextContainer,
   ButtonContainer,
   SwitchContainer,
+  Label,
 } from './styles'
-import {
-  BlockBackground,
-  Block,
-  Heading,
-  Text,
-  RowContainer,
-} from '../../styles'
+import { BlockBackground, Block, Heading, RowContainer } from '../../styles'
 import fullStar from './full-star-pink.png'
 import emptyStar from './empty-star-grey.png'
 import Stars from 'react-native-stars'
@@ -68,7 +63,7 @@ export default class EmploymentHistoryBlock extends Component {
           <SpacedHeading>Company Name</SpacedHeading>
           <RowSubContainer>
             <TextContainer>
-              <Text>{state.companyName}</Text>
+              <Label>{state.companyName}</Label>
             </TextContainer>
             <Avatar
               source={{
@@ -125,9 +120,9 @@ export default class EmploymentHistoryBlock extends Component {
                 updateState({ yearPickerEnabled: !yearPickerEnabled })
               }
             >
-              <Text disabled={isCurrentEmployee}>
+              <Label disabled={isCurrentEmployee}>
                 I last worked here in {yearLastWorked || `...`}
-              </Text>
+              </Label>
             </TouchableOpacity>
           </RowContainer>
         </Block>

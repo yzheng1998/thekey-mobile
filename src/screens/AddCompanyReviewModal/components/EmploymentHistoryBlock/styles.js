@@ -41,3 +41,11 @@ export const SwitchContainer = styled.View`
   flex-direction: row;
   justify-content: flex-end;
 `
+export const Label = styled.Text`
+  font-size: 16px;
+  color: ${props =>
+    props.disabled
+      ? themeGet('colors.buttonClicked')
+      : themeGet('colors.buttonPrimary')};
+  font-family: ${themeGet('fonts.medium')};
+`
