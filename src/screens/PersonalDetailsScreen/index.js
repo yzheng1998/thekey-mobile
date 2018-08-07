@@ -55,6 +55,7 @@ export default class PersonalDetailsScreen extends Component {
               setText={this.updateText}
               onPress={this.closeHometownPicker}
               visible={showHometownPicker}
+              showEmoji
             />
             <Header
               title={`${nodeEmoji.get('wave')} Hi, ${userInfo.firstName}!`}

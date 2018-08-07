@@ -21,7 +21,7 @@ const GET_HOMETOWNS = gql`
 
 export default class HometownSearchModal extends Component {
   static defaultProps = {
-    showEmoji: true,
+    showEmoji: false,
   }
 
   state = {

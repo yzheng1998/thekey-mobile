@@ -136,7 +136,6 @@ export default class AddCompanyReviewModal extends Component {
           setText={obj => this.setState({ location: obj.hometown })}
           onPress={this.toggleLocationSearchModal}
           visible={showLocationSearchModal}
-          showEmoji={false}
         />
         <SafeView>
           <KeyboardAvoidingView enabled behavior="padding">
