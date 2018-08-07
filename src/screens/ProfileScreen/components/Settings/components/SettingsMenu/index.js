@@ -41,6 +41,10 @@ export default class SettingsMenu extends Component {
           />
         </SettingsMenuItem>
         <MenuItemWithNavigation
+          title="Resume"
+          onPress={() => swipe('Resumes')}
+        />
+        <MenuItemWithNavigation
           title="Password"
           onPress={() => swipe('Password')}
         />

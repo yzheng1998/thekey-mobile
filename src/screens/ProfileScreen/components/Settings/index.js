@@ -19,6 +19,10 @@ const screens = [
     id: 2,
     title: 'Logout',
   },
+  {
+    id: 3,
+    title: 'Resumes',
+  },
 ]
 
 export default class Settings extends Component {
@@ -28,7 +32,7 @@ export default class Settings extends Component {
   }
 
   render() {
-    const { settings, state, email, toggleSettings } = this.props
+    const { settings, state, email, resumes, toggleSettings } = this.props
     const swipe = title => {
       const screenId = screens.find(el => el.title === title).id
       if (screenId > 0) this.setState({ displayId: screenId })
@@ -63,6 +67,7 @@ export default class Settings extends Component {
                 newsLetterPreferences={settings.newsLetterPreferences}
               />
               <SettingsScreens
+                resumes={resumes}
                 id={this.state.displayId}
                 navigation={this.props.navigation}
               />

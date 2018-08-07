@@ -58,6 +58,7 @@ export default class ProfileScreen extends Component {
             lookingFor,
             skills,
             settings,
+            resumes,
           } = data.viewer
           const emojiList = preferredWaysToMeet.map(emoji =>
             nodeEmoji.get(emoji.wayToMeet.toLowerCase()),
@@ -71,6 +72,7 @@ export default class ProfileScreen extends Component {
                 settings={settings}
                 toggleSettings={this.toggleSettings}
                 navigation={this.props.navigation}
+                resumes={resumes}
               />
               <MyProfilePicBlock
                 name={`${firstName} ${lastName}`}
