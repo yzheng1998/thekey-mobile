@@ -70,6 +70,9 @@ export const ButtonText = styled.Text`
   color: ${themeGet('colors.fontButtonPrimary')};
 `
 
+export const Screen = styled.View`
+  flex: 1;
+`
 export const ModalScreenContainer = styled.View`
   width: 100%;
   padding-left: 12px;
@@ -77,4 +80,23 @@ export const ModalScreenContainer = styled.View`
   padding-top: 12px;
   flex: 1;
   background-color: ${themeGet('colors.background')};
+`
+
+export const SubtitleView = styled.View`
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding-left: 12px;
+  padding-right: 12px;
+`
+
+export const Subtitle = styled.Text`
+  color: ${props =>
+    props.hyperlink
+      ? themeGet('colors.fontButtonTertiary')
+      : themeGet('colors.fontSubtitle.primary')};
+  font-family: ${themeGet('fonts.medium')};
+  font-size: 14px
+  line-height: 20px;
+  text-align: center;
 `

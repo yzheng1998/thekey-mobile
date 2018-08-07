@@ -4,10 +4,10 @@ import {
   EmailAddress,
   CancelMembershipButton,
   ButtonText,
-} from '../../styles'
+} from '../../../../styles'
 import NavigationArrow from 'react-native-vector-icons/EvilIcons'
 import SettingsMenuItem from '../SettingsMenuItem'
-import UserPreferenceSwitch from '../UserPreferenceSwitch'
+import UserPreferenceSwitch from '../../../UserPreferenceSwitch'
 
 const MenuItemWithNavigation = ({ title, onPress }) => (
   <SettingsMenuItem title={title} onPress={onPress}>
@@ -22,12 +22,7 @@ const MenuItemWithNavigation = ({ title, onPress }) => (
 
 export default class SettingsMenu extends Component {
   render() {
-    const {
-      email,
-      onPress,
-      emailPreferences,
-      newsLetterPreferences,
-    } = this.props
+    const { email, swipe, emailPreferences, newsLetterPreferences } = this.props
     return (
       <MenuItemList showsVerticalScrollIndicator={false}>
         <SettingsMenuItem title="Email Address" disabled>
@@ -45,14 +40,20 @@ export default class SettingsMenu extends Component {
             settingName="newsLetterPreferences"
           />
         </SettingsMenuItem>
-        <MenuItemWithNavigation title="Password" />
+        <MenuItemWithNavigation
+          title="Password"
+          onPress={() => swipe('Password')}
+        />
         <MenuItemWithNavigation title="About" />
         <MenuItemWithNavigation title="Terms Of Service" />
         <MenuItemWithNavigation title="Privacy Policy" />
         <MenuItemWithNavigation title="FAQ's" />
         <MenuItemWithNavigation title="Contact Us" />
         <MenuItemWithNavigation title="Restore Purchase" />
-        <MenuItemWithNavigation title="Logout" onPress={() => onPress(1)} />
+        <MenuItemWithNavigation
+          title="Logout"
+          onPress={() => swipe('Logout')}
+        />
         <CancelMembershipButton>
           <ButtonText>CANCEL MEMBERSHIP</ButtonText>
         </CancelMembershipButton>
