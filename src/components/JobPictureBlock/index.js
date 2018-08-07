@@ -8,8 +8,11 @@ import {
   Deadline,
   Apply,
   ApplyButton,
+  AppliedButton,
+  RowContainer,
 } from './styles'
 import PictureHeader from '../PictureHeader'
+import CheckIcon from 'react-native-vector-icons/FontAwesome'
 import moment from 'moment'
 
 const timePosted = time => {
@@ -40,12 +43,24 @@ class JobPictureBlock extends Component {
       location,
       time,
       toggleApplyModal,
+      hasApplied,
     } = this.props
     return (
       <HeaderContainer>
         <PictureHeader picture={picture} avatarSize={123} height={365}>
-          <Apply onPress={toggleApplyModal}>
-            <ApplyButton>APPLY NOW</ApplyButton>
+          <Apply
+            disabled={hasApplied}
+            onPress={toggleApplyModal}
+            hasApplied={hasApplied}
+          >
+            {hasApplied ? (
+              <RowContainer>
+                <CheckIcon name="check" color="white" size={13} />
+                <AppliedButton>APPLIED FOR</AppliedButton>
+              </RowContainer>
+            ) : (
+              <ApplyButton>APPLY NOW</ApplyButton>
+            )}
           </Apply>
           <DescriptionContainer>
             <Title>{title}</Title>
