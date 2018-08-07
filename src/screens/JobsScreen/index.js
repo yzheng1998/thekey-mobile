@@ -4,7 +4,7 @@ import { View, FlatList, ScrollView, StatusBar } from 'react-native'
 import SearchBar from '../../components/SearchBar'
 import JobCard from '../../components/JobCard'
 import JobsHeader from './components/JobsHeader'
-import { Divider, CardDivider } from './styles'
+import { CardDivider } from './styles'
 import { Query } from 'react-apollo'
 import LoadingWrapper from '../../components/LoadingWrapper'
 
@@ -65,7 +65,7 @@ class JobsScreen extends Component {
             searchText={searchText}
             placeholderText="Search Jobs & Internships"
           />
-          <Divider />
+          <CardDivider />
           <Query query={GET_JOBS} variables={variables}>
             {({ loading, data, refetch }) => {
               if (loading) return <LoadingWrapper loading />
