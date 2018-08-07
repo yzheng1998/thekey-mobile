@@ -8,12 +8,12 @@ export const Card = styled.TouchableOpacity`
   flex-direction: row;
   padding-left: 16px;
   align-items: center;
+  border-bottom-width: 1px;
+  border-bottom-color: ${themeGet('colors.border')};
 `
 export const RightContainer = styled.View`
   margin-left: 15px;
   padding-top: 18px;
-  border-bottom-width: 1px;
-  border-bottom-color: ${themeGet('colors.border')};
   flex: 1;
   padding-bottom: 20px; */
 `
