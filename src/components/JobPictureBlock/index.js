@@ -43,7 +43,10 @@ class JobPictureBlock extends Component {
     } = this.props
     return (
       <HeaderContainer>
-        <PictureHeader picture={picture} avatarSize={123} height={360}>
+        <PictureHeader picture={picture} avatarSize={123} height={365}>
+          <Apply onPress={toggleApplyModal}>
+            <ApplyButton>APPLY NOW</ApplyButton>
+          </Apply>
           <DescriptionContainer>
             <Title>{title}</Title>
             <Company>{company}</Company>
@@ -53,9 +56,6 @@ class JobPictureBlock extends Component {
             </Description>
             <Deadline>{timePosted(time)}</Deadline>
           </DescriptionContainer>
-          <Apply onPress={toggleApplyModal}>
-            <ApplyButton>APPLY NOW</ApplyButton>
-          </Apply>
         </PictureHeader>
       </HeaderContainer>
     )

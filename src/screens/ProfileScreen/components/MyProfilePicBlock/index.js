@@ -53,8 +53,6 @@ export default class MyProfilePicBlock extends Component {
             openModal={this.openQRModal}
             height={350}
           >
-            <EventTitleText onPress={this.openQRModal}>{name}</EventTitleText>
-            <LocationText>{hometown}</LocationText>
             <EditButton
               activeOpacity={0.5}
               onPress={() => this.props.navigation.navigate('EditProfile')}
@@ -62,6 +60,8 @@ export default class MyProfilePicBlock extends Component {
               <EditPencil name="edit" color="white" />
               <EditLabel>EDIT PROFILE</EditLabel>
             </EditButton>
+            <EventTitleText onPress={this.openQRModal}>{name}</EventTitleText>
+            <LocationText>{hometown}</LocationText>
           </PictureHeader>
         </BlockContainer>
       </View>

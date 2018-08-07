@@ -16,14 +16,14 @@ class ReviewPictureBlock extends Component {
     return (
       <Container>
         <PictureHeader picture={picture} avatarSize={123}>
+          <AddReviewButton onPress={showAddReview}>
+            <AddReviewText>ADD REVIEW</AddReviewText>
+          </AddReviewButton>
           <DescriptionContainer>
             <Title>{title}</Title>
             <RatingStar rating={rating} color="white" />
             <Reviews>{reviews} Total Reviews</Reviews>
           </DescriptionContainer>
-          <AddReviewButton onPress={showAddReview}>
-            <AddReviewText>ADD REVIEW</AddReviewText>
-          </AddReviewButton>
         </PictureHeader>
       </Container>
     )

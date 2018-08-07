@@ -8,6 +8,7 @@ export default class ProfilePicBlock extends Component {
     return (
       <Container>
         <PictureHeader picture={profilePic} avatarSize={171}>
+          <NameText />
           <NameText>{name}</NameText>
           <LocationText>{hometown}</LocationText>
         </PictureHeader>
