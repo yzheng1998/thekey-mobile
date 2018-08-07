@@ -21,8 +21,8 @@ export const AddButton = styled.TouchableOpacity`
   border-radius: 10px;
   align-items: center;
   padding: 16px;
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 12px;
+  margin-right: 12px;
 `
 export const RemoveButton = styled.TouchableOpacity`
   background-color: white;
@@ -43,8 +43,8 @@ export const DateInputRow = styled.View`
 `
 
 export const OptionsInputContainer = styled.TouchableOpacity`
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 12px;
+  margin-right: 12px;
   flex-direction: row;
   height: 50px;
   border-radius: 8px;

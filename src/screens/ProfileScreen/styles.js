@@ -54,13 +54,13 @@ export const EmailAddress = styled.Text`
   color: ${themeGet('colors.fontProfileFields')};
 `
 export const CancelMembershipButton = styled.TouchableOpacity`
-  width: 91%;
+  margin-left: 16px;
+  margin-right: 16px;
   height: 45px;
-  background-color: ${themeGet('colors.buttonPrimary')};
+  background-color: ${themeGet('colors.buttonTertiary')};
   border-radius: 8px;
   margin-top: 8px;
   margin-bottom: 80px;
-  align-self: center;
   align-items: center;
   justify-content: center;
 `

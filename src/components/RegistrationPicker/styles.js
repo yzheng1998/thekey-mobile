@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const PickerContainer = styled.TouchableOpacity`
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 12px;
+  margin-right: 12px;
   flex-direction: row;
   height: 50px;
   border-radius: 8px;

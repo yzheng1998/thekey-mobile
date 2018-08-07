@@ -6,6 +6,7 @@ const theme = {
     backgroundSecondary: 'rgb(242, 244, 245)',
     buttonPrimary: 'rgb(250, 53, 121)',
     buttonSecondary: 'rgb(243, 244, 245)',
+    buttonTertiary: 'rgb(250, 53, 98)',
     buttonClicked: 'rgb(253, 205, 221)',
     fontPrimary: 'white',
     fontHeader: 'rgb(7, 12, 27)',
