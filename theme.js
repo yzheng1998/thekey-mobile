@@ -46,6 +46,8 @@ const theme = {
     pickerPlaceholder: 'rgb(139, 133, 150)',
     activeTag: 'rgb(92, 78, 121)',
     cardLoading: 'rgb(100, 108, 132)',
+    pictureHeaderTint: 'rgba(0, 0, 0, 0.3)',
+    eventCardTint: 'rgba(0, 0, 0, 0.4)',
   },
   ...Platform.select({
     ios: {
