@@ -8,6 +8,7 @@ import {
   ContentContainer,
   PictureContainer,
   MiniQRCode,
+  Tint,
 } from './styles'
 
 import QRCodeGenerator from '../QRCodeGenerator'
@@ -27,6 +28,7 @@ export default class PictureHeader extends Component {
 
   render() {
     const { picture, showQRCode, id, openModal, height } = this.props
+    const [buttonRow, ...rest] = this.props.children
     const displayPicture = picture
       ? { uri: picture }
       : {
@@ -42,18 +44,21 @@ export default class PictureHeader extends Component {
           blurRadius={20}
           height={height}
         >
-          <SafeView>
-            <ContentContainer>
-              <PictureContainer>
-                <Picture
-                  source={displayPicture}
-                  avatarSize={this.props.avatarSize}
-                />
-                {showQRCode && <SmallQRCode id={id} openModal={openModal} />}
-              </PictureContainer>
-              {this.props.children}
-            </ContentContainer>
-          </SafeView>
+          <Tint>
+            <SafeView>
+              <ContentContainer>
+                <PictureContainer>
+                  <Picture
+                    source={displayPicture}
+                    avatarSize={this.props.avatarSize}
+                  />
+                  {showQRCode && <SmallQRCode id={id} openModal={openModal} />}
+                </PictureContainer>
+                {rest}
+              </ContentContainer>
+            </SafeView>
+          </Tint>
+          {buttonRow}
         </BackgroundPicture>
       </BlockContainer>
     )
