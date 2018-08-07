@@ -1,19 +1,15 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
+import Modal from 'react-native-modal'
 
-export const ScreenContainer = styled.View`
+export const Container = styled(Modal)`
   flex: 1;
-  padding-left: 12px;
-  padding-right: 12px;
-  background-color: ${themeGet('colors.background')};
-  padding-bottom: 24px;
+  margin: 0px;
 `
 export const SubtitleView = styled.View`
   width: 100%;
   margin-top: 5px;
   margin-bottom: 15px;
-  padding-left: 12px;
-  padding-right: 12px;
 `
 export const Subtitle = styled.Text`
   color: ${props =>
@@ -29,8 +25,17 @@ export const SafeView = styled.SafeAreaView`
   flex: 1;
   background-color: ${themeGet('colors.background')};
 `
+export const InputContainer = styled.View`
+  margin-left: 24px;
+  margin-right: 24px;
+`
+export const IndividualInputContainer = styled.View`
+  margin-top: 22px;
+`
+export const TokenImage = styled.Image`
+  margin-left: 3px;
+`
 export const ButtonContainer = styled.View`
-  margin-top: 54px;
   margin-left: 8px;
   margin-right: 8px;
 `
