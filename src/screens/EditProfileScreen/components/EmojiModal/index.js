@@ -9,7 +9,7 @@ import {
 import EmojiSelector from '../EmojiSelector'
 import { Query } from 'react-apollo'
 import { GET_WAYS_TO_MEET } from '../../query'
-import { Text } from 'react-native'
+import LoadingWrapper from '../../../../components/LoadingWrapper'
 
 export default class EmojiModal extends Component {
   render() {
@@ -21,9 +21,8 @@ export default class EmojiModal extends Component {
         </DoneButton>
         <EmojiContainer>
           <Query query={GET_WAYS_TO_MEET}>
-            {({ loading, error, data }) => {
-              if (loading) return <Text>Loading...</Text>
-              if (error) return <Text>Error! ${error.message}</Text>
+            {({ loading, data }) => {
+              if (loading) return <LoadingWrapper loading />
               return (
                 <EmojiWrapper>
                   {data.waysToMeet.map(emoji => (

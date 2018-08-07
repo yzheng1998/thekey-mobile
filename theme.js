@@ -45,6 +45,7 @@ const theme = {
     textInputBorder: 'rgb(229, 223, 242)',
     pickerPlaceholder: 'rgb(139, 133, 150)',
     activeTag: 'rgb(92, 78, 121)',
+    cardLoading: 'rgb(100, 108, 132)',
   },
   ...Platform.select({
     ios: {

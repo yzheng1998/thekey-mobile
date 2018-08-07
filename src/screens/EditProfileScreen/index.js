@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Text, AsyncStorage } from 'react-native'
+import { Modal, AsyncStorage } from 'react-native'
 import EditContactBlock from './components/EditContactBlock'
 import BasicInfoBlock from './components/BasicInfoBlock'
 import EditEducationBlock from './components/EditEducationBlock'
@@ -11,6 +11,7 @@ import InterestsSearchModal from './components/InterestsSearchModal'
 import EditProfileHeader from './components/EditProfileHeader'
 import EditPencil from 'react-native-vector-icons/MaterialIcons'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import LoadingWrapper from '../../components/LoadingWrapper'
 import {
   Screen,
   Block,
@@ -72,9 +73,8 @@ export default class EditProfileScreen extends Component {
   render() {
     return (
       <Query query={GET_USER}>
-        {({ loading, error, data, refetch }) => {
-          if (loading) return <Text>Loading...</Text>
-          if (error) return <Text>Error! ${error.message}</Text>
+        {({ loading, data, refetch }) => {
+          if (loading) return <LoadingWrapper loading />
           const displayData = Object.assign(
             { hometown: data.viewer.demographics.hometown },
             data.viewer,

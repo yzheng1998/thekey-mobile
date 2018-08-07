@@ -38,6 +38,13 @@ export default class AddEducationModal extends Component {
     } = state
 
     const { showSchoolTypePicker } = this.state
+    const openSchoolTypePicker = () => {
+      Keyboard.dismiss()
+      this.setState({ showSchoolTypePicker: true })
+      if (!schoolType) {
+        updateText({ schoolType: schoolTypeOptions[0].value })
+      }
+    }
     const findLabel = value =>
       schoolTypeOptions.find(el => el.value === value).label
     const noErrors = !errors
@@ -67,21 +74,20 @@ export default class AddEducationModal extends Component {
               }}
               onFocus={() => addTouched('major')}
               onBlur={() => validateForm(false)}
+              onSubmitEditing={openSchoolTypePicker}
+              returnKeyType="next"
               error={displayErrors.major}
             />
             <RegistrationPicker
               selected={showSchoolTypePicker}
-              onPress={() => {
-                Keyboard.dismiss()
-                this.setState({ showSchoolTypePicker: true })
-                if (!schoolType) {
-                  updateText({ schoolType: schoolTypeOptions[0].value })
-                }
-              }}
+              onPress={openSchoolTypePicker}
               text={schoolType ? findLabel(schoolType) : ''}
               placeholderText="What type of school did you attend?"
             />
             <LineInput
+              ref={degreeInput => {
+                this.degreeInput = degreeInput
+              }}
               text={degreeType}
               placeholderText="Degree type"
               updateText={text => {
@@ -89,10 +95,15 @@ export default class AddEducationModal extends Component {
               }}
               onFocus={() => addTouched('degreeType')}
               onBlur={() => validateForm(false)}
+              onSubmitEditing={() => this.startYearInput.focus()}
+              returnKeyType="next"
               error={displayErrors.degreeType}
             />
             <RowContainer>
               <LineInput
+                ref={startYearInput => {
+                  this.startYearInput = startYearInput
+                }}
                 width="48%"
                 text={startYear}
                 placeholderText="Start Year"
@@ -101,9 +112,14 @@ export default class AddEducationModal extends Component {
                 }}
                 onFocus={() => addTouched('startYear')}
                 onBlur={() => validateForm(false)}
+                onSubmitEditing={() => this.endYearInput.focus()}
+                returnKeyType="next"
                 error={displayErrors.startYear}
               />
               <LineInput
+                ref={endYearInput => {
+                  this.endYearInput = endYearInput
+                }}
                 text={
                   endYear === null || isCurrentEmployee === true
                     ? 'Present'
@@ -116,6 +132,7 @@ export default class AddEducationModal extends Component {
                 }}
                 onFocus={() => addTouched('endYear')}
                 onBlur={() => validateForm(false)}
+                returnKeyType="done"
                 error={displayErrors.endYear}
               />
             </RowContainer>
@@ -133,9 +150,12 @@ export default class AddEducationModal extends Component {
             <PickerComponent
               options={schoolTypeOptions}
               doneOnPress={() => {
-                this.setState({
-                  showSchoolTypePicker: false,
-                })
+                this.setState(
+                  {
+                    showSchoolTypePicker: false,
+                  },
+                  () => this.degreeInput.focus(),
+                )
               }}
               onValueChange={updateText}
               value={schoolType}

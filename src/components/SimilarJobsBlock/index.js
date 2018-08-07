@@ -9,9 +9,9 @@ import {
   List,
 } from './styles'
 import JobCard from '../../components/JobCard'
-import { Text } from 'react-native'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
+import LoadingWrapper from '../../components/LoadingWrapper'
 
 const _ = require('lodash')
 
@@ -41,12 +41,8 @@ class SimilarJobsBlock extends Component {
         query={SIMILAR_JOBS}
         variables={{ id: this.props.navigation.getParam('id') }}
       >
-        {({ loading, error, data }) => {
-          if (loading) return <Text>Loading...</Text>
-          if (error) {
-            return <Text>Error! {error.message}</Text>
-          }
-
+        {({ loading, data }) => {
+          if (loading) return <LoadingWrapper loading />
           if (_.isEmpty(data.similarJobs)) {
             return null
           }

@@ -4,7 +4,6 @@ import {
   Background,
   SearchNameContainer,
   PeopleListContainer,
-  Text,
   ThinDivider,
 } from './styles'
 import TagInput from 'react-native-tag-input'
@@ -12,6 +11,7 @@ import InterestCard from './components/InterestCard'
 import InterestsModalHeader from './components/InterestsModalHeader'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import LoadingWrapper from '../../../../components/LoadingWrapper'
 
 const SEARCH_TAGS = gql`
   query tags($substr: String!) {

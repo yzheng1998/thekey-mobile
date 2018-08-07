@@ -119,7 +119,22 @@ export default class AddEducationForm extends Component {
       optionsInputClicked,
     } = this.state
 
+    const returnKeyType = this.editMode ? 'done' : 'next'
+
     const noErrors = !this.state.errors
+
+    const openSchoolTypePicker = () => {
+      Keyboard.dismiss()
+      this.addTouched('schoolType')
+      if (!this.state.schoolType) {
+        this.setState({ schoolType: schoolTypes[0].value })
+      }
+      this.setState({
+        schoolTypePickerEnabled: true,
+        optionsInputSelected: true,
+        optionsInputClicked: true,
+      })
+    }
 
     return (
       <TouchableWithoutFeedback
@@ -144,29 +159,25 @@ export default class AddEducationForm extends Component {
                 }}
                 onFocus={() => this.addTouched('schoolName')}
                 onBlur={() => this.validateForm(false)}
+                returnKeyType={returnKeyType}
+                onSubmitEditing={() => {
+                  if (!this.editMode) openSchoolTypePicker()
+                }}
                 error={this.state.displayErrors.schoolName}
               />
               <View>
                 <OptionsInputContainer
                   selected={optionsInputClicked}
-                  onPress={() => {
-                    Keyboard.dismiss()
-                    this.addTouched('schoolType')
-                    if (!this.state.schoolType) {
-                      this.setState({ schoolType: schoolTypes[0].value })
-                    }
-                    this.setState({
-                      schoolTypePickerEnabled: true,
-                      optionsInputSelected: true,
-                      optionsInputClicked: true,
-                    })
-                  }}
+                  onPress={openSchoolTypePicker}
                 >
                   {this.renderSelectedOption(optionsInputSelected)}
                 </OptionsInputContainer>
                 <Error error={this.state.displayErrors.schoolType} />
               </View>
               <LineInput
+                ref={degreeInput => {
+                  this.degreeInput = degreeInput
+                }}
                 text={degreeType}
                 placeholderText="Degree Type"
                 updateText={text => {
@@ -176,9 +187,16 @@ export default class AddEducationForm extends Component {
                 }}
                 onFocus={() => this.addTouched('degreeType')}
                 onBlur={() => this.validateForm(false)}
+                returnKeyType={returnKeyType}
+                onSubmitEditing={() => {
+                  if (!this.editMode) this.majorInput.focus()
+                }}
                 error={this.state.displayErrors.degreeType}
               />
               <LineInput
+                ref={majorInput => {
+                  this.majorInput = majorInput
+                }}
                 text={major}
                 placeholderText="Field of Study"
                 updateText={text => {
@@ -186,10 +204,17 @@ export default class AddEducationForm extends Component {
                 }}
                 onFocus={() => this.addTouched('major')}
                 onBlur={() => this.validateForm(false)}
+                returnKeyType={returnKeyType}
+                onSubmitEditing={() => {
+                  if (!this.editMode) this.startYearInput.focus()
+                }}
                 error={this.state.displayErrors.major}
               />
               <DateInputRow>
                 <LineInput
+                  ref={startYearInput => {
+                    this.startYearInput = startYearInput
+                  }}
                   text={startYear}
                   placeholderText="Start Year"
                   updateText={text => {
@@ -199,9 +224,16 @@ export default class AddEducationForm extends Component {
                   }}
                   onFocus={() => this.addTouched('startYear')}
                   onBlur={() => this.validateForm(false)}
+                  returnKeyType={returnKeyType}
+                  onSubmitEditing={() => {
+                    if (!this.editMode) this.endYearInput.focus()
+                  }}
                   error={this.state.displayErrors.startYear}
                 />
                 <LineInput
+                  ref={endYearInput => {
+                    this.endYearInput = endYearInput
+                  }}
                   text={endYear}
                   placeholderText="Graduation Year"
                   updateText={text => {
@@ -267,6 +299,7 @@ export default class AddEducationForm extends Component {
                   optionsInputClicked: false, // handles border color of optionsInput
                 })
                 this.validateForm(false)
+                if (!this.editMode) this.degreeInput.focus()
               }}
               onValueChange={this.updateState}
               validateForm={this.validateForm}

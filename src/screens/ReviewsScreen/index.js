@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { AddReviewButton, Divider } from './styles'
-import { FlatList, ScrollView, Text, View, StatusBar } from 'react-native'
+import { FlatList, ScrollView, View, StatusBar } from 'react-native'
 import CompanyCard from '../../components/CompanyCard'
 import CompanySearchModal from './components/CompanySearchModal'
 import SearchBar from '../../components/SearchBar'
@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/Entypo'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import AddCompanyReviewModal from '../AddCompanyReviewModal'
+import LoadingWrapper from '../../components/LoadingWrapper'
 
 const GET_COMPANIES = gql`
   query companies($companyFilterInput: CompanyFilterInput!) {
@@ -68,9 +69,8 @@ class ReviewsScreen extends Component {
           />
           <Divider />
           <Query query={GET_COMPANIES} variables={variables}>
-            {({ loading, error, data }) => {
-              if (loading) return <Text>Loading...</Text>
-              if (error) return <Text>Error! ${error.message}</Text>
+            {({ loading, data }) => {
+              if (loading) return <LoadingWrapper loading />
               return (
                 <FlatList
                   keyboardShouldPersistTaps="handled"

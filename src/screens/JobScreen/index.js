@@ -5,7 +5,7 @@ import {
   BackButtonContainer,
   ButtonHeader,
 } from './styles'
-import { Text } from 'react-native'
+import LoadingWrapper from '../../components/LoadingWrapper'
 import JobPictureBlock from '../../components/JobPictureBlock'
 import AboutBlock from './components/AboutBlock'
 import TagLine from '../../components/TagLine'
@@ -55,11 +55,8 @@ class JobScreen extends Component {
     }
     return (
       <Query query={GET_JOB} variables={variables}>
-        {({ loading, error, data }) => {
-          if (loading) return <Text>Loading...</Text>
-          if (error) {
-            return <Text>Error! {error.message}</Text>
-          }
+        {({ loading, data }) => {
+          if (loading) return <LoadingWrapper loading />
           const {
             title,
             company,

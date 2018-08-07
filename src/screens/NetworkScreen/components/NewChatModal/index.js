@@ -13,6 +13,7 @@ import UserCard from '../../../../components/UserCard'
 import NewChatModalHeader from '../NewChatModalHeader'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import LoadingWrapper from '../../../../components/LoadingWrapper'
 
 const SEARCH_CONTACTS = gql`
   query contactsSearch($substr: String!) {
@@ -156,11 +157,8 @@ export default class NewChatModal extends Component {
           <ThinDivider />
           <ScrollScreen keyboardShouldPersistTaps="handled">
             <Query query={SEARCH_CONTACTS} variables={variables}>
-              {({ loading, error, data }) => {
-                if (loading) return <Text>Loading...</Text>
-                if (error) {
-                  return <Text>Error! {error.message}</Text>
-                }
+              {({ loading, data }) => {
+                if (loading) return <LoadingWrapper loading />
                 return (
                   <PeopleList
                     peopleData={data.contactsSearch}

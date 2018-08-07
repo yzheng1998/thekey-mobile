@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ScreenContainer, Divider, SettingsContainer, Menu } from './styles'
 import SettingsHeader from './components/SettingsHeader'
-import { Text, Modal, AsyncStorage } from 'react-native'
+import { Modal, AsyncStorage } from 'react-native'
 import MyProfilePicBlock from './components/MyProfilePicBlock'
 import MyProfileBioBlock from './components/MyProfileBioBlock'
 import ButtonRowView from './components/ButtonRowView'
@@ -15,6 +15,8 @@ import { GET_USER } from './query'
 import nodeEmoji from 'node-emoji'
 import Logout from './components/SettingsScreens/Logout'
 import { client } from '../../apollo'
+import Swiper from 'react-native-swiper'
+import LoadingWrapper from '../../components/LoadingWrapper'
 
 const screens = [
   {
@@ -34,8 +36,6 @@ const lookingForOptions = [
   { value: 'EMPLOYMENT', label: 'Employment' },
   { value: 'SCHOOLADVICE', label: 'School Advice' },
 ]
-
-import Swiper from 'react-native-swiper'
 
 const defaultProfilePicture =
   'https://images.unsplash.com/photo-1519145897500-869c40ccb024?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc363c8e033813d4f7b798846bb13a24&auto=format&fit=crop&w=582&q=80'
@@ -64,9 +64,8 @@ export default class ProfileScreen extends Component {
         query={GET_USER}
         variables={{ id: this.props.navigation.getParam('id') }}
       >
-        {({ loading, error, data }) => {
-          if (loading) return <Text>`Loading...`</Text>
-          if (error) return <Text>`Error! ${error.message}`</Text>
+        {({ loading, data }) => {
+          if (loading) return <LoadingWrapper loading />
           const {
             id,
             email,

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { Modal, FlatList, Text } from 'react-native'
+import { Modal, FlatList } from 'react-native'
 import { Background, ScrollScreen, ThinDivider } from './styles'
 import CompanyCard from '../../../../components/CompanyCard'
 import SearchModalHeader from '../SearchModalHeader'
 import SearchBar from '../../../../components/SearchBar'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
+import LoadingWrapper from '../../../../components/LoadingWrapper'
 
 const GET_COMPANIES = gql`
   query companies($companyFilterInput: CompanyFilterInput!) {
@@ -66,11 +67,8 @@ export default class CompanySearchModal extends Component {
           <ThinDivider />
           <ScrollScreen keyboardShouldPersistTaps="handled">
             <Query query={GET_COMPANIES} variables={variables}>
-              {({ loading, error, data }) => {
-                if (loading) return <Text>Loading...</Text>
-                if (error) {
-                  return <Text>Error! {error.message}</Text>
-                }
+              {({ loading, data }) => {
+                if (loading) return <LoadingWrapper loading />
                 return (
                   <FlatList
                     keyboardShouldPersistTaps="handled"

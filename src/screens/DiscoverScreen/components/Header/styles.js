@@ -8,13 +8,16 @@ export const Background = styled.View`
   flex-direction: row;
   margin-top: 20px;
 `
-export const IconButton = styled.TouchableOpacity``
+export const IconButton = styled.TouchableOpacity`
+  border-radius: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: ${themeGet('colors.cardLoading')};
+`
 export const Icon = styled.Image`
   width: 40px;
   height: 40px;
   border-radius: 20px;
-  margin-left: 5px;
-  margin-right: 5px;
 `
 export const TextBox = styled.View`
   justify-content: space-between;

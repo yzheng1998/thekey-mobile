@@ -108,9 +108,14 @@ export default class SignUpScreen extends Component {
                 }}
                 onFocus={() => this.addTouched('firstName')}
                 onBlur={() => this.validateForm(false)}
+                onSubmitEditing={() => this.lastNameInput.focus()}
+                returnKeyType="next"
                 error={displayErrors.firstName}
               />
               <LineInput
+                ref={lastNameInput => {
+                  this.lastNameInput = lastNameInput
+                }}
                 text={lastName}
                 placeholderText="Last name"
                 updateText={text => {
@@ -120,9 +125,14 @@ export default class SignUpScreen extends Component {
                 }}
                 onFocus={() => this.addTouched('lastName')}
                 onBlur={() => this.validateForm(false)}
+                onSubmitEditing={() => this.emailInput.focus()}
+                returnKeyType="next"
                 error={displayErrors.lastName}
               />
               <LineInput
+                ref={emailInput => {
+                  this.emailInput = emailInput
+                }}
                 text={email}
                 placeholderText="Email"
                 autoCapitalize="none"
@@ -131,6 +141,8 @@ export default class SignUpScreen extends Component {
                 }}
                 onFocus={() => this.addTouched('email')}
                 onBlur={() => this.validateForm(false)}
+                onSubmitEditing={() => this.passwordInput.focus()}
+                returnKeyType="next"
                 error={displayErrors.email}
               >
                 <Icon
@@ -141,6 +153,9 @@ export default class SignUpScreen extends Component {
                 />
               </LineInput>
               <LineInput
+                ref={passwordInput => {
+                  this.passwordInput = passwordInput
+                }}
                 text={password}
                 placeholderText="Password (minimum 6 characters)"
                 secureTextEntry
@@ -152,6 +167,7 @@ export default class SignUpScreen extends Component {
                 }}
                 onFocus={() => this.addTouched('password')}
                 onBlur={() => this.validateForm(false)}
+                returnKeyType="done"
                 error={displayErrors.password}
               >
                 <Icon

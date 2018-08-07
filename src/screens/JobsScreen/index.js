@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
-import { View, FlatList, ScrollView, Text, StatusBar } from 'react-native'
+import { View, FlatList, ScrollView, StatusBar } from 'react-native'
 import SearchBar from '../../components/SearchBar'
 import JobCard from '../../components/JobCard'
 import JobsHeader from './components/JobsHeader'
 import { Divider, CardDivider } from './styles'
 import { Query } from 'react-apollo'
+import LoadingWrapper from '../../components/LoadingWrapper'
 
 const GET_JOBS = gql`
   query jobs($jobsFilterInput: JobsFilterInput!) {
@@ -54,10 +55,8 @@ class JobsScreen extends Component {
       <View style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" />
         <Query query={GET_JOBS} variables={variables}>
-          {({ error, data, refetch }) => {
-            if (error) {
-              return <Text>Error! {error.message}</Text>
-            }
+          {({ loading, data, refetch }) => {
+            if (loading) return <LoadingWrapper loading />
             if (this.state.tab === 2) refetch()
             return (
               <ScrollView keyboardShouldPersistTaps="handled">

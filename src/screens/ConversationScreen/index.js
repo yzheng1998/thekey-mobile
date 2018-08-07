@@ -1,4 +1,4 @@
-import { AsyncStorage, View, Text } from 'react-native'
+import { AsyncStorage, View } from 'react-native'
 import React, { Component } from 'react'
 import { Background } from './styles'
 import { GET_CHAT_AND_VIEWER } from './queries'
@@ -8,6 +8,7 @@ import MessagesDisplay from './components/MessagesDisplay'
 import ConversationHeader from './components/ConversationHeader'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import LoadingWrapper from '../../components/LoadingWrapper'
 
 const CHAT_SUBSCRIPTION = gql`
   subscription messageAdded($chatId: ID!, $token: String!) {
@@ -50,10 +51,8 @@ class ConversationScreen extends Component {
     return (
       <Background>
         <Query query={GET_CHAT_AND_VIEWER} variables={variables}>
-          {({ data, loading, error, subscribeToMore, refetch }) => {
-            if (loading) return <Text>loading</Text>
-            if (error) return <Text>error</Text>
-
+          {({ data, loading, subscribeToMore, refetch }) => {
+            if (loading) return <LoadingWrapper loading />
             const {
               chat,
               viewer: { id: userId },
