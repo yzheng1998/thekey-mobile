@@ -24,16 +24,13 @@ export default class LineInput extends Component {
       placeholderText,
       text,
       onBlur,
+      onFocus,
       error,
-      staticBorder,
       ...rest
     } = this.props
     return (
       <RowContainer>
-        <LineInputContainer
-          staticBorder={staticBorder}
-          selected={this.state.selected}
-        >
+        <LineInputContainer selected={this.state.selected}>
           <InputContainer>
             {children}
             <Input
@@ -44,7 +41,10 @@ export default class LineInput extends Component {
               value={text}
               placeholderTextColor="rgb(139, 133, 150)"
               onChangeText={txt => updateText(txt)}
-              onFocus={() => this.setState({ selected: true })}
+              onFocus={() => {
+                this.setState({ selected: true })
+                if (onFocus) onFocus()
+              }}
               onBlur={() => {
                 this.setState({ selected: false })
                 if (onBlur) onBlur()
