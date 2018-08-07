@@ -163,7 +163,6 @@ export default class ProfileScreen extends Component {
               />
               <Divider />
               <EducationListView educationData={education} />
-              <Divider />
               <ExperienceListView experienceData={workExperiences} />
               <Description
                 row={false}

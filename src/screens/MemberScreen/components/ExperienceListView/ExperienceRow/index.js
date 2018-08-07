@@ -3,13 +3,13 @@ import ProfileInfoRow from '../../../../../components/ProfileInfoRow'
 
 export default class ExperienceRow extends Component {
   render() {
-    const { companyName, position, startYear, endYear } = this.props
+    const { employer, position, startDate, endDate } = this.props
     return (
       <ProfileInfoRow
-        title={companyName}
+        title={employer}
         subtitle1={position}
-        startYear={startYear}
-        endYear={endYear}
+        startYear={startDate}
+        endYear={endDate}
       />
     )
   }
