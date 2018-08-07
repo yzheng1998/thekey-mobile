@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native'
 
 const TextInputField = ({ value, placeholder, updateState }) => (
   <InputField
-    placeholderTextColor="rgb(250, 53, 121)"
+    placeholderTextColor="rgb(176, 186, 200)"
     placeholder={placeholder}
     value={value}
     onChangeText={text => {
