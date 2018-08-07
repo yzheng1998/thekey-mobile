@@ -7,7 +7,7 @@ import {
 } from '../../styles'
 import NavigationArrow from 'react-native-vector-icons/EvilIcons'
 import SettingsMenuItem from '../SettingsMenuItem'
-import Switch from 'react-native-switch-pro'
+import UserPreferenceSwitch from '../UserPreferenceSwitch'
 
 const MenuItemWithNavigation = ({ title, onPress }) => (
   <SettingsMenuItem title={title} onPress={onPress}>
@@ -34,12 +34,15 @@ export default class SettingsMenu extends Component {
           <EmailAddress>{email}</EmailAddress>
         </SettingsMenuItem>
         <SettingsMenuItem title="Enable Email Notifications" disabled>
-          <Switch backgroundActive="rgb(250,53,121)" value={emailPreferences} />
+          <UserPreferenceSwitch
+            selected={emailPreferences}
+            settingName="emailPreferences"
+          />
         </SettingsMenuItem>
         <SettingsMenuItem title="Recieve Monthly Newsletter" disabled>
-          <Switch
-            backgroundActive="rgb(250,53,121)"
-            value={newsLetterPreferences}
+          <UserPreferenceSwitch
+            selected={newsLetterPreferences}
+            settingName="newsLetterPreferences"
           />
         </SettingsMenuItem>
         <MenuItemWithNavigation title="Password" />
