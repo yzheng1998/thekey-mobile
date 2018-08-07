@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
-import { Container, SchoolName, Location } from './styles'
+import {
+  Container,
+  SchoolName,
+  Location,
+  SchoolContainer,
+  CardContainer,
+} from './styles'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 export default class SchoolSearchCard extends Component {
@@ -25,10 +30,12 @@ export default class SchoolSearchCard extends Component {
           color="rgb(75, 42, 168)"
           style={{ marginTop: 8 }}
         />
-        <View>
-          <SchoolName>{schoolName}</SchoolName>
+        <CardContainer>
+          <SchoolContainer>
+            <SchoolName>{schoolName}</SchoolName>
+          </SchoolContainer>
           <Location>{location}</Location>
-        </View>
+        </CardContainer>
       </Container>
     )
   }
