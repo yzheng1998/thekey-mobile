@@ -16,9 +16,7 @@ export default class OptionalInfoBlock extends Component {
               placeholderTextColor="rgb(176, 186, 200)"
               placeholder="General Manager"
               value={state.jobTitle.text}
-              onChangeText={text => {
-                updateJobTitle({ text })
-              }}
+              onChangeText={updateJobTitle}
             />
           </RowHeader>
         </Block>

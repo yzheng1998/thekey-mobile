@@ -69,7 +69,7 @@ class ReviewsScreen extends Component {
           />
           <ThinDivider />
           <Query query={GET_COMPANIES} variables={variables}>
-            {({ loading, data }) => {
+            {({ loading, data, refetch }) => {
               if (loading) return <LoadingWrapper loading />
               return (
                 <FlatList
@@ -78,6 +78,7 @@ class ReviewsScreen extends Component {
                   data={data.companies}
                   renderItem={({ item }) => (
                     <CompanyCard
+                      refetchCompanies={refetch}
                       picture={item.profilePicture}
                       title={item.name}
                       rating={item.rating}

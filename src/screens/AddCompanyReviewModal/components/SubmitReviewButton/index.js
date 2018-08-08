@@ -32,7 +32,14 @@ const ADD_COMPANY_REVIEW = gql`
 
 export default class SubmitReviewButton extends Component {
   render() {
-    const { state, hideAddReview, clearState, disabled } = this.props
+    const {
+      state,
+      hideAddReview,
+      clearState,
+      disabled,
+      refetchReviews,
+      refetchCompanies,
+    } = this.props
     const {
       rating,
       reviewTitle,
@@ -53,6 +60,8 @@ export default class SubmitReviewButton extends Component {
         onCompleted={() => {
           hideAddReview()
           clearState()
+          refetchReviews()
+          refetchCompanies()
         }}
         key={companyId}
       >

@@ -15,6 +15,7 @@ export default class CompanyCard extends Component {
       navigation,
       numReviews,
       onPress,
+      refetchCompanies,
     } = this.props
     return (
       <Card
@@ -27,6 +28,7 @@ export default class CompanyCard extends Component {
               companyId,
               picture,
               numReviews,
+              refetchCompanies,
             })
         }}
       >

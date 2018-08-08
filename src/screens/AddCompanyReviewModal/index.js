@@ -117,7 +117,12 @@ export default class AddCompanyReviewModal extends Component {
   }
 
   render() {
-    const { isVisible, hideAddReview } = this.props
+    const {
+      isVisible,
+      hideAddReview,
+      refetchReviews,
+      refetchCompanies,
+    } = this.props
     const {
       yearLastWorked,
       yearPickerEnabled,
@@ -188,6 +193,8 @@ export default class AddCompanyReviewModal extends Component {
                 updateState={this.updateState}
               />
               <SubmitReviewButton
+                refetchReviews={refetchReviews}
+                refetchCompanies={refetchCompanies}
                 state={{ ...this.state, ...this.props.state }}
                 hideAddReview={hideAddReview}
                 clearState={this.clearState}
