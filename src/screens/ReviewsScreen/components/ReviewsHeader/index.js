@@ -22,12 +22,12 @@ export default class ReviewsHeader extends Component {
             </BackButtonContainer>
             <Title>Reviews</Title>
             <SearchFilterTab
-              options={['All', 'Highest Rated']}
+              options={['All', 'Highest Rated', '']}
               selectedColor="white"
               color="white"
               selectedIndex={selectedIndex}
               updateState={changeTab}
-              width="60%"
+              width="62%"
             />
           </HeaderContainer>
         </SafeView>
