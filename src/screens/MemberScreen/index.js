@@ -14,6 +14,7 @@ import { GET_USER } from './query'
 import nodeEmoji from 'node-emoji'
 import ActionSheet from 'react-native-actionsheet'
 import LoadingWrapper from '../../components/LoadingWrapper'
+import { View } from 'react-native'
 
 const defaultProfilePicture =
   'https://images.unsplash.com/photo-1519145897500-869c40ccb024?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc363c8e033813d4f7b798846bb13a24&auto=format&fit=crop&w=582&q=80'
@@ -123,11 +124,15 @@ export default class MemberScreen extends Component {
               <Divider />
               <EducationListView educationData={education} />
               <ExperienceListView experienceData={workExperiences} />
-              <SecondaryTitle>Events In Common</SecondaryTitle>
-              <EventsInCommon
-                navigation={this.props.navigation}
-                events={eventsInCommon}
-              />
+              {eventsInCommon.length > 1 && (
+                <View>
+                  <SecondaryTitle>Events In Common</SecondaryTitle>
+                  <EventsInCommon
+                    navigation={this.props.navigation}
+                    events={eventsInCommon}
+                  />
+                </View>
+              )}
               <Description
                 row={false}
                 title="Interesting Fact About Me"
