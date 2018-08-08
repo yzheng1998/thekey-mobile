@@ -37,8 +37,9 @@ class EventsScreen extends Component {
     const tabs = {
       ALL: 0,
       TODAY: 1,
-      TOMORROW: 2,
-      THIS_WEEK: 3,
+      THIS_WEEK: 2,
+      THIS_MONTH: 3,
+      INTERESTED_IN: 4,
     }
 
     const getTabName = tab => {
@@ -47,10 +48,12 @@ class EventsScreen extends Component {
           return ''
         case tabs.TODAY:
           return 'today'
-        case tabs.TOMORROW:
-          return 'tomorrow'
         case tabs.THIS_WEEK:
           return 'thisWeek'
+        case tabs.THIS_MONTH:
+          return 'thisMonth'
+        case tabs.INTERESTED_IN:
+          return ''
         default:
           return ''
       }
@@ -59,6 +62,7 @@ class EventsScreen extends Component {
     const { searchText } = this.state
 
     const currentTab = getTabName(this.state.tab)
+    const filterByInterested = this.state.tab === 4 // same as saved events
 
     const query = searchText || currentTab ? GET_EVENTS : GET_SUGGESTED_EVENTS
 
@@ -88,11 +92,16 @@ class EventsScreen extends Component {
             {({ loading, data }) => {
               const usableData =
                 searchText || currentTab ? data.events : data.suggestedEvents
+              const interestedEvents = filterByInterested
+                ? data.suggestedEvents.filter(e => e.isInterested === true)
+                : searchText
 
               return (
                 <LoadingWrapper loading={loading}>
                   <HorizontalEventsScroll
-                    eventsList={usableData}
+                    eventsList={
+                      filterByInterested ? interestedEvents : usableData
+                    }
                     navigation={this.props.navigation}
                   />
                 </LoadingWrapper>
