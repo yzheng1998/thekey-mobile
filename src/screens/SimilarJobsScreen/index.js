@@ -45,6 +45,7 @@ class SimilarJobsScreen extends Component {
               <SimilarItemsHeader
                 backgroundImage={JobsHeaderImage}
                 title="Similar Jobs"
+                navigation={this.props.navigation}
               />
               <FlatList
                 keyExtractor={job => job.id}
