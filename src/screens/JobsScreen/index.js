@@ -22,6 +22,7 @@ const GET_JOBS = gql`
         name
       }
       isInterested
+      hasApplied
     }
   }
 `
@@ -51,6 +52,7 @@ class JobsScreen extends Component {
         tag: searchText,
       },
     }
+    const filterByApplied = this.state.tab === 1
     return (
       <View style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" />
@@ -70,11 +72,14 @@ class JobsScreen extends Component {
             {({ loading, data, refetch }) => {
               if (loading) return <LoadingWrapper loading />
               if (this.state.tab === 2) refetch()
+              const usableData = filterByApplied
+                ? data.jobs.filter(j => j.hasApplied === true)
+                : data.jobs
               return (
                 <FlatList
                   keyboardShouldPersistTaps="handled"
                   keyExtractor={job => job.id}
-                  data={data.jobs}
+                  data={usableData}
                   renderItem={({ item: job }) => (
                     <View>
                       <JobCard
