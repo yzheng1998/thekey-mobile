@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { View } from 'react-native'
 import PropTypes from 'prop-types'
 import LargeEventCard from '../LargeEventCard'
 import { Container, CardList, CardContainer } from './styles'
@@ -21,6 +22,7 @@ export default class HorizontalEventsScroll extends Component {
           horizontal
           keyExtractor={event => event.id}
           data={eventsList}
+          ListFooterComponent={<View style={{ width: 20 }} />}
           renderItem={({ item }) => (
             <CardContainer>
               <LargeEventCard navigation={this.props.navigation} event={item} />
