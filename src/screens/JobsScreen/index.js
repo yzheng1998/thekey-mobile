@@ -54,7 +54,6 @@ class JobsScreen extends Component {
     return (
       <View style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" />
-
         <ScrollView keyboardShouldPersistTaps="handled">
           <JobsHeader
             navigation={this.props.navigation}

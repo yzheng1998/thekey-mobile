@@ -100,7 +100,7 @@ export default class NewChatModal extends Component {
     }
     const inputProps = {
       keyboardType: 'default',
-      placeholder: this.state.tags.length ? '' : 'Search...',
+      placeholder: this.state.tags.length > 0 ? '' : 'Search...',
       autoFocus: true,
       style: {
         fontSize: 14,

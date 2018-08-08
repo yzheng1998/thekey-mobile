@@ -27,6 +27,7 @@ export default class JobsHeader extends Component {
               color="white"
               selectedColor="white"
               options={['All', 'Applied For', 'Saved']}
+              width="70%"
             />
           </HeaderContainer>
         </SafeView>
