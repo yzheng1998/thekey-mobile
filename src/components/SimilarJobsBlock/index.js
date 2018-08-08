@@ -53,7 +53,7 @@ class SimilarJobsBlock extends Component {
                 <ButtonContainer
                   onPress={() =>
                     this.props.navigation.push('SimilarJobsScreen', {
-                      data,
+                      id: this.props.navigation.getParam('id'),
                     })
                   }
                 >
