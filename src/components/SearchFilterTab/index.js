@@ -9,9 +9,15 @@ export default class SearchFilterTab extends Component {
   }
 
   render() {
-    const { color, selectedColor, updateState, selectedIndex } = this.props
+    const {
+      color,
+      selectedColor,
+      updateState,
+      selectedIndex,
+      width,
+    } = this.props
     return (
-      <Tab>
+      <Tab width={width}>
         {this.props.options.map((option, idx) => (
           <Categories
             key={option}

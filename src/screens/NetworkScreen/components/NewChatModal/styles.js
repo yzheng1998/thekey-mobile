@@ -1,16 +1,15 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const Background = styled.View`
-  padding: 10px;
-`
+export const Background = styled.View``
 export const Container = styled.View`
   padding: 10px;
 `
 export const Text = styled.Text`
   font-size: 14px;
+  margin-right: 8px;
   font-family: ${themeGet('fonts.medium')};
-  color: ${themeGet('colors.fontDescription.primary')};
+  color: ${themeGet('colors.fontDescription.tertiary')};
 `
 export const ScrollScreen = styled.ScrollView``
 export const InputField = styled.TextInput`
@@ -22,8 +21,8 @@ export const InputField = styled.TextInput`
 `
 export const SearchNameContainer = styled.View`
   flex-direction: row;
+  padding-left: 16px;
   align-items: center;
-  background-color: white;
 `
 export const PeopleListContainer = styled.ScrollView`
   flex: 1;
@@ -34,6 +33,7 @@ export const PeopleListContainer = styled.ScrollView`
 export const ThinDivider = styled.View`
   width: 100%;
   height: 4px;
-  margin: 5px;
+  margin-top: 3px;
+  margin-bottom: 3px;
   background-color: ${themeGet('colors.divider')};
 `

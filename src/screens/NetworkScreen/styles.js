@@ -33,7 +33,7 @@ export const NewChatButton = styled.TouchableOpacity`
 `
 export const Divider = styled.View`
   width: 100%;
-  height: 8px;
+  height: 4px;
   background-color: ${themeGet('colors.divider')};
 `
 export const ThinDivider = styled.View`

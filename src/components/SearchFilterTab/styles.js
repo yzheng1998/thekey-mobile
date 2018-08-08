@@ -6,14 +6,14 @@ export const Categories = styled.Text`
   font-weight: 700;
   font-family: '${themeGet('fonts.light')}';
   color: ${props => (props.isSelected ? props.selectedColor : props.color)};
-  margin-left: 20px;
   opacity: ${props => (props.isSelected ? '1' : '0.9')};
 `
 
-export const Tab = styled.TouchableOpacity`
-  width: 100%;
-  background-color: transparent;
+export const Tab = styled.View`
   align-items: center;
+  width: ${props => (props.width ? props.width : '100%')}
+  justify-content: space-between;
   flex-direction: row;
-  margin-right: 9px;
+  padding-right: 20px;
+  padding-left: 20px;
 `

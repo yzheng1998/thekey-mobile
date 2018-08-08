@@ -27,6 +27,7 @@ export default class ReviewsHeader extends Component {
               color="white"
               selectedIndex={selectedIndex}
               updateState={changeTab}
+              width="60%"
             />
           </HeaderContainer>
         </SafeView>

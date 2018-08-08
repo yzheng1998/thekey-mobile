@@ -23,7 +23,7 @@ const CHAT_SUBSCRIPTION = gql`
 `
 
 const MessageInputDisplay = ({ chatId, onPress }) => (
-  <View>
+  <View style={{ marginTop: 6 }}>
     <MessageInput onPress={onPress} chatId={chatId} />
     <KeyboardSpacer />
   </View>
