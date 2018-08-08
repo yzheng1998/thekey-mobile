@@ -4,15 +4,14 @@ import EventCard from '../EventsScreen/components/SmallEventCard'
 import {
   Background,
   HeaderBackground,
-  Title,
-  BackButtonContainer,
   EventsContainer,
   EventContainer,
 } from './styles'
-import BackButton from 'react-native-vector-icons/Ionicons'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import LoadingWrapper from '../../components/LoadingWrapper'
+import SimilarItemsHeader from '../../components/SimilarItemsHeader'
+import EventsHeaderBackground from '../../../assets/EventsBackground.png'
 
 const GET_SIMILAR_EVENTS = gql`
   query similarEvents($id: ID!) {
@@ -44,12 +43,12 @@ class SimilarEventsScreen extends Component {
     const { id } = this.props.navigation.state.params
     return (
       <Background>
-        <HeaderBackground>
-          <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
-            <BackButton name="ios-arrow-back" size={33} color="white" />
-          </BackButtonContainer>
-          <Title>Similar Events</Title>
-        </HeaderBackground>
+        <SimilarItemsHeader
+          backgroundImage={EventsHeaderBackground}
+          title="Similar Events"
+          navigation={this.props.navigation}
+        />
+        <HeaderBackground />
         <EventsContainer>
           <Query query={GET_SIMILAR_EVENTS} variables={{ id }}>
             {({ loading, data }) => {
