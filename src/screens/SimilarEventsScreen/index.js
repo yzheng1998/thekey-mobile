@@ -60,7 +60,12 @@ class SimilarEventsScreen extends Component {
                   data={data.similarEvents}
                   renderItem={({ item: event }) => (
                     <EventContainer>
-                      <EventCard event={event} />
+                      <EventCard
+                        event={event}
+                        navigate={thisId =>
+                          this.props.navigation.push('Event', { id: thisId })
+                        }
+                      />
                     </EventContainer>
                   )}
                 />
