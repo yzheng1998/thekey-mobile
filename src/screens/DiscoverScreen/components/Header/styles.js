@@ -11,7 +11,7 @@ export const Background = styled.View`
 export const IconButton = styled.TouchableOpacity`
   border-radius: 20px;
   margin-left: 5px;
-  margin-right: 5px;
+  margin-right: 12px;
   background-color: ${themeGet('colors.cardLoading')};
 `
 export const Icon = styled.Image`
@@ -22,6 +22,8 @@ export const Icon = styled.Image`
 export const TextBox = styled.View`
   justify-content: space-between;
   flex: 1;
+  margin-left: 12px;
+  margin-right: 12px;
 `
 export const Title = styled.Text`
   color: black;
