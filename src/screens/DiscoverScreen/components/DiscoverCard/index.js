@@ -7,6 +7,7 @@ import {
   Description,
   BackgroundImage,
   TextContainer,
+  ShadowContainer,
 } from './styles'
 
 export default class DiscoverCard extends Component {
@@ -24,13 +25,15 @@ export default class DiscoverCard extends Component {
   render() {
     const { title, description, image, onPress } = this.props
     return (
-      <Card onPress={onPress}>
-        <BackgroundImage source={image} />
-        <TextContainer>
-          <Title>{title}</Title>
-          <Description>{description}</Description>
-        </TextContainer>
-      </Card>
+      <ShadowContainer>
+        <Card onPress={onPress}>
+          <BackgroundImage source={image} />
+          <TextContainer>
+            <Title>{title}</Title>
+            <Description>{description}</Description>
+          </TextContainer>
+        </Card>
+      </ShadowContainer>
     )
   }
 }

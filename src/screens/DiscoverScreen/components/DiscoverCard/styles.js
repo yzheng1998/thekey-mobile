@@ -1,11 +1,16 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
+export const ShadowContainer = styled.View`
+  box-shadow: 1px 9px 5px rgb(169,169,169)};
+`
 export const Card = styled.TouchableOpacity`
-  width: 100%;
   height: 120px;
-  margin: 11px;
+  margin-top: 11px;
+  margin-bottom: 11px;
   border-radius: 15px;
+  margin-right: 12px;
+  margin-left: 12px;
   align-items: center;
   justify-content: center;
   overflow: hidden;
