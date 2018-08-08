@@ -35,8 +35,8 @@ export const AddButton = styled.TouchableOpacity`
   border-radius: 10px;
   align-items: center;
   padding: 16px;
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 12px;
+  margin-right: 12px;
 `
 export const RemoveButton = styled.TouchableOpacity`
   background-color: white;

@@ -91,7 +91,6 @@ class LoginBody extends Component {
                   placeholderText="Email"
                   placeholderTextColor="rgb(139, 133, 150)"
                   autoCapitalize="none"
-                  staticBorder
                   onSubmitEditing={() => this.passwordInput.focus()}
                   returnKeyType="next"
                 >
@@ -113,7 +112,6 @@ class LoginBody extends Component {
                   placeholderText="Password"
                   placeholderTextColor="rgb(139, 133, 150)"
                   autoCapitalize="none"
-                  staticBorder
                   secureTextEntry
                   returnKeyType="done"
                 >

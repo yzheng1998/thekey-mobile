@@ -54,13 +54,13 @@ export const EmailAddress = styled.Text`
   color: ${themeGet('colors.fontProfileFields')};
 `
 export const CancelMembershipButton = styled.TouchableOpacity`
-  width: 91%;
+  margin-left: 16px;
+  margin-right: 16px;
   height: 45px;
-  background-color: ${themeGet('colors.buttonPrimary')};
+  background-color: ${themeGet('colors.buttonTertiary')};
   border-radius: 8px;
   margin-top: 8px;
   margin-bottom: 80px;
-  align-self: center;
   align-items: center;
   justify-content: center;
 `
@@ -70,6 +70,9 @@ export const ButtonText = styled.Text`
   color: ${themeGet('colors.fontButtonPrimary')};
 `
 
+export const Screen = styled.View`
+  flex: 1;
+`
 export const ModalScreenContainer = styled.View`
   width: 100%;
   padding-left: 12px;
@@ -77,4 +80,23 @@ export const ModalScreenContainer = styled.View`
   padding-top: 12px;
   flex: 1;
   background-color: ${themeGet('colors.background')};
+`
+
+export const SubtitleView = styled.View`
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding-left: 12px;
+  padding-right: 12px;
+`
+
+export const Subtitle = styled.Text`
+  color: ${props =>
+    props.hyperlink
+      ? themeGet('colors.fontButtonTertiary')
+      : themeGet('colors.fontSubtitle.primary')};
+  font-family: ${themeGet('fonts.medium')};
+  font-size: 14px
+  line-height: 20px;
+  text-align: center;
 `

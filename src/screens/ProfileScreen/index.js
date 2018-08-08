@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import { ScreenContainer, Divider, SettingsContainer, Menu } from './styles'
-import SettingsHeader from './components/SettingsHeader'
-import { Modal, AsyncStorage } from 'react-native'
+import { ScreenContainer, Divider } from './styles'
 import MyProfilePicBlock from './components/MyProfilePicBlock'
 import MyProfileBioBlock from './components/MyProfileBioBlock'
 import ButtonRowView from './components/ButtonRowView'
@@ -9,25 +7,11 @@ import Description from './components/Description'
 import EducationListView from './components/EducationListView'
 import ExperienceListView from './components/ExperienceListView'
 import ContactContainerView from './components/ContactContainerView'
-import SettingsMenu from './components/SettingsMenu'
 import { Query } from 'react-apollo'
 import { GET_USER } from './query'
 import nodeEmoji from 'node-emoji'
-import Logout from './components/SettingsScreens/Logout'
-import { client } from '../../apollo'
-import Swiper from 'react-native-swiper'
+import Settings from './components/Settings'
 import LoadingWrapper from '../../components/LoadingWrapper'
-
-const screens = [
-  {
-    id: 0,
-    title: 'Settings',
-  },
-  {
-    id: 1,
-    title: 'Logout',
-  },
-]
 
 const lookingForOptions = [
   { value: 'BUSINESSMENTOR', label: 'Business Mentor' },
@@ -42,22 +26,11 @@ const defaultProfilePicture =
 
 export default class ProfileScreen extends Component {
   state = {
-    id: 0,
     showSettings: false,
   }
-
-  hideSettings = () => {
-    this.setState({
-      showSettings: !this.state.showSettings,
-    })
+  toggleSettings = () => {
+    this.setState({ showSettings: !this.state.showSettings })
   }
-
-  logout = async () => {
-    await AsyncStorage.clear()
-    client.resetStore()
-    this.props.navigation.navigate('Landing')
-  }
-
   render() {
     return (
       <Query
@@ -85,52 +58,22 @@ export default class ProfileScreen extends Component {
             lookingFor,
             skills,
             settings,
+            resumes,
           } = data.viewer
           const emojiList = preferredWaysToMeet.map(emoji =>
             nodeEmoji.get(emoji.wayToMeet.toLowerCase()),
           )
-          const swipe = targetIndex => {
-            const currentIndex = this.swiper.state.index
-            const offset = targetIndex - currentIndex
-            this.swiper.scrollBy(offset)
-          }
+
           return (
             <ScreenContainer>
-              <Modal
-                visible={this.state.showSettings}
-                transparent
-                animationType="slide"
-              >
-                <SettingsContainer>
-                  <Menu>
-                    <SettingsHeader
-                      onPress={swipe}
-                      settingsMain={this.state.id === 0}
-                      title={screens.find(el => el.id === this.state.id).title}
-                      hideSettings={this.hideSettings}
-                    />
-                    <Swiper
-                      ref={component => {
-                        this.swiper = component
-                      }}
-                      showsPagination={false}
-                      loop={false}
-                      scrollEnabled={false}
-                      onIndexChanged={index => {
-                        this.setState({ id: index })
-                      }}
-                    >
-                      <SettingsMenu
-                        email={email}
-                        onPress={swipe}
-                        emailPreferences={settings.emailPreferences}
-                        newsLetterPreferences={settings.newsLetterPreferences}
-                      />
-                      <Logout onPress={this.logout} />
-                    </Swiper>
-                  </Menu>
-                </SettingsContainer>
-              </Modal>
+              <Settings
+                state={this.state}
+                email={email}
+                settings={settings}
+                toggleSettings={this.toggleSettings}
+                navigation={this.props.navigation}
+                resumes={resumes}
+              />
               <MyProfilePicBlock
                 name={`${firstName} ${lastName}`}
                 hometown={demographics.hometown}
@@ -143,7 +86,6 @@ export default class ProfileScreen extends Component {
                 showSettings={() =>
                   this.setState({
                     showSettings: !this.state.showSettings,
-                    index: 1,
                   })
                 }
               />

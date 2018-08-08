@@ -5,7 +5,8 @@ export const Screen = styled.View`
   flex: 1;
 `
 export const Container = styled.View`
-  align-items: center;
+  padding-left: 12px;
+  padding-right: 12px;
   border-bottom-width: 0px;
   border-bottom-color: ${themeGet('colors.border')};
 `
@@ -13,8 +14,6 @@ export const TextInputContainer = styled.View`
   width: 100%;
   flex-direction: row;
   align-items: center;
-  padding-left: 24px;
-  padding-right: 24px;
 `
 export const ForgotPass = styled.TouchableOpacity`
   align-self: center;
@@ -27,7 +26,8 @@ export const PinkSubtitleText = styled.Text`
 export const PinkSubtitle = styled.TouchableOpacity``
 export const SignInButton = styled.TouchableOpacity`
   height: 50px;
-  width: 85%;
+  margin-left: 12px;
+  margin-right: 12px;
   background-color: ${props =>
     props.disabled
       ? themeGet('colors.buttonClicked')

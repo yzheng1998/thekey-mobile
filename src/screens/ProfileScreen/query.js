@@ -5,6 +5,10 @@ export const GET_USER = gql`
     viewer {
       ... on User {
         id
+        resumes {
+          id
+          resume
+        }
         email
         firstName
         lastName

@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/react-native'
 import { View } from 'react-native'
 import React from 'react'
-import SettingsMenu from '../screens/ProfileScreen/components/SettingsMenu'
+import SettingsMenu from '../screens/ProfileScreen/components/Settings/components/SettingsMenu'
 
 const style = {
   flex: 1,

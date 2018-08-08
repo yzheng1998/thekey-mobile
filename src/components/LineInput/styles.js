@@ -4,8 +4,8 @@ import { themeGet } from 'styled-system'
 export const LineInputContainer = styled.View`
   flex-direction: row;
   height: 50px;
-  margin-left: 8px;
-  margin-right: 8px;
+  margin-left: 12px;
+  margin-right: 12px;
   border-radius: 8px;
   align-items: center;
   padding-left: 4px;
