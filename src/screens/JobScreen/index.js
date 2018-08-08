@@ -37,6 +37,7 @@ const GET_JOB = gql`
       industry
       createdAt
       isInterested
+      hasApplied
     }
   }
 `
@@ -69,6 +70,7 @@ class JobScreen extends Component {
             bringToRole,
             industry,
             isInterested,
+            hasApplied,
           } = data.job
           return (
             <Container keyboardShouldPersistTaps="handled">
@@ -81,6 +83,7 @@ class JobScreen extends Component {
                 location={location}
                 time={createdAt}
                 toggleApplyModal={this.toggleApplyModal}
+                hasApplied={hasApplied}
               />
               <AboutBlock
                 navigation={this.props.navigation}
