@@ -20,6 +20,10 @@ const GET_HOMETOWNS = gql`
 `
 
 export default class HometownSearchModal extends Component {
+  static defaultProps = {
+    showEmoji: false,
+  }
+
   state = {
     searchText: '',
   }
@@ -29,7 +33,7 @@ export default class HometownSearchModal extends Component {
   }
 
   render() {
-    const { visible, onPress, setText } = this.props
+    const { visible, onPress, setText, showEmoji } = this.props
     const variables = { substr: this.state.searchText }
     return (
       <Modal animationType="slide" transparent={false} visible={visible}>
@@ -38,7 +42,9 @@ export default class HometownSearchModal extends Component {
             closeModal={onPress}
             updateText={this.updateText}
             searchText={this.state.searchText}
-            placeholderText={`Search for a city ${house}`}
+            placeholderText={
+              showEmoji ? `Search for a city ${house}` : `Search for a city`
+            }
           />
           <Divider />
           <Query query={GET_HOMETOWNS} variables={variables}>

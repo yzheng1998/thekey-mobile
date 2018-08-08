@@ -7,9 +7,14 @@ export const OptionalHeading = styled.Text`
   margin-bottom: 15px;
   color: ${themeGet('colors.fontSubtitle.primary')};
 `
+export const LocationText = styled.Text`
+  font-size: 16px;
+  font-family: ${themeGet('fonts.medium')};
+  color: ${themeGet('colors.fontDescription.primary')};
+`
 export const InputField = styled.TextInput`
   font-size: 16px;
-  color: ${themeGet('colors.buttonPrimary')};
+  color: ${themeGet('colors.fontDescription.primary')};
   font-family: ${themeGet('fonts.medium')};
   max-height: 80px;
   justify-content: flex-end;

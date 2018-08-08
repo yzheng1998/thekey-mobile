@@ -88,7 +88,9 @@ export default class AddCompanyReviewModal extends Component {
       showLocationSearchModal: !this.state.showLocationSearchModal,
     })
   }
-
+  updateJobTitle = jobTitle => {
+    this.setState({ jobTitle })
+  }
   clearState = () => {
     this.setState({
       rating: 0,
@@ -177,7 +179,7 @@ export default class AddCompanyReviewModal extends Component {
               <Divider />
               <OptionalInfoBlock
                 state={this.state}
-                updateLocation={this.updateLocation}
+                updateJobTitle={this.updateJobTitle}
                 toggleLocationModal={this.toggleLocationSearchModal}
               />
               <Divider />

@@ -6,18 +6,16 @@ import {
   Avatar,
   RowSubContainer,
   TextContainer,
+  ButtonContainer,
+  SwitchContainer,
+  Label,
 } from './styles'
-import {
-  BlockBackground,
-  Block,
-  Heading,
-  Text,
-  RowContainer,
-} from '../../styles'
-import CheckBox from '../CheckBox'
+import { BlockBackground, Block, Heading, RowContainer } from '../../styles'
 import fullStar from './full-star-pink.png'
 import emptyStar from './empty-star-grey.png'
 import Stars from 'react-native-stars'
+import { TouchableOpacity } from 'react-native'
+import Switch from 'react-native-switch-pro'
 
 const employmentTypes = [
   { value: 'FULLTIME', label: 'Full-Time' },
@@ -65,7 +63,7 @@ export default class EmploymentHistoryBlock extends Component {
           <SpacedHeading>Company Name</SpacedHeading>
           <RowSubContainer>
             <TextContainer>
-              <Text>{state.companyName}</Text>
+              <Label>{state.companyName}</Label>
             </TextContainer>
             <Avatar
               source={{
@@ -78,39 +76,54 @@ export default class EmploymentHistoryBlock extends Component {
           <RowContainer>
             <Heading>Employment Type</Heading>
           </RowContainer>
-          <Buttons
-            onPress={i => {
-              updateState({ employmentType: employmentTypes[i].value })
-            }}
-            buttons={employmentTypes.map(el => el.label)}
-            selectedIndex={employmentTypes.findIndex(
-              el => el.value === employmentType,
-            )}
-            containerStyle={{ height: 30 }}
-            textStyle={{ color: 'rgb(250,53,121)', fontWeight: '600' }}
-            selectedTextStyle={{ color: 'white', fontWeight: '600' }}
-            selectedButtonStyle={{
-              backgroundColor: 'rgb(250,53,121)',
-            }}
-          />
+          <ButtonContainer>
+            <Buttons
+              onPress={i => {
+                updateState({ employmentType: employmentTypes[i].value })
+              }}
+              buttons={employmentTypes.map(el => el.label)}
+              selectedIndex={employmentTypes.findIndex(
+                el => el.value === employmentType,
+              )}
+              containerStyle={{ height: 30 }}
+              textStyle={{ color: 'rgb(250,53,121)', fontWeight: '600' }}
+              selectedTextStyle={{ color: 'white', fontWeight: '600' }}
+              selectedButtonStyle={{
+                backgroundColor: 'rgb(250,53,121)',
+              }}
+            />
+          </ButtonContainer>
         </Block>
         <Block>
-          <CheckBox
-            isCurrentEmployee={isCurrentEmployee}
-            toggleCheckBox={() =>
-              updateState({
-                isCurrentEmployee: !isCurrentEmployee,
-              })
-            }
-          />
           <RowContainer>
-            <Text
+            <SpacedHeading>Current Employee</SpacedHeading>
+            <SwitchContainer>
+              <Switch
+                height={23}
+                width={45}
+                backgroundActive="rgb(250,53,121)"
+                value={isCurrentEmployee}
+                onSyncPress={() => {
+                  updateState({
+                    isCurrentEmployee: !isCurrentEmployee,
+                    yearPickerEnabled: false,
+                  })
+                }}
+              />
+            </SwitchContainer>
+          </RowContainer>
+
+          <RowContainer>
+            <TouchableOpacity
+              disabled={isCurrentEmployee}
               onPress={() =>
                 updateState({ yearPickerEnabled: !yearPickerEnabled })
               }
             >
-              Last worked here in {yearLastWorked || `...`}
-            </Text>
+              <Label disabled={isCurrentEmployee}>
+                I last worked here in {yearLastWorked || `...`}
+              </Label>
+            </TouchableOpacity>
           </RowContainer>
         </Block>
       </BlockBackground>
