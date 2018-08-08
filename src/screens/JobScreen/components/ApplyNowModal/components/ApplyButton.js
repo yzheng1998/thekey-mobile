@@ -33,9 +33,21 @@ const SEND_APPLICATION = gql`
 
 export default class ApplyButton extends Component {
   render() {
-    const { toggleApplyModal, coverLetter, id, clearContent } = this.props
+    const {
+      toggleApplyModal,
+      coverLetter,
+      id,
+      clearContent,
+      refreshPage,
+    } = this.props
     return (
-      <Mutation mutation={SEND_APPLICATION} onCompleted={toggleApplyModal}>
+      <Mutation
+        mutation={SEND_APPLICATION}
+        onCompleted={() => {
+          toggleApplyModal()
+          refreshPage()
+        }}
+      >
         {(applyToJob, { error }) => {
           if (error) {
             Alert.alert(

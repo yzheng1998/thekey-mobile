@@ -37,6 +37,7 @@ const GET_JOB = gql`
       industry
       createdAt
       isInterested
+      hasApplied
     }
   }
 `
@@ -55,7 +56,7 @@ class JobScreen extends Component {
     }
     return (
       <Query query={GET_JOB} variables={variables}>
-        {({ loading, data }) => {
+        {({ loading, data, refetch }) => {
           if (loading) return <LoadingWrapper loading />
           const {
             title,
@@ -69,6 +70,7 @@ class JobScreen extends Component {
             bringToRole,
             industry,
             isInterested,
+            hasApplied,
           } = data.job
           return (
             <Container keyboardShouldPersistTaps="handled">
@@ -81,6 +83,7 @@ class JobScreen extends Component {
                 location={location}
                 time={createdAt}
                 toggleApplyModal={this.toggleApplyModal}
+                hasApplied={hasApplied}
               />
               <AboutBlock
                 navigation={this.props.navigation}
@@ -107,6 +110,7 @@ class JobScreen extends Component {
                 />
               </ButtonHeader>
               <ApplyNowModal
+                refreshPage={refetch}
                 toggleApplyModal={this.toggleApplyModal}
                 id={this.props.navigation.getParam('id')}
                 isVisible={this.state.showApplyModal}

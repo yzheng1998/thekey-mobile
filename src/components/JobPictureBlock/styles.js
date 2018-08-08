@@ -25,21 +25,22 @@ export const Deadline = styled.Text`
   margin-top: 3px;
 `
 export const Apply = styled.TouchableOpacity`
-  height: ${props => (props.hasApplied ? 30 : 45)};
+  height: ${props => (props.hasApplied ? 33 : 45)};
   width: 100%;
   bottom: 0;
   position: absolute;
   background-color: ${props =>
     props.hasApplied ? 'rgb(119, 210, 103)' : themeGet('colors.buttonPrimary')};
   align-items: center;
+  justify-content: center;
   padding: ${props => (props.hasApplied ? '5px' : '14px')};
 `
-export const ApplyButton = styled.Text`
+export const ApplyButtonText = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   font-size: 14px;
   color: white;
 `
-export const AppliedButton = styled.Text`
+export const AppliedButtonText = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   font-size: 13px;
   color: white;
@@ -54,4 +55,6 @@ export const HeaderContainer = styled.View`
 `
 export const RowContainer = styled.View`
   flex-direction: row;
+  align-items: center;
+  margin-bottom: 2px;
 `
