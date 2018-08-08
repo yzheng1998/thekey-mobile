@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
-import { FlatList, ScrollView } from 'react-native'
+import { FlatList, ScrollView, View } from 'react-native'
 import JobCard from '../../components/JobCard'
-import { HeaderBackground, Title, BackButtonContainer } from './styles'
+import {
+  HeaderBackground,
+  Title,
+  BackButtonContainer,
+  CardDivider,
+} from './styles'
 import BackButton from 'react-native-vector-icons/Ionicons'
 
 class SimilarJobsScreen extends Component {
@@ -20,10 +25,13 @@ class SimilarJobsScreen extends Component {
           keyExtractor={job => job.id}
           data={jobs}
           renderItem={({ item: job }) => (
-            <JobCard
-              navigate={id => this.props.navigation.push('Job', { id })}
-              job={job}
-            />
+            <View>
+              <JobCard
+                navigate={id => this.props.navigation.push('Job', { id })}
+                job={job}
+              />
+              <CardDivider />
+            </View>
           )}
         />
       </ScrollView>

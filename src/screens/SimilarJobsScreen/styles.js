@@ -23,3 +23,7 @@ export const BackButtonContainer = styled.TouchableOpacity`
   top: 40px;
   left: 25px;
 `
+export const CardDivider = styled.View`
+  height: 2px;
+  background-color: ${themeGet('colors.divider')};
+`
