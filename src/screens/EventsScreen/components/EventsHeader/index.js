@@ -25,7 +25,7 @@ export default class EventsHeader extends Component {
             </ButtonRow>
             <Title>Events</Title>
             <SearchFilterTab
-              options={['All', 'Today', 'Tomorrow', 'This Week']}
+              options={['All', 'Today', 'Week', 'Month', 'Saved']}
               updateState={updateState}
               color="white"
               selectedColor="white"
