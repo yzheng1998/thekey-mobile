@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Background, List } from './styles'
 import DiscoverCard from './components/DiscoverCard'
 import Header from './components/Header'
-import { AsyncStorage } from 'react-native'
+import { View, AsyncStorage, StatusBar } from 'react-native'
 import PushNotification from 'react-native-push-notification'
 import TheSocietyCard from '../../../assets/TheSocietyCard.png'
 import JobsAndInternshipsCard from '../../../assets/JobsAndInternshipsCard.png'
@@ -56,6 +56,7 @@ class DiscoverScreen extends Component {
             image={ReviewsCard}
             onPress={() => this.props.navigation.navigate('Reviews')}
           />
+          <View style={{ height: 44 }} />
         </List>
       </Background>
     )
