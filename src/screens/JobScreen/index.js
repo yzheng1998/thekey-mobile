@@ -56,7 +56,7 @@ class JobScreen extends Component {
     }
     return (
       <Query query={GET_JOB} variables={variables}>
-        {({ loading, data }) => {
+        {({ loading, data, refetch }) => {
           if (loading) return <LoadingWrapper loading />
           const {
             title,
@@ -110,6 +110,7 @@ class JobScreen extends Component {
                 />
               </ButtonHeader>
               <ApplyNowModal
+                refreshPage={refetch}
                 toggleApplyModal={this.toggleApplyModal}
                 id={this.props.navigation.getParam('id')}
                 isVisible={this.state.showApplyModal}

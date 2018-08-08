@@ -39,7 +39,7 @@ export default class ApplyNowModal extends Component {
   }
   render() {
     const { selectedIndex } = this.state
-    const { isVisible, toggleApplyModal } = this.props
+    const { isVisible, toggleApplyModal, refreshPage } = this.props
     return (
       <BigContainer
         isVisible={isVisible}
@@ -84,6 +84,7 @@ export default class ApplyNowModal extends Component {
           navigation={this.props.navigation}
           id={this.props.id}
           clearContent={this.clearContent}
+          refreshPage={refreshPage}
         />
         <KeyboardSpacer />
       </BigContainer>
