@@ -7,8 +7,8 @@ import {
   Description,
   Deadline,
   Apply,
-  ApplyButton,
-  AppliedButton,
+  ApplyButtonText,
+  AppliedButtonText,
   RowContainer,
 } from './styles'
 import PictureHeader from '../PictureHeader'
@@ -56,10 +56,10 @@ class JobPictureBlock extends Component {
             {hasApplied ? (
               <RowContainer>
                 <CheckIcon name="check" color="white" size={13} />
-                <AppliedButton>APPLIED FOR</AppliedButton>
+                <AppliedButtonText>APPLIED FOR</AppliedButtonText>
               </RowContainer>
             ) : (
-              <ApplyButton>APPLY NOW</ApplyButton>
+              <ApplyButtonText>APPLY NOW</ApplyButtonText>
             )}
           </Apply>
           <DescriptionContainer>

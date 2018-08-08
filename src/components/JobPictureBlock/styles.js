@@ -35,12 +35,12 @@ export const Apply = styled.TouchableOpacity`
   justify-content: center;
   padding: ${props => (props.hasApplied ? '5px' : '14px')};
 `
-export const ApplyButton = styled.Text`
+export const ApplyButtonText = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   font-size: 14px;
   color: white;
 `
-export const AppliedButton = styled.Text`
+export const AppliedButtonText = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   font-size: 13px;
   color: white;
