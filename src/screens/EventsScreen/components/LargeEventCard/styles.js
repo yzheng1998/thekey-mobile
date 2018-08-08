@@ -4,7 +4,7 @@ import Icon1 from 'react-native-vector-icons/Foundation'
 import Icon2 from 'react-native-vector-icons/EvilIcons'
 
 export const Card = styled.TouchableOpacity`
-  width: 340px;
+  width: 330px;
   height: 355px;
   border-radius: 20px;
   overflow: hidden;
