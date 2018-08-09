@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, AsyncStorage } from 'react-native'
+import { View, AsyncStorage, Alert } from 'react-native'
 import LinkedInModal from 'react-native-linkedin'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
@@ -11,6 +11,7 @@ import {
   TextContainer,
 } from './styles'
 import { LinkedInClientID, LinkedInRedirectUri } from '../../../../../config'
+import LoadingWrapper from '../../../../components/LoadingWrapper'
 
 const LINKEDIN_LOGIN = gql`
   mutation linkedinLogin($authorizationCode: String!) {
@@ -65,12 +66,14 @@ class LargeLinkedInLoginButton extends Component {
                 <LinkedInButtonText>Sign in with LinkedIn</LinkedInButtonText>
               </TextContainer>
             </LinkedInButton>
-            {loading && <Text>Logging you in...</Text>}
+            {loading && <LoadingWrapper loading />}
             {data &&
-              data.linkedinLogin.error && (
-                <Text>{data.linkedinLogin.error.message}</Text>
+              data.linkedinLogin.error &&
+              Alert.alert(
+                'Error signing in with LinkedIn',
+                data.linkedinLogin.error.message,
               )}
-            {error && <Text>Server error</Text>}
+            {error && Alert.alert('Error signing in with LinkedIn')}
           </View>
         )}
       </Mutation>
