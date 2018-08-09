@@ -50,6 +50,10 @@ const theme = {
     pictureHeaderTint: 'rgba(0, 0, 0, 0.3)',
     eventCardTint: 'rgba(0, 0, 0, 0.4)',
     confirmation: 'rgb(119, 210, 103)',
+    facebookBlue: 'rgb(59,89,152)',
+    facebookBorder: 'rgb(45,73,134)',
+    linkedInBlue: 'rgb(1, 119, 181)',
+    linkedInBorder: 'rgb(8, 92, 144)',
   },
   ...Platform.select({
     ios: {
