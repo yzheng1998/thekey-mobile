@@ -21,6 +21,7 @@ import LockIcon from 'react-native-vector-icons/Feather'
 import LineInput from '../../../../components/LineInput'
 import AlertMessage from '../AlertMessage'
 import FBLoginButton from '../../../../components/FBLoginButton'
+import LargeLinkedInLoginButton from '../LargeLinkedInLoginButton'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 import {
@@ -231,6 +232,7 @@ class LoginBody extends Component {
                 <Divider />
               </DividerRow>
               <ColumnContainer>
+                <LargeLinkedInLoginButton />
                 <FBLoginButton
                   onPress={() => this.facebookLogin(loginUser)}
                   text="Sign in with Facebook"
