@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Alert } from 'react-native'
+import { View, Alert } from 'react-native'
 import LinkedInModal from 'react-native-linkedin'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
@@ -8,8 +8,9 @@ import {
   LinkedInButtonText,
   LinkedInButton,
   LinkedInLogoContainer,
-  RowContainer,
+  TextContainer,
 } from './styles'
+import LoadingWrapper from '../../../../components/LoadingWrapper'
 import { LinkedInClientID, LinkedInRedirectUri } from '../../../../../config'
 
 const GET_LINKEDIN_INFO = gql`
@@ -69,15 +70,16 @@ export default class LinkedInRegisterButton extends Component {
               renderButton={() => null}
             />
             <LinkedInButton onPress={() => this.modal.open()}>
-              <RowContainer>
-                <LinkedInLogoContainer>
-                  <LinkedInIcon name="linkedin" size={15} color="white" />
-                </LinkedInLogoContainer>
-              </RowContainer>
-              <LinkedInButtonText>Continue with LinkedIn</LinkedInButtonText>
+              <LinkedInLogoContainer>
+                <LinkedInIcon name="linkedin" size={25} color="white" />
+              </LinkedInLogoContainer>
+              <TextContainer>
+                <LinkedInButtonText>Continue with LinkedIn</LinkedInButtonText>
+              </TextContainer>
             </LinkedInButton>
-            {loading && <Text>Logging you in...</Text>}
-            {error && <Text>Server error</Text>}
+            {loading && <LoadingWrapper loading />}
+            {error &&
+              Alert.alert('There was an error registering you using LinkedIn.')}
           </View>
         )}
       </Mutation>
