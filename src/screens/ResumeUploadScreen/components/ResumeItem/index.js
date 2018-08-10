@@ -14,7 +14,7 @@ import ClearIcon from 'react-native-vector-icons/MaterialIcons'
 
 export default class ResumeItem extends Component {
   render() {
-    const { id, title, dataSize, progress, cancel } = this.props
+    const { id, title, dataSize, progress, cancel, refetch } = this.props
     return (
       <ResumeItemContainer>
         <Icon
@@ -30,10 +30,17 @@ export default class ResumeItem extends Component {
             </ResumeTitle>
           </ResumeDetails>
           <ProgressBarEmpty>
-            <ProgressBarFilled progress={progress} />
+            <ProgressBarFilled
+              progress={progress !== undefined ? progress : '100%'}
+            />
           </ProgressBarEmpty>
         </ResumeBody>
-        <ClearIconButton onPress={() => cancel(id)}>
+        <ClearIconButton
+          onPress={() => {
+            cancel(id)
+            refetch()
+          }}
+        >
           <ClearIcon name="clear" size={24} color="rgb(181, 171, 202)" />
         </ClearIconButton>
       </ResumeItemContainer>

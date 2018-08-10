@@ -13,7 +13,6 @@ import {
 } from 'react-native-document-picker'
 import RNFS from 'react-native-fs'
 import uuid from 'uuid/v4'
-
 import gql from 'graphql-tag'
 import { SEND_MEMBERSHIP_APPLICATION } from './mutations'
 import config from '../../../config'
