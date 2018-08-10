@@ -40,7 +40,7 @@ export default class SignUpScreen extends Component {
     }
   }
 
-  FBLoginCallback = async (error, result) => {
+  FBLoginCallback = (error, result) => {
     if (error) {
       Alert.alert('There was an error logging into Facebook.')
     } else {
@@ -63,14 +63,16 @@ export default class SignUpScreen extends Component {
     // need to go for webview.
     const FBGraphRequest = async (fields, callback) => {
       const accessData = await AccessToken.getCurrentAccessToken()
+      const { accessToken } = accessData
+
       this.setState({
-        facebookToken: accessData.accessToken,
+        facebookToken: accessToken,
       })
       // Create a graph request asking for user information
       const infoRequest = new GraphRequest(
         '/me',
         {
-          accessToken: accessData.accessToken,
+          accessToken,
           parameters: {
             fields: {
               string: fields,
