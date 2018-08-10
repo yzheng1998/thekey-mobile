@@ -17,7 +17,7 @@ import RNFS from 'react-native-fs'
 import uuid from 'uuid/v4'
 import gql from 'graphql-tag'
 import config from '../../../../../../../../../config'
-import { UPLOAD_RESUME } from './mutations'
+import { SET_RESUMES } from './mutations'
 
 function humanFileSize(bytes, si) {
   const thresh = si ? 1000 : 1024
@@ -48,6 +48,7 @@ class Resumes extends Component {
     super(props)
     this.state = {
       resumeListData: this.props.resumes,
+      setResumesInput: this.props.resumes,
     }
   }
 
@@ -140,6 +141,7 @@ class Resumes extends Component {
     const buttonText = this.state.resumeListData.length
       ? 'ADD ANOTHER FILE'
       : 'ADD FILE'
+    const initialResumeCount = this.props.resumes.length
 
     return (
       <ModalScreenContainer>
@@ -163,32 +165,39 @@ class Resumes extends Component {
             />
           </ScrollView>
           <Mutation
-            mutation={UPLOAD_RESUME}
+            mutation={SET_RESUMES}
             onCompleted={() => {
               Alert.alert('Changes saved.')
               this.props.refetch()
             }}
           >
-            {(uploadResume, { error }) => {
+            {(setResumes, { error }) => {
               if (error) {
                 Alert.alert(
                   'There was an error deleting your resume. Please try again.',
                   { cancelable: true },
                 )
               }
+              const setResumesInput = this.state.resumeListData.map(resume => ({
+                resume: resume.url,
+                title: resume.title,
+                dataSize: resume.dataSize,
+              }))
+              const shouldEnableSubmit =
+                initialResumeCount > 0 ||
+                (this.state.resumeListData.length > 0 &&
+                  this.state.resumeListData.every(
+                    resume => resume.progress === '100%',
+                  ))
               return (
-                this.state.resumeListData.length > 0 && (
+                shouldEnableSubmit && (
                   <SubmitButton
                     buttonText="SAVE CHANGES"
                     onPress={() => {
                       const variables = {
-                        uploadResumeInput: {
-                          resume: this.state.resumeListData[0].url,
-                          title: this.state.resumeListData[0].title,
-                          dataSize: this.state.resumeListData[0].dataSize,
-                        },
+                        setResumesInput,
                       }
-                      uploadResume({ variables })
+                      setResumes({ variables })
                     }}
                   />
                 )
