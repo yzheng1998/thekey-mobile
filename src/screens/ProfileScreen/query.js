@@ -8,6 +8,8 @@ export const GET_USER = gql`
         resumes {
           id
           resume
+          title
+          dataSize
         }
         email
         firstName
