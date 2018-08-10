@@ -52,7 +52,6 @@ export default class SubmitReviewButton extends Component {
       yearLastWorked,
       employmentType,
     } = state
-
     const lastWorked = yearLastWorked.toString()
     return (
       <Mutation
@@ -61,7 +60,7 @@ export default class SubmitReviewButton extends Component {
           hideAddReview()
           clearState()
           refetchReviews()
-          refetchCompanies()
+          if (refetchCompanies) refetchCompanies()
         }}
         key={companyId}
       >

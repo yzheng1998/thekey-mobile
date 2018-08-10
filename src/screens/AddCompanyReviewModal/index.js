@@ -132,7 +132,8 @@ export default class AddCompanyReviewModal extends Component {
       employmentType,
       showLocationSearchModal,
     } = this.state
-    const noErrors = !errors && acceptedTerms && rating && employmentType
+    const noErrors =
+      !errors && acceptedTerms && rating && employmentType && yearLastWorked
     return (
       <Background
         animationIn="slideInRight"

@@ -72,23 +72,38 @@ class ReviewsScreen extends Component {
             {({ loading, data, refetch }) => {
               if (loading) return <LoadingWrapper loading />
               return (
-                <FlatList
-                  keyboardShouldPersistTaps="handled"
-                  keyExtractor={company => company.id}
-                  data={data.companies}
-                  renderItem={({ item }) => (
-                    <CompanyCard
-                      refetchCompanies={refetch}
-                      picture={item.profilePicture}
-                      title={item.name}
-                      rating={item.rating}
-                      companyName={item.name}
-                      companyId={item.id}
-                      navigation={this.props.navigation}
-                      numReviews={item.reviewCount}
-                    />
-                  )}
-                />
+                <View>
+                  <FlatList
+                    keyboardShouldPersistTaps="handled"
+                    keyExtractor={company => company.id}
+                    data={data.companies}
+                    renderItem={({ item }) => (
+                      <CompanyCard
+                        refetchCompanies={refetch}
+                        picture={item.profilePicture}
+                        title={item.name}
+                        rating={item.rating}
+                        companyName={item.name}
+                        companyId={item.id}
+                        navigation={this.props.navigation}
+                        numReviews={item.reviewCount}
+                      />
+                    )}
+                  />
+                  <AddCompanyReviewModal
+                    refetchReviews={refetch}
+                    state={this.state}
+                    isVisible={this.state.showAddReview}
+                    hideAddReview={() =>
+                      this.setState({
+                        showAddReview: !this.state.showAddReview,
+                        companyId: '',
+                        companyName: '',
+                        picture: '',
+                      })
+                    }
+                  />
+                </View>
               )
             }}
           </Query>
@@ -110,18 +125,6 @@ class ReviewsScreen extends Component {
               companyId,
               companyName,
               picture,
-            })
-          }
-        />
-        <AddCompanyReviewModal
-          state={this.state}
-          isVisible={this.state.showAddReview}
-          hideAddReview={() =>
-            this.setState({
-              showAddReview: !this.state.showAddReview,
-              companyId: '',
-              companyName: '',
-              picture: '',
             })
           }
         />
