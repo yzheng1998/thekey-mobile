@@ -66,34 +66,31 @@ export default class ReviewScreen extends Component {
     }
     return (
       <Background>
+        <ReviewPictureBlock
+          picture={picture}
+          title={title}
+          rating={rating}
+          reviews={numReviews}
+          navigation={this.props.navigation}
+          companyId={companyId}
+          showAddReview={() =>
+            this.setState({ showAddReview: !this.state.showAddReview })
+          }
+        />
+        <Header>
+          <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
+            <BackButton name="ios-arrow-back" size={27} color="white" />
+          </BackButtonContainer>
+        </Header>
+        <FilterBlock
+          updateState={this.changeTab}
+          selectedIndex={this.state.tab}
+        />
         <Query query={GET_COMPANY_REVIEWS} variables={variables}>
           {({ loading, data, refetch }) => {
             if (loading) return <LoadingWrapper loading />
             return (
               <View>
-                <ReviewPictureBlock
-                  picture={picture}
-                  title={title}
-                  rating={rating}
-                  reviews={numReviews}
-                  navigation={this.props.navigation}
-                  companyId={companyId}
-                  showAddReview={() =>
-                    this.setState({ showAddReview: !this.state.showAddReview })
-                  }
-                />
-                <Header>
-                  <BackButtonContainer
-                    onPress={() => this.props.navigation.goBack()}
-                  >
-                    <BackButton name="ios-arrow-back" size={27} color="white" />
-                  </BackButtonContainer>
-                </Header>
-                <FilterBlock
-                  updateState={this.changeTab}
-                  selectedIndex={this.state.tab}
-                />
-
                 <FlatList
                   keyExtractor={review => review.id}
                   data={data.companyReviews}
