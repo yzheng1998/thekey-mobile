@@ -107,6 +107,7 @@ export default class EmploymentHistoryBlock extends Component {
                   updateState({
                     isCurrentEmployee: !isCurrentEmployee,
                     yearPickerEnabled: false,
+                    yearLastWorked: '2018',
                   })
                 }}
               />
