@@ -51,35 +51,27 @@ const LOGIN_USER = gql`
 `
 
 export default class SplashScreen extends Component {
-  FBLoginCallback = async (error, result) => {
-    if (error) {
-      Alert.alert('rippo')
-    } else {
-      // Retrieve and save user details (email, firstName, id, lastName, picture) in state
-      this.setState({
-        email: result.email,
-      })
-    }
-  }
-
   facebookLogin = async loginUser => {
     // native_only config will fail in the case that the user has
     // not installed in his device the Facebook app. In this case we
     // need to go for webview.
+
     const FBGraphRequest = async (fields, callback) => {
       const accessData = await AccessToken.getCurrentAccessToken()
+      const { accessToken } = accessData
+
       this.setState({
-        facebookToken: accessData.accessToken,
+        facebookToken: accessToken,
       })
       const variables = {
-        facebookToken: accessData.accessToken,
+        facebookToken: accessToken,
       }
       loginUser({ variables })
       // Create a graph request asking for user information
       const infoRequest = new GraphRequest(
         '/me',
         {
-          accessToken: accessData.accessToken,
+          accessToken,
           parameters: {
             fields: {
               string: fields,
@@ -118,7 +110,12 @@ export default class SplashScreen extends Component {
       // Create a graph request asking for user information
       FBGraphRequest(
         'id, email, first_name, last_name, picture.type(large)',
-        this.FBLoginCallback,
+        error => {
+          if (error) {
+            Alert.alert('There was an error logging into Facebook.')
+          }
+          // to get the data back from the graph request, add a second result field to this callback function
+        },
       )
     }
   }
