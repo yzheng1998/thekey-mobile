@@ -197,6 +197,8 @@ class ResumeUploadScreen extends Component {
                         ...userInfo,
                         resumes: this.state.resumeListData.map(resume => ({
                           resume: resume.url,
+                          title: resume.title,
+                          dataSize: resume.dataSize,
                         })),
                       }
                       const variables = {
