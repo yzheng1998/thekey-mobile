@@ -1,16 +1,16 @@
 import gql from 'graphql-tag'
 
-export const SEND_MEMBERSHIP_APPLICATION = gql`
-  mutation sendMembershipApplication(
-    $sendMembershipApplicationInput: SendMembershipApplicationInput!
-  ) {
-    sendMembershipApplication(
-      sendMembershipApplicationInput: $sendMembershipApplicationInput
-    ) {
-      application {
+export const UPLOAD_RESUME = gql`
+  mutation uploadResume($uploadResumeInput: ResumeInput!) {
+    uploadResume(uploadResumeInput: $uploadResumeInput) {
+      resume {
         id
-        firstName
-        lastName
+        resume
+        title
+        dataSize
+      }
+      error {
+        message
       }
     }
   }
