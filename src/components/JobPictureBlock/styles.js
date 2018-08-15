@@ -25,7 +25,7 @@ export const Deadline = styled.Text`
   margin-top: 3px;
 `
 export const Apply = styled.TouchableOpacity`
-  height: ${props => (props.hasApplied ? 33 : 45)};
+  height: 45;
   width: 100%;
   bottom: 0;
   position: absolute;
