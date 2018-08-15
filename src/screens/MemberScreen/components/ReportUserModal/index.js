@@ -45,7 +45,7 @@ export default class ReportUserModal extends Component {
     return (
       <Background
         animationIn="slideInRight"
-        animationOut="slideOutLeft"
+        animationOut="slideOutRight"
         isVisible={isVisible}
       >
         <SafeView>
