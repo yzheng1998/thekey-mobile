@@ -112,6 +112,7 @@ class ReviewsScreen extends Component {
           <Icon name="plus" size={18} color="white" />
         </AddReviewButton>
         <CompanySearchModal
+          state={this.state}
           navigation={this.props.navigation}
           closeModal={this.toggleSearchModal}
           visible={this.state.showSearchModal}
