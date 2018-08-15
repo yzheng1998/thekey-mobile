@@ -59,6 +59,7 @@ export default class Password extends Component {
   }
 
   render() {
+    const noErrors = !this.state.errors
     return (
       <ModalScreenContainer>
         <TouchableWithoutFeedback
@@ -101,7 +102,11 @@ export default class Password extends Component {
               onBlur={() => this.validateForm(false)}
               error={this.state.displayErrors.confirmNewPassword}
             />
-            <RegisterButton buttonText="UPDATE" onPress={this.props.onPress} />
+            <RegisterButton
+              buttonText="UPDATE"
+              disabled={!noErrors}
+              onPress={this.props.onPress}
+            />
           </KeyboardAwareScrollView>
         </TouchableWithoutFeedback>
       </ModalScreenContainer>
