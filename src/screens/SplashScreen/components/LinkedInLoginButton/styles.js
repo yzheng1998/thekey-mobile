@@ -5,7 +5,7 @@ export const LinkedInButtonText = styled.Text`
   font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.fontPrimary')};
   font-size: 16px;
-  position: absolute;
+  margin-left: 12px;
 `
 export const LinkedInButton = styled.TouchableOpacity`
   width: 100%;
@@ -20,7 +20,7 @@ export const LinkedInButton = styled.TouchableOpacity`
   justify-content: center;
 `
 export const LinkedInLogoContainer = styled.View`
-  width: 20%;
+  width: 50px;
   border-color: rgb(8, 92, 144);
   border-width: 1px;
   background-color: transparent;
@@ -29,8 +29,10 @@ export const LinkedInLogoContainer = styled.View`
   padding-top: 7px;
   padding-bottom: 7px;
 `
-export const RowContainer = styled.View`
+export const TextContainer = styled.View`
   flex-direction: row;
   flex: 1;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
+  margin-left: -20px;
 `

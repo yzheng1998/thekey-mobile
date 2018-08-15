@@ -49,10 +49,11 @@ export const Subtitle = styled.Text`
   padding-right: 5px;
 `
 export const ColumnContainer = styled.View`
+  margin-top: 6px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
-  margin-top: 130px;
+  margin-left: 12px;
+  margin-right: 12px;
 `
 export const SignUpContainer = styled.View`
   flex-direction: row;
@@ -65,4 +66,23 @@ export const SignUpContainer = styled.View`
 export const Message = styled.Text`
   margin: 100px 0 100px 0;
   text-align: center;
+`
+export const DividerText = styled.Text`
+  font-family: ${themeGet('fonts.bold')};
+  color: ${themeGet('colors.fontDescription.primary')};
+  font-size: 12px;
+`
+export const Divider = styled.View`
+  width: 46%;
+  background-color: ${themeGet('colors.fontDescription.primary')};
+  height: 1px;
+  margin-left: 3px;
+  margin-right: 3px;
+`
+export const DividerRow = styled.View`
+  flex-direction: row;
+  margin-top: 15px;
+  margin-left: 12px;
+  margin-right: 12px;
+  align-items: center;
 `

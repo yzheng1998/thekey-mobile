@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage, Alert } from 'react-native'
 import {
   Container,
+  ColumnContainer,
   TextInputContainer,
   ForgotPass,
   PinkSubtitle,
@@ -11,13 +12,24 @@ import {
   Subtitle,
   SignUpContainer,
   Screen,
+  Divider,
+  DividerRow,
+  DividerText,
 } from './styles'
 import EmailIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 import LockIcon from 'react-native-vector-icons/Feather'
-import gql from 'graphql-tag'
-import { Mutation } from 'react-apollo'
 import LineInput from '../../../../components/LineInput'
 import AlertMessage from '../AlertMessage'
+import FBLoginButton from '../../../../components/FBLoginButton'
+import LargeLinkedInLoginButton from '../LargeLinkedInLoginButton'
+import gql from 'graphql-tag'
+import { Mutation } from 'react-apollo'
+import {
+  AccessToken,
+  LoginManager,
+  GraphRequest,
+  GraphRequestManager,
+} from 'react-native-fbsdk'
 
 const LOGIN_USER = gql`
   mutation loginUser(
@@ -49,7 +61,78 @@ class LoginBody extends Component {
     password: '',
     showAlertError: false,
     errorMessage: '',
+    facebookToken: '',
   }
+
+  facebookLogin = async loginUser => {
+    // native_only config will fail in the case that the user has
+    // not installed in his device the Facebook app. In this case we
+    // need to go for webview.
+
+    const FBGraphRequest = async (fields, callback) => {
+      const accessData = await AccessToken.getCurrentAccessToken()
+      const { accessToken } = accessData
+
+      this.setState({
+        facebookToken: accessToken,
+      })
+      const variables = {
+        facebookToken: accessToken,
+      }
+      loginUser({ variables })
+      // Create a graph request asking for user information
+      const infoRequest = new GraphRequest(
+        '/me',
+        {
+          accessToken,
+          parameters: {
+            fields: {
+              string: fields,
+            },
+          },
+        },
+        callback.bind(this),
+      )
+      // Execute the graph request created above
+      new GraphRequestManager().addRequest(infoRequest).start()
+    }
+
+    let result
+    try {
+      LoginManager.setLoginBehavior('native')
+      result = await LoginManager.logInWithReadPermissions([
+        'public_profile',
+        'email',
+      ])
+    } catch (nativeError) {
+      try {
+        LoginManager.setLoginBehavior('web')
+        result = await LoginManager.logInWithReadPermissions([
+          'public_profile',
+          'email',
+        ])
+      } catch (webError) {
+        // show error message to the user if none of the FB screens
+        // did not open
+        Alert.alert(
+          'There was an error logging in with Facebook. Please try again.',
+        )
+      }
+    }
+    if (!result.isCancelled) {
+      // Create a graph request asking for user information
+      FBGraphRequest(
+        'id, email, first_name, last_name, picture.type(large)',
+        error => {
+          if (error) {
+            Alert.alert('There was an error logging into Facebook.')
+          }
+          // to get the data back from the graph request, add a second result field to this callback function
+        },
+      )
+    }
+  }
+
   render() {
     return (
       <Screen>
@@ -141,6 +224,19 @@ class LoginBody extends Component {
               >
                 <SignInText>SIGN IN</SignInText>
               </SignInButton>
+              <DividerRow>
+                <Divider />
+                <DividerText>OR</DividerText>
+                <Divider />
+              </DividerRow>
+              <ColumnContainer>
+                <LargeLinkedInLoginButton />
+                <FBLoginButton
+                  onPress={() => this.facebookLogin(loginUser)}
+                  text="Sign in with Facebook"
+                  small
+                />
+              </ColumnContainer>
             </Container>
           )}
         </Mutation>

@@ -5,20 +5,25 @@ import {
   SubtitleView,
   Subtitle,
   SafeView,
-  FacebookButtonContainer,
+  Divider,
+  DividerRow,
+  DividerText,
 } from './styles'
 import Header from '../../components/Header'
 import LineInput from '../../components/LineInput'
 import Icon from 'react-native-vector-icons/Feather'
 import RegisterButton from '../../components/RegisterButton'
 import LinkedInRegisterButton from './components/LinkedInRegisterButton'
-import { LoginButton, AccessToken } from 'react-native-fbsdk'
-import axios from 'axios'
+import FBLoginButton from '../../components/FBLoginButton'
+import {
+  AccessToken,
+  LoginManager,
+  GraphRequest,
+  GraphRequestManager,
+} from 'react-native-fbsdk'
 import constraints from './constraints'
 
 const validate = require('validate.js')
-
-const FACEBOOK_API_URL = 'https://graph.facebook.com/v3.1/'
 
 export default class SignUpScreen extends Component {
   constructor(props) {
@@ -32,6 +37,82 @@ export default class SignUpScreen extends Component {
       displayErrors: {},
       errors: {},
       touched: {},
+    }
+  }
+
+  FBLoginCallback = (error, result) => {
+    if (error) {
+      Alert.alert('There was an error logging into Facebook.')
+    } else {
+      // Retrieve and save user details, then navigate
+      this.props.navigation.navigate('PersonalDetails', {
+        userInfo: {
+          facebookToken: this.state.facebookToken,
+          firstName: result.first_name,
+          lastName: result.last_name,
+          email: result.email,
+          password: '',
+        },
+      })
+    }
+  }
+
+  facebookLogin = async () => {
+    // native_only config will fail in the case that the user has
+    // not installed in his device the Facebook app. In this case we
+    // need to go for webview.
+    const FBGraphRequest = async (fields, callback) => {
+      const accessData = await AccessToken.getCurrentAccessToken()
+      const { accessToken } = accessData
+
+      this.setState({
+        facebookToken: accessToken,
+      })
+      // Create a graph request asking for user information
+      const infoRequest = new GraphRequest(
+        '/me',
+        {
+          accessToken,
+          parameters: {
+            fields: {
+              string: fields,
+            },
+          },
+        },
+        callback.bind(this),
+      )
+      // Execute the graph request created above
+      new GraphRequestManager().addRequest(infoRequest).start()
+    }
+
+    let result
+    try {
+      LoginManager.setLoginBehavior('native')
+      result = await LoginManager.logInWithReadPermissions([
+        'public_profile',
+        'email',
+      ])
+    } catch (nativeError) {
+      try {
+        LoginManager.setLoginBehavior('web')
+        result = await LoginManager.logInWithReadPermissions([
+          'public_profile',
+          'email',
+        ])
+      } catch (webError) {
+        // show error message to the user if none of the FB screens open
+        Alert.alert(
+          'There was an error logging in with Facebook. Please try again.',
+        )
+      }
+    }
+    // handle the case that users clicks cancel button in Login view
+    if (!result.isCancelled) {
+      // Create a graph request asking for user information
+      FBGraphRequest(
+        'id, email, first_name, last_name, picture.type(large)',
+        this.FBLoginCallback,
+      )
     }
   }
 
@@ -204,43 +285,16 @@ export default class SignUpScreen extends Component {
                 buttonText="SIGN UP & ACCEPT"
                 disabled={!noErrors}
               />
-              <FacebookButtonContainer>
-                <LoginButton
-                  readPermissions={['email']}
-                  onLoginFinished={(error, result) => {
-                    if (error) {
-                      Alert.alert(
-                        'Error Ocurred',
-                        'Could not log in to Facebook',
-                      )
-                    } else if (result.isCancelled) {
-                      Alert.alert(
-                        'Error Occurred',
-                        'Facebook login was unexpectedly cancelled.',
-                      )
-                    } else {
-                      AccessToken.getCurrentAccessToken().then(async data => {
-                        const token = data.accessToken.toString()
-
-                        const { data: user } = await axios.get(
-                          `${FACEBOOK_API_URL}/me?fields=id,name,first_name,last_name,email&access_token=${token}`,
-                        )
-
-                        this.props.navigation.navigate('PersonalDetails', {
-                          userInfo: {
-                            facebookToken: token,
-                            firstName: user.first_name,
-                            lastName: user.last_name,
-                            email: user.email,
-                            password: '',
-                          },
-                        })
-                      })
-                    }
-                  }}
-                />
-                <LinkedInRegisterButton navigation={this.props.navigation} />
-              </FacebookButtonContainer>
+              <DividerRow>
+                <Divider />
+                <DividerText>OR</DividerText>
+                <Divider />
+              </DividerRow>
+              <LinkedInRegisterButton navigation={this.props.navigation} />
+              <FBLoginButton
+                onPress={() => this.facebookLogin()}
+                text="Continue with Facebook"
+              />
             </ScrollView>
           </KeyboardAvoidingView>
         </SafeView>

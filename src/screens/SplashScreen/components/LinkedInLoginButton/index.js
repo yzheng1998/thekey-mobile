@@ -8,7 +8,7 @@ import {
   LinkedInButtonText,
   LinkedInButton,
   LinkedInLogoContainer,
-  RowContainer,
+  TextContainer,
 } from './styles'
 import { LinkedInClientID, LinkedInRedirectUri } from '../../../../../config'
 
@@ -68,12 +68,12 @@ class LinkedInLoginButton extends Component {
               renderButton={() => null}
             />
             <LinkedInButton onPress={() => this.modal.open()}>
-              <RowContainer>
-                <LinkedInLogoContainer>
-                  <LinkedInIcon name="linkedin" size={30} color="white" />
-                </LinkedInLogoContainer>
-              </RowContainer>
-              <LinkedInButtonText>Sign in with LinkedIn</LinkedInButtonText>
+              <LinkedInLogoContainer>
+                <LinkedInIcon name="linkedin" size={30} color="white" />
+              </LinkedInLogoContainer>
+              <TextContainer>
+                <LinkedInButtonText>Sign in with LinkedIn</LinkedInButtonText>
+              </TextContainer>
             </LinkedInButton>
           </View>
         )}
