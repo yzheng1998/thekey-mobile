@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
-import { RowContainer, Title, Input } from '../../styles'
+import { RowContainer, Title, Input, Text } from '../../styles'
 
 export default class HorizontalEditField extends Component {
   render() {
-    const { title, onChangeText, value, disabled } = this.props
+    const { title, onChangeText, value, disabled, onPress } = this.props
     return (
       <RowContainer>
         <Title>{title}</Title>
-        <Input
-          editable={!disabled}
-          defaultValue={value}
-          onChangeText={onChangeText}
-        />
+        {onPress ? (
+          <Text onPress={onPress}>{value}</Text>
+        ) : (
+          <Input
+            editable={!disabled}
+            defaultValue={value}
+            onChangeText={onChangeText}
+          />
+        )}
       </RowContainer>
     )
   }

@@ -12,6 +12,7 @@ import EditProfileHeader from './components/EditProfileHeader'
 import EditPencil from 'react-native-vector-icons/MaterialIcons'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import LoadingWrapper from '../../components/LoadingWrapper'
+import LocationSearchModal from '../../components/HometownSearchModal'
 import {
   Screen,
   Block,
@@ -51,6 +52,7 @@ export default class EditProfileScreen extends Component {
     lookingForPickerEnabled: false,
     meetByPickerEnabled: false,
     interestsModalVisible: false,
+    showLocationSearchModal: false,
   }
 
   updateText = obj => {
@@ -69,7 +71,11 @@ export default class EditProfileScreen extends Component {
   closeInterestsModal = () => {
     this.setState({ interestsModalVisible: false })
   }
-
+  toggleLocationSearchModal = () => {
+    this.setState({
+      showLocationSearchModal: !this.state.showLocationSearchModal,
+    })
+  }
   render() {
     return (
       <Query query={GET_USER}>
@@ -81,6 +87,8 @@ export default class EditProfileScreen extends Component {
             this.state,
           )
           const {
+            firstName,
+            lastName,
             email,
             linkedIn,
             facebook,
@@ -117,6 +125,8 @@ export default class EditProfileScreen extends Component {
           const tagIds = tags.map(t => t.id)
           const updateProfileVariables = {
             updateUserInput: {
+              firstName,
+              lastName,
               email,
               bio,
               linkedIn,
@@ -131,6 +141,11 @@ export default class EditProfileScreen extends Component {
           }
           return (
             <Screen>
+              <LocationSearchModal
+                setText={obj => this.setState({ hometown: obj.hometown })}
+                onPress={this.toggleLocationSearchModal}
+                visible={this.state.showLocationSearchModal}
+              />
               <EditProfileHeader
                 goBack={() => this.props.navigation.goBack()}
                 mutationVariables={updateProfileVariables}
@@ -151,6 +166,7 @@ export default class EditProfileScreen extends Component {
                   lookingForOptions={lookingForOptions}
                   waysToMeet={waysToMeet}
                   onChangeText={this.updateText}
+                  toggleLocationSearchModal={this.toggleLocationSearchModal}
                 />
                 <Divider />
                 <Block>
