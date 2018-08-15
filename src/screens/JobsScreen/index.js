@@ -71,7 +71,7 @@ class JobsScreen extends Component {
           <Query query={GET_JOBS} variables={variables}>
             {({ loading, data, refetch }) => {
               if (loading) return <LoadingWrapper loading />
-              if (this.state.tab === 2) refetch()
+              if (this.state.tab > 0) refetch()
               const usableData = filterByApplied
                 ? data.jobs.filter(j => j.hasApplied === true)
                 : data.jobs
