@@ -114,6 +114,7 @@ export default class NewChatModal extends Component {
         {
           text: '',
           tags: [],
+          participants: [],
         },
         () => handleClose(),
       )
