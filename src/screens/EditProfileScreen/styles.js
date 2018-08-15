@@ -61,6 +61,11 @@ export const RowContainer = styled.View`
   margin-top: 8px;
   margin-bottom: 8px;
 `
+export const TitleRow = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 4px;
+`
 
 export const ColumnContainer = styled.View`
   margin-top: 8px;
@@ -107,7 +112,7 @@ export const EditTagsContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
 `
-export const EditTagsButton = styled.TouchableOpacity``
+export const EditButton = styled.TouchableOpacity``
 export const ContactContent = styled.TextInput`
   font-size: 18px;
   font-family: ${themeGet('fonts.light')};
@@ -144,21 +149,17 @@ export const PickerContainer = styled.View`
   bottom: 0;
 `
 
-export const PickerText = styled.Text`
+export const DescriptionText = styled.Text`
   font-size: 16px;
   font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.fontProfileFields')};
+  margin-right: 15px;
 `
 
-export const PickerButton = styled.TouchableOpacity`
-  flex: 2;
-  justify-content: space-between;
+export const EditDescriptionView = styled.View`
+  margin-top: 8px;
   flex-direction: row;
-`
-
-export const PickerView = styled.Picker`
-  width: 100%;
-  background-color: ${themeGet('colors.background')};
+  flex-wrap: wrap;
 `
 
 export const DoneButton = styled.TouchableOpacity`

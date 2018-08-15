@@ -40,7 +40,10 @@ export const GET_USER = gql`
         startDate
         endDate
       }
-      lookingFor
+      currentInitiatives {
+        id
+        initiative
+      }
       skills
       friends {
         id

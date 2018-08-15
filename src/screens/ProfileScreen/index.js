@@ -4,22 +4,15 @@ import MyProfilePicBlock from './components/MyProfilePicBlock'
 import MyProfileBioBlock from './components/MyProfileBioBlock'
 import ButtonRowView from './components/ButtonRowView'
 import Description from './components/Description'
+import ArrayDescription from './components/ArrayDescription'
 import EducationListView from './components/EducationListView'
 import ExperienceListView from './components/ExperienceListView'
 import ContactContainerView from './components/ContactContainerView'
 import { Query } from 'react-apollo'
 import { GET_USER } from './query'
-import nodeEmoji from 'node-emoji'
 import Settings from './components/Settings'
 import LoadingWrapper from '../../components/LoadingWrapper'
-
-const lookingForOptions = [
-  { value: 'BUSINESSMENTOR', label: 'Business Mentor' },
-  { value: 'FRIENDS', label: 'Friends' },
-  { value: 'BUSINESSPARTNER', label: 'Business Partner' },
-  { value: 'EMPLOYMENT', label: 'Employment' },
-  { value: 'SCHOOLADVICE', label: 'School Advice' },
-]
+import { currentInitiativesOptions, waysToMeetOptions } from '../../constants'
 
 const defaultProfilePicture =
   'https://images.unsplash.com/photo-1519145897500-869c40ccb024?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc363c8e033813d4f7b798846bb13a24&auto=format&fit=crop&w=582&q=80'
@@ -55,13 +48,20 @@ export default class ProfileScreen extends Component {
             preferredWaysToMeet,
             tags,
             workExperiences,
-            lookingFor,
+            currentInitiatives,
             skills,
             settings,
             resumes,
           } = data.viewer
-          const emojiList = preferredWaysToMeet.map(emoji =>
-            nodeEmoji.get(emoji.wayToMeet.toLowerCase()),
+          const emojiList = preferredWaysToMeet.map(
+            emoji =>
+              waysToMeetOptions.find(el => el.value === emoji.wayToMeet).label,
+          )
+          const initiativeEmojis = currentInitiatives.map(
+            emoji =>
+              currentInitiativesOptions.find(
+                el => el.value === emoji.initiative,
+              ).label,
           )
 
           return (
@@ -91,15 +91,11 @@ export default class ProfileScreen extends Component {
               />
               <MyProfileBioBlock tagData={tags} bioText={bio} />
               <Divider />
-              <Description
-                row
-                title="Looking For"
-                content={
-                  lookingForOptions.find(el => el.value === lookingFor).label
-                }
+              <ArrayDescription
+                title="Current Initiatives"
+                content={initiativeEmojis}
               />
-              <Description
-                row
+              <ArrayDescription
                 title="Preferred Ways To Meet"
                 content={emojiList}
               />

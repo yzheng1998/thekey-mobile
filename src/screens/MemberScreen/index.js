@@ -11,29 +11,20 @@ import EventsInCommon from './components/EventsInCommon'
 import ReportUserModal from './components/ReportUserModal'
 import { Query } from 'react-apollo'
 import { GET_USER } from './query'
-import nodeEmoji from 'node-emoji'
 import ActionSheet from 'react-native-actionsheet'
 import LoadingWrapper from '../../components/LoadingWrapper'
 import { View } from 'react-native'
+import ArrayDescription from '../ProfileScreen/components/ArrayDescription'
+import { currentInitiativesOptions, waysToMeetOptions } from '../../constants'
 
 const defaultProfilePicture =
   'https://images.unsplash.com/photo-1519145897500-869c40ccb024?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc363c8e033813d4f7b798846bb13a24&auto=format&fit=crop&w=582&q=80'
 
-const lookingForOptions = [
-  { label: 'Business Mentor', value: 'BUSINESSMENTOR' },
-  { label: 'Friends', value: 'FRIENDS' },
-  { label: 'Business Partner', value: 'BUSINESSPARTNER' },
-  { label: 'Employment', value: 'EMPLOYMENT' },
-  { label: 'School Advice', value: 'SCHOOLADVICE' },
-]
-
 export default class MemberScreen extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showReportUserModal: false,
-    }
+  state = {
+    showReportUserModal: false,
   }
+
   showActionSheet = () => {
     this.ActionSheet.show()
   }
@@ -61,15 +52,22 @@ export default class MemberScreen extends Component {
             preferredWaysToMeet,
             tags,
             workExperiences,
-            lookingFor,
+            currentInitiatives,
             skills,
             mutualFriends,
             eventsInCommon,
             isFriend,
             hasFriendRequest,
           } = data.user
-          const emojiList = preferredWaysToMeet.map(emoji =>
-            nodeEmoji.get(emoji.wayToMeet.toLowerCase()),
+          const emojiList = preferredWaysToMeet.map(
+            emoji =>
+              waysToMeetOptions.find(el => el.value === emoji.wayToMeet).label,
+          )
+          const initiativeEmojis = currentInitiatives.map(
+            emoji =>
+              currentInitiativesOptions.find(
+                el => el.value === emoji.initiative,
+              ).label,
           )
           return (
             <ScreenContainer>
@@ -109,15 +107,11 @@ export default class MemberScreen extends Component {
               />
               <MyProfileBioBlock tagData={tags} bioText={bio} />
               <Divider />
-              <Description
-                row
-                title="Looking For"
-                content={
-                  lookingForOptions.find(el => el.value === lookingFor).label
-                }
+              <ArrayDescription
+                title="Current Initiatives"
+                content={initiativeEmojis}
               />
-              <Description
-                row
+              <ArrayDescription
                 title="Preferred Ways To Meet"
                 content={emojiList}
               />

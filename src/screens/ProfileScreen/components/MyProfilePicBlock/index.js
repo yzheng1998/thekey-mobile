@@ -7,7 +7,7 @@ import {
   EditLabel,
 } from './styles'
 import PictureHeader from '../../../../components/PictureHeader'
-import EditPencil from 'react-native-vector-icons/MaterialIcons'
+import EditPencil from 'react-native-vector-icons/Feather'
 import { View, Modal } from 'react-native'
 import QRDisplayModal from '../QRDisplayModal'
 
@@ -57,7 +57,7 @@ export default class MyProfilePicBlock extends Component {
               activeOpacity={0.5}
               onPress={() => this.props.navigation.navigate('EditProfile')}
             >
-              <EditPencil name="edit" color="white" />
+              <EditPencil name="edit-2" color="rgb(148, 157, 170)" size={20} />
               <EditLabel>EDIT PROFILE</EditLabel>
             </EditButton>
             <EventTitleText onPress={this.openQRModal}>{name}</EventTitleText>
