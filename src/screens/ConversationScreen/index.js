@@ -16,6 +16,9 @@ const CHAT_SUBSCRIPTION = gql`
       id
       sender {
         id
+        firstName
+        lastName
+        profilePicture
       }
       content
     }
