@@ -46,6 +46,7 @@ export default class CompanySearchModal extends Component {
       showAddReview,
       setCompanyInfo,
       navigation,
+      state,
       ...rest
     } = this.props
     const closeSearchModal = () => {
@@ -56,7 +57,13 @@ export default class CompanySearchModal extends Component {
     }
 
     return (
-      <Modal onDismiss={showAddReview} animationType="slide" {...rest}>
+      <Modal
+        onDismiss={() => {
+          if (state.companyName) showAddReview()
+        }}
+        animationType="slide"
+        {...rest}
+      >
         <Background>
           <SearchModalHeader closeModal={closeSearchModal} />
           <SearchBar
