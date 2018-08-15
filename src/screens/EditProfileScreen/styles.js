@@ -80,6 +80,13 @@ export const Input = styled.TextInput`
   color: ${themeGet('colors.fontProfileFields')};
 `
 
+export const Text = styled.Text`
+  flex: 2;
+  font-size: 16px;
+  font-family: ${themeGet('fonts.medium')};
+  color: ${themeGet('colors.fontProfileFields')};
+`
+
 export const TagText = styled.Text`
   font-size: 16px;
   font-family: ${themeGet('fonts.medium')};

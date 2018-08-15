@@ -33,25 +33,23 @@ export default class BasicInfoBlock extends Component {
       el => waysToMeet.find(emoji => emoji.value === el.wayToMeet).label,
     )
 
-    const { onChangeText } = this.props
+    const { onChangeText, toggleLocationSearchModal } = this.props
     return (
       <WideContainer>
         <Block>
           <HorizontalEditField
-            disabled
             title="First Name"
             onChangeText={text => onChangeText({ firstName: text })}
             value={firstName}
           />
           <HorizontalEditField
-            disabled
             title="Last Name"
             onChangeText={text => onChangeText({ lastName: text })}
             value={lastName}
           />
           <HorizontalEditField
+            onPress={toggleLocationSearchModal}
             title="Location"
-            onChangeText={text => onChangeText({ hometown: text })}
             value={hometown}
           />
         </Block>
