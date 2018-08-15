@@ -3,42 +3,23 @@ import {
   Title,
   Container,
   Prompt,
-  ButtonsContainer,
   LetterInput,
   BackButtonContainer,
   BigContainer,
 } from './styles'
-import TemplateSelector from './components/ButtonGroup'
 import ApplyButton from './components/ApplyButton'
 import BackButton from 'react-native-vector-icons/Ionicons'
 import KeyboardSpacer from 'react-native-keyboard-spacer'
 
-const CUSTOM_TEMPLATE = 1
-
-const coverLetter =
-  'This would be a default cover letter that a user could configure in their settings. From here they could send as-is, or adjust the text to better suit the position in question.'
-
 export default class ApplyNowModal extends Component {
-  constructor() {
-    super()
-    this.state = {
-      selectedIndex: CUSTOM_TEMPLATE,
-      content: '',
-    }
-    this.updateIndex = this.updateIndex
+  state = {
+    content: '',
   }
 
-  updateIndex = selectedIndex => {
-    this.setState({
-      selectedIndex,
-      content: selectedIndex === CUSTOM_TEMPLATE ? '' : coverLetter,
-    })
-  }
   clearContent = () => {
     this.setState({ content: '' })
   }
   render() {
-    const { selectedIndex } = this.state
     const { isVisible, toggleApplyModal, refreshPage } = this.props
     return (
       <BigContainer
@@ -64,12 +45,6 @@ export default class ApplyNowModal extends Component {
             Tell us in a few words what makes you the right person for this job.
             Your CV and profile information will also be included.
           </Prompt>
-          <ButtonsContainer>
-            <TemplateSelector
-              onPress={this.updateIndex}
-              selectedIndex={selectedIndex}
-            />
-          </ButtonsContainer>
           <LetterInput
             multiline
             autoGrow={false}

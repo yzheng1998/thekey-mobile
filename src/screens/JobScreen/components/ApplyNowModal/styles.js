@@ -23,16 +23,11 @@ export const Prompt = styled.Text`
   color: ${themeGet('colors.fontSubtitle.primary')};
   padding-bottom: 12px;
 `
-export const ButtonsContainer = styled.View`
-  margin-left: -10px;
-  height: 29;
-  width: 100%;
-`
 export const LetterInput = styled.TextInput`
-  margin-top: 27px;
+  margin-top: 10px;
   padding: 14px;
   overflow: scroll;
-  height: 344px;
+  height: 380px;
   background-color: ${themeGet('colors.textArea')};
   font-family: ${themeGet('fonts.light')};
   font-size: 17px;
