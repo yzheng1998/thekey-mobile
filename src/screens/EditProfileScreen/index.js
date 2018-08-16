@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
-import { Modal, AsyncStorage } from 'react-native'
+import { AsyncStorage } from 'react-native'
 import EditContactBlock from './components/EditContactBlock'
 import BasicInfoBlock from './components/BasicInfoBlock'
 import EditEducationBlock from './components/EditEducationBlock'
 import EditExperienceBlock from './components/EditExperienceBlock'
-import PickerComponent from '../../components/PickerComponent'
-import EmojiModal from './components/EmojiModal'
 import ProfilePicture from './components/ProfilePicture'
 import InterestsSearchModal from './components/InterestsSearchModal'
 import EditProfileHeader from './components/EditProfileHeader'
-import EditPencil from 'react-native-vector-icons/MaterialIcons'
+import EditPencil from 'react-native-vector-icons/Feather'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import LoadingWrapper from '../../components/LoadingWrapper'
 import LocationSearchModal from '../../components/HometownSearchModal'
@@ -21,35 +19,20 @@ import {
   ColumnContainer,
   TagText,
   EditTagsContainer,
-  EditTagsButton,
+  EditButton,
+  TitleRow,
 } from './styles'
 
-import nodeEmoji from 'node-emoji'
+import { currentInitiativesOptions, waysToMeetOptions } from '../../constants'
 
 import { Query } from 'react-apollo'
 import { GET_USER } from './query'
-
-const lookingForOptions = [
-  { label: 'Business Mentor', value: 'BUSINESSMENTOR' },
-  { label: 'Friends', value: 'FRIENDS' },
-  { label: 'Business Partner', value: 'BUSINESSPARTNER' },
-  { label: 'Employment', value: 'EMPLOYMENT' },
-  { label: 'School Advice', value: 'SCHOOLADVICE' },
-]
-
-const waysToMeet = [
-  { label: nodeEmoji.get('coffee'), value: 'COFFEE' },
-  { label: nodeEmoji.get('hamburger'), value: 'HAMBURGER' },
-  { label: nodeEmoji.get('phone'), value: 'PHONE' },
-  { label: nodeEmoji.get('beers'), value: 'BEERS' },
-]
 
 const defaultProfilePicture =
   'https://images.unsplash.com/photo-1519145897500-869c40ccb024?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc363c8e033813d4f7b798846bb13a24&auto=format&fit=crop&w=582&q=80'
 
 export default class EditProfileScreen extends Component {
   state = {
-    lookingForPickerEnabled: false,
     meetByPickerEnabled: false,
     interestsModalVisible: false,
     showLocationSearchModal: false,
@@ -100,26 +83,8 @@ export default class EditProfileScreen extends Component {
             preferredWaysToMeet,
             tags,
             workExperiences,
-            lookingFor,
-            lookingForPickerEnabled,
-            meetByPickerEnabled,
+            currentInitiatives,
           } = displayData
-          const toggleWayToMeet = emoji => {
-            if (
-              preferredWaysToMeet
-                .map(obj => obj.wayToMeet)
-                .includes(emoji.wayToMeet)
-            ) {
-              this.setState({
-                preferredWaysToMeet: preferredWaysToMeet.filter(
-                  el => el.wayToMeet !== emoji.wayToMeet,
-                ),
-              })
-            } else
-              this.setState({
-                preferredWaysToMeet: [...preferredWaysToMeet, emoji],
-              })
-          }
 
           const preferredWaysToMeetIds = preferredWaysToMeet.map(p => p.id)
           const tagIds = tags.map(t => t.id)
@@ -133,7 +98,7 @@ export default class EditProfileScreen extends Component {
               facebook,
               twitter,
               profilePicture,
-              lookingFor,
+              currentInitiatives,
               hometown,
               tags: tagIds,
               preferredWaysToMeet: preferredWaysToMeetIds,
@@ -162,23 +127,29 @@ export default class EditProfileScreen extends Component {
                   updateProfilePicture={this.updateProfilePicture}
                 />
                 <BasicInfoBlock
+                  currentInitiativesOptions={currentInitiativesOptions}
+                  waysToMeetOptions={waysToMeetOptions}
                   state={displayData}
-                  lookingForOptions={lookingForOptions}
-                  waysToMeet={waysToMeet}
                   onChangeText={this.updateText}
                   toggleLocationSearchModal={this.toggleLocationSearchModal}
                 />
                 <Divider />
                 <Block>
                   <ColumnContainer>
-                    <BlockTitle>My Interests</BlockTitle>
+                    <TitleRow>
+                      <BlockTitle>My Interests</BlockTitle>
+                      <EditButton onPress={this.openInterestsModal}>
+                        <EditPencil
+                          name="edit-2"
+                          color="rgb(148, 157, 170)"
+                          size={20}
+                        />
+                      </EditButton>
+                    </TitleRow>
                     <EditTagsContainer>
                       <TagText>
                         {tags.map(tag => `#${tag.name}`).join(' ')}
                       </TagText>
-                      <EditTagsButton onPress={this.openInterestsModal}>
-                        <EditPencil name="edit" color="black" size={15} />
-                      </EditTagsButton>
                     </EditTagsContainer>
                     <InterestsSearchModal
                       navigation={this.props.navigation}
@@ -209,34 +180,6 @@ export default class EditProfileScreen extends Component {
                   onChangeText={this.updateText}
                 />
               </KeyboardAwareScrollView>
-              {lookingForPickerEnabled && (
-                <PickerComponent
-                  options={lookingForOptions}
-                  doneOnPress={() => {
-                    this.updateText({
-                      lookingForPickerEnabled: false,
-                    })
-                  }}
-                  onValueChange={this.updateText}
-                  value={lookingFor}
-                  keyName="lookingFor"
-                />
-              )}
-              <Modal
-                animationType="slide"
-                transparent
-                visible={meetByPickerEnabled}
-              >
-                <EmojiModal
-                  doneOnPress={() => {
-                    this.updateText({
-                      meetByPickerEnabled: false,
-                    })
-                  }}
-                  onSelection={toggleWayToMeet}
-                  selected={preferredWaysToMeet}
-                />
-              </Modal>
             </Screen>
           )
         }}

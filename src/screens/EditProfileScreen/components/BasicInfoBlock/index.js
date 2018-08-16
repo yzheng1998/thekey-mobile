@@ -5,13 +5,15 @@ import {
   BlockTitle,
   Title,
   LargeInput,
-  RowContainer,
   ColumnContainer,
-  PickerText,
-  PickerButton,
+  DescriptionText,
+  EditDescriptionView,
   Divider,
   WideContainer,
+  TitleRow,
+  EditButton,
 } from '../../styles'
+import EditPencil from 'react-native-vector-icons/Feather'
 
 export default class BasicInfoBlock extends Component {
   render() {
@@ -20,17 +22,20 @@ export default class BasicInfoBlock extends Component {
       lastName,
       hometown,
       bio,
-      lookingFor,
+      currentInitiatives,
       preferredWaysToMeet,
     } = this.props.state
-    const { lookingForOptions, waysToMeet } = this.props
+    const { currentInitiativesOptions, waysToMeetOptions } = this.props
 
-    const lookingForLabel = lookingForOptions.find(
-      element => element.value === lookingFor,
-    ).label
+    const currentInitiativesLabels = currentInitiatives.map(
+      el =>
+        currentInitiativesOptions.find(emoji => emoji.value === el.initiative)
+          .editLabel,
+    )
 
     const waysToMeetLabels = preferredWaysToMeet.map(
-      el => waysToMeet.find(emoji => emoji.value === el.wayToMeet).label,
+      el =>
+        waysToMeetOptions.find(emoji => emoji.value === el.wayToMeet).editLabel,
     )
 
     const { onChangeText, toggleLocationSearchModal } = this.props
@@ -66,32 +71,41 @@ export default class BasicInfoBlock extends Component {
         </Block>
         <Divider />
         <Block>
-          <RowContainer>
-            <Title>Looking For</Title>
-            <PickerButton
-              onPress={() =>
-                onChangeText({
-                  lookingForPickerEnabled: true,
-                  meetByPickerEnabled: false,
-                })
-              }
-            >
-              <PickerText>{lookingForLabel}</PickerText>
-            </PickerButton>
-          </RowContainer>
-          <RowContainer>
-            <Title>Meet By</Title>
-            <PickerButton
-              onPress={() =>
-                onChangeText({
-                  meetByPickerEnabled: true,
-                  lookingForPickerEnabled: false,
-                })
-              }
-            >
-              <PickerText>{waysToMeetLabels}</PickerText>
-            </PickerButton>
-          </RowContainer>
+          <ColumnContainer>
+            <TitleRow>
+              <Title>Current Initiatives</Title>
+              <EditButton>
+                <EditPencil
+                  name="edit-2"
+                  color="rgb(148, 157, 170)"
+                  size={20}
+                />
+              </EditButton>
+            </TitleRow>
+            <EditDescriptionView>
+              <DescriptionText>
+                {currentInitiativesLabels.join(', ')}
+              </DescriptionText>
+            </EditDescriptionView>
+          </ColumnContainer>
+        </Block>
+        <Divider />
+        <Block>
+          <ColumnContainer>
+            <TitleRow>
+              <Title>Meet By</Title>
+              <EditButton>
+                <EditPencil
+                  name="edit-2"
+                  color="rgb(148, 157, 170)"
+                  size={20}
+                />
+              </EditButton>
+            </TitleRow>
+            <EditDescriptionView>
+              <DescriptionText>{waysToMeetLabels.join(', ')}</DescriptionText>
+            </EditDescriptionView>
+          </ColumnContainer>
         </Block>
       </WideContainer>
     )
