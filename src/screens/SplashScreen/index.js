@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
-import { Image, Alert, AsyncStorage } from 'react-native'
+import {
+  Image,
+  Alert,
+  View,
+  AsyncStorage,
+  Dimensions,
+  SafeAreaView,
+} from 'react-native'
 import {
   Background,
   Container,
   Content,
   SubTitle,
+  SubTitleSecondary,
+  SwiperContainer,
   Title,
   SignInButton,
   SignInText,
@@ -14,7 +23,11 @@ import {
   Divider,
   DividerText,
 } from './styles'
-import Logo from '../../stories/thekey-logo.png'
+import Swiper from 'react-native-swiper'
+import logo from '../../../assets/theKeyLogo.png'
+import discoverGraphic from '../../../assets/discoverGraphic.png'
+import connectGraphic from '../../../assets/connectGraphic.png'
+import shareGraphic from '../../../assets/shareGraphic.png'
 import LinkedInLoginButton from './components/LinkedInLoginButton'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
@@ -25,6 +38,8 @@ import {
   GraphRequest,
   GraphRequestManager,
 } from 'react-native-fbsdk'
+
+const { height } = Dimensions.get('window')
 
 const LOGIN_USER = gql`
   mutation loginUser(
@@ -122,13 +137,136 @@ export default class SplashScreen extends Component {
   render() {
     return (
       <Background>
-        <Container>
-          <Content>
-            <Image source={Logo} style={{ height: 105, width: 79 }} />
-            <SubTitle>Welcome to</SubTitle>
-            <Title>The Key</Title>
-          </Content>
-        </Container>
+        <SafeAreaView style={{ flex: 0.5, backgroundColor: 'white' }}>
+          <SwiperContainer>
+            <Swiper
+              ref={component => {
+                this.swiper = component
+              }}
+              loop
+              autoplay
+              autoplayTimeout={2}
+              scrollEnabled={false}
+              style={{
+                backgroundColor: 'white',
+              }}
+              paginationStyle={{ bottom: 14 }}
+              activeDot={
+                <View
+                  style={{
+                    backgroundColor: 'rgb(250, 53, 121)',
+                    width: 10,
+                    height: 10,
+                    borderRadius: 5,
+                    marginLeft: 3,
+                    marginRight: 3,
+                    marginTop: 3,
+                    marginBottom: 3,
+                  }}
+                />
+              }
+              dot={
+                <View
+                  style={{
+                    backgroundColor: 'rgba(0, 0, 0, .2)',
+                    width: 6,
+                    height: 6,
+                    borderRadius: 3,
+                    marginLeft: 3,
+                    marginRight: 3,
+                    marginTop: 3,
+                    marginBottom: 3,
+                  }}
+                />
+              }
+            >
+              <Content>
+                <Image
+                  source={logo}
+                  style={{
+                    position: 'absolute',
+                    top: 55,
+                    height: height * 0.204,
+                    width: height * 0.17,
+                  }}
+                />
+                <View style={{ position: 'absolute', bottom: 40 }}>
+                  <SubTitle>Welcome to</SubTitle>
+                  <Title>The Key</Title>
+                </View>
+              </Content>
+              <Content>
+                <Image
+                  source={connectGraphic}
+                  style={{
+                    position: 'absolute',
+                    top: 40,
+                    width: height * 0.35,
+                    height: height * 0.258,
+                  }}
+                />
+                <View
+                  style={{
+                    position: 'absolute',
+                    bottom: 40,
+                    alignItems: 'center',
+                  }}
+                >
+                  <Title>Connect.</Title>
+                  <SubTitleSecondary>
+                    Connect with peers and alumni
+                  </SubTitleSecondary>
+                </View>
+              </Content>
+              <Content>
+                <Image
+                  source={discoverGraphic}
+                  style={{
+                    top: 32,
+                    position: 'absolute',
+                    width: height * 0.31,
+                    height: height * 0.289,
+                  }}
+                />
+                <View
+                  style={{
+                    position: 'absolute',
+                    bottom: 40,
+                    alignItems: 'center',
+                  }}
+                >
+                  <Title>Discover.</Title>
+                  <SubTitleSecondary>
+                    Discover opportunities, events, and groups
+                  </SubTitleSecondary>
+                </View>
+              </Content>
+              <Content>
+                <Image
+                  source={shareGraphic}
+                  style={{
+                    position: 'absolute',
+                    top: 39,
+                    width: height * 0.36,
+                    height: height * 0.268,
+                  }}
+                />
+                <View
+                  style={{
+                    position: 'absolute',
+                    bottom: 40,
+                    alignItems: 'center',
+                  }}
+                >
+                  <Title>Share.</Title>
+                  <SubTitleSecondary>
+                    Share knowledge on companies
+                  </SubTitleSecondary>
+                </View>
+              </Content>
+            </Swiper>
+          </SwiperContainer>
+        </SafeAreaView>
         <Container>
           <SignInButton onPress={() => this.props.navigation.navigate('Login')}>
             <SignInText>SIGN IN</SignInText>

@@ -4,30 +4,30 @@ import { themeGet } from 'styled-system'
 export const LinkedInButtonText = styled.Text`
   font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.fontPrimary')};
-  font-size: 14px;
-  margin-left: 3px;
-  margin-left: -30px;
+  font-size: 16px;
 `
 export const LinkedInButton = styled.TouchableOpacity`
-  width: 100%;
-  margin-top: 12px;
-  height: 33px;
+  border-color: rgb(8, 92, 144);
+  border-width: 1px;
+  height: 50px;
+  background-color: rgb(1, 119, 181);
+  border-radius: 8px;
+  align-items: center;
+  margin-left: 12px;
+  margin-right: 12px;
+  margin-top: 8px;
+  margin-bottom: 8px;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
-  background-color: ${themeGet('colors.linkedInBlue')};
-  border-radius: 4;
-  border-color: ${themeGet('colors.linkedInBorder')};
-  border-width: 0;
 `
 export const LinkedInLogoContainer = styled.View`
-  width: 15%;
-  border-radius: 3px;
+  width: 50px;
+  height: 100%;
+  position: absolute;
+  left: 0;
   align-items: center;
   justify-content: center;
-`
-export const TextContainer = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
+  border-right-width: 1.5px;
+  border-radius: 2px;
+  border-color: rgb(8, 92, 144);
 `

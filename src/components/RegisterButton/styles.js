@@ -3,7 +3,7 @@ import { themeGet } from 'styled-system'
 
 export const Button = styled.TouchableOpacity`
   margin-top: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   height: 50px;
   margin-left: 12px;
   margin-right: 12px;

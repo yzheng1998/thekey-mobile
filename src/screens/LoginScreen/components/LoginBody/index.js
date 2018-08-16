@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { AsyncStorage, Alert } from 'react-native'
 import {
   Container,
-  ColumnContainer,
   TextInputContainer,
   ForgotPass,
   PinkSubtitle,
@@ -229,14 +228,11 @@ class LoginBody extends Component {
                 <DividerText>OR</DividerText>
                 <Divider />
               </DividerRow>
-              <ColumnContainer>
-                <LargeLinkedInLoginButton />
-                <FBLoginButton
-                  onPress={() => this.facebookLogin(loginUser)}
-                  text="Sign in with Facebook"
-                  small
-                />
-              </ColumnContainer>
+              <LargeLinkedInLoginButton />
+              <FBLoginButton
+                onPress={() => this.facebookLogin(loginUser)}
+                text="Sign in with Facebook"
+              />
             </Container>
           )}
         </Mutation>
