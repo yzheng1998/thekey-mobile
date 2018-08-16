@@ -36,6 +36,7 @@ export const SignInButton = styled.TouchableOpacity`
   border-radius: 10px;
   align-items: center;
   padding: 16px;
+  margin-bottom: 8px;
 `
 export const SignInText = styled.Text`
   font-family: ${themeGet('fonts.heavy')};
@@ -71,18 +72,19 @@ export const DividerText = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   color: ${themeGet('colors.fontDescription.primary')};
   font-size: 12px;
+  margin-left: 8px;
+  margin-right: 8px;
 `
 export const Divider = styled.View`
-  width: 46%;
   background-color: ${themeGet('colors.fontDescription.primary')};
   height: 1px;
-  margin-left: 3px;
-  margin-right: 3px;
+  flex: 1;
 `
 export const DividerRow = styled.View`
   flex-direction: row;
-  margin-top: 15px;
-  margin-left: 12px;
-  margin-right: 12px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
   align-items: center;
 `

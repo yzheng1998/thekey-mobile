@@ -2,8 +2,10 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const Button = styled.TouchableOpacity`
-  margin-top: 12px;
-  margin-bottom: 12px;
+  margin-left: 12px;
+  margin-right: 12px;
+  margin-top: 8px;
+  margin-bottom: 8px;
   height: ${props => (props.small ? 33 : 50)};
   flex-direction: row;
   background-color: ${themeGet('colors.facebookBlue')};
@@ -26,7 +28,11 @@ export const ButtonText = styled.Text`
 export const IconContainer = styled.View`
   justify-content: center;
   align-items: center;
-  width: ${props => (props.small ? '15%' : 50)}
+  height: 100%;
+  position: absolute;
+  border-radius: 2px;
+  left: 0;
+  width: ${props => (props.small ? '15%' : 50)};
   border-color: ${themeGet('colors.facebookBorder')};
-  border-right-width: ${props => (props.small ? 0 : 1)};
+  border-right-width: ${props => (props.small ? 0 : 1.5)};
 `

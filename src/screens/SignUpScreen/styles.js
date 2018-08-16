@@ -9,7 +9,6 @@ export const ScreenContainer = styled.View`
   padding-left: 12px;
   padding-right: 12px;
   background-color: ${themeGet('colors.background')};
-  padding-bottom: 24px;
 `
 
 export const SubtitleView = styled.View`
@@ -44,18 +43,19 @@ export const DividerText = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   color: ${themeGet('colors.fontDescription.primary')};
   font-size: 12px;
+  margin-left: 8px;
+  margin-right: 8px;
 `
 export const Divider = styled.View`
-  width: 46%;
   background-color: ${themeGet('colors.fontDescription.primary')};
   height: 1px;
-  margin-left: 3px;
-  margin-right: 3px;
+  flex: 1;
 `
 export const DividerRow = styled.View`
   flex-direction: row;
-  margin-left: 12px;
-  margin-right: 12px;
-  margin-bottom: 12px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
   align-items: center;
 `
