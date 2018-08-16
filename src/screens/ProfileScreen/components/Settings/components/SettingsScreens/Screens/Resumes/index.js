@@ -4,11 +4,11 @@ import {
   SubtitleView,
   Subtitle,
 } from '../../../../../../styles'
-import { SafeAreaView } from 'react-native'
+import { SafeAreaView, Alert, ScrollView } from 'react-native'
 import RegisterButton from '../../../../../../../../components/RegisterButton'
 import SubmitButton from '../../../../../../../../components/SubmitButton'
 import ResumeList from '../../../../../../../ResumeUploadScreen/components/ResumeList'
-import { withApollo } from 'react-apollo'
+import { withApollo, Mutation } from 'react-apollo'
 import {
   DocumentPicker,
   DocumentPickerUtil,
@@ -17,6 +17,7 @@ import RNFS from 'react-native-fs'
 import uuid from 'uuid/v4'
 import gql from 'graphql-tag'
 import config from '../../../../../../../../../config'
+import { SET_RESUMES } from './mutations'
 
 function humanFileSize(bytes, si) {
   const thresh = si ? 1000 : 1024
@@ -42,12 +43,12 @@ const SIGN_S3_URL = gql`
     }
   }
 `
-
-class ResumeUploadScreen extends Component {
+class Resumes extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      resumeListData: [],
+      resumeListData: this.props.resumes,
+      setResumesInput: this.props.resumes,
     }
   }
 
@@ -75,7 +76,6 @@ class ResumeUploadScreen extends Component {
 
   handleFile = (err, res) => {
     const id = uuid()
-
     this.props.client
       .mutate({
         mutation: SIGN_S3_URL,
@@ -128,7 +128,6 @@ class ResumeUploadScreen extends Component {
         })
       })
   }
-
   handlePress = () => {
     DocumentPicker.show(
       {
@@ -142,32 +141,73 @@ class ResumeUploadScreen extends Component {
     const buttonText = this.state.resumeListData.length
       ? 'ADD ANOTHER FILE'
       : 'ADD FILE'
+    const initialResumeCount = this.props.resumes.length
+
     return (
       <ModalScreenContainer>
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-          <SubtitleView>
-            <Subtitle>
-              Add your resume. This should include GPA, School,
-              Extracurriculars, Internships/Work Experience, etc.
-            </Subtitle>
-          </SubtitleView>
-          <ResumeList
-            cancel={this.removeFileById}
-            resumeListData={this.state.resumeListData}
-          />
-          <RegisterButton
-            secondary
-            buttonText={buttonText}
-            onPress={this.handlePress}
-          />
+          <ScrollView style={{ marginLeft: 12, marginRight: 12 }}>
+            <SubtitleView>
+              <Subtitle>
+                Add your resume. This should include GPA, School,
+                Extracurriculars, Internships/Work Experience, etc.
+              </Subtitle>
+            </SubtitleView>
+            <ResumeList
+              resumeListData={this.state.resumeListData}
+              refetch={this.props.refetch}
+              cancel={this.removeFileById}
+            />
+            <RegisterButton
+              secondary
+              buttonText={buttonText}
+              onPress={this.handlePress}
+            />
+          </ScrollView>
+          <Mutation
+            mutation={SET_RESUMES}
+            onCompleted={() => {
+              Alert.alert('Changes saved.')
+              this.props.refetch()
+            }}
+          >
+            {(setResumes, { error }) => {
+              if (error) {
+                Alert.alert(
+                  'There was an error deleting your resume. Please try again.',
+                  { cancelable: true },
+                )
+              }
+              const setResumesInput = this.state.resumeListData.map(resume => ({
+                resume: resume.url,
+                title: resume.title,
+                dataSize: resume.dataSize,
+              }))
+              const shouldEnableSubmit =
+                initialResumeCount > 0 ||
+                (this.state.resumeListData.length > 0 &&
+                  this.state.resumeListData.every(
+                    resume => resume.progress === '100%',
+                  ))
+              return (
+                shouldEnableSubmit && (
+                  <SubmitButton
+                    buttonText="SAVE CHANGES"
+                    onPress={() => {
+                      const variables = {
+                        setResumesInput,
+                      }
+                      setResumes({ variables })
+                    }}
+                  />
+                )
+              )
+            }}
+          </Mutation>
         </SafeAreaView>
-        {this.state.resumeListData.length > 0 &&
-          this.state.resumeListData.every(
-            resume => resume.progress === '100%',
-          ) && <SubmitButton onPress={() => null} buttonText="SUBMIT" />}
       </ModalScreenContainer>
     )
   }
 }
 
-export default withApollo(ResumeUploadScreen)
+export default withApollo(Resumes)

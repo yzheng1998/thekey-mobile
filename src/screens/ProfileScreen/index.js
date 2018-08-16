@@ -37,7 +37,7 @@ export default class ProfileScreen extends Component {
         query={GET_USER}
         variables={{ id: this.props.navigation.getParam('id') }}
       >
-        {({ loading, data }) => {
+        {({ loading, data, refetch }) => {
           if (loading) return <LoadingWrapper loading />
           const {
             id,
@@ -73,6 +73,8 @@ export default class ProfileScreen extends Component {
                 toggleSettings={this.toggleSettings}
                 navigation={this.props.navigation}
                 resumes={resumes}
+                id={this.props.navigation.getParam('id')}
+                refetch={refetch}
               />
               <MyProfilePicBlock
                 name={`${firstName} ${lastName}`}

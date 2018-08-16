@@ -1,16 +1,18 @@
 import gql from 'graphql-tag'
 
-export const SEND_MEMBERSHIP_APPLICATION = gql`
-  mutation sendMembershipApplication(
-    $sendMembershipApplicationInput: SendMembershipApplicationInput!
-  ) {
-    sendMembershipApplication(
-      sendMembershipApplicationInput: $sendMembershipApplicationInput
-    ) {
-      application {
-        id
-        firstName
-        lastName
+export const SET_RESUMES = gql`
+  mutation setResumes($setResumesInput: [ResumeInput!]!) {
+    setResumes(setResumesInput: $setResumesInput) {
+      user {
+        resumes {
+          id
+          resume
+          title
+          dataSize
+        }
+      }
+      error {
+        message
       }
     }
   }

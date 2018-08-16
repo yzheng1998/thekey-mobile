@@ -75,8 +75,6 @@ export const Screen = styled.View`
 `
 export const ModalScreenContainer = styled.View`
   width: 100%;
-  padding-left: 12px;
-  padding-right: 12px;
   padding-top: 12px;
   flex: 1;
   background-color: ${themeGet('colors.background')};
