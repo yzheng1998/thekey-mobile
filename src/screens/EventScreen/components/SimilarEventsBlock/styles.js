@@ -1,7 +1,12 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
+import { Dimensions } from 'react-native'
 
-export const Container = styled.View``
+const { width } = Dimensions.get('window')
+
+export const Container = styled.View`
+  background-color: ${themeGet('colors.background')};
+`
 export const Title = styled.Text`
   font-size: 16px;
   font-family: ${themeGet('fonts.bold')};
@@ -11,10 +16,12 @@ export const Title = styled.Text`
   flex: 1;
 `
 export const EventContainer = styled.View`
-  box-shadow: 17px 18px 9px ${themeGet('colors.shadow')};
-  margin: 10px;
-  padding: 3px;
+  margin-top: 16px;
+  width: ${width * 0.872};
+  margin-left: 8px;
+  margin-right: 8px;
   padding-bottom: 20px;
+  box-shadow: 1px 13px 8px rgb(169,169,169)};
 `
 export const Header = styled.View`
   flex-direction: row;

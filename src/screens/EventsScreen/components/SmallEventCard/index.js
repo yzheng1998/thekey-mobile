@@ -5,12 +5,10 @@ import {
   Card,
   FullContainer,
   ContentContainer,
-  RowContainer,
   DetailsContainer,
   DateTime,
   Title,
   TimeIcon,
-  TitleContainer,
   Tint,
 } from './styles'
 import StarButton from '../../../../components/EventStarButton'
@@ -41,38 +39,30 @@ export default class SmallEventCard extends Component {
     const usableTimeStamp = new Date(dateRange[0])
     const cardImage = picture ? { uri: picture } : defaultCardBackground
     return (
-      <Card
-        width={this.props.width}
-        activeOpacity={0.9}
-        onPress={() => this.props.navigate(id)}
-      >
+      <Card activeOpacity={0.9} onPress={() => this.props.navigate(id)}>
         <BackgroundImage source={cardImage}>
           <Tint>
             <FullContainer>
               <ContentContainer>
                 <DetailsContainer>
                   <TimeIcon name="clock" size={19} />
-                  {<DateTime>{formatTimeStamp(usableTimeStamp)}</DateTime>}
+                  <DateTime>{formatTimeStamp(usableTimeStamp)}</DateTime>
                 </DetailsContainer>
-                <RowContainer>
-                  <TitleContainer>
-                    <Title numberOfLines={1}>{title}</Title>
-                  </TitleContainer>
-                  <StarButton isInterested={isInterested} id={id} />
-                </RowContainer>
+                <Title numberOfLines={1}>{title}</Title>
+                <AvatarRowContainer>
+                  {interestedFriends && (
+                    <InterestedFriendsRow
+                      navigate={this.props.navigateToPeopleList}
+                      avatarNum={5}
+                      avatarSize={22}
+                      connectionsNum={interestedFriends.length}
+                      interestedFriends={interestedFriends}
+                    />
+                  )}
+                </AvatarRowContainer>
               </ContentContainer>
+              <StarButton isInterested={isInterested} id={id} />
             </FullContainer>
-            <AvatarRowContainer>
-              {interestedFriends && (
-                <InterestedFriendsRow
-                  navigate={this.props.navigateToPeopleList}
-                  avatarNum={5}
-                  avatarSize={22}
-                  connectionsNum={interestedFriends.length}
-                  interestedFriends={interestedFriends}
-                />
-              )}
-            </AvatarRowContainer>
           </Tint>
         </BackgroundImage>
       </Card>

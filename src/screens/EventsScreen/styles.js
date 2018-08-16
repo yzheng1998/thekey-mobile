@@ -5,6 +5,8 @@ export const Background = styled.ScrollView`
   background-color: white;
 `
 export const SmallCardContainer = styled.View`
+  margin-left: 24px;
+  margin-right: 24px;
   box-shadow: 1px 13px 8px rgb(169,169,169)};
 `
 export const Spacer = styled.View`

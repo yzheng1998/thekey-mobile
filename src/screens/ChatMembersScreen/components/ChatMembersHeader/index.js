@@ -19,7 +19,7 @@ export default class ChatMembersHeader extends Component {
           <Title>Chat Members</Title>
           <ButtonRow>
             <BackButton onPress={() => navigation.goBack()}>
-              <BackArrow name="ios-arrow-back" color="rgb(3,3,3)" size={26} />
+              <BackArrow name="ios-arrow-back" color="rgb(3,3,3)" size={30} />
             </BackButton>
             <PlusButton onPress={openAddToChatModal}>
               <PlusIcon name="plus" size={23} color="black" />

@@ -9,7 +9,7 @@ export const BackButtonContainer = styled.TouchableOpacity``
 
 export const ButtonHeader = styled.View`
   position: absolute;
-  top: 35px;
+  top: 48px;
   padding-left: 20px;
   padding-right: 20px;
   flex-direction: row;

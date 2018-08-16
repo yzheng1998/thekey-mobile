@@ -8,7 +8,7 @@ export const Title = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   font-size: 24px;
   color: ${themeGet('colors.fontTag')};
-  padding-top: 15px;
+  margin-top: 16px;
 `
 export const Location = styled.Text`
   font-family: ${themeGet('fonts.medium')};
@@ -26,9 +26,8 @@ export const Date = styled.Text`
 export const DescriptionContainer = styled.View`
   align-items: center;
 `
-export const HeaderContainer = styled.View`
-  width: 100%;
-`
+export const HeaderContainer = styled.View``
+
 export const Container = styled.View`
   flex-direction: row;
 `
@@ -40,13 +39,3 @@ export const ClockContainer = styled.View`
   padding-top: 6px;
   padding-right: 4px;
 `
-export const ButtonHeader = styled.View`
-  position: absolute;
-  top: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-`
-export const BackButtonContainer = styled.TouchableOpacity``

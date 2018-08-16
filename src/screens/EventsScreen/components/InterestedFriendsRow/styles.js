@@ -3,8 +3,7 @@ import { themeGet } from 'styled-system'
 
 export const ConnectionsRowContainer = styled.TouchableOpacity`
   flex-direction: row;
-  margin-left: 5;
-  margin-bottom: 19;
+  align-items: center;
 `
 export const InterestedFriendsContainer = styled.Text`
   font-size: 16;
