@@ -8,7 +8,6 @@ import {
   LinkedInButtonText,
   LinkedInButton,
   LinkedInLogoContainer,
-  TextContainer,
 } from './styles'
 import { LinkedInClientID, LinkedInRedirectUri } from '../../../../../config'
 
@@ -71,9 +70,7 @@ class LinkedInLoginButton extends Component {
               <LinkedInLogoContainer>
                 <LinkedInIcon name="linkedin" size={30} color="white" />
               </LinkedInLogoContainer>
-              <TextContainer>
-                <LinkedInButtonText>Sign in with LinkedIn</LinkedInButtonText>
-              </TextContainer>
+              <LinkedInButtonText>Sign in with LinkedIn</LinkedInButtonText>
             </LinkedInButton>
           </View>
         )}

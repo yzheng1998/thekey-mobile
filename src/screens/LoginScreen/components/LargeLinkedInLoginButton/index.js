@@ -8,7 +8,6 @@ import {
   LinkedInButtonText,
   LinkedInButton,
   LinkedInLogoContainer,
-  TextContainer,
 } from './styles'
 import { LinkedInClientID, LinkedInRedirectUri } from '../../../../../config'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
@@ -62,9 +61,7 @@ class LargeLinkedInLoginButton extends Component {
               <LinkedInLogoContainer>
                 <LinkedInIcon name="linkedin" size={15} color="white" />
               </LinkedInLogoContainer>
-              <TextContainer>
-                <LinkedInButtonText>Sign in with LinkedIn</LinkedInButtonText>
-              </TextContainer>
+              <LinkedInButtonText>Sign in with LinkedIn</LinkedInButtonText>
             </LinkedInButton>
             {loading && <LoadingWrapper loading />}
             {data &&
