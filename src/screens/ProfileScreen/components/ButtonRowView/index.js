@@ -9,7 +9,7 @@ export default class ButtonRowView extends Component {
     return (
       <ButtonRow>
         <BackButton onPress={this.props.goBack}>
-          <BackArrow name="ios-arrow-back" color="white" size={33} />
+          <BackArrow name="ios-arrow-back" color="white" size={30} />
         </BackButton>
         <Settings onPress={this.props.showSettings}>
           <SettingsGear name="settings" color="white" size={25} />

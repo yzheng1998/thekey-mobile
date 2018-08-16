@@ -89,7 +89,7 @@ class QRScannerScreen extends Component {
                   >
                     <BackButtonIcon
                       name="ios-arrow-back"
-                      size={33}
+                      size={30}
                       color="white"
                     />
                   </BackButtonContainer>

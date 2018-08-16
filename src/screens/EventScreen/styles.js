@@ -3,6 +3,7 @@ import { themeGet } from 'styled-system'
 
 export const Container = styled.ScrollView`
   flex: 1;
+  background-color: ${themeGet('colors.background')};
 `
 export const PicContainer = styled.View`
   padding-top: 10px;
@@ -72,6 +73,7 @@ export const HeaderContainer = styled.View`
   aspect-ratio: 1.03878;
 `
 export const TagsContainer = styled.View`
+  background-color: ${themeGet('colors.background')};
   border-bottom-width: 4px;
   border-bottom-color: ${themeGet('colors.buttonSecondary')};
 `
@@ -83,15 +85,14 @@ export const Option = styled.Text`
   padding-top: 16px;
   padding-left: 16px;
 `
-export const JobsContainer = styled.ScrollView`
+export const ButtonHeader = styled.View`
+  position: absolute;
+  z-index: 1;
+  top: 48px;
+  padding-left: 20px;
+  padding-right: 20px;
   flex-direction: row;
-  align-content: flex-start;
-  border-bottom-width: 4px;
-  border-bottom-color: ${themeGet('colors.buttonSecondary')};
+  justify-content: space-between;
+  width: 100%;
 `
-export const JobContainer = styled.View`
-  box-shadow: 7px 8px 5px ${themeGet('colors.buttonSecondary')};
-  margin: 10px;
-  padding: 10px;
-  padding-bottom: 20px;
-`
+export const BackButtonContainer = styled.TouchableOpacity``

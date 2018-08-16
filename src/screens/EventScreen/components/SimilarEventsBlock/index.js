@@ -8,7 +8,7 @@ import {
   ButtonContainer,
 } from './styles'
 import SmallEventCard from '../../../../screens/EventsScreen/components/SmallEventCard'
-import { FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
@@ -58,6 +58,8 @@ class SimilarEventsBlock extends Component {
                 </ButtonContainer>
               </Header>
               <FlatList
+                ListHeaderComponent={<View style={{ width: 8 }} />}
+                ListFooterComponent={<View style={{ width: 8 }} />}
                 horizontal
                 keyExtractor={eventarr => eventarr.id}
                 data={data.similarEvents}
@@ -68,7 +70,6 @@ class SimilarEventsBlock extends Component {
                       navigate={() =>
                         this.props.navigation.push('Event', { id: item.id })
                       }
-                      width="327px"
                       event={item}
                       navigateToPeopleList={interestedFriends =>
                         this.props.navigation.navigate('PeopleList', {

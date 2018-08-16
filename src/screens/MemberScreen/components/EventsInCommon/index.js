@@ -13,7 +13,6 @@ class EventsInCommon extends Component {
         renderItem={({ item }) => (
           <SmallCardContainer>
             <SmallEventCard
-              width="327px"
               navigation={this.props.navigation}
               navigate={() =>
                 this.props.navigation.push('Event', { id: item.id })

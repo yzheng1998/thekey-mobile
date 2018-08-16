@@ -9,10 +9,12 @@ export const ContentContainer = styled.View`
   flex: 1;
   margin-bottom: 8px;
   align-items: center;
-  justify-content: center;
+  margin-top: 0px;
   height: ${props => (props.height ? props.height : 365)};
 `
-export const PictureContainer = styled.View``
+export const PictureContainer = styled.View`
+  margin-top: 70px;
+`
 
 export const SafeView = styled.SafeAreaView`
   align-items: center;
@@ -22,7 +24,6 @@ export const BackgroundPicture = styled.ImageBackground`
   width: 100%;
   height: ${props => (props.height ? props.height : 365)};
   align-items: center;
-  justify-content: center;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 `

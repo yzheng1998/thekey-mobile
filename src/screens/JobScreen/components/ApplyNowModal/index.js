@@ -36,7 +36,7 @@ export default class ApplyNowModal extends Component {
           >
             <BackButton
               name="ios-arrow-back"
-              size={27}
+              size={30}
               color="rgb(148,157,170)"
             />
           </BackButtonContainer>

@@ -9,7 +9,7 @@ class Header extends Component {
         <TitleRow>
           <BackButtonContainer onPress={this.props.onBackPress}>
             {this.props.showBack && (
-              <BackButtonIcon name="ios-arrow-back" size={27} color="black" />
+              <BackButtonIcon name="ios-arrow-back" size={30} color="black" />
             )}
           </BackButtonContainer>
           <Title>{this.props.title}</Title>

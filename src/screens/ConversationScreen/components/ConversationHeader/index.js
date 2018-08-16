@@ -84,7 +84,7 @@ export default class ConversationHeader extends Component {
           </TruncateTitle>
           <HeaderContainer>
             <BackButton onPress={() => navigation.goBack()}>
-              <BackArrow name="ios-arrow-back" color="rgb(3,3,3)" size={26} />
+              <BackArrow name="ios-arrow-back" color="rgb(3,3,3)" size={30} />
             </BackButton>
             <ParticipantPictures
               otherParticipants={participants.filter(p => p.id !== userId)}

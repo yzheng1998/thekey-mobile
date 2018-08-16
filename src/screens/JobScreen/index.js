@@ -102,7 +102,7 @@ class JobScreen extends Component {
                 <BackButtonContainer
                   onPress={() => this.props.navigation.goBack()}
                 >
-                  <BackButton name="ios-arrow-back" size={27} color="white" />
+                  <BackButton name="ios-arrow-back" size={30} color="white" />
                 </BackButtonContainer>
                 <JobStarButton
                   isInterested={isInterested}

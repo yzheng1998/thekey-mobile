@@ -23,7 +23,7 @@ const Header = ({ onBackPress, clearResponse }) => (
         clearResponse()
       }}
     >
-      <BackButtonIcon name="ios-arrow-back" size={33} color="black" />
+      <BackButtonIcon name="ios-arrow-back" size={30} color="black" />
     </BackButton>
     <Heading>Report Profile</Heading>
     <Instructions>

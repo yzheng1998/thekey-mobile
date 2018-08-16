@@ -4,7 +4,6 @@ import {
   BlockContainer,
   BackgroundPicture,
   Picture,
-  SafeView,
   ContentContainer,
   PictureContainer,
   MiniQRCode,
@@ -45,18 +44,16 @@ export default class PictureHeader extends Component {
           height={height}
         >
           <Tint>
-            <SafeView>
-              <ContentContainer>
-                <PictureContainer>
-                  <Picture
-                    source={displayPicture}
-                    avatarSize={this.props.avatarSize}
-                  />
-                  {showQRCode && <SmallQRCode id={id} openModal={openModal} />}
-                </PictureContainer>
-                {rest}
-              </ContentContainer>
-            </SafeView>
+            <ContentContainer>
+              <PictureContainer>
+                <Picture
+                  source={displayPicture}
+                  avatarSize={this.props.avatarSize}
+                />
+                {showQRCode && <SmallQRCode id={id} openModal={openModal} />}
+              </PictureContainer>
+              {rest}
+            </ContentContainer>
           </Tint>
           {buttonRow}
         </BackgroundPicture>

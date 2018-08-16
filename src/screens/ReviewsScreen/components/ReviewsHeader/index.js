@@ -18,7 +18,7 @@ export default class ReviewsHeader extends Component {
         <SafeView>
           <HeaderContainer>
             <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
-              <BackArrow name="ios-arrow-back" size={27} color="white" />
+              <BackArrow name="ios-arrow-back" size={30} color="white" />
             </BackButtonContainer>
             <Title>Reviews</Title>
             <SearchFilterTab

@@ -8,7 +8,7 @@ export default class BackButtonRelative extends Component {
       <BackButtonContainer onPress={this.props.onBackPress}>
         <BackButtonIcon
           name="ios-arrow-back"
-          size={this.props.size || 33}
+          size={this.props.size || 30}
           color={this.props.color || 'black'}
         />
       </BackButtonContainer>
