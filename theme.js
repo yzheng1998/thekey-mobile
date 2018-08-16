@@ -54,6 +54,7 @@ const theme = {
     facebookBorder: 'rgb(45,73,134)',
     linkedInBlue: 'rgb(1, 119, 181)',
     linkedInBorder: 'rgb(8, 92, 144)',
+    splashBackground: 'rgb(247, 249, 252)',
   },
   ...Platform.select({
     ios: {
