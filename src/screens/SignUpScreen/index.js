@@ -61,6 +61,7 @@ export default class SignUpScreen extends Component {
     // native_only config will fail in the case that the user has
     // not installed in his device the Facebook app. In this case we
     // need to go for webview.
+    LoginManager.logOut()
     const FBGraphRequest = async (fields, callback) => {
       const accessData = await AccessToken.getCurrentAccessToken()
       const { accessToken } = accessData
@@ -84,7 +85,6 @@ export default class SignUpScreen extends Component {
       // Execute the graph request created above
       new GraphRequestManager().addRequest(infoRequest).start()
     }
-
     let result
     try {
       LoginManager.setLoginBehavior('native')
@@ -107,7 +107,7 @@ export default class SignUpScreen extends Component {
       }
     }
     // handle the case that users clicks cancel button in Login view
-    if (!result.isCancelled) {
+    if (result && !result.isCancelled) {
       // Create a graph request asking for user information
       FBGraphRequest(
         'id, email, first_name, last_name, picture.type(large)',

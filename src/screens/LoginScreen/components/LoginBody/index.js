@@ -68,7 +68,7 @@ class LoginBody extends Component {
     // native_only config will fail in the case that the user has
     // not installed in his device the Facebook app. In this case we
     // need to go for webview.
-
+    LoginManager.logOut()
     const FBGraphRequest = async (fields, callback) => {
       const accessData = await AccessToken.getCurrentAccessToken()
       const { accessToken } = accessData
