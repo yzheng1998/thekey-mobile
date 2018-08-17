@@ -29,14 +29,14 @@ export default class SchoolSearchModal extends Component {
   }
 
   render() {
-    const { visible, toggleSchoolModal, toggleEducationModal } = this.props
+    const { visible, toggleSchoolModal, onDismiss } = this.props
     const variables = { substr: this.state.searchText }
     return (
       <Modal
         animationType="slide"
         transparent={false}
         visible={visible}
-        onDismiss={toggleEducationModal}
+        onDismiss={onDismiss}
       >
         <Container>
           <SearchBar

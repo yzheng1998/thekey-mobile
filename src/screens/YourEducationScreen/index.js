@@ -185,7 +185,7 @@ class YourEducationScreen extends Component {
           />
           <SchoolSearchModal
             updateState={this.updateState}
-            toggleEducationModal={this.toggleEducationModal}
+            onDismiss={this.toggleEducationModal}
             navigation={this.props.navigation}
             toggleSchoolModal={this.toggleSchoolModal}
             visible={this.state.showSchoolSearchModal}
