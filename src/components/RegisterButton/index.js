@@ -8,6 +8,7 @@ export default class RegisterButton extends Component {
         secondary={this.props.secondary}
         onPress={this.props.onPress}
         disabled={this.props.disabled}
+        noBorder={this.props.noBorder}
       >
         {this.props.children}
         <ButtonText secondary={this.props.secondary}>
