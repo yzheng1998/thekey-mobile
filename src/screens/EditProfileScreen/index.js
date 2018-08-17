@@ -11,6 +11,8 @@ import EditPencil from 'react-native-vector-icons/Feather'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import LoadingWrapper from '../../components/LoadingWrapper'
 import LocationSearchModal from '../../components/HometownSearchModal'
+import EditWaysToMeetModal from './components/EditWaysToMeetModal'
+import EditInitiativesModal from './components/EditInitiativesModal'
 import {
   Screen,
   Block,
@@ -36,6 +38,7 @@ export default class EditProfileScreen extends Component {
     meetByPickerEnabled: false,
     interestsModalVisible: false,
     showLocationSearchModal: false,
+    showEditWaysToMeetModal: false,
   }
 
   updateText = obj => {
@@ -57,6 +60,16 @@ export default class EditProfileScreen extends Component {
   toggleLocationSearchModal = () => {
     this.setState({
       showLocationSearchModal: !this.state.showLocationSearchModal,
+    })
+  }
+  toggleEditWaysToMeetModal = () => {
+    this.setState({
+      showEditWaysToMeetModal: !this.state.showEditWaysToMeetModal,
+    })
+  }
+  toggleEditInitiativesModal = () => {
+    this.setState({
+      showEditInitiativesModal: !this.state.showEditInitiativesModal,
     })
   }
   render() {
@@ -87,6 +100,7 @@ export default class EditProfileScreen extends Component {
           } = displayData
 
           const preferredWaysToMeetIds = preferredWaysToMeet.map(p => p.id)
+          const currentInitiativesIds = currentInitiatives.map(c => c.id)
           const tagIds = tags.map(t => t.id)
           const updateProfileVariables = {
             updateUserInput: {
@@ -98,10 +112,10 @@ export default class EditProfileScreen extends Component {
               facebook,
               twitter,
               profilePicture,
-              currentInitiatives,
               hometown,
               tags: tagIds,
               preferredWaysToMeet: preferredWaysToMeetIds,
+              currentInitiatives: currentInitiativesIds,
             },
           }
           return (
@@ -110,6 +124,40 @@ export default class EditProfileScreen extends Component {
                 setText={obj => this.setState({ hometown: obj.hometown })}
                 onPress={this.toggleLocationSearchModal}
                 visible={this.state.showLocationSearchModal}
+              />
+              <EditWaysToMeetModal
+                isVisible={this.state.showEditWaysToMeetModal}
+                toggleModal={this.toggleEditWaysToMeetModal}
+                preferredWaysToMeet={preferredWaysToMeet}
+                removeWayToMeet={wayToMeet => {
+                  this.setState({
+                    preferredWaysToMeet: preferredWaysToMeet.filter(
+                      el => el.id !== wayToMeet.id,
+                    ),
+                  })
+                }}
+                addWayToMeet={wayToMeet => {
+                  this.setState({
+                    preferredWaysToMeet: [...preferredWaysToMeet, wayToMeet],
+                  })
+                }}
+              />
+              <EditInitiativesModal
+                isVisible={this.state.showEditInitiativesModal}
+                toggleModal={this.toggleEditInitiativesModal}
+                currentInitiatives={currentInitiatives}
+                removeInitiative={initiative => {
+                  this.setState({
+                    currentInitiatives: currentInitiatives.filter(
+                      el => el.id !== initiative.id,
+                    ),
+                  })
+                }}
+                addInitiative={initiative => {
+                  this.setState({
+                    currentInitiatives: [...currentInitiatives, initiative],
+                  })
+                }}
               />
               <EditProfileHeader
                 goBack={() => this.props.navigation.goBack()}
@@ -132,6 +180,8 @@ export default class EditProfileScreen extends Component {
                   state={displayData}
                   onChangeText={this.updateText}
                   toggleLocationSearchModal={this.toggleLocationSearchModal}
+                  toggleEditWaysToMeetModal={this.toggleEditWaysToMeetModal}
+                  toggleEditInitiativesModal={this.toggleEditInitiativesModal}
                 />
                 <Divider />
                 <Block>

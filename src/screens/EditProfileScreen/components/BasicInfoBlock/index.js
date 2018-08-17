@@ -74,7 +74,7 @@ export default class BasicInfoBlock extends Component {
           <ColumnContainer>
             <TitleRow>
               <Title>Current Initiatives</Title>
-              <EditButton>
+              <EditButton onPress={this.props.toggleEditInitiativesModal}>
                 <EditPencil
                   name="edit-2"
                   color="rgb(148, 157, 170)"
@@ -94,7 +94,7 @@ export default class BasicInfoBlock extends Component {
           <ColumnContainer>
             <TitleRow>
               <Title>Meet By</Title>
-              <EditButton>
+              <EditButton onPress={this.props.toggleEditWaysToMeetModal}>
                 <EditPencil
                   name="edit-2"
                   color="rgb(148, 157, 170)"
