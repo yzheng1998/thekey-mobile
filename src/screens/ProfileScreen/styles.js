@@ -94,7 +94,7 @@ export const Subtitle = styled.Text`
       ? themeGet('colors.fontButtonTertiary')
       : themeGet('colors.fontSubtitle.primary')};
   font-family: ${themeGet('fonts.medium')};
-  font-size: 14px
+  font-size: 14px;
   line-height: 20px;
   text-align: center;
 `

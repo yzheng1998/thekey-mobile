@@ -97,6 +97,7 @@ export default class ProfileScreen extends Component {
                 title="Current Initiatives"
                 content={initiativeEmojis}
               />
+              <Divider />
               <ArrayDescription
                 title="Preferred Ways To Meet"
                 content={emojiList}
