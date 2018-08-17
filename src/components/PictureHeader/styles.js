@@ -13,7 +13,7 @@ export const ContentContainer = styled.View`
   height: ${props => (props.height ? props.height : 365)};
 `
 export const PictureContainer = styled.View`
-  margin-top: 70px;
+  margin-top: ${props => (props.marginTop ? props.marginTop : 70)};
 `
 
 export const SafeView = styled.SafeAreaView`

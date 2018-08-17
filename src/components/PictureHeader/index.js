@@ -26,7 +26,7 @@ export default class PictureHeader extends Component {
   }
 
   render() {
-    const { picture, showQRCode, id, openModal, height } = this.props
+    const { picture, showQRCode, id, openModal, height, marginTop } = this.props
     const [buttonRow, ...rest] = this.props.children
     const displayPicture = picture
       ? { uri: picture }
@@ -45,7 +45,7 @@ export default class PictureHeader extends Component {
         >
           <Tint>
             <ContentContainer>
-              <PictureContainer>
+              <PictureContainer marginTop={marginTop}>
                 <Picture
                   source={displayPicture}
                   avatarSize={this.props.avatarSize}
