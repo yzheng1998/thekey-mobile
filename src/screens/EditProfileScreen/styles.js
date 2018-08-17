@@ -76,6 +76,7 @@ export const Title = styled.Text`
   flex: 1;
   font-size: 16px;
   font-family: ${themeGet('fonts.bold')};
+  align-self: center;
 `
 
 export const Input = styled.TextInput`
@@ -83,6 +84,8 @@ export const Input = styled.TextInput`
   font-size: 16px;
   font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.fontProfileFields')};
+  padding: 0px;
+  margin: 0px;
 `
 
 export const Text = styled.Text`
