@@ -57,7 +57,7 @@ export const CancelMembershipButton = styled.TouchableOpacity`
   margin-left: 16px;
   margin-right: 16px;
   height: 45px;
-  background-color: ${themeGet('colors.buttonTertiary')};
+  background-color: ${themeGet('colors.buttonPrimary')};
   border-radius: 8px;
   margin-top: 8px;
   margin-bottom: 80px;

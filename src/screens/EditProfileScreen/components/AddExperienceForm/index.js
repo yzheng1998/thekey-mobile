@@ -171,7 +171,7 @@ export default class AddExperienceForm extends Component {
                 <Switch
                   onValueChange={toggleSwitch}
                   value={this.state.isCurrentEmployee}
-                  onTintColor="rgb(250, 53, 121)"
+                  onTintColor="rgb(220, 60, 53)"
                 />
               </SwitchContainer>
               <RowContainer>

@@ -15,7 +15,7 @@ const MainTabNavigator = createBottomTabNavigator(
         title: null,
         tabBarIcon: ({ focused }) =>
           focused ? (
-            <Compass name="compass" size={25} color="rgb(250,53,121)" />
+            <Compass name="compass" size={25} color="rgb(220, 60, 53)" />
           ) : (
             <Compass name="compass" size={25} color="rgb(148,157,170)" />
           ),
@@ -27,7 +27,7 @@ const MainTabNavigator = createBottomTabNavigator(
         title: null,
         tabBarIcon: ({ focused }) =>
           focused ? (
-            <ChatBubble name="message" size={25} color="rgb(250,53,121)" />
+            <ChatBubble name="message" size={25} color="rgb(244, 89, 82)" />
           ) : (
             <ChatBubble
               name="message-outline"

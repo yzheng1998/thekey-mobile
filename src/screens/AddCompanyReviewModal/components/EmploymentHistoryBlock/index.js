@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
   Buttons,
   StarsContainer,
+  StarContainer,
   SpacedHeading,
   Avatar,
   RowSubContainer,
@@ -11,17 +12,22 @@ import {
   Label,
 } from './styles'
 import { BlockBackground, Block, Heading, RowContainer } from '../../styles'
-import fullStar from './full-star-pink.png'
-import emptyStar from './empty-star-grey.png'
 import Stars from 'react-native-stars'
 import { TouchableOpacity } from 'react-native'
 import Switch from 'react-native-switch-pro'
+import Star from 'react-native-vector-icons/FontAwesome'
 
 const employmentTypes = [
   { value: 'FULLTIME', label: 'Full-Time' },
   { value: 'PARTTIME', label: 'Part-Time' },
   { value: 'INTERNSHIP', label: 'Internship' },
 ]
+
+const DisplayStar = ({ color }) => (
+  <StarContainer>
+    <Star name="star" size={23} color={color} />
+  </StarContainer>
+)
 
 export default class EmploymentHistoryBlock extends Component {
   static createYearData() {
@@ -51,11 +57,10 @@ export default class EmploymentHistoryBlock extends Component {
               update={rating => {
                 updateState({ rating })
               }}
-              spacing={10}
-              starSize={23}
+              starSize={90}
               count={5}
-              fullStar={fullStar}
-              emptyStar={emptyStar}
+              fullStar={<DisplayStar color="rgb(244, 89, 82)" />}
+              emptyStar={<DisplayStar color="rgb(211, 216, 223)" />}
             />
           </StarsContainer>
         </RowContainer>
@@ -86,10 +91,10 @@ export default class EmploymentHistoryBlock extends Component {
                 el => el.value === employmentType,
               )}
               containerStyle={{ height: 30 }}
-              textStyle={{ color: 'rgb(250,53,121)', fontWeight: '600' }}
+              textStyle={{ color: 'rgb(244, 89, 82)', fontWeight: '600' }}
               selectedTextStyle={{ color: 'white', fontWeight: '600' }}
               selectedButtonStyle={{
-                backgroundColor: 'rgb(250,53,121)',
+                backgroundColor: 'rgb(220, 60, 53)',
               }}
             />
           </ButtonContainer>
@@ -101,7 +106,7 @@ export default class EmploymentHistoryBlock extends Component {
               <Switch
                 height={23}
                 width={45}
-                backgroundActive="rgb(250,53,121)"
+                backgroundActive="rgb(220, 60, 53)"
                 value={isCurrentEmployee}
                 onSyncPress={() => {
                   updateState({

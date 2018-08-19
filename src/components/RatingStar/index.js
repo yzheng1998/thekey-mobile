@@ -7,7 +7,7 @@ import uuidv4 from 'uuid/v4'
 export default class RatingStar extends Component {
   static defaultProps = {
     scoreOff: false,
-    color: 'rgb(250,53,121)',
+    color: 'rgb(220, 60, 53)',
   }
   render() {
     const { rating, color, scoreOff } = this.props

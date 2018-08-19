@@ -21,7 +21,7 @@ export const ButtonContainer = styled.View`
 `
 export const CancelText = styled.Text`
   font-size: 18px;
-  color: ${themeGet('colors.buttonPrimary')};
+  color: ${themeGet('colors.fontSubtitle.primary')};
   font-family: ${themeGet('fonts.medium')};
 `
 export const Heading = styled.Text`

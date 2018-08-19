@@ -10,7 +10,7 @@ export const Text = styled.Text`
   font-size: 18px;
   color: ${props =>
     props.disabled
-      ? themeGet('colors.buttonClicked')
-      : themeGet('colors.buttonPrimary')};
+      ? themeGet('colors.headerClicked')
+      : themeGet('colors.fontSubtitle.primary')};
   font-family: ${themeGet('fonts.medium')};
 `

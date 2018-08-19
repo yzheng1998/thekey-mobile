@@ -8,6 +8,6 @@ export const Button = styled.TouchableOpacity`
 `
 export const Text = styled.Text`
   font-size: 18px;
-  color: ${themeGet('colors.buttonPrimary')};
+  color: ${themeGet('colors.fontSubtitle.primary')};
   font-family: ${themeGet('fonts.medium')};
 `

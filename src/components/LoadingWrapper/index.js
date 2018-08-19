@@ -9,7 +9,7 @@ export default class LoadingWrapper extends Component {
       <Container>
         {loading ? (
           <CenteredContainer>
-            <ActivityIndicator color="rgb(250, 53, 121)" />
+            <ActivityIndicator color="rgb(244, 89, 82)" />
           </CenteredContainer>
         ) : (
           <Container style={style}>{children}</Container>

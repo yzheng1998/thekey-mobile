@@ -10,7 +10,7 @@ export default class RatingStar extends Component {
     const roundedRating = Math.round(rating * 10) / 10
     const stars = _.range(Math.round(rating)).map(() => (
       <StarContainer key={uuidv4()}>
-        <Star name="star" size={16} color="rgb(250,53,121)" />
+        <Star name="star" size={16} color="rgb(220, 60, 53)" />
       </StarContainer>
     ))
     return (

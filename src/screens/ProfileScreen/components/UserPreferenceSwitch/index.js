@@ -31,7 +31,7 @@ export default class UserPreferenceSwitch extends Component {
       <Mutation mutation={UPDATE_USER_PREFERENCES}>
         {updateUserPreferences => (
           <Switch
-            backgroundActive="rgb(250,53,121)"
+            backgroundActive="rgb(220, 60, 53)"
             value={selected}
             onSyncPress={value => {
               const variables = {

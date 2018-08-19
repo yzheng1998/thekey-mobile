@@ -7,7 +7,7 @@ import CheckBoxIcon from 'react-native-vector-icons/MaterialCommunityIcons'
 const CheckBox = ({ accepted }) => (
   <CheckBoxIcon
     name="checkbox-marked-circle"
-    color={accepted ? 'rgb(250, 53, 121)' : 'rgb(176, 186, 200)'}
+    color={accepted ? 'rgb(220, 60, 53)' : 'rgb(176, 186, 200)'}
     size={30}
   />
 )
