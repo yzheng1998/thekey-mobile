@@ -19,6 +19,7 @@ import Error from '../../../../components/Error'
 import constraints from './constraints'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import moment from 'moment'
+import SchoolSearchModal from '../../../../components/SchoolSearchModal'
 
 const validate = require('validate.js')
 
@@ -50,15 +51,21 @@ export default class AddEducationForm extends Component {
 
     this.state = {
       ...educationInfo,
+      showSchoolSearchModal: false,
       startYear: formatYear(educationInfo.startYear),
       endYear: formatYear(educationInfo.endYear),
       schoolTypePickerEnabled: false,
+      schoolNameClicked: false,
       optionsInputSelected: false,
       optionsInputClicked: false,
       displayErrors: {},
       errors: {},
       touched: {},
     }
+  }
+
+  toggleEducationModal = () => {
+    this.setState({ showAddEducationModal: !this.state.showAddEducationModal })
   }
 
   validateForm = isOnChangeText => {
@@ -104,6 +111,14 @@ export default class AddEducationForm extends Component {
 
   editMode = this.props.navigation.getParam('editMode')
 
+  toggleSchoolModal = () => {
+    this.setState({
+      schoolNameClicked: true,
+      schoolNameSelected: !this.state.schoolNameSelected,
+      showSchoolSearchModal: !this.state.showSchoolSearchModal,
+    })
+  }
+
   renderSelectedOption = optionsInputSelected => {
     // if a selection has been made, change text from placeholder
     if (optionsInputSelected || this.editMode)
@@ -114,6 +129,13 @@ export default class AddEducationForm extends Component {
         </OptionsText>
       )
     return <OptionsPlaceholder>School Type</OptionsPlaceholder>
+  }
+
+  renderSchoolName = optionsInputSelected => {
+    // if a selection has been made, change text from placeholder
+    if (optionsInputSelected || this.editMode)
+      return <OptionsText>{this.state.schoolName}</OptionsText>
+    return <OptionsPlaceholder>School Name</OptionsPlaceholder>
   }
 
   render() {
@@ -127,6 +149,8 @@ export default class AddEducationForm extends Component {
       endYear,
       optionsInputSelected,
       optionsInputClicked,
+      schoolNameClicked,
+      schoolNameSelected,
     } = this.state
 
     const returnKeyType = this.editMode ? 'done' : 'next'
@@ -159,22 +183,15 @@ export default class AddEducationForm extends Component {
               title={this.editMode ? 'Edit School' : 'Education'}
             />
             <Block>
-              <LineInput
-                text={schoolName}
-                placeholderText="School Name"
-                updateText={text => {
-                  this.setState({ schoolName: text }, () =>
-                    this.validateForm(true),
-                  )
-                }}
-                onFocus={() => this.addTouched('schoolName')}
-                onBlur={() => this.validateForm(false)}
-                returnKeyType={returnKeyType}
-                onSubmitEditing={() => {
-                  if (!this.editMode) openSchoolTypePicker()
-                }}
-                error={this.state.displayErrors.schoolName}
-              />
+              <View>
+                <OptionsInputContainer
+                  selected={schoolNameSelected}
+                  onPress={this.toggleSchoolModal}
+                >
+                  {this.renderSchoolName(schoolNameClicked)}
+                </OptionsInputContainer>
+                <Error error={this.state.displayErrors.schoolName} />
+              </View>
               <View>
                 <OptionsInputContainer
                   selected={optionsInputClicked}
@@ -317,6 +334,12 @@ export default class AddEducationForm extends Component {
               keyName="schoolType"
             />
           )}
+          <SchoolSearchModal
+            updateState={this.updateState}
+            navigation={this.props.navigation}
+            toggleSchoolModal={this.toggleSchoolModal}
+            visible={this.state.showSchoolSearchModal}
+          />
         </Screen>
       </TouchableWithoutFeedback>
     )
