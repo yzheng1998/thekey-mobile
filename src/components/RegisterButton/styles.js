@@ -21,7 +21,7 @@ export const Button = styled.TouchableOpacity`
   border-radius: 8px;
   border-color: ${props =>
     props.disabled ? 'transparent' : themeGet('colors.buttonPrimary')};
-  border-width: 2px;
+  border-width: ${props => (props.noBorder ? 0 : 2)};
 `
 
 export const ButtonText = styled.Text`
