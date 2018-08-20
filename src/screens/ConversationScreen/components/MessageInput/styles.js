@@ -6,6 +6,7 @@ export const InputBox = styled.TextInput`
   margin-bottom: 7px;
   overflow: scroll;
   max-height: 80px;
+  text-align-vertical: top;
 `
 export const Container = styled.View`
   background-color: white;

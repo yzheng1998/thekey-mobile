@@ -24,6 +24,7 @@ export const Prompt = styled.Text`
   padding-bottom: 12px;
 `
 export const LetterInput = styled.TextInput`
+  text-align-vertical: top;
   margin-top: 10px;
   padding: 14px;
   overflow: scroll;

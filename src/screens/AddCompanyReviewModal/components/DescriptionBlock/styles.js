@@ -7,6 +7,7 @@ export const HelpText = styled.Text`
   font-family: ${themeGet('fonts.medium')};
 `
 export const ReviewInputField = styled.TextInput`
+  text-align-vertical: top;
   font-size: 18px;
   color: ${themeGet('colors.fontDescription.secondary')};
   font-family: ${themeGet('fonts.light')};

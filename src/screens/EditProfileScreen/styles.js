@@ -104,6 +104,7 @@ export const LargeInput = styled.TextInput`
   font-size: 16px;
   font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.fontProfileFields')};
+  text-align-vertical: top;
 `
 
 export const BlockTitle = styled.Text`
