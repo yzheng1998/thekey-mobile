@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'
 import SmallEventCard from '../../../EventsScreen/components/SmallEventCard'
 import { SmallCardContainer } from './styles'
 
@@ -8,6 +8,8 @@ class EventsInCommon extends Component {
     return (
       <FlatList
         horizontal
+        ListHeaderComponent={<View style={{ width: 8 }} />}
+        ListFooterComponent={<View style={{ width: 8 }} />}
         keyExtractor={item => item.id}
         data={this.props.events}
         renderItem={({ item }) => (
