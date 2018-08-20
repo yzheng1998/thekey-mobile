@@ -28,7 +28,7 @@ export default class PickerComponent extends Component {
               if (validateForm) validateForm(true)
             })
           }}
-          itemStyle={{ color: 'rgb(250, 53, 121)' }}
+          itemStyle={{ color: 'rgb(244, 89, 82)' }}
         >
           {options.map(option => (
             <PickerView.Item

@@ -18,7 +18,7 @@ export const ButtonContainer = styled.View`
 `
 export const CancelText = styled.Text`
   font-size: 18px;
-  color: ${themeGet('colors.buttonPrimary')};
+  color: ${themeGet('colors.fontSubtitle.primary')};
   font-family: ${themeGet('fonts.medium')};
 `
 export const Heading = styled.Text`
@@ -34,7 +34,7 @@ export const DoneText = styled.Text`
   font-size: 18px;
   color: ${props =>
     props.disabled
-      ? themeGet('colors.buttonClicked')
-      : themeGet('colors.buttonPrimary')};
+      ? themeGet('colors.headerClicked')
+      : themeGet('colors.fontSubtitle.primary')};
   font-family: ${themeGet('fonts.medium')};
 `

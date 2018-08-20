@@ -12,7 +12,7 @@ export default class FilterBlock extends Component {
         <TabContainer>
           <SearchFilterTab
             options={['All', 'Full-time', 'Part-time', 'Internship']}
-            selectedColor="rgb(250,53,121)"
+            selectedColor="rgb(244, 89, 82)"
             color="rgb(148,157,170)"
             updateState={updateState}
             selectedIndex={selectedIndex}

@@ -10,8 +10,13 @@ export const ButtonContainer = styled.View`
 export const StarsContainer = styled.View`
   align-items: flex-start;
   justify-content: flex-start;
-  height: 32;
+  height: 40;
   margin-top: 6px;
+`
+export const StarContainer = styled.View`
+  padding: 7px;
+  align-items: center;
+  justify-content: center;
 `
 export const RowSubContainer = styled.View`
   width: 50%;

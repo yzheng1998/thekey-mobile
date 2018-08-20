@@ -14,7 +14,7 @@ const ListItemWithSwitch = ({
   <ListItem>
     <ListItemTitle>{title}</ListItemTitle>
     <Switch
-      backgroundActive="rgb(250,53,121)"
+      backgroundActive="rgb(220, 60, 53)"
       disabled={disabled}
       value={value}
       onSyncPress={newValue => {

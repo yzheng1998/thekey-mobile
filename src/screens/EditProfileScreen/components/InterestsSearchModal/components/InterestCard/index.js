@@ -10,7 +10,7 @@ export default class InterestCard extends Component {
       <TouchableOpacity onPress={onPress}>
         <Card>
           <Title>{title}</Title>
-          <PlusIcon name="plus-circle" color="rgb(250, 53, 121)" size={20} />
+          <PlusIcon name="plus-circle" color="rgb(220, 60, 53)" size={20} />
         </Card>
       </TouchableOpacity>
     )

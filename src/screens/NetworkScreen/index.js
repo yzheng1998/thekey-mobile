@@ -61,7 +61,7 @@ class NetworkScreen extends Component {
               updateState={this.changeTab}
               selectedIndex={this.state.tab}
               color="rgb(176, 186, 200)"
-              selectedColor="rgb(250, 53, 121)"
+              selectedColor="rgb(244, 89, 82)"
               options={['All', 'Connections', 'Groups', 'Events']}
             />
             <ThinDivider />

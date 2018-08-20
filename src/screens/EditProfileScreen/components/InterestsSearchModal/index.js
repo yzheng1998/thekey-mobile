@@ -119,7 +119,7 @@ export default class InterestsSearchModal extends Component {
               labelExtractor={this.labelExtractor}
               text={this.state.text}
               onChangeText={this.onChangeText}
-              tagColor="rgb(250, 53, 121)"
+              tagColor="rgb(220, 60, 53)"
               tagTextColor="white"
               inputProps={inputProps}
               maxHeight={80}

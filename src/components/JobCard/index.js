@@ -75,7 +75,7 @@ export default class JobCard extends Component {
               isInterested={isInterested}
               id={id}
               size={24}
-              startColor="rgb(250, 53, 121)"
+              startColor="rgb(220, 60, 53)"
               endColor="rgb(148, 157, 170)"
             />
           </RightContainer>
