@@ -9,7 +9,7 @@ import {
 } from './styles'
 import ApplyButton from './components/ApplyButton'
 import BackButton from 'react-native-vector-icons/Ionicons'
-import KeyboardSpacer from 'react-native-keyboard-spacer'
+import KeyboardSpacer from '../../../../components/KeyboardSpacer'
 
 export default class ApplyNowModal extends Component {
   state = {

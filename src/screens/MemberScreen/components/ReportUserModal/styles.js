@@ -50,4 +50,5 @@ export const EssayInput = styled.TextInput`
   border-color: ${themeGet('colors.textAreaBorder')};
   background-color: rgb(249, 249, 249);
   overflow: scroll;
+  text-align-vertical: top;
 `

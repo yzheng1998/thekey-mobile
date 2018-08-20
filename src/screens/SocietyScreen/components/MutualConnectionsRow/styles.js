@@ -17,11 +17,12 @@ export const MutualConnections = styled.Text`
 `
 export const AvatarContainer = styled.View`
   flex-direction: row;
+  padding-left: 3px;
 `
 export const Avatar = styled.Image`
   height: ${props => (props.avatarSize ? props.avatarSize : 24)};
   width: ${props => (props.avatarSize ? props.avatarSize : 24)};
-  margin: -3px;
+  margin-left: -3px;
   border-color: white;
   border-width: 1.5;
   border-radius: ${props => (props.avatarSize ? props.avatarSize / 2 : 12)};

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import KeyboardSpacer from 'react-native-keyboard-spacer'
+import KeyboardSpacer from '../../../../components/KeyboardSpacer'
 import {
   Container,
   SubtitleView,

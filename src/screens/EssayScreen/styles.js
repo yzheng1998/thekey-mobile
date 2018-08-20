@@ -32,4 +32,5 @@ export const EssayInput = styled.TextInput`
   border-width: 2px;
   border-color: ${themeGet('colors.buttonPrimary')};
   overflow: scroll;
+  text-align-vertical: top;
 `

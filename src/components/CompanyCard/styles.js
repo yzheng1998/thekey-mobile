@@ -15,7 +15,7 @@ export const RightContainer = styled.View`
   margin-left: 15px;
   padding-top: 18px;
   flex: 1;
-  padding-bottom: 20px; */
+  padding-bottom: 20px;
 `
 export const Title = styled.Text`
   font-size: 18px;
@@ -31,4 +31,10 @@ export const CompanyPicture = styled.Image`
   width: 46;
   height: 46;
   border-radius: 23;
+`
+export const PictureLoading = styled.View`
+  width: 46;
+  height: 46;
+  border-radius: 23;
+  background-color: ${themeGet('colors.cardLoading')};
 `

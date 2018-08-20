@@ -15,7 +15,7 @@ export const Container = styled.View`
   align-items: center;
   justify-content: center;
   background-color: ${props =>
-    props.isError ? 'rgb(250, 53, 98)' : 'rgb(119, 210, 103)'};
+    props.isError ? themeGet('colors.buttonPrimary') : 'rgb(119, 210, 103)'};
 `
 export const Message = styled.Text`
   font-family: ${themeGet('fonts.bold')};
