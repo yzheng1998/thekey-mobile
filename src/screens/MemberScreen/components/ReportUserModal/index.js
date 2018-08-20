@@ -13,7 +13,7 @@ import {
 } from './styles'
 import BackButtonIcon from 'react-native-vector-icons/Ionicons'
 import ReportProfileButton from '../ReportProfileButton'
-import KeyboardSpacer from 'react-native-keyboard-spacer'
+import KeyboardSpacer from '../../../../components/KeyboardSpacer'
 
 const Header = ({ onBackPress, clearResponse }) => (
   <HeaderContainer>
