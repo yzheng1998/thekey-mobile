@@ -115,7 +115,7 @@ class ReviewsScreen extends Component {
           state={this.state}
           navigation={this.props.navigation}
           closeModal={this.toggleSearchModal}
-          visible={this.state.showSearchModal}
+          isVisible={this.state.showSearchModal}
           showAddReview={() =>
             this.setState({
               showAddReview: !this.state.showAddReview,

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
+import Modal from 'react-native-modal'
 
 export const Background = styled.View`
   padding-top: 10px;
@@ -37,4 +38,8 @@ export const ThinDivider = styled.View`
   height: 4px;
   margin: 5px;
   background-color: ${themeGet('colors.divider')};
+`
+export const SearchModal = styled(Modal)`
+  margin: 0px;
+  background-color: ${themeGet('colors.background')};
 `
