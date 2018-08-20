@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {
-  Container,
   DescriptionContainer,
   Title,
   Reviews,
@@ -14,18 +13,16 @@ class ReviewPictureBlock extends Component {
   render() {
     const { picture, title, rating, reviews, showAddReview } = this.props
     return (
-      <Container>
-        <PictureHeader picture={picture} avatarSize={123}>
-          <AddReviewButton onPress={showAddReview}>
-            <AddReviewText>ADD REVIEW</AddReviewText>
-          </AddReviewButton>
-          <DescriptionContainer>
-            <Title>{title}</Title>
-            <RatingStar rating={rating} color="white" />
-            <Reviews>{reviews} Total Reviews</Reviews>
-          </DescriptionContainer>
-        </PictureHeader>
-      </Container>
+      <PictureHeader picture={picture} avatarSize={123}>
+        <AddReviewButton onPress={showAddReview}>
+          <AddReviewText>ADD REVIEW</AddReviewText>
+        </AddReviewButton>
+        <DescriptionContainer>
+          <Title>{title}</Title>
+          {rating && <RatingStar rating={rating} color="white" />}
+          <Reviews>{reviews} Total Reviews</Reviews>
+        </DescriptionContainer>
+      </PictureHeader>
     )
   }
 }

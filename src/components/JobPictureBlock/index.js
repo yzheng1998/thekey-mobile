@@ -47,7 +47,7 @@ class JobPictureBlock extends Component {
     } = this.props
     return (
       <HeaderContainer>
-        <PictureHeader picture={picture} avatarSize={123} height={365}>
+        <PictureHeader picture={picture} avatarSize={123}>
           <Apply
             disabled={hasApplied}
             onPress={toggleApplyModal}

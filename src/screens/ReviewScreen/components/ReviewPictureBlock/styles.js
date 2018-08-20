@@ -7,23 +7,19 @@ export const PicContainer = styled.View`
 export const Title = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   font-size: 24px;
+  margin-bottom: 2px;
   color: ${themeGet('colors.fontTag')};
-  padding-top: 15px;
-  padding-bottom: 6px;
 `
 export const Reviews = styled.Text`
   font-family: ${themeGet('fonts.medium')};
   font-size: 14px;
   color: ${themeGet('colors.fontTag')};
-  padding-top: 5px;
-  padding-bottom: 20px;
+  margin-top: 2px;
 `
 export const DescriptionContainer = styled.View`
   align-items: center;
-`
-export const Container = styled.View`
-  width: 100%;
-  aspect-ratio: 1.03878;
+  margin-bottom: 64px;
+  margin-top: 16px;
 `
 export const AddReviewButton = styled.TouchableOpacity`
   height: 45px;

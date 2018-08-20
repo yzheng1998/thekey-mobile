@@ -5,8 +5,6 @@ import {
   Location,
   Date,
   Container,
-  LocationContainer,
-  ClockContainer,
 } from './styles'
 import PictureHeader from '../../../../components/PictureHeader'
 import InterestedFriendsRow from '../../../../screens/EventsScreen/components/InterestedFriendsRow'
@@ -24,37 +22,36 @@ class EventPictureBlock extends Component {
       connectionsNum,
     } = this.props
     return (
-      <PictureHeader
-        picture={picture}
-        avatarSize={123}
-        height={connectionsNum ? 355 : 320}
-      >
+      <PictureHeader picture={picture} avatarSize={123}>
         <Title />
         <DescriptionContainer>
           <Title>{title}</Title>
           <Container>
-            <LocationContainer>
-              <LocationIcon name="location-pin" size={13} color="white" />
-            </LocationContainer>
+            <LocationIcon
+              style={{ marginTop: 3 }}
+              name="location-pin"
+              size={13}
+              color="white"
+            />
             <Location>{location}</Location>
           </Container>
           <Container>
-            <ClockContainer>
-              <ClockIcon name="clock" size={13} color="white" />
-            </ClockContainer>
+            <ClockIcon name="clock" size={13} color="white" />
             <Date>{date}</Date>
           </Container>
-          <InterestedFriendsRow
-            navigate={interestedFriends =>
-              this.props.navigation.navigate('PeopleList', {
-                people: interestedFriends,
-                title: 'Interested Friends',
-              })
-            }
-            connectionsNum={connectionsNum}
-            interestedFriends={friends}
-            avatarSize={26}
-          />
+          {connectionsNum > 0 && (
+            <InterestedFriendsRow
+              navigate={interestedFriends =>
+                this.props.navigation.navigate('PeopleList', {
+                  people: interestedFriends,
+                  title: 'Interested Friends',
+                })
+              }
+              connectionsNum={connectionsNum}
+              interestedFriends={friends}
+              avatarSize={26}
+            />
+          )}
         </DescriptionContainer>
       </PictureHeader>
     )

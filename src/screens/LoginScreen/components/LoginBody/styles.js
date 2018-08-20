@@ -58,12 +58,10 @@ export const ColumnContainer = styled.View`
 `
 export const SignUpContainer = styled.View`
   flex-direction: row;
-  height: 50px;
   align-self: center;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  bottom: 10px;
+  margin-top: 20px;
 `
 export const Message = styled.Text`
   margin: 100px 0 100px 0;

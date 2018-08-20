@@ -8,34 +8,29 @@ export const Title = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   font-size: 24px;
   color: ${themeGet('colors.fontTag')};
-  margin-top: 16px;
+  margin-top: 2px;
 `
 export const Location = styled.Text`
   font-family: ${themeGet('fonts.medium')};
   font-size: 18px;
+  margin-left: 3px;
   color: ${themeGet('colors.fontTag')};
-  padding-top: 5px;
 `
 export const Date = styled.Text`
   font-family: ${themeGet('fonts.medium')};
   font-size: 14px;
+  margin-left: 4px;
   color: ${themeGet('colors.fontTag')};
-  padding-top: 5px;
-  padding-bottom: 20px;
 `
 export const DescriptionContainer = styled.View`
   align-items: center;
+  margin-bottom: 24px;
 `
 export const HeaderContainer = styled.View``
 
 export const Container = styled.View`
   flex-direction: row;
-`
-export const LocationContainer = styled.View`
-  padding-top: 8px;
-  padding-right: 3px;
-`
-export const ClockContainer = styled.View`
-  padding-top: 6px;
-  padding-right: 4px;
+  align-items: center;
+  margin-top: 4px;
+  margin-bottom: 4px;
 `

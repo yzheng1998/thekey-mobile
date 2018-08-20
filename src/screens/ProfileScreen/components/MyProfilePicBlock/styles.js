@@ -1,11 +1,6 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const BlockContainer = styled.View`
-  width: 100%;
-  aspect-ratio: 1.157;
-`
-
 export const EventTitleText = styled.Text`
   font-size: 24;
   line-height: 29;
@@ -20,6 +15,7 @@ export const LocationText = styled.Text`
   line-height: 21;
   font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.fontCard')};
+  margin-bottom: 64px;
 `
 
 export const EditButton = styled.TouchableOpacity`
