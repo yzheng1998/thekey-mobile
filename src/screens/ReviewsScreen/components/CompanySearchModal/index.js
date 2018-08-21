@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Modal, FlatList } from 'react-native'
-import { Background, ScrollScreen, ThinDivider } from './styles'
+import { FlatList } from 'react-native'
+import { Background, ScrollScreen, ThinDivider, SearchModal } from './styles'
 import CompanyCard from '../../../../components/CompanyCard'
 import SearchModalHeader from '../SearchModalHeader'
 import SearchBar from '../../../../components/SearchBar'
@@ -47,7 +47,7 @@ export default class CompanySearchModal extends Component {
       setCompanyInfo,
       navigation,
       state,
-      ...rest
+      isVisible,
     } = this.props
     const closeSearchModal = () => {
       this.setState({
@@ -57,12 +57,13 @@ export default class CompanySearchModal extends Component {
     }
 
     return (
-      <Modal
-        onDismiss={() => {
+      <SearchModal
+        onModalHide={() => {
           if (state.companyName) showAddReview()
         }}
-        animationType="slide"
-        {...rest}
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
+        isVisible={isVisible}
       >
         <Background>
           <SearchModalHeader closeModal={closeSearchModal} />
@@ -105,7 +106,7 @@ export default class CompanySearchModal extends Component {
             </Query>
           </ScrollScreen>
         </Background>
-      </Modal>
+      </SearchModal>
     )
   }
 }

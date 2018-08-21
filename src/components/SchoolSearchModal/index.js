@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { FlatList, Modal } from 'react-native'
-import { Container, Divider } from './styles'
+import { FlatList } from 'react-native'
+import { Container, Divider, SchoolModal } from './styles'
 import SearchBar from '../SearchBar'
 import SchoolSearchCard from '../SchoolSearchCard'
 import uuidv4 from 'uuid/v4'
@@ -32,11 +32,11 @@ export default class SchoolSearchModal extends Component {
     const { visible, toggleSchoolModal, onDismiss } = this.props
     const variables = { substr: this.state.searchText }
     return (
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={visible}
-        onDismiss={onDismiss}
+      <SchoolModal
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
+        isVisible={visible}
+        onModalHide={onDismiss}
       >
         <Container>
           <SearchBar
@@ -73,7 +73,7 @@ export default class SchoolSearchModal extends Component {
             )}
           </Query>
         </Container>
-      </Modal>
+      </SchoolModal>
     )
   }
 }

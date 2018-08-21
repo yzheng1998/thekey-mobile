@@ -12,7 +12,6 @@ import {
   Container,
   Content,
   SubTitle,
-  SubTitleSecondary,
   SwiperContainer,
   Title,
   SignInButton,
@@ -154,7 +153,7 @@ export default class SplashScreen extends Component {
               activeDot={
                 <View
                   style={{
-                    backgroundColor: 'rgb(250, 53, 121)',
+                    backgroundColor: 'rgb(220, 60, 53)',
                     width: 10,
                     height: 10,
                     borderRadius: 5,
@@ -184,16 +183,10 @@ export default class SplashScreen extends Component {
                 <Image
                   source={logo}
                   style={{
-                    position: 'absolute',
-                    top: 55,
-                    height: height * 0.204,
-                    width: height * 0.17,
+                    height: height * 0.11,
+                    width: height * 0.33,
                   }}
                 />
-                <View style={{ position: 'absolute', bottom: 40 }}>
-                  <SubTitle>Welcome to</SubTitle>
-                  <Title>The Key</Title>
-                </View>
               </Content>
               <Content>
                 <Image
@@ -202,7 +195,7 @@ export default class SplashScreen extends Component {
                     position: 'absolute',
                     top: 40,
                     width: height * 0.35,
-                    height: height * 0.258,
+                    height: height * 0.25,
                   }}
                 />
                 <View
@@ -213,19 +206,17 @@ export default class SplashScreen extends Component {
                   }}
                 >
                   <Title>Connect.</Title>
-                  <SubTitleSecondary>
-                    Connect with peers and alumni
-                  </SubTitleSecondary>
+                  <SubTitle>Connect with peers and alumni</SubTitle>
                 </View>
               </Content>
               <Content>
                 <Image
                   source={discoverGraphic}
                   style={{
-                    top: 32,
+                    top: 38,
                     position: 'absolute',
-                    width: height * 0.31,
-                    height: height * 0.289,
+                    width: height * 0.32,
+                    height: height * 0.27,
                   }}
                 />
                 <View
@@ -236,9 +227,9 @@ export default class SplashScreen extends Component {
                   }}
                 >
                   <Title>Discover.</Title>
-                  <SubTitleSecondary>
+                  <SubTitle>
                     Discover opportunities, events, and groups
-                  </SubTitleSecondary>
+                  </SubTitle>
                 </View>
               </Content>
               <Content>
@@ -247,7 +238,7 @@ export default class SplashScreen extends Component {
                   style={{
                     position: 'absolute',
                     top: 39,
-                    width: height * 0.36,
+                    width: height * 0.37,
                     height: height * 0.268,
                   }}
                 />
@@ -259,9 +250,7 @@ export default class SplashScreen extends Component {
                   }}
                 >
                   <Title>Share.</Title>
-                  <SubTitleSecondary>
-                    Share knowledge on companies
-                  </SubTitleSecondary>
+                  <SubTitle>Share knowledge on companies</SubTitle>
                 </View>
               </Content>
             </Swiper>

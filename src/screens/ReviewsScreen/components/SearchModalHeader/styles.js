@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const Background = styled.View`
-  width: 100%;
   padding: 10px;
   flex-direction: row;
   align-items: center;
