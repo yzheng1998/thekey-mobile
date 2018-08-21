@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">thekeymobile</string>
+    <string name="app_name">The Key</string>
     <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true">ALWAYS_SEND</string>
     <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true">ALWAYS_SEND</string>
     <string name="facebook_app_id">1883713978603895</string>
