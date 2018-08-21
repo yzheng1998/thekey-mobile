@@ -9,7 +9,7 @@ export default class ArrayDescription extends Component {
       <Container row={row}>
         <Title>{title}</Title>
         <RowContainer>
-          {content.map(text => <Content>{text}</Content>)}
+          {content.map(text => <Content key={text}>{text}</Content>)}
         </RowContainer>
       </Container>
     )
