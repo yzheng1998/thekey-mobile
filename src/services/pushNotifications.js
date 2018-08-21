@@ -51,15 +51,13 @@ const configure = () => {
 }
 
 const localNotification = () => {
-  setTimeout(() => {
-    PushNotification.localNotification({
-      autoCancel: true,
-      vibrate: true,
-      vibration: 300,
-      title: 'Notification Title',
-      message: 'Notification Message',
-    })
-  }, 5000)
+  console.log('About to Send')
+  PushNotification.localNotification({
+    message: 'Notification Message',
+    actions: '["Yes", "No"]',
+  })
+  console.log('sent')
+  console.log(PushNotification.localNotification)
 }
 
 export { configure, localNotification }
