@@ -17,7 +17,7 @@ const SEND_FRIEND_REQUEST = gql`
 
 export default class CardSwiper extends Component {
   render() {
-    const { width, userData } = this.props
+    const { width, userData, refetch } = this.props
     return (
       <Mutation mutation={SEND_FRIEND_REQUEST}>
         {createFriendRequest => (
@@ -31,6 +31,7 @@ export default class CardSwiper extends Component {
               }
               return (
                 <SocietyCard
+                  refetch={refetch}
                   user={renderUser}
                   navigation={this.props.navigation}
                 />

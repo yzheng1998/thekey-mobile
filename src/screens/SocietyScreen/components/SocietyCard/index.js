@@ -5,11 +5,16 @@ import TagLine from '../../../../components/TagLine'
 import MutualConnectionsRow from '../MutualConnectionsRow'
 
 export default class SocietyCard extends Component {
-  viewMember = memberId => {
-    this.props.navigation.navigate('Member', {
-      id: memberId,
-    })
+  constructor(props) {
+    super(props)
+    this.viewMember = memberId => {
+      this.props.navigation.navigate('Member', {
+        id: memberId,
+        refetch: props.refetch,
+      })
+    }
   }
+
   render() {
     const {
       id,
