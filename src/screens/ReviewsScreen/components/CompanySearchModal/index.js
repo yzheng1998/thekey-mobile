@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, SafeAreaView } from 'react-native'
 import { Background, ScrollScreen, ThinDivider, SearchModal } from './styles'
 import CompanyCard from '../../../../components/CompanyCard'
 import SearchModalHeader from '../SearchModalHeader'
@@ -57,56 +57,58 @@ export default class CompanySearchModal extends Component {
     }
 
     return (
-      <SearchModal
-        onModalHide={() => {
-          if (state.companyName) showAddReview()
-        }}
-        animationIn="slideInUp"
-        animationOut="slideOutDown"
-        isVisible={isVisible}
-      >
-        <Background>
-          <SearchModalHeader closeModal={closeSearchModal} />
-          <SearchBar
-            updateText={this.updateText}
-            searchText={this.state.searchText}
-            placeholderText="Search for a company"
-          />
-          <ThinDivider />
-          <ScrollScreen keyboardShouldPersistTaps="handled">
-            <Query query={GET_COMPANIES} variables={variables}>
-              {({ loading, data }) => {
-                if (loading) return <LoadingWrapper loading />
-                return (
-                  <FlatList
-                    keyboardShouldPersistTaps="handled"
-                    showsVerticalScrollIndicator={false}
-                    keyExtractor={company => company.id}
-                    data={data.companies}
-                    renderItem={({ item }) => (
-                      <CompanyCard
-                        onPress={() => {
-                          closeSearchModal()
-                          setCompanyInfo(
-                            item.id,
-                            item.name,
-                            item.profilePicture,
-                          )
-                        }}
-                        title={item.name}
-                        rating={item.rating}
-                        companyId={item.id}
-                        navigation={navigation}
-                        picture={item.profilePicture}
-                      />
-                    )}
-                  />
-                )
-              }}
-            </Query>
-          </ScrollScreen>
-        </Background>
-      </SearchModal>
+      <SafeAreaView style={{ flex: 1 }}>
+        <SearchModal
+          onModalHide={() => {
+            if (state.companyName) showAddReview()
+          }}
+          animationIn="slideInUp"
+          animationOut="slideOutDown"
+          isVisible={isVisible}
+        >
+          <Background>
+            <SearchModalHeader closeModal={closeSearchModal} />
+            <SearchBar
+              updateText={this.updateText}
+              searchText={this.state.searchText}
+              placeholderText="Search for a company"
+            />
+            <ThinDivider />
+            <ScrollScreen keyboardShouldPersistTaps="handled">
+              <Query query={GET_COMPANIES} variables={variables}>
+                {({ loading, data }) => {
+                  if (loading) return <LoadingWrapper loading />
+                  return (
+                    <FlatList
+                      keyboardShouldPersistTaps="handled"
+                      showsVerticalScrollIndicator={false}
+                      keyExtractor={company => company.id}
+                      data={data.companies}
+                      renderItem={({ item }) => (
+                        <CompanyCard
+                          onPress={() => {
+                            closeSearchModal()
+                            setCompanyInfo(
+                              item.id,
+                              item.name,
+                              item.profilePicture,
+                            )
+                          }}
+                          title={item.name}
+                          rating={item.rating}
+                          companyId={item.id}
+                          navigation={navigation}
+                          picture={item.profilePicture}
+                        />
+                      )}
+                    />
+                  )
+                }}
+              </Query>
+            </ScrollScreen>
+          </Background>
+        </SearchModal>
+      </SafeAreaView>
     )
   }
 }
