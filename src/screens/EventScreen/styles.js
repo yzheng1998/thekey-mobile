@@ -85,14 +85,3 @@ export const Option = styled.Text`
   padding-top: 16px;
   padding-left: 16px;
 `
-export const ButtonHeader = styled.View`
-  position: absolute;
-  z-index: 1;
-  top: 48px;
-  padding-left: 20px;
-  padding-right: 20px;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-`
-export const BackButtonContainer = styled.TouchableOpacity``

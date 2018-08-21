@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
-import {
-  Container,
-  TagsContainer,
-  BackButtonContainer,
-  ButtonHeader,
-} from './styles'
+import { Container, TagsContainer } from './styles'
+import ButtonRow from '../../components/MainButtonRow'
 import LoadingWrapper from '../../components/LoadingWrapper'
 import JobPictureBlock from '../../components/JobPictureBlock'
 import AboutBlock from './components/AboutBlock'
 import TagLine from '../../components/TagLine'
 import SimilarJobsBlock from '../../components/SimilarJobsBlock'
-import BackButton from 'react-native-vector-icons/Ionicons'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import JobStarButton from '../../components/JobStarButton'
@@ -98,17 +93,12 @@ class JobScreen extends Component {
                 <TagLine tagData={tags} lines={1} />
               </TagsContainer>
               <SimilarJobsBlock navigation={this.props.navigation} />
-              <ButtonHeader>
-                <BackButtonContainer
-                  onPress={() => this.props.navigation.goBack()}
-                >
-                  <BackButton name="ios-arrow-back" size={30} color="white" />
-                </BackButtonContainer>
+              <ButtonRow navigation={this.props.navigation}>
                 <JobStarButton
                   isInterested={isInterested}
                   id={this.props.navigation.getParam('id')}
                 />
-              </ButtonHeader>
+              </ButtonRow>
               <ApplyNowModal
                 refreshPage={refetch}
                 toggleApplyModal={this.toggleApplyModal}

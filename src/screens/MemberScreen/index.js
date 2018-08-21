@@ -100,8 +100,8 @@ export default class MemberScreen extends Component {
                 refreshScreen={refetch}
               />
               <ButtonRowView
+                navigation={this.props.navigation}
                 reportUser={this.showActionSheet}
-                goBack={() => this.props.navigation.goBack()}
                 showSettings={() =>
                   this.setState({
                     showSettings: !this.state.showSettings,
