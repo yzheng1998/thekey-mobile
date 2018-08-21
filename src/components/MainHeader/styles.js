@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
+import { Platform } from 'react-native'
 
 export const ButtonRow = styled.View`
   width: 100%;
+  margin-top: ${Platform.OS === 'ios' ? 5 : 30};
   padding-left: 20px;
   padding-right: 20px;
   flex-direction: row;
