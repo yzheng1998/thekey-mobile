@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { AsyncStorage } from 'react-native'
 import { Background, Icon, IconButton, Name, Title, TextBox } from './styles'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -35,8 +36,9 @@ export default class Header extends Component {
           <Title>Discover</Title>
         </TextBox>
         <Query query={GET_VIEWER}>
-          {({ data, loading }) => {
+          {({ data, error, loading }) => {
             if (loading) return <LoadingWrapper loading />
+            if (error) AsyncStorage.clear()
             const { profilePicture } = data.viewer
             const profilePictureUrl = profilePicture || defaultProfilePicture
             return (
