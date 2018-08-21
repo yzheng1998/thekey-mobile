@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const Background = styled.View`
-  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 `
 export const Container = styled.View`
   padding: 10px;
@@ -21,8 +22,9 @@ export const InputField = styled.TextInput`
 `
 export const SearchNameContainer = styled.View`
   flex-direction: row;
+  padding-left: 6px;
+  padding-right: 6px;
   align-items: center;
-  background-color: white;
 `
 export const PeopleListContainer = styled.View`
   width: 100%;
@@ -30,8 +32,10 @@ export const PeopleListContainer = styled.View`
   margin-bottom: 120px;
 `
 export const ThinDivider = styled.View`
-  width: 100%;
   height: 4px;
-  margin: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: -10px;
+  margin-right: -10px;
   background-color: ${themeGet('colors.divider')};
 `

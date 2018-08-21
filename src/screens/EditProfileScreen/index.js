@@ -205,9 +205,8 @@ export default class EditProfileScreen extends Component {
                       navigation={this.props.navigation}
                       visible={this.state.interestsModalVisible}
                       closeModal={this.closeInterestsModal}
-                      updateInterests={tagArray =>
-                        this.setState({ tags: tagArray })
-                      }
+                      tags={this.state.tags || tags}
+                      updateTags={tagArray => this.setState({ tags: tagArray })}
                     />
                   </ColumnContainer>
                 </Block>
