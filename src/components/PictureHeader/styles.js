@@ -1,16 +1,9 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const BlockContainer = styled.View`
-  overflow: hidden;
-  width: 100%;
-`
+export const BlockContainer = styled.View``
 export const ContentContainer = styled.View`
-  flex: 1;
-  margin-bottom: 8px;
   align-items: center;
-  margin-top: 0px;
-  height: ${props => (props.height ? props.height : 365)};
 `
 export const PictureContainer = styled.View`
   margin-top: ${props => (props.marginTop ? props.marginTop : 70)};
@@ -21,8 +14,6 @@ export const SafeView = styled.SafeAreaView`
   flex: 1;
 `
 export const BackgroundPicture = styled.ImageBackground`
-  width: 100%;
-  height: ${props => (props.height ? props.height : 365)};
   align-items: center;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -47,5 +38,4 @@ export const MiniQRCode = styled.TouchableHighlight`
 export const Tint = styled.View`
   background-color: ${themeGet('colors.pictureHeaderTint')};
   width: 100%;
-  position: absolute;
 `

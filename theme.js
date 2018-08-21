@@ -72,6 +72,7 @@ const theme = {
       fonts: {
         heavy: 'Roboto-Bold',
         bold: 'Roboto-Bold',
+        semiBold: 'Roboto-Medium',
         medium: 'Roboto-Medium',
         light: 'Roboto-Light',
         regular: 'Roboto-Regular',

@@ -7,14 +7,14 @@ export default class MyProfileBioBlock extends Component {
     truncated: true,
   }
 
-  changeSize() {
+  changeSize = () => {
     this.setState({ truncated: !this.state.truncated })
   }
 
   render() {
     return (
       <BlockContainer>
-        <TextButton activeOpacity={0.9} onPress={() => this.changeSize()}>
+        <TextButton activeOpacity={0.9} onPress={this.changeSize}>
           <BioText numberOfLines={this.state.truncated ? 3 : 0}>
             {this.props.bioText}
           </BioText>

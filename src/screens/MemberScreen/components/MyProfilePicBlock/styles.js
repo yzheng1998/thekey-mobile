@@ -38,5 +38,6 @@ export const EditLabel = styled.Text`
   margin-left: 3;
 `
 export const Container = styled.View`
-  padding-top: 16px;
+  margin-top: 16px;
+  margin-bottom: 58px;
 `

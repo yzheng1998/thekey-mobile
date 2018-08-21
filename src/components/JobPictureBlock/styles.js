@@ -23,6 +23,7 @@ export const Deadline = styled.Text`
   font-size: 12px;
   color: ${themeGet('colors.fontTag')};
   margin-top: 3px;
+  margin-bottom: 64px;
 `
 export const Apply = styled.TouchableOpacity`
   height: 45;
@@ -48,10 +49,11 @@ export const AppliedButtonText = styled.Text`
 `
 export const DescriptionContainer = styled.View`
   align-items: center;
+  margin-top: 12px;
+  margin-bottom: 4px;
 `
 export const HeaderContainer = styled.View`
-  width: 100%;
-  aspect-ratio: 1.03878;
+  flex: 1;
 `
 export const RowContainer = styled.View`
   flex-direction: row;
