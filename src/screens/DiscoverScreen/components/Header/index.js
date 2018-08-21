@@ -38,7 +38,7 @@ export default class Header extends Component {
         <Query query={GET_VIEWER}>
           {({ data, error, loading }) => {
             if (loading) return <LoadingWrapper loading />
-            if (error) AsyncStorage.clear()
+            if (error || !data.viewer.id) AsyncStorage.clear()
             const { profilePicture } = data.viewer
             const profilePictureUrl = profilePicture || defaultProfilePicture
             return (
