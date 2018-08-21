@@ -39,25 +39,23 @@ const InterestList = ({ interestData, addInterest }) => (
 )
 
 export default class InterestsSearchModal extends Component {
-  state = {
-    text: '',
-    tags: [],
-    interests: [],
-    doneButtonDisabled: true,
+  constructor(props) {
+    super(props)
+    this.state = {
+      text: '',
+      tags: props.tags,
+    }
+
+    this.handleClose = () => {
+      this.setState({ text: '' })
+      props.closeModal()
+    }
   }
 
-  onChangeTags = tags => {
-    if (tags.length > this.state.tags.length) {
-      this.setState({ tags })
-    } else {
-      this.setState({
-        tags,
-        interests: this.state.interests.filter(interest =>
-          tags.includes(interest.name),
-        ),
-        doneButtonDisabled: !(tags.length > 0),
-      })
-    }
+  onChangeTagNames = tagNames => {
+    this.setState({
+      tags: this.state.tags.filter(tag => tagNames.includes(tag.name)),
+    })
   }
 
   onChangeText = text => {
@@ -65,14 +63,11 @@ export default class InterestsSearchModal extends Component {
   }
 
   addInterest = (name, id) => {
-    if (this.state.interests.map(interest => interest.name).includes(name)) {
-      this.setState({})
-    } else {
+    const tagNames = this.state.tags.map(el => el.name)
+    if (!tagNames.includes(name)) {
       this.setState({
-        tags: [...this.state.tags, name],
         text: '',
-        interests: [...this.state.interests, { id, name }],
-        doneButtonDisabled: false,
+        tags: [...this.state.tags, { id, name }],
       })
     }
   }
@@ -93,37 +88,49 @@ export default class InterestsSearchModal extends Component {
       },
     }
 
-    const { closeModal, updateInterests, ...rest } = this.props
-    const handleCloseModal = () => {
-      this.setState({
-        text: '',
-        users: [],
-      })
-      closeModal()
-    }
+    const { updateTags, tags, ...rest } = this.props
 
+    const tagNames = this.state.tags.map(el => el.name)
+
+    const handleCancel = () => {
+      this.setState({ tags })
+      this.handleClose()
+    }
     return (
       <Modal animationType="slide" {...rest}>
         <Background>
           <InterestsModalHeader
-            handleClose={handleCloseModal}
-            interests={this.state.interests} // object
-            updateInterests={updateInterests}
-            doneButtonDisabled={this.state.doneButtonDisabled}
+            handleClose={this.handleClose}
+            handleCancel={handleCancel}
+            tags={this.state.tags}
+            updateTags={updateTags}
           />
           <ThinDivider />
           <SearchNameContainer>
             <TagInput
-              value={this.state.tags}
-              onChange={this.onChangeTags}
+              value={tagNames}
+              onChange={this.onChangeTagNames}
               labelExtractor={this.labelExtractor}
               text={this.state.text}
               onChangeText={this.onChangeText}
-              tagColor="rgb(220, 60, 53)"
+              tagColor=" rgb(220, 60, 53)"
               tagTextColor="white"
+              tagTextStyle={{ fontSize: 14 }}
               inputProps={inputProps}
+              scrollViewProps={{
+                horizontal: true,
+                showsHorizontalScrollIndicator: false,
+              }}
+              inputColor="black"
               maxHeight={80}
-              tagContainerStyle={{ height: 31 }}
+              tagContainerStyle={{
+                borderRadius: 10,
+                margin: 0,
+                marginRight: 5,
+                padding: 0,
+                paddingLeft: 7,
+                paddingRight: 7,
+              }}
             />
           </SearchNameContainer>
           <ThinDivider />

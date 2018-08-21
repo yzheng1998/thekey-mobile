@@ -42,11 +42,15 @@ export default class SendFriendRequestButton extends Component {
       isFriend,
       hasFriendRequest,
       refreshScreen,
+      refetch,
     } = this.props
     return (
       <Mutation
         mutation={SEND_FRIEND_REQUEST}
-        onCompleted={() => refreshScreen()}
+        onCompleted={() => {
+          refetch()
+          refreshScreen()
+        }}
       >
         {(createFriendRequest, { loading, error }) => {
           if (error) {

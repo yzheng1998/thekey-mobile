@@ -47,7 +47,7 @@ export default class ChatCard extends Component {
               <TimeStamp>{formatTime(timeStamp)}</TimeStamp>
             </TitleWrapper2>
           </TitleWrapper>
-          <Message numberOfLines={2}>{message}</Message>
+          <Message numberOfLines={1}>{message}</Message>
         </Wrapper>
       </Card>
     )

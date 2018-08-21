@@ -11,5 +11,7 @@ export const EventsContainer = styled.ScrollView`
   height: 100%;
 `
 export const EventContainer = styled.View`
+  padding-left: 16px;
+  padding-right: 16px;
   box-shadow: 10px 10px 9px ${themeGet('colors.shadow')};
 `
