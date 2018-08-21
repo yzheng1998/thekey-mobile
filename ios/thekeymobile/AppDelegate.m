@@ -35,8 +35,10 @@
                                                       moduleName:@"thekeymobile"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
+  rootView.backgroundColor = [[UIColor alloc] initWithRed:0.39 green:0.58 blue:0.67 alpha:1];
   
-  rootView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"SplashIcon.png"]];
+  // This will set the background to an image, but I'm not sure how to control that
+  // rootView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"SplashIcon.png"]];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
