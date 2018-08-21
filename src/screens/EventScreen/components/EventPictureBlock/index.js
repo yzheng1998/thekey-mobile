@@ -5,6 +5,7 @@ import {
   Location,
   Date,
   Container,
+  TimeContainer,
 } from './styles'
 import PictureHeader from '../../../../components/PictureHeader'
 import InterestedFriendsRow from '../../../../screens/EventsScreen/components/InterestedFriendsRow'
@@ -35,10 +36,10 @@ class EventPictureBlock extends Component {
             />
             <Location>{location}</Location>
           </Container>
-          <Container>
+          <TimeContainer>
             <ClockIcon name="clock" size={13} color="white" />
             <Date>{date}</Date>
-          </Container>
+          </TimeContainer>
           {connectionsNum > 0 && (
             <InterestedFriendsRow
               navigate={interestedFriends =>
