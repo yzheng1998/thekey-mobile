@@ -21,6 +21,7 @@ export default class MyProfilePicBlock extends Component {
       isFriend,
       hasFriendRequest,
       refreshScreen,
+      refetch,
     } = this.props
     return (
       <BlockContainer>
@@ -31,6 +32,7 @@ export default class MyProfilePicBlock extends Component {
             recipientId={id}
             swipedLeft={false}
             refreshScreen={refreshScreen}
+            refetch={refetch}
           />
           <EventTitleText>{name}</EventTitleText>
           <LocationText>{hometown}</LocationText>

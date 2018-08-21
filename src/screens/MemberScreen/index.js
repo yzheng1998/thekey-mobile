@@ -29,10 +29,12 @@ export default class MemberScreen extends Component {
     this.ActionSheet.show()
   }
   render() {
+    const refetchCards = this.props.navigation.getParam('refetch')
     return (
       <Query
         query={GET_USER}
         variables={{ id: this.props.navigation.getParam('id') }}
+        fetchPolicy="network-only"
       >
         {({ loading, data, refetch }) => {
           if (loading) return <LoadingWrapper loading />
@@ -86,6 +88,7 @@ export default class MemberScreen extends Component {
                 }}
               />
               <MyProfilePicBlock
+                refetch={refetchCards}
                 id={id}
                 name={`${firstName} ${lastName}`}
                 hometown={demographics.hometown}
