@@ -6,10 +6,10 @@ import Resumes from './Screens/Resumes'
 
 export default class SettingsScreens extends Component {
   render() {
-    const { id, navigation, resumes, userId, refetch } = this.props
+    const { id, navigation, resumes, userId, refetch, swipe } = this.props
     const settingsScreens = [
       { id: 0, screen: null },
-      { id: 1, screen: <Password /> },
+      { id: 1, screen: <Password onPress={() => swipe('Settings')} /> },
       { id: 2, screen: <Logout navigation={navigation} /> },
       {
         id: 3,

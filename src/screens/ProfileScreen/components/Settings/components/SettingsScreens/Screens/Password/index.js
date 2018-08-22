@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TouchableWithoutFeedback } from 'react-native'
+import { TouchableWithoutFeedback, View } from 'react-native'
 import { ModalScreenContainer } from '../../../../../../styles'
 import RegisterButton from '../../../../../../../../components/RegisterButton'
 import LineInput from '../../../../../../../../components/LineInput'
@@ -8,8 +8,25 @@ import {
   Keyboard,
 } from 'react-native-keyboard-aware-scroll-view'
 import constraints from './constraints'
+import { Mutation } from 'react-apollo'
+import gql from 'graphql-tag'
+import LoadingWrapper from '../../../../../../../../components/LoadingWrapper'
+import { ErrorMessage } from '../../../../../../../../components/Error/styles'
 
 const validate = require('validate.js')
+
+const CHANGE_USER_PASSWORD = gql`
+  mutation changeUserPassword($oldPassword: String!, $newPassword: String!) {
+    changeUserPassword(oldPassword: $oldPassword, newPassword: $newPassword) {
+      updatedUser {
+        id
+      }
+      error {
+        message
+      }
+    }
+  }
+`
 
 export default class Password extends Component {
   state = {
@@ -19,6 +36,7 @@ export default class Password extends Component {
     displayErrors: {},
     errors: {},
     touched: {},
+    submitError: '',
   }
 
   validateForm = isOnChangeText => {
@@ -60,13 +78,19 @@ export default class Password extends Component {
 
   render() {
     const noErrors = !this.state.errors
+    const variables = {
+      oldPassword: this.state.password,
+      newPassword: this.state.newPassword,
+    }
     return (
       <ModalScreenContainer>
         <TouchableWithoutFeedback
           onPress={() => Keyboard.dismiss()}
           accessible={false}
         >
-          <KeyboardAwareScrollView>
+          <KeyboardAwareScrollView
+            style={{ paddingLeft: 12, paddingRight: 12, paddingTop: 6 }}
+          >
             <LineInput
               updateText={text => this.setState({ password: text })}
               text={this.state.password}
@@ -102,11 +126,45 @@ export default class Password extends Component {
               onBlur={() => this.validateForm(false)}
               error={this.state.displayErrors.confirmNewPassword}
             />
-            <RegisterButton
-              buttonText="UPDATE"
-              disabled={!noErrors}
-              onPress={this.props.onPress}
-            />
+            <Mutation
+              mutation={CHANGE_USER_PASSWORD}
+              onCompleted={data => {
+                if (data.changeUserPassword.error)
+                  this.setState({
+                    submitError: data.changeUserPassword.error.message,
+                  })
+                else {
+                  this.props.onPress()
+                  this.setState({
+                    password: '',
+                    newPassword: '',
+                    confirmNewPassword: '',
+                    displayErrors: {},
+                    errors: {},
+                    touched: {},
+                    submitError: '',
+                  })
+                }
+              }}
+            >
+              {(changeUserPassword, { loading }) => (
+                <View>
+                  <RegisterButton
+                    buttonText="UPDATE"
+                    disabled={!noErrors}
+                    onPress={() => {
+                      changeUserPassword({ variables })
+                    }}
+                  />
+                  <LoadingWrapper loading={loading} />
+                  {this.state.submitError.length > 0 && (
+                    <View style={{ alignItems: 'center' }}>
+                      <ErrorMessage>{this.state.submitError}</ErrorMessage>
+                    </View>
+                  )}
+                </View>
+              )}
+            </Mutation>
           </KeyboardAwareScrollView>
         </TouchableWithoutFeedback>
       </ModalScreenContainer>
