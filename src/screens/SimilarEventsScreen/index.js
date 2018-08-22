@@ -10,7 +10,7 @@ import {
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import LoadingWrapper from '../../components/LoadingWrapper'
-import SimilarItemsHeader from '../../components/SimilarItemsHeader'
+import MainHeader from '../../components/MainHeader'
 import EventsHeaderBackground from '../../../assets/EventsBackground.png'
 
 const GET_SIMILAR_EVENTS = gql`
@@ -43,7 +43,7 @@ class SimilarEventsScreen extends Component {
     const { id } = this.props.navigation.state.params
     return (
       <Background>
-        <SimilarItemsHeader
+        <MainHeader
           backgroundImage={EventsHeaderBackground}
           title="Similar Events"
           navigation={this.props.navigation}
