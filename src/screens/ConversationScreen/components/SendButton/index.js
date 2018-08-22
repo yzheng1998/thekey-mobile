@@ -4,6 +4,7 @@ import { Alert } from 'react-native'
 import { GET_CHAT_AND_VIEWER } from '../../queries'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { buttonRadius } from '../../../../constants'
 
 const SEND_MESSAGE = gql`
   mutation sendMessage($sendMessageInput: SendMessageInput!) {
@@ -69,6 +70,7 @@ export default class SendButton extends Component {
           }
           return (
             <ButtonContainer
+              hitSlop={buttonRadius}
               onPress={() => {
                 const variables = {
                   sendMessageInput: {

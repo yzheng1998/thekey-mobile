@@ -14,6 +14,7 @@ import {
   EditButton,
 } from '../../styles'
 import EditPencil from 'react-native-vector-icons/Feather'
+import { buttonRadius } from '../../../../constants'
 
 export default class BasicInfoBlock extends Component {
   render() {
@@ -74,7 +75,10 @@ export default class BasicInfoBlock extends Component {
           <ColumnContainer>
             <TitleRow>
               <Title>Current Initiatives</Title>
-              <EditButton onPress={this.props.toggleEditInitiativesModal}>
+              <EditButton
+                hitSlop={buttonRadius}
+                onPress={this.props.toggleEditInitiativesModal}
+              >
                 <EditPencil
                   name="edit-2"
                   color="rgb(148, 157, 170)"

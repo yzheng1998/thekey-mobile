@@ -8,6 +8,7 @@ import {
   EditButton,
 } from './styles'
 import EditPencil from 'react-native-vector-icons/Feather'
+import { buttonRadius } from '../../constants'
 
 import moment from 'moment'
 
@@ -47,7 +48,7 @@ export default class ProfileInfoRow extends Component {
           {yearArray.length > 1 && <Years>{yearArray.join(' - ')}</Years>}
         </TextContainer>
         {this.props.showEditButton && (
-          <EditButton onPress={onPress}>
+          <EditButton hitSlop={buttonRadius} onPress={onPress}>
             <EditPencil name="edit-2" color="rgb(148, 157, 170)" size={20} />
           </EditButton>
         )}

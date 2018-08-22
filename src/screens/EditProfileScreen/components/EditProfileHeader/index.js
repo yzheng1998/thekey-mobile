@@ -9,6 +9,7 @@ import {
   Divider,
 } from './styles'
 import UpdateProfileButton from '../UpdateProfileButton'
+import { buttonRadius } from '../../../../constants'
 
 export default class EditProfileHeader extends Component {
   render() {
@@ -17,7 +18,7 @@ export default class EditProfileHeader extends Component {
       <SafeView>
         <Background>
           <ButtonContainer>
-            <CancelButton onPress={goBack}>
+            <CancelButton hitSlop={buttonRadius} onPress={goBack}>
               <CancelText>Cancel</CancelText>
             </CancelButton>
             <Heading>Edit Profile</Heading>

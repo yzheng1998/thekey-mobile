@@ -12,6 +12,7 @@ import { FlatList, View } from 'react-native'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
+import { buttonRadius } from '../../../../constants'
 
 const GET_SIMILAR_EVENTS = gql`
   query similarEvents($id: ID!) {
@@ -50,6 +51,7 @@ class SimilarEventsBlock extends Component {
               <Header>
                 <Title>Similar Events</Title>
                 <ButtonContainer
+                  hitSlop={buttonRadius}
                   onPress={() =>
                     this.props.navigation.push('SimilarEventsScreen', { id })
                   }

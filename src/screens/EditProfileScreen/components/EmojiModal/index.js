@@ -10,13 +10,14 @@ import EmojiSelector from '../EmojiSelector'
 import { Query } from 'react-apollo'
 import { GET_WAYS_TO_MEET } from '../../query'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
+import { buttonRadius } from '../../../../constants'
 
 export default class EmojiModal extends Component {
   render() {
     const { doneOnPress, onSelection, selected } = this.props
     return (
       <ModalContainer>
-        <DoneButton onPress={doneOnPress}>
+        <DoneButton onPress={doneOnPress} hitSlop={buttonRadius}>
           <DoneButtonText>Done</DoneButtonText>
         </DoneButton>
         <EmojiContainer>

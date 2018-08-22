@@ -12,6 +12,7 @@ import JobCard from '../../components/JobCard'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import LoadingWrapper from '../../components/LoadingWrapper'
+import { buttonRadius } from '../../constants'
 
 const _ = require('lodash')
 
@@ -51,6 +52,7 @@ class SimilarJobsBlock extends Component {
               <Header>
                 <Title>Similar Jobs</Title>
                 <ButtonContainer
+                  hitSlop={buttonRadius}
                   onPress={() =>
                     this.props.navigation.push('SimilarJobsScreen', {
                       id: this.props.navigation.getParam('id'),

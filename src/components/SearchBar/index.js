@@ -11,6 +11,7 @@ import {
   CancelText,
   CancelAnimated,
 } from './styles'
+import { buttonRadius } from '../../constants'
 
 export default class SearchBar extends Component {
   constructor(props) {
@@ -85,6 +86,7 @@ export default class SearchBar extends Component {
           }}
         >
           <CancelButton
+            hitSlop={buttonRadius}
             onPress={() => {
               updateText('')
               this.slide()

@@ -120,3 +120,7 @@ export const waysToMeetOptions = [
     editLabel: 'Weekends',
   },
 ]
+
+export const buttonRadius = { top: 5, left: 5, bottom: 5, right: 5 }
+
+export const wordRadius = { top: 2, left: 5, bottom: 5, right: 2 }

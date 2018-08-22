@@ -9,6 +9,7 @@ import {
   BackButton,
   PlusButton,
 } from './styles'
+import { buttonRadius } from '../../../../constants'
 
 export default class ChatMembersHeader extends Component {
   render() {
@@ -18,7 +19,10 @@ export default class ChatMembersHeader extends Component {
         <TitleContainer>
           <Title>Chat Members</Title>
           <ButtonRow>
-            <BackButton onPress={() => navigation.goBack()}>
+            <BackButton
+              hitSlop={buttonRadius}
+              onPress={() => navigation.goBack()}
+            >
               <BackArrow name="ios-arrow-back" color="rgb(3,3,3)" size={30} />
             </BackButton>
             <PlusButton onPress={openAddToChatModal}>
