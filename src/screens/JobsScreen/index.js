@@ -54,20 +54,20 @@ class JobsScreen extends Component {
     }
     const filterByApplied = this.state.tab === 1
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
         <StatusBar barStyle="light-content" />
+        <JobsHeader
+          navigation={this.props.navigation}
+          changeTab={this.changeTab}
+          selectedIndex={this.state.tab}
+        />
+        <SearchBar
+          updateText={this.updateText}
+          searchText={searchText}
+          placeholderText="Search Jobs & Internships"
+        />
+        <CardDivider />
         <ScrollView keyboardShouldPersistTaps="handled">
-          <JobsHeader
-            navigation={this.props.navigation}
-            changeTab={this.changeTab}
-            selectedIndex={this.state.tab}
-          />
-          <SearchBar
-            updateText={this.updateText}
-            searchText={searchText}
-            placeholderText="Search Jobs & Internships"
-          />
-          <CardDivider />
           <Query query={GET_JOBS} variables={variables}>
             {({ loading, data, refetch }) => {
               if (loading) return <LoadingWrapper loading />
