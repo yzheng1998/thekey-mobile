@@ -62,7 +62,7 @@ class SocietyScreen extends Component {
         <StatusBar barStyle="light-content" />
         <SocietySearchModal
           navigation={this.props.navigation}
-          visible={this.state.searchModalVisible}
+          isVisible={this.state.searchModalVisible}
           closeModal={this.closeSearchModal}
         />
         <Background

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Modal, FlatList, StatusBar } from 'react-native'
+import { FlatList, StatusBar } from 'react-native'
 import {
   Background,
   ScrollScreen,
   PeopleListContainer,
   ThinDivider,
+  SearchModal,
 } from './styles'
 import UserCard from '../../../../components/UserCard'
 import SearchModalHeader from '../SearchModalHeader'
@@ -27,7 +28,7 @@ const GET_USERS = gql`
   }
 `
 
-const PeopleList = ({ peopleData, viewMember }) => (
+const PeopleList = ({ peopleData, onPress, updateState }) => (
   <PeopleListContainer>
     <FlatList
       keyboardShouldPersistTaps="handled"
@@ -35,7 +36,10 @@ const PeopleList = ({ peopleData, viewMember }) => (
       data={peopleData}
       renderItem={({ item: person }) => (
         <UserCard
-          onPress={() => viewMember(person.id)}
+          onPress={() => {
+            onPress()
+            updateState({ id: person.id })
+          }}
           name={`${person.firstName} ${person.lastName}`}
           picture={person.profilePicture}
           subtitle={person.demographics.hometown}
@@ -51,6 +55,7 @@ export default class SocietySearchModal extends Component {
 
   state = {
     searchText: '',
+    id: '',
   }
 
   updateText = searchText => {
@@ -59,21 +64,32 @@ export default class SocietySearchModal extends Component {
 
   render() {
     const variables = { usersFilterInput: { name: this.state.searchText } }
-    const { closeModal, navigation, ...rest } = this.props
-    const viewMember = memberId => {
-      navigation.navigate('Member', {
-        id: memberId,
-      })
-      closeModal()
-    }
+    const { closeModal, navigation, isVisible } = this.props
+
     const closeSearchModal = () => {
       this.setState({
         searchText: '',
+        id: '',
       })
       closeModal()
     }
+    const viewMember = memberId => {
+      closeModal()
+      navigation.navigate('Member', {
+        id: memberId,
+      })
+    }
     return (
-      <Modal animationType="slide" {...rest}>
+      <SearchModal
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
+        isVisible={isVisible}
+        onModalHide={
+          this.state.id.length > 0
+            ? () => viewMember(this.state.id)
+            : () => closeSearchModal()
+        }
+      >
         <StatusBar barStyle="dark-content" />
         <Background>
           <SearchModalHeader closeModal={closeSearchModal} />
@@ -89,7 +105,8 @@ export default class SocietySearchModal extends Component {
                 if (loading) return <LoadingWrapper loading />
                 return (
                   <PeopleList
-                    viewMember={viewMember}
+                    onPress={closeSearchModal}
+                    updateState={obj => this.setState(obj)}
                     peopleData={data.users}
                     addParticipant={this.addParticipant}
                   />
@@ -98,7 +115,7 @@ export default class SocietySearchModal extends Component {
             </Query>
           </ScrollScreen>
         </Background>
-      </Modal>
+      </SearchModal>
     )
   }
 }
