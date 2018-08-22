@@ -1,10 +1,5 @@
 import React, { Component } from 'react'
-import {
-  Container,
-  TagsContainer,
-  BackButtonContainer,
-  ButtonHeader,
-} from './styles'
+import { Container, TagsContainer } from './styles'
 import EventPictureBlock from './components/EventPictureBlock'
 import AboutBlock from '../../components/AboutBlock'
 import TagLine from '../../components/TagLine'
@@ -13,8 +8,8 @@ import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import LoadingWrapper from '../../components/LoadingWrapper'
 import moment from 'moment'
-import BackButton from 'react-native-vector-icons/Ionicons'
 import EventStarButton from '../../components/EventStarButton'
+import ButtonRow from '../../components/MainButtonRow'
 
 const GET_EVENT = gql`
   query event($id: ID!) {
@@ -78,14 +73,6 @@ class EventScreen extends Component {
           const displayImage = picture || defaultEventImage
           return (
             <Container>
-              <ButtonHeader>
-                <BackButtonContainer
-                  onPress={() => this.props.navigation.goBack()}
-                >
-                  <BackButton name="ios-arrow-back" size={30} color="white" />
-                </BackButtonContainer>
-                <EventStarButton isInterested={isInterested} id={id} />
-              </ButtonHeader>
               <EventPictureBlock
                 navigation={this.props.navigation}
                 picture={displayImage}
@@ -95,6 +82,9 @@ class EventScreen extends Component {
                 friends={interestedFriends}
                 connectionsNum={interestedFriends.length}
               />
+              <ButtonRow navigation={this.props.navigation}>
+                <EventStarButton isInterested={isInterested} id={id} />
+              </ButtonRow>
               <AboutBlock about={details} />
               <TagsContainer>
                 <TagLine tagData={tags} lines={1} />

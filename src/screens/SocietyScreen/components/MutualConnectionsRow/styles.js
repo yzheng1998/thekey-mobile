@@ -7,6 +7,7 @@ export const ConnectionsRowContainer = styled.TouchableOpacity`
   margin-bottom: 19px;
   position: absolute;
   bottom: 3px;
+  align-items: center;
 `
 export const MutualConnections = styled.Text`
   font-size: 16px;

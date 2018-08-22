@@ -26,6 +26,7 @@ export const Deadline = styled.Text`
   margin-bottom: 64px;
 `
 export const Apply = styled.TouchableOpacity`
+  z-index: 1;
   height: 45;
   width: 100%;
   bottom: 0;

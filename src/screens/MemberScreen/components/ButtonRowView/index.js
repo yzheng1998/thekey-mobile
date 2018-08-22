@@ -1,17 +1,14 @@
 import React, { Component } from 'react'
-import { ButtonRow, BackButton, ReportUserButton } from './styles'
+import { ReportUserButton } from './styles'
+import ButtonRow from '../../../../components/MainButtonRow'
 
-import BackArrow from 'react-native-vector-icons/Ionicons'
 import Icon from 'react-native-vector-icons/Entypo'
 
 export default class ButtonRowView extends Component {
   render() {
     const { reportUser } = this.props
     return (
-      <ButtonRow>
-        <BackButton onPress={this.props.goBack}>
-          <BackArrow name="ios-arrow-back" color="white" size={30} />
-        </BackButton>
+      <ButtonRow navigation={this.props.navigation}>
         {reportUser && (
           <ReportUserButton onPress={reportUser}>
             <Icon name="dots-three-horizontal" size={30} color="white" />

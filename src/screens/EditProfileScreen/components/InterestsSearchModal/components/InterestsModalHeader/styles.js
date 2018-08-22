@@ -2,18 +2,17 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const Background = styled.View`
-  width: 100%;
-  height: 65px;
-  padding: 10px;
-  padding-top: 15px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  height: 60px;
 `
 export const CancelButton = styled.TouchableOpacity``
 export const ButtonContainer = styled.View`
-  width: 100%;
   flex-direction: row;
+  width: 100%;
+  bottom: 10px;
+  position: absolute;
+  padding-left: 12px;
+  padding-right: 16px;
+  align-items: center;
   justify-content: space-between;
 `
 export const CancelText = styled.Text`
@@ -25,16 +24,15 @@ export const Heading = styled.Text`
   font-size: 18px;
   color: ${themeGet('colors.fontHeader')};
   font-family: ${themeGet('fonts.bold')};
+  align-self: center;
   position: absolute;
+  bottom: 10px;
 `
 export const SafeView = styled.SafeAreaView`
   width: 100%;
 `
 export const DoneText = styled.Text`
   font-size: 18px;
-  color: ${props =>
-    props.disabled
-      ? themeGet('colors.headerClicked')
-      : themeGet('colors.fontSubtitle.primary')};
+  color: ${themeGet('colors.fontSubtitle.primary')};
   font-family: ${themeGet('fonts.medium')};
 `

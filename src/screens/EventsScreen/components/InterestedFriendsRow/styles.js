@@ -4,7 +4,7 @@ import { themeGet } from 'styled-system'
 export const ConnectionsRowContainer = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 4px;
 `
 export const InterestedFriendsContainer = styled.Text`
   font-size: 16;

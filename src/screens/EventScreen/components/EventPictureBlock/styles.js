@@ -34,3 +34,9 @@ export const Container = styled.View`
   margin-top: 4px;
   margin-bottom: 4px;
 `
+export const TimeContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 4px;
+  margin-bottom: 16px;
+`

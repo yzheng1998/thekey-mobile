@@ -12,27 +12,21 @@ import {
 
 export default class InterestsModalHeader extends Component {
   render() {
-    const {
-      handleClose,
-      updateInterests,
-      interests,
-      doneButtonDisabled,
-    } = this.props
+    const { handleClose, handleCancel, updateTags, tags } = this.props
     return (
       <SafeView>
         <Background>
           <ButtonContainer>
-            <CancelButton onPress={handleClose}>
+            <CancelButton onPress={handleCancel}>
               <CancelText>Cancel</CancelText>
             </CancelButton>
             <TouchableOpacity
-              disabled={doneButtonDisabled}
               onPress={() => {
-                updateInterests(interests)
+                updateTags(tags)
                 handleClose()
               }}
             >
-              <DoneText disabled={doneButtonDisabled}>Done</DoneText>
+              <DoneText>Done</DoneText>
             </TouchableOpacity>
           </ButtonContainer>
           <Heading>Add Interests</Heading>

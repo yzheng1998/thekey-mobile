@@ -2,8 +2,6 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const Container = styled.View`
-  aspect-ratio: 1.048;
-  width: 100%;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   overflow: hidden;
@@ -23,4 +21,5 @@ export const LocationText = styled.Text`
   line-height: 21;
   font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.fontPrimary')};
+  margin-bottom: 24px;
 `

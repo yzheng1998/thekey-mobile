@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'
 import EventCard from '../EventsScreen/components/SmallEventCard'
 import {
   Background,
@@ -55,6 +55,8 @@ class SimilarEventsScreen extends Component {
               if (loading) return <LoadingWrapper loading />
               return (
                 <FlatList
+                  ListHeaderComponent={<View style={{ height: 12 }} />}
+                  ListFooterComponent={<View style={{ height: 24 }} />}
                   keyExtractor={event => event.id}
                   data={data.similarEvents}
                   renderItem={({ item: event }) => (

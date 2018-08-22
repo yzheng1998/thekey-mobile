@@ -76,10 +76,11 @@ class SocietyScreen extends Component {
           />
           <CardContainer>
             <Query query={GET_SOCIETY_USERS} fetchPolicy="network-only">
-              {({ loading, data }) => (
+              {({ loading, data, refetch }) => (
                 <LoadingWrapper loading={loading}>
                   <SwiperContainer>
                     <CardSwiper
+                      refetch={refetch}
                       navigation={this.props.navigation}
                       width={width}
                       userData={data.societyQuery}

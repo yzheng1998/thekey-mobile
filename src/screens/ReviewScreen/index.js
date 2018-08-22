@@ -3,8 +3,8 @@ import FilterBlock from './components/FilterBlock'
 import ReviewBlock from './components/ReviewBlock'
 import ReviewPictureBlock from './components/ReviewPictureBlock'
 import AddCompanyReviewModal from '../AddCompanyReviewModal'
-import BackButton from 'react-native-vector-icons/Ionicons'
-import { Background, Header, BackButtonContainer } from './styles'
+import ButtonRow from '../../components/MainButtonRow'
+import { Background } from './styles'
 import { FlatList, View } from 'react-native'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -77,11 +77,7 @@ export default class ReviewScreen extends Component {
             this.setState({ showAddReview: !this.state.showAddReview })
           }
         />
-        <Header>
-          <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
-            <BackButton name="ios-arrow-back" size={30} color="white" />
-          </BackButtonContainer>
-        </Header>
+        <ButtonRow navigation={this.props.navigation} />
         <FilterBlock
           updateState={this.changeTab}
           selectedIndex={this.state.tab}

@@ -81,8 +81,9 @@ class DiscoverScreen extends Component {
             <View style={{ height: 44 }} />
           </List>
           <Query query={GET_HAS_LOGGED_IN}>
-            {({ loading, data, refetch }) => {
+            {({ loading, data, error, refetch }) => {
               if (loading) return <View />
+              if (error || !data.viewer.id) AsyncStorage.clear()
               return (
                 <WelcomeCard
                   refetch={refetch}

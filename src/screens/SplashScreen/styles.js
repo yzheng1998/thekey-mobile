@@ -17,16 +17,10 @@ export const Container = styled.View`
 `
 export const Content = styled.View`
   align-items: center;
+  justify-content: center;
   flex: 1;
 `
 export const SubTitle = styled.Text`
-  font-family: ${themeGet('fonts.bold')};
-  color: ${themeGet('colors.fontSubtitle.primary')};
-  font-size: 18px;
-  margin-top: 12px;
-  text-align: center;
-`
-export const SubTitleSecondary = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   color: ${themeGet('colors.fontSubtitle.primary')};
   font-size: 16px;
