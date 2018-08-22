@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "loading-icon.png",
+      "filename" : "The Key Icon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "loading-icon@2x.png",
+      "filename" : "The Key Icon@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "loading-icon@3x.png",
+      "filename" : "The Key Icon@3x.png",
       "scale" : "3x"
     }
   ],
