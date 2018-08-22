@@ -1,23 +1,22 @@
 import React, { Component } from 'react'
-import { Container, InfoContainer, InfoText, See, SeeButton } from './styles'
+import { Container, InfoContainer, InfoText } from './styles'
 
 class AboutBlock extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { extend: false }
+  state = { truncated: true }
+
+  changeSize = () => {
+    this.setState({ truncated: !this.state.truncated })
   }
+
   render() {
     const { about } = this.props
     return (
       <Container>
-        <InfoContainer>
-          <InfoText numberOfLines={this.state.extend === false ? 4 : 0}>
+        <InfoContainer activeOpacity={0.9} onPress={this.changeSize}>
+          <InfoText numberOfLines={this.state.truncated ? 4 : 0}>
             {about}
           </InfoText>
         </InfoContainer>
-        <See onPress={() => this.setState({ extend: !this.state.extend })}>
-          <SeeButton>{this.state.extend ? 'SHOW LESS' : 'SEE ALL'}</SeeButton>
-        </See>
       </Container>
     )
   }

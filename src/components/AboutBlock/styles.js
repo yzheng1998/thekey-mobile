@@ -9,8 +9,9 @@ export const InfoText = styled.Text`
   color: ${themeGet('colors.textAreaText')};
   font-family: ${themeGet('fonts.light')};
 `
-export const InfoContainer = styled.View`
-  padding: 16px;
+export const InfoContainer = styled.TouchableOpacity`
+  padding-left: 16px;
+  padding-top: 16px;
   background-color: white;
 `
 export const See = styled.TouchableOpacity`
