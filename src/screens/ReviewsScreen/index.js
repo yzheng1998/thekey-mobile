@@ -54,20 +54,20 @@ class ReviewsScreen extends Component {
       },
     }
     return (
-      <View>
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
         <StatusBar barStyle="light-content" />
+        <ReviewsHeader
+          navigation={this.props.navigation}
+          selectedIndex={this.state.tab}
+          changeTab={this.changeTab}
+        />
+        <SearchBar
+          updateText={this.updateText}
+          searchText={searchText}
+          placeholderText="Search All Reviews"
+        />
+        <ThinDivider />
         <ScrollView keyboardShouldPersistTaps="handled">
-          <ReviewsHeader
-            navigation={this.props.navigation}
-            selectedIndex={this.state.tab}
-            changeTab={this.changeTab}
-          />
-          <SearchBar
-            updateText={this.updateText}
-            searchText={searchText}
-            placeholderText="Search All Reviews"
-          />
-          <ThinDivider />
           <Query query={GET_COMPANIES} variables={variables}>
             {({ loading, data, refetch }) => {
               if (loading) return <LoadingWrapper loading />

@@ -11,28 +11,35 @@ const ChatStack = createStackNavigator(
       screen: NetworkScreen,
       navigationOptions: () => ({
         title: 'Your Network',
+        gesturesEnabled: false,
       }),
     },
     Conversation: {
       screen: ConversationScreen,
-      navigationOptions: () => ({ header: null }),
+      navigationOptions: () => ({
+        header: null,
+        gesturesEnabled: false,
+      }),
     },
     ChatMembers: {
       screen: ChatMembersScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     Member: {
       screen: MemberScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     PeopleList: {
       screen: PeopleList,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
   },

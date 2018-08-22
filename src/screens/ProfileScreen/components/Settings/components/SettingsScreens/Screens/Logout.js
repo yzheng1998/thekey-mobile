@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ModalScreenContainer } from '../../../../../styles'
 import RegisterButton from '../../../../../../../components/RegisterButton'
 import { client } from '../../../../../../../apollo'
-import { AsyncStorage } from 'react-native'
+import { View, AsyncStorage } from 'react-native'
 
 export default class Logout extends Component {
   logout = async () => {
@@ -14,7 +14,9 @@ export default class Logout extends Component {
   render() {
     return (
       <ModalScreenContainer>
-        <RegisterButton buttonText="LOGOUT" onPress={this.logout} />
+        <View style={{ paddingLeft: 12, paddingRight: 12 }}>
+          <RegisterButton buttonText="LOGOUT" onPress={this.logout} />
+        </View>
       </ModalScreenContainer>
     )
   }

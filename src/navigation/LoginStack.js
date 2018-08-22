@@ -18,72 +18,84 @@ const LoginStack = createStackNavigator(
       screen: LandingScreen,
       navigationOptions: () => ({
         title: 'Get Started',
+        gesturesEnabled: false,
       }),
     },
     Splash: {
       screen: SplashScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     Login: {
       screen: LoginScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     SignUp: {
       screen: SignUpScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     PersonalDetails: {
       screen: PersonalDetailsScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     Gender: {
       screen: GenderScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     YourEducation: {
       screen: YourEducationScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     Essay: {
       screen: EssayScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     Interests: {
       screen: InterestsScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     Skills: {
       screen: SkillsScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     Resume: {
       screen: ResumeUploadScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     ResetPassword: {
       screen: ResetPasswordScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
   },

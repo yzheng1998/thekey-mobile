@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
 import { FlatList, View } from 'react-native'
 import EventCard from '../EventsScreen/components/SmallEventCard'
-import {
-  Background,
-  HeaderBackground,
-  EventsContainer,
-  EventContainer,
-} from './styles'
+import { Background, EventsContainer, EventContainer } from './styles'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import LoadingWrapper from '../../components/LoadingWrapper'
@@ -48,7 +43,6 @@ class SimilarEventsScreen extends Component {
           title="Similar Events"
           navigation={this.props.navigation}
         />
-        <HeaderBackground />
         <EventsContainer>
           <Query query={GET_SIMILAR_EVENTS} variables={{ id }}>
             {({ loading, data }) => {

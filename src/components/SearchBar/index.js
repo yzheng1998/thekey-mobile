@@ -13,18 +13,23 @@ import {
 } from './styles'
 
 export default class SearchBar extends Component {
-  state = {
-    showCancel: false,
-    animated: new Animated.Value(0),
-  }
+  constructor(props) {
+    super(props)
+    this.state = {
+      showCancel: false,
+      animated: props.alwaysShowCancel
+        ? new Animated.Value(1)
+        : new Animated.Value(0),
+    }
 
-  slide() {
-    const newState = !this.state.showCancel
-    this.setState({ showCancel: newState })
-    Animated.timing(this.state.animated, {
-      toValue: newState ? 1 : 0,
-      duration: 200,
-    }).start()
+    this.slide = () => {
+      const newState = props.alwaysShowCancel ? true : !this.state.showCancel
+      this.setState({ showCancel: newState })
+      Animated.timing(this.state.animated, {
+        toValue: newState ? 1 : 0,
+        duration: 200,
+      }).start()
+    }
   }
 
   render() {

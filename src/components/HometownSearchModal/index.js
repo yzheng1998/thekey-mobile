@@ -39,6 +39,8 @@ export default class HometownSearchModal extends Component {
       <Modal animationType="slide" transparent={false} visible={visible}>
         <Container>
           <SearchBar
+            autoCapitalize="words"
+            alwaysShowCancel
             closeModal={onPress}
             updateText={this.updateText}
             searchText={this.state.searchText}

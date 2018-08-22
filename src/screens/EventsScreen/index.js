@@ -114,6 +114,7 @@ class EventsScreen extends Component {
             {({ loading, data }) => (
               <LoadingWrapper loading={loading}>
                 <FlatList
+                  ListFooterComponent={<View style={{ height: 20 }} />}
                   keyboardShouldPersistTaps="handled"
                   keyExtractor={event => event.id}
                   data={data.events}

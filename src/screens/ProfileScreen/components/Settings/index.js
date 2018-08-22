@@ -74,6 +74,7 @@ export default class Settings extends Component {
                 newsLetterPreferences={settings.newsLetterPreferences}
               />
               <SettingsScreens
+                swipe={swipe}
                 resumes={resumes}
                 id={this.state.displayId}
                 navigation={this.props.navigation}
