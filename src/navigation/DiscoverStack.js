@@ -26,48 +26,56 @@ const DiscoverStack = createStackNavigator(
       screen: DiscoverScreen,
       navigationOptions: () => ({
         title: 'View Options',
+        gesturesEnabled: false,
       }),
     },
     Society: {
       screen: SocietyScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     User: {
       screen: UserScreen,
       navigationOptions: () => ({
         title: 'View User',
+        gesturesEnabled: false,
       }),
     },
     Member: {
       screen: MemberScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     Events: {
       screen: EventsScreen,
       navigationOptions: () => ({
         title: 'View Events',
+        gesturesEnabled: false,
       }),
     },
     Event: {
       screen: EventScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     Jobs: {
       screen: JobsScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     Job: {
       screen: JobScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     Summary: {
@@ -75,68 +83,84 @@ const DiscoverStack = createStackNavigator(
       navigationOptions: () => ({
         title: 'Job Summary',
         header: null,
+        gesturesEnabled: false,
       }),
     },
     Reviews: {
       screen: ReviewsScreen,
-      navigationOptions: () => ({ header: null }),
+      navigationOptions: () => ({
+        header: null,
+        gesturesEnabled: false,
+      }),
     },
     Review: {
       screen: ReviewScreen,
-      navigationOptions: () => ({ header: null }),
+      navigationOptions: () => ({
+        header: null,
+        gesturesEnabled: false,
+      }),
     },
     FriendRequests: {
       screen: FriendRequestScreen,
       navigationOptions: () => ({
         title: 'View Friend Requests',
+        gesturesEnabled: false,
       }),
     },
     Profile: {
       screen: ProfileScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     EditProfile: {
       screen: EditProfileScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     AddEducation: {
       screen: AddEducationForm,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     AddExperience: {
       screen: AddExperienceForm,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     SimilarJobsScreen: {
       screen: SimilarJobsScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     SimilarEventsScreen: {
       screen: SimilarEventsScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     PeopleList: {
       screen: PeopleList,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
     QRScanner: {
       screen: QRScannerScreen,
       navigationOptions: () => ({
         header: null,
+        gesturesEnabled: false,
       }),
     },
   },
