@@ -2,18 +2,19 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const Card = styled.View`
-  height: 62px;
-  width: 100%;
-  background-color: white;
+  background-color: ${themeGet('colors.background')};
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 12px;
   flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
   border-bottom-width: 1px;
   border-bottom-color: ${themeGet('colors.border')};
 `
 export const Name = styled.Text`
   font-size: 18px;
   font-family: ${themeGet('fonts.bold')};
-  margin-bottom: 2px;
 `
 export const Subtitle = styled.Text`
   font-size: 12px;
@@ -22,14 +23,12 @@ export const Subtitle = styled.Text`
 `
 export const InfoContainer = styled.View`
   flex: 1;
-  justify-content: center;
-  margin-left: 10px;
+  margin-left: 12px;
 `
 export const Picture = styled.Image`
   width: 46px;
   height: 46px;
   border-radius: 23px;
-  margin: 6px;
 `
 export const AddedText = styled.Text`
   font-size: 14px;
