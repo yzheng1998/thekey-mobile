@@ -42,12 +42,14 @@ export default class SchoolSearchModal extends Component {
           <SearchBar
             updateText={this.updateText}
             searchText={this.state.searchText}
+            autoCapitalize="words"
             placeholderText="Search for a school"
+            alwaysShowCancel
             onSubmitEditing={() => {
               toggleSchoolModal()
               this.props.updateState({
                 schoolName: this.state.searchText,
-                location: 'Unknown Location',
+                location: 'Unlisted School',
                 schoolId: uuidv4(),
               })
             }}
