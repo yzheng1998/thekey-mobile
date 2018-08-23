@@ -17,3 +17,13 @@ export const SchoolModal = styled(Modal)`
   margin: 0px;
   flex: 1;
 `
+
+export const Text = styled.Text`
+  font-family: ${themeGet('fonts.medium')};
+  color: ${themeGet('colors.fontDescription.primary')};
+  font-size: 16px;
+  text-align: center;
+  align-self: center;
+  margin-top: 16px;
+  line-height: 22px;
+`
