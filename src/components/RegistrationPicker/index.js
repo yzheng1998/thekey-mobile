@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
-import { PickerContainer, TextField } from './styles'
+import { Container, PickerContainer, TextField } from './styles'
 import Error from '../../components/Error'
 
 export default class RegistrationPicker extends Component {
   render() {
     const { placeholderText, text, onPress, selected, error } = this.props
     return (
-      <View>
+      <Container>
         <PickerContainer
           activeOpacity={1}
           onPress={onPress}
@@ -17,7 +16,7 @@ export default class RegistrationPicker extends Component {
           {text !== '' && <TextField>{text}</TextField>}
         </PickerContainer>
         <Error error={error} />
-      </View>
+      </Container>
     )
   }
 }

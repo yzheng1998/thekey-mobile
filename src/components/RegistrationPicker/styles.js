@@ -1,9 +1,14 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const PickerContainer = styled.TouchableOpacity`
+export const Container = styled.View`
+  flex-grow: 1;
+  margin-top: 4px;
   margin-left: 12px;
   margin-right: 12px;
+`
+
+export const PickerContainer = styled.TouchableOpacity`
   flex-direction: row;
   height: 50px;
   border-radius: 8px;
@@ -15,7 +20,6 @@ export const PickerContainer = styled.TouchableOpacity`
     props.selected
       ? themeGet('colors.buttonPrimary')
       : themeGet('colors.textInputBorder')};
-  margin-top: 4px;
 `
 
 export const TextField = styled.Text`
