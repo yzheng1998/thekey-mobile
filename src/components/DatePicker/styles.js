@@ -14,3 +14,10 @@ export const DoneButtonText = styled.Text`
   color: black;
   font-family: ${themeGet('fonts.medium')};
 `
+
+export const Container = styled.View`
+  background-color: ${themeGet('colors.background')};
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+`
