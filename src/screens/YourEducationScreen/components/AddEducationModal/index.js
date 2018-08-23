@@ -44,6 +44,7 @@ export default class AddEducationModal extends Component {
       if (!schoolType) {
         updateText({ schoolType: schoolTypeOptions[0].value })
       }
+      this.picker.showActionSheet()
     }
     const findLabel = value =>
       schoolTypeOptions.find(el => el.value === value).label
@@ -146,22 +147,24 @@ export default class AddEducationModal extends Component {
               disabled={!noErrors}
             />
           </KeyboardAwareScrollView>
-          {showSchoolTypePicker && (
-            <PickerComponent
-              options={schoolTypeOptions}
-              doneOnPress={() => {
-                this.setState(
-                  {
-                    showSchoolTypePicker: false,
-                  },
-                  () => this.degreeInput.focus(),
-                )
-              }}
-              onValueChange={updateText}
-              value={schoolType}
-              keyName="schoolType"
-            />
-          )}
+          <PickerComponent
+            visible={showSchoolTypePicker}
+            ref={picker => {
+              this.picker = picker
+            }}
+            options={schoolTypeOptions}
+            doneOnPress={() => {
+              this.setState(
+                {
+                  showSchoolTypePicker: false,
+                },
+                () => this.degreeInput.focus(),
+              )
+            }}
+            onValueChange={updateText}
+            value={schoolType}
+            keyName="schoolType"
+          />
         </ScreenContainer>
       </RightModal>
     )

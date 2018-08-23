@@ -37,6 +37,7 @@ class YourEducationScreen extends Component {
       displayErrors: {},
       errors: {},
       touched: {},
+      closeModal: false,
     }
   }
 
@@ -73,6 +74,7 @@ class YourEducationScreen extends Component {
       displayErrors: {},
       errors: {},
       touched: {},
+      closeModal: false,
     })
   }
 
@@ -185,7 +187,9 @@ class YourEducationScreen extends Component {
           />
           <SchoolSearchModal
             updateState={this.updateState}
-            onDismiss={this.toggleEducationModal}
+            onDismiss={
+              this.state.closeModal ? () => null : this.toggleEducationModal
+            }
             navigation={this.props.navigation}
             toggleSchoolModal={this.toggleSchoolModal}
             visible={this.state.showSchoolSearchModal}
