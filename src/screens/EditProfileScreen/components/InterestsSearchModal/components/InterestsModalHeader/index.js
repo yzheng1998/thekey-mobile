@@ -9,6 +9,7 @@ import {
   SafeView,
   DoneText,
 } from './styles'
+import { buttonRadius } from '../../../../../../constants'
 
 export default class InterestsModalHeader extends Component {
   render() {
@@ -17,10 +18,11 @@ export default class InterestsModalHeader extends Component {
       <SafeView>
         <Background>
           <ButtonContainer>
-            <CancelButton onPress={handleCancel}>
+            <CancelButton hitSlop={buttonRadius} onPress={handleCancel}>
               <CancelText>Cancel</CancelText>
             </CancelButton>
             <TouchableOpacity
+              hitSlop={buttonRadius}
               onPress={() => {
                 updateTags(tags)
                 handleClose()

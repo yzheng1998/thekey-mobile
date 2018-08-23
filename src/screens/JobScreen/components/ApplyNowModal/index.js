@@ -10,6 +10,7 @@ import {
 import ApplyButton from './components/ApplyButton'
 import BackButton from 'react-native-vector-icons/Ionicons'
 import KeyboardSpacer from '../../../../components/KeyboardSpacer'
+import { buttonRadius } from '../../../../constants'
 
 export default class ApplyNowModal extends Component {
   state = {
@@ -33,6 +34,7 @@ export default class ApplyNowModal extends Component {
               toggleApplyModal()
               this.clearContent()
             }}
+            hitSlop={buttonRadius}
           >
             <BackButton
               name="ios-arrow-back"

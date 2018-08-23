@@ -7,6 +7,7 @@ import {
   CancelText,
   SafeView,
 } from './styles'
+import { buttonRadius } from '../../../../constants'
 
 export default class SearchModalHeader extends Component {
   render() {
@@ -15,7 +16,7 @@ export default class SearchModalHeader extends Component {
       <SafeView>
         <Background>
           <CancelContainer>
-            <CancelButton onPress={closeModal}>
+            <CancelButton hitSlop={buttonRadius} onPress={closeModal}>
               <CancelText>Cancel</CancelText>
             </CancelButton>
           </CancelContainer>

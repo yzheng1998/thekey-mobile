@@ -29,6 +29,7 @@ import {
   GraphRequest,
   GraphRequestManager,
 } from 'react-native-fbsdk'
+import { buttonRadius } from '../../../../constants'
 
 const LOGIN_USER = gql`
   mutation loginUser(
@@ -207,6 +208,7 @@ class LoginBody extends Component {
               </TextInputContainer>
 
               <ForgotPass
+                hitSlop={buttonRadius}
                 onPress={() => this.props.navigation.navigate('ResetPassword')}
               >
                 <PinkSubtitleText>Forgot password?</PinkSubtitleText>
@@ -239,6 +241,7 @@ class LoginBody extends Component {
         <SignUpContainer>
           <Subtitle>Don&apos;t have an account?</Subtitle>
           <PinkSubtitle
+            hitSlop={buttonRadius}
             onPress={() => this.props.navigation.navigate('SignUp')}
           >
             <PinkSubtitleText>Sign Up</PinkSubtitleText>

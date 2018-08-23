@@ -8,6 +8,7 @@ export const Categories = styled.Text`
   color: ${props => (props.isSelected ? props.selectedColor : props.color)};
   opacity: ${props => (props.isSelected ? '1' : '0.9')};
 `
+export const CategoryButton = styled.TouchableOpacity``
 
 export const Tab = styled.View`
   align-items: center;

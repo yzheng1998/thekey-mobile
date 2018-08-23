@@ -13,6 +13,7 @@ import {
 import BackArrow from 'react-native-vector-icons/Ionicons'
 import AvatarRow from '../../../MemberScreen/components/MutualFriends'
 import { TouchableOpacity, View } from 'react-native'
+import { buttonRadius } from '../../../../constants'
 
 const getConversationTitle = (participants, userId) => {
   const otherParticipants = participants.filter(p => p.id !== userId)
@@ -83,7 +84,10 @@ export default class ConversationHeader extends Component {
             <ConversationTitle participants={participants} userId={userId} />
           </TruncateTitle>
           <HeaderContainer>
-            <BackButton onPress={() => navigation.goBack()}>
+            <BackButton
+              hitSlop={buttonRadius}
+              onPress={() => navigation.goBack()}
+            >
               <BackArrow name="ios-arrow-back" color="rgb(3,3,3)" size={30} />
             </BackButton>
             <ParticipantPictures

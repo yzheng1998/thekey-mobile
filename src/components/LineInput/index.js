@@ -8,6 +8,7 @@ import {
 } from './styles'
 import ClearIcon from 'react-native-vector-icons/MaterialIcons'
 import Error from '../../components/Error'
+import { buttonRadius } from '../../constants'
 
 export default class LineInput extends Component {
   state = {
@@ -54,7 +55,10 @@ export default class LineInput extends Component {
             />
             {text !== undefined &&
               text !== '' && (
-                <ClearIconButton onPress={() => updateText('')}>
+                <ClearIconButton
+                  hitSlop={buttonRadius}
+                  onPress={() => updateText('')}
+                >
                   <ClearIcon
                     name="clear"
                     size={17}

@@ -22,4 +22,11 @@ module.exports = {
       },
     ],
   },
+  settings: {
+    'import/resolver': {
+      node: {
+        paths: ['@rootSource/constants'],
+      },
+    },
+  },
 }

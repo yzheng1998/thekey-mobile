@@ -10,6 +10,7 @@ import {
   BackButtonContainer,
 } from './styles'
 import BackButton from 'react-native-vector-icons/Ionicons'
+import { buttonRadius } from '../../constants'
 
 const commitmentOptions = [
   { value: 'FULLTIME', label: 'Full-Time' },
@@ -37,7 +38,10 @@ class JobSummaryScreen extends Component {
     return (
       <BigContainer>
         <Container>
-          <BackButtonContainer onPress={() => this.props.navigation.goBack()}>
+          <BackButtonContainer
+            hitSlop={buttonRadius}
+            onPress={() => this.props.navigation.goBack()}
+          >
             <BackButton
               name="ios-arrow-back"
               size={30}

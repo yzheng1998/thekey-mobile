@@ -14,10 +14,12 @@ import {
 import BackButtonIcon from 'react-native-vector-icons/Ionicons'
 import ReportProfileButton from '../ReportProfileButton'
 import KeyboardSpacer from '../../../../components/KeyboardSpacer'
+import { buttonRadius } from '../../../../constants'
 
 const Header = ({ onBackPress, clearResponse }) => (
   <HeaderContainer>
     <BackButton
+      hitSlop={buttonRadius}
       onPress={() => {
         onBackPress()
         clearResponse()

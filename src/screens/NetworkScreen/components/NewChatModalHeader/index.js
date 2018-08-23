@@ -9,6 +9,7 @@ import {
 } from './styles'
 import CreateChatButton from '../CreateChatButton'
 import AddToChatButton from '../AddToChatButton'
+import { buttonRadius } from '../../../../constants'
 
 export default class NewChatModalHeader extends Component {
   render() {
@@ -25,7 +26,7 @@ export default class NewChatModalHeader extends Component {
       <SafeView>
         <Background>
           <ButtonContainer>
-            <CancelButton onPress={handleClose}>
+            <CancelButton hitSlop={buttonRadius} onPress={handleClose}>
               <CancelText>Cancel</CancelText>
             </CancelButton>
             <Heading>{heading}</Heading>

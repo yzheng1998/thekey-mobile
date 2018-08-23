@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Container, InfoContainer, InfoText, See, SeeButton } from './styles'
+import { buttonRadius } from '../../../../constants'
 
 class AboutBlock extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class AboutBlock extends Component {
           </InfoText>
         </InfoContainer>
         <See
+          hitSlop={buttonRadius}
           onPress={() =>
             this.props.navigation.navigate('Summary', {
               about,

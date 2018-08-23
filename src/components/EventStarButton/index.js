@@ -3,6 +3,7 @@ import { Button } from './styles'
 import Star from 'react-native-vector-icons/FontAwesome'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { buttonRadius } from '../../constants'
 
 const TOGGLE_EVENT_INTEREST = gql`
   mutation toggleInterestInEvent($eventId: ID!) {
@@ -35,6 +36,7 @@ export default class EventStarButton extends Component {
       <Mutation mutation={TOGGLE_EVENT_INTEREST} key={id}>
         {toggleInterestInEvent => (
           <Button
+            hitSlop={buttonRadius}
             onPress={() => {
               const variables = { eventId: id }
               toggleInterestInEvent({ variables })

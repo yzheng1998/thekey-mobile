@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Tab, Categories } from './styles'
+import { Tab, Categories, CategoryButton } from './styles'
+import { wordRadius } from '../../constants'
 
 export default class SearchFilterTab extends Component {
   static defaultProps = {
@@ -19,17 +20,21 @@ export default class SearchFilterTab extends Component {
     return (
       <Tab width={width}>
         {this.props.options.map((option, idx) => (
-          <Categories
-            key={option}
-            isSelected={selectedIndex === idx}
+          <CategoryButton
+            hitSlop={wordRadius}
             onPress={() => {
               updateState(idx)
             }}
-            color={color}
-            selectedColor={selectedColor}
           >
-            {option}
-          </Categories>
+            <Categories
+              key={option}
+              isSelected={selectedIndex === idx}
+              color={color}
+              selectedColor={selectedColor}
+            >
+              {option}
+            </Categories>
+          </CategoryButton>
         ))}
       </Tab>
     )

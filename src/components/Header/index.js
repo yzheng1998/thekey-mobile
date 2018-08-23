@@ -8,7 +8,10 @@ class Header extends Component {
     return (
       <Container>
         <TitleRow>
-          <BackButton onPress={this.props.onBackPress}>
+          <BackButton
+            hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}
+            onPress={this.props.onBackPress}
+          >
             {this.props.showBack && (
               <BackButtonIcon name="ios-arrow-back" size={30} color="black" />
             )}

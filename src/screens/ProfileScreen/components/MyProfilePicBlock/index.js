@@ -4,6 +4,7 @@ import PictureHeader from '../../../../components/PictureHeader'
 import EditPencil from 'react-native-vector-icons/MaterialIcons'
 import { View, Modal } from 'react-native'
 import QRDisplayModal from '../QRDisplayModal'
+import { buttonRadius } from '../../../../constants'
 
 export default class MyProfilePicBlock extends Component {
   constructor(props) {
@@ -48,6 +49,7 @@ export default class MyProfilePicBlock extends Component {
           <EventTitleText onPress={this.openQRModal}>{name}</EventTitleText>
           <LocationText>{hometown}</LocationText>
           <EditButton
+            hitSlop={buttonRadius}
             activeOpacity={0.5}
             onPress={() => this.props.navigation.navigate('EditProfile')}
           >
