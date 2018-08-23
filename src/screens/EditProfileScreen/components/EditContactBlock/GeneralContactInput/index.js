@@ -10,6 +10,7 @@ export default class GeneralContactInput extends Component {
       <Contact>
         <Icon name={iconName} size={23} />
         <ContactContent
+          autoCapitalize="none"
           defaultValue={value}
           placeholder={placeholder}
           onChangeText={onChangeText}
