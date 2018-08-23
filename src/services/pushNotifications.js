@@ -6,6 +6,7 @@ import gql from 'graphql-tag'
 const configure = () => {
   PushNotification.configure({
     onRegister(token) {
+      console.log('REGISTERING')
       client
         .mutate({
           variables: {
@@ -44,20 +45,17 @@ const configure = () => {
       badge: true,
       sound: true,
     },
-
+    senderID: '360968734693',
     popInitialNotification: false,
     requestPermissions: false,
   })
 }
 
 const localNotification = () => {
-  console.log('About to Send')
   PushNotification.localNotification({
     message: 'Notification Message',
     actions: '["Yes", "No"]',
   })
-  console.log('sent')
-  console.log(PushNotification.localNotification)
 }
 
 export { configure, localNotification }
