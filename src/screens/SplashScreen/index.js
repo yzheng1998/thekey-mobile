@@ -6,6 +6,7 @@ import {
   AsyncStorage,
   Dimensions,
   SafeAreaView,
+  Platform,
 } from 'react-native'
 import {
   Background,
@@ -39,6 +40,8 @@ import {
 } from 'react-native-fbsdk'
 
 const { height } = Dimensions.get('window')
+
+const loginBehavior = Platform.OS === 'ios' ? 'native' : 'NATIVE_WITH_FALLBACK'
 
 const LOGIN_USER = gql`
   mutation loginUser(
@@ -100,7 +103,7 @@ export default class SplashScreen extends Component {
 
     let result
     try {
-      LoginManager.setLoginBehavior('native')
+      LoginManager.setLoginBehavior(loginBehavior)
       result = await LoginManager.logInWithReadPermissions([
         'public_profile',
         'email',

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { KeyboardAvoidingView, Alert, ScrollView } from 'react-native'
+import { KeyboardAvoidingView, Alert, ScrollView, Platform } from 'react-native'
 import {
   ScreenContainer,
   SubtitleView,
@@ -24,6 +24,8 @@ import {
 import constraints from './constraints'
 
 const validate = require('validate.js')
+
+const loginBehavior = Platform.OS === 'ios' ? 'native' : 'NATIVE_WITH_FALLBACK'
 
 export default class SignUpScreen extends Component {
   constructor(props) {
@@ -87,7 +89,7 @@ export default class SignUpScreen extends Component {
     }
     let result
     try {
-      LoginManager.setLoginBehavior('native')
+      LoginManager.setLoginBehavior(loginBehavior)
       result = await LoginManager.logInWithReadPermissions([
         'public_profile',
         'email',
