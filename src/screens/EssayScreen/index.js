@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {
-  Container,
-  Scroll,
+  ScrollContainer,
   InstructionsContainer,
   Instructions,
   EssayInput,
@@ -20,9 +19,16 @@ class EssayScreen extends Component {
     const userInfo = this.props.navigation.getParam('userInfo')
     const disabled = !this.state.essay.length
     return (
-      <Container behavior="padding" enabled>
-        <SafeAreaView style={{ backgroundColor: 'white' }} />
-        <Scroll>
+      <SafeAreaView
+        style={{
+          backgroundColor: 'white',
+          flex: 1,
+        }}
+      >
+        <ScrollContainer
+          scrollEnabled={false}
+          keyboardShouldPersistTaps="never"
+        >
           <Header
             title={`Initiation ${nodeEmoji.get('sunglasses')}`}
             showBack
@@ -40,7 +46,7 @@ class EssayScreen extends Component {
             onBlur={Keyboard.dismiss}
             autoGrow={false}
           />
-        </Scroll>
+        </ScrollContainer>
         {!disabled && (
           <SubmitButton
             onPress={() =>
@@ -54,7 +60,7 @@ class EssayScreen extends Component {
             buttonText="CONTINUE"
           />
         )}
-      </Container>
+      </SafeAreaView>
     )
   }
 }

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Container, Divider } from './styles'
 import SearchBar from '../SearchBar'
 import HometownSearchCard from '../HometownSearchCard'
-import { FlatList, Modal, Keyboard } from 'react-native'
+import { FlatList, Keyboard } from 'react-native'
+import Modal from 'react-native-modal'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import nodeEmoji from 'node-emoji'
@@ -36,7 +37,12 @@ export default class HometownSearchModal extends Component {
     const { visible, onPress, setText, showEmoji } = this.props
     const variables = { substr: this.state.searchText }
     return (
-      <Modal animationType="slide" transparent={false} visible={visible}>
+      <Modal
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
+        style={{ margin: 0, flex: 1 }}
+        isVisible={visible}
+      >
         <Container>
           <SearchBar
             autoCapitalize="words"

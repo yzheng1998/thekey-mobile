@@ -15,6 +15,10 @@ import { Switch, Keyboard, TouchableWithoutFeedback, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import _ from 'lodash'
 import constraints from './constraints'
+import RegistrationPicker from '../../../../components/RegistrationPicker'
+/* eslint-disable */
+import DatePicker from '../../../../components/DatePicker/DatePicker/'
+/* eslint-enable */
 
 const validate = require('validate.js')
 
@@ -25,11 +29,6 @@ validate.extend(validate.validators.datetime, {
   format: value => value.format(format),
   parse: value => moment(value, format, true),
 })
-
-const formatDate = date => {
-  if (date) return moment(new Date(date)).format('MMM YYYY')
-  return ''
-}
 
 export default class AddExperienceForm extends Component {
   constructor(props) {
@@ -44,12 +43,14 @@ export default class AddExperienceForm extends Component {
     ])
     this.state = {
       ...experienceInfo,
-      startDate: formatDate(experienceInfo.startDate),
-      endDate: formatDate(experienceInfo.endDate),
+      startDate: experienceInfo.startDate,
+      endDate: experienceInfo.endDate,
       isCurrentEmployee: experienceInfo.endDate === null,
       displayErrors: {},
       errors: {},
       touched: {},
+      showStartDate: false,
+      showEndDate: false,
     }
   }
 
@@ -102,6 +103,8 @@ export default class AddExperienceForm extends Component {
       endDate,
       isCurrentEmployee,
       id,
+      showStartDate,
+      showEndDate,
     } = this.state
 
     const endDateIsPresent = endDate === null || isCurrentEmployee === true
@@ -111,18 +114,15 @@ export default class AddExperienceForm extends Component {
     const noErrors = !this.state.errors
 
     const toggleSwitch = () => {
-      this.setState(
-        {
-          isCurrentEmployee: !this.state.isCurrentEmployee,
-          endDate: !isCurrentEmployee ? null : undefined,
-        },
-        () => {
-          if (!this.editMode && !startDate) {
-            this.startDateInput.focus()
-          }
-        },
-      )
+      this.setState({
+        isCurrentEmployee: !this.state.isCurrentEmployee,
+        endDate: !isCurrentEmployee ? null : undefined,
+      })
     }
+
+    const formattedEndDate = endDate
+      ? moment(new Date(endDate)).format('MMM D, YYYY')
+      : ''
 
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -165,6 +165,9 @@ export default class AddExperienceForm extends Component {
                 onBlur={() => this.validateForm(false)}
                 returnKeyType={returnKeyType}
                 error={this.state.displayErrors.position}
+                onSubmitEditing={() => {
+                  if (!this.editMode) this.setState({ showStartDate: true })
+                }}
               />
               <SwitchContainer>
                 <SwitchLabel>I am currently working here</SwitchLabel>
@@ -175,47 +178,33 @@ export default class AddExperienceForm extends Component {
                 />
               </SwitchContainer>
               <RowContainer>
-                <LineInput
-                  ref={startDateInput => {
-                    this.startDateInput = startDateInput
+                <RegistrationPicker
+                  selected={showStartDate}
+                  onPress={() => {
+                    this.setState({
+                      showStartDate: true,
+                      startDate,
+                    })
+                    this.startDatePicker.openDatePicker()
                   }}
-                  text={startDate}
-                  width="48%"
-                  placeholderText="Start Date"
-                  updateText={text => {
-                    this.setState({ startDate: text }, () =>
-                      this.validateForm(true),
-                    )
-                  }}
-                  onFocus={() => this.addTouched('startDate')}
-                  onBlur={() => this.validateForm(false)}
-                  returnKeyType={
-                    this.editMode || (!this.editMode && endDateIsPresent)
-                      ? 'done'
-                      : 'next'
+                  text={
+                    startDate
+                      ? moment(new Date(startDate)).format('MMM D, YYYY')
+                      : ''
                   }
-                  onSubmitEditing={() => {
-                    if (!this.editMode && !endDateIsPresent)
-                      this.endDateInput.focus()
-                  }}
-                  error={this.state.displayErrors.startDate}
+                  placeholderText="Start date"
                 />
-                <LineInput
-                  ref={endDateInput => {
-                    this.endDateInput = endDateInput
+                <RegistrationPicker
+                  selected={showEndDate}
+                  onPress={() => {
+                    this.setState({
+                      showEndDate: true,
+                      endDate,
+                    })
+                    this.endDatePicker.openDatePicker()
                   }}
-                  // if endDate is null (currentEmployee) display endDate as "Present"
-                  text={endDateIsPresent ? 'Present' : endDate}
-                  width="48%"
-                  placeholderText="End Date"
-                  updateText={text => {
-                    this.setState({ endDate: text }, () =>
-                      this.validateForm(true),
-                    )
-                  }}
-                  onFocus={() => this.addTouched('endDate')}
-                  onBlur={() => this.validateForm(false)}
-                  error={this.state.displayErrors.endDate}
+                  text={endDateIsPresent ? 'Present' : formattedEndDate}
+                  placeholderText="End date"
                 />
               </RowContainer>
               <ButtonContainer>
@@ -258,6 +247,43 @@ export default class AddExperienceForm extends Component {
               </ButtonContainer>
             </Block>
           </KeyboardAwareScrollView>
+          <DatePicker
+            ref={datePicker => {
+              this.startDatePicker = datePicker
+            }}
+            visible={showStartDate}
+            mode="date"
+            date={new Date(startDate) || new Date(1996, 0, 1)}
+            doneOnPress={() => {
+              this.setState({ showStartDate: false })
+              if (!isCurrentEmployee) {
+                this.setState({ showEndDate: true })
+              }
+            }}
+            setDate={date => {
+              this.setState({
+                startDate: date,
+              })
+            }}
+          />
+          <DatePicker
+            ref={datePicker => {
+              this.endDatePicker = datePicker
+            }}
+            visible={showEndDate}
+            mode="date"
+            date={new Date(endDate) || new Date(1996, 0, 1)}
+            doneOnPress={() => {
+              this.setState({
+                showEndDate: false,
+              })
+            }}
+            setDate={date => {
+              this.setState({
+                endDate: date,
+              })
+            }}
+          />
         </Screen>
       </TouchableWithoutFeedback>
     )

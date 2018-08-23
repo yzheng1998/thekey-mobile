@@ -59,7 +59,7 @@ class LargeLinkedInLoginButton extends Component {
             />
             <LinkedInButton onPress={() => this.modal.open()}>
               <LinkedInLogoContainer>
-                <LinkedInIcon name="linkedin" size={15} color="white" />
+                <LinkedInIcon name="linkedin" size={25} color="white" />
               </LinkedInLogoContainer>
               <LinkedInButtonText>Sign in with LinkedIn</LinkedInButtonText>
             </LinkedInButton>

@@ -75,10 +75,11 @@ export default class AddCompanyReviewModal extends Component {
     this.setState({ touched })
   }
 
-  togglePicker = () => {
+  openPicker = () => {
     this.setState({
-      yearPickerEnabled: !this.state.yearPickerEnabled,
+      yearPickerEnabled: true,
     })
+    this.picker.showActionSheet()
   }
   handleUsePicker = obj => {
     this.setState(obj)
@@ -174,6 +175,7 @@ export default class AddCompanyReviewModal extends Component {
               <EmploymentHistoryBlock
                 state={{ ...this.state, ...this.props.state }}
                 updateState={this.updateState}
+                openPicker={this.openPicker}
               />
               <Divider />
               <DescriptionBlock
@@ -205,17 +207,19 @@ export default class AddCompanyReviewModal extends Component {
             </ScreenScroll>
           </KeyboardAvoidingView>
         </SafeView>
-        {yearPickerEnabled && (
-          <Picker
-            options={EmploymentHistoryBlock.createYearData()}
-            doneOnPress={() => {
-              this.togglePicker()
-            }}
-            onValueChange={this.handleUsePicker}
-            value={yearLastWorked}
-            keyName="yearLastWorked"
-          />
-        )}
+        <Picker
+          visible={yearPickerEnabled}
+          ref={picker => {
+            this.picker = picker
+          }}
+          options={EmploymentHistoryBlock.createYearData()}
+          doneOnPress={() => {
+            this.setState({ yearPickerEnabled: false })
+          }}
+          onValueChange={this.handleUsePicker}
+          value={yearLastWorked}
+          keyName="yearLastWorked"
+        />
       </Background>
     )
   }

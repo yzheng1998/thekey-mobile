@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { FlatList } from 'react-native'
-import { Container, Divider, SchoolModal } from './styles'
+import { FlatList, View } from 'react-native'
+import { Container, Divider, SchoolModal, Text } from './styles'
 import SearchBar from '../SearchBar'
 import SchoolSearchCard from '../SchoolSearchCard'
 import uuidv4 from 'uuid/v4'
 
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
+import LoadingWrapper from '../LoadingWrapper'
 
 const GET_SCHOOLS = gql`
   query schools($substr: String!) {
@@ -29,14 +30,19 @@ export default class SchoolSearchModal extends Component {
   }
 
   render() {
-    const { visible, toggleSchoolModal, onDismiss } = this.props
+    const { visible, toggleSchoolModal, onDismiss, updateState } = this.props
     const variables = { substr: this.state.searchText }
+    const text =
+      'Oops! Your school wasn\'t found. Press "Next" to add your own school!'
     return (
       <SchoolModal
         animationIn="slideInUp"
         animationOut="slideOutDown"
         isVisible={visible}
-        onModalHide={onDismiss}
+        onModalHide={() => {
+          onDismiss()
+          updateState({ closeModal: false })
+        }}
       >
         <Container>
           <SearchBar
@@ -47,32 +53,47 @@ export default class SchoolSearchModal extends Component {
             alwaysShowCancel
             onSubmitEditing={() => {
               toggleSchoolModal()
-              this.props.updateState({
+              updateState({
                 schoolName: this.state.searchText,
-                location: 'Unlisted School',
+                location: 'Custom School',
                 schoolId: uuidv4(),
               })
+            }}
+            closeModal={() => {
+              toggleSchoolModal()
+              updateState({ closeModal: true })
             }}
             returnKeyType="next"
           />
           <Divider />
           <Query query={GET_SCHOOLS} variables={variables}>
-            {({ data }) => (
-              <FlatList
-                keyboardShouldPersistTaps="handled"
-                keyExtractor={university => university.id}
-                data={data.schools}
-                renderItem={({ item: university }) => (
-                  <SchoolSearchCard
-                    schoolId={university.id}
-                    updateState={this.props.updateState}
-                    toggleSchoolModal={toggleSchoolModal}
-                    schoolName={university.name}
-                    location={`${university.city}, ${university.state}`}
-                  />
-                )}
-              />
-            )}
+            {({ data, loading }) => {
+              if (loading) return <LoadingWrapper loading />
+              return (
+                <View>
+                  {data.schools.length > 0 ? (
+                    <FlatList
+                      keyboardShouldPersistTaps="handled"
+                      keyExtractor={university => university.id}
+                      data={data.schools}
+                      renderItem={({ item: university }) => (
+                        <SchoolSearchCard
+                          schoolId={university.id}
+                          updateState={this.props.updateState}
+                          toggleSchoolModal={toggleSchoolModal}
+                          schoolName={university.name}
+                          location={`${university.city}, ${university.state}`}
+                        />
+                      )}
+                    />
+                  ) : (
+                    <View style={{ paddingLeft: 24, paddingRight: 24 }}>
+                      <Text>{text}</Text>
+                    </View>
+                  )}
+                </View>
+              )
+            }}
           </Query>
         </Container>
       </SchoolModal>

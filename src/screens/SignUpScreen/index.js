@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { KeyboardAvoidingView, Alert, ScrollView, Platform } from 'react-native'
+import { Alert, ScrollView, Platform } from 'react-native'
 import {
   ScreenContainer,
   SubtitleView,
@@ -174,131 +174,127 @@ export default class SignUpScreen extends Component {
     return (
       <ScreenContainer>
         <SafeView>
-          <KeyboardAvoidingView behavior="padding" enabled>
-            <ScrollView keyboardShouldPersistTaps="always">
-              <Header
-                title="Sign Up"
-                showBack
-                onBackPress={() => this.props.navigation.goBack()}
+          {/* <KeyboardAvoidingView behavior="padding" enabled> */}
+          <ScrollView keyboardShouldPersistTaps="always">
+            <Header
+              title="Sign Up"
+              showBack
+              onBackPress={() => this.props.navigation.goBack()}
+            />
+            <LineInput
+              text={firstName}
+              placeholderText="First name"
+              updateText={text => {
+                this.setState({ firstName: text }, () =>
+                  this.validateForm(true),
+                )
+              }}
+              onFocus={() => this.addTouched('firstName')}
+              onBlur={() => this.validateForm(false)}
+              onSubmitEditing={() => this.lastNameInput.focus()}
+              returnKeyType="next"
+              error={displayErrors.firstName}
+            />
+            <LineInput
+              ref={lastNameInput => {
+                this.lastNameInput = lastNameInput
+              }}
+              text={lastName}
+              placeholderText="Last name"
+              updateText={text => {
+                this.setState({ lastName: text }, () => this.validateForm(true))
+              }}
+              onFocus={() => this.addTouched('lastName')}
+              onBlur={() => this.validateForm(false)}
+              onSubmitEditing={() => this.emailInput.focus()}
+              returnKeyType="next"
+              error={displayErrors.lastName}
+            />
+            <LineInput
+              ref={emailInput => {
+                this.emailInput = emailInput
+              }}
+              text={email}
+              placeholderText="Email"
+              autoCapitalize="none"
+              updateText={text => {
+                this.setState({ email: text }, () => this.validateForm(true))
+              }}
+              onFocus={() => this.addTouched('email')}
+              onBlur={() => this.validateForm(false)}
+              onSubmitEditing={() => this.passwordInput.focus()}
+              returnKeyType="next"
+              error={displayErrors.email}
+            >
+              <Icon
+                name="mail"
+                size={18}
+                color="rgb(139, 133, 150)"
+                style={{ marginLeft: 8 }}
               />
-              <LineInput
-                text={firstName}
-                placeholderText="First name"
-                updateText={text => {
-                  this.setState({ firstName: text }, () =>
-                    this.validateForm(true),
-                  )
-                }}
-                onFocus={() => this.addTouched('firstName')}
-                onBlur={() => this.validateForm(false)}
-                onSubmitEditing={() => this.lastNameInput.focus()}
-                returnKeyType="next"
-                error={displayErrors.firstName}
+            </LineInput>
+            <LineInput
+              ref={passwordInput => {
+                this.passwordInput = passwordInput
+              }}
+              text={password}
+              placeholderText="Password (minimum 6 characters)"
+              secureTextEntry
+              autoCapitalize="none"
+              updateText={text => {
+                this.setState({ password: text }, () => this.validateForm(true))
+              }}
+              onFocus={() => this.addTouched('password')}
+              onBlur={() => this.validateForm(false)}
+              returnKeyType="done"
+              error={displayErrors.password}
+            >
+              <Icon
+                name="lock"
+                size={18}
+                color="rgb(139, 133, 150)"
+                style={{ marginLeft: 8 }}
               />
-              <LineInput
-                ref={lastNameInput => {
-                  this.lastNameInput = lastNameInput
-                }}
-                text={lastName}
-                placeholderText="Last name"
-                updateText={text => {
-                  this.setState({ lastName: text }, () =>
-                    this.validateForm(true),
-                  )
-                }}
-                onFocus={() => this.addTouched('lastName')}
-                onBlur={() => this.validateForm(false)}
-                onSubmitEditing={() => this.emailInput.focus()}
-                returnKeyType="next"
-                error={displayErrors.lastName}
-              />
-              <LineInput
-                ref={emailInput => {
-                  this.emailInput = emailInput
-                }}
-                text={email}
-                placeholderText="Email"
-                autoCapitalize="none"
-                updateText={text => {
-                  this.setState({ email: text }, () => this.validateForm(true))
-                }}
-                onFocus={() => this.addTouched('email')}
-                onBlur={() => this.validateForm(false)}
-                onSubmitEditing={() => this.passwordInput.focus()}
-                returnKeyType="next"
-                error={displayErrors.email}
-              >
-                <Icon
-                  name="mail"
-                  size={18}
-                  color="rgb(139, 133, 150)"
-                  style={{ marginLeft: 8 }}
-                />
-              </LineInput>
-              <LineInput
-                ref={passwordInput => {
-                  this.passwordInput = passwordInput
-                }}
-                text={password}
-                placeholderText="Password (minimum 6 characters)"
-                secureTextEntry
-                autoCapitalize="none"
-                updateText={text => {
-                  this.setState({ password: text }, () =>
-                    this.validateForm(true),
-                  )
-                }}
-                onFocus={() => this.addTouched('password')}
-                onBlur={() => this.validateForm(false)}
-                returnKeyType="done"
-                error={displayErrors.password}
-              >
-                <Icon
-                  name="lock"
-                  size={18}
-                  color="rgb(139, 133, 150)"
-                  style={{ marginLeft: 8 }}
-                />
-              </LineInput>
-              <SubtitleView>
-                <Subtitle>
-                  {'By clicking “Sign up & Accept”, you agree to The Keys '}
-                  <Subtitle hyperlink onPress={() => null}>
-                    Terms & Conditions{' '}
-                  </Subtitle>
-                  and{' '}
-                  <Subtitle hyperlink onPress={() => null}>
-                    Privacy Policy
-                  </Subtitle>.
+            </LineInput>
+            <SubtitleView>
+              <Subtitle>
+                {'By clicking “Sign up & Accept”, you agree to The Keys '}
+                <Subtitle hyperlink onPress={() => null}>
+                  Terms & Conditions{' '}
                 </Subtitle>
-              </SubtitleView>
-              <RegisterButton
-                keyboardShouldPersistTaps="always"
-                onPress={() =>
-                  this.props.navigation.navigate('PersonalDetails', {
-                    userInfo: {
-                      firstName,
-                      lastName,
-                      email,
-                      password,
-                    },
-                  })
-                }
-                buttonText="SIGN UP & ACCEPT"
-                disabled={!noErrors}
-              />
-              <DividerRow>
-                <Divider />
-                <DividerText>OR</DividerText>
-                <Divider />
-              </DividerRow>
-              <LinkedInRegisterButton navigation={this.props.navigation} />
-              <FBLoginButton
-                onPress={() => this.facebookLogin()}
-                text="Continue with Facebook"
-              />
-            </ScrollView>
-          </KeyboardAvoidingView>
+                and{' '}
+                <Subtitle hyperlink onPress={() => null}>
+                  Privacy Policy
+                </Subtitle>.
+              </Subtitle>
+            </SubtitleView>
+            <RegisterButton
+              keyboardShouldPersistTaps="always"
+              onPress={() =>
+                this.props.navigation.navigate('PersonalDetails', {
+                  userInfo: {
+                    firstName,
+                    lastName,
+                    email,
+                    password,
+                  },
+                })
+              }
+              buttonText="SIGN UP & ACCEPT"
+              disabled={!noErrors}
+            />
+            <DividerRow>
+              <Divider />
+              <DividerText>OR</DividerText>
+              <Divider />
+            </DividerRow>
+            <LinkedInRegisterButton navigation={this.props.navigation} />
+            <FBLoginButton
+              onPress={() => this.facebookLogin()}
+              text="Continue with Facebook"
+            />
+          </ScrollView>
+          {/* </KeyboardAvoidingView> */}
         </SafeView>
       </ScreenContainer>
     )
