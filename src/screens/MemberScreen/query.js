@@ -28,7 +28,6 @@ export const GET_USER = gql`
         startYear
         endYear
       }
-      interestingFact
       preferredWaysToMeet {
         id
         wayToMeet
@@ -44,7 +43,6 @@ export const GET_USER = gql`
         id
         initiative
       }
-      skills
       friends {
         id
         firstName
