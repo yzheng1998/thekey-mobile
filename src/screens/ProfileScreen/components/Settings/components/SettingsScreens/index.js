@@ -3,6 +3,8 @@ import { Screen } from '../../../../styles'
 import Logout from './Screens/Logout'
 import Password from './Screens/Password'
 import Resumes from './Screens/Resumes'
+import TermsOfService from './Screens/TermsOfService'
+import PrivacyPolicy from './Screens/PrivacyPolicy'
 
 export default class SettingsScreens extends Component {
   render() {
@@ -15,6 +17,8 @@ export default class SettingsScreens extends Component {
         id: 3,
         screen: <Resumes resumes={resumes} userId={userId} refetch={refetch} />,
       },
+      { id: 4, screen: <TermsOfService /> },
+      { id: 5, screen: <PrivacyPolicy /> },
     ]
     return <Screen>{settingsScreens.find(el => el.id === id).screen}</Screen>
   }

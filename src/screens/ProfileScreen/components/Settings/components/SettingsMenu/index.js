@@ -48,12 +48,14 @@ export default class SettingsMenu extends Component {
           title="Password"
           onPress={() => swipe('Password')}
         />
-        <MenuItemWithNavigation title="About" />
-        <MenuItemWithNavigation title="Terms Of Service" />
-        <MenuItemWithNavigation title="Privacy Policy" />
-        <MenuItemWithNavigation title="FAQ's" />
-        <MenuItemWithNavigation title="Contact Us" />
-        <MenuItemWithNavigation title="Restore Purchase" />
+        <MenuItemWithNavigation
+          title="Terms Of Service"
+          onPress={() => swipe('TermsOfService')}
+        />
+        <MenuItemWithNavigation
+          title="Privacy Policy"
+          onPress={() => swipe('PrivacyPolicy')}
+        />
         <MenuItemWithNavigation
           title="Logout"
           onPress={() => swipe('Logout')}
