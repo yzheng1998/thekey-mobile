@@ -69,6 +69,7 @@ export default class AddEducationModal extends Component {
             </Header>
             <LineInput
               text={major}
+              disabled={this.state.showSchoolTypePicker}
               placeholderText="What did you study?"
               updateText={text => {
                 updateText({ major: text }, () => validateForm(true))
@@ -99,12 +100,14 @@ export default class AddEducationModal extends Component {
               onSubmitEditing={() => this.startYearInput.focus()}
               returnKeyType="next"
               error={displayErrors.degreeType}
+              disabled={this.state.showSchoolTypePicker}
             />
             <RowContainer>
               <LineInput
                 ref={startYearInput => {
                   this.startYearInput = startYearInput
                 }}
+                disabled={this.state.showSchoolTypePicker}
                 width="48%"
                 text={startYear}
                 placeholderText="Start Year"
@@ -135,6 +138,7 @@ export default class AddEducationModal extends Component {
                 onBlur={() => validateForm(false)}
                 returnKeyType="done"
                 error={displayErrors.endYear}
+                disabled={this.state.showSchoolTypePicker}
               />
             </RowContainer>
             <RegisterButton
@@ -147,25 +151,25 @@ export default class AddEducationModal extends Component {
               disabled={!noErrors}
             />
           </KeyboardAwareScrollView>
-          <PickerComponent
-            visible={showSchoolTypePicker}
-            ref={picker => {
-              this.picker = picker
-            }}
-            options={schoolTypeOptions}
-            doneOnPress={() => {
-              this.setState(
-                {
-                  showSchoolTypePicker: false,
-                },
-                () => this.degreeInput.focus(),
-              )
-            }}
-            onValueChange={updateText}
-            value={schoolType}
-            keyName="schoolType"
-          />
         </ScreenContainer>
+        <PickerComponent
+          visible={showSchoolTypePicker}
+          ref={picker => {
+            this.picker = picker
+          }}
+          options={schoolTypeOptions}
+          doneOnPress={() => {
+            this.setState(
+              {
+                showSchoolTypePicker: false,
+              },
+              () => this.degreeInput.focus(),
+            )
+          }}
+          onValueChange={updateText}
+          value={schoolType}
+          keyName="schoolType"
+        />
       </RightModal>
     )
   }
