@@ -14,6 +14,9 @@ import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
 
+const defaultProfilePicture =
+  'https://images.unsplash.com/photo-1519145897500-869c40ccb024?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc363c8e033813d4f7b798846bb13a24&auto=format&fit=crop&w=582&q=80'
+
 const GET_USERS = gql`
   query users($usersFilterInput: UsersFilterInput!) {
     users(usersFilterInput: $usersFilterInput) {
@@ -41,7 +44,7 @@ const PeopleList = ({ peopleData, onPress, updateState }) => (
             updateState({ id: person.id })
           }}
           name={`${person.firstName} ${person.lastName}`}
-          picture={person.profilePicture}
+          picture={person.profilePicture || defaultProfilePicture}
           subtitle={person.demographics.hometown}
         />
       )}
