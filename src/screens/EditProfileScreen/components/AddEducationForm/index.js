@@ -59,7 +59,7 @@ export default class AddEducationForm extends Component {
       optionsInputSelected: false,
       optionsInputClicked: false,
       displayErrors: {},
-      errors: {},
+      errors: null,
       touched: {},
     }
   }
