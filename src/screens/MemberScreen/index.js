@@ -3,7 +3,6 @@ import { ScreenContainer, Divider, SecondaryTitle } from './styles'
 import MyProfilePicBlock from './components/MyProfilePicBlock'
 import MyProfileBioBlock from './components/MyProfileBioBlock'
 import ButtonRowView from './components/ButtonRowView'
-import Description from './components/Description'
 import EducationListView from './components/EducationListView'
 import ExperienceListView from './components/ExperienceListView'
 import ContactContainerView from './components/ContactContainerView'
@@ -50,12 +49,10 @@ export default class MemberScreen extends Component {
             twitter,
             profilePicture,
             education,
-            interestingFact,
             preferredWaysToMeet,
             tags,
             workExperiences,
             currentInitiatives,
-            skills,
             mutualFriends,
             eventsInCommon,
             isFriend,
@@ -130,12 +127,6 @@ export default class MemberScreen extends Component {
                   />
                 </View>
               )}
-              <Description
-                row={false}
-                title="Interesting Fact About Me"
-                content={interestingFact}
-              />
-              <Description row={false} title="Skills" content={skills} />
               <ContactContainerView
                 linkedIn={linkedIn}
                 email={email}

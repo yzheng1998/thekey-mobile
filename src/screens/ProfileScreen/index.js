@@ -3,7 +3,6 @@ import { ScreenContainer, Divider } from './styles'
 import MyProfilePicBlock from './components/MyProfilePicBlock'
 import MyProfileBioBlock from './components/MyProfileBioBlock'
 import ButtonRowView from './components/ButtonRowView'
-import Description from './components/Description'
 import ArrayDescription from './components/ArrayDescription'
 import EducationListView from './components/EducationListView'
 import ExperienceListView from './components/ExperienceListView'
@@ -44,12 +43,11 @@ export default class ProfileScreen extends Component {
             twitter,
             profilePicture,
             education,
-            interestingFact,
             preferredWaysToMeet,
             tags,
             workExperiences,
             currentInitiatives,
-            skills,
+
             settings,
             resumes,
           } = data.viewer
@@ -105,12 +103,6 @@ export default class ProfileScreen extends Component {
               <Divider />
               <EducationListView educationData={education} />
               <ExperienceListView experienceData={workExperiences} />
-              <Description
-                row={false}
-                title="Interesting Fact About Me"
-                content={interestingFact}
-              />
-              <Description row={false} title="Skills" content={skills} />
               <ContactContainerView
                 linkedIn={linkedIn}
                 email={email}
