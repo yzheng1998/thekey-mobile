@@ -5,7 +5,7 @@ module.exports = {
   graphqlWsUrl:
     process.env.REACT_APP_WS_API_URL ||
     'wss://thekey-api-staging.herokuapp.com/subscriptions',
-  LinkedInClientID: '7741ysuwp6w3ty',
+  LinkedInClientID: '779rrrorh2glbm',
   LinkedInRedirectUri: 'https://thekey-api-staging.herokuapp.com/auth/linkedin',
   s3Bucket: 'https://s3.amazonaws.com/thekey-files-staging/',
 }
