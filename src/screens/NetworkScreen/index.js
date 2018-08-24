@@ -58,11 +58,12 @@ class NetworkScreen extends Component {
           <HeaderBackground>
             <Title>Your Network</Title>
             <SearchFilterTab
+              width="75%"
               updateState={this.changeTab}
               selectedIndex={this.state.tab}
               color="rgb(176, 186, 200)"
               selectedColor="rgb(244, 89, 82)"
-              options={['All', 'Connections', 'Groups', 'Events']}
+              options={['All', 'Connections', 'Groups']}
             />
             <ThinDivider />
           </HeaderBackground>
