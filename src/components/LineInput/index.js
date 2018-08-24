@@ -27,6 +27,7 @@ export default class LineInput extends Component {
       onBlur,
       onFocus,
       error,
+      disabled,
       ...rest
     } = this.props
     return (
@@ -35,6 +36,7 @@ export default class LineInput extends Component {
           <InputContainer>
             {children}
             <Input
+              editable={!disabled}
               innerRef={comp => {
                 this.textInput = comp
               }}
