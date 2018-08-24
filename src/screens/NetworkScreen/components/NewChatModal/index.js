@@ -106,6 +106,7 @@ export default class NewChatModal extends Component {
         fontSize: 14,
         marginVertical: Platform.OS === 'ios' ? 8.5 : -2,
       },
+      returnKeyType: 'next',
     }
 
     const { handleClose, isExistingChat, chatId, ...rest } = this.props

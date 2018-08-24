@@ -4,10 +4,18 @@ import Error from '../../components/Error'
 
 export default class RegistrationPicker extends Component {
   render() {
-    const { placeholderText, text, onPress, selected, error } = this.props
+    const {
+      placeholderText,
+      text,
+      onPress,
+      selected,
+      error,
+      disabled,
+    } = this.props
     return (
       <Container>
         <PickerContainer
+          disabled={disabled}
           activeOpacity={1}
           onPress={onPress}
           selected={selected}

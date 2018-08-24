@@ -47,7 +47,7 @@ export default class AddExperienceForm extends Component {
       endDate: experienceInfo.endDate,
       isCurrentEmployee: experienceInfo.endDate === null,
       displayErrors: {},
-      errors: {},
+      errors: null,
       touched: {},
       showStartDate: false,
       showEndDate: false,
@@ -105,17 +105,19 @@ export default class AddExperienceForm extends Component {
       id,
       showStartDate,
       showEndDate,
+      errors,
+      displayErrors,
     } = this.state
 
     const endDateIsPresent = endDate === null || isCurrentEmployee === true
 
     const returnKeyType = this.editMode ? 'done' : 'next'
 
-    const noErrors = !this.state.errors
+    const noErrors = !errors
 
     const toggleSwitch = () => {
       this.setState({
-        isCurrentEmployee: !this.state.isCurrentEmployee,
+        isCurrentEmployee: !isCurrentEmployee,
         endDate: !isCurrentEmployee ? null : undefined,
       })
     }
@@ -146,9 +148,10 @@ export default class AddExperienceForm extends Component {
                 onBlur={() => this.validateForm(false)}
                 returnKeyType={returnKeyType}
                 onSubmitEditing={() => {
-                  if (!this.editMode) this.positionInput.focus()
+                  if (!this.editMode && !position) this.positionInput.focus()
                 }}
-                error={this.state.displayErrors.employer}
+                error={displayErrors.employer}
+                disabled={showEndDate || showStartDate}
               />
               <LineInput
                 ref={positionInput => {
@@ -164,22 +167,25 @@ export default class AddExperienceForm extends Component {
                 onFocus={() => this.addTouched('position')}
                 onBlur={() => this.validateForm(false)}
                 returnKeyType={returnKeyType}
-                error={this.state.displayErrors.position}
+                error={displayErrors.position}
                 onSubmitEditing={() => {
-                  if (!this.editMode) this.setState({ showStartDate: true })
+                  if (!this.editMode && !startDate)
+                    this.setState({ showStartDate: true })
                 }}
+                disabled={showEndDate || showStartDate}
               />
               <SwitchContainer>
                 <SwitchLabel>I am currently working here</SwitchLabel>
                 <Switch
                   onValueChange={toggleSwitch}
-                  value={this.state.isCurrentEmployee}
+                  value={isCurrentEmployee}
                   onTintColor="rgb(220, 60, 53)"
                 />
               </SwitchContainer>
               <RowContainer>
                 <RegistrationPicker
                   selected={showStartDate}
+                  disabled={showEndDate}
                   onPress={() => {
                     this.setState({
                       showStartDate: true,
@@ -196,6 +202,7 @@ export default class AddExperienceForm extends Component {
                 />
                 <RegistrationPicker
                   selected={showEndDate}
+                  disabled={showStartDate}
                   onPress={() => {
                     this.setState({
                       showEndDate: true,
@@ -256,9 +263,10 @@ export default class AddExperienceForm extends Component {
             date={new Date(startDate) || new Date(1996, 0, 1)}
             doneOnPress={() => {
               this.setState({ showStartDate: false })
-              if (!isCurrentEmployee) {
+              if (!isCurrentEmployee && !endDate) {
                 this.setState({ showEndDate: true })
               }
+              this.validateForm(true)
             }}
             setDate={date => {
               this.setState({
