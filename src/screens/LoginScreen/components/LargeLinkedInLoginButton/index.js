@@ -35,7 +35,7 @@ class LargeLinkedInLoginButton extends Component {
           const {
             linkedinLogin: { token, user },
           } = data
-          if (!data.loginUser.error) {
+          if (!data.linkedinLogin.error) {
             await AsyncStorage.setItem('token', token)
             await AsyncStorage.setItem('userId', user.id)
             this.props.navigation.navigate('MainTab')

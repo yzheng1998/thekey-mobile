@@ -231,7 +231,7 @@ class LoginBody extends Component {
                 <DividerText>OR</DividerText>
                 <Divider />
               </DividerRow>
-              <LargeLinkedInLoginButton />
+              <LargeLinkedInLoginButton navigation={this.props.navigation} />
               <FBLoginButton
                 onPress={() => this.facebookLogin(loginUser)}
                 text="Sign in with Facebook"
