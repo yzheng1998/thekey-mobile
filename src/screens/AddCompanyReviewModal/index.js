@@ -32,7 +32,7 @@ export default class AddCompanyReviewModal extends Component {
     reviewPros: '',
     reviewCons: '',
     displayErrors: {},
-    errors: {},
+    errors: null,
     touched: {},
     showLocationSearchModal: false,
   }
@@ -106,7 +106,7 @@ export default class AddCompanyReviewModal extends Component {
       reviewPros: '',
       reviewCons: '',
       displayErrors: {},
-      errors: {},
+      errors: null,
       touched: [],
       showLocationSearchModal: false,
     })
