@@ -37,7 +37,7 @@ export default class SignUpScreen extends Component {
       email: '',
       password: '',
       displayErrors: {},
-      errors: {},
+      errors: null,
       touched: {},
     }
   }
