@@ -1,18 +1,14 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const Container = styled.KeyboardAvoidingView`
+export const ScrollContainer = styled.ScrollView`
   flex: 1;
-  width: 100%;
-  background-color: ${themeGet('colors.background')};
-  align-items: center;
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 12;
+  padding-right: 12;
 `
-export const Scroll = styled.ScrollView`
-  background-color: ${themeGet('colors.background')};
+export const Container = styled.View`
   flex: 1;
-  width: 100%;
+  background-color: ${themeGet('colors.background')};
 `
 export const InstructionsContainer = styled.View``
 
@@ -23,7 +19,7 @@ export const Instructions = styled.Text`
   text-align: center;
 `
 export const EssayInput = styled.TextInput`
-  height: 264;
+  height: 210px;
   margin-left: 12px;
   padding: 10px;
   margin-right: 12px;

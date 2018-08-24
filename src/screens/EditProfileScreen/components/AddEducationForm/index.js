@@ -59,7 +59,7 @@ export default class AddEducationForm extends Component {
       optionsInputSelected: false,
       optionsInputClicked: false,
       displayErrors: {},
-      errors: {},
+      errors: null,
       touched: {},
     }
   }
@@ -168,6 +168,7 @@ export default class AddEducationForm extends Component {
         optionsInputSelected: true,
         optionsInputClicked: true,
       })
+      this.picker.showActionSheet()
     }
 
     return (
@@ -317,23 +318,25 @@ export default class AddEducationForm extends Component {
               </ButtonContainer>
             </Block>
           </KeyboardAwareScrollView>
-          {this.state.schoolTypePickerEnabled && (
-            <PickerComponent
-              options={schoolTypes}
-              doneOnPress={() => {
-                this.setState({
-                  schoolTypePickerEnabled: false,
-                  optionsInputClicked: false, // handles border color of optionsInput
-                })
-                this.validateForm(false)
-                if (!this.editMode) this.degreeInput.focus()
-              }}
-              onValueChange={this.updateState}
-              validateForm={this.validateForm}
-              value={schoolType}
-              keyName="schoolType"
-            />
-          )}
+          <PickerComponent
+            visible={this.state.schoolTypePickerEnabled}
+            ref={picker => {
+              this.picker = picker
+            }}
+            options={schoolTypes}
+            doneOnPress={() => {
+              this.setState({
+                schoolTypePickerEnabled: false,
+                optionsInputClicked: false, // handles border color of optionsInput
+              })
+              this.validateForm(false)
+              if (!this.editMode) this.degreeInput.focus()
+            }}
+            onValueChange={this.updateState}
+            validateForm={this.validateForm}
+            value={schoolType}
+            keyName="schoolType"
+          />
           <SchoolSearchModal
             updateState={this.updateState}
             navigation={this.props.navigation}

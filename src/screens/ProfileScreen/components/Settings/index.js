@@ -23,6 +23,14 @@ const screens = [
     id: 3,
     title: 'Resumes',
   },
+  {
+    id: 4,
+    title: 'TermsOfService',
+  },
+  {
+    id: 5,
+    title: 'PrivacyPolicy',
+  },
 ]
 
 export default class Settings extends Component {

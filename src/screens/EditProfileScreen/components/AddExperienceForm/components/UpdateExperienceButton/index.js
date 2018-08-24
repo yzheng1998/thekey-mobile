@@ -34,8 +34,8 @@ export default class UpdateExperienceButton extends Component {
                   id,
                   employer,
                   position,
-                  startDate,
-                  endDate,
+                  startDate: new Date(startDate),
+                  endDate: new Date(endDate),
                 },
               }
               updateExperience({ variables })

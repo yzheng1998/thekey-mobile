@@ -37,11 +37,7 @@ class DiscoverScreen extends Component {
   }
 
   componentDidMount = async () => {
-    const firstName = await AsyncStorage.getItem('firstName')
     PushNotification.requestPermissions()
-    if (firstName) {
-      this.setState({ name: firstName })
-    }
   }
 
   onComplete = () => {
@@ -51,40 +47,43 @@ class DiscoverScreen extends Component {
   render() {
     return (
       <Background>
-        <SafeAreaView style={{ flex: 1 }}>
-          <List>
-            <Header name={this.state.name} navigation={this.props.navigation} />
-            <DiscoverCard
-              title="The Society"
-              description="Connect with others on The Key"
-              image={TheSocietyCard}
-              onPress={() => this.props.navigation.navigate('Society')}
-            />
-            <DiscoverCard
-              title="Jobs/Internships"
-              description="View jobs posted on The Key"
-              image={JobsAndInternshipsCard}
-              onPress={() => this.props.navigation.navigate('Jobs')}
-            />
-            <DiscoverCard
-              title="Events"
-              description="View events posted on The Key"
-              image={EventsCard}
-              onPress={() => this.props.navigation.navigate('Events')}
-            />
-            <DiscoverCard
-              title="Reviews"
-              description="Review companies using The Key"
-              image={ReviewsCard}
-              onPress={() => this.props.navigation.navigate('Reviews')}
-            />
-            <View style={{ height: 44 }} />
-          </List>
-          <Query query={GET_HAS_LOGGED_IN}>
-            {({ loading, data, error, refetch }) => {
-              if (loading) return <View />
-              if (error || !data.viewer) AsyncStorage.clear()
-              return (
+        <Query query={GET_HAS_LOGGED_IN}>
+          {({ loading, data, error, refetch }) => {
+            if (loading) return <View />
+            if (error || !data.viewer) AsyncStorage.clear()
+            return (
+              <SafeAreaView style={{ flex: 1 }}>
+                <List>
+                  <Header
+                    name={data.viewer.firstName}
+                    navigation={this.props.navigation}
+                  />
+                  <DiscoverCard
+                    title="The Society"
+                    description="Connect with others on The Key"
+                    image={TheSocietyCard}
+                    onPress={() => this.props.navigation.navigate('Society')}
+                  />
+                  <DiscoverCard
+                    title="Jobs/Internships"
+                    description="View jobs posted on The Key"
+                    image={JobsAndInternshipsCard}
+                    onPress={() => this.props.navigation.navigate('Jobs')}
+                  />
+                  <DiscoverCard
+                    title="Events"
+                    description="View events posted on The Key"
+                    image={EventsCard}
+                    onPress={() => this.props.navigation.navigate('Events')}
+                  />
+                  <DiscoverCard
+                    title="Reviews"
+                    description="Review companies using The Key"
+                    image={ReviewsCard}
+                    onPress={() => this.props.navigation.navigate('Reviews')}
+                  />
+                  <View style={{ height: 44 }} />
+                </List>
                 <WelcomeCard
                   refetch={refetch}
                   firstName={data.viewer.firstName}
@@ -93,10 +92,10 @@ class DiscoverScreen extends Component {
                   completeProfileClicked={this.state.completeProfileClicked}
                   onComplete={this.onComplete}
                 />
-              )
-            }}
-          </Query>
-        </SafeAreaView>
+              </SafeAreaView>
+            )
+          }}
+        </Query>
       </Background>
     )
   }

@@ -10,6 +10,7 @@ import LinkedInModal from 'react-native-linkedin'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 import LinkedInIcon from 'react-native-vector-icons/Ionicons'
+import config from '../../../../../config'
 
 const LINKEDIN_LOGIN = gql`
   mutation linkedinLogin($authorizationCode: String!) {
@@ -25,8 +26,6 @@ const LINKEDIN_LOGIN = gql`
     }
   }
 `
-const clientID = '7741ysuwp6w3ty'
-const redirectUri = 'http://localhost:3000/auth/linkedin'
 class LinkedInLoginButton extends Component {
   render() {
     return (
@@ -50,8 +49,8 @@ class LinkedInLoginButton extends Component {
                 this.modal = ref
               }}
               clientSecret="" // Required prop
-              clientID={clientID}
-              redirectUri={redirectUri}
+              clientID={config.LinkedInClientID}
+              redirectUri={config.LinkedInRedirectUri}
               shouldGetAccessToken={false}
               onSuccess={authorizationCode =>
                 linkedinLogin({ variables: { authorizationCode } })

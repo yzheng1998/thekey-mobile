@@ -14,15 +14,6 @@ const constraints = {
   startDate: {
     presence: {
       allowEmpty: false,
-      message: 'must be in this format: MMM YYYY',
-    },
-    datetime: {
-      message: 'must be in this format: MMM YYYY',
-    },
-  },
-  endDate: {
-    datetime: {
-      message: 'must be in this format: MMM YYYY',
     },
   },
 }

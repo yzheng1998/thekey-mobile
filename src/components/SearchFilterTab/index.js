@@ -21,13 +21,13 @@ export default class SearchFilterTab extends Component {
       <Tab width={width}>
         {this.props.options.map((option, idx) => (
           <CategoryButton
+            key={option}
             hitSlop={wordRadius}
             onPress={() => {
               updateState(idx)
             }}
           >
             <Categories
-              key={option}
               isSelected={selectedIndex === idx}
               color={color}
               selectedColor={selectedColor}

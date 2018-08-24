@@ -1,20 +1,31 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
-import { DoneButton, DoneButtonText } from './styles'
+import { DatePickerAndroid } from 'react-native'
+import Error from '../../components/Error'
 
 export default class DatePicker extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      error: '',
+    }
+    const { setDate, doneOnPress, date } = props
+    this.openDatePicker = async () => {
+      try {
+        const { action, year, month, day } = await DatePickerAndroid.open({
+          date,
+          mode: 'spinner',
+        })
+        if (action !== DatePickerAndroid.dismissedAction) {
+          setDate(new Date(year, month, day))
+          doneOnPress()
+        }
+      } catch ({ code, message }) {
+        this.setState({ error: `Cannot open date picker: ${message}` })
+      }
+    }
+  }
+
   render() {
-    const { doneOnPress, visible } = this.props
-    return (
-      <View>
-        {visible && (
-          <View style={{ backgroundColor: 'white' }}>
-            <DoneButton onPress={doneOnPress}>
-              <DoneButtonText>Done</DoneButtonText>
-            </DoneButton>
-          </View>
-        )}
-      </View>
-    )
+    return <Error error={this.state.error} />
   }
 }

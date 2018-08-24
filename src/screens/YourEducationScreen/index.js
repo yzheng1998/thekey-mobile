@@ -35,8 +35,9 @@ class YourEducationScreen extends Component {
       isCurrentEmployee: false,
       educationListData: [],
       displayErrors: {},
-      errors: {},
+      errors: null,
       touched: {},
+      closeModal: false,
     }
   }
 
@@ -71,8 +72,9 @@ class YourEducationScreen extends Component {
       schoolType: '',
       degreeType: '',
       displayErrors: {},
-      errors: {},
+      errors: null,
       touched: {},
+      closeModal: false,
     })
   }
 
@@ -185,7 +187,9 @@ class YourEducationScreen extends Component {
           />
           <SchoolSearchModal
             updateState={this.updateState}
-            onDismiss={this.toggleEducationModal}
+            onDismiss={
+              this.state.closeModal ? () => null : this.toggleEducationModal
+            }
             navigation={this.props.navigation}
             toggleSchoolModal={this.toggleSchoolModal}
             visible={this.state.showSchoolSearchModal}

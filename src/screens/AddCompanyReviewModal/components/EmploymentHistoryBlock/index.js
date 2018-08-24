@@ -39,14 +39,8 @@ export default class EmploymentHistoryBlock extends Component {
   }
 
   render() {
-    const { state, updateState } = this.props
-    const {
-      picture,
-      employmentType,
-      isCurrentEmployee,
-      yearPickerEnabled,
-      yearLastWorked,
-    } = state
+    const { state, updateState, openPicker } = this.props
+    const { picture, employmentType, isCurrentEmployee, yearLastWorked } = state
     return (
       <BlockBackground>
         <RowContainer>
@@ -120,12 +114,7 @@ export default class EmploymentHistoryBlock extends Component {
           </RowContainer>
 
           <RowContainer>
-            <TouchableOpacity
-              disabled={isCurrentEmployee}
-              onPress={() =>
-                updateState({ yearPickerEnabled: !yearPickerEnabled })
-              }
-            >
+            <TouchableOpacity disabled={isCurrentEmployee} onPress={openPicker}>
               <Label disabled={isCurrentEmployee}>
                 I last worked here in {yearLastWorked || `...`}
               </Label>
