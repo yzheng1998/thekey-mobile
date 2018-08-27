@@ -100,7 +100,7 @@ const LoginStack = createStackNavigator(
     },
   },
   {
-    initialRouteName: 'Landing',
+    initialRouteName: 'Splash',
     headerMode: 'screen',
   },
 )

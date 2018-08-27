@@ -31,6 +31,8 @@
 		1BB8BD1B07D84716B26BF50D /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D3C8CEE2F944B99EE9754A /* libRCTFBSDK.a */; };
 		220F5FEB210A827A00571A8A /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 220F5FE7210A825900571A8A /* libRNCamera.a */; };
 		2211685F20D40641000216D2 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		226B26342130DCE8007C6053 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226B26332130DCE8007C6053 /* GameKit.framework */; };
+		226B26362130DCEB007C6053 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226B26352130DCEB007C6053 /* StoreKit.framework */; };
 		22FD6E6621063F4B0057A8C6 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 22FD6E6321063F020057A8C6 /* libRCTPushNotification.a */; };
 		254F748340F74529AEDE145C /* SF-Pro-Display-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97E06529390F489EB5575924 /* SF-Pro-Display-BoldItalic.otf */; };
 		27119E9E210BE00700C94199 /* libFBSDKCoreKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27119E9D210BE00700C94199 /* libFBSDKCoreKit.a */; };
@@ -68,7 +70,6 @@
 		72BF2E2A7FD2419F91D63944 /* SF-Pro-Text-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B7EF863D1434457CA3F80BC7 /* SF-Pro-Text-MediumItalic.otf */; };
 		7CF1FB45D7364F38A4AC8994 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFAB74744CF14358ADFE9529 /* SF-Pro-Text-Medium.otf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		86EA3D286A2A490DB1188250 /* libRCTLinkedinLogin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 770979C32CE742419B4E5066 /* libRCTLinkedinLogin.a */; };
 		89267F086D8F4E2EB23BB8DC /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BB68CEA55FEF447E9C55555D /* SF-Pro-Text-Semibold.otf */; };
 		935CF08FFECE4CB1BCDC195F /* SF-Pro-Display-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF05E27E8B8841E3A910C5E6 /* SF-Pro-Display-ThinItalic.otf */; };
 		9ED885B592DE4C91ACF7B773 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E5539AFFF742A69B39A006 /* libRNVectorIcons.a */; };
@@ -477,6 +478,8 @@
 		14C28565BDC4D4FBF4904BC4 /* Pods-thekeymobile-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-thekeymobile-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-thekeymobile-tvOS/Pods-thekeymobile-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		1F752141CBE04275AC84407A /* SF-Pro-Text-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-Light.otf"; path = "../assets/fonts/SF-Pro-Text-Light.otf"; sourceTree = "<group>"; };
 		220F5FB8210A825900571A8A /* RNCamera.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RNCamera.xcodeproj"; sourceTree = "<group>"; };
+		226B26332130DCE8007C6053 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		226B26352130DCEB007C6053 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		22FD6E5D21063F020057A8C6 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		27119E9D210BE00700C94199 /* libFBSDKCoreKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKCoreKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		27119E9F210BE00700C94199 /* libFBSDKLoginKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBSDKLoginKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -579,12 +582,13 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				9ED885B592DE4C91ACF7B773 /* libRNVectorIcons.a in Frameworks */,
+				226B26342130DCE8007C6053 /* GameKit.framework in Frameworks */,
 				D40677B25EE34111A4F58A89 /* libAppCenterReactNative.a in Frameworks */,
+				226B26362130DCEB007C6053 /* StoreKit.framework in Frameworks */,
 				EBBA8FBC292C489E86F2A7EE /* libAppCenterReactNativeAnalytics.a in Frameworks */,
 				CB684F2C61FE48528244A665 /* (null) in Frameworks */,
 				FABA81C9D0556D6707D72315 /* libPods-thekeymobile.a in Frameworks */,
 				2845B3092107861C005CC9C3 /* libRNSVG.a in Frameworks */,
-				86EA3D286A2A490DB1188250 /* libRCTLinkedinLogin.a in Frameworks */,
 				22FD6E6621063F4B0057A8C6 /* libRCTPushNotification.a in Frameworks */,
 				220F5FEB210A827A00571A8A /* libRNCamera.a in Frameworks */,
 				1BB8BD1B07D84716B26BF50D /* libRCTFBSDK.a in Frameworks */,
@@ -801,6 +805,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				226B26352130DCEB007C6053 /* StoreKit.framework */,
+				226B26332130DCE8007C6053 /* GameKit.framework */,
 				27119E9D210BE00700C94199 /* libFBSDKCoreKit.a */,
 				27119E9F210BE00700C94199 /* libFBSDKLoginKit.a */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
@@ -1091,12 +1097,20 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = 26RF3UMDG8;
+						ProvisioningStyle = Manual;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 26RF3UMDG8;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
+							com.apple.GameCenter.iOS = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -1831,6 +1845,9 @@
 			baseConfigurationReference = 36D5746878A8001C50797F37 /* Pods-thekeymobileTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 26RF3UMDG8;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1860,8 +1877,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hsadev.thekey.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/thekeymobile.app/thekeymobile";
 			};
 			name = Debug;
@@ -1871,7 +1889,10 @@
 			baseConfigurationReference = D04A162B6C43F43AD8402A98 /* Pods-thekeymobileTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 26RF3UMDG8;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
@@ -1897,8 +1918,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hsadev.thekey.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/thekeymobile.app/thekeymobile";
 			};
 			name = Release;
@@ -1909,8 +1931,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = thekeymobile/thekeymobile.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 26RF3UMDG8;
@@ -1932,8 +1954,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hsadev.thekey;
 				PRODUCT_NAME = thekeymobile;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "3be272d1-2bec-4079-b5b7-88a171a4b08e";
+				PROVISIONING_PROFILE_SPECIFIER = "The Key App Store Distribution";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1944,8 +1966,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = thekeymobile/thekeymobile.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 26RF3UMDG8;
 				HEADER_SEARCH_PATHS = (
@@ -1969,8 +1991,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hsadev.thekey;
 				PRODUCT_NAME = thekeymobile;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "3be272d1-2bec-4079-b5b7-88a171a4b08e";
+				PROVISIONING_PROFILE_SPECIFIER = "The Key App Store Distribution";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
