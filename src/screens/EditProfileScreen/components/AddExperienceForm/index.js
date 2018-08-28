@@ -47,7 +47,7 @@ export default class AddExperienceForm extends Component {
       endDate: experienceInfo.endDate,
       isCurrentEmployee: experienceInfo.endDate === null,
       displayErrors: {},
-      errors: null,
+      errors: {},
       touched: {},
       showStartDate: false,
       showEndDate: false,

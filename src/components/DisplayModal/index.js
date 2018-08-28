@@ -13,8 +13,6 @@ export default class DisplayModal extends Component {
         style={{
           margin: 0,
           backgroundColor: 'white',
-          flex: 1,
-          justifyContent: 'flex-start',
         }}
       >
         <Header

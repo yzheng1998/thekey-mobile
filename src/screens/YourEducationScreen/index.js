@@ -35,7 +35,7 @@ class YourEducationScreen extends Component {
       isCurrentEmployee: false,
       educationListData: [],
       displayErrors: {},
-      errors: null,
+      errors: {},
       touched: {},
       closeModal: false,
     }
@@ -72,7 +72,7 @@ class YourEducationScreen extends Component {
       schoolType: '',
       degreeType: '',
       displayErrors: {},
-      errors: null,
+      errors: {},
       touched: {},
       closeModal: false,
     })

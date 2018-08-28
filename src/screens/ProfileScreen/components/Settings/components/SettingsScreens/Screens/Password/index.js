@@ -34,7 +34,7 @@ export default class Password extends Component {
     newPassword: '',
     confirmNewPassword: '',
     displayErrors: {},
-    errors: null,
+    errors: {},
     touched: {},
     submitError: '',
   }
@@ -140,7 +140,7 @@ export default class Password extends Component {
                     newPassword: '',
                     confirmNewPassword: '',
                     displayErrors: {},
-                    errors: null,
+                    errors: {},
                     touched: {},
                     submitError: '',
                   })
