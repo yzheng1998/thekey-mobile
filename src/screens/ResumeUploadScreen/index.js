@@ -166,51 +166,54 @@ class ResumeUploadScreen extends Component {
           />
         </SafeAreaView>
 
-        {this.state.resumeListData.length > 0 &&
-          this.state.resumeListData.every(
-            resume => resume.progress === '100%',
-          ) && (
-            <Mutation
-              mutation={SEND_MEMBERSHIP_APPLICATION}
-              onCompleted={() => {
-                this.props.navigation.navigate('Splash', { hasApplied: true })
+        {this.state.resumeListData.every(
+          resume => resume.progress === '100%',
+        ) && (
+          <Mutation
+            mutation={SEND_MEMBERSHIP_APPLICATION}
+            onCompleted={() => {
+              this.props.navigation.navigate('Splash', { hasApplied: true })
+              Alert.alert(
+                'Thank you for applying to The Key!',
+                'We will review your application and get back to you shortly.',
+              )
+            }}
+          >
+            {(sendMembershipApplication, { error }) => {
+              if (error) {
                 Alert.alert(
-                  'Thank you for applying to The Key!',
-                  'We will review your application and get back to you shortly.',
+                  'Failed to upload your application',
+                  'There was an error sending in your application. Please try again.',
+                  [{ text: 'OK', onPress: () => {} }],
+                  { cancelable: true },
                 )
-              }}
-            >
-              {(sendMembershipApplication, { error }) => {
-                if (error) {
-                  Alert.alert(
-                    'Failed to upload your application',
-                    'There was an error sending in your application. Please try again.',
-                    [{ text: 'OK', onPress: () => {} }],
-                    { cancelable: true },
-                  )
-                }
-                return (
-                  <SubmitButton
-                    onPress={() => {
-                      const userInfoFinal = {
-                        ...userInfo,
-                        resumes: this.state.resumeListData.map(resume => ({
-                          resume: resume.url,
-                          title: resume.title,
-                          dataSize: resume.dataSize,
-                        })),
-                      }
-                      const variables = {
-                        sendMembershipApplicationInput: { ...userInfoFinal },
-                      }
-                      sendMembershipApplication({ variables })
-                    }}
-                    buttonText="SUBMIT"
-                  />
-                )
-              }}
-            </Mutation>
-          )}
+              }
+              return (
+                <SubmitButton
+                  onPress={() => {
+                    const userInfoFinal = {
+                      ...userInfo,
+                      resumes: this.state.resumeListData.map(resume => ({
+                        resume: resume.url,
+                        title: resume.title,
+                        dataSize: resume.dataSize,
+                      })),
+                    }
+                    const variables = {
+                      sendMembershipApplicationInput: { ...userInfoFinal },
+                    }
+                    sendMembershipApplication({ variables })
+                  }}
+                  buttonText={
+                    this.state.resumeListData.length > 0
+                      ? 'SUBMIT'
+                      : 'SUBMIT WITHOUT A RESUME'
+                  }
+                />
+              )
+            }}
+          </Mutation>
+        )}
       </ScreenContainer>
     )
   }
