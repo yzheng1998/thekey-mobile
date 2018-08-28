@@ -1,11 +1,11 @@
 export const ethnicityOptions = [
-  { label: 'Black', value: 'BLACK' },
+  { label: 'Black / African-American', value: 'BLACK' },
   { label: 'White', value: 'WHITE' },
-  { label: 'East Asian', value: 'ASIANEAST' },
-  { label: 'South Asian', value: 'ASIANSOUTH' },
+  { label: 'Asian', value: 'ASIAN' },
+  { label: 'Pacific Islander', value: 'PACIFICISLANDER' },
   { label: 'Middle Eastern', value: 'MIDDLEEASTERN' },
   { label: 'Native American', value: 'NATIVEAMERICAN' },
-  { label: 'Hispanic', value: 'HISPANIC' },
+  { label: 'Latino / Hispanic', value: 'HISPANIC' },
   { label: 'Other', value: 'OTHER' },
   { label: 'Decline', value: 'DECLINE' },
 ]
