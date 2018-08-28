@@ -3,16 +3,24 @@ import { Button, ButtonText } from './styles'
 
 export default class RegisterButton extends Component {
   render() {
+    const {
+      secondary,
+      onPress,
+      disabled,
+      noBorder,
+      children,
+      buttonText,
+    } = this.props
     return (
       <Button
-        secondary={this.props.secondary}
-        onPress={this.props.onPress}
-        disabled={this.props.disabled}
-        noBorder={this.props.noBorder}
+        secondary={secondary}
+        onPress={onPress}
+        disabled={disabled}
+        noBorder={noBorder}
       >
-        {this.props.children}
-        <ButtonText secondary={this.props.secondary}>
-          {this.props.buttonText}
+        {children}
+        <ButtonText disabled={disabled} secondary={secondary}>
+          {buttonText}
         </ButtonText>
       </Button>
     )

@@ -32,7 +32,7 @@ export default class JobStarButton extends Component {
       ? this.props.startColor || 'white'
       : this.props.endColor || 'white'
     return (
-      <Mutation mutation={TOGGLE_JOB_INTEREST} variables={{ jobId: id }}>
+      <Mutation mutation={TOGGLE_JOB_INTEREST}>
         {toggleInterestInJob => (
           <Button
             hitSlop={buttonRadius}

@@ -32,4 +32,5 @@ export const ButtonText = styled.Text`
     props.secondary
       ? themeGet('colors.buttonPrimary')
       : themeGet('colors.fontPrimary')};
+  opacity: ${props => (props.secondary && props.disabled ? 0.5 : 1)};
 `
