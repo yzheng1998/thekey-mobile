@@ -5,7 +5,7 @@ import { Dimensions, StatusBar } from 'react-native'
 import SocietyHeader from './components/SocietyHeader'
 import CardSwiper from './components/CardSwiper'
 import OutOfMatchesCard from './components/OutOfMatchesCard'
-import { SwiperContainer, Background, CardContainer, Screen } from './styles'
+import { Background, CardContainer, Screen } from './styles'
 import SocietySearchModal from './components/SocietySearchModal'
 import LoadingWrapper from '../../components/LoadingWrapper'
 
@@ -78,14 +78,12 @@ class SocietyScreen extends Component {
             <Query query={GET_SOCIETY_USERS} fetchPolicy="network-only">
               {({ loading, data, refetch }) => (
                 <LoadingWrapper loading={loading}>
-                  <SwiperContainer>
-                    <CardSwiper
-                      refetch={refetch}
-                      navigation={this.props.navigation}
-                      width={width}
-                      userData={data.societyQuery}
-                    />
-                  </SwiperContainer>
+                  <CardSwiper
+                    refetch={refetch}
+                    navigation={this.props.navigation}
+                    width={width}
+                    userData={data.societyQuery}
+                  />
                   <OutOfMatchesCard navigation={this.props.navigation} />
                 </LoadingWrapper>
               )}

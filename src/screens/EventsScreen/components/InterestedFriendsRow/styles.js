@@ -11,7 +11,7 @@ export const InterestedFriendsContainer = styled.Text`
   line-height: 19;
   font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.fontPrimary')};
-  margin-left: 8px;
+  margin-left: 5px;
 `
 export const AvatarContainer = styled.View`
   flex-direction: row;
@@ -19,7 +19,6 @@ export const AvatarContainer = styled.View`
 export const Avatar = styled.Image`
   height: ${props => (props.avatarSize ? props.avatarSize : 24)};
   width: ${props => (props.avatarSize ? props.avatarSize : 24)};
-  margin: -3px;
   border-color: white;
   border-width: 1.5;
   border-radius: ${props => (props.avatarSize ? props.avatarSize / 2 : 12)};

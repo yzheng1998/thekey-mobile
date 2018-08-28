@@ -46,6 +46,9 @@ export const Tint = styled.View`
   flex: 1;
 `
 export const AvatarRowContainer = styled.View`
-  height: 20px;
+  height: 30px;
+  justify-content: center;
   margin-top: 12px;
+  padding-left: 2px;
+  padding-right: 5px;
 `
