@@ -31,6 +31,5 @@ export const ClearIconButton = styled.TouchableOpacity`
   margin-right: 8px;
 `
 export const RowContainer = styled.View`
-  flex: 1;
-  width: 100%;
+  flex-shrink: 1;
 `

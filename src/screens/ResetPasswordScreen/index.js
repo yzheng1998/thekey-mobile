@@ -24,7 +24,7 @@ export default class ResetPasswordScreen extends Component {
       email: '',
       showResetPasswordModal: false,
       displayErrors: {},
-      errors: null,
+      errors: {},
       touched: {},
     }
   }

@@ -36,4 +36,5 @@ export const RightModal = styled(Modal)`
 
 export const RowContainer = styled.View`
   flex-direction: row;
+  width: 100%;
 `

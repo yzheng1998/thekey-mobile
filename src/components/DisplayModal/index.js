@@ -10,7 +10,10 @@ export default class DisplayModal extends Component {
         isVisible={isVisible}
         animationIn="slideInUp"
         animationOut="slideOutDown"
-        style={{ margin: 0, backgroundColor: 'white' }}
+        style={{
+          margin: 0,
+          backgroundColor: 'white',
+        }}
       >
         <Header
           noMargin
