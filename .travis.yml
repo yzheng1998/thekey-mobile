@@ -6,8 +6,6 @@ cache:
 
 before_install:
   - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
-  - bundle install
-  - bundle update
 
 script:
-  - bundle exec fastlane ios beta
+  - cd ios && bundle exec fastlane ios beta
