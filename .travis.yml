@@ -6,9 +6,6 @@ node_js:
 os: osx
 osx_image: xcode9.4
 
-cache:
-  - bundler
-
 before_install:
   - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
 
