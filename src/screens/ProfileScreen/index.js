@@ -47,7 +47,6 @@ export default class ProfileScreen extends Component {
             tags,
             workExperiences,
             currentInitiatives,
-
             settings,
             resumes,
           } = data.viewer

@@ -22,6 +22,9 @@ import {
   GraphRequestManager,
 } from 'react-native-fbsdk'
 import constraints from './constraints'
+import DisplayModal from '../../components/DisplayModal'
+import PrivacyPolicy from '../ProfileScreen/components/Settings/components/SettingsScreens/Screens/PrivacyPolicy'
+import TermsOfService from '../ProfileScreen/components/Settings/components/SettingsScreens/Screens/TermsOfService'
 
 const validate = require('validate.js')
 
@@ -39,6 +42,8 @@ export default class SignUpScreen extends Component {
       displayErrors: {},
       errors: null,
       touched: {},
+      showPrivacyPolicy: false,
+      showTermsOfService: false,
     }
   }
 
@@ -161,6 +166,9 @@ export default class SignUpScreen extends Component {
     this.setState({ [key]: text })
   }
 
+  privacyOnBackPress = () => this.setState({ showPrivacyPolicy: false })
+  termsOnBackPress = () => this.setState({ showTermsOfService: false })
+
   render() {
     const {
       firstName,
@@ -173,8 +181,21 @@ export default class SignUpScreen extends Component {
     const noErrors = !errors
     return (
       <ScreenContainer>
+        <DisplayModal
+          isVisible={this.state.showPrivacyPolicy}
+          title="Privacy Policy"
+          onBackPress={this.privacyOnBackPress}
+        >
+          <PrivacyPolicy />
+        </DisplayModal>
+        <DisplayModal
+          isVisible={this.state.showTermsOfService}
+          title="Terms Of Service"
+          onBackPress={this.termsOnBackPress}
+        >
+          <TermsOfService />
+        </DisplayModal>
         <SafeView>
-          {/* <KeyboardAvoidingView behavior="padding" enabled> */}
           <ScrollView keyboardShouldPersistTaps="always">
             <Header
               title="Sign Up"
@@ -259,11 +280,17 @@ export default class SignUpScreen extends Component {
             <SubtitleView>
               <Subtitle>
                 {'By clicking “Sign up & Accept”, you agree to The Keys '}
-                <Subtitle hyperlink onPress={() => null}>
+                <Subtitle
+                  hyperlink
+                  onPress={() => this.setState({ showTermsOfService: true })}
+                >
                   Terms & Conditions{' '}
                 </Subtitle>
                 and{' '}
-                <Subtitle hyperlink onPress={() => null}>
+                <Subtitle
+                  hyperlink
+                  onPress={() => this.setState({ showPrivacyPolicy: true })}
+                >
                   Privacy Policy
                 </Subtitle>.
               </Subtitle>
@@ -294,7 +321,6 @@ export default class SignUpScreen extends Component {
               text="Continue with Facebook"
             />
           </ScrollView>
-          {/* </KeyboardAvoidingView> */}
         </SafeView>
       </ScreenContainer>
     )

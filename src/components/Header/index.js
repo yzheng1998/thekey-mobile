@@ -1,27 +1,34 @@
 import React, { Component } from 'react'
-import { Container, TitleRow, Title, BackButton } from './styles'
+import { Container, TitleRow, Title, BackButton, Divider } from './styles'
 import BackButtonIcon from 'react-native-vector-icons/Ionicons'
 import RegistrationProgressBar from '../RegistrationProgressBar'
 
 class Header extends Component {
   render() {
+    const {
+      onBackPress,
+      showBack,
+      title,
+      children,
+      progress,
+      showDivider,
+    } = this.props
     return (
-      <Container>
+      <Container noMargin>
         <TitleRow>
           <BackButton
             hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}
-            onPress={this.props.onBackPress}
+            onPress={onBackPress}
           >
-            {this.props.showBack && (
+            {showBack && (
               <BackButtonIcon name="ios-arrow-back" size={30} color="black" />
             )}
           </BackButton>
-          <Title>{this.props.title}</Title>
-          {this.props.children}
+          <Title>{title}</Title>
+          {children}
         </TitleRow>
-        {this.props.progress && (
-          <RegistrationProgressBar progress={this.props.progress} />
-        )}
+        {progress && <RegistrationProgressBar progress={progress} />}
+        {showDivider && <Divider />}
       </Container>
     )
   }

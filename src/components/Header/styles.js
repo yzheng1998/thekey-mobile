@@ -2,10 +2,9 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const Container = styled.View`
-  width: 100%;
-  background-color: ${themeGet('colors.background')};
   padding-top: 40px;
-  margin-bottom: 4px;
+  margin-bottom: ${props => (props.noMargin ? 0 : 4)};
+  background-color: ${themeGet('colors.background')};
 `
 export const TitleRow = styled.View`
   width: 100%;
@@ -23,4 +22,8 @@ export const BackButton = styled.TouchableOpacity`
   position: absolute;
   left: 20px;
   top: 1px;
+`
+export const Divider = styled.View`
+  background-color: ${themeGet('colors.divider')};
+  height: 2px;
 `
