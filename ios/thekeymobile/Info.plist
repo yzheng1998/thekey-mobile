@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>14</string>
 	<key>FacebookAppID</key>
 	<string>1883713978603895</string>
 	<key>FacebookDisplayName</key>
@@ -69,11 +69,11 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>This app requires access to the camera to search for QR codes and take photos.</string>
+	<string>The Key requires access to the camera to search for QR codes and take photos.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>The Key requires access to your location in order to better match you with users and events.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>This app does not require access to the microphone.</string>
+	<string>The Key does not require access to the microphone.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>The Key requires access to the photo library in order to choose a profile picture.</string>
 	<key>UIAppFonts</key>
@@ -129,8 +129,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>

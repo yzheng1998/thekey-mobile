@@ -68,7 +68,6 @@
 		72BF2E2A7FD2419F91D63944 /* SF-Pro-Text-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = B7EF863D1434457CA3F80BC7 /* SF-Pro-Text-MediumItalic.otf */; };
 		7CF1FB45D7364F38A4AC8994 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = EFAB74744CF14358ADFE9529 /* SF-Pro-Text-Medium.otf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		86EA3D286A2A490DB1188250 /* libRCTLinkedinLogin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 770979C32CE742419B4E5066 /* libRCTLinkedinLogin.a */; };
 		89267F086D8F4E2EB23BB8DC /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BB68CEA55FEF447E9C55555D /* SF-Pro-Text-Semibold.otf */; };
 		935CF08FFECE4CB1BCDC195F /* SF-Pro-Display-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF05E27E8B8841E3A910C5E6 /* SF-Pro-Display-ThinItalic.otf */; };
 		9ED885B592DE4C91ACF7B773 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1E5539AFFF742A69B39A006 /* libRNVectorIcons.a */; };
@@ -584,7 +583,6 @@
 				CB684F2C61FE48528244A665 /* (null) in Frameworks */,
 				FABA81C9D0556D6707D72315 /* libPods-thekeymobile.a in Frameworks */,
 				2845B3092107861C005CC9C3 /* libRNSVG.a in Frameworks */,
-				86EA3D286A2A490DB1188250 /* libRCTLinkedinLogin.a in Frameworks */,
 				22FD6E6621063F4B0057A8C6 /* libRCTPushNotification.a in Frameworks */,
 				220F5FEB210A827A00571A8A /* libRNCamera.a in Frameworks */,
 				1BB8BD1B07D84716B26BF50D /* libRCTFBSDK.a in Frameworks */,
@@ -1942,8 +1940,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hsadev.thekey;
 				PRODUCT_NAME = thekeymobile;
-				PROVISIONING_PROFILE = "788b5537-2daf-4912-ae98-95116aa5867e";
-				PROVISIONING_PROFILE_SPECIFIER = "TheKey AdHoc Development";
+				PROVISIONING_PROFILE = "3be272d1-2bec-4079-b5b7-88a171a4b08e";
+				PROVISIONING_PROFILE_SPECIFIER = "The Key App Store Distribution";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1979,8 +1977,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hsadev.thekey;
 				PRODUCT_NAME = thekeymobile;
-				PROVISIONING_PROFILE = "788b5537-2daf-4912-ae98-95116aa5867e";
-				PROVISIONING_PROFILE_SPECIFIER = "TheKey AdHoc Development";
+				PROVISIONING_PROFILE = "3be272d1-2bec-4079-b5b7-88a171a4b08e";
+				PROVISIONING_PROFILE_SPECIFIER = "The Key App Store Distribution";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
