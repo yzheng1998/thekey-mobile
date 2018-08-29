@@ -8,7 +8,7 @@ export default class Logout extends Component {
   logout = async () => {
     await AsyncStorage.clear()
     client.resetStore()
-    this.props.navigation.navigate('Landing')
+    this.props.navigation.navigate('Splash')
   }
 
   render() {
