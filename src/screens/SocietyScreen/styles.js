@@ -6,10 +6,10 @@ const { width } = Dimensions.get('window')
 
 export const Screen = styled.View`
   flex: 1;
-  background-color: ${themeGet('colors.background')};
+  background-color: ${themeGet('colors.divider')};
 `
 export const Background = styled.ScrollView`
-  background-color: ${themeGet('colors.buttonSecondary')};
+  background-color: ${themeGet('colors.divider')};
   flex: 1;
 `
 export const CardContainer = styled.View`
