@@ -75,7 +75,7 @@ export default class LargeEventsCard extends Component {
                 <ClockIcon name="clock" size={19} />
                 <DateTime>{formatTimeStamp(usableTimeStamp)}</DateTime>
               </DetailsContainer>
-              <Title numberOfLines={3}>{title}</Title>
+              <Title numberOfLines={1}>{title}</Title>
               <DetailsContainer>
                 <LocationIcon name="location" size={25} />
                 <Location>{location}</Location>
