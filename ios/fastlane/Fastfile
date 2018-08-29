@@ -1,0 +1,49 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  before_all do |lane, options|
+    create_keychain(
+      name: ENV["MATCH_KEYCHAIN_NAME"],
+      password: ENV["MATCH_PASSWORD"],
+      default_keychain: true,
+      unlock: true,
+      timeout: 3600,
+      add_to_search_list: true,
+      verbose: true
+    )
+  end
+
+  desc "Push a new beta build to TestFlight" 
+  lane :beta do
+    match(
+      type: "appstore",
+      keychain_name: ENV["MATCH_KEYCHAIN_NAME"],
+      keychain_password: ENV["MATCH_PASSWORD"]
+    )
+    sh("npm", "run", "bundle-ios")
+    increment_build_number(xcodeproj: "thekeymobile.xcodeproj")
+    build_app(workspace: "thekeymobile.xcworkspace", scheme: "thekeymobile")
+    upload_to_testflight
+  end
+
+  after_all do |lane|
+    delete_keychain(
+      name: ENV["MATCH_KEYCHAIN_NAME"]
+    )
+  end
+end
