@@ -51,6 +51,7 @@ class SimilarJobsScreen extends Component {
                 <FlatList
                   keyExtractor={job => job.id}
                   data={data.similarJobs}
+                  contentContainerStyle={{ paddingBottom: 115 }}
                   renderItem={({ item: job }) => (
                     <View>
                       <JobCard
