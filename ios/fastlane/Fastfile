@@ -35,7 +35,6 @@ platform :ios do
       keychain_name: ENV["MATCH_KEYCHAIN_NAME"],
       keychain_password: ENV["MATCH_PASSWORD"]
     )
-    sh("npm", "run", "bundle-ios")
     increment_build_number(xcodeproj: "thekeymobile.xcodeproj")
     build_app(workspace: "thekeymobile.xcworkspace", scheme: "thekeymobile")
     upload_to_testflight
