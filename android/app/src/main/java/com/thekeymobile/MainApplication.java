@@ -10,7 +10,6 @@ import com.facebook.appevents.AppEventsLogger;
 
 import com.rnfs.RNFSPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
-import net.jodybrewster.linkedinlogin.RNLinkedinLoginPackage;
 import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 import com.microsoft.appcenter.reactnative.analytics.AppCenterReactNativeAnalyticsPackage;
 import com.microsoft.appcenter.reactnative.appcenter.AppCenterReactNativePackage;
@@ -21,6 +20,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
 import org.reactnative.camera.RNCameraPackage;
+import com.reactnative.ivpusic.imagepicker.PickerPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -47,13 +47,13 @@ public class MainApplication extends Application implements ReactApplication {
           new FBSDKPackage(mCallbackManager),
           new RNFSPackage(),
           new RNFetchBlobPackage(),
-          new RNLinkedinLoginPackage(),
           new RNCameraPackage(),
           new ReactNativeDocumentPicker(),
           new AppCenterReactNativeAnalyticsPackage(MainApplication.this, getResources().getString(R.string.appCenterAnalytics_whenToEnableAnalytics)),
           new AppCenterReactNativePackage(MainApplication.this),
           new VectorIconsPackage(),
-          new SvgPackage()
+          new SvgPackage(),
+          new PickerPackage()
       );
     }
 
