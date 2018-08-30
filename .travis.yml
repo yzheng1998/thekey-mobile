@@ -12,11 +12,9 @@ cache:
 before_install:
   - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
 
-install:
-  - npm install
-
-script:
+before_script:
   - cd ios
   - gem install bundler
   - bundle install
+script:
   - bundle exec fastlane ios beta
