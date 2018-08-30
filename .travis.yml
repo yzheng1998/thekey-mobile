@@ -16,5 +16,6 @@ before_script:
   - cd ios
   - gem install bundler
   - bundle install
+  - bundle update
 script:
   - bundle exec fastlane ios beta
