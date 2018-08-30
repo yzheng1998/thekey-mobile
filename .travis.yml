@@ -18,4 +18,5 @@ before_script:
   - bundle install
   - bundle update
 script:
+  - bundle exec fastlane --version
   - bundle exec fastlane ios beta
