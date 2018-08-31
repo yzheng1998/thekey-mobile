@@ -16,6 +16,16 @@ before_script:
   - cd ios
   - gem install bundler
   - bundle install
-  - bundle update
 script:
   - bundle exec fastlane ios beta
+
+notifications:
+  slack:
+    rooms:
+      - "$SLACK_DEPLOY_TOKEN"
+    template:
+      - "%{repository_slug} (%{commit}): Deploy to Test Flight by %{author} %{result}
+        after %{duration}"
+env:
+  global:
+    secure: r3PzF1zoGYl4rP87xYtAqTTqZlsi6I+EPpdZmDS99JqMwiZmCqza4yNeKLnym3+eB4cw5dpijZ/zp8NZ0O5u0I2lJRGVITD61q2O3MWp3fXCtyhGggrXP4Y0T6IFUCPmVmkmOKTDPY7N50h6b7FcTiDUpCOps1zrAPCHJBAcjhD8fPy4oBF2n1TxCndZ4Qdi3DOZ6R74NImOavrK2+JiGbjEBH9hVB2nTFkn9OBtLW1ibuGbWcvSXzDa/x95h3eR+I0NkTvCnxfpeQptm5+TiNUBs2ZCUcDlz7CU5nVKsBfujkxxLbXWTor4KQVsqHChEaXAA+T69UFNxnDGSymdCmjdE/teNNJ47Hma+kRZvRM4Wp8NCYja9njjkSjBJbLFf9Ka1J/1vm2bkpa113QOazljN/45KvLO75iz9t8+7LhfBDwa8iBCfJ0XDn11vm03zg2wrWiGs1MC2pLoWDMu1UabN6LCoX58eJz161+1u0lpCcRG2B0GdTQtXkJ76L+qXx7JsBLrnX1U7yOx+xginvh2LJ2j1QM5JSosyqpGiMYd0owkCnCJyd9wUXylL9pu2uStvrp2uVQP6KjEJkWKOGKSISGgHwC2E06jq1FWJJQwu9Wy6JkBGdLCk54hXI07YNYJpzTrtBAURJJj+mrTTPDlpC6UxY/wYiFH2CTy+Jc=
