@@ -3,9 +3,27 @@ import { Picture, PictureButton, EditLabel } from '../../styles'
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
 import RNFetchBlob from 'rn-fetch-blob'
-import { Alert } from 'react-native'
+import { Alert, Platform } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
 import config from '../../../../../config'
+
+const parseVariables = image => {
+  if (Platform.OS === 'ios') {
+    return {
+      signS3UrlInput: {
+        fileName: image.filename,
+        contentType: image.mime,
+      },
+    }
+  }
+  const fileName = image.path.split('/').pop()
+  return {
+    signS3UrlInput: {
+      fileName,
+      contentType: image.mime,
+    },
+  }
+}
 
 const SIGN_S3_URL = gql`
   mutation signS3Url($signS3UrlInput: SignS3UrlInput!) {
@@ -73,12 +91,7 @@ export default class ProfilePicture extends Component {
                     height: 300,
                     cropping: true,
                   }).then(image => {
-                    const variables = {
-                      signS3UrlInput: {
-                        fileName: image.filename,
-                        contentType: image.mime,
-                      },
-                    }
+                    const variables = parseVariables(image)
                     signS3Url({ variables })
                     this.setState({ image })
                   })
