@@ -29,7 +29,7 @@ platform :ios do
       keychain_password: ENV["MATCH_KEYCHAIN_PASSWORD"]
     )
     increment_build_number(xcodeproj: "thekeymobile.xcodeproj")
-    gym(workspace: "thekeymobile.xcworkspace", scheme: "thekeymobile")
+    gym(workspace: "thekeymobile.xcworkspace", scheme: "thekeymobile", clean: true, skip_archive: true, verbose: true)
     upload_to_testflight
   end
 end
