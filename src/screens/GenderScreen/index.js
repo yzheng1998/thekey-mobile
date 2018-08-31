@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, SafeAreaView } from 'react-native'
+import { View, SafeAreaView, ScrollView } from 'react-native'
 import {
   ScreenContainer,
   SubtitleView,
@@ -30,38 +30,40 @@ export default class GenderScreen extends Component {
     return (
       <ScreenContainer>
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-          <Header
-            title={`${nodeEmoji.get('wave')} Hi, ${userInfo.firstName}!`}
-            showBack
-            onBackPress={() => this.props.navigation.goBack()}
-            progress="28.5%"
-          />
-          <SubtitleView>
-            <Subtitle>
-              Select the following that apply to your gender identity &
-              experience
-            </Subtitle>
-          </SubtitleView>
-          <View>
-            {genderOptions.map(option => (
-              <GenderButton
-                key={option.value}
-                clicked={option.value === this.state.gender}
-                onPress={() => this.setState({ gender: option.value })}
-              >
-                <ButtonText>{option.label}</ButtonText>
-              </GenderButton>
-            ))}
-          </View>
-          <RegisterButton
-            buttonText="NEXT"
-            disabled={disabled}
-            onPress={() =>
-              this.props.navigation.navigate('YourEducation', {
-                userInfo: { ...userInfo, gender: this.state.gender },
-              })
-            }
-          />
+          <ScrollView keyboardShouldPersistTaps="always">
+            <Header
+              title={`${nodeEmoji.get('wave')} Hi, ${userInfo.firstName}!`}
+              showBack
+              onBackPress={() => this.props.navigation.goBack()}
+              progress="28.5%"
+            />
+            <SubtitleView>
+              <Subtitle>
+                Select the following that apply to your gender identity &
+                experience
+              </Subtitle>
+            </SubtitleView>
+            <View>
+              {genderOptions.map(option => (
+                <GenderButton
+                  key={option.value}
+                  clicked={option.value === this.state.gender}
+                  onPress={() => this.setState({ gender: option.value })}
+                >
+                  <ButtonText>{option.label}</ButtonText>
+                </GenderButton>
+              ))}
+            </View>
+            <RegisterButton
+              buttonText="NEXT"
+              disabled={disabled}
+              onPress={() =>
+                this.props.navigation.navigate('YourEducation', {
+                  userInfo: { ...userInfo, gender: this.state.gender },
+                })
+              }
+            />
+          </ScrollView>
         </SafeAreaView>
       </ScreenContainer>
     )
