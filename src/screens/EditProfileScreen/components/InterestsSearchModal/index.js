@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Modal, FlatList, Platform } from 'react-native'
+import { FlatList, Platform } from 'react-native'
+import Modal from 'react-native-modal'
 import {
   Background,
   SearchNameContainer,
@@ -88,7 +89,7 @@ export default class InterestsSearchModal extends Component {
       },
     }
 
-    const { updateTags, tags, ...rest } = this.props
+    const { updateTags, tags, isVisible } = this.props
 
     const tagNames = this.state.tags.map(el => el.name)
 
@@ -97,7 +98,12 @@ export default class InterestsSearchModal extends Component {
       this.handleClose()
     }
     return (
-      <Modal animationType="slide" {...rest}>
+      <Modal
+        style={{ margin: 0 }}
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
+        isVisible={isVisible}
+      >
         <Background>
           <InterestsModalHeader
             handleClose={this.handleClose}
