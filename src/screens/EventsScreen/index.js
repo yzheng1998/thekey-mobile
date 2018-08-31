@@ -75,7 +75,7 @@ class EventsScreen extends Component {
       },
     }
     return (
-      <View>
+      <View style={{ backgroundColor: 'white', flex: 1 }}>
         <StatusBar barStyle="light-content" />
         <EventsHeader
           navigation={this.props.navigation}
