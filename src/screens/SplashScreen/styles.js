@@ -8,7 +8,7 @@ export const Background = styled.View`
 export const SwiperContainer = styled.View`
   flex: 1;
 `
-export const Container = styled.View`
+export const Container = styled.ScrollView`
   flex: 0.5;
   background-color: ${themeGet('colors.splashBackground')};
   padding-left: 12px;
