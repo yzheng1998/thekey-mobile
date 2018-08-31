@@ -98,6 +98,7 @@
 		FABA81C9D0556D6707D72315 /* libPods-thekeymobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 572F2637C26E50E39E659CCF /* libPods-thekeymobile.a */; };
 		FECCE418212E15A50035A72E /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FECCE417212E15A50035A72E /* GameKit.framework */; };
 		FECCE41A212E15A90035A72E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FECCE419212E15A90035A72E /* StoreKit.framework */; };
+		FED60F9121388CED00AD6B5A /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = FED60F9021388CED00AD6B5A /* main.jsbundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -454,7 +455,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
 		00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = "../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj"; sourceTree = "<group>"; };
 		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = "../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj"; sourceTree = "<group>"; };
@@ -551,6 +551,7 @@
 		FEBB26E911E9468BB08BB06B /* SF-Pro-Display-SemiboldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-SemiboldItalic.otf"; path = "../assets/fonts/SF-Pro-Display-SemiboldItalic.otf"; sourceTree = "<group>"; };
 		FECCE417212E15A50035A72E /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		FECCE419212E15A90035A72E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		FED60F9021388CED00AD6B5A /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = thekeymobile/main.jsbundle; sourceTree = "<group>"; };
 		FF05E27E8B8841E3A910C5E6 /* SF-Pro-Display-ThinItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-ThinItalic.otf"; path = "../assets/fonts/SF-Pro-Display-ThinItalic.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -728,9 +729,9 @@
 		13B07FAE1A68108700A75B9A /* thekeymobile */ = {
 			isa = PBXGroup;
 			children = (
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				FED60F9021388CED00AD6B5A /* main.jsbundle */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
@@ -1602,6 +1603,7 @@
 				D926BB3D19DB4DC78764B437 /* MaterialIcons.ttf in Resources */,
 				65663D91475F4FB686315EC7 /* Octicons.ttf in Resources */,
 				D806152269ED4ACD8AA26B7D /* SimpleLineIcons.ttf in Resources */,
+				FED60F9121388CED00AD6B5A /* main.jsbundle in Resources */,
 				50120DCC1F894836A5E4CB3A /* Zocial.ttf in Resources */,
 				006BB4013DBD484A94E17B89 /* SF-Pro-Display-Bold.otf in Resources */,
 				4B4E9CC9C36D451395F20D36 /* SF-Pro-Display-Medium.otf in Resources */,
@@ -1661,6 +1663,7 @@
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/myfile",
 			);
 			name = "Bundle React Native code and images";
 			outputPaths = (
@@ -1668,6 +1671,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			showEnvVarsInLog = 0;
 		};
 		1F73A451F5D82B72D50FB958 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1934,7 +1938,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 26RF3UMDG8;
 				HEADER_SEARCH_PATHS = (
@@ -1968,7 +1972,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = 26RF3UMDG8;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
