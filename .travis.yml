@@ -4,7 +4,7 @@ node_js:
   - '10'
 
 os: osx
-osx_image: xcode9.3
+osx_image: xcode9.4
 
 cache:
   - bundler
@@ -13,11 +13,9 @@ before_install:
   - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
 
 before_script:
-  - npm run bundle-ios
   - cd ios
   - gem install bundler
   - bundle install
   - bundle update
 script:
-  - bundle exec fastlane --version
   - bundle exec fastlane ios beta
