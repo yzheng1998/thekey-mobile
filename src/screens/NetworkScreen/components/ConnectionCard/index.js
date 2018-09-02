@@ -10,6 +10,7 @@ import {
   Content,
   ButtonRow,
   TextContainer,
+  ImageButton,
 } from './styles'
 import moment from 'moment'
 import AcceptFriendRequestButton from '../AcceptFriendRequestButton'
@@ -28,10 +29,12 @@ class ConnectionCard extends Component {
         : moment(time).format('MM/DD/YY')
       return result
     }
-    const { name, picture, timeStamp, id, refreshPage } = this.props
+    const { name, picture, timeStamp, id, refreshPage, onPress } = this.props
     return (
       <Card>
-        <ProfileImage source={{ uri: picture }} />
+        <ImageButton onPress={onPress}>
+          <ProfileImage source={{ uri: picture }} />
+        </ImageButton>
         <Container>
           <Content>
             <TextContainer>
