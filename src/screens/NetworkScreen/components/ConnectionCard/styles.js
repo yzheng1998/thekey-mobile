@@ -48,10 +48,12 @@ export const ProfileImage = styled.Image`
   border-radius: 25px;
   height: 50px;
   width: 50px;
-  align-self: center;
 `
 export const TimeStamp = styled.Text`
   font-size: 12;
   color: ${themeGet('colors.fontTitle')};
   margin-top: 3px;
+`
+export const ImageButton = styled.TouchableOpacity`
+  align-self: center;
 `

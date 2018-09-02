@@ -104,7 +104,7 @@ class NetworkScreen extends Component {
           />
           <Divider />
           <ScrollView keyboardShouldPersistTaps="handled">
-            <FriendRequestList />
+            <FriendRequestList navigation={this.props.navigation} />
             <ChatInbox
               searchText={this.state.searchText}
               tab={this.state.tab}

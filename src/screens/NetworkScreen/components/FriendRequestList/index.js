@@ -46,6 +46,11 @@ export default class FriendRequestList extends Component {
                   timeStamp="2018-07-19 23:29:09.592-04"
                   picture={friendRequest.sender.profilePicture}
                   refreshPage={refetch}
+                  onPress={() =>
+                    this.props.navigation.navigate('Member', {
+                      id: friendRequest.sender.id,
+                    })
+                  }
                 />
               ))}
               {data.viewer.friendRequests.length !== 0 && <Divider />}
