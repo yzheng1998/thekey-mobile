@@ -31,12 +31,12 @@ export const Title = styled.Text`
   color: black;
   font-size: 48px;
 `
-export const SignInText = styled.Text`
+export const RegisterText = styled.Text`
   font-family: ${themeGet('fonts.heavy')};
   color: white;
   font-size: 14px;
 `
-export const RegisterText = styled.Text`
+export const SignInText = styled.Text`
   font-family: ${themeGet('fonts.heavy')};
   color: ${themeGet('colors.buttonPrimary')};
   font-size: 14px;
@@ -61,7 +61,7 @@ export const DividerRow = styled.View`
   padding-right: 12px;
   align-items: center;
 `
-export const SignInButton = styled.TouchableOpacity`
+export const RegisterButton = styled.TouchableOpacity`
   height: 50px;
   background-color: ${themeGet('colors.buttonPrimary')};
   border-radius: 10px;
@@ -72,7 +72,7 @@ export const SignInButton = styled.TouchableOpacity`
   margin-top: 8px;
   margin-bottom: 8px;
 `
-export const RegisterButton = styled.TouchableOpacity`
+export const SignInButton = styled.TouchableOpacity`
   border-color: ${themeGet('colors.buttonPrimary')};
   border-width: 2px;
   background-color: white;
@@ -83,4 +83,24 @@ export const RegisterButton = styled.TouchableOpacity`
   padding: 16px;
   margin-left: 12px;
   margin-right: 12px;
+`
+export const AbsoluteView = styled.View`
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+`
+export const DevView = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`
+export const DevText = styled.Text`
+  font-family: ${themeGet('fonts.heavy')};
+  color: black;
+  font-size: 14px;
+  margin-right: 6px;
+`
+export const DevLogo = styled.Image`
+  height: 17px;
+  width: 68px;
 `
