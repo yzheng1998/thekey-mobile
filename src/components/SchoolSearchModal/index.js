@@ -82,7 +82,11 @@ export default class SchoolSearchModal extends Component {
                           updateState={this.props.updateState}
                           toggleSchoolModal={toggleSchoolModal}
                           schoolName={university.name}
-                          location={`${university.city}, ${university.state}`}
+                          location={
+                            university.city && university.state
+                              ? `${university.city}, ${university.state}`
+                              : university.city || university.state
+                          }
                         />
                       )}
                     />

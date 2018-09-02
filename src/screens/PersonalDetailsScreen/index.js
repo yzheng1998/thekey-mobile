@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SafeAreaView, View } from 'react-native'
+import { SafeAreaView, View, ScrollView } from 'react-native'
 import { ScreenContainer, SubtitleView, Subtitle } from './styles'
 import PickerComponent from '../../components/PickerComponent'
 import Header from '../../components/Header'
@@ -53,74 +53,76 @@ export default class PersonalDetailsScreen extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-          <HometownSearchModal
-            setText={this.updateText}
-            onPress={this.closeHometownPicker}
-            visible={showHometownPicker}
-            showEmoji
-          />
-          <ScreenContainer>
-            <Header
-              title={`${nodeEmoji.get('wave')} Hi, ${userInfo.firstName}!`}
-              showBack
-              onBackPress={() => this.props.navigation.goBack()}
-              progress="14.2%"
+          <ScrollView keyboardShouldPersistTaps="always">
+            <HometownSearchModal
+              setText={this.updateText}
+              onPress={this.closeHometownPicker}
+              visible={showHometownPicker}
+              showEmoji
             />
-            <SubtitleView>
-              <Subtitle>
-                Before you can get started, tell us a little bit about yourself.
-                This information is private
-              </Subtitle>
-            </SubtitleView>
-            <RegistrationPicker
-              selected={showHometownPicker}
-              onPress={() => {
-                if (!showEthnicityPicker && !showBirthdayPicker)
-                  this.setState({ showHometownPicker: true })
-              }}
-              text={hometown}
-              placeholderText="What's your hometown?"
-            />
-            <RegistrationPicker
-              selected={showEthnicityPicker}
-              onPress={() => {
-                if (!showHometownPicker && !showBirthdayPicker) {
-                  this.setState({
-                    showEthnicityPicker: true,
-                    ethnicity: ethnicity || ethnicityOptions[0].value,
-                  })
-                  this.ethnicityPicker.showActionSheet()
+            <ScreenContainer>
+              <Header
+                title={`${nodeEmoji.get('wave')} Hi, ${userInfo.firstName}!`}
+                showBack
+                onBackPress={() => this.props.navigation.goBack()}
+                progress="14.2%"
+              />
+              <SubtitleView>
+                <Subtitle>
+                  Before you can get started, tell us a little bit about
+                  yourself. This information is private
+                </Subtitle>
+              </SubtitleView>
+              <RegistrationPicker
+                selected={showHometownPicker}
+                onPress={() => {
+                  if (!showEthnicityPicker && !showBirthdayPicker)
+                    this.setState({ showHometownPicker: true })
+                }}
+                text={hometown}
+                placeholderText="What's your hometown?"
+              />
+              <RegistrationPicker
+                selected={showEthnicityPicker}
+                onPress={() => {
+                  if (!showHometownPicker && !showBirthdayPicker) {
+                    this.setState({
+                      showEthnicityPicker: true,
+                      ethnicity: ethnicity || ethnicityOptions[0].value,
+                    })
+                    this.ethnicityPicker.showActionSheet()
+                  }
+                }}
+                text={
+                  ethnicity ? this.findLabel(ethnicity, ethnicityOptions) : ''
                 }
-              }}
-              text={
-                ethnicity ? this.findLabel(ethnicity, ethnicityOptions) : ''
-              }
-              placeholderText="What's your ethnicity"
-            />
-            <RegistrationPicker
-              selected={showBirthdayPicker}
-              onPress={() => {
-                if (!showHometownPicker && !showEthnicityPicker) {
-                  this.setState({
-                    showBirthdayPicker: true,
-                    birthday,
+                placeholderText="What's your ethnicity"
+              />
+              <RegistrationPicker
+                selected={showBirthdayPicker}
+                onPress={() => {
+                  if (!showHometownPicker && !showEthnicityPicker) {
+                    this.setState({
+                      showBirthdayPicker: true,
+                      birthday,
+                    })
+                    this.datePicker.openDatePicker()
+                  }
+                }}
+                text={birthday ? moment(birthday).format('MMMM D, YYYY') : ''}
+                placeholderText="What's your birthday?"
+              />
+              <RegisterButton
+                buttonText="NEXT"
+                disabled={disabled}
+                onPress={() =>
+                  this.props.navigation.navigate('Gender', {
+                    userInfo: { ...userInfo, ethnicity, hometown, birthday },
                   })
-                  this.datePicker.openDatePicker()
                 }
-              }}
-              text={birthday ? moment(birthday).format('MMMM D, YYYY') : ''}
-              placeholderText="What's your birthday?"
-            />
-            <RegisterButton
-              buttonText="NEXT"
-              disabled={disabled}
-              onPress={() =>
-                this.props.navigation.navigate('Gender', {
-                  userInfo: { ...userInfo, ethnicity, hometown, birthday },
-                })
-              }
-            />
-          </ScreenContainer>
+              />
+            </ScreenContainer>
+          </ScrollView>
         </SafeAreaView>
         <PickerComponent
           visible={showEthnicityPicker}

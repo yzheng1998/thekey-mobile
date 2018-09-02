@@ -203,7 +203,7 @@ export default class EditProfileScreen extends Component {
                     </EditTagsContainer>
                     <InterestsSearchModal
                       navigation={this.props.navigation}
-                      visible={this.state.interestsModalVisible}
+                      isVisible={this.state.interestsModalVisible}
                       closeModal={this.closeInterestsModal}
                       tags={this.state.tags || tags}
                       updateTags={tagArray => this.setState({ tags: tagArray })}

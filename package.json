@@ -54,7 +54,7 @@
     "react-native-form": "^2.1.2",
     "react-native-form-builder": "^1.0.14",
     "react-native-fs": "^2.10.14",
-    "react-native-image-crop-picker": "^0.20.3",
+    "react-native-image-crop-picker": "0.20.1",
     "react-native-keyboard-aware-scroll-view": "^0.6.0",
     "react-native-keyboard-spacer": "^0.4.1",
     "react-native-linkedin": "git+https://github.com/hsadev/react-native-linkedin.git",

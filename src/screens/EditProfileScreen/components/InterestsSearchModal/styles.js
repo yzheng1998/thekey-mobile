@@ -4,6 +4,8 @@ import { themeGet } from 'styled-system'
 export const Background = styled.View`
   padding-left: 10px;
   padding-right: 10px;
+  flex: 1;
+  background-color: ${themeGet('colors.background')};
 `
 export const Container = styled.View`
   padding: 10px;
@@ -27,9 +29,8 @@ export const SearchNameContainer = styled.View`
   align-items: center;
 `
 export const PeopleListContainer = styled.View`
-  width: 100%;
   background-color: ${themeGet('colors.background')};
-  margin-bottom: 120px;
+  flex: 1;
 `
 export const ThinDivider = styled.View`
   height: 4px;
