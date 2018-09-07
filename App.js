@@ -8,14 +8,19 @@ import * as pushNotifications from './src/services/pushNotifications'
 
 pushNotifications.configure()
 
+import { Provider } from 'react-redux'
+import store from './src/redux/store'
+
 export default class App extends Component {
   render() {
     return (
-      <ApolloProvider client={client}>
-        <ThemeProvider theme={theme}>
-          <RootNavigator />
-        </ThemeProvider>
-      </ApolloProvider>
+      <Provider store={store}>
+        <ApolloProvider client={client}>
+          <ThemeProvider theme={theme}>
+            <RootNavigator />
+          </ThemeProvider>
+        </ApolloProvider>
+      </Provider>
     )
   }
 }
