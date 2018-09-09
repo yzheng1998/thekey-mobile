@@ -8,7 +8,7 @@ import GenderScreen from '../screens/GenderScreen'
 import YourEducationScreen from '../screens/YourEducationScreen'
 import EssayScreen from '../screens/EssayScreen'
 import InterestsScreen from '../screens/InterestsScreen'
-import SkillsScreen from '../screens/SkillsScreen'
+import DescriptionsScreen from '../screens/DescriptionsScreen'
 import ResumeUploadScreen from '../screens/ResumeUploadScreen'
 import ResetPasswordScreen from '../screens/ResetPasswordScreen'
 
@@ -77,8 +77,8 @@ const LoginStack = createStackNavigator(
         gesturesEnabled: false,
       }),
     },
-    Skills: {
-      screen: SkillsScreen,
+    Descriptions: {
+      screen: DescriptionsScreen,
       navigationOptions: () => ({
         header: null,
         gesturesEnabled: false,

@@ -6,7 +6,6 @@ export const UPDATE_EDUCATIONS = 'UPDATE_EDUCATIONS'
 export const UPDATE_ESSAY = 'UPDATE_ESSAY'
 export const UPDATE_INTERESTS = 'UPDATE_INTERESTS'
 export const UPDATE_DESCRIPTIONS = 'UPDATE_DESCRIPTIONS'
-export const UPDATE_RESUMES = 'UPDATE_RESUMES'
 export const UPDATE_FACEBOOK_INFO = 'UPDATE_FACEBOOK_INFO'
 export const UPDATE_LINKEDIN_INFO = 'UPDATE_LINKEDIN_INFO'
 
@@ -27,7 +26,6 @@ export const updateGender = ({ gender }) => ({
   type: UPDATE_GENDER,
   payload: { gender },
 })
-
 export const updateEducations = ({ educations }) => ({
   type: UPDATE_EDUCATIONS,
   payload: { educations },
@@ -43,10 +41,6 @@ export const updateInterests = ({ interests }) => ({
 export const updateDescriptions = ({ descriptions }) => ({
   type: UPDATE_DESCRIPTIONS,
   payload: { descriptions },
-})
-export const updateResumes = ({ resumes }) => ({
-  type: UPDATE_RESUMES,
-  payload: { resumes },
 })
 export const updateFacebookInfo = ({ facebookInfo }) => ({
   type: UPDATE_FACEBOOK_INFO,

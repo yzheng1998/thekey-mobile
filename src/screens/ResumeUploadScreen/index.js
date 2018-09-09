@@ -17,6 +17,12 @@ import gql from 'graphql-tag'
 import { SEND_MEMBERSHIP_APPLICATION } from './mutations'
 import config from '../../../config'
 
+import { connect } from 'react-redux'
+
+const mapStateToProps = state => ({
+  membershipApplication: state.membershipApplication,
+})
+
 function humanFileSize(bytes, si) {
   const thresh = si ? 1000 : 1024
   let bytesCounter = bytes
@@ -43,8 +49,11 @@ const SIGN_S3_URL = gql`
 `
 
 class ResumeUploadScreen extends Component {
-  state = {
-    resumeListData: [],
+  constructor(props) {
+    super(props)
+    this.state = {
+      resumeListData: props.resumes || [],
+    }
   }
 
   updateText = (key, text) => {
@@ -138,7 +147,6 @@ class ResumeUploadScreen extends Component {
     const buttonText = this.state.resumeListData.length
       ? 'ADD ANOTHER FILE'
       : 'ADD FILE'
-    const userInfo = this.props.navigation.getParam('userInfo')
 
     return (
       <ScreenContainer>
@@ -192,7 +200,7 @@ class ResumeUploadScreen extends Component {
                 <SubmitButton
                   onPress={() => {
                     const userInfoFinal = {
-                      ...userInfo,
+                      ...this.props.membershipApplication,
                       resumes: this.state.resumeListData.map(resume => ({
                         resume: resume.url,
                         title: resume.title,
@@ -219,4 +227,4 @@ class ResumeUploadScreen extends Component {
   }
 }
 
-export default withApollo(ResumeUploadScreen)
+export default connect(mapStateToProps)(withApollo(ResumeUploadScreen))

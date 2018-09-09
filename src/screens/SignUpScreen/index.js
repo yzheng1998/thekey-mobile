@@ -26,19 +26,33 @@ import DisplayModal from '../../components/DisplayModal'
 import PrivacyPolicy from '../ProfileScreen/components/Settings/components/SettingsScreens/Screens/PrivacyPolicy'
 import TermsOfService from '../ProfileScreen/components/Settings/components/SettingsScreens/Screens/TermsOfService'
 
+import { connect } from 'react-redux'
+import { updateAccountInfo } from '../../redux/actions/membershipApplication'
+
 const validate = require('validate.js')
 
 const loginBehavior = Platform.OS === 'ios' ? 'native' : 'NATIVE_WITH_FALLBACK'
 
-export default class SignUpScreen extends Component {
+const mapStateToProps = state => ({
+  firstName: state.membershipApplication.firstName,
+  lastName: state.membershipApplication.lastName,
+  email: state.membershipApplication.email,
+  password: state.membershipApplication.password,
+})
+
+const mapDispatchToProps = {
+  updateAccountInfo,
+}
+
+class SignUpScreen extends Component {
   constructor(props) {
     super(props)
     this.updateState = this.setState.bind(this)
     this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
+      firstName: props.firstName || '',
+      lastName: props.lastName || '',
+      email: props.email || '',
+      password: props.password || '',
       displayErrors: {},
       errors: {},
       touched: {},
@@ -297,7 +311,13 @@ export default class SignUpScreen extends Component {
             </SubtitleView>
             <RegisterButton
               keyboardShouldPersistTaps="always"
-              onPress={() =>
+              onPress={() => {
+                this.props.updateAccountInfo({
+                  firstName,
+                  lastName,
+                  email,
+                  password,
+                })
                 this.props.navigation.navigate('PersonalDetails', {
                   userInfo: {
                     firstName,
@@ -306,7 +326,7 @@ export default class SignUpScreen extends Component {
                     password,
                   },
                 })
-              }
+              }}
               buttonText="SIGN UP & ACCEPT"
               disabled={!noErrors}
             />
@@ -326,3 +346,8 @@ export default class SignUpScreen extends Component {
     )
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SignUpScreen)

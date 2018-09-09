@@ -15,14 +15,31 @@ import DatePicker from '../../components/DatePicker/DatePicker/'
 
 import nodeEmoji from 'node-emoji'
 
-export default class PersonalDetailsScreen extends Component {
-  state = {
-    ethnicity: '',
-    hometown: '',
-    birthday: '',
-    showEthnicityPicker: false,
-    showHometownPicker: false,
-    showBirthdayPicker: false,
+import { connect } from 'react-redux'
+import { updatePersonalDetails } from '../../redux/actions/membershipApplication'
+
+const mapStateToProps = state => ({
+  firstName: state.membershipApplication.firstName,
+  hometown: state.membershipApplication.hometown,
+  ethnicity: state.membershipApplication.ethnicity,
+  birthday: state.membershipApplication.birthday,
+})
+
+const mapDispatchToProps = {
+  updatePersonalDetails,
+}
+
+class PersonalDetailsScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      ethnicity: props.ethnicity || '',
+      hometown: props.hometown || '',
+      birthday: props.birthday || '',
+      showEthnicityPicker: false,
+      showHometownPicker: false,
+      showBirthdayPicker: false,
+    }
   }
 
   updateText = obj => {
@@ -49,7 +66,6 @@ export default class PersonalDetailsScreen extends Component {
       showEthnicityPicker ||
       showHometownPicker ||
       showBirthdayPicker
-    const userInfo = this.props.navigation.getParam('userInfo')
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -62,7 +78,7 @@ export default class PersonalDetailsScreen extends Component {
             />
             <ScreenContainer>
               <Header
-                title={`${nodeEmoji.get('wave')} Hi, ${userInfo.firstName}!`}
+                title={`${nodeEmoji.get('wave')} Hi, ${this.props.firstName}!`}
                 showBack
                 onBackPress={() => this.props.navigation.goBack()}
                 progress="14.2%"
@@ -115,11 +131,14 @@ export default class PersonalDetailsScreen extends Component {
               <RegisterButton
                 buttonText="NEXT"
                 disabled={disabled}
-                onPress={() =>
-                  this.props.navigation.navigate('Gender', {
-                    userInfo: { ...userInfo, ethnicity, hometown, birthday },
+                onPress={() => {
+                  this.props.updatePersonalDetails({
+                    hometown,
+                    ethnicity,
+                    birthday,
                   })
-                }
+                  this.props.navigation.navigate('Gender')
+                }}
               />
             </ScreenContainer>
           </ScrollView>
@@ -161,3 +180,8 @@ export default class PersonalDetailsScreen extends Component {
     )
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(PersonalDetailsScreen)

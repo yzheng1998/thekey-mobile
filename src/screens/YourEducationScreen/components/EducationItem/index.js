@@ -28,7 +28,11 @@ export default class EducationItem extends Component {
             <Location>{location}</Location>
           </InfoContainer>
         </EducationBody>
-        <ClearIconButton onPress={() => cancel(id)}>
+        <ClearIconButton
+          onPress={() => {
+            cancel(id)
+          }}
+        >
           <ClearIcon name="clear" size={24} color="rgb(181, 171, 202)" />
         </ClearIconButton>
       </EducationItemContainer>

@@ -1,5 +1,6 @@
-const initialState = {}
+import membershipApplicationReducer from '../reducers'
+import { combineReducers } from 'redux'
 
-const rootReducer = (state = initialState) => state
+const rootReducer = combineReducers({ membershipApplicationReducer })
 
-export default rootReducer
+export default (state, action) => rootReducer(state, action)

@@ -11,12 +11,26 @@ import { SafeAreaView, Keyboard } from 'react-native'
 
 import nodeEmoji from 'node-emoji'
 
+import { connect } from 'react-redux'
+import { updateEssay } from '../../redux/actions/membershipApplication'
+
+const mapStateToProps = state => ({
+  essay: state.membershipApplication.essay,
+})
+
+const mapDispatchToProps = {
+  updateEssay,
+}
+
 class EssayScreen extends Component {
-  state = {
-    essay: '',
+  constructor(props) {
+    super(props)
+    this.state = {
+      essay: props.essay || '',
+    }
   }
+
   render() {
-    const userInfo = this.props.navigation.getParam('userInfo')
     const disabled = !this.state.essay.length
     return (
       <SafeAreaView
@@ -49,14 +63,10 @@ class EssayScreen extends Component {
         </ScrollContainer>
         {!disabled && (
           <SubmitButton
-            onPress={() =>
-              this.props.navigation.navigate('Interests', {
-                userInfo: {
-                  ...userInfo,
-                  essay: this.state.essay,
-                },
-              })
-            }
+            onPress={() => {
+              this.props.updateEssay({ essay: this.state.essay })
+              this.props.navigation.navigate('Interests')
+            }}
             buttonText="CONTINUE"
           />
         )}
@@ -65,4 +75,7 @@ class EssayScreen extends Component {
   }
 }
 
-export default EssayScreen
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(EssayScreen)

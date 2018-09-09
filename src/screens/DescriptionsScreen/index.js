@@ -11,6 +11,17 @@ import {
 import SubmitButton from '../../components/SubmitButton'
 import Header from '../../components/Header'
 
+import { connect } from 'react-redux'
+import { updateDescriptions } from '../../redux/actions/membershipApplication'
+
+const mapStateToProps = state => ({
+  descriptions: state.membershipApplication.selfDescription,
+})
+
+const mapDispatchToProps = {
+  updateDescriptions,
+}
+
 const tags = [
   'DRIVEN',
   'SELF-MOTIVATED',
@@ -99,26 +110,28 @@ const tags = [
 
 const MAX_NUM_INTERESTS = 5
 
-export default class SkillsScreen extends Component {
-  state = {
-    skills: [],
+class DescriptionsScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      descriptions: props.descriptions ? props.descriptions.split(', ') : [],
+    }
   }
 
-  toggleSkill = skill => {
-    const { skills } = this.state
-    if (skills.includes(skill)) {
+  toggleDescription = description => {
+    const { descriptions } = this.state
+    if (descriptions.includes(description)) {
       this.setState({
-        skills: this.state.skills.filter(el => el !== skill),
+        descriptions: this.state.descriptions.filter(el => el !== description),
       })
     } else
       this.setState({
-        skills: [...this.state.skills, skill],
+        descriptions: [...this.state.descriptions, description],
       })
   }
 
   render() {
-    const maxReached = this.state.skills.length >= MAX_NUM_INTERESTS
-    const userInfo = this.props.navigation.getParam('userInfo')
+    const maxReached = this.state.descriptions.length >= MAX_NUM_INTERESTS
     return (
       <ScreenContainer>
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -138,9 +151,11 @@ export default class SkillsScreen extends Component {
                   <RegistrationTag
                     name={tag}
                     key={tag}
-                    disable={maxReached && !this.state.skills.includes(tag)}
-                    selected={this.state.skills.includes(tag)}
-                    onPress={this.toggleSkill}
+                    disable={
+                      maxReached && !this.state.descriptions.includes(tag)
+                    }
+                    selected={this.state.descriptions.includes(tag)}
+                    onPress={this.toggleDescription}
                   />
                 ))}
               </TagsRow>
@@ -149,12 +164,10 @@ export default class SkillsScreen extends Component {
           {maxReached && (
             <SubmitButton
               onPress={() => {
-                this.props.navigation.navigate('Resume', {
-                  userInfo: {
-                    ...userInfo,
-                    selfDescription: this.state.skills.join(', '),
-                  },
+                this.props.updateDescriptions({
+                  descriptions: this.state.descriptions.join(', '),
                 })
+                this.props.navigation.navigate('Resume')
               }}
               buttonText="CONTINUE"
             />
@@ -164,3 +177,8 @@ export default class SkillsScreen extends Component {
     )
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(DescriptionsScreen)

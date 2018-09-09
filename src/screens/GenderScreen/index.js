@@ -13,9 +13,24 @@ import { genderOptions } from './constants'
 
 import nodeEmoji from 'node-emoji'
 
-export default class GenderScreen extends Component {
-  state = {
-    gender: '',
+import { connect } from 'react-redux'
+import { updateGender } from '../../redux/actions/membershipApplication'
+
+const mapStateToProps = state => ({
+  firstName: state.membershipApplication.firstName,
+  gender: state.membershipApplication.gender,
+})
+
+const mapDispatchToProps = {
+  updateGender,
+}
+
+class GenderScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      gender: props.gender || '',
+    }
   }
 
   updateText = obj => {
@@ -26,13 +41,12 @@ export default class GenderScreen extends Component {
 
   render() {
     const disabled = !this.state.gender
-    const userInfo = this.props.navigation.getParam('userInfo')
     return (
       <ScreenContainer>
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
           <ScrollView keyboardShouldPersistTaps="always">
             <Header
-              title={`${nodeEmoji.get('wave')} Hi, ${userInfo.firstName}!`}
+              title={`${nodeEmoji.get('wave')} Hi, ${this.props.firstName}!`}
               showBack
               onBackPress={() => this.props.navigation.goBack()}
               progress="28.5%"
@@ -57,11 +71,10 @@ export default class GenderScreen extends Component {
             <RegisterButton
               buttonText="NEXT"
               disabled={disabled}
-              onPress={() =>
-                this.props.navigation.navigate('YourEducation', {
-                  userInfo: { ...userInfo, gender: this.state.gender },
-                })
-              }
+              onPress={() => {
+                this.props.updateGender({ gender: this.state.gender })
+                this.props.navigation.navigate('YourEducation')
+              }}
             />
           </ScrollView>
         </SafeAreaView>
@@ -69,3 +82,8 @@ export default class GenderScreen extends Component {
     )
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(GenderScreen)
