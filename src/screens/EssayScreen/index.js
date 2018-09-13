@@ -31,7 +31,7 @@ class EssayScreen extends Component {
   }
 
   render() {
-    const disabled = !this.state.essay.length
+    const essayHasWords = this.state.essay.length
     return (
       <SafeAreaView
         style={{
@@ -61,15 +61,13 @@ class EssayScreen extends Component {
             autoGrow={false}
           />
         </ScrollContainer>
-        {!disabled && (
-          <SubmitButton
-            onPress={() => {
-              this.props.updateEssay({ essay: this.state.essay })
-              this.props.navigation.navigate('Interests')
-            }}
-            buttonText="CONTINUE"
-          />
-        )}
+        <SubmitButton
+          onPress={() => {
+            this.props.updateEssay({ essay: this.state.essay })
+            this.props.navigation.navigate('Interests')
+          }}
+          buttonText={essayHasWords ? 'CONTINUE' : 'SKIP'}
+        />
       </SafeAreaView>
     )
   }

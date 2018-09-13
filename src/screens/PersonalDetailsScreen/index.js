@@ -101,9 +101,10 @@ class PersonalDetailsScreen extends Component {
               <RegistrationPicker
                 selected={showEthnicityPicker}
                 onPress={() => {
-                  if (!showHometownPicker && !showBirthdayPicker) {
+                  if (!showHometownPicker) {
                     this.setState({
                       showEthnicityPicker: true,
+                      showBirthdayPicker: false,
                       ethnicity: ethnicity || ethnicityOptions[0].value,
                     })
                     this.ethnicityPicker.showActionSheet()
@@ -117,9 +118,10 @@ class PersonalDetailsScreen extends Component {
               <RegistrationPicker
                 selected={showBirthdayPicker}
                 onPress={() => {
-                  if (!showHometownPicker && !showEthnicityPicker) {
+                  if (!showHometownPicker) {
                     this.setState({
                       showBirthdayPicker: true,
+                      showEthnicityPicker: false,
                       birthday,
                     })
                     this.datePicker.openDatePicker()

@@ -210,7 +210,7 @@ class SignUpScreen extends Component {
           <TermsOfService />
         </DisplayModal>
         <SafeView>
-          <ScrollView keyboardShouldPersistTaps="always">
+          <ScrollView keyboardShouldPersistTaps="never">
             <Header
               title="Sign Up"
               showBack
