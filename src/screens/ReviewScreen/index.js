@@ -18,13 +18,13 @@ const GET_COMPANY_REVIEWS = gql`
       title
       pros
       cons
+      reviewableCompany {
+        id
+      }
       employmentType
       current
       jobTitle
       location
-      company {
-        id
-      }
       lastWorked
       createdAt
     }
@@ -60,7 +60,7 @@ export default class ReviewScreen extends Component {
     } = this.props.navigation.state.params
     const variables = {
       companyReviewFilterInput: {
-        companyId,
+        reviewableCompanyId: companyId,
         employmentType: TABS[this.state.tab],
       },
     }

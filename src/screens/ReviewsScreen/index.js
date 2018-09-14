@@ -11,19 +11,38 @@ import gql from 'graphql-tag'
 import AddCompanyReviewModal from '../AddCompanyReviewModal'
 import LoadingWrapper from '../../components/LoadingWrapper'
 
-const GET_COMPANIES = gql`
-  query companies($companyFilterInput: CompanyFilterInput!) {
-    companies(companyFilterInput: $companyFilterInput) {
+const defaultImage =
+  'https://images.unsplash.com/photo-1486108334972-f02b6c78ba07?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7b5a12ea524ae41d923b50f2e43f1cb8&auto=format&fit=crop&w=1500&q=80'
+
+const GET_REVIEWABLE_COMPANIES = gql`
+  query reviewableCompanies(
+    $reviewableCompanyFilterInput: ReviewableCompanyFilterInput!
+  ) {
+    reviewableCompanies(
+      reviewableCompanyFilterInput: $reviewableCompanyFilterInput
+    ) {
       id
       name
-      email
-      about
+      image
+      sector
       rating
-      profilePicture
-      reviewCount
+      reviews {
+        id
+        rating
+        title
+        pros
+        cons
+        employmentType
+        current
+        jobTitle
+        location
+        lastWorked
+        createdAt
+      }
     }
   }
 `
+
 class ReviewsScreen extends Component {
   state = {
     searchText: '',
@@ -48,7 +67,7 @@ class ReviewsScreen extends Component {
   render() {
     const { searchText } = this.state
     const variables = {
-      companyFilterInput: {
+      reviewableCompanyFilterInput: {
         name: this.state.searchText,
         highestRated: this.state.tab === 1,
       },
@@ -68,25 +87,25 @@ class ReviewsScreen extends Component {
         />
         <ThinDivider />
         <ScrollView keyboardShouldPersistTaps="handled">
-          <Query query={GET_COMPANIES} variables={variables}>
+          <Query query={GET_REVIEWABLE_COMPANIES} variables={variables}>
             {({ loading, data, refetch }) => {
               if (loading) return <LoadingWrapper loading />
               return (
                 <View>
                   <FlatList
                     keyboardShouldPersistTaps="handled"
-                    keyExtractor={company => company.id}
-                    data={data.companies}
+                    keyExtractor={reviewableCompany => reviewableCompany.id}
+                    data={data.reviewableCompanies}
                     renderItem={({ item }) => (
                       <CompanyCard
                         refetchCompanies={refetch}
-                        picture={item.profilePicture}
+                        picture={item.image || defaultImage}
                         title={item.name}
                         rating={item.rating}
                         companyName={item.name}
                         companyId={item.id}
                         navigation={this.props.navigation}
-                        numReviews={item.reviewCount}
+                        numReviews={item.reviews.length}
                       />
                     )}
                   />

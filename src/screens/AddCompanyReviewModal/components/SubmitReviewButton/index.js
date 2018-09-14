@@ -17,7 +17,7 @@ const ADD_COMPANY_REVIEW = gql`
         current
         jobTitle
         location
-        company {
+        reviewableCompany {
           id
         }
         lastWorked
@@ -88,7 +88,7 @@ export default class SubmitReviewButton extends Component {
                     current: isCurrentEmployee,
                     jobTitle,
                     location,
-                    companyId,
+                    reviewableCompanyId: companyId,
                     lastWorked,
                   },
                 }
