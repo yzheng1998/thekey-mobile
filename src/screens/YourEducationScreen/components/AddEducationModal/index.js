@@ -23,6 +23,7 @@ export default class AddEducationModal extends Component {
       schoolTypeOptions,
       validateForm,
       addTouched,
+      handleEducationChange,
     } = this.props
     const {
       schoolName,
@@ -145,6 +146,7 @@ export default class AddEducationModal extends Component {
               buttonText="ADD SCHOOL"
               onPress={() => {
                 addEducation()
+                handleEducationChange()
                 toggleEducationModal()
                 clearState()
               }}

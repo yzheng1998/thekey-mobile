@@ -11,6 +11,17 @@ import SubmitButton from '../../components/SubmitButton'
 import Header from '../../components/Header'
 import { SafeAreaView } from 'react-native'
 
+import { connect } from 'react-redux'
+import { updateInterests } from '../../redux/actions/membershipApplication'
+
+const mapStateToProps = state => ({
+  interests: state.membershipApplication.interests,
+})
+
+const mapDispatchToProps = {
+  updateInterests,
+}
+
 const tags = [
   'TECH',
   'START-UPS',
@@ -97,9 +108,12 @@ const tags = [
 
 const MAX_NUM_INTERESTS = 5
 
-export default class InterestsScreen extends Component {
-  state = {
-    interests: [],
+class InterestsScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      interests: props.interests ? props.interests.split(', ') : [],
+    }
   }
 
   toggleInterest = interest => {
@@ -116,7 +130,6 @@ export default class InterestsScreen extends Component {
 
   render() {
     const maxReached = this.state.interests.length >= MAX_NUM_INTERESTS
-    const userInfo = this.props.navigation.getParam('userInfo')
     return (
       <ScreenContainer>
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -146,14 +159,12 @@ export default class InterestsScreen extends Component {
           </Container>
           {maxReached && (
             <SubmitButton
-              onPress={() =>
-                this.props.navigation.navigate('Skills', {
-                  userInfo: {
-                    ...userInfo,
-                    interests: this.state.interests.join(', '),
-                  },
+              onPress={() => {
+                this.props.updateInterests({
+                  interests: this.state.interests.join(', '),
                 })
-              }
+                this.props.navigation.navigate('Descriptions')
+              }}
               buttonText="CONTINUE"
             />
           )}
@@ -162,3 +173,8 @@ export default class InterestsScreen extends Component {
     )
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(InterestsScreen)
