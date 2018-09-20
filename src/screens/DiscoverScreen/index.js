@@ -9,6 +9,8 @@ import JobsAndInternshipsCard from '../../../assets/JobsAndInternshipsCard.png'
 import EventsCard from '../../../assets/EventsCard.png'
 import ReviewsCard from '../../../assets/ReviewsCard.png'
 import WelcomeCard from './components/WelcomeCard'
+import DisplayModal from '../../components/DisplayModal'
+import InviteFriend from './components/InviteFriend'
 
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
@@ -34,6 +36,7 @@ class DiscoverScreen extends Component {
     profilePicture:
       'https://images.unsplash.com/photo-1476983109555-18ebaf412d7c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c508869d7645131d98c453dd9ce0ae6&auto=format&fit=crop&w=2420&q=80',
     completeProfile: false,
+    inviteFriendModalVisible: false,
   }
 
   componentDidMount = async () => {
@@ -44,9 +47,22 @@ class DiscoverScreen extends Component {
     this.setState({ completeProfileClicked: true })
   }
 
+  toggleInviteFriendModal = () => {
+    this.setState({
+      inviteFriendModalVisible: !this.state.inviteFriendModalVisible,
+    })
+  }
+
   render() {
     return (
       <Background>
+        <DisplayModal
+          onBackPress={this.toggleInviteFriendModal}
+          isVisible={this.state.inviteFriendModalVisible}
+          title="Invite Friends!"
+        >
+          <InviteFriend closeModal={this.toggleInviteFriendModal} />
+        </DisplayModal>
         <Query query={GET_HAS_LOGGED_IN}>
           {({ loading, data, error, refetch }) => {
             if (loading) return <View />
@@ -55,6 +71,7 @@ class DiscoverScreen extends Component {
               <SafeAreaView style={{ flex: 1 }}>
                 <List>
                   <Header
+                    toggleInviteFriendModal={this.toggleInviteFriendModal}
                     name={data.viewer.firstName}
                     navigation={this.props.navigation}
                   />
