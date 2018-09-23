@@ -4,41 +4,13 @@ import { Background, ScrollScreen, ThinDivider, SearchModal } from './styles'
 import CompanyCard from '../../../../components/CompanyCard'
 import SearchModalHeader from '../SearchModalHeader'
 import SearchBar from '../../../../components/SearchBar'
-import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
+import { Query, Mutation } from 'react-apollo'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
+
+import { GET_REVIEWABLE_COMPANIES, CREATE_REVIEWABLE_COMPANY } from './queries'
 
 const defaultImage =
   'https://images.unsplash.com/photo-1486108334972-f02b6c78ba07?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7b5a12ea524ae41d923b50f2e43f1cb8&auto=format&fit=crop&w=1500&q=80'
-
-const GET_REVIEWABLE_COMPANIES = gql`
-  query reviewableCompanies(
-    $reviewableCompanyFilterInput: ReviewableCompanyFilterInput!
-  ) {
-    reviewableCompanies(
-      reviewableCompanyFilterInput: $reviewableCompanyFilterInput
-    ) {
-      id
-      name
-      image
-      sector
-      rating
-      reviews {
-        id
-        rating
-        title
-        pros
-        cons
-        employmentType
-        current
-        jobTitle
-        location
-        lastWorked
-        createdAt
-      }
-    }
-  }
-`
 
 export default class CompanySearchModal extends Component {
   static navigationOptions = {
@@ -47,6 +19,7 @@ export default class CompanySearchModal extends Component {
 
   state = {
     searchText: '',
+    noResults: false,
   }
 
   updateText = searchText => {
@@ -60,6 +33,9 @@ export default class CompanySearchModal extends Component {
         highestRated: false,
       },
     }
+    const mutationVariables = {
+      companyName: this.state.searchText,
+    }
     const {
       closeModal,
       showAddReview,
@@ -71,8 +47,18 @@ export default class CompanySearchModal extends Component {
     const closeSearchModal = () => {
       this.setState({
         searchText: '',
+        noResults: false,
       })
       closeModal()
+    }
+
+    const onCompleted = data => {
+      closeSearchModal()
+      setCompanyInfo(
+        data.createReviewableCompany.reviewableCompany.id,
+        data.createReviewableCompany.reviewableCompany.name,
+        defaultImage,
+      )
     }
 
     return (
@@ -86,16 +72,40 @@ export default class CompanySearchModal extends Component {
       >
         <Background>
           <SearchModalHeader closeModal={closeSearchModal} />
-          <SearchBar
-            updateText={this.updateText}
-            searchText={this.state.searchText}
-            placeholderText="Search for a company"
-          />
+          <Mutation
+            mutation={CREATE_REVIEWABLE_COMPANY}
+            onCompleted={data => onCompleted(data)}
+          >
+            {createReviewableCompany => (
+              <SearchBar
+                updateText={this.updateText}
+                searchText={this.state.searchText}
+                placeholderText="Search for a company"
+                onSubmitEditing={() => {
+                  if (this.state.noResults) {
+                    createReviewableCompany({ variables: mutationVariables })
+                  }
+                }}
+                returnKeyType="next"
+              />
+            )}
+          </Mutation>
           <ThinDivider />
           <ScrollScreen keyboardShouldPersistTaps="handled">
             <Query query={GET_REVIEWABLE_COMPANIES} variables={variables}>
               {({ loading, data }) => {
                 if (loading) return <LoadingWrapper loading />
+                if (
+                  data.reviewableCompanies.length === 0 &&
+                  !this.state.noResults
+                )
+                  this.setState({ noResults: true })
+                if (
+                  data.reviewableCompanies.length > 0 &&
+                  this.state.noResults
+                ) {
+                  this.setState({ noResults: false })
+                }
                 return (
                   <FlatList
                     keyboardShouldPersistTaps="handled"

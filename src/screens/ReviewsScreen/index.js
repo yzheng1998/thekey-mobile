@@ -7,41 +7,12 @@ import SearchBar from '../../components/SearchBar'
 import ReviewsHeader from './components/ReviewsHeader'
 import Icon from 'react-native-vector-icons/Entypo'
 import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
 import AddCompanyReviewModal from '../AddCompanyReviewModal'
 import LoadingWrapper from '../../components/LoadingWrapper'
+import { GET_REVIEWABLE_COMPANIES } from './queries'
 
 const defaultImage =
   'https://images.unsplash.com/photo-1486108334972-f02b6c78ba07?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7b5a12ea524ae41d923b50f2e43f1cb8&auto=format&fit=crop&w=1500&q=80'
-
-const GET_REVIEWABLE_COMPANIES = gql`
-  query reviewableCompanies(
-    $reviewableCompanyFilterInput: ReviewableCompanyFilterInput!
-  ) {
-    reviewableCompanies(
-      reviewableCompanyFilterInput: $reviewableCompanyFilterInput
-    ) {
-      id
-      name
-      image
-      sector
-      rating
-      reviews {
-        id
-        rating
-        title
-        pros
-        cons
-        employmentType
-        current
-        jobTitle
-        location
-        lastWorked
-        createdAt
-      }
-    }
-  }
-`
 
 class ReviewsScreen extends Component {
   state = {
