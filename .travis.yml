@@ -1,9 +1,38 @@
 language: node_js
 
 node_js:
-  - "8"
+  - '10'
 
-sudo: false
+os: osx
+osx_image: xcode9.4
 
-script:
-  - npm run lint
+cache:
+  - bundler
+
+jobs:
+  include:
+    - stage: Linting
+      name: run lint
+      script: npm run lint
+    - stage: TestFlight deploy
+      name: fastlane deploy to TestFlight
+      if: branch = master AND commit_message =~ /\[TESTFLIGHT\]/
+      env:
+        - REACT_APP_API_URL=https://thekey-api-production.herokuapp.com/graphql
+        - REACT_APP_WS_API_URL=wss://thekey-api-production.herokuapp.com/subscriptions
+      before_install:
+        - echo -e "machine github.com\n  login $CI_USER_TOKEN" >> ~/.netrc
+      before_script:
+        - cd ios
+        - gem install bundler
+        - bundle install
+      script:
+        - bundle exec fastlane ios beta
+
+notifications:
+  slack:
+    rooms:
+      secure: xM47gMRvVTE8HOY4c/JA58VRrK27NKC/ee6IWmEK7jKkdZlobdSvH6ixypF6Dpf2Er1zoVcwuUWZVuFZV+QQQ/+ZsgW+JNzxI1bn8aCONJlsba+W88Y3MiwLDbAddHxH6DxzUAtCvewcGsyswAgv/93gJIX9JWLrsrYH5SW1vS2i9KLtBu6Td4bO316CBP4vE/H3yJTmILcwaIILRhAh3nVqApHBlHU1gQw5Vjn1By0jk+IuqEs3I4foPuclQkkeZt6YPwcqEWsb5RXmfVL3+7cfOuy6zBmxkNxsj1tjwf+hCjtfz8bIoILCRDx9Us5fQOatTA5aBfJlo2MQQ7n/H5nTeDW7jtSW88qLujlDpYeAykHHeh+5OcFQYBiAilofbIRhSB1MiTG0qzNpbch3MNgFXSuUMk1GlBrnP4h8NNp77yYPRsnCJ6qL47ZKdNezwLT6/Vi+gJVSDw/3A7LLBW7zb600Ec/iaBoqemr1UUTcWkN/btj6q/e0CQQFi81WJmlgn/FrAXFEoxcByX34tAQvHo8mV5TwjoRIXITbrzt43g5e70DeOxfAlfjEKdDNdFxD+A7iHP31jc8T4WoQ4JdOx2J8C72+SLthOIGlazWW0LrXZ6t3/CoeJEZYJnPiN5cKhD1jFZ5wvoqAUYFZ665Z1kg8UJy5tgBi/FfNRVM=
+    template:
+      - "%{repository_slug} (%{commit}): Deploy to Test Flight by %{author} %{result}
+        after %{duration}"
