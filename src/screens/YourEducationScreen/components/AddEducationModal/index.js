@@ -7,10 +7,12 @@ import RegisterButton from '../../../../components/RegisterButton'
 import RegistrationPicker from '../../../../components/RegistrationPicker'
 import PickerComponent from '../../../../components/PickerComponent'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { degreeTypeOptions } from '../../../../constants'
 
 export default class AddEducationModal extends Component {
   state = {
     showSchoolTypePicker: false,
+    showDegreeTypePicker: false,
   }
   render() {
     const {
@@ -38,7 +40,7 @@ export default class AddEducationModal extends Component {
       displayErrors,
     } = state
 
-    const { showSchoolTypePicker } = this.state
+    const { showSchoolTypePicker, showDegreeTypePicker } = this.state
     const openSchoolTypePicker = () => {
       Keyboard.dismiss()
       this.setState({ showSchoolTypePicker: true })
@@ -47,8 +49,17 @@ export default class AddEducationModal extends Component {
       }
       this.picker.showActionSheet()
     }
-    const findLabel = value =>
-      schoolTypeOptions.find(el => el.value === value).label
+    const openDegreeTypePicker = () => {
+      Keyboard.dismiss()
+      this.setState({ showDegreeTypePicker: true })
+      if (!degreeType) {
+        updateText({ degreeType: degreeTypeOptions[0].value })
+      }
+      this.picker.showActionSheet()
+    }
+    const findLabel = (value, options) =>
+      options.find(el => el.value === value).label
+
     const noErrors = !errors
     return (
       <RightModal
@@ -84,24 +95,14 @@ export default class AddEducationModal extends Component {
             <RegistrationPicker
               selected={showSchoolTypePicker}
               onPress={openSchoolTypePicker}
-              text={schoolType ? findLabel(schoolType) : ''}
+              text={schoolType ? findLabel(schoolType, schoolTypeOptions) : ''}
               placeholderText="What type of school did you attend?"
             />
-            <LineInput
-              ref={degreeInput => {
-                this.degreeInput = degreeInput
-              }}
-              text={degreeType}
-              placeholderText="Degree type"
-              updateText={text => {
-                updateText({ degreeType: text }, () => validateForm(true))
-              }}
-              onFocus={() => addTouched('degreeType')}
-              onBlur={() => validateForm(false)}
-              onSubmitEditing={() => this.startYearInput.focus()}
-              returnKeyType="next"
-              error={displayErrors.degreeType}
-              disabled={this.state.showSchoolTypePicker}
+            <RegistrationPicker
+              selected={showDegreeTypePicker}
+              onPress={openDegreeTypePicker}
+              text={degreeType ? findLabel(degreeType, degreeTypeOptions) : ''}
+              placeholderText="Degree Type"
             />
             <RowContainer>
               <LineInput
@@ -165,12 +166,30 @@ export default class AddEducationModal extends Component {
               {
                 showSchoolTypePicker: false,
               },
-              () => this.degreeInput.focus(),
+              openDegreeTypePicker,
             )
           }}
           onValueChange={updateText}
           value={schoolType}
           keyName="schoolType"
+        />
+        <PickerComponent
+          visible={showDegreeTypePicker}
+          ref={picker => {
+            this.picker = picker
+          }}
+          options={degreeTypeOptions}
+          doneOnPress={() => {
+            this.setState(
+              {
+                showDegreeTypePicker: false,
+              },
+              this.startYearInput.focus,
+            )
+          }}
+          onValueChange={updateText}
+          value={degreeType}
+          keyName="degreeType"
         />
       </RightModal>
     )
