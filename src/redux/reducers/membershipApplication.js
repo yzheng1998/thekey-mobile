@@ -3,6 +3,7 @@ import {
   UPDATE_PERSONAL_DETAILS,
   UPDATE_ESSAY,
   UPDATE_GENDER,
+  UPDATE_ETHNICITIES,
   UPDATE_EDUCATIONS,
   UPDATE_INTERESTS,
   UPDATE_DESCRIPTIONS,
@@ -34,13 +35,17 @@ const membershipApplicationReducer = (state = initialState, action) => {
     case UPDATE_PERSONAL_DETAILS: {
       return updatedState({
         hometown: action.payload.hometown,
-        ethnicity: action.payload.ethnicity,
         birthday: action.payload.birthday,
       })
     }
     case UPDATE_GENDER: {
       return updatedState({
         gender: action.payload.gender,
+      })
+    }
+    case UPDATE_ETHNICITIES: {
+      return updatedState({
+        ethnicities: action.payload.ethnicities,
       })
     }
     case UPDATE_EDUCATIONS: {
