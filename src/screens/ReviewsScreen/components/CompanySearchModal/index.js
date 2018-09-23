@@ -8,15 +8,34 @@ import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
 
-const GET_COMPANIES = gql`
-  query companies($companyFilterInput: CompanyFilterInput!) {
-    companies(companyFilterInput: $companyFilterInput) {
+const defaultImage =
+  'https://images.unsplash.com/photo-1486108334972-f02b6c78ba07?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7b5a12ea524ae41d923b50f2e43f1cb8&auto=format&fit=crop&w=1500&q=80'
+
+const GET_REVIEWABLE_COMPANIES = gql`
+  query reviewableCompanies(
+    $reviewableCompanyFilterInput: ReviewableCompanyFilterInput!
+  ) {
+    reviewableCompanies(
+      reviewableCompanyFilterInput: $reviewableCompanyFilterInput
+    ) {
       id
       name
-      email
-      about
+      image
+      sector
       rating
-      profilePicture
+      reviews {
+        id
+        rating
+        title
+        pros
+        cons
+        employmentType
+        current
+        jobTitle
+        location
+        lastWorked
+        createdAt
+      }
     }
   }
 `
@@ -36,7 +55,7 @@ export default class CompanySearchModal extends Component {
 
   render() {
     const variables = {
-      companyFilterInput: {
+      reviewableCompanyFilterInput: {
         name: this.state.searchText,
         highestRated: false,
       },
@@ -74,7 +93,7 @@ export default class CompanySearchModal extends Component {
           />
           <ThinDivider />
           <ScrollScreen keyboardShouldPersistTaps="handled">
-            <Query query={GET_COMPANIES} variables={variables}>
+            <Query query={GET_REVIEWABLE_COMPANIES} variables={variables}>
               {({ loading, data }) => {
                 if (loading) return <LoadingWrapper loading />
                 return (
@@ -82,7 +101,7 @@ export default class CompanySearchModal extends Component {
                     keyboardShouldPersistTaps="handled"
                     showsVerticalScrollIndicator={false}
                     keyExtractor={company => company.id}
-                    data={data.companies}
+                    data={data.reviewableCompanies}
                     renderItem={({ item }) => (
                       <CompanyCard
                         onPress={() => {
@@ -90,14 +109,14 @@ export default class CompanySearchModal extends Component {
                           setCompanyInfo(
                             item.id,
                             item.name,
-                            item.profilePicture,
+                            item.image || defaultImage,
                           )
                         }}
                         title={item.name}
                         rating={item.rating}
                         companyId={item.id}
                         navigation={navigation}
-                        picture={item.profilePicture}
+                        picture={item.image || defaultImage}
                       />
                     )}
                   />
