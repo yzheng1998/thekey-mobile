@@ -95,6 +95,7 @@
 		F94943B6FF1F4DD29B498BFF /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AD76A1DA3F3E4580B86C8A89 /* Feather.ttf */; };
 		FA22CC833E284936A304AE57 /* SF-Pro-Text-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F98BD162EE8F4042ACDFE76A /* SF-Pro-Text-LightItalic.otf */; };
 		FABA81C9D0556D6707D72315 /* libPods-thekeymobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 572F2637C26E50E39E659CCF /* libPods-thekeymobile.a */; };
+		FEA0415E2157CEBB006871A8 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = FEA0415D2157CEBB006871A8 /* main.jsbundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -451,7 +452,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
 		00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = "../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj"; sourceTree = "<group>"; };
 		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = "../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj"; sourceTree = "<group>"; };
@@ -545,6 +545,7 @@
 		F2C3AF69108144D6A9CDA0C7 /* SF-Pro-Display-UltralightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-UltralightItalic.otf"; path = "../assets/fonts/SF-Pro-Display-UltralightItalic.otf"; sourceTree = "<group>"; };
 		F98BD162EE8F4042ACDFE76A /* SF-Pro-Text-LightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Text-LightItalic.otf"; path = "../assets/fonts/SF-Pro-Text-LightItalic.otf"; sourceTree = "<group>"; };
 		FBEF8EC4E6B84CA58D6AADE5 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		FEA0415D2157CEBB006871A8 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = thekeymobile/main.jsbundle; sourceTree = "<group>"; };
 		FEBB26E911E9468BB08BB06B /* SF-Pro-Display-SemiboldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-SemiboldItalic.otf"; path = "../assets/fonts/SF-Pro-Display-SemiboldItalic.otf"; sourceTree = "<group>"; };
 		FF05E27E8B8841E3A910C5E6 /* SF-Pro-Display-ThinItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SF-Pro-Display-ThinItalic.otf"; path = "../assets/fonts/SF-Pro-Display-ThinItalic.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -720,7 +721,7 @@
 		13B07FAE1A68108700A75B9A /* thekeymobile */ = {
 			isa = PBXGroup;
 			children = (
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+				FEA0415D2157CEBB006871A8 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -1586,6 +1587,7 @@
 				D926BB3D19DB4DC78764B437 /* MaterialIcons.ttf in Resources */,
 				65663D91475F4FB686315EC7 /* Octicons.ttf in Resources */,
 				D806152269ED4ACD8AA26B7D /* SimpleLineIcons.ttf in Resources */,
+				FEA0415E2157CEBB006871A8 /* main.jsbundle in Resources */,
 				50120DCC1F894836A5E4CB3A /* Zocial.ttf in Resources */,
 				006BB4013DBD484A94E17B89 /* SF-Pro-Display-Bold.otf in Resources */,
 				4B4E9CC9C36D451395F20D36 /* SF-Pro-Display-Medium.otf in Resources */,
@@ -1940,8 +1942,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hsadev.thekey;
 				PRODUCT_NAME = thekeymobile;
-				PROVISIONING_PROFILE = "3be272d1-2bec-4079-b5b7-88a171a4b08e";
-				PROVISIONING_PROFILE_SPECIFIER = "The Key App Store Distribution";
+				PROVISIONING_PROFILE = "806e0fb7-e95a-496b-a338-dc900e8cbe71";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.hsadev.thekey";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1977,8 +1979,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hsadev.thekey;
 				PRODUCT_NAME = thekeymobile;
-				PROVISIONING_PROFILE = "3be272d1-2bec-4079-b5b7-88a171a4b08e";
-				PROVISIONING_PROFILE_SPECIFIER = "The Key App Store Distribution";
+				PROVISIONING_PROFILE = "806e0fb7-e95a-496b-a338-dc900e8cbe71";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore com.hsadev.thekey";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
