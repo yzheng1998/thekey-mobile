@@ -4,6 +4,7 @@ import LandingScreen from '../screens/LandingScreen/'
 import SplashScreen from '../screens/SplashScreen/'
 import SignUpScreen from '../screens/SignUpScreen'
 import PersonalDetailsScreen from '../screens/PersonalDetailsScreen'
+import EthnicitiesScreen from '../screens/EthnicitiesScreen'
 import GenderScreen from '../screens/GenderScreen'
 import YourEducationScreen from '../screens/YourEducationScreen'
 import EssayScreen from '../screens/EssayScreen'
@@ -93,6 +94,13 @@ const LoginStack = createStackNavigator(
     },
     ResetPassword: {
       screen: ResetPasswordScreen,
+      navigationOptions: () => ({
+        header: null,
+        gesturesEnabled: false,
+      }),
+    },
+    Ethnicities: {
+      screen: EthnicitiesScreen,
       navigationOptions: () => ({
         header: null,
         gesturesEnabled: false,
