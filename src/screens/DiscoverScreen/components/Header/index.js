@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { AsyncStorage } from 'react-native'
-import { Background, Icon, IconButton, Name, Title, TextBox } from './styles'
+import {
+  Background,
+  Icon,
+  IconButton,
+  Name,
+  Title,
+  TextBox,
+  InviteButton,
+} from './styles'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
+import AddUser from 'react-native-vector-icons/MaterialIcons'
 
 const GET_VIEWER = gql`
   query viewer {
@@ -28,13 +37,16 @@ export default class Header extends Component {
   }
 
   render() {
-    const { name } = this.props
+    const { name, toggleInviteFriendModal } = this.props
     return (
       <Background>
         <TextBox>
           <Name>HI {name.toUpperCase()}</Name>
           <Title>Discover</Title>
         </TextBox>
+        <InviteButton onPress={toggleInviteFriendModal}>
+          <AddUser name="person-add" size={27} color="rgb(244, 89, 82)" />
+        </InviteButton>
         <Query query={GET_VIEWER}>
           {({ data, error, loading }) => {
             if (loading) return <LoadingWrapper loading />

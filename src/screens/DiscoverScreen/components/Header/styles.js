@@ -10,7 +10,7 @@ export const Background = styled.View`
 `
 export const IconButton = styled.TouchableOpacity`
   border-radius: 20px;
-  margin-left: 5px;
+  margin-left: 12px;
   margin-right: 12px;
   background-color: ${themeGet('colors.cardLoading')};
 `
@@ -36,3 +36,4 @@ export const Name = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   font-size: 14px;
 `
+export const InviteButton = styled.TouchableOpacity``

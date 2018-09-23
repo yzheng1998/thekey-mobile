@@ -4,6 +4,7 @@ const theme = {
   colors: {
     background: 'white',
     backgroundSecondary: 'rgb(242, 244, 245)',
+    backgroundTertiary: 'rgba(144, 217, 131, .8)',
     buttonPrimary: 'rgb(220, 60, 53)',
     buttonSecondary: 'rgb(243, 244, 245)',
     buttonTertiary: 'rgb(244, 89, 82)',

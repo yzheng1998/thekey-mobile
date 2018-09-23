@@ -9,15 +9,12 @@ import {
   HeaderBackground,
   Title,
   NewChatButton,
-  InviteButton,
   Divider,
   ThinDivider,
   SafeView,
 } from './styles'
-import Icon from 'react-native-vector-icons/MaterialIcons'
 import { ScrollView, StatusBar, View } from 'react-native'
-import InviteFriend from './components/InviteFriend'
-import DisplayModal from '../../components/DisplayModal'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 class NetworkScreen extends Component {
   static navigationOptions = {
@@ -28,7 +25,6 @@ class NetworkScreen extends Component {
     searchText: '',
     tab: 0,
     newChatModalVisible: false,
-    inviteFriendModalVisible: false,
   }
 
   updateText = searchText => {
@@ -47,25 +43,12 @@ class NetworkScreen extends Component {
     this.setState({ newChatModalVisible: false })
   }
 
-  toggleInviteFriendModal = () => {
-    this.setState({
-      inviteFriendModalVisible: !this.state.inviteFriendModalVisible,
-    })
-  }
-
   render() {
     const { searchText } = this.state
     return (
       <SafeView>
         <StatusBar barStyle="dark-content" />
         <Background>
-          <DisplayModal
-            onBackPress={this.toggleInviteFriendModal}
-            isVisible={this.state.inviteFriendModalVisible}
-            title="Invite Friends!"
-          >
-            <InviteFriend closeModal={this.toggleInviteFriendModal} />
-          </DisplayModal>
           <NewChatModal
             isExistingChat={false}
             navigation={this.props.navigation}
@@ -82,9 +65,6 @@ class NetworkScreen extends Component {
               }}
             >
               <Title>Your Network</Title>
-              <InviteButton onPress={this.toggleInviteFriendModal}>
-                <Icon name="person-add" size={27} color="rgb(244, 89, 82)" />
-              </InviteButton>
             </View>
             <SearchFilterTab
               width="75%"

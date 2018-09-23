@@ -2,26 +2,39 @@ import React, { Component } from 'react'
 import Swiper from 'react-native-deck-swiper'
 import SocietyCard from '../../components/SocietyCard'
 import ReactionSymbol from '../../components/ReactionSymbol'
-import gql from 'graphql-tag'
+import { SEND_FRIEND_REQUEST } from './mutation'
 import { Mutation } from 'react-apollo'
-
-const SEND_FRIEND_REQUEST = gql`
-  mutation createFriendRequest($recipientId: ID!, $swipedLeft: Boolean!) {
-    createFriendRequest(recipientId: $recipientId, swipedLeft: $swipedLeft) {
-      error {
-        message
-      }
-    }
-  }
-`
 
 export default class CardSwiper extends Component {
   render() {
-    const { width, userData, refetch } = this.props
+    const {
+      width,
+      userData,
+      refetch,
+      handleSwipe,
+      toggleMatchModal,
+      setSwipedAll,
+    } = this.props
     return (
-      <Mutation mutation={SEND_FRIEND_REQUEST}>
+      <Mutation
+        mutation={SEND_FRIEND_REQUEST}
+        onCompleted={data => {
+          const { friendRequest } = data.createFriendRequest
+          if (friendRequest.status === 'ACCEPTED') {
+            handleSwipe({
+              senderFirstName: friendRequest.sender.firstName,
+              senderLastName: friendRequest.sender.lastName,
+              recipientProfilePicture: friendRequest.recipient.profilePicture,
+              senderProfilePicture: friendRequest.sender.profilePicture,
+              senderId: friendRequest.sender.id,
+            })
+            toggleMatchModal()
+          }
+        }}
+      >
         {createFriendRequest => (
           <Swiper
+            onSwipedAll={setSwipedAll}
             cards={userData}
             renderCard={item => {
               const renderUser = {
@@ -37,7 +50,7 @@ export default class CardSwiper extends Component {
                 />
               )
             }}
-            backgroundColor="white"
+            backgroundColor="transparent"
             verticalSwipe={false}
             stackSize={3}
             cardVerticalMargin={10}
