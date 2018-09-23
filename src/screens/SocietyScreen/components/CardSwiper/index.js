@@ -2,32 +2,8 @@ import React, { Component } from 'react'
 import Swiper from 'react-native-deck-swiper'
 import SocietyCard from '../../components/SocietyCard'
 import ReactionSymbol from '../../components/ReactionSymbol'
-import gql from 'graphql-tag'
+import { SEND_FRIEND_REQUEST } from './mutation'
 import { Mutation } from 'react-apollo'
-
-const SEND_FRIEND_REQUEST = gql`
-  mutation createFriendRequest($recipientId: ID!, $swipedLeft: Boolean!) {
-    createFriendRequest(recipientId: $recipientId, swipedLeft: $swipedLeft) {
-      friendRequest {
-        id
-        recipient {
-          id
-          profilePicture
-        }
-        sender {
-          id
-          firstName
-          lastName
-          profilePicture
-        }
-        status
-      }
-      error {
-        message
-      }
-    }
-  }
-`
 
 export default class CardSwiper extends Component {
   render() {
