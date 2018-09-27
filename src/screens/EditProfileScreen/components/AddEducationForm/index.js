@@ -181,11 +181,25 @@ export default class AddEducationForm extends Component {
     const openDegreeTypePicker = () => {
       Keyboard.dismiss()
       this.addTouched('degreeType')
+      const updatedState = { showDegreeTypePicker: true }
       if (!degreeType) {
-        this.setState({ degreeType: degreeTypeOptions[0].value })
+        updatedState.degreeType = degreeTypeOptions[0].value
       }
-      this.setState({ showDegreeTypePicker: true })
+      this.setState(updatedState)
       this.picker.showActionSheet()
+    }
+
+    const schoolPickerOnDone = () => {
+      this.setState(
+        {
+          schoolTypePickerEnabled: false,
+          optionsInputClicked: false, // handles border color of optionsInput
+        },
+        () => {
+          this.validateForm(false)
+          if (!this.editMode) openDegreeTypePicker()
+        },
+      )
     }
 
     return (
@@ -330,18 +344,7 @@ export default class AddEducationForm extends Component {
               this.picker = picker
             }}
             options={schoolTypes}
-            doneOnPress={() => {
-              this.setState(
-                {
-                  schoolTypePickerEnabled: false,
-                  optionsInputClicked: false, // handles border color of optionsInput
-                },
-                () => {
-                  this.validateForm(false)
-                  if (!this.editMode) openDegreeTypePicker()
-                },
-              )
-            }}
+            doneOnPress={schoolPickerOnDone}
             onValueChange={this.updateState}
             validateForm={this.validateForm}
             value={schoolType}
