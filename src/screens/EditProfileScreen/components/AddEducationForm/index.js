@@ -20,6 +20,8 @@ import constraints from './constraints'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import moment from 'moment'
 import SchoolSearchModal from '../../../../components/SchoolSearchModal'
+import { degreeTypeOptions } from '../../../../constants'
+import RegistrationPicker from '../../../../components/RegistrationPicker'
 
 const validate = require('validate.js')
 
@@ -33,6 +35,9 @@ const formatYear = date => {
   if (date) return moment(new Date(date)).format('YYYY')
   return ''
 }
+
+const findLabel = (value, options) =>
+  options.find(el => el.value === value).label
 
 export default class AddEducationForm extends Component {
   constructor(props) {
@@ -52,6 +57,7 @@ export default class AddEducationForm extends Component {
     this.state = {
       ...educationInfo,
       showSchoolSearchModal: false,
+      showDegreeTypePicker: false,
       startYear: formatYear(educationInfo.startYear),
       endYear: formatYear(educationInfo.endYear),
       schoolTypePickerEnabled: false,
@@ -151,6 +157,7 @@ export default class AddEducationForm extends Component {
       optionsInputClicked,
       schoolNameClicked,
       schoolNameSelected,
+      showDegreeTypePicker,
     } = this.state
 
     const returnKeyType = this.editMode ? 'done' : 'next'
@@ -160,7 +167,7 @@ export default class AddEducationForm extends Component {
     const openSchoolTypePicker = () => {
       Keyboard.dismiss()
       this.addTouched('schoolType')
-      if (!this.state.schoolType) {
+      if (!schoolType) {
         this.setState({ schoolType: schoolTypes[0].value })
       }
       this.setState({
@@ -169,6 +176,30 @@ export default class AddEducationForm extends Component {
         optionsInputClicked: true,
       })
       this.picker.showActionSheet()
+    }
+
+    const openDegreeTypePicker = () => {
+      Keyboard.dismiss()
+      this.addTouched('degreeType')
+      const updatedState = { showDegreeTypePicker: true }
+      if (!degreeType) {
+        updatedState.degreeType = degreeTypeOptions[0].value
+      }
+      this.setState(updatedState)
+      this.picker.showActionSheet()
+    }
+
+    const schoolPickerOnDone = () => {
+      this.setState(
+        {
+          schoolTypePickerEnabled: false,
+          optionsInputClicked: false, // handles border color of optionsInput
+        },
+        () => {
+          this.validateForm(false)
+          if (!this.editMode) openDegreeTypePicker()
+        },
+      )
     }
 
     return (
@@ -202,24 +233,13 @@ export default class AddEducationForm extends Component {
                 </OptionsInputContainer>
                 <Error error={this.state.displayErrors.schoolType} />
               </View>
-              <LineInput
-                ref={degreeInput => {
-                  this.degreeInput = degreeInput
-                }}
-                text={degreeType}
+              <RegistrationPicker
+                selected={showDegreeTypePicker}
+                onPress={openDegreeTypePicker}
+                text={
+                  degreeType ? findLabel(degreeType, degreeTypeOptions) : ''
+                }
                 placeholderText="Degree Type"
-                updateText={text => {
-                  this.setState({ degreeType: text }, () =>
-                    this.validateForm(true),
-                  )
-                }}
-                onFocus={() => this.addTouched('degreeType')}
-                onBlur={() => this.validateForm(false)}
-                returnKeyType={returnKeyType}
-                onSubmitEditing={() => {
-                  if (!this.editMode) this.majorInput.focus()
-                }}
-                error={this.state.displayErrors.degreeType}
               />
               <LineInput
                 ref={majorInput => {
@@ -324,18 +344,32 @@ export default class AddEducationForm extends Component {
               this.picker = picker
             }}
             options={schoolTypes}
-            doneOnPress={() => {
-              this.setState({
-                schoolTypePickerEnabled: false,
-                optionsInputClicked: false, // handles border color of optionsInput
-              })
-              this.validateForm(false)
-              if (!this.editMode) this.degreeInput.focus()
-            }}
+            doneOnPress={schoolPickerOnDone}
             onValueChange={this.updateState}
             validateForm={this.validateForm}
             value={schoolType}
             keyName="schoolType"
+          />
+          <PickerComponent
+            visible={showDegreeTypePicker}
+            ref={picker => {
+              this.picker = picker
+            }}
+            options={degreeTypeOptions}
+            doneOnPress={() => {
+              this.setState(
+                {
+                  showDegreeTypePicker: false,
+                },
+                () => {
+                  this.validateForm(false)
+                  if (!this.editMode) this.majorInput.focus()
+                },
+              )
+            }}
+            onValueChange={obj => this.setState(obj)}
+            value={degreeType}
+            keyName="degreeType"
           />
           <SchoolSearchModal
             updateState={this.updateState}

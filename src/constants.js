@@ -124,3 +124,38 @@ export const waysToMeetOptions = [
 export const buttonRadius = { top: 5, left: 5, bottom: 5, right: 5 }
 
 export const wordRadius = { top: 2, left: 5, bottom: 5, right: 2 }
+
+export const degreeTypeOptions = [
+  {
+    value: 'HIGHSCHOOL',
+    label: 'High School',
+  },
+  {
+    value: 'BACHELORS',
+    label: "Bachelor's",
+  },
+  {
+    value: 'MASTERS',
+    label: "Master's",
+  },
+  {
+    value: 'ASSOCIATES',
+    label: "Associate's",
+  },
+  {
+    value: 'PHD',
+    label: 'PhD',
+  },
+  {
+    value: 'JD',
+    label: 'JD',
+  },
+  {
+    value: 'MD',
+    label: 'MD',
+  },
+  {
+    value: 'PROFESSIONAL',
+    label: 'Professional',
+  },
+]
