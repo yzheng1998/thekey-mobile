@@ -11,6 +11,7 @@ import PickerComponent from '../../../../components/PickerComponent'
 import AddEducationButton from './components/AddEducationButton'
 import UpdateEducationButton from './components/UpdateEducationButton'
 import DeleteEducationButton from './components/DeleteEducationButton'
+import RegistrationPicker from '../../../../components/RegistrationPicker'
 import Header from '../Header'
 import LineInput from '../../../../components/LineInput'
 import _ from 'lodash'
@@ -54,6 +55,8 @@ export default class AddEducationForm extends Component {
       showSchoolSearchModal: false,
       startYear: formatYear(educationInfo.startYear),
       endYear: formatYear(educationInfo.endYear),
+      showStartYearPicker: false,
+      showEndYearPicker: false,
       schoolTypePickerEnabled: false,
       schoolNameClicked: false,
       optionsInputSelected: false,
@@ -62,6 +65,14 @@ export default class AddEducationForm extends Component {
       errors: {},
       touched: {},
     }
+  }
+
+  createYearData = () => {
+    const yearArray = []
+    for (let i = new Date().getFullYear(); i >= 1970; i -= 1) {
+      yearArray.push({ label: i.toString(), value: i.toString() })
+    }
+    return yearArray
   }
 
   toggleEducationModal = () => {
@@ -119,6 +130,10 @@ export default class AddEducationForm extends Component {
     })
   }
 
+  handleUsePicker = obj => {
+    this.setState(obj)
+  }
+
   renderSelectedOption = optionsInputSelected => {
     // if a selection has been made, change text from placeholder
     if (optionsInputSelected || this.editMode)
@@ -151,6 +166,8 @@ export default class AddEducationForm extends Component {
       optionsInputClicked,
       schoolNameClicked,
       schoolNameSelected,
+      showStartYearPicker,
+      showEndYearPicker,
     } = this.state
 
     const returnKeyType = this.editMode ? 'done' : 'next'
@@ -239,39 +256,21 @@ export default class AddEducationForm extends Component {
                 error={this.state.displayErrors.major}
               />
               <DateInputRow>
-                <LineInput
-                  ref={startYearInput => {
-                    this.startYearInput = startYearInput
+                <RegistrationPicker
+                  selected={showStartYearPicker}
+                  onPress={() => {
+                    this.setState({ showStartYearPicker: true })
                   }}
                   text={startYear}
-                  placeholderText="Start Year"
-                  updateText={text => {
-                    this.setState({ startYear: text }, () =>
-                      this.validateForm(true),
-                    )
-                  }}
-                  onFocus={() => this.addTouched('startYear')}
-                  onBlur={() => this.validateForm(false)}
-                  returnKeyType={returnKeyType}
-                  onSubmitEditing={() => {
-                    if (!this.editMode) this.endYearInput.focus()
-                  }}
-                  error={this.state.displayErrors.startYear}
+                  placeholderText="Start year"
                 />
-                <LineInput
-                  ref={endYearInput => {
-                    this.endYearInput = endYearInput
+                <RegistrationPicker
+                  selected={showEndYearPicker}
+                  onPress={() => {
+                    this.setState({ showEndYearPicker: true })
                   }}
                   text={endYear}
-                  placeholderText="Graduation Year"
-                  updateText={text => {
-                    this.setState({ endYear: text }, () =>
-                      this.validateForm(true),
-                    )
-                  }}
-                  onFocus={() => this.addTouched('endYear')}
-                  onBlur={() => this.validateForm(false)}
-                  error={this.state.displayErrors.endYear}
+                  placeholderText="End year"
                 />
               </DateInputRow>
               <ButtonContainer>
@@ -342,6 +341,34 @@ export default class AddEducationForm extends Component {
             navigation={this.props.navigation}
             toggleSchoolModal={this.toggleSchoolModal}
             visible={this.state.showSchoolSearchModal}
+          />
+          <PickerComponent
+            visible={showStartYearPicker}
+            ref={picker => {
+              this.startYearPicker = picker
+            }}
+            options={this.createYearData()}
+            doneOnPress={() => {
+              this.setState({ showStartYearPicker: false })
+              this.validateForm(false)
+            }}
+            onValueChange={this.handleUsePicker}
+            value={startYear}
+            keyName="startYear"
+          />
+          <PickerComponent
+            visible={showEndYearPicker}
+            ref={picker => {
+              this.endYearPicker = picker
+            }}
+            options={this.createYearData()}
+            doneOnPress={() => {
+              this.setState({ showEndYearPicker: false })
+              this.validateForm(false)
+            }}
+            onValueChange={this.handleUsePicker}
+            value={endYear}
+            keyName="endYear"
           />
         </Screen>
       </TouchableWithoutFeedback>
