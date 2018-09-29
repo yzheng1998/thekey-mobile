@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { SafeAreaView, View, ScrollView } from 'react-native'
 import { ScreenContainer, SubtitleView, Subtitle } from './styles'
-import PickerComponent from '../../components/PickerComponent'
 import Header from '../../components/Header'
 import RegisterButton from '../../components/RegisterButton'
 import RegistrationPicker from '../../components/RegistrationPicker'
-import { ethnicityOptions } from './constants'
 import HometownSearchModal from '../../components/HometownSearchModal'
 import moment from 'moment'
 
@@ -21,7 +19,6 @@ import { updatePersonalDetails } from '../../redux/actions/membershipApplication
 const mapStateToProps = state => ({
   firstName: state.membershipApplication.firstName,
   hometown: state.membershipApplication.hometown,
-  ethnicity: state.membershipApplication.ethnicity,
   birthday: state.membershipApplication.birthday,
 })
 
@@ -33,10 +30,8 @@ class PersonalDetailsScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      ethnicity: props.ethnicity || '',
       hometown: props.hometown || '',
       birthday: props.birthday || '',
-      showEthnicityPicker: false,
       showHometownPicker: false,
       showBirthdayPicker: false,
     }
@@ -54,18 +49,13 @@ class PersonalDetailsScreen extends Component {
 
   render() {
     const {
-      ethnicity,
       hometown,
       birthday,
-      showEthnicityPicker,
       showHometownPicker,
       showBirthdayPicker,
     } = this.state
     const disabled =
-      !(ethnicity && hometown && birthday) ||
-      showEthnicityPicker ||
-      showHometownPicker ||
-      showBirthdayPicker
+      !(hometown && birthday) || showHometownPicker || showBirthdayPicker
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -92,36 +82,19 @@ class PersonalDetailsScreen extends Component {
               <RegistrationPicker
                 selected={showHometownPicker}
                 onPress={() => {
-                  if (!showEthnicityPicker && !showBirthdayPicker)
+                  if (!showBirthdayPicker)
                     this.setState({ showHometownPicker: true })
                 }}
                 text={hometown}
                 placeholderText="What's your hometown?"
               />
-              <RegistrationPicker
-                selected={showEthnicityPicker}
-                onPress={() => {
-                  if (!showHometownPicker) {
-                    this.setState({
-                      showEthnicityPicker: true,
-                      showBirthdayPicker: false,
-                      ethnicity: ethnicity || ethnicityOptions[0].value,
-                    })
-                    this.ethnicityPicker.showActionSheet()
-                  }
-                }}
-                text={
-                  ethnicity ? this.findLabel(ethnicity, ethnicityOptions) : ''
-                }
-                placeholderText="What's your ethnicity"
-              />
+
               <RegistrationPicker
                 selected={showBirthdayPicker}
                 onPress={() => {
                   if (!showHometownPicker) {
                     this.setState({
                       showBirthdayPicker: true,
-                      showEthnicityPicker: false,
                       birthday,
                     })
                     this.datePicker.openDatePicker()
@@ -136,30 +109,14 @@ class PersonalDetailsScreen extends Component {
                 onPress={() => {
                   this.props.updatePersonalDetails({
                     hometown,
-                    ethnicity,
                     birthday,
                   })
-                  this.props.navigation.navigate('Gender')
+                  this.props.navigation.navigate('Ethnicities')
                 }}
               />
             </ScreenContainer>
           </ScrollView>
         </SafeAreaView>
-        <PickerComponent
-          visible={showEthnicityPicker}
-          ref={ethnicityPicker => {
-            this.ethnicityPicker = ethnicityPicker
-          }}
-          options={ethnicityOptions}
-          doneOnPress={() => {
-            this.updateText({
-              showEthnicityPicker: false,
-            })
-          }}
-          onValueChange={this.updateText}
-          value={ethnicity}
-          keyName="ethnicity"
-        />
         <DatePicker
           ref={datePicker => {
             this.datePicker = datePicker

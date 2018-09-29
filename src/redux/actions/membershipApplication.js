@@ -2,6 +2,7 @@
 export const UPDATE_ACCOUNT_INFO = 'UPDATE_ACCOUNT_INFO'
 export const UPDATE_PERSONAL_DETAILS = 'UPDATE_PERSONAL_DETAILS'
 export const UPDATE_GENDER = 'UPDATE_GENDER'
+export const UPDATE_ETHNICITIES = 'UPDATE_ETHNICITIES'
 export const UPDATE_EDUCATIONS = 'UPDATE_EDUCATIONS'
 export const UPDATE_ESSAY = 'UPDATE_ESSAY'
 export const UPDATE_INTERESTS = 'UPDATE_INTERESTS'
@@ -25,6 +26,10 @@ export const updatePersonalDetails = ({ hometown, ethnicity, birthday }) => ({
 export const updateGender = ({ gender }) => ({
   type: UPDATE_GENDER,
   payload: { gender },
+})
+export const updateEthnicities = ({ ethnicities }) => ({
+  type: UPDATE_ETHNICITIES,
+  payload: { ethnicities },
 })
 export const updateEducations = ({ educations }) => ({
   type: UPDATE_EDUCATIONS,
