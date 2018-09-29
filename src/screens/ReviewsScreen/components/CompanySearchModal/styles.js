@@ -14,6 +14,16 @@ export const Text = styled.Text`
   font-family: ${themeGet('fonts.medium')};
   color: ${themeGet('colors.fontDescription.primary')};
 `
+export const NoResultText = styled.Text`
+  font-size: 16px;
+  font-family: ${themeGet('fonts.medium')};
+  color: ${themeGet('colors.fontDescription.primary')};
+  text-align: center;
+  line-height: 22px;
+  margin-top: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+`
 export const ScrollScreen = styled.ScrollView``
 export const InputField = styled.TextInput`
   font-size: 14px;

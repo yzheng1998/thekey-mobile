@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 import { FlatList } from 'react-native'
-import { Background, ScrollScreen, ThinDivider, SearchModal } from './styles'
+import {
+  Background,
+  ScrollScreen,
+  ThinDivider,
+  SearchModal,
+  NoResultText,
+} from './styles'
 import CompanyCard from '../../../../components/CompanyCard'
 import SearchModalHeader from '../SearchModalHeader'
 import SearchBar from '../../../../components/SearchBar'
@@ -106,7 +112,13 @@ export default class CompanySearchModal extends Component {
                 ) {
                   this.setState({ noResults: false })
                 }
-                return (
+                return this.state.noResults ? (
+                  <NoResultText>
+                    {`Looks like ${
+                      this.state.searchText
+                    } has not been reviewed.\nPress 'Next' to be the first.`}
+                  </NoResultText>
+                ) : (
                   <FlatList
                     keyboardShouldPersistTaps="handled"
                     showsVerticalScrollIndicator={false}
