@@ -192,7 +192,6 @@ class YourEducationScreen extends Component {
                 endYear,
               })
             }}
-            handleEducationChange={handleEducationChange}
             schoolTypeOptions={schoolTypeOptions}
             clearState={this.clearState}
             state={this.state}
