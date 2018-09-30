@@ -26,7 +26,10 @@ import java.util.Arrays;
 import java.util.List;
 import com.testfairy.TestFairy;
 
-public class MainApplication extends Application implements ReactApplication {
+import cl.json.RNSharePackage;
+import cl.json.ShareApplication;
+
+public class MainApplication extends Application implements ShareApplication, ReactApplication {
 
   private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
 
@@ -53,7 +56,8 @@ public class MainApplication extends Application implements ReactApplication {
           new AppCenterReactNativePackage(MainApplication.this),
           new VectorIconsPackage(),
           new SvgPackage(),
-          new PickerPackage()
+          new PickerPackage(),
+          new RNSharePackage()
       );
     }
 
@@ -73,5 +77,10 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     AppEventsLogger.activateApp(this);
     SoLoader.init(this, /* native exopackage */ false);
+  }
+
+  @Override
+  public String getFileProviderAuthority() {
+    return "com.thekeymobile.provider";
   }
 }
