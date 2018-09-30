@@ -13,7 +13,18 @@ export default class AddEducationModal extends Component {
   state = {
     showSchoolTypePicker: false,
     showDegreeTypePicker: false,
+    showStartYearPicker: false,
+    showEndYearPicker: false,
   }
+
+  createYearData = () => {
+    const yearArray = []
+    for (let i = new Date().getFullYear(); i >= 1970; i -= 1) {
+      yearArray.push({ label: i.toString(), value: i.toString() })
+    }
+    return yearArray
+  }
+
   render() {
     const {
       state,
@@ -34,12 +45,13 @@ export default class AddEducationModal extends Component {
       major,
       startYear,
       endYear,
-      isCurrentEmployee,
       errors,
       displayErrors,
     } = state
-
+    /* Fix this next */
     const { showSchoolTypePicker, showDegreeTypePicker } = this.state
+    const { showStartYearPicker, showEndYearPicker } = this.state
+    /* End Fix */
     const openSchoolTypePicker = () => {
       Keyboard.dismiss()
       this.setState({ showSchoolTypePicker: true })
@@ -104,42 +116,21 @@ export default class AddEducationModal extends Component {
               placeholderText="Degree Type"
             />
             <RowContainer>
-              <LineInput
-                ref={startYearInput => {
-                  this.startYearInput = startYearInput
+              <RegistrationPicker
+                selected={showStartYearPicker}
+                onPress={() => {
+                  this.setState({ showStartYearPicker: true })
                 }}
-                disabled={this.state.showSchoolTypePicker}
-                width="48%"
                 text={startYear}
-                placeholderText="Start Year"
-                updateText={text => {
-                  updateText({ startYear: text }, () => validateForm(true))
-                }}
-                onFocus={() => addTouched('startYear')}
-                onBlur={() => validateForm(false)}
-                onSubmitEditing={() => this.endYearInput.focus()}
-                returnKeyType="next"
-                error={displayErrors.startYear}
+                placeholderText="Start year"
               />
-              <LineInput
-                ref={endYearInput => {
-                  this.endYearInput = endYearInput
+              <RegistrationPicker
+                selected={showEndYearPicker}
+                onPress={() => {
+                  this.setState({ showEndYearPicker: true })
                 }}
-                text={
-                  endYear === null || isCurrentEmployee === true
-                    ? 'Present'
-                    : endYear
-                }
-                width="48%"
-                placeholderText="Graduation Year"
-                updateText={text => {
-                  updateText({ endYear: text }, () => validateForm(true))
-                }}
-                onFocus={() => addTouched('endYear')}
-                onBlur={() => validateForm(false)}
-                returnKeyType="done"
-                error={displayErrors.endYear}
-                disabled={this.state.showSchoolTypePicker}
+                text={endYear}
+                placeholderText="End year"
               />
             </RowContainer>
             <RegisterButton
@@ -182,12 +173,42 @@ export default class AddEducationModal extends Component {
               {
                 showDegreeTypePicker: false,
               },
-              this.startYearInput.focus,
+              () => validateForm(false),
             )
           }}
           onValueChange={updateText}
           value={degreeType}
           keyName="degreeType"
+        />
+        <PickerComponent
+          visible={showStartYearPicker}
+          ref={picker => {
+            this.startYearPicker = picker
+          }}
+          options={this.createYearData()}
+          doneOnPress={() => {
+            this.setState({ showStartYearPicker: false }, () =>
+              validateForm(false),
+            )
+          }}
+          onValueChange={updateText}
+          value={startYear}
+          keyName="startYear"
+        />
+        <PickerComponent
+          visible={showEndYearPicker}
+          ref={picker => {
+            this.endYearPicker = picker
+          }}
+          options={this.createYearData()}
+          doneOnPress={() => {
+            this.setState({ showEndYearPicker: false }, () =>
+              validateForm(false),
+            )
+          }}
+          onValueChange={updateText}
+          value={endYear}
+          keyName="endYear"
         />
       </RightModal>
     )
