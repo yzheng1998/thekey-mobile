@@ -19,7 +19,7 @@ export default class AddEducationModal extends Component {
 
   createYearData = () => {
     const yearArray = []
-    for (let i = new Date().getFullYear(); i >= 1970; i -= 1) {
+    for (let i = new Date().getFullYear() + 10; i >= 1970; i -= 1) {
       yearArray.push({ label: i.toString(), value: i.toString() })
     }
     return yearArray
