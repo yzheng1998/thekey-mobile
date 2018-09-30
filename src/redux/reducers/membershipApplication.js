@@ -70,12 +70,21 @@ const membershipApplicationReducer = (state = initialState, action) => {
     }
     case UPDATE_FACEBOOK_INFO: {
       return updatedState({
-        facebookInfo: action.payload.facebookInfo,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        facebookToken: action.payload.facebookID,
+        email: action.payload.email,
+        password: action.payload.password,
+        profilePicture: action.payload.profilePicture,
       })
     }
     case UPDATE_LINKEDIN_INFO: {
       return updatedState({
-        linkedInInfo: action.payload.linkedInInfo,
+        linkedInId: action.payload.linkedInId,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        email: action.payload.email,
+        password: '',
       })
     }
     default: {
