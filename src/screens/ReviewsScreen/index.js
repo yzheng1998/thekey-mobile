@@ -10,6 +10,7 @@ import { Query } from 'react-apollo'
 import AddCompanyReviewModal from '../AddCompanyReviewModal'
 import LoadingWrapper from '../../components/LoadingWrapper'
 import { GET_REVIEWABLE_COMPANIES } from './queries'
+import { reviewableCompanyLimit } from '../../constants'
 
 const defaultImage =
   'https://images.unsplash.com/photo-1486108334972-f02b6c78ba07?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7b5a12ea524ae41d923b50f2e43f1cb8&auto=format&fit=crop&w=1500&q=80'
@@ -23,6 +24,7 @@ class ReviewsScreen extends Component {
     companyId: '',
     companyName: '',
     picture: '',
+    offset: 0,
   }
 
   updateText = searchText => {
@@ -42,6 +44,8 @@ class ReviewsScreen extends Component {
         name: this.state.searchText,
         highestRated: this.state.tab === 1,
       },
+      offset: this.state.offset,
+      limit: reviewableCompanyLimit,
     }
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
@@ -66,7 +70,7 @@ class ReviewsScreen extends Component {
                   <FlatList
                     keyboardShouldPersistTaps="handled"
                     keyExtractor={reviewableCompany => reviewableCompany.id}
-                    data={data.reviewableCompanies}
+                    data={data.reviewableCompanies.nodes}
                     renderItem={({ item }) => (
                       <CompanyCard
                         refetchCompanies={refetch}
@@ -76,7 +80,7 @@ class ReviewsScreen extends Component {
                         companyName={item.name}
                         companyId={item.id}
                         navigation={this.props.navigation}
-                        numReviews={item.reviews.length}
+                        numReviews={item.reviews.totalCount}
                       />
                     )}
                   />

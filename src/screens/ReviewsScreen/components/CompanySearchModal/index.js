@@ -12,7 +12,7 @@ import SearchModalHeader from '../SearchModalHeader'
 import SearchBar from '../../../../components/SearchBar'
 import { Query, Mutation } from 'react-apollo'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
-
+import { reviewableCompanyLimit } from '../../../../constants'
 import { GET_REVIEWABLE_COMPANIES, CREATE_REVIEWABLE_COMPANY } from './queries'
 
 const defaultImage =
@@ -26,6 +26,7 @@ export default class CompanySearchModal extends Component {
   state = {
     searchText: '',
     noResults: false,
+    offset: 0,
   }
 
   updateText = searchText => {
@@ -38,6 +39,8 @@ export default class CompanySearchModal extends Component {
         name: this.state.searchText,
         highestRated: false,
       },
+      offset: this.state.offset,
+      limit: reviewableCompanyLimit,
     }
     const mutationVariables = {
       companyName: this.state.searchText,
@@ -123,7 +126,7 @@ export default class CompanySearchModal extends Component {
                     keyboardShouldPersistTaps="handled"
                     showsVerticalScrollIndicator={false}
                     keyExtractor={company => company.id}
-                    data={data.reviewableCompanies}
+                    data={data.reviewableCompanies.nodes}
                     renderItem={({ item }) => (
                       <CompanyCard
                         onPress={() => {

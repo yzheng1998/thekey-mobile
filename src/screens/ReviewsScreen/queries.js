@@ -3,27 +3,27 @@ import gql from 'graphql-tag'
 export const GET_REVIEWABLE_COMPANIES = gql`
   query reviewableCompanies(
     $reviewableCompanyFilterInput: ReviewableCompanyFilterInput!
+    $offset: Int
+    $limit: Int
   ) {
     reviewableCompanies(
       reviewableCompanyFilterInput: $reviewableCompanyFilterInput
+      offset: $offset
+      limit: $limit
     ) {
-      id
-      name
-      image
-      sector
-      rating
-      reviews {
+      nodes {
         id
+        name
+        image
+        sector
         rating
-        title
-        pros
-        cons
-        employmentType
-        current
-        jobTitle
-        location
-        lastWorked
-        createdAt
+        reviews {
+          totalCount
+        }
+      }
+      pageInfo {
+        offset
+        limit
       }
     }
   }

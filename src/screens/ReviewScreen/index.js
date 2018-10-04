@@ -9,24 +9,39 @@ import { FlatList, View } from 'react-native'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import LoadingWrapper from '../../components/LoadingWrapper'
+import { reviewsLimit } from '../../constants'
 
 const GET_COMPANY_REVIEWS = gql`
-  query companyReviews($companyReviewFilterInput: CompanyReviewFilterInput!) {
-    companyReviews(companyReviewFilterInput: $companyReviewFilterInput) {
-      id
-      rating
-      title
-      pros
-      cons
-      reviewableCompany {
+  query companyReviews(
+    $companyReviewFilterInput: CompanyReviewFilterInput!
+    $offset: Int
+    $limit: Int
+  ) {
+    companyReviews(
+      companyReviewFilterInput: $companyReviewFilterInput
+      offset: $offset
+      limit: $limit
+    ) {
+      nodes {
         id
+        rating
+        title
+        pros
+        cons
+        reviewableCompany {
+          id
+        }
+        employmentType
+        current
+        jobTitle
+        location
+        lastWorked
+        createdAt
       }
-      employmentType
-      current
-      jobTitle
-      location
-      lastWorked
-      createdAt
+      pageInfo {
+        offset
+        limit
+      }
     }
   }
 `
@@ -43,6 +58,7 @@ export default class ReviewScreen extends Component {
       companyId,
       picture,
       companyName: title,
+      offset: 0,
     }
   }
 
@@ -63,6 +79,8 @@ export default class ReviewScreen extends Component {
         reviewableCompanyId: companyId,
         employmentType: TABS[this.state.tab],
       },
+      limit: reviewsLimit,
+      offset: this.state.offset,
     }
     return (
       <Background>
@@ -89,7 +107,7 @@ export default class ReviewScreen extends Component {
               <View>
                 <FlatList
                   keyExtractor={review => review.id}
-                  data={data.companyReviews}
+                  data={data.companyReviews.nodes}
                   renderItem={({ item: review }) => (
                     <ReviewBlock
                       subject={review.title}
