@@ -27,7 +27,10 @@ import PrivacyPolicy from '../ProfileScreen/components/Settings/components/Setti
 import TermsOfService from '../ProfileScreen/components/Settings/components/SettingsScreens/Screens/TermsOfService'
 
 import { connect } from 'react-redux'
-import { updateAccountInfo } from '../../redux/actions/membershipApplication'
+import {
+  updateAccountInfo,
+  updateFacebookInfo,
+} from '../../redux/actions/membershipApplication'
 
 const validate = require('validate.js')
 
@@ -42,6 +45,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   updateAccountInfo,
+  updateFacebookInfo,
 }
 
 class SignUpScreen extends Component {
@@ -66,14 +70,19 @@ class SignUpScreen extends Component {
       Alert.alert('There was an error logging into Facebook.')
     } else {
       // Retrieve and save user details, then navigate
+
+      const facebookInfo = {
+        facebookToken: this.state.facebookToken,
+        firstName: result.first_name,
+        lastName: result.last_name,
+        email: result.email,
+        password: '',
+        profilePicture: result.picture.data.url,
+      }
+      this.props.updateFacebookInfo(facebookInfo)
+
       this.props.navigation.navigate('PersonalDetails', {
-        userInfo: {
-          facebookToken: this.state.facebookToken,
-          firstName: result.first_name,
-          lastName: result.last_name,
-          email: result.email,
-          password: '',
-        },
+        userInfo: facebookInfo,
       })
     }
   }

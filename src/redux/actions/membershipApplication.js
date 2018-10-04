@@ -47,11 +47,31 @@ export const updateDescriptions = ({ descriptions }) => ({
   type: UPDATE_DESCRIPTIONS,
   payload: { descriptions },
 })
-export const updateFacebookInfo = ({ facebookInfo }) => ({
+export const updateFacebookInfo = ({
+  firstName,
+  lastName,
+  facebookToken,
+  profilePicture,
+  email,
+  password,
+}) => ({
   type: UPDATE_FACEBOOK_INFO,
-  payload: { facebookInfo },
+  payload: {
+    firstName,
+    lastName,
+    facebookToken,
+    email,
+    password,
+    profilePicture,
+  },
 })
-export const updateLinkedInInfo = ({ linkedInInfo }) => ({
+export const updateLinkedInInfo = ({
+  linkedInId,
+  firstName,
+  lastName,
+  email,
+  password,
+}) => ({
   type: UPDATE_LINKEDIN_INFO,
-  payload: { linkedInInfo },
+  payload: { linkedInId, firstName, lastName, email, password },
 })

@@ -12,6 +12,13 @@ import {
 import LoadingWrapper from '../../../../components/LoadingWrapper'
 import { LinkedInClientID, LinkedInRedirectUri } from '../../../../../config'
 
+import { connect } from 'react-redux'
+import { updateLinkedInInfo } from '../../../../redux/actions/membershipApplication'
+
+const mapDispatchToProps = {
+  updateLinkedInInfo,
+}
+
 const GET_LINKEDIN_INFO = gql`
   mutation getLinkedInInfo($authorizationCode: String!) {
     getLinkedInInfo(authorizationCode: $authorizationCode) {
@@ -25,7 +32,8 @@ const GET_LINKEDIN_INFO = gql`
     }
   }
 `
-export default class LinkedInRegisterButton extends Component {
+
+class LinkedInRegisterButton extends Component {
   render() {
     return (
       <Mutation
@@ -41,15 +49,15 @@ export default class LinkedInRegisterButton extends Component {
           if (error) {
             Alert.alert('Error Occurred', 'Could not log in with LinkedIn')
           } else {
-            this.props.navigation.navigate('PersonalDetails', {
-              userInfo: {
-                linkedInId,
-                firstName,
-                lastName,
-                email,
-                password: '',
-              },
-            })
+            const userInfo = {
+              linkedInId,
+              firstName,
+              lastName,
+              email,
+              password: '',
+            }
+            this.props.updateLinkedInInfo(userInfo)
+            this.props.navigation.navigate('PersonalDetails', { userInfo })
           }
         }}
       >
@@ -83,3 +91,8 @@ export default class LinkedInRegisterButton extends Component {
     )
   }
 }
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(LinkedInRegisterButton)
