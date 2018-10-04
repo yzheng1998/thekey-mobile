@@ -131,9 +131,7 @@ class DiscoverScreen extends Component {
                     iconSrc={{ uri: MORE_ICON }}
                     onPress={() => {
                       this.toggleInviteFriendModal()
-                      setTimeout(() => {
-                        Share.open(shareOptions)
-                      }, 300)
+                      Share.open(shareOptions)
                     }}
                   >
                     More
