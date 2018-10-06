@@ -12,7 +12,7 @@ import SearchModalHeader from '../SearchModalHeader'
 import SearchBar from '../../../../components/SearchBar'
 import { Query, Mutation } from 'react-apollo'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
-import { reviewableCompanyLimit } from '../../../../constants'
+import { reviewableCompanyLimit } from '../../../../../config'
 import { GET_REVIEWABLE_COMPANIES, CREATE_REVIEWABLE_COMPANY } from './queries'
 
 const defaultImage =

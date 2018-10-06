@@ -159,6 +159,3 @@ export const degreeTypeOptions = [
     label: 'Professional',
   },
 ]
-
-export const reviewableCompanyLimit = 30
-export const reviewsLimit = 30

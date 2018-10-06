@@ -9,7 +9,7 @@ import { FlatList, View } from 'react-native'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import LoadingWrapper from '../../components/LoadingWrapper'
-import { reviewsLimit } from '../../constants'
+import { reviewsLimit } from '../../../config'
 
 const GET_COMPANY_REVIEWS = gql`
   query companyReviews(
