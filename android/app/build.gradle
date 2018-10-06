@@ -156,6 +156,7 @@ dependencies {
         compile 'com.android.support:exifinterface:27.+'
     }
     compile project(':react-native-image-crop-picker')
+    compile project(':react-native-share')
     implementation 'testfairy:testfairy-android-sdk:1.+@aar'
 }
 

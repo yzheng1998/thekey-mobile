@@ -9,11 +9,17 @@ import JobsAndInternshipsCard from '../../../assets/JobsAndInternshipsCard.png'
 import EventsCard from '../../../assets/EventsCard.png'
 import ReviewsCard from '../../../assets/ReviewsCard.png'
 import WelcomeCard from './components/WelcomeCard'
-import DisplayModal from '../../components/DisplayModal'
-import InviteFriend from './components/InviteFriend'
 
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
+
+import Share, { ShareSheet, Button } from 'react-native-share'
+
+const EMAIL_ICON =
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAMAAAANIilAAAABC1BMVEUAAAA/Pz8/Pz9AQEA/Pz8/Pz8+Pj4+Pj4/Pz8/Pz8/Pz8/Pz8+Pj4+Pj4/Pz8/Pz8/Pz9AQEA+Pj5AQEA/Pz87Ozs7Ozs/Pz8+Pj47OztAQEA/Pz89PT01NTVBQUFBQUE/Pz8/Pz8+Pj4/Pz9BQUE+Pj4/Pz8/Pz89PT0+Pj4/Pz9BQUFAQEA9PT09PT0/Pz87Ozs9PT05OTk/Pz8+Pj4/Pz9AQEA/Pz8/Pz8/Pz8/Pz+AgIA+Pj4/Pz8/Pz9AQEA/Pz8/Pz8/Pz8/Pz8+Pj4/Pz8/Pz8/Pz9AQEA+Pj4/Pz8+Pj4/Pz85OTk/Pz8/Pz8/Pz8/Pz88PDw9PT0/Pz88PDw8PDw+Pj45OTlktUJVAAAAWXRSTlMA/7N4w+lCWvSx8etGX/XlnmRO7+1KY/fjOGj44DU7UvndMec/VvLbLj7YKyiJdu9O7jZ6Um1w7DnzWQJz+tpE6uY9t8D9QehAOt7PVRt5q6duEVDwSEysSPRjqHMAAAEfSURBVEjH7ZTXUgIxGEa/TwURUFyKYgMURLCvbe2gYAV7ff8nMRksgEDiKl7lXOxM5p8zO3s2CWAwGAx/CjXontzT25Y+pezxtpv2+xTygJ+BYOvh4BBDwx1lKxxhNNZqNjLK+JjVWUYsykj4+2h8gpNTUMkIBuhPNE+SKU7PQC3D62E60ziYzXIuBx0Z+XRTc9F5fgF6MhKNzWXnRejKWGJdc9GZy8AP3kyurH52Ju01XTkjvnldNN+Qi03RecthfFtPlrXz8rmzi739Ax7mUCjy6FhH/vjPonmqVD6pdT718excLX/tsItLeRAqtc7VLIsFlVy/t6+ub27v7t8XD490niy3p+rZpv3i+jy/Or+5SUrdvcNcywaDwfD/vAF2TBl+G6XvQwAAAABJRU5ErkJggg=='
+
+const MORE_ICON =
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAMAAAANIilAAAAAQlBMVEUAAABEREQ9PT0/Pz8/Pz9AQEA7OzszMzM/Pz8/Pz9FRUU/Pz8/Pz9VVVUAAAA/Pz8+Pj4/Pz8/Pz9BQUFAQEA/Pz+e9yGtAAAAFnRSTlMAD5bv9KgaFJ/yGv+zAwGltPH9LyD5QNQoVwAAAF5JREFUSMft0EkKwCAQRFHHqEnUON3/qkmDuHMlZlVv95GCRsYAAAD+xYVU+hhprHPWjDy1koJPx+L63L5XiJQx9PQPpZiOEz3n0qs2ylZ7lkyZ9oyXzl76MAAAgD1eJM8FMZg0rF4AAAAASUVORK5CYII='
 
 const GET_HAS_LOGGED_IN = gql`
   query viewer {
@@ -54,15 +60,15 @@ class DiscoverScreen extends Component {
   }
 
   render() {
+    const shareOptions = {
+      title: 'React Native',
+      message: 'Download The Key here: ',
+      url: 'https://itunes.apple.com/us/app/the-key-society/id1397945385?mt=8',
+      subject: 'Share Link',
+    }
+
     return (
       <Background>
-        <DisplayModal
-          onBackPress={this.toggleInviteFriendModal}
-          isVisible={this.state.inviteFriendModalVisible}
-          title="Invite Friends!"
-        >
-          <InviteFriend closeModal={this.toggleInviteFriendModal} />
-        </DisplayModal>
         <Query query={GET_HAS_LOGGED_IN}>
           {({ loading, data, error, refetch }) => {
             if (loading) return <View />
@@ -109,6 +115,28 @@ class DiscoverScreen extends Component {
                   completeProfileClicked={this.state.completeProfileClicked}
                   onComplete={this.onComplete}
                 />
+                <ShareSheet
+                  visible={this.state.inviteFriendModalVisible}
+                  onCancel={this.toggleInviteFriendModal}
+                >
+                  <Button
+                    iconSrc={{ uri: EMAIL_ICON }}
+                    onPress={() => {
+                      this.toggleInviteFriendModal()
+                    }}
+                  >
+                    Email
+                  </Button>
+                  <Button
+                    iconSrc={{ uri: MORE_ICON }}
+                    onPress={() => {
+                      this.toggleInviteFriendModal()
+                      Share.open(shareOptions)
+                    }}
+                  >
+                    More
+                  </Button>
+                </ShareSheet>
               </SafeAreaView>
             )
           }}
