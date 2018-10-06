@@ -80,32 +80,38 @@ export default class ReviewScreen extends Component {
         employmentType: TABS[this.state.tab],
       },
       limit: reviewsLimit,
-      offset: this.state.offset,
+      offset: 0,
     }
     return (
       <Background>
-        <ReviewPictureBlock
-          picture={picture}
-          title={title}
-          rating={rating}
-          reviews={numReviews}
-          navigation={this.props.navigation}
-          companyId={companyId}
-          showAddReview={() =>
-            this.setState({ showAddReview: !this.state.showAddReview })
-          }
-        />
-        <ButtonRow navigation={this.props.navigation} />
-        <FilterBlock
-          updateState={this.changeTab}
-          selectedIndex={this.state.tab}
-        />
         <Query query={GET_COMPANY_REVIEWS} variables={variables}>
-          {({ loading, data, refetch }) => {
+          {({ loading, data, refetch, fetchMore }) => {
             if (loading) return <LoadingWrapper loading />
             return (
               <View>
                 <FlatList
+                  ListHeaderComponent={
+                    <View>
+                      <ReviewPictureBlock
+                        picture={picture}
+                        title={title}
+                        rating={rating}
+                        reviews={numReviews}
+                        navigation={this.props.navigation}
+                        companyId={companyId}
+                        showAddReview={() =>
+                          this.setState({
+                            showAddReview: !this.state.showAddReview,
+                          })
+                        }
+                      />
+                      <ButtonRow navigation={this.props.navigation} />
+                      <FilterBlock
+                        updateState={this.changeTab}
+                        selectedIndex={this.state.tab}
+                      />
+                    </View>
+                  }
                   keyExtractor={review => review.id}
                   data={data.companyReviews.nodes}
                   renderItem={({ item: review }) => (
@@ -122,6 +128,36 @@ export default class ReviewScreen extends Component {
                       cons={review.cons}
                     />
                   )}
+                  onEndReachedThreshold={0.55}
+                  onEndReached={() =>
+                    fetchMore({
+                      variables: {
+                        ...variables,
+                        offset: data.companyReviews.nodes.length,
+                      },
+                      updateQuery: (prev, { fetchMoreResult }) => {
+                        if (!fetchMoreResult) return prev
+                        return Object.assign({}, prev, {
+                          companyReviews: Object.assign(
+                            {},
+                            prev.companyReviews,
+                            {
+                              nodes: [
+                                ...prev.companyReviews.nodes,
+                                ...fetchMoreResult.companyReviews.nodes.filter(
+                                  n =>
+                                    !prev.companyReviews.nodes.some(
+                                      p => p.id === n.id,
+                                    ),
+                                ),
+                              ],
+                              pageInfo: fetchMoreResult.companyReviews.pageInfo,
+                            },
+                          ),
+                        })
+                      },
+                    })
+                  }
                 />
                 <AddCompanyReviewModal
                   refetchCompanies={refetchCompanies}

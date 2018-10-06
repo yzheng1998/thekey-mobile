@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
-export const Background = styled.ScrollView`
+export const Background = styled.View`
   width: 100%;
   background-color: ${themeGet('colors.background')};
 `

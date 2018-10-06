@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { AddReviewButton, ThinDivider } from './styles'
-import { FlatList, ScrollView, View, StatusBar } from 'react-native'
+import { FlatList, View, StatusBar } from 'react-native'
 import CompanyCard from '../../components/CompanyCard'
 import CompanySearchModal from './components/CompanySearchModal'
 import SearchBar from '../../components/SearchBar'
@@ -24,7 +24,6 @@ class ReviewsScreen extends Component {
     companyId: '',
     companyName: '',
     picture: '',
-    offset: 0,
   }
 
   updateText = searchText => {
@@ -44,7 +43,7 @@ class ReviewsScreen extends Component {
         name: this.state.searchText,
         highestRated: this.state.tab === 1,
       },
-      offset: this.state.offset,
+      offset: 0,
       limit: reviewableCompanyLimit,
     }
     return (
@@ -61,47 +60,76 @@ class ReviewsScreen extends Component {
           placeholderText="Search All Reviews"
         />
         <ThinDivider />
-        <ScrollView keyboardShouldPersistTaps="handled">
-          <Query query={GET_REVIEWABLE_COMPANIES} variables={variables}>
-            {({ loading, data, refetch }) => {
-              if (loading) return <LoadingWrapper loading />
-              return (
-                <View>
-                  <FlatList
-                    keyboardShouldPersistTaps="handled"
-                    keyExtractor={reviewableCompany => reviewableCompany.id}
-                    data={data.reviewableCompanies.nodes}
-                    renderItem={({ item }) => (
-                      <CompanyCard
-                        refetchCompanies={refetch}
-                        picture={item.image || defaultImage}
-                        title={item.name}
-                        rating={item.rating}
-                        companyName={item.name}
-                        companyId={item.id}
-                        navigation={this.props.navigation}
-                        numReviews={item.reviews.totalCount}
-                      />
-                    )}
-                  />
-                  <AddCompanyReviewModal
-                    refetchReviews={refetch}
-                    state={this.state}
-                    isVisible={this.state.showAddReview}
-                    hideAddReview={() =>
-                      this.setState({
-                        showAddReview: !this.state.showAddReview,
-                        companyId: '',
-                        companyName: '',
-                        picture: '',
-                      })
-                    }
-                  />
-                </View>
-              )
-            }}
-          </Query>
-        </ScrollView>
+        <Query query={GET_REVIEWABLE_COMPANIES} variables={variables}>
+          {({ loading, data, refetch, fetchMore }) => {
+            if (loading) return <LoadingWrapper loading />
+            return (
+              <View>
+                <FlatList
+                  keyboardShouldPersistTaps="handled"
+                  keyExtractor={reviewableCompany => reviewableCompany.id}
+                  data={data.reviewableCompanies.nodes}
+                  renderItem={({ item }) => (
+                    <CompanyCard
+                      refetchCompanies={refetch}
+                      picture={item.image || defaultImage}
+                      title={item.name}
+                      rating={item.rating}
+                      companyName={item.name}
+                      companyId={item.id}
+                      navigation={this.props.navigation}
+                      numReviews={item.reviews.totalCount}
+                    />
+                  )}
+                  onEndReachedThreshold={0.35}
+                  onEndReached={() =>
+                    fetchMore({
+                      variables: {
+                        ...variables,
+                        offset: data.reviewableCompanies.nodes.length,
+                      },
+                      updateQuery: (prev, { fetchMoreResult }) => {
+                        if (!fetchMoreResult) return prev
+                        return Object.assign({}, prev, {
+                          reviewableCompanies: Object.assign(
+                            {},
+                            prev.reviewableCompanies,
+                            {
+                              nodes: [
+                                ...prev.reviewableCompanies.nodes,
+                                ...fetchMoreResult.reviewableCompanies.nodes.filter(
+                                  n =>
+                                    !prev.reviewableCompanies.nodes.some(
+                                      p => p.id === n.id,
+                                    ),
+                                ),
+                              ],
+                              pageInfo:
+                                fetchMoreResult.reviewableCompanies.pageInfo,
+                            },
+                          ),
+                        })
+                      },
+                    })
+                  }
+                />
+                <AddCompanyReviewModal
+                  refetchReviews={refetch}
+                  state={this.state}
+                  isVisible={this.state.showAddReview}
+                  hideAddReview={() =>
+                    this.setState({
+                      showAddReview: !this.state.showAddReview,
+                      companyId: '',
+                      companyName: '',
+                      picture: '',
+                    })
+                  }
+                />
+              </View>
+            )
+          }}
+        </Query>
         <AddReviewButton onPress={this.toggleSearchModal}>
           <Icon name="plus" size={18} color="white" />
         </AddReviewButton>
