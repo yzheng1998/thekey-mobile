@@ -71,31 +71,38 @@ class ChatInbox extends Component {
                   },
                   updateQuery: (prev, { fetchMoreResult }) => {
                     if (!fetchMoreResult) return prev
-                    return {
-                      ...prev,
+
+                    // Make sure that there are no repeat nodes
+                    const newNodes = [
+                      ...prev.viewer.chats.nodes,
+                      ...fetchMoreResult.viewer.chats.nodes.filter(
+                        n => !prev.viewer.chats.nodes.some(p => p.id === n.id),
+                      ),
+                    ]
+
+                    const newChats = {
+                      ...prev.viewer.chats,
                       ...{
-                        viewer: {
-                          ...prev.viewer,
-                          ...{
-                            chats: {
-                              ...prev.viewer.chats,
-                              ...{
-                                nodes: [
-                                  ...prev.viewer.chats.nodes,
-                                  ...fetchMoreResult.viewer.chats.nodes.filter(
-                                    n =>
-                                      !prev.viewer.chats.nodes.some(
-                                        p => p.id === n.id,
-                                      ),
-                                  ),
-                                ],
-                                pageInfo: fetchMoreResult.viewer.chats.pageInfo,
-                              },
-                            },
-                          },
-                        },
+                        nodes: newNodes,
+                        pageInfo: fetchMoreResult.viewer.chats.pageInfo,
                       },
                     }
+
+                    const newViewer = {
+                      ...prev.viewer,
+                      ...{
+                        chats: newChats,
+                      },
+                    }
+
+                    const newQuery = {
+                      ...prev,
+                      ...{
+                        viewer: newViewer,
+                      },
+                    }
+
+                    return newQuery
                   },
                 })
               }
