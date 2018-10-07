@@ -1,14 +1,15 @@
 import { AsyncStorage, View } from 'react-native'
 import React, { Component } from 'react'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
 import { Background } from './styles'
 import { GET_CHAT_AND_VIEWER } from './queries'
+import LoadingWrapper from '../../components/LoadingWrapper'
 import KeyboardSpacer from '../../components/KeyboardSpacer'
 import MessageInput from './components/MessageInput'
 import MessagesDisplay from './components/MessagesDisplay'
 import ConversationHeader from './components/ConversationHeader'
-import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
-import LoadingWrapper from '../../components/LoadingWrapper'
+import config from '../../../config'
 
 const CHAT_SUBSCRIPTION = gql`
   subscription messageAdded($chatId: ID!, $token: String!) {
@@ -41,7 +42,11 @@ class ConversationScreen extends Component {
   render() {
     const { id: chatId } = this.props.navigation.getParam('chat')
 
-    const variables = { chatId }
+    const variables = {
+      chatId,
+      offset: 0,
+      limit: config.messageLimit,
+    }
 
     const handlePress = () => {
       this.flatListRef.current.scrollToOffset({
@@ -83,13 +88,40 @@ class ConversationScreen extends Component {
                       updateQuery: (oldQuery, { subscriptionData }) => {
                         if (!subscriptionData.data) return oldQuery
                         const message = subscriptionData.data.messageAdded
-                        const newQuery = {
-                          ...oldQuery,
-                          chat: {
-                            ...oldQuery.chat,
-                            messages: [message, ...oldQuery.chat.messages],
+
+                        const newNodes = [
+                          message,
+                          ...oldQuery.chat.messages.nodes,
+                        ]
+
+                        const newPageInfo = {
+                          ...oldQuery.chat.messages.pageInfo,
+                          offset: oldQuery.chat.messages.pageInfo.offset + 1,
+                          limit: oldQuery.chat.messages.pageInfo.limit,
+                        }
+
+                        const newMessages = {
+                          ...oldQuery.chat.messages,
+                          ...{
+                            nodes: newNodes,
+                            pageInfo: newPageInfo,
                           },
                         }
+
+                        const newChat = {
+                          ...oldQuery.chat,
+                          ...{
+                            messages: newMessages,
+                          },
+                        }
+
+                        const newQuery = {
+                          ...oldQuery,
+                          ...{
+                            chat: newChat,
+                          },
+                        }
+
                         handlePress()
                         return newQuery
                       },
