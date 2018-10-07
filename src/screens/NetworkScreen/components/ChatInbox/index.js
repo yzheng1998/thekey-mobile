@@ -4,9 +4,14 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import ChatCard from '../../../../components/ChatCard'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
+import config from '../../../../../config'
 
 const GET_CHATS = gql`
-  query viewerWithChats($chatsFilterInput: ChatsFilterInput!) {
+  query viewerWithChats(
+    $chatsFilterInput: ChatsFilterInput!
+    $offset: Int
+    $limit: Int
+  ) {
     viewer {
       ... on User {
         id
@@ -14,28 +19,39 @@ const GET_CHATS = gql`
         lastName
         profilePicture
         email
-        chats(chatsFilterInput: $chatsFilterInput) {
-          id
-          participants {
+        chats(
+          chatsFilterInput: $chatsFilterInput
+          offset: $offset
+          limit: $limit
+        ) {
+          nodes {
             id
-            firstName
-            lastName
-            profilePicture
-          }
-          messages {
-            id
-            sender {
+            participants {
               id
               firstName
               lastName
+              profilePicture
             }
-            content
-            chat {
-              messages {
+            messages(offset: 0, limit: 1) {
+              nodes {
+                id
+                sender {
+                  id
+                  firstName
+                  lastName
+                }
                 content
+                createdAt
+              }
+              pageInfo {
+                offset
+                limit
               }
             }
-            createdAt
+          }
+          pageInfo {
+            offset
+            limit
           }
         }
       }
@@ -58,48 +74,84 @@ class ChatInbox extends Component {
 
   render() {
     const { searchText, tab } = this.props
+    const variables = {
+      chatsFilterInput: {
+        participant: searchText,
+        connectionsOnly: tab === 1,
+        groupsOnly: tab === 2,
+      },
+      limit: config.chatLimit,
+      offset: 0,
+    }
     return (
-      <Query
-        query={GET_CHATS}
-        variables={{
-          chatsFilterInput: {
-            participant: searchText,
-            connectionsOnly: tab === 1,
-            groupsOnly: tab === 2,
-          },
-        }}
-        pollInterval={5000}
-      >
-        {({ loading, data }) => {
+      <Query query={GET_CHATS} variables={variables}>
+        {({ loading, data, fetchMore }) => {
           if (loading) return <LoadingWrapper loading />
           return (
             <FlatList
               keyboardShouldPersistTaps="handled"
               keyExtractor={chat => chat.id}
-              data={data.viewer.chats}
-              renderItem={({ item: chat }) => (
-                <ChatCard
-                  name={this.showParticipantNames(
-                    chat.participants.filter(x => x.id !== data.viewer.id),
-                  )}
-                  message={chat.messages.length ? chat.messages[0].content : ''}
-                  profileImage={chat.participants
-                    .filter(x => x.id !== data.viewer.id)
-                    .map(x => `${x.profilePicture}`)
-                    .join(', ')}
-                  timeStamp={
-                    chat.messages.length
-                      ? chat.messages[chat.messages.length - 1].createdAt
-                      : ''
-                  }
-                  onPress={() =>
-                    this.props.navigation.navigate('Conversation', {
-                      chat,
-                      viewer: data.viewer,
-                    })
-                  }
-                />
-              )}
+              data={data.viewer.chats.nodes}
+              renderItem={({ item: chat }) => {
+                const lastMessage =
+                  chat.messages.nodes.length && chat.messages.nodes[0]
+                return (
+                  <ChatCard
+                    name={this.showParticipantNames(
+                      chat.participants.filter(x => x.id !== data.viewer.id),
+                    )}
+                    message={lastMessage ? lastMessage.content : ''}
+                    profileImage={chat.participants
+                      .filter(x => x.id !== data.viewer.id)
+                      .map(x => `${x.profilePicture}`)
+                      .join(', ')}
+                    timeStamp={lastMessage ? lastMessage.createdAt : ''}
+                    onPress={() =>
+                      this.props.navigation.navigate('Conversation', {
+                        chat,
+                        viewer: data.viewer,
+                      })
+                    }
+                  />
+                )
+              }}
+              onEndReachedThreshold={0.25}
+              onEndReached={() =>
+                fetchMore({
+                  variables: {
+                    ...variables,
+                    offset: data.viewer.chats.nodes.length,
+                  },
+                  updateQuery: (prev, { fetchMoreResult }) => {
+                    if (!fetchMoreResult) return prev
+                    return {
+                      ...prev,
+                      ...{
+                        viewer: {
+                          ...prev.viewer,
+                          ...{
+                            chats: {
+                              ...prev.viewer.chats,
+                              ...{
+                                nodes: [
+                                  ...prev.viewer.chats.nodes,
+                                  ...fetchMoreResult.viewer.chats.nodes.filter(
+                                    n =>
+                                      !prev.viewer.chats.nodes.some(
+                                        p => p.id === n.id,
+                                      ),
+                                  ),
+                                ],
+                                pageInfo: fetchMoreResult.viewer.chats.pageInfo,
+                              },
+                            },
+                          },
+                        },
+                      },
+                    }
+                  },
+                })
+              }
             />
           )
         }}
