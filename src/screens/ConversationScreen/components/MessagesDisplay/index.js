@@ -64,7 +64,7 @@ class MessagesDisplay extends Component {
           ref={this.props.flatListRef}
           inverted
           keyExtractor={message => message.id}
-          data={chat.messages}
+          data={chat.messages.nodes}
           renderItem={({ item }) => (
             <View>
               {isGroupMessage === true &&
