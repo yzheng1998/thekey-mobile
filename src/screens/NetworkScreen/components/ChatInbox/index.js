@@ -1,63 +1,10 @@
 import React, { Component } from 'react'
 import { FlatList } from 'react-native'
 import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
+import { GET_CHATS } from './queries'
 import ChatCard from '../../../../components/ChatCard'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
 import config from '../../../../../config'
-
-const GET_CHATS = gql`
-  query viewerWithChats(
-    $chatsFilterInput: ChatsFilterInput!
-    $offset: Int
-    $limit: Int
-  ) {
-    viewer {
-      ... on User {
-        id
-        firstName
-        lastName
-        profilePicture
-        email
-        chats(
-          chatsFilterInput: $chatsFilterInput
-          offset: $offset
-          limit: $limit
-        ) {
-          nodes {
-            id
-            participants {
-              id
-              firstName
-              lastName
-              profilePicture
-            }
-            messages(offset: 0, limit: 1) {
-              nodes {
-                id
-                sender {
-                  id
-                  firstName
-                  lastName
-                }
-                content
-                createdAt
-              }
-              pageInfo {
-                offset
-                limit
-              }
-            }
-          }
-          pageInfo {
-            offset
-            limit
-          }
-        }
-      }
-    }
-  }
-`
 
 class ChatInbox extends Component {
   state = {
