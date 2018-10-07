@@ -4,6 +4,7 @@ import { Query } from 'react-apollo'
 import { GET_CHATS } from './queries'
 import ChatCard from '../../../../components/ChatCard'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
+import FriendRequestList from '../FriendRequestList'
 import config from '../../../../../config'
 
 class ChatInbox extends Component {
@@ -37,6 +38,9 @@ class ChatInbox extends Component {
           return (
             <FlatList
               keyboardShouldPersistTaps="handled"
+              ListHeaderComponent={
+                <FriendRequestList navigation={this.props.navigation} />
+              }
               keyExtractor={chat => chat.id}
               data={data.viewer.chats.nodes}
               renderItem={({ item: chat }) => {
