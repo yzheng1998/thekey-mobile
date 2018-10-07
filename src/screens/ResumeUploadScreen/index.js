@@ -11,9 +11,8 @@ import {
   DocumentPicker,
   DocumentPickerUtil,
 } from 'react-native-document-picker'
-import RNFS from 'react-native-fs'
+import axios from 'axios'
 import uuid from 'uuid/v4'
-import gql from 'graphql-tag'
 import { SEND_MEMBERSHIP_APPLICATION } from './mutations'
 import config from '../../../config'
 
@@ -40,14 +39,6 @@ function humanFileSize(bytes, si) {
   return `${bytesCounter.toFixed(1)} ${units[u]}`
 }
 
-const SIGN_S3_URL = gql`
-  mutation signS3Url($signS3UrlInput: SignS3UrlInput!) {
-    signS3Url(signS3UrlInput: $signS3UrlInput) {
-      url
-    }
-  }
-`
-
 class ResumeUploadScreen extends Component {
   constructor(props) {
     super(props)
@@ -65,8 +56,8 @@ class ResumeUploadScreen extends Component {
     this.setState({ resumeListData: filteredList })
   }
 
-  handleProgress = (id, { totalBytesExpectedToSend, totalBytesSent }) => {
-    const progress = `${(totalBytesSent / totalBytesExpectedToSend) * 100}%`
+  handleProgress = (id, total, sent) => {
+    const progress = `${(sent / total) * 100}%`
     this.setState({
       resumeListData: [
         {
@@ -78,60 +69,45 @@ class ResumeUploadScreen extends Component {
     })
   }
 
-  handleFile = (err, res) => {
+  handleFile = async (err, res) => {
     const id = uuid()
 
-    this.props.client
-      .mutate({
-        mutation: SIGN_S3_URL,
-        variables: {
-          signS3UrlInput: {
-            fileName: res.fileName,
-            contentType: 'application/pdf',
-          },
-        },
-      })
-      .then(async ({ data }) => {
-        const {
-          signS3Url: { url },
-        } = data
-        const imageNameRegEx = /.*amazonaws.com\/(.*)\?.*/
-        const match = imageNameRegEx.exec(data.signS3Url.url)
-        const imageName = match.length > 0 ? match[1] : ''
-        const finalUrl = config.s3Bucket + imageName
-        const item = {
-          id,
-          title: res.fileName,
-          dataSize: humanFileSize(res.fileSize),
-          progress: '0%',
-          url: finalUrl,
-        }
-        this.setState({
-          resumeListData: [item, ...this.state.resumeListData],
-        })
-        const fileUrl = res.uri.substring(7)
-        const split = fileUrl.split('/')
-        const name = split.pop()
-        const inbox = split.pop()
-        const realPath = `${RNFS.TemporaryDirectoryPath}${inbox}/${name}`
+    const { uri, type: mimeType, fileName } = res
+    const formData = new FormData()
+    formData.append('file', { uri, type: mimeType, name: fileName })
 
-        RNFS.uploadFiles({
-          toUrl: url,
-          files: [
-            {
-              name,
-              filename: name,
-              filepath: realPath,
-            },
-          ],
-          headers: {
-            'Content-Type': 'application/pdf',
-          },
-          method: 'PUT',
-          progressCallback: result => this.handleProgress(id, result),
-          progress: result => this.handleProgress(id, result),
-        })
-      })
+    const item = {
+      id,
+      title: res.fileName,
+      dataSize: humanFileSize(res.fileSize),
+      progress: '0%',
+    }
+    this.setState({
+      resumeListData: [item, ...this.state.resumeListData],
+    })
+
+    const result = await axios({
+      method: 'post',
+      data: formData,
+      params: { key: res.fileName },
+      url: `${config.restUrl}upload`,
+      timeout: 10000, // default is `0` (no timeout)
+      onUploadProgress: progressEvent => {
+        this.handleProgress(id, progressEvent.total, progressEvent.loaded)
+      },
+    })
+    const finalUrl = result.data.url
+
+    this.setState({
+      resumeListData: [
+        {
+          ...this.state.resumeListData.find(el => el.id === id),
+          progress: '100%',
+          finalUrl,
+        },
+        ...this.state.resumeListData.filter(el => el.id !== id),
+      ],
+    })
   }
 
   handlePress = () => {
