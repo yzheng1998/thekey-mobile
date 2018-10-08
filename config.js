@@ -6,6 +6,7 @@ module.exports = {
   LinkedInRedirectUri: 'https://thekey-api-staging.herokuapp.com/auth/linkedin',
   s3Bucket: 'https://s3.amazonaws.com/thekey-events/',
   geocoderApiKey: 'AIzaSyCVvYisZmFqXG0cFD9B6r8utyxnQyzo0r4',
+  gcmSenderId: process.env.GCM_SENDER_ID || '63293492677',
   reviewableCompanyLimit: 50,
   reviewsLimit: 50,
   eventsLimit: 50,
