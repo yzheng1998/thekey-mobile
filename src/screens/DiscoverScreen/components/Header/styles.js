@@ -36,4 +36,18 @@ export const Name = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   font-size: 14px;
 `
-export const InviteButton = styled.TouchableOpacity``
+export const InviteButton = styled.TouchableOpacity`
+  background-color: ${themeGet('colors.background')};
+  border-radius: 8px;
+  border-color: ${themeGet('colors.buttonPrimary')};
+  border-width: 1.5;
+  padding-left: 5px;
+  padding-right: 5px;
+`
+
+export const InviteText = styled.Text`
+  font-family: ${themeGet('fonts.heavy')};
+  font-size: 14px;
+  line-height: 25px;
+  color: ${themeGet('colors.buttonPrimary')};
+`
