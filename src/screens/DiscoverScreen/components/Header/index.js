@@ -9,11 +9,11 @@ import {
   Title,
   TextBox,
   InviteButton,
+  InviteText,
 } from './styles'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
-import AddUser from 'react-native-vector-icons/MaterialIcons'
 
 const GET_VIEWER = gql`
   query viewer {
@@ -45,7 +45,7 @@ export default class Header extends Component {
           <Title>Discover</Title>
         </TextBox>
         <InviteButton onPress={toggleInviteFriendModal}>
-          <AddUser name="person-add" size={27} color="rgb(244, 89, 82)" />
+          <InviteText>Invite</InviteText>
         </InviteButton>
         <Query query={GET_VIEWER}>
           {({ data, error, loading }) => {
