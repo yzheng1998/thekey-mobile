@@ -14,6 +14,7 @@ import {
   Spacer,
 } from './styles'
 import { GET_EVENTS, GET_SUGGESTED_EVENTS } from './query'
+import { eventsLimit } from '../../../config'
 
 class EventsScreen extends Component {
   static navigationOptions = {
@@ -73,6 +74,8 @@ class EventsScreen extends Component {
         tag: this.state.searchText,
         title: this.state.searchText,
       },
+      limit: eventsLimit,
+      offset: 0,
     }
     return (
       <View style={{ backgroundColor: 'white', flex: 1 }}>
@@ -90,10 +93,15 @@ class EventsScreen extends Component {
         <Background keyboardShouldPersistTaps="handled">
           <Query query={query} variables={variables}>
             {({ loading, data }) => {
+              if (loading) return <LoadingWrapper loading />
               const usableData =
-                searchText || currentTab ? data.events : data.suggestedEvents
+                searchText || currentTab
+                  ? data.events.nodes
+                  : data.suggestedEvents.nodes
               const interestedEvents = filterByInterested
-                ? data.suggestedEvents.filter(e => e.isInterested === true)
+                ? data.suggestedEvents.nodes.filter(
+                    e => e.isInterested === true,
+                  )
                 : searchText
 
               return (
@@ -110,33 +118,43 @@ class EventsScreen extends Component {
           </Query>
           <Subtitle>More Events</Subtitle>
           <Description>Other events nearby</Description>
-          <Query query={GET_EVENTS} variables={{ eventsFilterInput: {} }}>
-            {({ loading, data }) => (
-              <LoadingWrapper loading={loading}>
-                <FlatList
-                  ListFooterComponent={<View style={{ height: 20 }} />}
-                  keyboardShouldPersistTaps="handled"
-                  keyExtractor={event => event.id}
-                  data={data.events}
-                  renderItem={({ item }) => (
-                    <SmallCardContainer>
-                      <SmallEventCard
-                        navigate={id =>
-                          this.props.navigation.navigate('Event', { id })
-                        }
-                        event={item}
-                        navigateToPeopleList={friends =>
-                          this.props.navigation.navigate('PeopleList', {
-                            people: friends,
-                            title: 'Interested Friends',
-                          })
-                        }
-                      />
-                    </SmallCardContainer>
-                  )}
-                />
-              </LoadingWrapper>
-            )}
+          <Query
+            query={GET_EVENTS}
+            variables={{
+              eventsFilterInput: {},
+              limit: eventsLimit,
+              offset: 0,
+            }}
+          >
+            {({ loading, data }) => {
+              if (loading) return <LoadingWrapper loading />
+              return (
+                <LoadingWrapper loading={loading}>
+                  <FlatList
+                    ListFooterComponent={<View style={{ height: 20 }} />}
+                    keyboardShouldPersistTaps="handled"
+                    keyExtractor={event => event.id}
+                    data={data.events.nodes}
+                    renderItem={({ item }) => (
+                      <SmallCardContainer>
+                        <SmallEventCard
+                          navigate={id =>
+                            this.props.navigation.navigate('Event', { id })
+                          }
+                          event={item}
+                          navigateToPeopleList={friends =>
+                            this.props.navigation.navigate('PeopleList', {
+                              people: friends,
+                              title: 'Interested Friends',
+                            })
+                          }
+                        />
+                      </SmallCardContainer>
+                    )}
+                  />
+                </LoadingWrapper>
+              )
+            }}
           </Query>
           <Spacer />
         </Background>

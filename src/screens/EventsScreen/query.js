@@ -1,57 +1,79 @@
 import gql from 'graphql-tag'
 
 export const GET_EVENTS = gql`
-  query events($eventsFilterInput: EventsFilterInput!) {
-    events(eventsFilterInput: $eventsFilterInput) {
-      id
-      location
-      dateRange
-      title
-      picture
-      details
-      link
-      price
-      tags {
-        name
-      }
-      interestedFriends {
+  query events(
+    $eventsFilterInput: EventsFilterInput!
+    $offset: Int
+    $limit: Int
+  ) {
+    events(
+      eventsFilterInput: $eventsFilterInput
+      offset: $offset
+      limit: $limit
+    ) {
+      nodes {
         id
-        firstName
-        lastName
-        profilePicture
+        location
+        dateRange
+        title
+        picture
+        details
+        link
+        price
+        tags {
+          name
+        }
+        interestedFriends {
+          id
+          firstName
+          lastName
+          profilePicture
+        }
+        company {
+          id
+        }
+        isInterested
       }
-      company {
-        id
+      totalCount
+      pageInfo {
+        offset
+        limit
       }
-      isInterested
     }
   }
 `
 
 export const GET_SUGGESTED_EVENTS = gql`
-  query suggestedEvents {
-    suggestedEvents {
-      id
-      location
-      dateRange
-      title
-      picture
-      details
-      link
-      price
-      tags {
-        name
-      }
-      interestedFriends {
+  query suggestedEvents($offset: Int, $limit: Int) {
+    suggestedEvents(offset: $offset, limit: $limit) {
+      nodes {
         id
-        firstName
-        lastName
-        profilePicture
+        location
+        dateRange
+        title
+        picture
+        details
+        link
+        price
+        tags {
+          name
+        }
+        interestedFriends {
+          id
+          firstName
+          lastName
+          profilePicture
+        }
+        company {
+          id
+        }
+        isInterested
       }
-      company {
-        id
+      totalCount
+      pageInfo {
+        offset
+        limit
       }
-      isInterested
     }
   }
 `
