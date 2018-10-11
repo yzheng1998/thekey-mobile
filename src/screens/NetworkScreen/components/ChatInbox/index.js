@@ -75,7 +75,6 @@ class ChatInbox extends Component {
                   },
                   updateQuery: (prev, { fetchMoreResult }) => {
                     if (!fetchMoreResult) return prev
-
                     // Make sure that there are no repeat nodes
                     const newNodes = [
                       ...prev.viewer.chats.nodes,
@@ -105,7 +104,6 @@ class ChatInbox extends Component {
                         viewer: newViewer,
                       },
                     }
-
                     return newQuery
                   },
                 })

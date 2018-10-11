@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FlatList, View } from 'react-native'
+import { FlatList, ScrollView, View } from 'react-native'
 import MessageBubble from '../MessageBubble'
 import {
   Name,
@@ -56,36 +56,40 @@ class MessagesDisplay extends Component {
     this.props.subscribe()
   }
   render() {
-    const { chat, userId, isGroupMessage, refreshData } = this.props
+    const { chat, userId, isGroupMessage, refreshData, ...rest } = this.props
     refreshData()
     return (
       <Screen>
-        <FlatList
-          ref={this.props.flatListRef}
-          inverted
-          keyExtractor={message => message.id}
-          data={chat.messages.nodes}
-          renderItem={({ item }) => (
-            <View>
-              {isGroupMessage === true &&
-                item.sender.id !== userId && (
-                  <SenderGroupChatMessage
-                    chat={chat}
-                    item={item}
-                    userId={userId}
-                  />
-                )}
-              {(isGroupMessage === false ||
-                (isGroupMessage && item.sender.id === userId)) && (
-                <MessageBubble
-                  key={item.id}
-                  isUser={item.sender.id === userId}
-                  message={item.content}
-                />
+        <ScrollView>
+          <View>
+            <FlatList
+              ref={this.props.flatListRef}
+              keyExtractor={message => message.id}
+              data={chat.messages.nodes}
+              inverted
+              renderItem={({ item }) => (
+                <View>
+                  {isGroupMessage === true &&
+                    item.sender.id !== userId && (
+                      <SenderGroupChatMessage
+                        chat={chat}
+                        item={item}
+                        userId={userId}
+                      />
+                    )}
+                  {(isGroupMessage === false ||
+                    (isGroupMessage && item.sender.id === userId)) && (
+                    <MessageBubble
+                      key={item.id}
+                      isUser={item.sender.id === userId}
+                      message={item.content}
+                    />
+                  )}
+                </View>
               )}
-            </View>
-          )}
-        />
+            />
+          </View>
+        </ScrollView>
       </Screen>
     )
   }

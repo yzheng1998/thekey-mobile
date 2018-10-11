@@ -32,7 +32,7 @@ const GET_FRIEND_REQUESTS = gql`
 export default class FriendRequestList extends Component {
   render() {
     return (
-      <Query query={GET_FRIEND_REQUESTS} pollInterval={5000}>
+      <Query query={GET_FRIEND_REQUESTS}>
         {({ loading, data, refetch }) => {
           if (loading) return <LoadingWrapper loading />
           return (

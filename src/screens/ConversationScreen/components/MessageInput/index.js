@@ -28,6 +28,8 @@ export default class MessageInput extends Component {
           chatId={this.props.chatId}
           content={this.state.content}
           clearMessage={this.clearMessage}
+          limit={this.props.limit}
+          offset={this.props.offset}
         />
       </Container>
     )

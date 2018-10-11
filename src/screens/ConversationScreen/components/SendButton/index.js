@@ -29,6 +29,7 @@ const SEND_MESSAGE = gql`
 export default class SendButton extends Component {
   render() {
     // need to add better error handeling in update for if error is set
+    const { chatId, offset, limit } = this.props
     return (
       <Mutation
         mutation={SEND_MESSAGE}
@@ -41,21 +42,47 @@ export default class SendButton extends Component {
             },
           },
         ) => {
+          console.log('Message', message)
+          console.log('Cache', cache)
+          console.log('Chat', chatId)
+          console.log('Offset', offset)
+          console.log('Limit', limit)
           const oldQuery = cache.readQuery({
             query: GET_CHAT_AND_VIEWER,
-            variables: { chatId: this.props.chatId },
+            variables: { chatId, offset, limit },
           })
-          const newQuery = {
-            ...oldQuery,
-            chat: {
-              ...oldQuery.chat,
-              messages: [message, ...oldQuery.chat.messages],
+          const newNodes = [message, ...oldQuery.chat.messages.nodes]
+
+          const newPageInfo = {
+            ...oldQuery.chat.messages.pageInfo,
+          }
+
+          const newMessages = {
+            ...oldQuery.chat.messages,
+            ...{
+              nodes: newNodes,
+              pageInfo: newPageInfo,
             },
           }
+
+          const newChat = {
+            ...oldQuery.chat,
+            ...{
+              messages: newMessages,
+            },
+          }
+
+          const newQuery = {
+            ...oldQuery,
+            ...{
+              chat: newChat,
+            },
+          }
+
           cache.writeQuery({
             query: GET_CHAT_AND_VIEWER,
             data: newQuery,
-            variables: { chatId: this.props.chatId },
+            variables: { chatId, offset, limit },
           })
         }}
       >
