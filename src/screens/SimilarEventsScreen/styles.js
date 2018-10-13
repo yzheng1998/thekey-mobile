@@ -7,9 +7,6 @@ export const Background = styled.View`
 export const HeaderBackground = styled.View`
   height: 10px;
 `
-export const EventsContainer = styled.ScrollView`
-  height: 100%;
-`
 export const EventContainer = styled.View`
   padding-left: 16px;
   padding-right: 16px;
