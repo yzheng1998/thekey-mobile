@@ -7,10 +7,7 @@ module.exports = {
   LinkedInRedirectUri: 'https://thekey-api-staging.herokuapp.com/auth/linkedin',
   s3Bucket: 'https://s3.amazonaws.com/thekey-events/',
   geocoderApiKey: 'AIzaSyCVvYisZmFqXG0cFD9B6r8utyxnQyzo0r4',
-<<<<<<< HEAD
   reviewableCompanyLimit: 30,
   reviewsLimit: 30,
-=======
-  eventsLimit: 5,
->>>>>>> 55b07376... fix events queries
+  eventsLimit: 20,
 }

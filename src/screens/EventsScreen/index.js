@@ -6,13 +6,7 @@ import HorizontalEventsScroll from './components/HorizontalEventsScroll'
 import SmallEventCard from './components/SmallEventCard'
 import EventsHeader from './components/EventsHeader'
 import LoadingWrapper from '../../components/LoadingWrapper'
-import {
-  Background,
-  Subtitle,
-  Description,
-  SmallCardContainer,
-  Spacer,
-} from './styles'
+import { Background, Subtitle, Description, SmallCardContainer } from './styles'
 import { GET_EVENTS, GET_SUGGESTED_EVENTS } from './query'
 import { eventsLimit } from '../../../config'
 
@@ -66,6 +60,7 @@ class EventsScreen extends Component {
     const filterByInterested = this.state.tab === 4 // same as saved events
 
     const query = searchText || currentTab ? GET_EVENTS : GET_SUGGESTED_EVENTS
+    const eventType = searchText || currentTab ? 'events' : 'suggestedEvents'
 
     const variables = {
       eventsFilterInput: {
@@ -92,24 +87,41 @@ class EventsScreen extends Component {
         />
         <Background keyboardShouldPersistTaps="handled">
           <Query query={query} variables={variables}>
-            {({ loading, data }) => {
+            {({ loading, data, fetchMore }) => {
               if (loading) return <LoadingWrapper loading />
-              const usableData =
-                searchText || currentTab
-                  ? data.events.nodes
-                  : data.suggestedEvents.nodes
-              const interestedEvents = filterByInterested
-                ? data.suggestedEvents.nodes.filter(
-                    e => e.isInterested === true,
-                  )
-                : searchText
-
+              const eventsList = filterByInterested
+                ? data[eventType].nodes.filter(e => e.isInterested === true)
+                : data[eventType].nodes
               return (
                 <LoadingWrapper loading={loading}>
                   <HorizontalEventsScroll
-                    eventsList={
-                      filterByInterested ? interestedEvents : usableData
-                    }
+                    onEndReachedThreshold={0.25}
+                    onEndReached={() => {
+                      fetchMore({
+                        variables: {
+                          ...variables,
+                          offset: eventsList.length,
+                        },
+                        updateQuery: (prev, { fetchMoreResult }) => {
+                          if (!fetchMoreResult) return prev
+                          return Object.assign({}, prev, {
+                            [eventType]: Object.assign({}, prev[eventType], {
+                              nodes: [
+                                ...prev[eventType].nodes,
+                                ...fetchMoreResult[eventType].nodes.filter(
+                                  n =>
+                                    !prev[eventType].nodes.some(
+                                      p => p.id === n.id,
+                                    ),
+                                ),
+                              ],
+                              pageInfo: fetchMoreResult[eventType].pageInfo,
+                            }),
+                          })
+                        },
+                      })
+                    }}
+                    eventsList={eventsList}
                     navigation={this.props.navigation}
                   />
                 </LoadingWrapper>
@@ -122,7 +134,7 @@ class EventsScreen extends Component {
             query={GET_EVENTS}
             variables={{
               eventsFilterInput: {},
-              limit: eventsLimit,
+              limit: 20,
               offset: 0,
             }}
           >
@@ -156,7 +168,6 @@ class EventsScreen extends Component {
               )
             }}
           </Query>
-          <Spacer />
         </Background>
       </View>
     )

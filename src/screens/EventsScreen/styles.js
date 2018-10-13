@@ -9,10 +9,6 @@ export const SmallCardContainer = styled.View`
   margin-right: 24px;
   box-shadow: 1px 13px 8px rgb(169,169,169)};
 `
-export const Spacer = styled.View`
-  height: 180px;
-  width: 100%;
-`
 export const MoreEventsHeader = styled.View`
   width: 100%;
   justify-content: flex-start;

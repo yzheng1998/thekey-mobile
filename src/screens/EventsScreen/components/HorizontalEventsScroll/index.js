@@ -13,12 +13,14 @@ export default class HorizontalEventsScroll extends Component {
     eventsList: PropTypes.arrayOf(PropTypes.object),
   }
   render() {
-    const { eventsList } = this.props
+    const { eventsList, onEndReached, onEndReachedThreshold } = this.props
 
     return (
       <Container>
         <CardList
           keyboardShouldPersistTaps="handled"
+          onEndReached={onEndReached}
+          onEndReachedThreshold={onEndReachedThreshold}
           horizontal
           keyExtractor={event => event.id}
           data={eventsList}
