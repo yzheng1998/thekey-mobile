@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import gql from 'graphql-tag'
 import { View, FlatList, ScrollView, StatusBar } from 'react-native'
 import SearchBar from '../../components/SearchBar'
 import JobCard from '../../components/JobCard'
@@ -7,25 +6,8 @@ import JobsHeader from './components/JobsHeader'
 import { CardDivider } from './styles'
 import { Query } from 'react-apollo'
 import LoadingWrapper from '../../components/LoadingWrapper'
-
-const GET_JOBS = gql`
-  query jobs($jobsFilterInput: JobsFilterInput!) {
-    jobs(jobsFilterInput: $jobsFilterInput) {
-      id
-      title
-      description
-      picture
-      location
-      commitment
-      deadline
-      tags {
-        name
-      }
-      isInterested
-      hasApplied
-    }
-  }
-`
+import { jobsLimit } from '../../../config'
+import { GET_JOBS } from './queries'
 
 class JobsScreen extends Component {
   state = {
@@ -51,6 +33,8 @@ class JobsScreen extends Component {
         company: searchText,
         tag: searchText,
       },
+      offset: 0,
+      limit: jobsLimit,
     }
     const filterByApplied = this.state.tab === 1
     return (
@@ -73,8 +57,8 @@ class JobsScreen extends Component {
               if (loading) return <LoadingWrapper loading />
               if (this.state.tab > 0) refetch()
               const usableData = filterByApplied
-                ? data.jobs.filter(j => j.hasApplied === true)
-                : data.jobs
+                ? data.jobs.nodes.filter(j => j.hasApplied === true)
+                : data.jobs.nodes
               return (
                 <FlatList
                   keyboardShouldPersistTaps="handled"

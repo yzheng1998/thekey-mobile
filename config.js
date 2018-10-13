@@ -10,4 +10,5 @@ module.exports = {
   reviewableCompanyLimit: 30,
   reviewsLimit: 30,
   eventsLimit: 20,
+  jobsLimit: 20,
 }
