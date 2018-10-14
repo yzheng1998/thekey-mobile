@@ -73,17 +73,21 @@ class JobsScreen extends Component {
                       },
                       updateQuery: (prev, { fetchMoreResult }) => {
                         if (!fetchMoreResult) return prev
-                        return Object.assign({}, prev, {
-                          jobs: Object.assign({}, prev.jobs, {
-                            nodes: [
-                              ...prev.jobs.nodes,
-                              ...fetchMoreResult.jobs.nodes.filter(
-                                n => !prev.jobs.nodes.some(p => p.id === n.id),
-                              ),
-                            ],
+                        const newNodes = [
+                          ...prev.jobs.nodes,
+                          ...fetchMoreResult.jobs.nodes.filter(
+                            n => !prev.jobs.nodes.some(p => p.id === n.id),
+                          ),
+                        ]
+                        const newQuery = {
+                          ...prev,
+                          jobs: {
+                            ...prev.jobs,
+                            nodes: newNodes,
                             pageInfo: fetchMoreResult.jobs.pageInfo,
-                          }),
-                        })
+                          },
+                        }
+                        return newQuery
                       },
                     })
                   }
