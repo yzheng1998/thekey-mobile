@@ -90,25 +90,28 @@ class ReviewsScreen extends Component {
                       },
                       updateQuery: (prev, { fetchMoreResult }) => {
                         if (!fetchMoreResult) return prev
-                        return Object.assign({}, prev, {
-                          reviewableCompanies: Object.assign(
-                            {},
-                            prev.reviewableCompanies,
-                            {
-                              nodes: [
-                                ...prev.reviewableCompanies.nodes,
-                                ...fetchMoreResult.reviewableCompanies.nodes.filter(
-                                  n =>
-                                    !prev.reviewableCompanies.nodes.some(
-                                      p => p.id === n.id,
-                                    ),
-                                ),
-                              ],
-                              pageInfo:
-                                fetchMoreResult.reviewableCompanies.pageInfo,
-                            },
+
+                        const newNodes = [
+                          ...prev.reviewableCompanies.nodes,
+                          ...fetchMoreResult.reviewableCompanies.nodes.filter(
+                            n =>
+                              !prev.reviewableCompanies.nodes.some(
+                                p => p.id === n.id,
+                              ),
                           ),
-                        })
+                        ]
+
+                        const newQuery = {
+                          ...prev,
+                          reviewableCompanies: {
+                            ...prev.reviewableCompanies,
+                            nodes: newNodes,
+                            pageInfo:
+                              fetchMoreResult.reviewableCompanies.pageInfo,
+                          },
+                        }
+
+                        return newQuery
                       },
                     })
                   }

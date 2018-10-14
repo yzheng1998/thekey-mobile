@@ -137,24 +137,27 @@ export default class ReviewScreen extends Component {
                       },
                       updateQuery: (prev, { fetchMoreResult }) => {
                         if (!fetchMoreResult) return prev
-                        return Object.assign({}, prev, {
-                          companyReviews: Object.assign(
-                            {},
-                            prev.companyReviews,
-                            {
-                              nodes: [
-                                ...prev.companyReviews.nodes,
-                                ...fetchMoreResult.companyReviews.nodes.filter(
-                                  n =>
-                                    !prev.companyReviews.nodes.some(
-                                      p => p.id === n.id,
-                                    ),
-                                ),
-                              ],
-                              pageInfo: fetchMoreResult.companyReviews.pageInfo,
-                            },
+
+                        const newNodes = [
+                          ...prev.companyReviews.nodes,
+                          ...fetchMoreResult.companyReviews.nodes.filter(
+                            n =>
+                              !prev.companyReviews.nodes.some(
+                                p => p.id === n.id,
+                              ),
                           ),
-                        })
+                        ]
+
+                        const newQuery = {
+                          ...prev,
+                          companyReviews: {
+                            ...prev.companyReviews,
+                            nodes: newNodes,
+                            pageInfo: fetchMoreResult.companyReviews.pageInfo,
+                          },
+                        }
+
+                        return newQuery
                       },
                     })
                   }
