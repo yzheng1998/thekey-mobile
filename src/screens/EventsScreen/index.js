@@ -104,20 +104,22 @@ class EventsScreen extends Component {
                         },
                         updateQuery: (prev, { fetchMoreResult }) => {
                           if (!fetchMoreResult) return prev
-                          return Object.assign({}, prev, {
-                            [eventType]: Object.assign({}, prev[eventType], {
-                              nodes: [
-                                ...prev[eventType].nodes,
-                                ...fetchMoreResult[eventType].nodes.filter(
-                                  n =>
-                                    !prev[eventType].nodes.some(
-                                      p => p.id === n.id,
-                                    ),
-                                ),
-                              ],
+                          const newNodes = [
+                            ...prev[eventType].nodes,
+                            ...fetchMoreResult[eventType].nodes.filter(
+                              n =>
+                                !prev[eventType].nodes.some(p => p.id === n.id),
+                            ),
+                          ]
+                          const newQuery = {
+                            ...prev,
+                            [eventType]: {
+                              ...prev[eventType],
+                              nodes: newNodes,
                               pageInfo: fetchMoreResult[eventType].pageInfo,
-                            }),
-                          })
+                            },
+                          }
+                          return newQuery
                         },
                       })
                     }}
