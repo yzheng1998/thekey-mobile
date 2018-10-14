@@ -2,34 +2,22 @@ import React, { Component } from 'react'
 import { FlatList, ScrollView, View } from 'react-native'
 import JobCard from '../../components/JobCard'
 import { CardDivider } from './styles'
-import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import LoadingWrapper from '../../components/LoadingWrapper'
 import JobsHeaderImage from '../../../assets/JobsBackground.png'
 import MainHeader from '../../components/MainHeader'
+import { SIMILAR_JOBS } from './queries'
+import { similarJobsLimit } from '../../../config'
 
 const _ = require('lodash')
 
-const SIMILAR_JOBS = gql`
-  query similarJobs($id: ID!) {
-    similarJobs(id: $id) {
-      id
-      title
-      description
-      picture
-      experience
-      location
-      deadline
-      commitment
-      tags {
-        name
-      }
-      isInterested
-    }
-  }
-`
 class SimilarJobsScreen extends Component {
   render() {
+    const variables = {
+      id: this.props.navigation.getParam('id'),
+      offset: 0,
+      limit: similarJobsLimit,
+    }
     return (
       <View>
         <MainHeader
@@ -37,21 +25,44 @@ class SimilarJobsScreen extends Component {
           title="Similar Jobs"
           navigation={this.props.navigation}
         />
-        <Query
-          query={SIMILAR_JOBS}
-          variables={{ id: this.props.navigation.getParam('id') }}
-        >
-          {({ loading, data }) => {
+        <Query query={SIMILAR_JOBS} variables={variables}>
+          {({ loading, data, fetchMore }) => {
             if (loading) return <LoadingWrapper loading />
-            if (_.isEmpty(data.similarJobs)) {
+            if (_.isEmpty(data.similarJobs.nodes)) {
               return null
             }
             return (
               <ScrollView>
                 <FlatList
                   keyExtractor={job => job.id}
-                  data={data.similarJobs}
+                  data={data.similarJobs.nodes}
                   contentContainerStyle={{ paddingBottom: 115 }}
+                  onEndReachedThreshold={0.25}
+                  onEndReached={() =>
+                    fetchMore({
+                      variables: {
+                        ...variables,
+                        offset: data.similarJobs.nodes.length,
+                      },
+                      updateQuery: (prev, { fetchMoreResult }) => {
+                        if (!fetchMoreResult) return prev
+                        return Object.assign({}, prev, {
+                          similarJobs: Object.assign({}, prev.similarJobs, {
+                            nodes: [
+                              ...prev.similarJobs.nodes,
+                              ...fetchMoreResult.similarJobs.nodes.filter(
+                                n =>
+                                  !prev.similarJobs.nodes.some(
+                                    p => p.id === n.id,
+                                  ),
+                              ),
+                            ],
+                            pageInfo: fetchMoreResult.similarJobs.pageInfo,
+                          }),
+                        })
+                      },
+                    })
+                  }
                   renderItem={({ item: job }) => (
                     <View>
                       <JobCard

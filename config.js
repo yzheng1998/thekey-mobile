@@ -12,4 +12,5 @@ module.exports = {
   eventsLimit: 20,
   similarEventsLimit: 5,
   jobsLimit: 20,
+  similarJobsLimit: 20,
 }
