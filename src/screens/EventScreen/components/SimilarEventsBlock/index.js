@@ -55,20 +55,25 @@ class SimilarEventsBlock extends Component {
                     },
                     updateQuery: (prev, { fetchMoreResult }) => {
                       if (!fetchMoreResult) return prev
-                      return Object.assign({}, prev, {
-                        similarEvents: Object.assign({}, prev.similarEvents, {
-                          nodes: [
-                            ...prev.similarEvents.nodes,
-                            ...fetchMoreResult.similarEvents.nodes.filter(
-                              n =>
-                                !prev.similarEvents.nodes.some(
-                                  p => p.id === n.id,
-                                ),
-                            ),
-                          ],
+
+                      const newNodes = [
+                        ...prev.similarEvents.nodes,
+                        ...fetchMoreResult.similarEvents.nodes.filter(
+                          n =>
+                            !prev.similarEvents.nodes.some(p => p.id === n.id),
+                        ),
+                      ]
+
+                      const newQuery = {
+                        ...prev,
+                        similarEvents: {
+                          ...prev.similarEvents,
+                          nodes: newNodes,
                           pageInfo: fetchMoreResult.similarEvents.pageInfo,
-                        }),
-                      })
+                        },
+                      }
+
+                      return newQuery
                     },
                   })
                 }
