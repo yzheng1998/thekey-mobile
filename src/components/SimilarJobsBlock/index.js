@@ -62,20 +62,24 @@ class SimilarJobsBlock extends Component {
                     },
                     updateQuery: (prev, { fetchMoreResult }) => {
                       if (!fetchMoreResult) return prev
-                      return Object.assign({}, prev, {
-                        similarJobs: Object.assign({}, prev.similarJobs, {
-                          nodes: [
-                            ...prev.similarJobs.nodes,
-                            ...fetchMoreResult.similarJobs.nodes.filter(
-                              n =>
-                                !prev.similarJobs.nodes.some(
-                                  p => p.id === n.id,
-                                ),
-                            ),
-                          ],
+
+                      const newNodes = [
+                        ...prev.similarJobs.nodes,
+                        ...fetchMoreResult.similarJobs.nodes.filter(
+                          n => !prev.similarJobs.nodes.some(p => p.id === n.id),
+                        ),
+                      ]
+
+                      const newQuery = {
+                        ...prev,
+                        similarJobs: {
+                          ...prev.similarJobs,
+                          nodes: newNodes,
                           pageInfo: fetchMoreResult.similarJobs.pageInfo,
-                        }),
-                      })
+                        },
+                      }
+
+                      return newQuery
                     },
                   })
                 }
