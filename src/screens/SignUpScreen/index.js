@@ -209,7 +209,6 @@ class SignUpScreen extends Component {
               showBack
               onBackPress={() => this.props.navigation.goBack()}
             />
-
             <LineInput
               ref={emailInput => {
                 this.emailInput = emailInput
@@ -257,7 +256,7 @@ class SignUpScreen extends Component {
                 this.props.updateEmail({
                   email,
                 })
-                this.props.navigation.navigate('PersonalDetails', {
+                this.props.navigation.navigate('Verification', {
                   userInfo: {
                     email,
                   },
