@@ -32,7 +32,7 @@ class ChatInbox extends Component {
       offset: 0,
     }
     return (
-      <Query query={GET_CHATS} variables={variables}>
+      <Query query={GET_CHATS} variables={variables} pollInterval={5000}>
         {({ loading, data, fetchMore }) => {
           if (loading) return <LoadingWrapper loading />
           return (
@@ -44,19 +44,20 @@ class ChatInbox extends Component {
               keyExtractor={chat => chat.id}
               data={data.viewer.chats.nodes}
               renderItem={({ item: chat }) => {
-                const lastMessage =
-                  chat.messages.nodes.length && chat.messages.nodes[0]
+                const lastMessage = chat.messages.nodes.length
+                  ? chat.messages.nodes[0]
+                  : { content: '', createdAt: '' }
                 return (
                   <ChatCard
                     name={this.showParticipantNames(
                       chat.participants.filter(x => x.id !== data.viewer.id),
                     )}
-                    message={lastMessage ? lastMessage.content : ''}
+                    message={lastMessage.content}
                     profileImage={chat.participants
                       .filter(x => x.id !== data.viewer.id)
                       .map(x => `${x.profilePicture}`)
                       .join(', ')}
-                    timeStamp={lastMessage ? lastMessage.createdAt : ''}
+                    timeStamp={lastMessage.createdAt}
                     onPress={() =>
                       this.props.navigation.navigate('Conversation', {
                         chat,
