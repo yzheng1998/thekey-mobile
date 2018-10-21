@@ -12,6 +12,7 @@ export default class MessageInput extends Component {
   }
 
   render() {
+    const { onSendMessage, chatId, onPress } = this.props
     return (
       <Container>
         <InputBox
@@ -24,12 +25,11 @@ export default class MessageInput extends Component {
           }}
         />
         <SendButton
-          onPress={this.props.onPress}
-          chatId={this.props.chatId}
+          onPress={onPress}
+          chatId={chatId}
+          onSendMessage={onSendMessage}
           content={this.state.content}
           clearMessage={this.clearMessage}
-          limit={this.props.limit}
-          offset={this.props.offset}
         />
       </Container>
     )

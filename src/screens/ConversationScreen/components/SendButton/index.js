@@ -1,7 +1,6 @@
 import { ButtonContainer, SendIcon } from './styles'
 import React, { Component } from 'react'
-import { Alert } from 'react-native'
-import { GET_CHAT_AND_VIEWER } from '../../queries'
+import { Alert, Keyboard } from 'react-native'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { buttonRadius } from '../../../../constants'
@@ -29,11 +28,11 @@ const SEND_MESSAGE = gql`
 export default class SendButton extends Component {
   render() {
     // need to add better error handeling in update for if error is set
-    const { chatId, offset, limit } = this.props
+    const { clearMessage, onSendMessage, chatId, content, onPress } = this.props
     return (
       <Mutation
         mutation={SEND_MESSAGE}
-        onCompleted={this.props.clearMessage}
+        onCompleted={clearMessage}
         update={(
           cache,
           {
@@ -42,48 +41,7 @@ export default class SendButton extends Component {
             },
           },
         ) => {
-          console.log('Message', message)
-          console.log('Cache', cache)
-          console.log('Chat', chatId)
-          console.log('Offset', offset)
-          console.log('Limit', limit)
-          const oldQuery = cache.readQuery({
-            query: GET_CHAT_AND_VIEWER,
-            variables: { chatId, offset, limit },
-          })
-          const newNodes = [message, ...oldQuery.chat.messages.nodes]
-
-          const newPageInfo = {
-            ...oldQuery.chat.messages.pageInfo,
-          }
-
-          const newMessages = {
-            ...oldQuery.chat.messages,
-            ...{
-              nodes: newNodes,
-              pageInfo: newPageInfo,
-            },
-          }
-
-          const newChat = {
-            ...oldQuery.chat,
-            ...{
-              messages: newMessages,
-            },
-          }
-
-          const newQuery = {
-            ...oldQuery,
-            ...{
-              chat: newChat,
-            },
-          }
-
-          cache.writeQuery({
-            query: GET_CHAT_AND_VIEWER,
-            data: newQuery,
-            variables: { chatId, offset, limit },
-          })
+          onSendMessage(message)
         }}
       >
         {(sendMessage, { error }) => {
@@ -101,13 +59,14 @@ export default class SendButton extends Component {
               onPress={() => {
                 const variables = {
                   sendMessageInput: {
-                    chatId: this.props.chatId,
-                    content: this.props.content,
+                    chatId,
+                    content,
                   },
                 }
                 if (variables.sendMessageInput.content.length > 0) {
                   sendMessage({ variables })
-                  this.props.onPress()
+                  Keyboard.dismiss()
+                  onPress()
                 }
               }}
             >
