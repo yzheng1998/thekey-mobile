@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { FlatList, ScrollView, View } from 'react-native'
+import { FlatList, ScrollView, View, RefreshControl } from 'react-native'
 import MessageBubble from '../MessageBubble'
 import {
   Name,
+  InstructionText,
+  InstructionContainer,
   Avatar,
   GroupMessageContainer,
   WideMessageContainer,
@@ -51,44 +53,81 @@ const SenderGroupChatMessage = ({ chat, item, userId }) => (
   </View>
 )
 
+const InstructionHeader = ({ moreMessages }) => {
+  if (moreMessages)
+    return (
+      <InstructionContainer>
+        <InstructionText>Pull to load more</InstructionText>
+      </InstructionContainer>
+    )
+  return null
+}
+
 class MessagesDisplay extends Component {
+  state = {
+    refreshing: false,
+  }
+
   componentDidMount() {
     this.props.subscribe()
   }
+
+  loadMore = (moreMessages, onRefresh) => {
+    if (moreMessages) {
+      this.setState({ refreshing: true })
+      onRefresh().then(() => {
+        this.setState({ refreshing: false })
+      })
+    }
+  }
+
   render() {
-    const { chat, userId, isGroupMessage, refreshData, ...rest } = this.props
-    refreshData()
+    const { chat, userId, isGroupMessage, onRefresh, flatListRef } = this.props
+    const moreMessages = chat.messages.nodes.length < chat.messages.totalCount
     return (
       <Screen>
-        <ScrollView>
-          <View>
-            <FlatList
-              ref={this.props.flatListRef}
-              keyExtractor={message => message.id}
-              data={chat.messages.nodes}
-              inverted
-              renderItem={({ item }) => (
-                <View>
-                  {isGroupMessage === true &&
-                    item.sender.id !== userId && (
-                      <SenderGroupChatMessage
-                        chat={chat}
-                        item={item}
-                        userId={userId}
-                      />
-                    )}
-                  {(isGroupMessage === false ||
-                    (isGroupMessage && item.sender.id === userId)) && (
-                    <MessageBubble
-                      key={item.id}
-                      isUser={item.sender.id === userId}
-                      message={item.content}
+        <ScrollView
+          contentContainerStyle={{
+            flex: 1,
+            width: '100%',
+          }}
+          keyboardShouldPersistTaps="handled"
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={() => this.loadMore(moreMessages, onRefresh)}
+            />
+          }
+        >
+          <FlatList
+            ref={flatListRef}
+            keyExtractor={message => message.id}
+            data={chat.messages.nodes}
+            ListFooterComponent={
+              <InstructionHeader moreMessages={moreMessages} />
+            }
+            inverted
+            renderItem={({ item }) => (
+              <View>
+                {isGroupMessage === true &&
+                  item.sender.id !== userId && (
+                    <SenderGroupChatMessage
+                      chat={chat}
+                      item={item}
+                      userId={userId}
                     />
                   )}
-                </View>
-              )}
-            />
-          </View>
+                {(isGroupMessage === false ||
+                  (isGroupMessage && item.sender.id === userId)) && (
+                  <MessageBubble
+                    key={item.id}
+                    isUser={item.sender.id === userId}
+                    message={item.content}
+                  />
+                )}
+              </View>
+            )}
+          />
         </ScrollView>
       </Screen>
     )
