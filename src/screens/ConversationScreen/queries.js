@@ -32,6 +32,7 @@ export const GET_CHAT_AND_VIEWER = gql`
           offset
           limit
         }
+        totalCount
       }
     }
   }
