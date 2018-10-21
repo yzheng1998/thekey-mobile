@@ -12,6 +12,7 @@ import InterestsScreen from '../screens/InterestsScreen'
 import DescriptionsScreen from '../screens/DescriptionsScreen'
 import ResumeUploadScreen from '../screens/ResumeUploadScreen'
 import ResetPasswordScreen from '../screens/ResetPasswordScreen'
+import VerificationScreen from '../screens/VerificationScreen'
 
 const LoginStack = createStackNavigator(
   {
@@ -38,6 +39,13 @@ const LoginStack = createStackNavigator(
     },
     SignUp: {
       screen: SignUpScreen,
+      navigationOptions: () => ({
+        header: null,
+        gesturesEnabled: false,
+      }),
+    },
+    Verification: {
+      screen: VerificationScreen,
       navigationOptions: () => ({
         header: null,
         gesturesEnabled: false,
