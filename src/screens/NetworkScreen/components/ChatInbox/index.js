@@ -76,19 +76,22 @@ class ChatInbox extends Component {
                   },
                   updateQuery: (prev, { fetchMoreResult }) => {
                     if (!fetchMoreResult) return prev
+                    const { chats: prevChats } = prev.viewer
+                    const { chats: fetchChats } = fetchMoreResult.viewer
+
                     // Make sure that there are no repeat nodes
                     const newNodes = [
-                      ...prev.viewer.chats.nodes,
-                      ...fetchMoreResult.viewer.chats.nodes.filter(
-                        n => !prev.viewer.chats.nodes.some(p => p.id === n.id),
+                      ...prevChats.nodes,
+                      ...fetchChats.nodes.filter(
+                        n => !prevChats.nodes.some(p => p.id === n.id),
                       ),
                     ]
 
                     const newChats = {
-                      ...prev.viewer.chats,
+                      ...prevChats,
                       ...{
                         nodes: newNodes,
-                        pageInfo: fetchMoreResult.viewer.chats.pageInfo,
+                        pageInfo: fetchChats.pageInfo,
                       },
                     }
 
