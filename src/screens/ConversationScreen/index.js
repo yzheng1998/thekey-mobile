@@ -26,13 +26,20 @@ const CHAT_SUBSCRIPTION = gql`
   }
 `
 
-const MessageInputDisplay = ({ chatId, onPress, offset, limit }) => (
+const MessageInputDisplay = ({
+  chatId,
+  onPress,
+  offset,
+  limit,
+  onSendMessage,
+}) => (
   <View style={{ marginTop: 6 }}>
     <MessageInput
       onPress={onPress}
       chatId={chatId}
       offset={offset}
       limit={limit}
+      onSendMessage={onSendMessage}
     />
     <KeyboardSpacer />
   </View>
@@ -42,9 +49,6 @@ class ConversationScreen extends Component {
   constructor(props) {
     super(props)
     this.flatListRef = React.createRef()
-  }
-  state = {
-    refreshing: false,
   }
 
   render() {
@@ -96,20 +100,19 @@ class ConversationScreen extends Component {
                       updateQuery: (oldQuery, { subscriptionData }) => {
                         if (!subscriptionData.data) return oldQuery
                         const message = subscriptionData.data.messageAdded
+                        const { messages: oldMessages } = oldQuery.chat
+                        const { pageInfo: oldPageInfo } = oldQuery.chat.messages
 
-                        const newNodes = [
-                          message,
-                          ...oldQuery.chat.messages.nodes,
-                        ]
+                        const newNodes = [message, ...oldMessages.nodes]
 
                         const newPageInfo = {
-                          ...oldQuery.chat.messages.pageInfo,
-                          offset: oldQuery.chat.messages.pageInfo.offset + 1,
-                          limit: oldQuery.chat.messages.pageInfo.limit,
+                          ...oldPageInfo,
+                          offset: oldPageInfo.offset + 1,
+                          limit: oldPageInfo.limit,
                         }
 
                         const newMessages = {
-                          ...oldQuery.chat.messages,
+                          ...oldMessages,
                           ...{
                             nodes: newNodes,
                             pageInfo: newPageInfo,
@@ -135,53 +138,50 @@ class ConversationScreen extends Component {
                       },
                     })
                   }}
-                  refreshing={this.state.refreshing}
-                  onRefresh={() =>
+                  onRefresh={async () =>
                     fetchMore({
                       variables: {
                         ...variables,
                         offset: data.chat.messages.nodes.length,
                       },
                       updateQuery: (prev, { fetchMoreResult }) => {
-                        this.setState({ refreshing: true }, () => {
-                          if (!fetchMoreResult) return prev
-                          // Make sure that there are no repeat nodes
-                          console.log(fetchMoreResult.chat)
-                          console.log(prev.chat)
-                          const newNodes = [
-                            ...prev.chat.messages.nodes,
-                            ...fetchMoreResult.chat.messages.nodes.filter(
-                              n =>
-                                !prev.chat.messages.nodes.some(
-                                  p => p.id === n.id,
-                                ),
-                            ),
-                          ]
+                        if (!fetchMoreResult) return prev
 
-                          const newMessages = {
-                            ...prev.chat.messages,
-                            ...{
-                              nodes: newNodes,
-                              pageInfo: fetchMoreResult.chat.messages.pageInfo,
-                            },
-                          }
+                        const { messages: prevMessages } = prev.chat
+                        const { messages: fetchMessages } = fetchMoreResult.chat
 
-                          const newChat = {
-                            ...prev.chat,
-                            ...{
-                              messages: newMessages,
-                            },
-                          }
+                        // Make sure that there are no repeat nodes
+                        const newNodes = [
+                          ...prevMessages.nodes,
+                          ...fetchMessages.nodes.filter(
+                            n => !prevMessages.nodes.some(p => p.id === n.id),
+                          ),
+                        ]
 
-                          const newQuery = {
-                            ...prev,
-                            ...{
-                              chat: newChat,
-                            },
-                          }
-                          this.setState({ refreshing: false })
-                          return newQuery
-                        })
+                        const newMessages = {
+                          ...prevMessages,
+                          ...{
+                            nodes: newNodes,
+                            pageInfo: fetchMessages.pageInfo,
+                            totalCount: fetchMessages.totalCount,
+                          },
+                        }
+
+                        const newChat = {
+                          ...prev.chat,
+                          ...{
+                            messages: newMessages,
+                          },
+                        }
+
+                        const newQuery = {
+                          ...prev,
+                          ...{
+                            chat: newChat,
+                          },
+                        }
+
+                        return newQuery
                       },
                     })
                   }
@@ -191,6 +191,53 @@ class ConversationScreen extends Component {
                   chatId={chatId}
                   offset={0}
                   limit={data.chat.messages.nodes.length}
+                  onSendMessage={message => {
+                    fetchMore({
+                      variables: {
+                        ...variables,
+                        offset: data.chat.messages.nodes.length + 1,
+                      },
+                      updateQuery: (prev, { fetchMoreResult }) => {
+                        if (!fetchMoreResult) return prev
+
+                        const { messages: prevMessages } = prev.chat
+                        const { pageInfo: prevPageInfo } = prevMessages
+
+                        // Make sure that there are no repeat nodes
+                        const newNodes = [message, ...prevMessages.nodes]
+
+                        const newPageInfo = {
+                          ...prevPageInfo,
+                          offset: prevPageInfo.offset + 1,
+                          limit: prevPageInfo.limit,
+                        }
+
+                        const newMessages = {
+                          ...prevMessages,
+                          ...{
+                            nodes: newNodes,
+                            pageInfo: newPageInfo,
+                          },
+                        }
+
+                        const newChat = {
+                          ...prev.chat,
+                          ...{
+                            messages: newMessages,
+                          },
+                        }
+
+                        const newQuery = {
+                          ...prev,
+                          ...{
+                            chat: newChat,
+                          },
+                        }
+
+                        return newQuery
+                      },
+                    })
+                  }}
                 />
               </View>
             )
