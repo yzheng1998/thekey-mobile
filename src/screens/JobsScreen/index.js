@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, FlatList, ScrollView, StatusBar } from 'react-native'
+import { View, FlatList, StatusBar } from 'react-native'
 import SearchBar from '../../components/SearchBar'
 import JobCard from '../../components/JobCard'
 import JobsHeader from './components/JobsHeader'
@@ -51,62 +51,60 @@ class JobsScreen extends Component {
           placeholderText="Search Jobs & Internships"
         />
         <CardDivider />
-        <ScrollView keyboardShouldPersistTaps="handled">
-          <Query query={GET_JOBS} variables={variables}>
-            {({ loading, data, refetch, fetchMore }) => {
-              if (loading) return <LoadingWrapper loading />
-              if (this.state.tab > 0) refetch()
-              const usableData = filterByApplied
-                ? data.jobs.nodes.filter(j => j.hasApplied === true)
-                : data.jobs.nodes
-              return (
-                <FlatList
-                  keyboardShouldPersistTaps="handled"
-                  keyExtractor={job => job.id}
-                  data={usableData}
-                  onEndReachedThreshold={0.25}
-                  onEndReached={() =>
-                    fetchMore({
-                      variables: {
-                        ...variables,
-                        offset: data.jobs.nodes.length,
-                      },
-                      updateQuery: (prev, { fetchMoreResult }) => {
-                        if (!fetchMoreResult) return prev
-                        const newNodes = [
-                          ...prev.jobs.nodes,
-                          ...fetchMoreResult.jobs.nodes.filter(
-                            n => !prev.jobs.nodes.some(p => p.id === n.id),
-                          ),
-                        ]
-                        const newQuery = {
-                          ...prev,
-                          jobs: {
-                            ...prev.jobs,
-                            nodes: newNodes,
-                            pageInfo: fetchMoreResult.jobs.pageInfo,
-                          },
-                        }
-                        return newQuery
-                      },
-                    })
-                  }
-                  renderItem={({ item: job }) => (
-                    <View>
-                      <JobCard
-                        navigate={id =>
-                          this.props.navigation.navigate('Job', { id })
-                        }
-                        job={job}
-                      />
-                      <CardDivider />
-                    </View>
-                  )}
-                />
-              )
-            }}
-          </Query>
-        </ScrollView>
+        <Query query={GET_JOBS} variables={variables}>
+          {({ loading, data, refetch, fetchMore }) => {
+            if (loading) return <LoadingWrapper loading />
+            if (this.state.tab > 0) refetch()
+            const usableData = filterByApplied
+              ? data.jobs.nodes.filter(j => j.hasApplied === true)
+              : data.jobs.nodes
+            return (
+              <FlatList
+                keyboardShouldPersistTaps="handled"
+                keyExtractor={job => job.id}
+                data={usableData}
+                onEndReachedThreshold={0.25}
+                onEndReached={() =>
+                  fetchMore({
+                    variables: {
+                      ...variables,
+                      offset: data.jobs.nodes.length,
+                    },
+                    updateQuery: (prev, { fetchMoreResult }) => {
+                      if (!fetchMoreResult) return prev
+                      const newNodes = [
+                        ...prev.jobs.nodes,
+                        ...fetchMoreResult.jobs.nodes.filter(
+                          n => !prev.jobs.nodes.some(p => p.id === n.id),
+                        ),
+                      ]
+                      const newQuery = {
+                        ...prev,
+                        jobs: {
+                          ...prev.jobs,
+                          nodes: newNodes,
+                          pageInfo: fetchMoreResult.jobs.pageInfo,
+                        },
+                      }
+                      return newQuery
+                    },
+                  })
+                }
+                renderItem={({ item: job }) => (
+                  <View>
+                    <JobCard
+                      navigate={id =>
+                        this.props.navigation.navigate('Job', { id })
+                      }
+                      job={job}
+                    />
+                    <CardDivider />
+                  </View>
+                )}
+              />
+            )
+          }}
+        </Query>
       </View>
     )
   }
