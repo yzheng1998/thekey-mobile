@@ -25,3 +25,7 @@ export const ThinDivider = styled.View`
   height: 2px;
   background-color: ${themeGet('colors.divider')};
 `
+export const ListPadding = styled.View`
+  width: 100%;
+  height: 200px;
+`

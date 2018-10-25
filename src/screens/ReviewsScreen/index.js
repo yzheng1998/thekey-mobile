@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AddReviewButton, ThinDivider } from './styles'
+import { AddReviewButton, ThinDivider, ListPadding } from './styles'
 import { FlatList, View, StatusBar } from 'react-native'
 import CompanyCard from '../../components/CompanyCard'
 import CompanySearchModal from './components/CompanySearchModal'
@@ -69,6 +69,7 @@ class ReviewsScreen extends Component {
                   keyboardShouldPersistTaps="handled"
                   keyExtractor={reviewableCompany => reviewableCompany.id}
                   data={data.reviewableCompanies.nodes}
+                  ListFooterComponent={<ListPadding />}
                   renderItem={({ item }) => (
                     <CompanyCard
                       refetchCompanies={refetch}
