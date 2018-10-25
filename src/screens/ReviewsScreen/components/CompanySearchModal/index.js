@@ -97,11 +97,14 @@ export default class CompanySearchModal extends Component {
             {({ loading, data, fetchMore }) => {
               if (loading) return <LoadingWrapper loading />
               if (
-                data.reviewableCompanies.length === 0 &&
+                data.reviewableCompanies.nodes.length === 0 &&
                 !this.state.noResults
               )
                 this.setState({ noResults: true })
-              if (data.reviewableCompanies.length > 0 && this.state.noResults) {
+              if (
+                data.reviewableCompanies.nodes.length > 0 &&
+                this.state.noResults
+              ) {
                 this.setState({ noResults: false })
               }
               return this.state.noResults ? (
