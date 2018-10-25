@@ -14,4 +14,5 @@ module.exports = {
   similarJobsLimit: 20,
   chatLimit: 10,
   messageLimit: 15,
+  societySearchLimit: 10,
 }
