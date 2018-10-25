@@ -143,30 +143,28 @@ class EventsScreen extends Component {
             {({ loading, data }) => {
               if (loading) return <LoadingWrapper loading />
               return (
-                <LoadingWrapper loading={loading}>
-                  <FlatList
-                    ListFooterComponent={<View style={{ height: 20 }} />}
-                    keyboardShouldPersistTaps="handled"
-                    keyExtractor={event => event.id}
-                    data={data.events.nodes}
-                    renderItem={({ item }) => (
-                      <SmallCardContainer>
-                        <SmallEventCard
-                          navigate={id =>
-                            this.props.navigation.navigate('Event', { id })
-                          }
-                          event={item}
-                          navigateToPeopleList={friends =>
-                            this.props.navigation.navigate('PeopleList', {
-                              people: friends,
-                              title: 'Interested Friends',
-                            })
-                          }
-                        />
-                      </SmallCardContainer>
-                    )}
-                  />
-                </LoadingWrapper>
+                <FlatList
+                  ListFooterComponent={<View style={{ height: 20 }} />}
+                  keyboardShouldPersistTaps="handled"
+                  keyExtractor={event => event.id}
+                  data={data.events.nodes}
+                  renderItem={({ item }) => (
+                    <SmallCardContainer>
+                      <SmallEventCard
+                        navigate={id =>
+                          this.props.navigation.navigate('Event', { id })
+                        }
+                        event={item}
+                        navigateToPeopleList={friends =>
+                          this.props.navigation.navigate('PeopleList', {
+                            people: friends,
+                            title: 'Interested Friends',
+                          })
+                        }
+                      />
+                    </SmallCardContainer>
+                  )}
+                />
               )
             }}
           </Query>

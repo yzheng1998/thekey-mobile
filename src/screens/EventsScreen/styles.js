@@ -7,7 +7,7 @@ export const Background = styled.ScrollView`
 export const SmallCardContainer = styled.View`
   margin-left: 24px;
   margin-right: 24px;
-  box-shadow: 1px 13px 8px rgb(169,169,169)};
+  box-shadow: 1px 13px 8px rgb(169, 169, 169);
 `
 export const MoreEventsHeader = styled.View`
   width: 100%;
