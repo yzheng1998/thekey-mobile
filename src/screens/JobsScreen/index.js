@@ -13,6 +13,7 @@ class JobsScreen extends Component {
   state = {
     searchText: '',
     tab: 0,
+    tabChanged: false,
   }
 
   updateText = searchText => {
@@ -20,7 +21,7 @@ class JobsScreen extends Component {
   }
 
   changeTab = tab => {
-    this.setState({ tab })
+    this.setState({ tab, tabChanged: true })
   }
 
   render() {
@@ -54,7 +55,10 @@ class JobsScreen extends Component {
         <Query query={GET_JOBS} variables={variables}>
           {({ loading, data, refetch, fetchMore }) => {
             if (loading) return <LoadingWrapper loading />
-            if (this.state.tab > 0) refetch()
+            if (this.state.tab > 0 && this.state.tabChanged) {
+              refetch()
+              this.setState({ tabChanged: false })
+            }
             const usableData = filterByApplied
               ? data.jobs.nodes.filter(j => j.hasApplied === true)
               : data.jobs.nodes
