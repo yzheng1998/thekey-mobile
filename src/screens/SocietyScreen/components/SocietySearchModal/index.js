@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { FlatList, StatusBar } from 'react-native'
 import {
   Background,
-  ScrollScreen,
   PeopleListContainer,
   ThinDivider,
   SearchModal,
@@ -45,6 +44,7 @@ const PeopleList = ({
                 n => !prev.users.nodes.some(p => p.id === n.id),
               ),
             ]
+
             const newQuery = {
               ...prev,
               users: {
@@ -126,23 +126,22 @@ export default class SocietySearchModal extends Component {
             placeholderText="Search for a user"
           />
           <ThinDivider />
-          <ScrollScreen keyboardShouldPersistTaps="handled">
-            <Query query={GET_USERS} variables={variables}>
-              {({ loading, data, fetchMore }) => {
-                if (loading) return <LoadingWrapper loading />
-                return (
-                  <PeopleList
-                    variables={variables}
-                    fetchMore={fetchMore}
-                    onPress={closeSearchModal}
-                    updateState={obj => this.setState(obj)}
-                    peopleData={data.users.nodes}
-                    addParticipant={this.addParticipant}
-                  />
-                )
-              }}
-            </Query>
-          </ScrollScreen>
+          <Query query={GET_USERS} variables={variables}>
+            {({ loading, data, fetchMore }) => {
+              if (loading || !data.users) return <LoadingWrapper loading />
+
+              return (
+                <PeopleList
+                  variables={variables}
+                  fetchMore={fetchMore}
+                  onPress={closeSearchModal}
+                  updateState={obj => this.setState(obj)}
+                  peopleData={data.users.nodes}
+                  addParticipant={this.addParticipant}
+                />
+              )
+            }}
+          </Query>
         </Background>
       </SearchModal>
     )

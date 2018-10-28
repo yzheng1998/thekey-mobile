@@ -11,6 +11,7 @@ import {
   CancelText,
   CancelAnimated,
 } from './styles'
+import _ from 'lodash'
 import { buttonRadius } from '../../constants'
 
 export default class SearchBar extends Component {
@@ -23,6 +24,8 @@ export default class SearchBar extends Component {
         : new Animated.Value(0),
     }
 
+    this.delayedOnChangeText = _.debounce(this.onChangeText, 200)
+
     this.slide = () => {
       const newState = props.alwaysShowCancel ? true : !this.state.showCancel
       this.setState({ showCancel: newState })
@@ -31,6 +34,11 @@ export default class SearchBar extends Component {
         duration: 200,
       }).start()
     }
+  }
+
+  onChangeText = text => {
+    this.props.updateText(text)
+    this.setState({ showCancel: true })
   }
 
   render() {
@@ -57,11 +65,9 @@ export default class SearchBar extends Component {
             placeholderTextColor="rgb(142, 142, 147)"
             onFocus={() => {
               if (!this.state.showCancel) this.slide()
-            }}
-            onChangeText={text => {
-              updateText(text)
               this.setState({ showCancel: true })
             }}
+            onChangeText={this.delayedOnChangeText}
             value={searchText}
             autoCapitalize="none"
             {...rest}
