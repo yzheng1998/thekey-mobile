@@ -6,6 +6,18 @@ export const Name = styled.Text`
   font-family: ${themeGet('fonts.bold')};
   color: ${themeGet('colors.messageBubbleOtherUser')};
 `
+export const InstructionText = styled.Text`
+  font-size: 14px;
+  font-family: ${themeGet('fonts.medium')};
+  margin-top: 4px;
+  color: ${themeGet('colors.fontDescription.primary')};
+`
+export const InstructionContainer = styled.View`
+  width: 100%;
+  height: 50;
+  align-items: center;
+  justify-content: center;
+`
 export const Avatar = styled.Image`
   width: 30px;
   height: 30px;

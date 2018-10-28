@@ -9,24 +9,39 @@ import { FlatList, View } from 'react-native'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import LoadingWrapper from '../../components/LoadingWrapper'
+import { reviewsLimit } from '../../../config'
 
 const GET_COMPANY_REVIEWS = gql`
-  query companyReviews($companyReviewFilterInput: CompanyReviewFilterInput!) {
-    companyReviews(companyReviewFilterInput: $companyReviewFilterInput) {
-      id
-      rating
-      title
-      pros
-      cons
-      reviewableCompany {
+  query companyReviews(
+    $companyReviewFilterInput: CompanyReviewFilterInput!
+    $offset: Int
+    $limit: Int
+  ) {
+    companyReviews(
+      companyReviewFilterInput: $companyReviewFilterInput
+      offset: $offset
+      limit: $limit
+    ) {
+      nodes {
         id
+        rating
+        title
+        pros
+        cons
+        reviewableCompany {
+          id
+        }
+        employmentType
+        current
+        jobTitle
+        location
+        lastWorked
+        createdAt
       }
-      employmentType
-      current
-      jobTitle
-      location
-      lastWorked
-      createdAt
+      pageInfo {
+        offset
+        limit
+      }
     }
   }
 `
@@ -43,6 +58,7 @@ export default class ReviewScreen extends Component {
       companyId,
       picture,
       companyName: title,
+      offset: 0,
     }
   }
 
@@ -63,33 +79,41 @@ export default class ReviewScreen extends Component {
         reviewableCompanyId: companyId,
         employmentType: TABS[this.state.tab],
       },
+      limit: reviewsLimit,
+      offset: 0,
     }
     return (
       <Background>
-        <ReviewPictureBlock
-          picture={picture}
-          title={title}
-          rating={rating}
-          reviews={numReviews}
-          navigation={this.props.navigation}
-          companyId={companyId}
-          showAddReview={() =>
-            this.setState({ showAddReview: !this.state.showAddReview })
-          }
-        />
-        <ButtonRow navigation={this.props.navigation} />
-        <FilterBlock
-          updateState={this.changeTab}
-          selectedIndex={this.state.tab}
-        />
         <Query query={GET_COMPANY_REVIEWS} variables={variables}>
-          {({ loading, data, refetch }) => {
+          {({ loading, data, refetch, fetchMore }) => {
             if (loading) return <LoadingWrapper loading />
             return (
               <View>
                 <FlatList
+                  ListHeaderComponent={
+                    <View>
+                      <ReviewPictureBlock
+                        picture={picture}
+                        title={title}
+                        rating={rating}
+                        reviews={numReviews}
+                        navigation={this.props.navigation}
+                        companyId={companyId}
+                        showAddReview={() =>
+                          this.setState({
+                            showAddReview: !this.state.showAddReview,
+                          })
+                        }
+                      />
+                      <ButtonRow navigation={this.props.navigation} />
+                      <FilterBlock
+                        updateState={this.changeTab}
+                        selectedIndex={this.state.tab}
+                      />
+                    </View>
+                  }
                   keyExtractor={review => review.id}
-                  data={data.companyReviews}
+                  data={data.companyReviews.nodes}
                   renderItem={({ item: review }) => (
                     <ReviewBlock
                       subject={review.title}
@@ -104,6 +128,39 @@ export default class ReviewScreen extends Component {
                       cons={review.cons}
                     />
                   )}
+                  onEndReachedThreshold={0.55}
+                  onEndReached={() =>
+                    fetchMore({
+                      variables: {
+                        ...variables,
+                        offset: data.companyReviews.nodes.length,
+                      },
+                      updateQuery: (prev, { fetchMoreResult }) => {
+                        if (!fetchMoreResult) return prev
+
+                        const newNodes = [
+                          ...prev.companyReviews.nodes,
+                          ...fetchMoreResult.companyReviews.nodes.filter(
+                            n =>
+                              !prev.companyReviews.nodes.some(
+                                p => p.id === n.id,
+                              ),
+                          ),
+                        ]
+
+                        const newQuery = {
+                          ...prev,
+                          companyReviews: {
+                            ...prev.companyReviews,
+                            nodes: newNodes,
+                            pageInfo: fetchMoreResult.companyReviews.pageInfo,
+                          },
+                        }
+
+                        return newQuery
+                      },
+                    })
+                  }
                 />
                 <AddCompanyReviewModal
                   refetchCompanies={refetchCompanies}

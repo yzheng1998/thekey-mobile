@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export const GET_CHAT_AND_VIEWER = gql`
-  query chatAndViewer($chatId: ID!) {
+  query chatAndViewer($chatId: ID!, $offset: Int, $limit: Int) {
     viewer {
       ... on User {
         id
@@ -17,15 +17,22 @@ export const GET_CHAT_AND_VIEWER = gql`
         lastName
         profilePicture
       }
-      messages {
-        id
-        sender {
+      messages(offset: $offset, limit: $limit) {
+        nodes {
           id
-          firstName
-          lastName
-          profilePicture
+          sender {
+            id
+            firstName
+            lastName
+            profilePicture
+          }
+          content
         }
-        content
+        pageInfo {
+          offset
+          limit
+        }
+        totalCount
       }
     }
   }

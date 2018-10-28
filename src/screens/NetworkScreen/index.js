@@ -3,7 +3,6 @@ import ChatInbox from './components/ChatInbox'
 import SearchFilterTab from '../../components/SearchFilterTab'
 import SearchBar from '../../components/SearchBar'
 import NewChatModal from './components/NewChatModal'
-import FriendRequestList from './components/FriendRequestList'
 import {
   Background,
   HeaderBackground,
@@ -13,7 +12,7 @@ import {
   ThinDivider,
   SafeView,
 } from './styles'
-import { ScrollView, StatusBar, View } from 'react-native'
+import { StatusBar, View } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 class NetworkScreen extends Component {
@@ -83,14 +82,11 @@ class NetworkScreen extends Component {
             placeholderText="Search Your Network"
           />
           <Divider />
-          <ScrollView keyboardShouldPersistTaps="handled">
-            <FriendRequestList navigation={this.props.navigation} />
-            <ChatInbox
-              searchText={this.state.searchText}
-              tab={this.state.tab}
-              navigation={this.props.navigation}
-            />
-          </ScrollView>
+          <ChatInbox
+            searchText={this.state.searchText}
+            tab={this.state.tab}
+            navigation={this.props.navigation}
+          />
           <NewChatButton onPress={this.handleStartNewChat}>
             <Icon name="chat-bubble" size={25} color="white" />
           </NewChatButton>

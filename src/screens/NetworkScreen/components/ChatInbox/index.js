@@ -1,47 +1,11 @@
 import React, { Component } from 'react'
 import { FlatList } from 'react-native'
 import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
+import { GET_CHATS } from './queries'
 import ChatCard from '../../../../components/ChatCard'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
-
-const GET_CHATS = gql`
-  query viewerWithChats($chatsFilterInput: ChatsFilterInput!) {
-    viewer {
-      ... on User {
-        id
-        firstName
-        lastName
-        profilePicture
-        email
-        chats(chatsFilterInput: $chatsFilterInput) {
-          id
-          participants {
-            id
-            firstName
-            lastName
-            profilePicture
-          }
-          messages {
-            id
-            sender {
-              id
-              firstName
-              lastName
-            }
-            content
-            chat {
-              messages {
-                content
-              }
-            }
-            createdAt
-          }
-        }
-      }
-    }
-  }
-`
+import FriendRequestList from '../FriendRequestList'
+import config from '../../../../../config'
 
 class ChatInbox extends Component {
   state = {
@@ -58,48 +22,96 @@ class ChatInbox extends Component {
 
   render() {
     const { searchText, tab } = this.props
+    const variables = {
+      chatsFilterInput: {
+        participant: searchText,
+        connectionsOnly: tab === 1,
+        groupsOnly: tab === 2,
+      },
+      limit: config.chatLimit,
+      offset: 0,
+    }
     return (
-      <Query
-        query={GET_CHATS}
-        variables={{
-          chatsFilterInput: {
-            participant: searchText,
-            connectionsOnly: tab === 1,
-            groupsOnly: tab === 2,
-          },
-        }}
-        pollInterval={5000}
-      >
-        {({ loading, data }) => {
+      <Query query={GET_CHATS} variables={variables} pollInterval={5000}>
+        {({ loading, data, fetchMore }) => {
           if (loading) return <LoadingWrapper loading />
           return (
             <FlatList
               keyboardShouldPersistTaps="handled"
+              ListHeaderComponent={
+                <FriendRequestList navigation={this.props.navigation} />
+              }
               keyExtractor={chat => chat.id}
-              data={data.viewer.chats}
-              renderItem={({ item: chat }) => (
-                <ChatCard
-                  name={this.showParticipantNames(
-                    chat.participants.filter(x => x.id !== data.viewer.id),
-                  )}
-                  message={chat.messages.length ? chat.messages[0].content : ''}
-                  profileImage={chat.participants
-                    .filter(x => x.id !== data.viewer.id)
-                    .map(x => `${x.profilePicture}`)
-                    .join(', ')}
-                  timeStamp={
-                    chat.messages.length
-                      ? chat.messages[chat.messages.length - 1].createdAt
-                      : ''
-                  }
-                  onPress={() =>
-                    this.props.navigation.navigate('Conversation', {
-                      chat,
-                      viewer: data.viewer,
-                    })
-                  }
-                />
-              )}
+              data={data.viewer.chats.nodes}
+              renderItem={({ item: chat }) => {
+                const lastMessage = chat.messages.nodes.length
+                  ? chat.messages.nodes[0]
+                  : { content: '', createdAt: '' }
+                return (
+                  <ChatCard
+                    name={this.showParticipantNames(
+                      chat.participants.filter(x => x.id !== data.viewer.id),
+                    )}
+                    message={lastMessage.content}
+                    profileImage={chat.participants
+                      .filter(x => x.id !== data.viewer.id)
+                      .map(x => `${x.profilePicture}`)
+                      .join(', ')}
+                    timeStamp={lastMessage.createdAt}
+                    onPress={() =>
+                      this.props.navigation.navigate('Conversation', {
+                        chat,
+                        viewer: data.viewer,
+                      })
+                    }
+                  />
+                )
+              }}
+              onEndReachedThreshold={0.25}
+              onEndReached={() =>
+                fetchMore({
+                  variables: {
+                    ...variables,
+                    offset: data.viewer.chats.nodes.length,
+                  },
+                  updateQuery: (prev, { fetchMoreResult }) => {
+                    if (!fetchMoreResult) return prev
+                    const { chats: prevChats } = prev.viewer
+                    const { chats: fetchChats } = fetchMoreResult.viewer
+
+                    // Make sure that there are no repeat nodes
+                    const newNodes = [
+                      ...prevChats.nodes,
+                      ...fetchChats.nodes.filter(
+                        n => !prevChats.nodes.some(p => p.id === n.id),
+                      ),
+                    ]
+
+                    const newChats = {
+                      ...prevChats,
+                      ...{
+                        nodes: newNodes,
+                        pageInfo: fetchChats.pageInfo,
+                      },
+                    }
+
+                    const newViewer = {
+                      ...prev.viewer,
+                      ...{
+                        chats: newChats,
+                      },
+                    }
+
+                    const newQuery = {
+                      ...prev,
+                      ...{
+                        viewer: newViewer,
+                      },
+                    }
+                    return newQuery
+                  },
+                })
+              }
             />
           )
         }}

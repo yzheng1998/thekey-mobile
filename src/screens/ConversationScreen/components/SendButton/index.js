@@ -1,7 +1,6 @@
 import { ButtonContainer, SendIcon } from './styles'
 import React, { Component } from 'react'
-import { Alert } from 'react-native'
-import { GET_CHAT_AND_VIEWER } from '../../queries'
+import { Alert, Keyboard } from 'react-native'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 import { buttonRadius } from '../../../../constants'
@@ -29,10 +28,11 @@ const SEND_MESSAGE = gql`
 export default class SendButton extends Component {
   render() {
     // need to add better error handeling in update for if error is set
+    const { clearMessage, onSendMessage, chatId, content, onPress } = this.props
     return (
       <Mutation
         mutation={SEND_MESSAGE}
-        onCompleted={this.props.clearMessage}
+        onCompleted={clearMessage}
         update={(
           cache,
           {
@@ -41,22 +41,7 @@ export default class SendButton extends Component {
             },
           },
         ) => {
-          const oldQuery = cache.readQuery({
-            query: GET_CHAT_AND_VIEWER,
-            variables: { chatId: this.props.chatId },
-          })
-          const newQuery = {
-            ...oldQuery,
-            chat: {
-              ...oldQuery.chat,
-              messages: [message, ...oldQuery.chat.messages],
-            },
-          }
-          cache.writeQuery({
-            query: GET_CHAT_AND_VIEWER,
-            data: newQuery,
-            variables: { chatId: this.props.chatId },
-          })
+          onSendMessage(message)
         }}
       >
         {(sendMessage, { error }) => {
@@ -74,13 +59,14 @@ export default class SendButton extends Component {
               onPress={() => {
                 const variables = {
                   sendMessageInput: {
-                    chatId: this.props.chatId,
-                    content: this.props.content,
+                    chatId,
+                    content,
                   },
                 }
                 if (variables.sendMessageInput.content.length > 0) {
                   sendMessage({ variables })
-                  this.props.onPress()
+                  Keyboard.dismiss()
+                  onPress()
                 }
               }}
             >

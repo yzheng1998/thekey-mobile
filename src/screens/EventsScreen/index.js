@@ -6,14 +6,9 @@ import HorizontalEventsScroll from './components/HorizontalEventsScroll'
 import SmallEventCard from './components/SmallEventCard'
 import EventsHeader from './components/EventsHeader'
 import LoadingWrapper from '../../components/LoadingWrapper'
-import {
-  Background,
-  Subtitle,
-  Description,
-  SmallCardContainer,
-  Spacer,
-} from './styles'
+import { Background, Subtitle, Description, SmallCardContainer } from './styles'
 import { GET_EVENTS, GET_SUGGESTED_EVENTS } from './query'
+import { eventsLimit } from '../../../config'
 
 class EventsScreen extends Component {
   static navigationOptions = {
@@ -65,6 +60,7 @@ class EventsScreen extends Component {
     const filterByInterested = this.state.tab === 4 // same as saved events
 
     const query = searchText || currentTab ? GET_EVENTS : GET_SUGGESTED_EVENTS
+    const eventType = searchText || currentTab ? 'events' : 'suggestedEvents'
 
     const variables = {
       eventsFilterInput: {
@@ -73,6 +69,8 @@ class EventsScreen extends Component {
         tag: this.state.searchText,
         title: this.state.searchText,
       },
+      limit: eventsLimit,
+      offset: 0,
     }
     return (
       <View style={{ backgroundColor: 'white', flex: 1 }}>
@@ -89,19 +87,43 @@ class EventsScreen extends Component {
         />
         <Background keyboardShouldPersistTaps="handled">
           <Query query={query} variables={variables}>
-            {({ loading, data }) => {
-              const usableData =
-                searchText || currentTab ? data.events : data.suggestedEvents
-              const interestedEvents = filterByInterested
-                ? data.suggestedEvents.filter(e => e.isInterested === true)
-                : searchText
-
+            {({ loading, data, fetchMore }) => {
+              if (loading) return <LoadingWrapper loading />
+              const eventsList = filterByInterested
+                ? data[eventType].nodes.filter(e => e.isInterested === true)
+                : data[eventType].nodes
               return (
                 <LoadingWrapper loading={loading}>
                   <HorizontalEventsScroll
-                    eventsList={
-                      filterByInterested ? interestedEvents : usableData
-                    }
+                    onEndReachedThreshold={0.25}
+                    onEndReached={() => {
+                      fetchMore({
+                        variables: {
+                          ...variables,
+                          offset: eventsList.length,
+                        },
+                        updateQuery: (prev, { fetchMoreResult }) => {
+                          if (!fetchMoreResult) return prev
+                          const newNodes = [
+                            ...prev[eventType].nodes,
+                            ...fetchMoreResult[eventType].nodes.filter(
+                              n =>
+                                !prev[eventType].nodes.some(p => p.id === n.id),
+                            ),
+                          ]
+                          const newQuery = {
+                            ...prev,
+                            [eventType]: {
+                              ...prev[eventType],
+                              nodes: newNodes,
+                              pageInfo: fetchMoreResult[eventType].pageInfo,
+                            },
+                          }
+                          return newQuery
+                        },
+                      })
+                    }}
+                    eventsList={eventsList}
                     navigation={this.props.navigation}
                   />
                 </LoadingWrapper>
@@ -110,14 +132,22 @@ class EventsScreen extends Component {
           </Query>
           <Subtitle>More Events</Subtitle>
           <Description>Other events nearby</Description>
-          <Query query={GET_EVENTS} variables={{ eventsFilterInput: {} }}>
-            {({ loading, data }) => (
-              <LoadingWrapper loading={loading}>
+          <Query
+            query={GET_EVENTS}
+            variables={{
+              eventsFilterInput: {},
+              limit: 20,
+              offset: 0,
+            }}
+          >
+            {({ loading, data }) => {
+              if (loading) return <LoadingWrapper loading />
+              return (
                 <FlatList
                   ListFooterComponent={<View style={{ height: 20 }} />}
                   keyboardShouldPersistTaps="handled"
                   keyExtractor={event => event.id}
-                  data={data.events}
+                  data={data.events.nodes}
                   renderItem={({ item }) => (
                     <SmallCardContainer>
                       <SmallEventCard
@@ -135,10 +165,9 @@ class EventsScreen extends Component {
                     </SmallCardContainer>
                   )}
                 />
-              </LoadingWrapper>
-            )}
+              )
+            }}
           </Query>
-          <Spacer />
         </Background>
       </View>
     )

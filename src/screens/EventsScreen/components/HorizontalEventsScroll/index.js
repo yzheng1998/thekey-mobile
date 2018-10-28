@@ -13,7 +13,7 @@ export default class HorizontalEventsScroll extends Component {
     eventsList: PropTypes.arrayOf(PropTypes.object),
   }
   render() {
-    const { eventsList } = this.props
+    const { eventsList, ...rest } = this.props
 
     return (
       <Container>
@@ -28,6 +28,7 @@ export default class HorizontalEventsScroll extends Component {
               <LargeEventCard navigation={this.props.navigation} event={item} />
             </CardContainer>
           )}
+          {...rest}
         />
       </Container>
     )

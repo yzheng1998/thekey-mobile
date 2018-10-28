@@ -1,18 +1,12 @@
 import React, { Component } from 'react'
 import { FlatList } from 'react-native'
-import {
-  Background,
-  ScrollScreen,
-  ThinDivider,
-  SearchModal,
-  NoResultText,
-} from './styles'
+import { Background, ThinDivider, SearchModal, NoResultText } from './styles'
 import CompanyCard from '../../../../components/CompanyCard'
 import SearchModalHeader from '../SearchModalHeader'
 import SearchBar from '../../../../components/SearchBar'
 import { Query, Mutation } from 'react-apollo'
 import LoadingWrapper from '../../../../components/LoadingWrapper'
-
+import { reviewableCompanyLimit } from '../../../../../config'
 import { GET_REVIEWABLE_COMPANIES, CREATE_REVIEWABLE_COMPANY } from './queries'
 
 const defaultImage =
@@ -38,6 +32,8 @@ export default class CompanySearchModal extends Component {
         name: this.state.searchText,
         highestRated: false,
       },
+      offset: 0,
+      limit: reviewableCompanyLimit,
     }
     const mutationVariables = {
       companyName: this.state.searchText,
@@ -97,55 +93,87 @@ export default class CompanySearchModal extends Component {
             )}
           </Mutation>
           <ThinDivider />
-          <ScrollScreen keyboardShouldPersistTaps="handled">
-            <Query query={GET_REVIEWABLE_COMPANIES} variables={variables}>
-              {({ loading, data }) => {
-                if (loading) return <LoadingWrapper loading />
-                if (
-                  data.reviewableCompanies.length === 0 &&
-                  !this.state.noResults
-                )
-                  this.setState({ noResults: true })
-                if (
-                  data.reviewableCompanies.length > 0 &&
-                  this.state.noResults
-                ) {
-                  this.setState({ noResults: false })
-                }
-                return this.state.noResults ? (
-                  <NoResultText>
-                    {`Looks like ${
-                      this.state.searchText
-                    } has not been reviewed.\nPress 'Next' to be the first.`}
-                  </NoResultText>
-                ) : (
-                  <FlatList
-                    keyboardShouldPersistTaps="handled"
-                    showsVerticalScrollIndicator={false}
-                    keyExtractor={company => company.id}
-                    data={data.reviewableCompanies}
-                    renderItem={({ item }) => (
-                      <CompanyCard
-                        onPress={() => {
-                          closeSearchModal()
-                          setCompanyInfo(
-                            item.id,
-                            item.name,
-                            item.image || defaultImage,
-                          )
-                        }}
-                        title={item.name}
-                        rating={item.rating}
-                        companyId={item.id}
-                        navigation={navigation}
-                        picture={item.image || defaultImage}
-                      />
-                    )}
-                  />
-                )
-              }}
-            </Query>
-          </ScrollScreen>
+          <Query query={GET_REVIEWABLE_COMPANIES} variables={variables}>
+            {({ loading, data, fetchMore }) => {
+              if (loading) return <LoadingWrapper loading />
+              if (
+                data.reviewableCompanies.nodes.length === 0 &&
+                !this.state.noResults
+              )
+                this.setState({ noResults: true })
+              if (
+                data.reviewableCompanies.nodes.length > 0 &&
+                this.state.noResults
+              ) {
+                this.setState({ noResults: false })
+              }
+              return this.state.noResults ? (
+                <NoResultText>
+                  {`Looks like ${
+                    this.state.searchText
+                  } has not been reviewed.\nPress 'Next' to be the first.`}
+                </NoResultText>
+              ) : (
+                <FlatList
+                  keyboardShouldPersistTaps="handled"
+                  showsVerticalScrollIndicator={false}
+                  keyExtractor={company => company.id}
+                  data={data.reviewableCompanies.nodes}
+                  renderItem={({ item }) => (
+                    <CompanyCard
+                      onPress={() => {
+                        closeSearchModal()
+                        setCompanyInfo(
+                          item.id,
+                          item.name,
+                          item.image || defaultImage,
+                        )
+                      }}
+                      title={item.name}
+                      rating={item.rating}
+                      companyId={item.id}
+                      navigation={navigation}
+                      picture={item.image || defaultImage}
+                    />
+                  )}
+                  onEndReachedThreshold={0.35}
+                  onEndReached={() =>
+                    fetchMore({
+                      variables: {
+                        ...variables,
+                        offset: data.reviewableCompanies.nodes.length,
+                      },
+                      updateQuery: (prev, { fetchMoreResult }) => {
+                        if (!fetchMoreResult) return prev
+
+                        const newNodes = [
+                          ...prev.reviewableCompanies.nodes,
+                          ...fetchMoreResult.reviewableCompanies.nodes.filter(
+                            n =>
+                              !prev.reviewableCompanies.nodes.some(
+                                p => p.id === n.id,
+                              ),
+                          ),
+                        ]
+
+                        const newQuery = {
+                          ...prev,
+                          reviewableCompanies: {
+                            ...prev.reviewableCompanies,
+                            nodes: newNodes,
+                            pageInfo:
+                              fetchMoreResult.reviewableCompanies.pageInfo,
+                          },
+                        }
+
+                        return newQuery
+                      },
+                    })
+                  }
+                />
+              )
+            }}
+          </Query>
         </Background>
       </SearchModal>
     )

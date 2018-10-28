@@ -39,6 +39,7 @@ export default class FriendRequestList extends Component {
             <View>
               {data.viewer.friendRequests.map(friendRequest => (
                 <ConnectionCard
+                  key={friendRequest.id}
                   id={friendRequest.id}
                   name={`${friendRequest.sender.firstName} ${
                     friendRequest.sender.lastName
