@@ -16,6 +16,7 @@ import VerificationScreen from '../screens/VerificationScreen'
 import PhotoUploadScreen from '../screens/PhotoUploadScreen'
 import IntroductionScreen from '../screens/IntroductionScreen'
 import CreatePasswordScreen from '../screens/CreatePasswordScreen'
+import LocationScreen from '../screens/LocationScreen'
 
 const LoginStack = createStackNavigator(
   {
@@ -133,6 +134,13 @@ const LoginStack = createStackNavigator(
     },
     Introduction: {
       screen: IntroductionScreen,
+      navigationOptions: () => ({
+        header: null,
+        gesturesEnabled: false,
+      }),
+    },
+    Location: {
+      screen: LocationScreen,
       navigationOptions: () => ({
         header: null,
         gesturesEnabled: false,

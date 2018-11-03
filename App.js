@@ -5,29 +5,13 @@ import { ThemeProvider } from 'styled-components/native'
 import { client } from './src/apollo'
 import theme from './theme'
 import * as pushNotifications from './src/services/pushNotifications'
-import { AppState, AsyncStorage } from 'react-native'
+import { AppState } from 'react-native'
 
 pushNotifications.configure()
 
 import { Provider } from 'react-redux'
 import store from './src/redux/store'
-
-const getPosition = () => {
-  navigator.geolocation.getCurrentPosition(
-    async position => {
-      await AsyncStorage.setItem(
-        'latitude',
-        JSON.stringify(position.coords.latitude),
-      )
-      await AsyncStorage.setItem(
-        'longitude',
-        JSON.stringify(position.coords.longitude),
-      )
-    },
-    error => this.setState({ error: error.message }),
-    { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
-  )
-}
+import { setPosition } from './AppUtilities/geolocation'
 
 export default class App extends Component {
   state = {
@@ -37,7 +21,7 @@ export default class App extends Component {
 
   componentDidMount() {
     AppState.addEventListener('change', this.handleAppStateChange)
-    getPosition()
+    setPosition()
   }
 
   componentWillUnmount() {
@@ -49,7 +33,7 @@ export default class App extends Component {
       this.state.appState.match(/inactive|background/) &&
       nextAppState === 'active'
     ) {
-      getPosition()
+      setPosition()
     }
     this.setState({ appState: nextAppState })
   }

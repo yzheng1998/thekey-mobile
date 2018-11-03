@@ -5,7 +5,9 @@ export default class BasicSubtitle extends Component {
   render() {
     return (
       <Container>
-        <Subtitle>{this.props.children || this.props.text}</Subtitle>
+        <Subtitle style={this.props.style}>
+          {this.props.children || this.props.text}
+        </Subtitle>
       </Container>
     )
   }
