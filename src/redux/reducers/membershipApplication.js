@@ -1,5 +1,5 @@
 import {
-  UPDATE_ACCOUNT_INFO,
+  UPDATE_EMAIL,
   UPDATE_PERSONAL_DETAILS,
   UPDATE_ESSAY,
   UPDATE_GENDER,
@@ -24,12 +24,9 @@ const membershipApplicationReducer = (state = initialState, action) => {
     },
   })
   switch (action.type) {
-    case UPDATE_ACCOUNT_INFO: {
+    case UPDATE_EMAIL: {
       return updatedState({
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
         email: action.payload.email,
-        password: action.payload.password,
       })
     }
     case UPDATE_PERSONAL_DETAILS: {
