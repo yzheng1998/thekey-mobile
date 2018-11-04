@@ -26,10 +26,6 @@ const mapDispatchToProps = {
   updateIntroductionInfo,
 }
 
-/* eslint-disable */
-import DatePicker from '../../components/DatePicker/DatePicker/'
-/* eslint-enable */
-
 class IntroductionScreen extends Component {
   constructor(props) {
     super(props)

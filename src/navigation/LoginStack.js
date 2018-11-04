@@ -12,12 +12,9 @@ import InterestsScreen from '../screens/InterestsScreen'
 import DescriptionsScreen from '../screens/DescriptionsScreen'
 import ResumeUploadScreen from '../screens/ResumeUploadScreen'
 import ResetPasswordScreen from '../screens/ResetPasswordScreen'
-<<<<<<< HEAD
 import VerificationScreen from '../screens/VerificationScreen'
 import PhotoUploadScreen from '../screens/PhotoUploadScreen'
-=======
 import IntroductionScreen from '../screens/IntroductionScreen'
->>>>>>> 1a889e9... Implemented Introduction Screen design
 
 const LoginStack = createStackNavigator(
   {
@@ -119,13 +116,15 @@ const LoginStack = createStackNavigator(
         gesturesEnabled: false,
       }),
     },
-<<<<<<< HEAD
     PhotoUpload: {
       screen: PhotoUploadScreen,
-=======
+      navigationOptions: () => ({
+        header: null,
+        gesturesEnabled: false,
+      }),
+    },
     Introduction: {
       screen: IntroductionScreen,
->>>>>>> 1a889e9... Implemented Introduction Screen design
       navigationOptions: () => ({
         header: null,
         gesturesEnabled: false,

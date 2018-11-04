@@ -9,6 +9,7 @@ import {
   UPDATE_DESCRIPTIONS,
   UPDATE_FACEBOOK_INFO,
   UPDATE_LINKEDIN_INFO,
+  UPDATE_INTRODUCTION_INFO,
 } from '../actions/membershipApplication'
 
 const initialState = {
@@ -82,6 +83,13 @@ const membershipApplicationReducer = (state = initialState, action) => {
         lastName: action.payload.lastName,
         email: action.payload.email,
         password: '',
+      })
+    }
+    case UPDATE_INTRODUCTION_INFO: {
+      return updatedState({
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        birthday: action.payload.birthday,
       })
     }
     default: {
