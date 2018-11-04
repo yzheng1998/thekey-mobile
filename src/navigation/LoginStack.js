@@ -13,6 +13,7 @@ import DescriptionsScreen from '../screens/DescriptionsScreen'
 import ResumeUploadScreen from '../screens/ResumeUploadScreen'
 import ResetPasswordScreen from '../screens/ResetPasswordScreen'
 import VerificationScreen from '../screens/VerificationScreen'
+import PhotoUploadScreen from '../screens/PhotoUploadScreen'
 
 const LoginStack = createStackNavigator(
   {
@@ -109,6 +110,13 @@ const LoginStack = createStackNavigator(
     },
     Ethnicities: {
       screen: EthnicitiesScreen,
+      navigationOptions: () => ({
+        header: null,
+        gesturesEnabled: false,
+      }),
+    },
+    PhotoUpload: {
+      screen: PhotoUploadScreen,
       navigationOptions: () => ({
         header: null,
         gesturesEnabled: false,
