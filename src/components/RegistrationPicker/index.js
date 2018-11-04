@@ -1,25 +1,29 @@
 import React, { Component } from 'react'
-import { Container, PickerContainer, TextField } from './styles'
+import { Container, PickerContainer, TextField, Title } from './styles'
 import Error from '../../components/Error'
 
 export default class RegistrationPicker extends Component {
   render() {
     const {
+      title,
       placeholderText,
       text,
       onPress,
       selected,
       error,
       disabled,
+      children,
     } = this.props
     return (
       <Container>
+        {title && <Title>{title}</Title>}
         <PickerContainer
           disabled={disabled}
           activeOpacity={1}
           onPress={onPress}
           selected={selected}
         >
+          {children}
           {text === '' && <TextField placeholder>{placeholderText}</TextField>}
           {text !== '' && <TextField>{text}</TextField>}
         </PickerContainer>

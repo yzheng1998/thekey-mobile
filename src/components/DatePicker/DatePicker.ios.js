@@ -8,16 +8,16 @@ export default class DatePicker extends Component {
   render() {
     const { doneOnPress, date, setDate, mode, visible } = this.props
     return (
-      <View>
+      <Container>
         {visible && (
-          <Container>
+          <View>
             <DoneButton onPress={doneOnPress}>
               <DoneButtonText>Done</DoneButtonText>
             </DoneButton>
             <DatePickerIOS mode={mode} date={date} onDateChange={setDate} />
-          </Container>
+          </View>
         )}
-      </View>
+      </Container>
     )
   }
 }
