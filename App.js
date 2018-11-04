@@ -13,6 +13,8 @@ import { Provider } from 'react-redux'
 import store from './src/redux/store'
 import { setPosition } from './AppUtilities/geolocation'
 
+import Permissions from 'react-native-permissions'
+
 export default class App extends Component {
   state = {
     error: null,
@@ -20,8 +22,12 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    AppState.addEventListener('change', this.handleAppStateChange)
-    setPosition()
+    Permissions.check('location').then(response => {
+      if (response === 'authorized') {
+        AppState.addEventListener('change', this.handleAppStateChange)
+        setPosition()
+      }
+    })
   }
 
   componentWillUnmount() {
@@ -29,12 +35,15 @@ export default class App extends Component {
   }
 
   handleAppStateChange = nextAppState => {
-    if (
-      this.state.appState.match(/inactive|background/) &&
-      nextAppState === 'active'
-    ) {
-      setPosition()
-    }
+    Permissions.check('location').then(response => {
+      if (
+        this.state.appState.match(/inactive|background/) &&
+        nextAppState === 'active' &&
+        response === 'authorized'
+      ) {
+        setPosition()
+      }
+    })
     this.setState({ appState: nextAppState })
   }
 
