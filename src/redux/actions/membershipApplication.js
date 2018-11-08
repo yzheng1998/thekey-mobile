@@ -1,5 +1,6 @@
 // Action types
 export const UPDATE_EMAIL = 'UPDATE_EMAIL'
+export const UPDATE_PASSWORD = 'UPDATE_PASSWORD'
 export const UPDATE_PERSONAL_DETAILS = 'UPDATE_PERSONAL_DETAILS'
 export const UPDATE_GENDER = 'UPDATE_GENDER'
 export const UPDATE_ETHNICITIES = 'UPDATE_ETHNICITIES'
@@ -13,6 +14,10 @@ export const UPDATE_LINKEDIN_INFO = 'UPDATE_LINKEDIN_INFO'
 export const updateEmail = ({ email }) => ({
   type: UPDATE_EMAIL,
   payload: { email },
+})
+export const updatePassword = ({ password }) => ({
+  type: UPDATE_PASSWORD,
+  payload: { password },
 })
 export const updatePersonalDetails = ({ hometown, ethnicity, birthday }) => ({
   type: UPDATE_PERSONAL_DETAILS,

@@ -28,7 +28,7 @@ export default class VerificationScreen extends Component {
         </BasicSubtitle>
         <VerificationRow
           onChangeText={this.updateText}
-          onSubmit={() => this.props.navigation.navigate('PersonalDetails')}
+          onSubmit={() => this.props.navigation.navigate('CreatePassword')}
         />
       </Screen>
     )

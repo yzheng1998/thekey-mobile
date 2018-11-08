@@ -214,14 +214,13 @@ class SignUpScreen extends Component {
                 this.emailInput = emailInput
               }}
               text={email}
-              placeholderText="Email"
+              placeholderText="Email (college email preferred)"
               autoCapitalize="none"
               updateText={text => {
                 this.setState({ email: text }, () => this.validateForm(true))
               }}
               onFocus={() => this.addTouched('email')}
               onBlur={() => this.validateForm(false)}
-              onSubmitEditing={() => this.passwordInput.focus()}
               returnKeyType="next"
               error={displayErrors.email}
             >
