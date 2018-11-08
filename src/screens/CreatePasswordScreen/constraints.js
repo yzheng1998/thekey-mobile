@@ -12,6 +12,12 @@ const constraints = {
       message: '^\nPassword must be at least 6 characters long',
     },
   },
+  passwordConfirmation: {
+    equality: {
+      attribute: 'password',
+      message: '^Passwords do not match',
+    },
+  },
 }
 
 export default constraints

@@ -221,7 +221,6 @@ class SignUpScreen extends Component {
               }}
               onFocus={() => this.addTouched('email')}
               onBlur={() => this.validateForm(false)}
-              onSubmitEditing={() => this.passwordInput.focus()}
               returnKeyType="next"
               error={displayErrors.email}
             >

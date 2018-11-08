@@ -23,6 +23,7 @@ class CreatePasswordScreen extends Component {
     super(props)
     this.state = {
       password: props.password || '',
+      passwordConfirmation: '',
       displayErrors: {},
       errors: {},
       touched: {},
@@ -33,6 +34,7 @@ class CreatePasswordScreen extends Component {
     const errors = validate(
       {
         password: this.state.password,
+        passwordConfirmation: this.state.passwordConfirmation,
       },
       constraints,
     )
@@ -66,7 +68,7 @@ class CreatePasswordScreen extends Component {
   }
 
   render() {
-    const { password, displayErrors, errors } = this.state
+    const { password, passwordConfirmation, displayErrors, errors } = this.state
     const noErrors = !errors
     return (
       <Screen>
@@ -81,6 +83,7 @@ class CreatePasswordScreen extends Component {
           characters
         </BasicSubtitle>
         <LineInput
+          secureTextEntry
           text={password}
           placeholderText="Password"
           autoCapitalize="none"
@@ -90,6 +93,20 @@ class CreatePasswordScreen extends Component {
           onFocus={() => this.addTouched('password')}
           onBlur={() => this.validateForm(false)}
           error={displayErrors.password}
+        />
+        <LineInput
+          secureTextEntry
+          text={passwordConfirmation}
+          placeholderText="Confirm password"
+          autoCapitalize="none"
+          updateText={text => {
+            this.setState({ passwordConfirmation: text }, () =>
+              this.validateForm(true),
+            )
+          }}
+          onFocus={() => this.addTouched('passwordConfirmation')}
+          onBlur={() => this.validateForm(false)}
+          error={displayErrors.passwordConfirmation}
         />
         <RegisterButton
           keyboardShouldPersistTaps="always"
