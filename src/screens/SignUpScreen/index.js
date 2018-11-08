@@ -214,7 +214,7 @@ class SignUpScreen extends Component {
                 this.emailInput = emailInput
               }}
               text={email}
-              placeholderText="Email"
+              placeholderText="Email (college email preferred)"
               autoCapitalize="none"
               updateText={text => {
                 this.setState({ email: text }, () => this.validateForm(true))
