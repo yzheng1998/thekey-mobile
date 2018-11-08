@@ -30,7 +30,7 @@ export const ButtonText = styled.Text`
   line-height: 23px;
   color: ${props =>
     props.secondary
-      ? themeGet('colors.buttonPrimary')
+      ? themeGet('colors.fontSubtitle.primary')
       : themeGet('colors.fontPrimary')};
   opacity: ${props => (props.secondary && props.disabled ? 0.5 : 1)};
 `
