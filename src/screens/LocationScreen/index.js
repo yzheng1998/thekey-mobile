@@ -61,7 +61,7 @@ class LocationScreen extends Component {
         <RegisterButton
           style={{ marginTop: 36 }}
           onPress={() => {
-            this.props.navigation.navigate('PhotoUpload')
+            this.props.navigation.navigate('Share')
           }}
           secondary
           noBorder
