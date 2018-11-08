@@ -13,8 +13,7 @@ export default class ShareScreen extends Component {
         <Image source={inviteGraphic} style={imageStyle} />
         <Title>Invite your friends to join</Title>
         <Subtitle style={subtitleStyle}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor.
+          Build a community of strong, {'\n'}connected individuals.
         </Subtitle>
         <RegisterButton
           onPress={() => {
