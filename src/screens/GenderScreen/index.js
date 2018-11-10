@@ -1,20 +1,11 @@
 import React, { Component } from 'react'
 import { View, SafeAreaView, ScrollView } from 'react-native'
-import {
-  ScreenContainer,
-  SubtitleView,
-  Subtitle,
-  GenderButton,
-  ButtonText,
-} from './styles'
+import { ScreenContainer, GenderButton, ButtonText } from './styles'
 import Header from '../../components/Header'
-import RegisterButton from '../../components/RegisterButton'
-import { genderOptions } from './constants'
-
-import nodeEmoji from 'node-emoji'
-
+import SubmitButton from '../../components/SubmitButton'
 import { connect } from 'react-redux'
 import { updateGender } from '../../redux/actions/membershipApplication'
+import MoreOptionsButton from './components/MoreOptionsButton'
 
 const mapStateToProps = state => ({
   firstName: state.membershipApplication.firstName,
@@ -46,38 +37,42 @@ class GenderScreen extends Component {
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
           <ScrollView keyboardShouldPersistTaps="always">
             <Header
-              title={`${nodeEmoji.get('wave')} Hi, ${this.props.firstName}!`}
+              title="Which gender best describes you?"
               showBack
               onBackPress={() => this.props.navigation.goBack()}
               progress="28.5%"
             />
-            <SubtitleView>
-              <Subtitle>
-                Select the following that apply to your gender identity &
-                experience
-              </Subtitle>
-            </SubtitleView>
             <View>
-              {genderOptions.map(option => (
-                <GenderButton
-                  key={option.value}
-                  clicked={option.value === this.state.gender}
-                  onPress={() => this.setState({ gender: option.value })}
-                >
-                  <ButtonText>{option.label}</ButtonText>
-                </GenderButton>
-              ))}
+              <GenderButton
+                key="MALE"
+                clicked={this.state.gender === 'MALE'}
+                onPress={() => this.setState({ gender: 'MALE' })}
+              >
+                <ButtonText>Male</ButtonText>
+              </GenderButton>
+
+              <GenderButton
+                key="FEMALE"
+                clicked={this.state.gender === 'FEMALE'}
+                onPress={() => this.setState({ gender: 'FEMALE' })}
+              >
+                <ButtonText>Female</ButtonText>
+              </GenderButton>
+              <MoreOptionsButton
+                updateGender={gender => this.setState({ gender })}
+                currentGender={this.state.gender}
+              />
             </View>
-            <RegisterButton
-              buttonText="NEXT"
-              disabled={disabled}
-              onPress={() => {
-                this.props.updateGender({ gender: this.state.gender })
-                this.props.navigation.navigate('YourEducation')
-              }}
-            />
           </ScrollView>
         </SafeAreaView>
+        <SubmitButton
+          buttonText="NEXT"
+          disabled={disabled}
+          onPress={() => {
+            this.props.updateGender({ gender: this.state.gender })
+            this.props.navigation.navigate('YourEducation')
+          }}
+        />
       </ScreenContainer>
     )
   }
