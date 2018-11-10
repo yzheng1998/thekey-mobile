@@ -28,7 +28,7 @@ import TermsOfService from '../ProfileScreen/components/Settings/components/Sett
 
 import { connect } from 'react-redux'
 import {
-  updateAccountInfo,
+  updateEmail,
   updateFacebookInfo,
 } from '../../redux/actions/membershipApplication'
 
@@ -37,14 +37,11 @@ const validate = require('validate.js')
 const loginBehavior = Platform.OS === 'ios' ? 'native' : 'NATIVE_WITH_FALLBACK'
 
 const mapStateToProps = state => ({
-  firstName: state.membershipApplication.firstName,
-  lastName: state.membershipApplication.lastName,
   email: state.membershipApplication.email,
-  password: state.membershipApplication.password,
 })
 
 const mapDispatchToProps = {
-  updateAccountInfo,
+  updateEmail,
   updateFacebookInfo,
 }
 
@@ -53,10 +50,7 @@ class SignUpScreen extends Component {
     super(props)
     this.updateState = this.setState.bind(this)
     this.state = {
-      firstName: props.firstName || '',
-      lastName: props.lastName || '',
       email: props.email || '',
-      password: props.password || '',
       displayErrors: {},
       errors: {},
       touched: {},
@@ -149,10 +143,7 @@ class SignUpScreen extends Component {
   validateForm = isOnChangeText => {
     const errors = validate(
       {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
         email: this.state.email,
-        password: this.state.password,
       },
       constraints,
     )
@@ -193,14 +184,7 @@ class SignUpScreen extends Component {
   termsOnBackPress = () => this.setState({ showTermsOfService: false })
 
   render() {
-    const {
-      firstName,
-      lastName,
-      email,
-      password,
-      errors,
-      displayErrors,
-    } = this.state
+    const { email, errors, displayErrors } = this.state
     const noErrors = !errors
     return (
       <ScreenContainer>
@@ -226,75 +210,22 @@ class SignUpScreen extends Component {
               onBackPress={() => this.props.navigation.goBack()}
             />
             <LineInput
-              text={firstName}
-              placeholderText="First name"
-              updateText={text => {
-                this.setState({ firstName: text }, () =>
-                  this.validateForm(true),
-                )
-              }}
-              onFocus={() => this.addTouched('firstName')}
-              onBlur={() => this.validateForm(false)}
-              onSubmitEditing={() => this.lastNameInput.focus()}
-              returnKeyType="next"
-              error={displayErrors.firstName}
-            />
-            <LineInput
-              ref={lastNameInput => {
-                this.lastNameInput = lastNameInput
-              }}
-              text={lastName}
-              placeholderText="Last name"
-              updateText={text => {
-                this.setState({ lastName: text }, () => this.validateForm(true))
-              }}
-              onFocus={() => this.addTouched('lastName')}
-              onBlur={() => this.validateForm(false)}
-              onSubmitEditing={() => this.emailInput.focus()}
-              returnKeyType="next"
-              error={displayErrors.lastName}
-            />
-            <LineInput
               ref={emailInput => {
                 this.emailInput = emailInput
               }}
               text={email}
-              placeholderText="Email"
+              placeholderText="Email (college email preferred)"
               autoCapitalize="none"
               updateText={text => {
                 this.setState({ email: text }, () => this.validateForm(true))
               }}
               onFocus={() => this.addTouched('email')}
               onBlur={() => this.validateForm(false)}
-              onSubmitEditing={() => this.passwordInput.focus()}
               returnKeyType="next"
               error={displayErrors.email}
             >
               <Icon
                 name="mail"
-                size={18}
-                color="rgb(139, 133, 150)"
-                style={{ marginLeft: 8 }}
-              />
-            </LineInput>
-            <LineInput
-              ref={passwordInput => {
-                this.passwordInput = passwordInput
-              }}
-              text={password}
-              placeholderText="Password (minimum 6 characters)"
-              secureTextEntry
-              autoCapitalize="none"
-              updateText={text => {
-                this.setState({ password: text }, () => this.validateForm(true))
-              }}
-              onFocus={() => this.addTouched('password')}
-              onBlur={() => this.validateForm(false)}
-              returnKeyType="done"
-              error={displayErrors.password}
-            >
-              <Icon
-                name="lock"
                 size={18}
                 color="rgb(139, 133, 150)"
                 style={{ marginLeft: 8 }}
@@ -321,18 +252,12 @@ class SignUpScreen extends Component {
             <RegisterButton
               keyboardShouldPersistTaps="always"
               onPress={() => {
-                this.props.updateAccountInfo({
-                  firstName,
-                  lastName,
+                this.props.updateEmail({
                   email,
-                  password,
                 })
-                this.props.navigation.navigate('PersonalDetails', {
+                this.props.navigation.navigate('Verification', {
                   userInfo: {
-                    firstName,
-                    lastName,
                     email,
-                    password,
                   },
                 })
               }}

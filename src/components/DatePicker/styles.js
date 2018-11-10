@@ -18,6 +18,7 @@ export const DoneButtonText = styled.Text`
 export const Container = styled.View`
   background-color: ${themeGet('colors.background')};
   position: absolute;
+  align-self: center;
   bottom: 0;
   width: 100%;
 `

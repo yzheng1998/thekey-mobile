@@ -30,3 +30,10 @@ export const TextField = styled.Text`
   color: ${props =>
     props.placeholder ? themeGet('colors.pickerPlaceholder') : 'black'};
 `
+
+export const Title = styled.Text`
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: ${themeGet('colors.activeTag')};
+  font-family: ${themeGet('fonts.medium')};
+`

@@ -1,5 +1,6 @@
 import {
-  UPDATE_ACCOUNT_INFO,
+  UPDATE_EMAIL,
+  UPDATE_PASSWORD,
   UPDATE_PERSONAL_DETAILS,
   UPDATE_ESSAY,
   UPDATE_GENDER,
@@ -9,6 +10,7 @@ import {
   UPDATE_DESCRIPTIONS,
   UPDATE_FACEBOOK_INFO,
   UPDATE_LINKEDIN_INFO,
+  UPDATE_INTRODUCTION_INFO,
 } from '../actions/membershipApplication'
 
 const initialState = {
@@ -24,11 +26,13 @@ const membershipApplicationReducer = (state = initialState, action) => {
     },
   })
   switch (action.type) {
-    case UPDATE_ACCOUNT_INFO: {
+    case UPDATE_EMAIL: {
       return updatedState({
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
         email: action.payload.email,
+      })
+    }
+    case UPDATE_PASSWORD: {
+      return updatedState({
         password: action.payload.password,
       })
     }
@@ -85,6 +89,13 @@ const membershipApplicationReducer = (state = initialState, action) => {
         lastName: action.payload.lastName,
         email: action.payload.email,
         password: '',
+      })
+    }
+    case UPDATE_INTRODUCTION_INFO: {
+      return updatedState({
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
+        birthday: action.payload.birthday,
       })
     }
     default: {

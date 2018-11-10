@@ -57,6 +57,8 @@ const theme = {
     linkedInBlue: 'rgb(1, 119, 181)',
     linkedInBorder: 'rgb(8, 92, 144)',
     splashBackground: 'rgb(247, 249, 252)',
+    verificationNumber: 'rgb(92, 78, 121)',
+    cameraButton: 'rgb(235, 240, 247)',
   },
   ...Platform.select({
     ios: {

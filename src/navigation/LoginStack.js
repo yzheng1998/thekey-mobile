@@ -12,6 +12,10 @@ import InterestsScreen from '../screens/InterestsScreen'
 import DescriptionsScreen from '../screens/DescriptionsScreen'
 import ResumeUploadScreen from '../screens/ResumeUploadScreen'
 import ResetPasswordScreen from '../screens/ResetPasswordScreen'
+import VerificationScreen from '../screens/VerificationScreen'
+import PhotoUploadScreen from '../screens/PhotoUploadScreen'
+import IntroductionScreen from '../screens/IntroductionScreen'
+import CreatePasswordScreen from '../screens/CreatePasswordScreen'
 
 const LoginStack = createStackNavigator(
   {
@@ -38,6 +42,20 @@ const LoginStack = createStackNavigator(
     },
     SignUp: {
       screen: SignUpScreen,
+      navigationOptions: () => ({
+        header: null,
+        gesturesEnabled: false,
+      }),
+    },
+    Verification: {
+      screen: VerificationScreen,
+      navigationOptions: () => ({
+        header: null,
+        gesturesEnabled: false,
+      }),
+    },
+    CreatePassword: {
+      screen: CreatePasswordScreen,
       navigationOptions: () => ({
         header: null,
         gesturesEnabled: false,
@@ -101,6 +119,20 @@ const LoginStack = createStackNavigator(
     },
     Ethnicities: {
       screen: EthnicitiesScreen,
+      navigationOptions: () => ({
+        header: null,
+        gesturesEnabled: false,
+      }),
+    },
+    PhotoUpload: {
+      screen: PhotoUploadScreen,
+      navigationOptions: () => ({
+        header: null,
+        gesturesEnabled: false,
+      }),
+    },
+    Introduction: {
+      screen: IntroductionScreen,
       navigationOptions: () => ({
         header: null,
         gesturesEnabled: false,

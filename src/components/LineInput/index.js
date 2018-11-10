@@ -5,6 +5,7 @@ import {
   InputContainer,
   Input,
   ClearIconButton,
+  Title,
 } from './styles'
 import ClearIcon from 'react-native-vector-icons/MaterialIcons'
 import Error from '../../components/Error'
@@ -20,6 +21,7 @@ export default class LineInput extends Component {
 
   render() {
     const {
+      title,
       updateText,
       children,
       placeholderText,
@@ -32,6 +34,7 @@ export default class LineInput extends Component {
     } = this.props
     return (
       <RowContainer>
+        {title && <Title>{title}</Title>}
         <LineInputContainer selected={this.state.selected}>
           <InputContainer>
             {children}
