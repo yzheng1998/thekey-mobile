@@ -10,6 +10,7 @@ export const UPDATE_INTERESTS = 'UPDATE_INTERESTS'
 export const UPDATE_DESCRIPTIONS = 'UPDATE_DESCRIPTIONS'
 export const UPDATE_FACEBOOK_INFO = 'UPDATE_FACEBOOK_INFO'
 export const UPDATE_LINKEDIN_INFO = 'UPDATE_LINKEDIN_INFO'
+export const UPDATE_INTRODUCTION_INFO = 'UPDATE_INTRODUCTION_INFO'
 
 export const updateEmail = ({ email }) => ({
   type: UPDATE_EMAIL,
@@ -74,4 +75,9 @@ export const updateLinkedInInfo = ({
 }) => ({
   type: UPDATE_LINKEDIN_INFO,
   payload: { linkedInId, firstName, lastName, email, password },
+})
+
+export const updateIntroductionInfo = ({ firstName, lastName, birthday }) => ({
+  type: UPDATE_INTRODUCTION_INFO,
+  payload: { firstName, lastName, birthday },
 })
