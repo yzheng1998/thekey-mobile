@@ -1,5 +1,6 @@
 import {
   UPDATE_EMAIL,
+  UPDATE_PASSWORD,
   UPDATE_PERSONAL_DETAILS,
   UPDATE_ESSAY,
   UPDATE_GENDER,
@@ -28,6 +29,11 @@ const membershipApplicationReducer = (state = initialState, action) => {
     case UPDATE_EMAIL: {
       return updatedState({
         email: action.payload.email,
+      })
+    }
+    case UPDATE_PASSWORD: {
+      return updatedState({
+        password: action.payload.password,
       })
     }
     case UPDATE_PERSONAL_DETAILS: {

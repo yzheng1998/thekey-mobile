@@ -15,6 +15,7 @@ import ResetPasswordScreen from '../screens/ResetPasswordScreen'
 import VerificationScreen from '../screens/VerificationScreen'
 import PhotoUploadScreen from '../screens/PhotoUploadScreen'
 import IntroductionScreen from '../screens/IntroductionScreen'
+import CreatePasswordScreen from '../screens/CreatePasswordScreen'
 
 const LoginStack = createStackNavigator(
   {
@@ -48,6 +49,13 @@ const LoginStack = createStackNavigator(
     },
     Verification: {
       screen: VerificationScreen,
+      navigationOptions: () => ({
+        header: null,
+        gesturesEnabled: false,
+      }),
+    },
+    CreatePassword: {
+      screen: CreatePasswordScreen,
       navigationOptions: () => ({
         header: null,
         gesturesEnabled: false,

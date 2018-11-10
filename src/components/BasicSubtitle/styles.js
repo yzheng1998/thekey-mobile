@@ -4,6 +4,8 @@ import { themeGet } from 'styled-system'
 export const Container = styled.View`
   align-items: center;
   width: 100%;
+  padding-left: 12px;
+  padding-right: 12px;
 `
 
 export const Subtitle = styled.Text`
