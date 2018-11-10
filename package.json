@@ -48,6 +48,7 @@
     "react-native-actionsheet": "^2.4.2",
     "react-native-camera": "^1.1.4",
     "react-native-communications": "^2.2.1",
+    "react-native-confirmation-code-input": "^1.0.4",
     "react-native-deck-swiper": "git+https://github.com/hsadev/react-native-deck-swiper.git",
     "react-native-document-picker": "^2.1.0",
     "react-native-elements": "^0.19.1",
