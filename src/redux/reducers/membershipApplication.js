@@ -11,6 +11,7 @@ import {
   UPDATE_FACEBOOK_INFO,
   UPDATE_LINKEDIN_INFO,
   UPDATE_INTRODUCTION_INFO,
+  UPDATE_COORDINATES,
 } from '../actions/membershipApplication'
 
 const initialState = {
@@ -96,6 +97,11 @@ const membershipApplicationReducer = (state = initialState, action) => {
         firstName: action.payload.firstName,
         lastName: action.payload.lastName,
         birthday: action.payload.birthday,
+      })
+    }
+    case UPDATE_COORDINATES: {
+      return updatedState({
+        coordinates: action.payload.coordinates,
       })
     }
     default: {

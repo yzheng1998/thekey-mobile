@@ -11,6 +11,7 @@ export const UPDATE_DESCRIPTIONS = 'UPDATE_DESCRIPTIONS'
 export const UPDATE_FACEBOOK_INFO = 'UPDATE_FACEBOOK_INFO'
 export const UPDATE_LINKEDIN_INFO = 'UPDATE_LINKEDIN_INFO'
 export const UPDATE_INTRODUCTION_INFO = 'UPDATE_INTRODUCTION_INFO'
+export const UPDATE_COORDINATES = 'UPDATE_COORDINATES'
 
 export const updateEmail = ({ email }) => ({
   type: UPDATE_EMAIL,
@@ -80,4 +81,8 @@ export const updateLinkedInInfo = ({
 export const updateIntroductionInfo = ({ firstName, lastName, birthday }) => ({
   type: UPDATE_INTRODUCTION_INFO,
   payload: { firstName, lastName, birthday },
+})
+export const updateCoordinates = ({ coordinates }) => ({
+  type: UPDATE_COORDINATES,
+  payload: { coordinates },
 })

@@ -4,18 +4,33 @@ import Subtitle from '../../components/BasicSubtitle'
 import { Image } from 'react-native'
 import locationGraphic from '../../../assets/locationGraphic.png'
 import RegisterButton from '../../components/RegisterButton'
+import { connect } from 'react-redux'
+import { updateCoordinates } from '../../redux/actions/membershipApplication'
 
-export default class LocationScreen extends Component {
+const mapStateToProps = state => ({
+  coordinates: state.membershipApplication.coordinates,
+})
+
+const mapDispatchToProps = {
+  updateCoordinates,
+}
+
+class LocationScreen extends Component {
   state = {
     latitude: null,
     longitude: null,
   }
 
-  getPosition = () => {
-    navigator.geolocation.getCurrentPosition(position => ({
-      latitude: position.coords.latitude,
-      longitude: position.coords.longitude,
-    }))
+  getPosition = callback => {
+    navigator.geolocation.getCurrentPosition(position => {
+      this.setState(
+        {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        },
+        callback,
+      )
+    })
   }
 
   render() {
@@ -28,11 +43,19 @@ export default class LocationScreen extends Component {
           nearby.
         </Subtitle>
         <RegisterButton
-          onPress={() =>
-            this.props.navigation.navigate('PhotoUpload', {
-              position: this.getPosition,
-            })
-          }
+          onPress={() => {
+            const coordinates = {
+              latitude: this.state.latitude,
+              longitude: this.state.longitude,
+            }
+            const callback = () => {
+              this.props.updateCoordinates({
+                coordinates,
+              })
+              this.props.navigation.navigate('PhotoUpload')
+            }
+            this.getPosition(callback)
+          }}
           buttonText="ENABLE LOCATION"
         />
         <RegisterButton
@@ -48,3 +71,8 @@ export default class LocationScreen extends Component {
     )
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LocationScreen)
