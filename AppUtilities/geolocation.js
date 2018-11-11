@@ -1,6 +1,5 @@
 import { client } from '../src/apollo'
 import { UPDATE_LOCATION } from './mutations'
-import { Alert } from 'react-native'
 
 export const setPosition = () => {
   navigator.geolocation.getCurrentPosition(
