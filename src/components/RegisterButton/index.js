@@ -10,6 +10,7 @@ export default class RegisterButton extends Component {
       noBorder,
       children,
       buttonText,
+      style,
     } = this.props
     return (
       <Button
@@ -17,6 +18,7 @@ export default class RegisterButton extends Component {
         onPress={onPress}
         disabled={disabled}
         noBorder={noBorder}
+        style={style}
       >
         {children}
         <ButtonText disabled={disabled} secondary={secondary}>
