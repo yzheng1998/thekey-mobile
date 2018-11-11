@@ -9,23 +9,10 @@ export const ScreenContainer = styled.View`
   padding-bottom: 24px;
 `
 
-export const SubtitleView = styled.View`
-  width: 100%;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  padding-left: 12px;
-  padding-right: 12px;
-`
-
-export const Subtitle = styled.Text`
-  color: ${props =>
-    props.hyperlink
-      ? themeGet('colors.fontButtonTertiary')
-      : themeGet('colors.fontSubtitle.primary')};
-  font-family: ${themeGet('fonts.medium')};
-  font-size: 14px
-  line-height: 20px;
-  text-align: center;
+export const ContentContainer = styled.SafeAreaView`
+  flex: 1;
+  background-color: white;
+  margin-bottom: 70px;
 `
 
 export const Button = styled.TouchableOpacity`

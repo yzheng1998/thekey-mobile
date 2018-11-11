@@ -1,17 +1,9 @@
 import React, { Component } from 'react'
-import { View, SafeAreaView, ScrollView } from 'react-native'
-import {
-  ScreenContainer,
-  SubtitleView,
-  Subtitle,
-  Button,
-  ButtonText,
-} from './styles'
+import { View, ScrollView } from 'react-native'
+import { ScreenContainer, ContentContainer, Button, ButtonText } from './styles'
 import Header from '../../components/Header'
-import RegisterButton from '../../components/RegisterButton'
+import SubmitButton from '../../components/SubmitButton'
 import { ethnicityOptions } from './constants'
-
-import nodeEmoji from 'node-emoji'
 
 import { connect } from 'react-redux'
 import { updateEthnicities } from '../../redux/actions/membershipApplication'
@@ -61,19 +53,14 @@ class EthnicitiesScreen extends Component {
     const disabled = this.state.ethnicities.length === 0
     return (
       <ScreenContainer>
-        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+        <ContentContainer>
           <ScrollView keyboardShouldPersistTaps="always">
             <Header
-              title={`${nodeEmoji.get('wave')} Hi, ${this.props.firstName}!`}
+              title="Which race best describes you?"
               showBack
               onBackPress={() => this.props.navigation.goBack()}
               progress="28.5%"
             />
-            <SubtitleView>
-              <Subtitle>
-                Select the following that apply to your ethnicity
-              </Subtitle>
-            </SubtitleView>
             <View>
               {ethnicityOptions.map(option => (
                 <Button
@@ -85,18 +72,18 @@ class EthnicitiesScreen extends Component {
                 </Button>
               ))}
             </View>
-            <RegisterButton
-              buttonText="NEXT"
-              disabled={disabled}
-              onPress={() => {
-                this.props.updateEthnicities({
-                  ethnicities: this.state.ethnicities,
-                })
-                this.props.navigation.navigate('Gender')
-              }}
-            />
           </ScrollView>
-        </SafeAreaView>
+        </ContentContainer>
+        <SubmitButton
+          buttonText="NEXT"
+          disabled={disabled}
+          onPress={() => {
+            this.props.updateEthnicities({
+              ethnicities: this.state.ethnicities,
+            })
+            this.props.navigation.navigate('Gender')
+          }}
+        />
       </ScreenContainer>
     )
   }
