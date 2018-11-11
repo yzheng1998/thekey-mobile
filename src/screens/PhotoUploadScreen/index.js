@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Screen } from './styles'
 import Header from '../../components/Header'
-import Subtitle from '../../components/BasicSubtitle'
 import RegisterButton from '../../components/RegisterButton'
 import PhotoUploadButton from './components/PhotoUploadButton'
 
@@ -22,9 +21,9 @@ export default class PhotoUploadScreen extends Component {
           onBackPress={() => this.props.navigation.goBack()}
           progress="42.8%"
         />
-        <Subtitle>Insert picture below</Subtitle>
         <PhotoUploadButton updateProfilePicture={this.updateProfilePicture} />
         <RegisterButton
+          disabled={!this.state.profilePicture}
           keyboardShouldPersistTaps="always"
           buttonText="CONTINUE"
         />
