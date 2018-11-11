@@ -31,6 +31,8 @@ import {
   updateEmail,
   updateFacebookInfo,
 } from '../../redux/actions/membershipApplication'
+import { Mutation } from 'react-apollo'
+import { SEND_VERIFICATION } from './mutations'
 
 const validate = require('validate.js')
 
@@ -249,21 +251,32 @@ class SignUpScreen extends Component {
                 </Subtitle>.
               </Subtitle>
             </SubtitleView>
-            <RegisterButton
-              keyboardShouldPersistTaps="always"
-              onPress={() => {
-                this.props.updateEmail({
-                  email,
-                })
+            <Mutation
+              mutation={SEND_VERIFICATION}
+              onCompleted={data => {
                 this.props.navigation.navigate('Verification', {
-                  userInfo: {
-                    email,
-                  },
+                  userInfo: { email },
+                  verificationCode: data.sendVerification.verificationCode,
                 })
               }}
-              buttonText="SIGN UP & ACCEPT"
-              disabled={!noErrors}
-            />
+            >
+              {sendVerification => (
+                <RegisterButton
+                  keyboardShouldPersistTaps="always"
+                  onPress={() => {
+                    const variables = {
+                      email,
+                    }
+                    this.props.updateEmail({
+                      email,
+                    })
+                    sendVerification({ variables })
+                  }}
+                  buttonText="SIGN UP & ACCEPT"
+                  disabled={!noErrors}
+                />
+              )}
+            </Mutation>
             <DividerRow>
               <Divider />
               <DividerText>OR</DividerText>

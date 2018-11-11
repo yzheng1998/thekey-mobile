@@ -54,7 +54,7 @@ const LoginStack = createStackNavigator(
         gesturesEnabled: false,
       }),
     },
-    CreatePassword: {
+    Password: {
       screen: CreatePasswordScreen,
       navigationOptions: () => ({
         header: null,
