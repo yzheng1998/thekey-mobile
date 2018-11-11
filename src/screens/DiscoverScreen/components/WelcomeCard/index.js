@@ -1,15 +1,8 @@
 import React, { Component } from 'react'
 import welcomeGraphic from '../../../../../assets/welcomeGraphic.png'
 import RegisterButton from '../../../../components/RegisterButton'
-import {
-  Card,
-  Title,
-  Subtitle,
-  Image,
-  ButtonText,
-  CardContainer,
-} from '../../styles'
-import { View, TouchableOpacity } from 'react-native'
+import { Card, Title, Subtitle, Image, CardContainer } from '../../styles'
+import { View } from 'react-native'
 
 import gql from 'graphql-tag'
 import { Mutation } from 'react-apollo'
@@ -30,25 +23,14 @@ export default class WelcomeCard extends Component {
   }
 
   render() {
-    const {
-      navigation,
-      completeProfileClicked,
-      onComplete,
-      refetch,
-      firstName,
-    } = this.props
-    const laterText = "I'll do it later"
+    const { refetch, firstName, toggleNotificationCard } = this.props
     return (
       <Card
         isVisible={this.state.showWelcomeCard}
         animationIn="slideInUp"
         animationOut="slideOutDown"
         backdropOpacity={0.4}
-        onModalHide={() => {
-          if (completeProfileClicked) {
-            navigation.navigate('EditProfile')
-          }
-        }}
+        onModalHide={toggleNotificationCard}
       >
         <CardContainer>
           <Image source={welcomeGraphic} />
@@ -70,17 +52,9 @@ export default class WelcomeCard extends Component {
                   secondary
                   onPress={() => {
                     setHasLoggedIn()
-                    onComplete()
                   }}
-                  buttonText="COMPLETE YOUR PUBLIC PROFILE"
+                  buttonText="Next"
                 />
-                <TouchableOpacity
-                  onPress={() => {
-                    setHasLoggedIn()
-                  }}
-                >
-                  <ButtonText>{laterText}</ButtonText>
-                </TouchableOpacity>
               </View>
             )}
           </Mutation>

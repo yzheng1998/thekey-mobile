@@ -3,12 +3,13 @@ import { Background, List } from './styles'
 import DiscoverCard from './components/DiscoverCard'
 import Header from './components/Header'
 import { View, AsyncStorage, SafeAreaView } from 'react-native'
-import PushNotification from 'react-native-push-notification'
 import TheSocietyCard from '../../../assets/TheSocietyCard.png'
 import JobsAndInternshipsCard from '../../../assets/JobsAndInternshipsCard.png'
 import EventsCard from '../../../assets/EventsCard.png'
 import ReviewsCard from '../../../assets/ReviewsCard.png'
 import WelcomeCard from './components/WelcomeCard'
+import NotificationCard from './components/NotificationCard'
+import CompleteCard from './components/CompleteCard'
 import ShareMenu from './components/ShareMenu'
 
 import gql from 'graphql-tag'
@@ -34,22 +35,23 @@ class DiscoverScreen extends Component {
     name: '',
     profilePicture:
       'https://images.unsplash.com/photo-1476983109555-18ebaf412d7c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c508869d7645131d98c453dd9ce0ae6&auto=format&fit=crop&w=2420&q=80',
-    completeProfile: false,
     inviteFriendModalVisible: false,
-  }
-
-  componentDidMount = async () => {
-    PushNotification.requestPermissions()
-  }
-
-  onComplete = () => {
-    this.setState({ completeProfileClicked: true })
+    showNotificationCard: false,
+    showCompleteCard: false,
   }
 
   toggleInviteFriendModal = () => {
     this.setState({
       inviteFriendModalVisible: !this.state.inviteFriendModalVisible,
     })
+  }
+
+  toggleNotificationCard = () => {
+    this.setState({ showNotificationCard: !this.state.showNotificationCard })
+  }
+
+  toggleCompleteCard = () => {
+    this.setState({ showCompleteCard: !this.state.showCompleteCard })
   }
 
   render() {
@@ -97,9 +99,19 @@ class DiscoverScreen extends Component {
                   refetch={refetch}
                   firstName={data.viewer.firstName}
                   showWelcomeCard={!data.viewer.hasLoggedIn}
+                  toggleNotificationCard={this.toggleNotificationCard}
+                />
+                <NotificationCard
+                  isVisible={this.state.showNotificationCard}
+                  firstName={data.viewer.firstName}
+                  toggleNotificationCard={this.toggleNotificationCard}
+                  toggleCompleteCard={this.toggleCompleteCard}
+                />
+                <CompleteCard
+                  refetch={refetch}
+                  isVisible={this.state.showCompleteCard}
                   navigation={this.props.navigation}
-                  completeProfileClicked={this.state.completeProfileClicked}
-                  onComplete={this.onComplete}
+                  toggleCompleteCard={this.toggleCompleteCard}
                 />
                 <ShareMenu
                   visible={this.state.inviteFriendModalVisible}
