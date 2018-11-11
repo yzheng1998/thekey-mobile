@@ -114,7 +114,7 @@ class CreatePasswordScreen extends Component {
             this.props.updatePassword({
               password,
             })
-            this.props.navigation.navigate('PersonalDetails', {
+            this.props.navigation.navigate('Introduction', {
               userInfo: {
                 password,
               },

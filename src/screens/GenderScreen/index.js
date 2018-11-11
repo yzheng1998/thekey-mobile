@@ -70,7 +70,7 @@ class GenderScreen extends Component {
           disabled={disabled}
           onPress={() => {
             this.props.updateGender({ gender: this.state.gender })
-            this.props.navigation.navigate('YourEducation')
+            this.props.navigation.navigate('Ethnicities')
           }}
         />
       </ScreenContainer>

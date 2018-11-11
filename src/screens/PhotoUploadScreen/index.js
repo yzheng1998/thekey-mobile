@@ -23,6 +23,7 @@ export default class PhotoUploadScreen extends Component {
         />
         <PhotoUploadButton updateProfilePicture={this.updateProfilePicture} />
         <RegisterButton
+          onPress={() => this.props.navigation.navigate('Location')}
           disabled={!this.state.profilePicture}
           keyboardShouldPersistTaps="always"
           buttonText="CONTINUE"
