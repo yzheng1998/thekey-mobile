@@ -18,6 +18,7 @@ import IntroductionScreen from '../screens/IntroductionScreen'
 import CreatePasswordScreen from '../screens/CreatePasswordScreen'
 import LocationScreen from '../screens/LocationScreen'
 import ShareScreen from '../screens/ShareScreen'
+import AddEducationScreen from '../screens/AddEducationScreen'
 
 const LoginStack = createStackNavigator(
   {
@@ -149,6 +150,13 @@ const LoginStack = createStackNavigator(
     },
     Share: {
       screen: ShareScreen,
+      navigationOptions: () => ({
+        header: null,
+        gesturesEnabled: false,
+      }),
+    },
+    Education: {
+      screen: AddEducationScreen,
       navigationOptions: () => ({
         header: null,
         gesturesEnabled: false,

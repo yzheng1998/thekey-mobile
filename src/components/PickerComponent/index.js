@@ -5,8 +5,10 @@ import {
   DoneButton,
   DoneButtonText,
 } from './styles'
-import { Platform, View } from 'react-native'
+import { Platform, View, PickerIOS } from 'react-native'
 import ActionSheet from 'react-native-actionsheet'
+
+const PickerItem = PickerIOS.Item
 
 export default class PickerComponent extends Component {
   showActionSheet = () => {
@@ -39,7 +41,7 @@ export default class PickerComponent extends Component {
               itemStyle={{ color: 'rgb(244, 89, 82)' }}
             >
               {options.map(option => (
-                <PickerView.Item
+                <PickerItem
                   label={option.label}
                   value={option.value}
                   key={option}

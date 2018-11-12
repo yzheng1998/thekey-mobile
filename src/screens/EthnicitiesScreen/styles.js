@@ -35,3 +35,10 @@ export const ButtonText = styled.Text`
   font-size: 16px;
   color: white;
 `
+export const Icon = styled.Image`
+  width: 20px;
+  height: 20px;
+  margin-left: 12px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+`
