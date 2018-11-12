@@ -54,12 +54,20 @@ export const Subtitle = styled.Text`
   margin-left: 12px;
   margin-right: 12px;
   margin-top: 8px;
+  margin-bottom: 12px;
 `
 
 export const Image = styled.Image`
   width: ${width * 0.64};
   height: ${width * 0.592};
   align-self: center;
+`
+
+export const NotificationImage = styled.Image`
+  width: ${width * 0.64};
+  height: ${width * 0.532};
+  align-self: center;
+  margin-right: 30px;
 `
 
 export const ButtonText = styled.Text`
