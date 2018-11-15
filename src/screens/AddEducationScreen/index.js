@@ -203,7 +203,10 @@ export default class AddEducationScreen extends Component {
             <RegistrationPicker
               title="Select your degree type"
               selected={showDegreeTypePicker}
-              onPress={openDegreeTypePicker}
+              onPress={() => {
+                openDegreeTypePicker()
+                this.Scroll.scrollToPosition(0, 13, true)
+              }}
               text={degreeType ? findLabel(degreeType, degreeTypeOptions) : ''}
               placeholderText="Select your degree type"
             />
