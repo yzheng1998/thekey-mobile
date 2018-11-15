@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Keyboard, View } from 'react-native'
+import { connect } from 'react-redux'
 import {
   ScreenContainer,
   ContentContainer,
@@ -11,6 +12,7 @@ import SubmitButton from '../../components/SubmitButton'
 import RegistrationPicker from '../../components/RegistrationPicker'
 import LineInput from '../../components/LineInput'
 import PickerComponent from '../../components/PickerComponent'
+import SchoolSearchModal from '../../components/SchoolSearchModal'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { degreeTypeOptions } from '../../constants'
 import constraints from './constraints'
@@ -32,7 +34,15 @@ const createYearData = () => {
 const findLabel = (value, options) =>
   options.find(el => el.value === value).label
 
-export default class AddEducationScreen extends Component {
+const mapStateToProps = state => ({
+  educations: state.membershipApplication.educations,
+})
+
+const mapDispatchToProps = {
+  updateEducations,
+}
+
+class AddEducationScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -55,15 +65,16 @@ export default class AddEducationScreen extends Component {
     }
   }
 
-  handleEducationChange = () =>
-    updateEducations({
+  handleEducationChange = () => {
+    this.props.updateEducations({
       educations: this.state.educationListData,
     })
+  }
 
   addEducation = schoolObj => {
     this.setState(
       {
-        educationListData: [...this.state.educationListData, schoolObj],
+        educationListData: [schoolObj],
       },
       this.handleEducationChange,
     )
@@ -127,6 +138,10 @@ export default class AddEducationScreen extends Component {
 
   updateState = this.setState.bind(this)
 
+  toggleSchoolModal = () => {
+    this.setState({ showUniversitySearch: !this.state.showUniversitySearch })
+  }
+
   render() {
     const {
       schoolId,
@@ -144,8 +159,6 @@ export default class AddEducationScreen extends Component {
       showEndYearPicker,
     } = this.state
 
-    const toggleEducationModal = () => {}
-
     const addEducation = () => {
       this.addEducation({
         schoolId,
@@ -157,7 +170,8 @@ export default class AddEducationScreen extends Component {
         endYear,
       })
     }
-    const { clearState, validateForm, addTouched } = this
+
+    const { validateForm, addTouched } = this
 
     const openDegreeTypePicker = () => {
       Keyboard.dismiss()
@@ -203,7 +217,10 @@ export default class AddEducationScreen extends Component {
             <RegistrationPicker
               title="Select your degree type"
               selected={showDegreeTypePicker}
-              onPress={openDegreeTypePicker}
+              onPress={() => {
+                openDegreeTypePicker()
+                this.Scroll.scrollToPosition(0, 13, true)
+              }}
               text={degreeType ? findLabel(degreeType, degreeTypeOptions) : ''}
               placeholderText="Select your degree type"
             />
@@ -311,13 +328,19 @@ export default class AddEducationScreen extends Component {
           value={endYear}
           keyName="endYear"
         />
+        <SchoolSearchModal
+          updateState={this.updateState}
+          onDismiss={() => null}
+          navigation={this.props.navigation}
+          toggleSchoolModal={this.toggleSchoolModal}
+          visible={this.state.showUniversitySearch}
+        />
         {noErrors && (
           <SubmitButton
             buttonText="ADD SCHOOL"
             onPress={() => {
               addEducation()
-              toggleEducationModal()
-              clearState()
+              this.props.navigation.navigate('PhotoUpload')
             }}
           />
         )}
@@ -325,3 +348,8 @@ export default class AddEducationScreen extends Component {
     )
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AddEducationScreen)
