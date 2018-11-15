@@ -254,10 +254,18 @@ class SignUpScreen extends Component {
             <Mutation
               mutation={SEND_VERIFICATION}
               onCompleted={data => {
-                this.props.navigation.navigate('Verification', {
-                  userInfo: { email },
-                  verificationCode: data.sendVerification.verificationCode,
-                })
+                if (data.sendVerification.error) {
+                  Alert.alert(
+                    'Failed to upload your application',
+                    'There was an error sending in your application. Please try again.',
+                    [{ text: 'OK', onPress: () => {} }],
+                    { cancelable: true },
+                  )
+                } else
+                  this.props.navigation.navigate('Verification', {
+                    userInfo: { email },
+                    verificationCode: data.sendVerification.verificationCode,
+                  })
               }}
             >
               {sendVerification => (
