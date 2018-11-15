@@ -18,14 +18,14 @@ export default class ShareScreen extends Component {
         <RegisterButton
           onPress={() => {
             text(null, 'Join the key! http://onelink.to/ywz9nu')
-            this.props.navigation.navigate('PhotoUpload')
+            this.props.navigation.navigate('Splash')
           }}
           buttonText="INVITE MY FRIENDS"
         />
         <RegisterButton
           style={{ marginTop: 36 }}
           onPress={() => {
-            this.props.navigation.navigate('PhotoUpload')
+            this.props.navigation.navigate('Splash')
           }}
           secondary
           noBorder

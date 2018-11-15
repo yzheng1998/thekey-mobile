@@ -52,7 +52,7 @@ class LocationScreen extends Component {
               this.props.updateCoordinates({
                 coordinates,
               })
-              this.props.navigation.navigate('PhotoUpload')
+              this.props.navigation.navigate('Share')
             }
             this.getPosition(callback)
           }}
