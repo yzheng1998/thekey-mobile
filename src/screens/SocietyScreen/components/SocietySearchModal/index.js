@@ -17,46 +17,12 @@ import { societySearchLimit } from '../../../../../config'
 const defaultProfilePicture =
   'https://images.unsplash.com/photo-1519145897500-869c40ccb024?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dc363c8e033813d4f7b798846bb13a24&auto=format&fit=crop&w=582&q=80'
 
-const PeopleList = ({
-  peopleData,
-  onPress,
-  updateState,
-  variables,
-  fetchMore,
-}) => (
+const PeopleList = ({ peopleData, onPress, updateState }) => (
   <PeopleListContainer>
     <FlatList
       keyboardShouldPersistTaps="handled"
       keyExtractor={person => person.id}
       data={peopleData}
-      onEndReachedThreshold={0.25}
-      onEndReached={() =>
-        fetchMore({
-          variables: {
-            ...variables,
-            offset: peopleData.length,
-          },
-          updateQuery: (prev, { fetchMoreResult }) => {
-            if (!fetchMoreResult) return prev
-            const newNodes = [
-              ...prev.users.nodes,
-              ...fetchMoreResult.users.nodes.filter(
-                n => !prev.users.nodes.some(p => p.id === n.id),
-              ),
-            ]
-
-            const newQuery = {
-              ...prev,
-              users: {
-                ...prev.users,
-                nodes: newNodes,
-                pageInfo: fetchMoreResult.users.pageInfo,
-              },
-            }
-            return newQuery
-          },
-        })
-      }
       renderItem={({ item: person }) => (
         <UserCard
           onPress={() => {

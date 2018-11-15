@@ -33,7 +33,7 @@ class ChatInbox extends Component {
     }
     return (
       <Query query={GET_CHATS} variables={variables} pollInterval={5000}>
-        {({ loading, data, fetchMore }) => {
+        {({ loading, data }) => {
           if (loading) return <LoadingWrapper loading />
           return (
             <FlatList
@@ -67,51 +67,6 @@ class ChatInbox extends Component {
                   />
                 )
               }}
-              onEndReachedThreshold={0.25}
-              onEndReached={() =>
-                fetchMore({
-                  variables: {
-                    ...variables,
-                    offset: data.viewer.chats.nodes.length,
-                  },
-                  updateQuery: (prev, { fetchMoreResult }) => {
-                    if (!fetchMoreResult) return prev
-                    const { chats: prevChats } = prev.viewer
-                    const { chats: fetchChats } = fetchMoreResult.viewer
-
-                    // Make sure that there are no repeat nodes
-                    const newNodes = [
-                      ...prevChats.nodes,
-                      ...fetchChats.nodes.filter(
-                        n => !prevChats.nodes.some(p => p.id === n.id),
-                      ),
-                    ]
-
-                    const newChats = {
-                      ...prevChats,
-                      ...{
-                        nodes: newNodes,
-                        pageInfo: fetchChats.pageInfo,
-                      },
-                    }
-
-                    const newViewer = {
-                      ...prev.viewer,
-                      ...{
-                        chats: newChats,
-                      },
-                    }
-
-                    const newQuery = {
-                      ...prev,
-                      ...{
-                        viewer: newViewer,
-                      },
-                    }
-                    return newQuery
-                  },
-                })
-              }
             />
           )
         }}

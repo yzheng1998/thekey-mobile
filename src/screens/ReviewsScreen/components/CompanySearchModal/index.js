@@ -94,7 +94,7 @@ export default class CompanySearchModal extends Component {
           </Mutation>
           <ThinDivider />
           <Query query={GET_REVIEWABLE_COMPANIES} variables={variables}>
-            {({ loading, data, fetchMore }) => {
+            {({ loading, data }) => {
               if (loading) return <LoadingWrapper loading />
               if (
                 data.reviewableCompanies.nodes.length === 0 &&
@@ -136,40 +136,6 @@ export default class CompanySearchModal extends Component {
                       picture={item.image || defaultImage}
                     />
                   )}
-                  onEndReachedThreshold={0.35}
-                  onEndReached={() =>
-                    fetchMore({
-                      variables: {
-                        ...variables,
-                        offset: data.reviewableCompanies.nodes.length,
-                      },
-                      updateQuery: (prev, { fetchMoreResult }) => {
-                        if (!fetchMoreResult) return prev
-
-                        const newNodes = [
-                          ...prev.reviewableCompanies.nodes,
-                          ...fetchMoreResult.reviewableCompanies.nodes.filter(
-                            n =>
-                              !prev.reviewableCompanies.nodes.some(
-                                p => p.id === n.id,
-                              ),
-                          ),
-                        ]
-
-                        const newQuery = {
-                          ...prev,
-                          reviewableCompanies: {
-                            ...prev.reviewableCompanies,
-                            nodes: newNodes,
-                            pageInfo:
-                              fetchMoreResult.reviewableCompanies.pageInfo,
-                          },
-                        }
-
-                        return newQuery
-                      },
-                    })
-                  }
                 />
               )
             }}

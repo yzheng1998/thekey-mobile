@@ -87,7 +87,7 @@ class EventsScreen extends Component {
         />
         <Background keyboardShouldPersistTaps="handled">
           <Query query={query} variables={variables}>
-            {({ loading, data, fetchMore }) => {
+            {({ loading, data }) => {
               if (loading) return <LoadingWrapper loading />
               const eventsList = filterByInterested
                 ? data[eventType].nodes.filter(e => e.isInterested === true)
@@ -95,34 +95,6 @@ class EventsScreen extends Component {
               return (
                 <LoadingWrapper loading={loading}>
                   <HorizontalEventsScroll
-                    onEndReachedThreshold={0.25}
-                    onEndReached={() => {
-                      fetchMore({
-                        variables: {
-                          ...variables,
-                          offset: eventsList.length,
-                        },
-                        updateQuery: (prev, { fetchMoreResult }) => {
-                          if (!fetchMoreResult) return prev
-                          const newNodes = [
-                            ...prev[eventType].nodes,
-                            ...fetchMoreResult[eventType].nodes.filter(
-                              n =>
-                                !prev[eventType].nodes.some(p => p.id === n.id),
-                            ),
-                          ]
-                          const newQuery = {
-                            ...prev,
-                            [eventType]: {
-                              ...prev[eventType],
-                              nodes: newNodes,
-                              pageInfo: fetchMoreResult[eventType].pageInfo,
-                            },
-                          }
-                          return newQuery
-                        },
-                      })
-                    }}
                     eventsList={eventsList}
                     navigation={this.props.navigation}
                   />
