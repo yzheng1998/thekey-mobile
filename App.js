@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components/native'
 import { client } from './src/apollo'
 import theme from './theme'
 import * as pushNotifications from './src/services/pushNotifications'
-import { AppState } from 'react-native'
+import { AppState, AsyncStorage } from 'react-native'
 
 pushNotifications.configure()
 
@@ -21,13 +21,17 @@ export default class App extends Component {
     appState: AppState.currentState,
   }
 
-  componentDidMount() {
-    Permissions.check('location').then(response => {
-      if (response === 'authorized') {
-        AppState.addEventListener('change', this.handleAppStateChange)
-        setPosition()
-      }
-    })
+  componentDidMount = async () => {
+    const token = await AsyncStorage.getItem('token')
+    if (token !== null) {
+      Permissions.check('location').then(response => {
+        if (response === 'authorized') {
+          AppState.addEventListener('change', this.handleAppStateChange)
+          setPosition()
+        }
+        console.log('reponse', response)
+      })
+    }
   }
 
   componentWillUnmount() {

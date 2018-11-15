@@ -215,7 +215,7 @@ class YourEducationScreen extends Component {
           <SubmitButton
             onPress={() => {
               handleEducationChange()
-              this.props.navigation.navigate('Essay')
+              this.props.navigation.navigate('PhotoUpload')
             }}
             buttonText="CONTINUE"
           />
