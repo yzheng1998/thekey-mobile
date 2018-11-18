@@ -273,8 +273,7 @@ class AddEducationScreen extends Component {
                 )
               }
               onBlur={() => validateForm(false)}
-              onSubmitEditing={openDegreeTypePicker}
-              returnKeyType="next"
+              returnKeyType="done"
               error={displayErrors.major}
             />
             <View style={{ height: 150 }} />
