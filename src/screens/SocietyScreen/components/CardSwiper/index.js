@@ -20,7 +20,7 @@ export default class CardSwiper extends Component {
         mutation={SEND_FRIEND_REQUEST}
         onCompleted={data => {
           const { friendRequest } = data.createFriendRequest
-          if (friendRequest.status === 'ACCEPTED') {
+          if (friendRequest && friendRequest.status === 'ACCEPTED') {
             handleSwipe({
               senderFirstName: friendRequest.sender.firstName,
               senderLastName: friendRequest.sender.lastName,

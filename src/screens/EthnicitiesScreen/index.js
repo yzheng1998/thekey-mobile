@@ -81,7 +81,7 @@ class EthnicitiesScreen extends Component {
             this.props.updateEthnicities({
               ethnicities: this.state.ethnicities,
             })
-            this.props.navigation.navigate('YourEducation')
+            this.props.navigation.navigate('Education')
           }}
         />
       </ScreenContainer>
