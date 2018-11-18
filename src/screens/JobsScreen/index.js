@@ -53,7 +53,7 @@ class JobsScreen extends Component {
         />
         <CardDivider />
         <Query query={GET_JOBS} variables={variables}>
-          {({ loading, data, refetch, fetchMore }) => {
+          {({ loading, data, refetch }) => {
             if (loading) return <LoadingWrapper loading />
             if (this.state.tab > 0 && this.state.tabChanged) {
               refetch()
@@ -67,33 +67,6 @@ class JobsScreen extends Component {
                 keyboardShouldPersistTaps="handled"
                 keyExtractor={job => job.id}
                 data={usableData}
-                onEndReachedThreshold={0.25}
-                onEndReached={() =>
-                  fetchMore({
-                    variables: {
-                      ...variables,
-                      offset: data.jobs.nodes.length,
-                    },
-                    updateQuery: (prev, { fetchMoreResult }) => {
-                      if (!fetchMoreResult) return prev
-                      const newNodes = [
-                        ...prev.jobs.nodes,
-                        ...fetchMoreResult.jobs.nodes.filter(
-                          n => !prev.jobs.nodes.some(p => p.id === n.id),
-                        ),
-                      ]
-                      const newQuery = {
-                        ...prev,
-                        jobs: {
-                          ...prev.jobs,
-                          nodes: newNodes,
-                          pageInfo: fetchMoreResult.jobs.pageInfo,
-                        },
-                      }
-                      return newQuery
-                    },
-                  })
-                }
                 renderItem={({ item: job }) => (
                   <View>
                     <JobCard

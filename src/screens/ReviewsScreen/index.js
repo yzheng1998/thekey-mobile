@@ -61,7 +61,7 @@ class ReviewsScreen extends Component {
         />
         <ThinDivider />
         <Query query={GET_REVIEWABLE_COMPANIES} variables={variables}>
-          {({ loading, data, refetch, fetchMore }) => {
+          {({ loading, data, refetch }) => {
             if (loading) return <LoadingWrapper loading />
             return (
               <View>
@@ -82,40 +82,6 @@ class ReviewsScreen extends Component {
                       numReviews={item.reviews.totalCount}
                     />
                   )}
-                  onEndReachedThreshold={0.35}
-                  onEndReached={() =>
-                    fetchMore({
-                      variables: {
-                        ...variables,
-                        offset: data.reviewableCompanies.nodes.length,
-                      },
-                      updateQuery: (prev, { fetchMoreResult }) => {
-                        if (!fetchMoreResult) return prev
-
-                        const newNodes = [
-                          ...prev.reviewableCompanies.nodes,
-                          ...fetchMoreResult.reviewableCompanies.nodes.filter(
-                            n =>
-                              !prev.reviewableCompanies.nodes.some(
-                                p => p.id === n.id,
-                              ),
-                          ),
-                        ]
-
-                        const newQuery = {
-                          ...prev,
-                          reviewableCompanies: {
-                            ...prev.reviewableCompanies,
-                            nodes: newNodes,
-                            pageInfo:
-                              fetchMoreResult.reviewableCompanies.pageInfo,
-                          },
-                        }
-
-                        return newQuery
-                      },
-                    })
-                  }
                 />
                 <AddCompanyReviewModal
                   refetchReviews={refetch}
