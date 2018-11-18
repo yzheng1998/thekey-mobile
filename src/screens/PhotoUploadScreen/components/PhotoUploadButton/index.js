@@ -80,12 +80,23 @@ export default class PhotoUploadButton extends Component {
                     width: 300,
                     height: 300,
                     cropping: true,
-                  }).then(image => {
-                    const variables = parseVariables(image)
-                    this.setState({ image }, () => {
-                      signS3Url({ variables })
-                    })
                   })
+                    .then(image => {
+                      const variables = parseVariables(image)
+                      this.setState({ image }, () => {
+                        signS3Url({ variables })
+                      })
+                    })
+                    .catch(er => {
+                      if (er.message !== 'User cancelled image selection') {
+                        Alert.alert(
+                          'Cannot access images',
+                          'Check your settings to ensure The Key has permission to access photos',
+                          [{ text: 'OK', onPress: () => {} }],
+                          { cancelable: true },
+                        )
+                      }
+                    })
                 }
               >
                 {this.state.image ? (
