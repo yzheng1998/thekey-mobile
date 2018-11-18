@@ -42,7 +42,7 @@ export default class NotificationCard extends Component {
             buttonText="ENABLE NOTIFICATIONS"
           />
           <RegisterButton
-            secondary
+            tertiary
             noBorder
             onPress={() => {
               Alert.alert(

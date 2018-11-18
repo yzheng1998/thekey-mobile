@@ -28,9 +28,10 @@ export const ButtonText = styled.Text`
   font-family: ${themeGet('fonts.heavy')};
   font-size: 14px;
   line-height: 23px;
-  color: ${props =>
-    props.secondary
-      ? themeGet('colors.fontSubtitle.primary')
-      : themeGet('colors.fontPrimary')};
+  color: ${props => {
+    if (props.secondary) return themeGet('colors.buttonPrimary')
+    if (props.tertiary) return themeGet('colors.fontSubtitle.primary')
+    return themeGet('colors.fontPrimary')
+  }}
   opacity: ${props => (props.secondary && props.disabled ? 0.5 : 1)};
 `

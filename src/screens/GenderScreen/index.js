@@ -40,7 +40,7 @@ class GenderScreen extends Component {
               title="Which gender best describes you?"
               showBack
               onBackPress={() => this.props.navigation.goBack()}
-              progress="28.5%"
+              progress="55%"
             />
             <View>
               <GenderButton

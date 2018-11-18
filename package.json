@@ -52,7 +52,7 @@
     "react-native-deck-swiper": "git+https://github.com/hsadev/react-native-deck-swiper.git",
     "react-native-document-picker": "^2.1.0",
     "react-native-elements": "^0.19.1",
-    "react-native-fbsdk": "^0.7.0",
+    "react-native-fbsdk": "^0.8.0",
     "react-native-form": "^2.1.2",
     "react-native-form-builder": "^1.0.14",
     "react-native-fs": "^2.10.14",

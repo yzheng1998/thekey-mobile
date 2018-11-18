@@ -27,7 +27,7 @@ export default class ShareScreen extends Component {
           onPress={() => {
             this.props.navigation.navigate('Splash')
           }}
-          secondary
+          tertiary
           noBorder
           buttonText="No thanks"
         />

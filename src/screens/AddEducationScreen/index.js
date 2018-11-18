@@ -194,7 +194,7 @@ class AddEducationScreen extends Component {
           title={`Add Your Education ${nodeEmoji.get('mortar_board')}`}
           showBack
           onBackPress={() => this.props.navigation.goBack()}
-          progress="42.8%"
+          progress="79%"
         />
         <ContentContainer addPadding={showEndYearPicker || showStartYearPicker}>
           <KeyboardAwareScrollView

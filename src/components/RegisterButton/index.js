@@ -5,6 +5,7 @@ export default class RegisterButton extends Component {
   render() {
     const {
       secondary,
+      tertiary,
       onPress,
       disabled,
       noBorder,
@@ -14,14 +15,18 @@ export default class RegisterButton extends Component {
     } = this.props
     return (
       <Button
-        secondary={secondary}
+        secondary={secondary || tertiary}
         onPress={onPress}
         disabled={disabled}
         noBorder={noBorder}
         style={style}
       >
         {children}
-        <ButtonText disabled={disabled} secondary={secondary}>
+        <ButtonText
+          disabled={disabled}
+          tertiary={tertiary}
+          secondary={secondary}
+        >
           {buttonText}
         </ButtonText>
       </Button>

@@ -19,7 +19,7 @@ export default class PhotoUploadScreen extends Component {
           title="Add a Profile Picture"
           showBack
           onBackPress={() => this.props.navigation.goBack()}
-          progress="42.8%"
+          progress="100%"
         />
         <PhotoUploadButton updateProfilePicture={this.updateProfilePicture} />
         <RegisterButton

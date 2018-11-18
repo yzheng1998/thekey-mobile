@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { Screen, Title, imageStyle, subtitleStyle } from './styles'
 import Subtitle from '../../components/BasicSubtitle'
-import { Image } from 'react-native'
+import { Image, View, Alert } from 'react-native'
 import locationGraphic from '../../../assets/locationGraphic.png'
 import RegisterButton from '../../components/RegisterButton'
 import { connect } from 'react-redux'
 import { updateCoordinates } from '../../redux/actions/membershipApplication'
+import { SEND_MEMBERSHIP_APPLICATION } from './mutations'
+import { Mutation } from 'react-apollo'
 
 const mapStateToProps = state => ({
-  coordinates: state.membershipApplication.coordinates,
+  membershipApplication: state.membershipApplication,
 })
 
 const mapDispatchToProps = {
@@ -42,31 +44,64 @@ class LocationScreen extends Component {
           Let The Key help you find like-minded people, events and job listings
           nearby.
         </Subtitle>
-        <RegisterButton
-          onPress={() => {
-            const coordinates = {
-              latitude: this.state.latitude,
-              longitude: this.state.longitude,
-            }
-            const callback = () => {
-              this.props.updateCoordinates({
-                coordinates,
-              })
-              this.props.navigation.navigate('Share')
-            }
-            this.getPosition(callback)
-          }}
-          buttonText="ENABLE LOCATION"
-        />
-        <RegisterButton
-          style={{ marginTop: 36 }}
-          onPress={() => {
+        <Mutation
+          mutation={SEND_MEMBERSHIP_APPLICATION}
+          onCompleted={() => {
             this.props.navigation.navigate('Share')
+            Alert.alert(
+              'Thank you for applying to The Key!',
+              'We will review your application and get back to you shortly.',
+            )
           }}
-          secondary
-          noBorder
-          buttonText="No thanks"
-        />
+        >
+          {(sendMembershipApplication, { error }) => {
+            if (error) {
+              Alert.alert(
+                'Failed to upload your application',
+                'There was an error sending in your application. Please try again.',
+                [{ text: 'OK', onPress: () => {} }],
+                { cancelable: true },
+              )
+            }
+            return (
+              <View>
+                <RegisterButton
+                  onPress={() => {
+                    const coordinates = {
+                      latitude: this.state.latitude,
+                      longitude: this.state.longitude,
+                    }
+                    const callback = () => {
+                      this.props.updateCoordinates({
+                        coordinates,
+                      })
+                      const variables = {
+                        sendMembershipApplicationInput: this.props
+                          .membershipApplication,
+                      }
+                      sendMembershipApplication({ variables })
+                    }
+                    this.getPosition(callback)
+                  }}
+                  buttonText="ENABLE LOCATION"
+                />
+                <RegisterButton
+                  style={{ marginTop: 36 }}
+                  onPress={() => {
+                    const variables = {
+                      sendMembershipApplicationInput: this.props
+                        .membershipApplication,
+                    }
+                    sendMembershipApplication({ variables })
+                  }}
+                  tertiary
+                  noBorder
+                  buttonText="No thanks"
+                />
+              </View>
+            )
+          }}
+        </Mutation>
       </Screen>
     )
   }

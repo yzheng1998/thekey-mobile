@@ -59,7 +59,7 @@ class EthnicitiesScreen extends Component {
               title="Which race best describes you?"
               showBack
               onBackPress={() => this.props.navigation.goBack()}
-              progress="28.5%"
+              progress="67%"
             />
             <View>
               {ethnicityOptions.map(option => (
@@ -81,7 +81,7 @@ class EthnicitiesScreen extends Component {
             this.props.updateEthnicities({
               ethnicities: this.state.ethnicities,
             })
-            this.props.navigation.navigate('YourEducation')
+            this.props.navigation.navigate('Education')
           }}
         />
       </ScreenContainer>
