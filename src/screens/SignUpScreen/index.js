@@ -256,8 +256,8 @@ class SignUpScreen extends Component {
               onCompleted={data => {
                 if (data.sendVerification.error) {
                   Alert.alert(
-                    'Failed to upload your application',
-                    'There was an error sending in your application. Please try again.',
+                    'Could not send verification',
+                    'This email is already in use. Please use another.',
                     [{ text: 'OK', onPress: () => {} }],
                     { cancelable: true },
                   )
