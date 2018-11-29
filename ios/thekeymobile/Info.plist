@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.3</string>
+	<string>1.8</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -30,7 +30,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>15</string>
+	<string>22</string>
 	<key>FacebookAppID</key>
 	<string>1883713978603895</string>
 	<key>FacebookDisplayName</key>
@@ -66,14 +66,26 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>The Key does not require acccess to your apple music library.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>The Key does not require access to your bluetooth devices.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>The Key does not require access to your calendar.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>The Key requires access to the camera to search for QR codes and take photos.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>The Key requieres access to your location to match you with events and users.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>The Key does not require access to the microphone.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>The Key does not require access to your phones accelerometer.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>The Key requires access to the photo library in order to choose a profile picture.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>The Key needs access to your speech recognition information in order to use voice commands.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
@@ -130,7 +142,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string></string>
 </dict>
 </plist>
