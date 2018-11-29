@@ -50,6 +50,7 @@ class AddEducationScreen extends Component {
       showStartYearPicker: false,
       showEndYearPicker: false,
       showUniversitySearch: false,
+      majorInputFocused: false,
       educationListData: [],
       schoolID: '',
       schoolName: '',
@@ -157,6 +158,7 @@ class AddEducationScreen extends Component {
       showDegreeTypePicker,
       showStartYearPicker,
       showEndYearPicker,
+      majorInputFocused,
     } = this.state
 
     const addEducation = () => {
@@ -187,7 +189,35 @@ class AddEducationScreen extends Component {
       this.degreePicker.showActionSheet()
     }
 
-    const noErrors = !errors
+    const openStartYearPicker = () => {
+      Keyboard.dismiss()
+      this.setState({
+        showDegreeTypePicker: false,
+        showUniversitySearch: false,
+        showStartYearPicker: true,
+        showEndYearPicker: false,
+      })
+      if (!startYear) {
+        this.setState({ startYear: createYearData()[0].value })
+      }
+      this.startYearPicker.showActionSheet()
+    }
+
+    const openEndYearPicker = () => {
+      Keyboard.dismiss()
+      this.setState({
+        showDegreeTypePicker: false,
+        showUniversitySearch: false,
+        showStartYearPicker: false,
+        showEndYearPicker: true,
+      })
+      if (!endYear) {
+        this.setState({ endYear: createYearData()[0].value })
+      }
+      this.endYearPicker.showActionSheet()
+    }
+
+    const showSubmit = !errors && !majorInputFocused
     return (
       <ScreenContainer>
         <Header
@@ -229,9 +259,8 @@ class AddEducationScreen extends Component {
                 title="Start Year"
                 selected={showStartYearPicker}
                 onPress={() => {
-                  this.setState({ showStartYearPicker: true }, () =>
-                    this.Scroll.scrollToEnd({ animation: true }),
-                  )
+                  openStartYearPicker()
+                  this.Scroll.scrollToEnd({ animation: true })
                 }}
                 text={startYear}
                 placeholderText="Year"
@@ -240,9 +269,8 @@ class AddEducationScreen extends Component {
                 title="Grad Year"
                 selected={showEndYearPicker}
                 onPress={() => {
-                  this.setState({ showEndYearPicker: true }, () =>
-                    this.Scroll.scrollToEnd(),
-                  )
+                  openEndYearPicker()
+                  this.Scroll.scrollToEnd()
                 }}
                 text={endYear}
                 placeholderText="Year"
@@ -268,11 +296,16 @@ class AddEducationScreen extends Component {
                     showDegreeTypePicker: false,
                     showStartYearPicker: false,
                     showEndYearPicker: false,
+                    majorInputFocused: true,
                   },
                   () => addTouched('major'),
                 )
               }
-              onBlur={() => validateForm(false)}
+              onBlur={() =>
+                this.setState({ majorInputFocused: false }, () =>
+                  validateForm(false),
+                )
+              }
               returnKeyType="done"
               error={displayErrors.major}
             />
@@ -334,7 +367,7 @@ class AddEducationScreen extends Component {
           toggleSchoolModal={this.toggleSchoolModal}
           visible={this.state.showUniversitySearch}
         />
-        {noErrors && (
+        {showSubmit && (
           <SubmitButton
             buttonText="ADD SCHOOL"
             onPress={() => {

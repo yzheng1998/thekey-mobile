@@ -32,6 +32,8 @@ export default class LineInput extends Component {
       disabled,
       ...rest
     } = this.props
+
+    const showClearIcon = text !== undefined && text !== ''
     return (
       <RowContainer>
         {title && <Title>{title}</Title>}
@@ -58,19 +60,14 @@ export default class LineInput extends Component {
               returnKeyType="done"
               {...rest}
             />
-            {text !== undefined &&
-              text !== '' && (
-                <ClearIconButton
-                  hitSlop={buttonRadius}
-                  onPress={() => updateText('')}
-                >
-                  <ClearIcon
-                    name="clear"
-                    size={17}
-                    color="rgb(181, 171, 202)"
-                  />
-                </ClearIconButton>
-              )}
+            {showClearIcon && (
+              <ClearIconButton
+                hitSlop={buttonRadius}
+                onPress={() => updateText('')}
+              >
+                <ClearIcon name="clear" size={17} color="rgb(181, 171, 202)" />
+              </ClearIconButton>
+            )}
           </InputContainer>
         </LineInputContainer>
         <Error error={error} />
