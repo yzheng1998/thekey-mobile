@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Screen } from './styles'
+import { Screen, RowContainer } from './styles'
 import Header from '../../components/Header'
 import BasicSubtitle from '../../components/BasicSubtitle'
 import LineInput from '../../components/LineInput'
@@ -82,32 +82,36 @@ class CreatePasswordScreen extends Component {
           Your password should contain 1 letter, 1 number, and at least 6
           characters
         </BasicSubtitle>
-        <LineInput
-          secureTextEntry
-          text={password}
-          placeholderText="Password"
-          autoCapitalize="none"
-          updateText={text => {
-            this.setState({ password: text }, () => this.validateForm(true))
-          }}
-          onFocus={() => this.addTouched('password')}
-          onBlur={() => this.validateForm(false)}
-          error={displayErrors.password}
-        />
-        <LineInput
-          secureTextEntry
-          text={passwordConfirmation}
-          placeholderText="Confirm password"
-          autoCapitalize="none"
-          updateText={text => {
-            this.setState({ passwordConfirmation: text }, () =>
-              this.validateForm(true),
-            )
-          }}
-          onFocus={() => this.addTouched('passwordConfirmation')}
-          onBlur={() => this.validateForm(false)}
-          error={displayErrors.passwordConfirmation}
-        />
+        <RowContainer>
+          <LineInput
+            secureTextEntry
+            text={password}
+            placeholderText="Password"
+            autoCapitalize="none"
+            updateText={text => {
+              this.setState({ password: text }, () => this.validateForm(true))
+            }}
+            onFocus={() => this.addTouched('password')}
+            onBlur={() => this.validateForm(false)}
+            error={displayErrors.password}
+          />
+        </RowContainer>
+        <RowContainer>
+          <LineInput
+            secureTextEntry
+            text={passwordConfirmation}
+            placeholderText="Confirm password"
+            autoCapitalize="none"
+            updateText={text => {
+              this.setState({ passwordConfirmation: text }, () =>
+                this.validateForm(true),
+              )
+            }}
+            onFocus={() => this.addTouched('passwordConfirmation')}
+            onBlur={() => this.validateForm(false)}
+            error={displayErrors.passwordConfirmation}
+          />
+        </RowContainer>
         <RegisterButton
           keyboardShouldPersistTaps="always"
           onPress={() => {
