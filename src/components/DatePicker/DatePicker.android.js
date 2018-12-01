@@ -18,6 +18,8 @@ export default class DatePicker extends Component {
         if (action !== DatePickerAndroid.dismissedAction) {
           setDate(new Date(year, month, day))
           doneOnPress()
+        } else if (action === DatePickerAndroid.dismissedAction) {
+          doneOnPress()
         }
       } catch ({ code, message }) {
         this.setState({ error: `Cannot open date picker: ${message}` })
