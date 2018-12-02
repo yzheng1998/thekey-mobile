@@ -31,7 +31,7 @@ class GenderScreen extends Component {
   findLabel = (value, arr) => arr.find(el => el.value === value).label
 
   render() {
-    const disabled = !this.state.gender
+    const showNext = !!this.state.gender
     return (
       <ScreenContainer>
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
@@ -65,14 +65,15 @@ class GenderScreen extends Component {
             </View>
           </ScrollView>
         </SafeAreaView>
-        <SubmitButton
-          buttonText="NEXT"
-          disabled={disabled}
-          onPress={() => {
-            this.props.updateGender({ gender: this.state.gender })
-            this.props.navigation.navigate('Ethnicities')
-          }}
-        />
+        {showNext && (
+          <SubmitButton
+            buttonText="NEXT"
+            onPress={() => {
+              this.props.updateGender({ gender: this.state.gender })
+              this.props.navigation.navigate('Ethnicities')
+            }}
+          />
+        )}
       </ScreenContainer>
     )
   }
