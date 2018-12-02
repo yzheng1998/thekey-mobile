@@ -50,7 +50,7 @@ class EthnicitiesScreen extends Component {
   findLabel = (value, arr) => arr.find(el => el.value === value).label
 
   render() {
-    const disabled = this.state.ethnicities.length === 0
+    const showNext = this.state.ethnicities.length !== 0
     return (
       <ScreenContainer>
         <ContentContainer>
@@ -74,16 +74,17 @@ class EthnicitiesScreen extends Component {
             </View>
           </ScrollView>
         </ContentContainer>
-        <SubmitButton
-          buttonText="NEXT"
-          disabled={disabled}
-          onPress={() => {
-            this.props.updateEthnicities({
-              ethnicities: this.state.ethnicities,
-            })
-            this.props.navigation.navigate('Education')
-          }}
-        />
+        {showNext && (
+          <SubmitButton
+            buttonText="NEXT"
+            onPress={() => {
+              this.props.updateEthnicities({
+                ethnicities: this.state.ethnicities,
+              })
+              this.props.navigation.navigate('Education')
+            }}
+          />
+        )}
       </ScreenContainer>
     )
   }
