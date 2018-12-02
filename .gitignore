@@ -54,3 +54,7 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
+
+.idea
+graphql.config.json
+graphql.schema.json
