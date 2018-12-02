@@ -257,23 +257,29 @@ class AddEducationScreen extends Component {
             <RowContainer>
               <RegistrationPicker
                 title="Start Year"
+                width={150}
                 selected={showStartYearPicker}
                 onPress={() => {
                   openStartYearPicker()
+                  this.addTouched('startYear')
                   this.Scroll.scrollToEnd({ animation: true })
                 }}
                 text={startYear}
                 placeholderText="Year"
+                error={displayErrors.startYear}
               />
               <RegistrationPicker
                 title="Grad Year"
+                width={150}
                 selected={showEndYearPicker}
                 onPress={() => {
                   openEndYearPicker()
+                  this.addTouched('endYear')
                   this.Scroll.scrollToEnd()
                 }}
                 text={endYear}
                 placeholderText="Year"
+                error={displayErrors.endYear}
               />
             </RowContainer>
             <LineInput

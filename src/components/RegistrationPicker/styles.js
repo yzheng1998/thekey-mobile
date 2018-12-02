@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import { themeGet } from 'styled-system'
 
 export const Container = styled.View`
-  flex-grow: 1;
+  width: ${props => (props.width ? `${props.width}px` : 'undefined')};
+  flex-grow: ${props => (props.width ? 0 : 1)};
   margin-top: 4px;
   margin-left: 12px;
   margin-right: 12px;
