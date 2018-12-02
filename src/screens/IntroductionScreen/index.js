@@ -18,13 +18,23 @@ import DatePicker from '../../components/DatePicker/DatePicker/'
 
 const validate = require('validate.js')
 
-// This function allows us to read from the phone's hard disk
+validate.extend(validate.validators.datetime, {
+  parse: value => +moment.utc(value),
+
+  format: (value, options) => {
+    const format = options.dateOnly
+      ? 'MM / DD / YYYY'
+      : 'MM / DD / YYYY hh:mm:ss'
+    return moment.utc(value).format(format)
+  },
+})
+
 const mapStateToProps = state => ({
   firstName: state.membershipApplication.firstName,
   lastName: state.membershipApplication.lastName,
   birthday: state.membershipApplication.birthday,
 })
-// This function allows us to write to the phone's hard disk
+
 const mapDispatchToProps = {
   updateIntroductionInfo,
 }
@@ -136,9 +146,11 @@ class IntroductionScreen extends Component {
                   birthday,
                 })
                 this.datePicker.openDatePicker()
+                this.addTouched('birthday')
               }}
               text={birthday ? moment(birthday).format('MM / DD / YYYY') : ''}
               placeholderText="mm / dd / yyyy"
+              error={displayErrors.birthday}
             >
               <Icon source={dateIcon} />
             </RegistrationPicker>
@@ -168,9 +180,12 @@ class IntroductionScreen extends Component {
           mode="date"
           date={birthday || new Date(1996, 0, 1)}
           doneOnPress={() => {
-            this.setState({
-              showBirthdayPicker: false,
-            })
+            this.setState(
+              {
+                showBirthdayPicker: false,
+              },
+              () => this.validateForm(false),
+            )
           }}
           setDate={date => {
             this.setState({
