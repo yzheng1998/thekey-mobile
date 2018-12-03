@@ -267,6 +267,16 @@ class SignUpScreen extends Component {
                     verificationCode: data.sendVerification.verificationCode,
                   })
               }}
+              onError={error => {
+                if (error) {
+                  Alert.alert(
+                    'Could not connect to server',
+                    'Please check your connection and try again',
+                    [{ text: 'OK', onPress: () => {} }],
+                    { cancelable: true },
+                  )
+                }
+              }}
             >
               {sendVerification => (
                 <RegisterButton
