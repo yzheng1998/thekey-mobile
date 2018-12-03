@@ -36,6 +36,7 @@ export const Subtitle = styled.Text`
 
 export const RowContainer = styled.View`
   flex-direction: row;
+  justify-content: space-between;
   width: 100%;
 `
 export const SearchIcon = styled(Icon)`

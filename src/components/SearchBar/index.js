@@ -11,7 +11,6 @@ import {
   CancelText,
   CancelAnimated,
 } from './styles'
-import _ from 'lodash'
 import { buttonRadius } from '../../constants'
 
 export default class SearchBar extends Component {
@@ -23,8 +22,6 @@ export default class SearchBar extends Component {
         ? new Animated.Value(1)
         : new Animated.Value(0),
     }
-
-    this.delayedOnChangeText = _.debounce(this.onChangeText, 200)
 
     this.slide = () => {
       const newState = props.alwaysShowCancel ? true : !this.state.showCancel
@@ -67,7 +64,7 @@ export default class SearchBar extends Component {
               if (!this.state.showCancel) this.slide()
               this.setState({ showCancel: true })
             }}
-            onChangeText={this.delayedOnChangeText}
+            onChangeText={this.onChangeText}
             value={searchText}
             autoCapitalize="none"
             {...rest}

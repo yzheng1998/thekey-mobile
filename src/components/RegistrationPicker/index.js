@@ -13,9 +13,10 @@ export default class RegistrationPicker extends Component {
       error,
       disabled,
       children,
+      width,
     } = this.props
     return (
-      <Container>
+      <Container width={width}>
         {title && <Title>{title}</Title>}
         <PickerContainer
           disabled={disabled}

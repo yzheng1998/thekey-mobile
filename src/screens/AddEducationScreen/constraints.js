@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 const constraints = {
   schoolName: {
     presence: {
@@ -30,6 +32,11 @@ const constraints = {
       pattern: /^[0-9]*$/,
       message: '^Please provide a valid year',
     },
+    numericality: {
+      onlyInteger: true,
+      lessThanOrEqualTo: moment().year(),
+      message: '^Start year must be at or before current year',
+    },
   },
   endYear: {
     length: {
@@ -40,6 +47,11 @@ const constraints = {
       pattern: /^[0-9]*$/,
       message: '^Please provide a valid year',
     },
+    numericality: (_, attributes) => ({
+      onlyInteger: true,
+      greaterThanOrEqualTo: parseInt(attributes.startYear, 10),
+      message: '^Grad year must be at or after start year',
+    }),
   },
 }
 
