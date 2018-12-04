@@ -28,6 +28,7 @@ export default class MyProfilePicBlock extends Component {
           visible={this.state.showQRCodeModal}
           transparent
           animationType="slide"
+          onRequestClose={() => null}
         >
           <QRDisplayModal
             id={id}
