@@ -7,7 +7,8 @@ import OptionalInfoBlock from './components/OptionalInfoBlock'
 import TermsOfServiceConfirmation from './components/TermsOfServiceConfirmation'
 import SubmitReviewButton from './components/SubmitReviewButton'
 import { Background, Divider, ScreenScroll, SafeView } from './styles'
-import { KeyboardAvoidingView, Alert } from 'react-native'
+import { Alert } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import constraints from './constraints'
 import LocationSearchModal from '../../components/HometownSearchModal'
 
@@ -147,7 +148,7 @@ export default class AddCompanyReviewModal extends Component {
           visible={showLocationSearchModal}
         />
         <SafeView>
-          <KeyboardAvoidingView enabled behavior="padding">
+          <KeyboardAwareScrollView>
             <ScreenScroll>
               <CancelHeader
                 onCancel={() => {
@@ -205,7 +206,7 @@ export default class AddCompanyReviewModal extends Component {
                 disabled={!noErrors}
               />
             </ScreenScroll>
-          </KeyboardAvoidingView>
+          </KeyboardAwareScrollView>
         </SafeView>
         <Picker
           visible={yearPickerEnabled}
