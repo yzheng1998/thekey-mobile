@@ -28,7 +28,7 @@ const configure = () => {
             }
           `,
         })
-        .catch(error => {
+        .catch(() => {
           Alert.alert(
             'Something Went Wrong',
             'Could not Register for Push Notifications',
