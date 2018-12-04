@@ -102,7 +102,7 @@ export default class PhotoUploadButton extends Component {
                 {this.state.image ? (
                   <Photo
                     source={{
-                      uri: this.state.image.sourceURL,
+                      uri: this.state.image.path,
                     }}
                   />
                 ) : (
