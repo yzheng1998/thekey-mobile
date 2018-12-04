@@ -25,12 +25,6 @@ import { degreeTypeOptions } from '../../../../constants'
 
 const validate = require('validate.js')
 
-const schoolTypes = [
-  { label: 'Secondary', value: 'SECONDARY' },
-  { label: 'Undergraduate', value: 'UNDERGRADUATE' },
-  { label: 'Graduate', value: 'GRADUATE' },
-]
-
 const formatYear = date => {
   if (date) return moment(new Date(date)).format('YYYY')
   return ''
@@ -38,6 +32,18 @@ const formatYear = date => {
 
 const findLabel = (value, options) =>
   options.find(el => el.value === value).label
+
+const findSchoolType = degreeType => {
+  switch (degreeType) {
+    case 'HIGHSCHOOL':
+      return 'SECONDARY'
+    case 'BACHELORS':
+    case 'ASSOCIATES':
+      return 'UNDERGRADUATE'
+    default:
+      return 'GRADUATE'
+  }
+}
 
 export default class AddEducationForm extends Component {
   constructor(props) {
@@ -62,10 +68,6 @@ export default class AddEducationForm extends Component {
       endYear: formatYear(educationInfo.endYear),
       showStartYearPicker: false,
       showEndYearPicker: false,
-      schoolTypePickerEnabled: false,
-      schoolNameClicked: false,
-      optionsInputSelected: false,
-      optionsInputClicked: false,
       displayErrors: {},
       errors: {},
       touched: {},
@@ -139,18 +141,6 @@ export default class AddEducationForm extends Component {
     this.setState(obj)
   }
 
-  renderSelectedOption = optionsInputSelected => {
-    // if a selection has been made, change text from placeholder
-    if (optionsInputSelected || this.editMode)
-      return (
-        <OptionsText>
-          {this.state.schoolType &&
-            schoolTypes.find(el => el.value === this.state.schoolType).label}
-        </OptionsText>
-      )
-    return <OptionsPlaceholder>School Type</OptionsPlaceholder>
-  }
-
   renderSchoolName = optionsInputSelected => {
     // if a selection has been made, change text from placeholder
     if (optionsInputSelected || this.editMode)
@@ -162,13 +152,10 @@ export default class AddEducationForm extends Component {
     const {
       id,
       schoolName,
-      schoolType,
       degreeType,
       major,
       startYear,
       endYear,
-      optionsInputSelected,
-      optionsInputClicked,
       schoolNameClicked,
       schoolNameSelected,
       showDegreeTypePicker,
@@ -180,20 +167,6 @@ export default class AddEducationForm extends Component {
 
     const noErrors = !this.state.errors
 
-    const openSchoolTypePicker = () => {
-      Keyboard.dismiss()
-      this.addTouched('schoolType')
-      if (!schoolType) {
-        this.setState({ schoolType: schoolTypes[0].value })
-      }
-      this.setState({
-        schoolTypePickerEnabled: true,
-        optionsInputSelected: true,
-        optionsInputClicked: true,
-      })
-      this.picker.showActionSheet()
-    }
-
     const openDegreeTypePicker = () => {
       Keyboard.dismiss()
       this.addTouched('degreeType')
@@ -202,20 +175,7 @@ export default class AddEducationForm extends Component {
         updatedState.degreeType = degreeTypeOptions[0].value
       }
       this.setState(updatedState)
-      this.picker.showActionSheet()
-    }
-
-    const schoolPickerOnDone = () => {
-      this.setState(
-        {
-          schoolTypePickerEnabled: false,
-          optionsInputClicked: false, // handles border color of optionsInput
-        },
-        () => {
-          this.validateForm(false)
-          if (!this.editMode) openDegreeTypePicker()
-        },
-      )
+      this.degreeTypePicker.showActionSheet()
     }
 
     return (
@@ -239,15 +199,6 @@ export default class AddEducationForm extends Component {
                   {this.renderSchoolName(schoolNameClicked)}
                 </OptionsInputContainer>
                 <Error error={this.state.displayErrors.schoolName} />
-              </View>
-              <View>
-                <OptionsInputContainer
-                  selected={optionsInputClicked}
-                  onPress={openSchoolTypePicker}
-                >
-                  {this.renderSelectedOption(optionsInputSelected)}
-                </OptionsInputContainer>
-                <Error error={this.state.displayErrors.schoolType} />
               </View>
               <RegistrationPicker
                 selected={showDegreeTypePicker}
@@ -299,7 +250,7 @@ export default class AddEducationForm extends Component {
                       disabled={!noErrors}
                       id={id}
                       schoolName={schoolName}
-                      schoolType={schoolType}
+                      schoolType={findSchoolType(degreeType)}
                       degreeType={degreeType}
                       major={major}
                       startYear={startYear}
@@ -322,7 +273,7 @@ export default class AddEducationForm extends Component {
                     )}
                     disabled={!noErrors}
                     schoolName={schoolName}
-                    schoolType={schoolType}
+                    schoolType={findSchoolType(degreeType)}
                     degreeType={degreeType}
                     major={major}
                     startYear={startYear}
@@ -334,21 +285,9 @@ export default class AddEducationForm extends Component {
             </Block>
           </KeyboardAwareScrollView>
           <PickerComponent
-            visible={this.state.schoolTypePickerEnabled}
-            ref={picker => {
-              this.picker = picker
-            }}
-            options={schoolTypes}
-            doneOnPress={schoolPickerOnDone}
-            onValueChange={this.updateState}
-            validateForm={this.validateForm}
-            value={schoolType}
-            keyName="schoolType"
-          />
-          <PickerComponent
             visible={showDegreeTypePicker}
             ref={picker => {
-              this.picker = picker
+              this.degreeTypePicker = picker
             }}
             options={degreeTypeOptions}
             doneOnPress={() => {

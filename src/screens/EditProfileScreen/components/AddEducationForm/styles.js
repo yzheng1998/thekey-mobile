@@ -65,5 +65,9 @@ export const OptionsPlaceholder = styled.Text`
   margin-left: 12px;
 `
 export const OptionsText = styled.Text`
+  font-family: ${themeGet('fonts.regular')};
+  font-size: 15px;
+  flex: 1;
   margin-left: 12px;
+  color: black;
 `
