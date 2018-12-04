@@ -8,7 +8,6 @@ const UPDATE_USER = gql`
     updateUser(updateUserInput: $updateUserInput) {
       updatedUser {
         id
-        hometown
         bio
       }
       error {
