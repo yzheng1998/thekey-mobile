@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Keyboard } from 'react-native'
 import ProfileInfoRow from '../../../../../components/ProfileInfoRow'
 
 export default class ExperienceRow extends Component {
@@ -7,14 +8,15 @@ export default class ExperienceRow extends Component {
     return (
       <ProfileInfoRow
         navigation={this.props.navigation}
-        onPress={() =>
+        onPress={() => {
+          Keyboard.dismiss()
           this.props.navigation.navigate('AddExperience', {
             addExperience: this.props.addExperience,
             formElements: this.props,
             editMode: true,
             refreshData: this.props.refreshData,
           })
-        }
+        }}
         showEditButton={this.props.showEditButton}
         title={employer}
         subtitle1={position}
