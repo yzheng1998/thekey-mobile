@@ -58,7 +58,12 @@ export default class Settings extends Component {
       this.swiper.scrollBy(offset)
     }
     return (
-      <Modal visible={state.showSettings} transparent animationType="slide">
+      <Modal
+        visible={state.showSettings}
+        transparent
+        animationType="slide"
+        onRequestClose={() => null}
+      >
         <SettingsContainer>
           <Menu>
             <SettingsHeader

@@ -178,6 +178,35 @@ export default class AddEducationForm extends Component {
       this.degreeTypePicker.showActionSheet()
     }
 
+    const openStartYearTypePicker = () => {
+      Keyboard.dismiss()
+      this.addTouched('startYear')
+      const updatedState = { showStartYearPicker: true }
+      this.setState(updatedState)
+      this.startYearPicker.showActionSheet()
+    }
+
+    const openEndYearTypePicker = () => {
+      Keyboard.dismiss()
+      this.addTouched('endYear')
+      const updatedState = { showEndYearPicker: true }
+      this.setState(updatedState)
+      this.endYearPicker.showActionSheet()
+    }
+
+    const schoolPickerOnDone = () => {
+      this.setState(
+        {
+          schoolTypePickerEnabled: false,
+          optionsInputClicked: false, // handles border color of optionsInput
+        },
+        () => {
+          this.validateForm(false)
+          if (!this.editMode) openDegreeTypePicker()
+        },
+      )
+    }
+
     return (
       <TouchableWithoutFeedback
         onPress={() => Keyboard.dismiss()}
@@ -225,17 +254,13 @@ export default class AddEducationForm extends Component {
               <DateInputRow>
                 <RegistrationPicker
                   selected={showStartYearPicker}
-                  onPress={() => {
-                    this.setState({ showStartYearPicker: true })
-                  }}
+                  onPress={openStartYearTypePicker}
                   text={startYear}
                   placeholderText="Start year"
                 />
                 <RegistrationPicker
                   selected={showEndYearPicker}
-                  onPress={() => {
-                    this.setState({ showEndYearPicker: true })
-                  }}
+                  onPress={openEndYearTypePicker}
                   text={endYear}
                   placeholderText="End year"
                 />

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Keyboard } from 'react-native'
 import { ExperienceList, WideContainer } from '../../styles'
 import ExperienceRow from '../../../ProfileScreen/components/ExperienceListView/ExperienceRow'
 import Suitcase from 'react-native-vector-icons/Entypo'
@@ -28,12 +29,13 @@ export default class EditExperienceBlock extends Component {
         </ExperienceList>
         <BlockButton
           text="ADD EXPERIENCE"
-          onPress={() =>
+          onPress={() => {
+            Keyboard.dismiss()
             this.props.navigation.navigate('AddExperience', {
               addExperience: this.props.addExperience,
               refreshData: this.props.refreshData,
             })
-          }
+          }}
         />
       </WideContainer>
     )

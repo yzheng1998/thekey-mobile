@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Keyboard } from 'react-native'
 import EducationRow from '../../../ProfileScreen/components/EducationListView/EducationRow'
 import BlockButton from '../../../../components/BlockButton'
 import { WideContainer, ExperienceList } from '../../styles'
@@ -33,12 +34,13 @@ export default class EditEducationBlock extends Component {
         </ExperienceList>
         <BlockButton
           text="ADD EDUCATION"
-          onPress={() =>
+          onPress={() => {
+            Keyboard.dismiss()
             this.props.navigation.navigate('AddEducation', {
               addEducation: this.props.addEducation,
               refreshData: this.props.refreshData,
             })
-          }
+          }}
         />
       </WideContainer>
     )

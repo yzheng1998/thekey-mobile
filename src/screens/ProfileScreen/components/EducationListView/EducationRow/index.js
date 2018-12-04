@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Keyboard } from 'react-native'
 import ProfileInfoRow from '../../../../../components/ProfileInfoRow'
 import { degreeTypeOptions } from '../../../../../constants'
 
@@ -15,14 +16,15 @@ export default class EducationRow extends Component {
       <ProfileInfoRow
         education
         showEditButton={this.props.showEditButton}
-        onPress={() =>
+        onPress={() => {
+          Keyboard.dismiss()
           this.props.navigation.navigate('AddEducation', {
             addEducation: this.props.addEducation,
             formElements: this.props,
             editMode: true,
             refreshData: this.props.refreshData,
           })
-        }
+        }}
         navigation={this.props.navigation}
         title={schoolName}
         subtitle1={degreeTypeLabel}

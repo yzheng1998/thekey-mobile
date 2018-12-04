@@ -125,7 +125,7 @@ export default class NewChatModal extends Component {
       participant => participant.id,
     )
     return (
-      <Modal animationType="slide" {...rest}>
+      <Modal animationType="slide" {...rest} onRequestClose={() => null}>
         <Background>
           <NewChatModalHeader
             chatId={chatId}
