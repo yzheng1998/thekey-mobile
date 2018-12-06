@@ -87,12 +87,13 @@ class Resumes extends Component {
       method: 'post',
       data: formData,
       params: { key: res.fileName },
-      url: `${config.restUrl}upload`,
+      url: `${config.resumeUploadUrl}`,
       timeout: 10000, // default is `0` (no timeout)
       onUploadProgress: progressEvent => {
         this.handleProgress(id, progressEvent.total, progressEvent.loaded)
       },
     })
+
     const finalUrl = result.data.url
 
     this.setState({
@@ -100,7 +101,7 @@ class Resumes extends Component {
         {
           ...this.state.resumeListData.find(el => el.id === id),
           progress: '100%',
-          finalUrl,
+          resume: finalUrl,
         },
         ...this.state.resumeListData.filter(el => el.id !== id),
       ],
@@ -116,6 +117,7 @@ class Resumes extends Component {
   }
 
   render() {
+    console.log('STATE', this.state.resumeListData)
     const buttonText = this.state.resumeListData.length
       ? 'ADD ANOTHER FILE'
       : 'ADD FILE'
@@ -157,7 +159,7 @@ class Resumes extends Component {
                 )
               }
               const setResumesInput = this.state.resumeListData.map(resume => ({
-                resume: resume.url,
+                resume: resume.resume,
                 title: resume.title,
                 dataSize: resume.dataSize,
               }))
