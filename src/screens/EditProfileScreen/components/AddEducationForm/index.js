@@ -194,19 +194,6 @@ export default class AddEducationForm extends Component {
       this.endYearPicker.showActionSheet()
     }
 
-    const schoolPickerOnDone = () => {
-      this.setState(
-        {
-          schoolTypePickerEnabled: false,
-          optionsInputClicked: false, // handles border color of optionsInput
-        },
-        () => {
-          this.validateForm(false)
-          if (!this.editMode) openDegreeTypePicker()
-        },
-      )
-    }
-
     return (
       <TouchableWithoutFeedback
         onPress={() => Keyboard.dismiss()}
