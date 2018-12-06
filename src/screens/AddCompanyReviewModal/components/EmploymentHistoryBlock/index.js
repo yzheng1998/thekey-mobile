@@ -35,7 +35,7 @@ export default class EmploymentHistoryBlock extends Component {
     for (let i = 1970; i <= new Date().getFullYear(); i += 1) {
       yearArray.push({ label: i.toString(), value: i.toString() })
     }
-    return yearArray
+    return yearArray.reverse()
   }
 
   render() {
