@@ -125,7 +125,9 @@ class Resumes extends Component {
     return (
       <ModalScreenContainer>
         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-          <ScrollView style={{ marginLeft: 12, marginRight: 12 }}>
+          <ScrollView
+            style={{ marginLeft: 12, marginRight: 12, marginBottom: 100 }}
+          >
             <SubtitleView>
               <Subtitle>
                 Add your resume. This should include GPA, School,
