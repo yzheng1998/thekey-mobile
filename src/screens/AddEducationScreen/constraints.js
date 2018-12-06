@@ -53,6 +53,18 @@ const constraints = {
       message: '^Grad year must be at or after start year',
     }),
   },
+  gpa: {
+    presence: {
+      allowEmpty: false,
+      message: '^Please provide your GPA. ',
+    },
+    numericality: {
+      onlyInteger: false,
+      lessThanOrEqualTo: 5.0,
+      greaterThanOrEqualTo: 0.0,
+      message: '^GPA must be a number between 0.0 and 5.0',
+    },
+  },
 }
 
 export default constraints
