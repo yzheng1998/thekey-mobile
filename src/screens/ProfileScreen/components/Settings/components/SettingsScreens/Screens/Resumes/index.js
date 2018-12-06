@@ -117,7 +117,6 @@ class Resumes extends Component {
   }
 
   render() {
-    console.log('STATE', this.state.resumeListData)
     const buttonText = this.state.resumeListData.length
       ? 'ADD ANOTHER FILE'
       : 'ADD FILE'
