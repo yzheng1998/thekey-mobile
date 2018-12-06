@@ -1,5 +1,8 @@
+const baseUrl = 'http://localhost:5000'
+
 module.exports = {
-  graphqlUrl: process.env.REACT_APP_API_URL || 'http://localhost:5000/graphql',
+  graphqlUrl: process.env.REACT_APP_API_URL || `${baseUrl}/graphql`,
+  resumeUploadUrl: `${baseUrl}/upload`,
   graphqlWsUrl:
     process.env.REACT_APP_WS_API_URL || 'ws://localhost:5000/subscriptions',
   LinkedInClientID: '779rrrorh2glbm',
