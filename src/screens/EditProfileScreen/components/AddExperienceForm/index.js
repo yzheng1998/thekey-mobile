@@ -11,7 +11,8 @@ import AddExperienceButton from './components/AddExperienceButton'
 import UpdateExperienceButton from './components/UpdateExperienceButton'
 import DeleteExperienceButton from './components/DeleteExperienceButton'
 import Header from '../Header'
-import { Switch, Keyboard, TouchableWithoutFeedback, View } from 'react-native'
+import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
+import Switch from 'react-native-switch-pro'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import _ from 'lodash'
 import constraints from './constraints'
@@ -177,9 +178,9 @@ export default class AddExperienceForm extends Component {
               <SwitchContainer>
                 <SwitchLabel>I am currently working here</SwitchLabel>
                 <Switch
-                  onValueChange={toggleSwitch}
+                  onSyncPress={toggleSwitch}
                   value={isCurrentEmployee}
-                  onTintColor="rgb(220, 60, 53)"
+                  backgroundActive="rgb(220, 60, 53)"
                 />
               </SwitchContainer>
               <RowContainer>
