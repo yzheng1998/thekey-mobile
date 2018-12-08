@@ -12,6 +12,7 @@ export const UPDATE_FACEBOOK_INFO = 'UPDATE_FACEBOOK_INFO'
 export const UPDATE_LINKEDIN_INFO = 'UPDATE_LINKEDIN_INFO'
 export const UPDATE_INTRODUCTION_INFO = 'UPDATE_INTRODUCTION_INFO'
 export const UPDATE_COORDINATES = 'UPDATE_COORDINATES'
+export const UPDATE_PROFILE_PICTURE = 'UPDATE_PROFILE_PICTURE'
 
 export const updateEmail = ({ email }) => ({
   type: UPDATE_EMAIL,
@@ -85,4 +86,9 @@ export const updateIntroductionInfo = ({ firstName, lastName, birthday }) => ({
 export const updateCoordinates = ({ coordinates }) => ({
   type: UPDATE_COORDINATES,
   payload: { coordinates },
+})
+
+export const updateProfilePicture = profilePicture => ({
+  type: UPDATE_PROFILE_PICTURE,
+  payload: { profilePicture },
 })
