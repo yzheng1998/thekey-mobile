@@ -7,12 +7,6 @@ const constraints = {
       message: '^Please provide a school name',
     },
   },
-  schoolType: {
-    presence: {
-      allowEmpty: false,
-      message: '^Please provide a school type',
-    },
-  },
   degreeType: {
     presence: {
       allowEmpty: false,

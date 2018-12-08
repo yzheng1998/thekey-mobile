@@ -57,7 +57,6 @@ export default class AddEducationForm extends Component {
     const formElements = this.props.navigation.getParam('formElements')
     const educationInfo = _.pick(formElements, [
       'schoolName',
-      'schoolType',
       'degreeType',
       'major',
       'startYear',
@@ -96,7 +95,6 @@ export default class AddEducationForm extends Component {
     const errors = validate(
       {
         schoolName: this.state.schoolName,
-        schoolType: this.state.schoolType,
         degreeType: this.state.degreeType,
         major: this.state.major,
         startYear: this.state.startYear,
@@ -176,6 +174,7 @@ export default class AddEducationForm extends Component {
     const { width } = Dimensions.get('window')
 
     const noErrors = !this.state.errors
+    console.log(this.state.errors)
 
     const openDegreeTypePicker = () => {
       Keyboard.dismiss()
