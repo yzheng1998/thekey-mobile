@@ -378,6 +378,7 @@ export default class AddEducationForm extends Component {
             navigation={this.props.navigation}
             toggleSchoolModal={this.toggleSchoolModal}
             visible={this.state.showSchoolSearchModal}
+            onDismiss={() => null}
           />
         </Screen>
       </TouchableWithoutFeedback>
