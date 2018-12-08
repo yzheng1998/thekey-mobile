@@ -28,15 +28,15 @@ const constraints = {
   startYear: {
     presence: {
       allowEmpty: false,
-      message: '^Please provide a valid year',
+      message: '^Please provide a valid year. ',
     },
     length: {
       is: 4,
-      message: '^Please provide a valid year',
+      message: '^Please provide a valid year. ',
     },
     format: {
       pattern: /^[0-9]*$/,
-      message: '^Please provide a valid year',
+      message: '^Please provide a valid year. ',
     },
     numericality: {
       onlyInteger: true,
@@ -47,15 +47,15 @@ const constraints = {
   endYear: {
     presence: {
       allowEmpty: false,
-      message: '^Please provide a valid year',
+      message: '^Please provide a valid year. ',
     },
     length: {
       is: 4,
-      message: '^Please provide a valid year',
+      message: '^Please provide a valid year. ',
     },
     format: {
       pattern: /^[0-9]*$/,
-      message: '^Please provide a valid year',
+      message: '^Please provide a valid year. ',
     },
     numericality: (_, attributes) => ({
       onlyInteger: true,
