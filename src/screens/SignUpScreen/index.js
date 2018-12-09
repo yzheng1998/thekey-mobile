@@ -77,9 +77,7 @@ class SignUpScreen extends Component {
       }
       this.props.updateFacebookInfo(facebookInfo)
 
-      this.props.navigation.navigate('PersonalDetails', {
-        userInfo: facebookInfo,
-      })
+      this.props.navigation.navigate('Introduction')
     }
   }
 
