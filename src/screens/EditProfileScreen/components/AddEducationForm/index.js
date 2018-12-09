@@ -174,7 +174,6 @@ export default class AddEducationForm extends Component {
     const { width } = Dimensions.get('window')
 
     const noErrors = !this.state.errors
-    console.log(this.state.errors)
 
     const openDegreeTypePicker = () => {
       Keyboard.dismiss()
