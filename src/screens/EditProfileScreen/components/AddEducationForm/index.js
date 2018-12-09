@@ -292,6 +292,7 @@ export default class AddEducationForm extends Component {
                       schoolType={findSchoolType(degreeType)}
                       degreeType={degreeType}
                       major={major}
+                      gpa={gpa}
                       startYear={startYear}
                       endYear={endYear}
                       navigation={this.props.navigation}
