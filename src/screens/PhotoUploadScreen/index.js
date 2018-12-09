@@ -3,14 +3,21 @@ import { Screen } from './styles'
 import Header from '../../components/Header'
 import RegisterButton from '../../components/RegisterButton'
 import PhotoUploadButton from './components/PhotoUploadButton'
+import { updateProfilePicture } from '../../redux/actions/membershipApplication'
+import { connect } from 'react-redux'
 
-export default class PhotoUploadScreen extends Component {
+const mapDispatchToProps = {
+  updateProfilePicture,
+}
+
+class PhotoUploadScreen extends Component {
   state = {
     profilePicture: null,
   }
 
-  updateProfilePicture = pic => {
+  updateProfilePictureState = pic => {
     this.setState({ profilePicture: pic })
+    this.props.updateProfilePicture(pic)
   }
   render() {
     return (
@@ -21,7 +28,9 @@ export default class PhotoUploadScreen extends Component {
           onBackPress={() => this.props.navigation.goBack()}
           progress="100%"
         />
-        <PhotoUploadButton updateProfilePicture={this.updateProfilePicture} />
+        <PhotoUploadButton
+          updateProfilePicture={this.updateProfilePictureState}
+        />
         <RegisterButton
           onPress={() => this.props.navigation.navigate('Location')}
           disabled={!this.state.profilePicture}
@@ -32,3 +41,8 @@ export default class PhotoUploadScreen extends Component {
     )
   }
 }
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(PhotoUploadScreen)

@@ -12,6 +12,7 @@ import {
   UPDATE_LINKEDIN_INFO,
   UPDATE_INTRODUCTION_INFO,
   UPDATE_COORDINATES,
+  UPDATE_PROFILE_PICTURE,
 } from '../actions/membershipApplication'
 
 const initialState = {
@@ -102,6 +103,11 @@ const membershipApplicationReducer = (state = initialState, action) => {
     case UPDATE_COORDINATES: {
       return updatedState({
         coordinates: action.payload.coordinates,
+      })
+    }
+    case UPDATE_PROFILE_PICTURE: {
+      return updatedState({
+        profilePicture: action.payload.profilePicture,
       })
     }
     default: {
