@@ -27,6 +27,7 @@ export default class AddEducationButton extends Component {
       startYear,
       endYear,
       disabled,
+      gpa,
     } = this.props
     return (
       <Mutation
@@ -47,6 +48,7 @@ export default class AddEducationButton extends Component {
                   major,
                   startYear,
                   endYear,
+                  gpa,
                 },
               }
               addEducation({ variables })

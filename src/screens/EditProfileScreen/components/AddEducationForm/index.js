@@ -317,6 +317,7 @@ export default class AddEducationForm extends Component {
                     major={major}
                     startYear={startYear}
                     endYear={endYear}
+                    gpa={gpa}
                     navigation={this.props.navigation}
                   />
                 )}
