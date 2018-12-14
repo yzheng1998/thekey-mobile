@@ -57,7 +57,7 @@ class LinkedInRegisterButton extends Component {
               password: '',
             }
             this.props.updateLinkedInInfo(userInfo)
-            this.props.navigation.navigate('PersonalDetails', { userInfo })
+            this.props.navigation.navigate('Introduction')
           }
         }}
       >

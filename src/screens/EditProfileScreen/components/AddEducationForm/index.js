@@ -15,7 +15,12 @@ import RegistrationPicker from '../../../../components/RegistrationPicker'
 import Header from '../Header'
 import LineInput from '../../../../components/LineInput'
 import _ from 'lodash'
-import { Keyboard, TouchableWithoutFeedback, View } from 'react-native'
+import {
+  Keyboard,
+  TouchableWithoutFeedback,
+  View,
+  Dimensions,
+} from 'react-native'
 import Error from '../../../../components/Error'
 import constraints from './constraints'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -52,11 +57,11 @@ export default class AddEducationForm extends Component {
     const formElements = this.props.navigation.getParam('formElements')
     const educationInfo = _.pick(formElements, [
       'schoolName',
-      'schoolType',
       'degreeType',
       'major',
       'startYear',
       'endYear',
+      'gpa',
       'id',
     ])
 
@@ -90,11 +95,11 @@ export default class AddEducationForm extends Component {
     const errors = validate(
       {
         schoolName: this.state.schoolName,
-        schoolType: this.state.schoolType,
         degreeType: this.state.degreeType,
         major: this.state.major,
         startYear: this.state.startYear,
         endYear: this.state.endYear,
+        gpa: this.state.gpa,
       },
       constraints,
     )
@@ -156,6 +161,7 @@ export default class AddEducationForm extends Component {
       major,
       startYear,
       endYear,
+      gpa,
       schoolNameClicked,
       schoolNameSelected,
       showDegreeTypePicker,
@@ -164,6 +170,8 @@ export default class AddEducationForm extends Component {
     } = this.state
 
     const returnKeyType = this.editMode ? 'done' : 'next'
+
+    const { width } = Dimensions.get('window')
 
     const noErrors = !this.state.errors
 
@@ -225,6 +233,20 @@ export default class AddEducationForm extends Component {
                 placeholderText="Degree Type"
               />
               <LineInput
+                ref={gpaInput => {
+                  this.gpaInput = gpaInput
+                }}
+                text={gpa}
+                placeholderText="GPA"
+                updateText={text => {
+                  this.setState({ gpa: text }, () => this.validateForm(true))
+                }}
+                onFocus={() => this.addTouched('gpa')}
+                onBlur={() => this.validateForm(false)}
+                returnKeyType={returnKeyType}
+                error={this.state.displayErrors.gpa}
+              />
+              <LineInput
                 ref={majorInput => {
                   this.majorInput = majorInput
                 }}
@@ -244,12 +266,16 @@ export default class AddEducationForm extends Component {
                   onPress={openStartYearTypePicker}
                   text={startYear}
                   placeholderText="Start year"
+                  width={width / 2.5}
+                  error={this.state.displayErrors.startYear}
                 />
                 <RegistrationPicker
                   selected={showEndYearPicker}
                   onPress={openEndYearTypePicker}
                   text={endYear}
                   placeholderText="End year"
+                  width={width / 2.5}
+                  error={this.state.displayErrors.endYear}
                 />
               </DateInputRow>
               <ButtonContainer>
@@ -265,6 +291,7 @@ export default class AddEducationForm extends Component {
                       schoolType={findSchoolType(degreeType)}
                       degreeType={degreeType}
                       major={major}
+                      gpa={gpa}
                       startYear={startYear}
                       endYear={endYear}
                       navigation={this.props.navigation}
@@ -290,6 +317,7 @@ export default class AddEducationForm extends Component {
                     major={major}
                     startYear={startYear}
                     endYear={endYear}
+                    gpa={gpa}
                     navigation={this.props.navigation}
                   />
                 )}
@@ -309,7 +337,7 @@ export default class AddEducationForm extends Component {
                 },
                 () => {
                   this.validateForm(false)
-                  if (!this.editMode) this.majorInput.focus()
+                  if (!this.editMode) this.gpaInput.focus()
                 },
               )
             }}
@@ -350,6 +378,7 @@ export default class AddEducationForm extends Component {
             navigation={this.props.navigation}
             toggleSchoolModal={this.toggleSchoolModal}
             visible={this.state.showSchoolSearchModal}
+            onDismiss={() => null}
           />
         </Screen>
       </TouchableWithoutFeedback>

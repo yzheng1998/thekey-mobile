@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Keyboard, View } from 'react-native'
+import { Keyboard, View, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import {
   ScreenContainer,
@@ -51,6 +51,7 @@ class AddEducationScreen extends Component {
       showEndYearPicker: false,
       showUniversitySearch: false,
       majorInputFocused: false,
+      gpaInputFocused: false,
       educationListData: [],
       schoolID: '',
       schoolName: '',
@@ -60,6 +61,7 @@ class AddEducationScreen extends Component {
       major: '',
       startYear: '',
       endYear: '',
+      gpa: '',
       errors: {},
       displayErrors: {},
       touched: {},
@@ -89,6 +91,7 @@ class AddEducationScreen extends Component {
       major: '',
       startYear: '',
       endYear: '',
+      gpa: '',
       degreeType: '',
       displayErrors: {},
       errors: {},
@@ -105,6 +108,7 @@ class AddEducationScreen extends Component {
         major: this.state.major,
         startYear: this.state.startYear,
         endYear: this.state.endYear,
+        gpa: this.state.gpa,
       },
       constraints,
     )
@@ -152,6 +156,7 @@ class AddEducationScreen extends Component {
       major,
       startYear,
       endYear,
+      gpa,
       errors,
       displayErrors,
       showUniversitySearch,
@@ -159,6 +164,7 @@ class AddEducationScreen extends Component {
       showStartYearPicker,
       showEndYearPicker,
       majorInputFocused,
+      gpaInputFocused,
     } = this.state
 
     const addEducation = () => {
@@ -170,10 +176,13 @@ class AddEducationScreen extends Component {
         major,
         startYear,
         endYear,
+        gpa,
       })
     }
 
     const { validateForm, addTouched } = this
+
+    const { width } = Dimensions.get('window')
 
     const openDegreeTypePicker = () => {
       Keyboard.dismiss()
@@ -217,7 +226,7 @@ class AddEducationScreen extends Component {
       this.endYearPicker.showActionSheet()
     }
 
-    const showSubmit = !errors && !majorInputFocused
+    const showSubmit = !errors && !majorInputFocused && !gpaInputFocused
     return (
       <ScreenContainer>
         <Header
@@ -254,10 +263,43 @@ class AddEducationScreen extends Component {
               text={degreeType ? findLabel(degreeType, degreeTypeOptions) : ''}
               placeholderText="Select your degree type"
             />
+            <LineInput
+              title="GPA"
+              text={gpa}
+              disabled={
+                this.state.showDegreeTypePicker ||
+                this.state.showEndYearPicker ||
+                this.state.showStartYearPicker ||
+                this.state.showUniversitySearch
+              }
+              placeholderText="Enter your GPA"
+              updateText={text => {
+                this.setState({ gpa: text }, () => validateForm(true))
+              }}
+              onFocus={() =>
+                this.setState(
+                  {
+                    showUniversitySearch: false,
+                    showDegreeTypePicker: false,
+                    showStartYearPicker: false,
+                    showEndYearPicker: false,
+                    gpaInputFocused: true,
+                  },
+                  () => addTouched('gpa'),
+                )
+              }
+              onBlur={() =>
+                this.setState({ gpaInputFocused: false }, () =>
+                  validateForm(false),
+                )
+              }
+              returnKeyType="next"
+              error={displayErrors.gpa}
+            />
             <RowContainer>
               <RegistrationPicker
                 title="Start Year"
-                width={150}
+                width={width / 2.5}
                 selected={showStartYearPicker}
                 onPress={() => {
                   openStartYearPicker()
@@ -270,7 +312,7 @@ class AddEducationScreen extends Component {
               />
               <RegistrationPicker
                 title="Grad Year"
-                width={150}
+                width={width / 2.5}
                 selected={showEndYearPicker}
                 onPress={() => {
                   openEndYearPicker()
