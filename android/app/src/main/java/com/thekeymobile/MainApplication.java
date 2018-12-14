@@ -7,6 +7,7 @@ import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.FacebookSdk;
 import com.facebook.CallbackManager;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.FirebaseApp;
 
 import com.rnfs.RNFSPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
@@ -21,6 +22,7 @@ import com.facebook.soloader.SoLoader;
 import com.horcrux.svg.SvgPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;  // <--- Import Package
 
 import java.util.Arrays;
 import java.util.List;
@@ -57,7 +59,8 @@ public class MainApplication extends Application implements ShareApplication, Re
           new VectorIconsPackage(),
           new SvgPackage(),
           new PickerPackage(),
-          new RNSharePackage()
+          new RNSharePackage(),
+          new ReactNativePushNotificationPackage()
       );
     }
 
@@ -77,6 +80,11 @@ public class MainApplication extends Application implements ShareApplication, Re
     super.onCreate();
     AppEventsLogger.activateApp(this);
     SoLoader.init(this, /* native exopackage */ false);
+    try {
+      FirebaseApp.initializeApp(this);
+    }
+    catch (Exception e) {
+    }
   }
 
   @Override

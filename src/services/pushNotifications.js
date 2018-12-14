@@ -3,6 +3,8 @@ import { PushNotificationIOS, Alert } from 'react-native'
 import { client } from '../apollo'
 import gql from 'graphql-tag'
 
+import config from '../../config'
+
 const configure = () => {
   PushNotification.configure({
     onRegister(token) {
@@ -44,9 +46,9 @@ const configure = () => {
       badge: true,
       sound: true,
     },
+    senderID: config.gcmSenderId,
 
     popInitialNotification: false,
-    requestPermissions: false,
   })
 }
 

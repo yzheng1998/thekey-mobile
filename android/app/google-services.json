@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "63293492677",
+    "firebase_url": "https://thekey-5f321.firebaseio.com",
+    "project_id": "thekey-5f321",
+    "storage_bucket": "thekey-5f321.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63293492677:android:e4bd5688424ca7fc",
+        "android_client_info": {
+          "package_name": "com.thekeymobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "63293492677-itbcec4jog872d6plegqcp2nk014qveu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXiyheYdYiNIqIgbktVTqD_hsuyUPtS5U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
