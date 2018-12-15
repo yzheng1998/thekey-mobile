@@ -49,6 +49,7 @@ const configure = () => {
     senderID: config.gcmSenderId,
 
     popInitialNotification: false,
+    requestPermissions: false,
   })
 }
 
