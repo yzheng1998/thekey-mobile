@@ -43,7 +43,10 @@ class IntroductionScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: `${this.props.firstName} ${this.props.lastName}` || '',
+      name:
+        this.props.firstName || this.props.lastName
+          ? `${this.props.firstName} ${this.props.lastName}`
+          : '',
       birthday: this.props.birthday || '',
       showBirthdayPicker: false,
       touched: {},
