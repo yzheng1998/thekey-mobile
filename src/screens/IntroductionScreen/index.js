@@ -39,11 +39,20 @@ const mapDispatchToProps = {
   updateIntroductionInfo,
 }
 
+const formatName = (firstName, lastName) => {
+  if (firstName && lastName) {
+    return `${firstName} ${lastName}`
+  } else if (!firstName && !lastName) {
+    return ''
+  }
+  return firstName || lastName
+}
+
 class IntroductionScreen extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: `${this.props.firstName} ${this.props.lastName}` || '',
+      name: formatName(this.props.firstName, this.props.lastName),
       birthday: this.props.birthday || '',
       showBirthdayPicker: false,
       touched: {},
