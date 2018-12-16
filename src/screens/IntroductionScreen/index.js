@@ -47,7 +47,7 @@ class IntroductionScreen extends Component {
       birthday: this.props.birthday || '',
       showBirthdayPicker: false,
       touched: {},
-      errors: undefined,
+      errors: null,
       displayErrors: {},
     }
   }
