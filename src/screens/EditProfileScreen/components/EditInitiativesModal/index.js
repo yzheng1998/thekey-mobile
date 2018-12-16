@@ -30,7 +30,7 @@ export default class EditWaysToMeetModal extends Component {
         animationOut="slideOutRight"
         isVisible={isVisible}
       >
-        <SwitchListHeader title="CurrentInitiatives" goBack={toggleModal} />
+        <SwitchListHeader title="Current Initiatives" goBack={toggleModal} />
         <Query query={GET_INITIATIVES}>
           {({ loading, data }) => {
             if (loading) return <LoadingWrapper loading />
