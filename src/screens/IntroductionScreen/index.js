@@ -47,7 +47,7 @@ class IntroductionScreen extends Component {
       birthday: this.props.birthday || '',
       showBirthdayPicker: false,
       touched: {},
-      errors: {},
+      errors: undefined,
       displayErrors: {},
     }
   }
@@ -101,6 +101,7 @@ class IntroductionScreen extends Component {
       displayErrors,
       errors,
     } = this.state
+
     const { navigation } = this.props
     const noErrors = !errors
     return (
