@@ -7,7 +7,7 @@ import { EMAIL_ICON, TEXT_ICON, MORE_ICON } from './constants'
 export default class ShareMenu extends Component {
   render() {
     const shareOptions = {
-      title: 'React Native',
+      title: 'Share With',
       message: 'Download The Key here: ',
       url: 'http://onelink.to/ywz9nu',
       subject: 'Share Link',
