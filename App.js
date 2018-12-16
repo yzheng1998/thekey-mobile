@@ -29,7 +29,6 @@ export default class App extends Component {
           AppState.addEventListener('change', this.handleAppStateChange)
           setPosition()
         }
-        console.log('reponse', response)
       })
     }
   }
