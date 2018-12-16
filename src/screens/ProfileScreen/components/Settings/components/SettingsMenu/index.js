@@ -50,11 +50,11 @@ export default class SettingsMenu extends Component {
         />
         <MenuItemWithNavigation
           title="Terms Of Service"
-          onPress={() => swipe('TermsOfService')}
+          onPress={() => swipe('Terms Of Service')}
         />
         <MenuItemWithNavigation
           title="Privacy Policy"
-          onPress={() => swipe('PrivacyPolicy')}
+          onPress={() => swipe('Privacy Policy')}
         />
         <MenuItemWithNavigation
           title="Logout"
