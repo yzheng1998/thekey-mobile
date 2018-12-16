@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { Platform } from 'react-native'
 import Share, { ShareSheet } from 'react-native-share'
-import { email, text } from 'react-native-communications'
+import { email, text, textWithoutEncoding } from 'react-native-communications'
 import InviteButton from './components/InviteButton'
 import { EMAIL_ICON, TEXT_ICON, MORE_ICON } from './constants'
 
@@ -37,7 +38,14 @@ export default class ShareMenu extends Component {
           iconSrc={{ uri: TEXT_ICON }}
           onPress={() => {
             this.props.toggleInviteFriendModal()
-            text(null, 'Join the key! http://onelink.to/ywz9nu')
+            if (Platform.OS === 'iOS') {
+              text(null, 'Join The Key! http://onelink.to/ywz9nu')
+            } else {
+              textWithoutEncoding(
+                null,
+                'Join The Key! http://onelink.to/ywz9nu',
+              )
+            }
           }}
         >
           Text
