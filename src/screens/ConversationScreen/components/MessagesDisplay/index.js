@@ -13,7 +13,7 @@ import {
 
 function isSendersFirstMessage(chat, item) {
   // locate the current message and the one before it, and compare sender ids
-  const messageIds = chat.messages.map(m => m.id)
+  const messageIds = chat.messages.nodes.map(m => m.id)
   if (messageIds.indexOf(item.id) + 1 >= messageIds.length) return true
   const previousMessageIndex = messageIds.indexOf(item.id) + 1
   const previousMessage = chat.messages[previousMessageIndex]
