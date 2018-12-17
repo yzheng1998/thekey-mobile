@@ -25,11 +25,11 @@ const screens = [
   },
   {
     id: 4,
-    title: 'TermsOfService',
+    title: 'Terms Of Service',
   },
   {
     id: 5,
-    title: 'PrivacyPolicy',
+    title: 'Privacy Policy',
   },
 ]
 
