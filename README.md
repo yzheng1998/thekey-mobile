@@ -1,5 +1,7 @@
 # thekey-mobile
 
+<img src="assets/DisplayPic.png" width="200">
+
 ## Setting up the application
 
 ```bash
